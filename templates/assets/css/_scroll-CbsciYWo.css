@@ -1,0 +1,6 @@
+body.scroll-blocked {
+  overflow: hidden;
+  padding-right: var(--scrollbar-width, 0px);
+  height: 100dvh;
+  min-height: 100dvh;
+}

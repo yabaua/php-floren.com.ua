@@ -1,0 +1,72 @@
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  background-color: currentColor;
+}
+.icon-location {
+  mask-image: url("/img/icons/icon-location.svg");
+}
+.icon-close {
+  mask-image: url("/img/icons/icon-close.svg");
+}
+.icon-down {
+  mask-image: url("/img/icons/icon-down.svg");
+}
+.icon-whatsapp {
+  mask-image: url("/img/icons/icon-whatsapp.svg");
+}
+.icon-telegram {
+  mask-image: url("/img/icons/icon-telegram.svg");
+}
+.icon-user {
+  mask-image: url("/img/icons/icon-user.svg");
+}
+.icon-heart {
+  mask-image: url("/img/icons/icon-heart.svg");
+}
+.icon-basket {
+  mask-image: url("/img/icons/icon-shopping-bag.svg");
+}
+.icon-menu {
+  mask-image: url("/img/icons/icon-menu.svg");
+}
+.icon-fitodesign {
+  mask-image: url("/img/icons/icon-fitodesign.svg");
+}
+.icon-vertical {
+  mask-image: url("/img/icons/icon-vertical.svg");
+}
+.icon-care {
+  mask-image: url("/img/icons/icon-care.svg");
+}
+.icon-photogallery {
+  mask-image: url("/img/icons/icon-photogallery.svg");
+}
+.icon-facebook {
+  mask-image: url("/img/icons/icon-facebook.svg");
+}
+.icon-youtube {
+  mask-image: url("/img/icons/icon-youtube.svg");
+}
+.icon-instagram {
+  mask-image: url("/img/icons/icon-instagram.svg");
+}
+.icon-arrow-angle-right {
+  mask-image: url("/img/icons/icon-arrow-angle-right.svg");
+}
+.icon-arrow-angle-left {
+  mask-image: url("/img/icons/icon-arrow-angle-left.svg");
+}
+.icon-star {
+  mask-image: url("/img/icons/icon-star.svg");
+}
+.icon-video-button {
+  mask-image: url("/img/icons/icon-video-button.svg");
+}

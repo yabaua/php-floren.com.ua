@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Каталог продукції</title>
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;600;900&display=swap"
+      rel="stylesheet"
+    /> -->
+    <!-- <link rel="stylesheet" href="../styles/style.css" /> -->
+    <script type="module" crossorigin src="/assets/js/modulepreload-polyfill-COaX8i6R.js"></script>
+    <script type="module" crossorigin src="/assets/js/_swipers-W78pJMEt.js"></script>
+    <script type="module" crossorigin src="/assets/js/_shoelace-93ZMtKYV.js"></script>
+    <script type="module" crossorigin src="/assets/js/_events-B9TtzH4c.js"></script>
+    <script type="module" crossorigin src="/assets/js/_scroll-qwBtBhbR.js"></script>
+    <script type="module" crossorigin src="/assets/js/_catalog-64HryAnt.js"></script>
+    <script type="module" crossorigin src="/assets/js/_clickOutside-BYa46nKa.js"></script>
+    <script type="module" crossorigin src="/assets/js/_expandableText-Bi2QDYtX.js"></script>
+    <script type="module" crossorigin src="/assets/js/main-DDObV7Ms.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/css/main-8pNQGu6Z.css">
+    <link rel="stylesheet" crossorigin href="/assets/css/index-DOaU0IMu.css">
+  </head>
+  <body>
+    <!-- Шапка сайту -->
+    <!-- prettier-ignore -->
+    <!-- Overlay для каталогу -->
+<div class="catalog-overlay" id="catalog-overlay"></div>
+
+<!-- Header site -->
+<header class="header">
+  <div class="container">
+    <nav class="header__nav" aria-label="Головне меню сайту">
+
+      <!-- Dropdown локації/магазинів -->
+      <!-- Location dropdown element start -->
+      <sl-tooltip
+        id="location-tooltip"
+        class="tooltip header__nav-location"
+        trigger="manual"
+        placement="bottom-start"
+        style="--sl-tooltip-arrow-size: 0"
+        distance="0"
+      >
+        <div slot="content" class="header__nav-location--content">
+          <img src="/img/icon-shop.svg" alt="icon-shop"/>
+          <div class="description">
+            <button
+              class="icon-button header__nav-location--close"
+              aria-label="Закрити вікно"
+              data-event="click"
+              data-callback="toggleLocation"
+            >
+              <svg class="icon icon-close"/>
+            </button>
+            <a
+              href="https://goo.gl/maps/UPpaCBkrMd2TWfXq7"
+              target="_blank"
+              rel="noopener noreferrer"
+              >м. Київ, пр. Берестейський, 70</a
+            >
+            <p>Графік роботи магазинів:</p>
+            <p>пн-сб: 09:00 - 19:30</p>
+            <p>нд: 10:00 - 18:00</p>
+          </div>
+        </div>
+        <sl-button
+          class="header__nav-location--button"
+          data-event="click"
+          data-callback="toggleLocation"
+        >
+          <svg class="icon icon-location"/>
+          Магазини у Києві
+        </sl-button>
+      </sl-tooltip>
+      <!-- Location dropdown element end -->
+
+      <!-- Меню навігації -->
+      <!-- Navigation menu start -->
+      <ul class="header__nav-list">
+        <li class="header__nav-item">
+          <a href="#" class="header__nav-link">Про компанію</a>
+        </li>
+        <li class="header__nav-item">
+          <a href="#" class="header__nav-link">Оплата та Доставка</a>
+        </li>
+        <li class="header__nav-item">
+          <a href="#" class="header__nav-link">Корисні матеріали</a>
+        </li>
+        <li class="header__nav-item">
+          <a href="#" class="header__nav-link">Контакти</a>
+        </li>
+      </ul>
+      <!-- Navigation menu end -->
+
+      <!-- Вибір мови -->
+      <!-- Language dropdown element start -->
+      <div class="header__nav-lang">
+        <sl-dropdown class="dropdown">
+          <sl-button class="header__nav-lang--button" slot="trigger" caret
+            >Українською
+            <svg class="icon icon-down"/>
+          </sl-button>
+          <sl-menu>
+            <sl-menu-item data-checked value="ua">Українською</sl-menu-item>
+            <sl-divider></sl-divider>
+            <sl-menu-item value="ru">Російською</sl-menu-item>
+          </sl-menu>
+        </sl-dropdown>
+      </div>
+      <!-- Language dropdown element end -->
+    </nav>
+
+    <!-- Основна частина header з лого, телефонами, пошуком, кошиком -->
+    <div class="header__main">
+      <div class="header__main--left">
+        <a href="/" class="header__main--logo">
+          <img src="/img/main-logo.svg" alt="Logo"/>
+        </a>
+        <sl-tooltip
+          id="phones-tooltip"
+          class="tooltip header__main--phones-tooltip"
+          trigger="manual"
+          placement="bottom-start"
+          style="--sl-tooltip-arrow-size: 0"
+          distance="0"
+        >
+          <div slot="content" class="header__main--phones-content">
+            <button
+              class="icon-button"
+              aria-label="Закрити вікно"
+              data-event="click"
+              data-callback="togglePhones"
+            >
+              <svg class="icon icon-close"/>
+            </button>
+            <div class="phones-tooltip--item">
+              <img src="/img/icons/icon-phone.svg" alt="Phone"/>
+              <div class="phones-tooltip--item-wrapper">
+                <p class="item-phone">(044) 344-28-95, (050) 660-52-75</p>
+                <p class="item-hours">По буднях 09:00 - 19:30</p>
+                <p class="item-messengers">
+                  <a href="">
+                    <svg class="icon icon-whatsapp"/>
+                  </a>
+                  <a href="">
+                    <svg class="icon icon-telegram"/>
+                  </a>
+                </p>
+              </div>
+            </div>
+            <div class="phones-tooltip--item">
+              <img src="/img/icons/icon-feedback.svg" alt="Feedback"/>
+              <div class="phones-tooltip--item-wrapper">
+                <a class="item-feedback" href="">Форма зворотнього звʼязку</a>
+              </div>
+            </div>
+          </div>
+          <div class="header__main--phones">
+            <img src="/img/icons/icon-phone.svg" alt="Phone"/>
+            <div class="header__main--phones-wrapper">
+              <div class="header__main--phones-hidden">
+                (044) 344..
+                <button data-event="click" data-callback="togglePhones">
+                  показати
+                </button>
+              </div>
+              <div class="header__main--phones-showed">
+                (044) 344-28-95, (050) 660-52-75
+              </div>
+              <div class="header__main--phones-hours">
+                По буднях 9:00 - 19:30
+              </div>
+            </div>
+          </div>
+        </sl-tooltip>
+      </div>
+
+      <!-- Права частина: пошук, профіль, улюблені, кошик -->
+      <div class="header__main--right">
+        <!-- Search form start -->
+        <form action="" class="header__main--search">
+          <div class="search-wrapper">
+            <img
+              class="search-icon"
+              src="/img/icons/icon-search.svg"
+              alt="Search"
+/>
+            <input class="search-input" type="search" placeholder="Шефлера"/>
+            <button class="search-button">Пошук</button>
+          </div>
+        </form>
+        <!-- Search form end -->
+
+        <div class="header__main--profile">
+          <a href="#" class="icon-button" aria-label="Особистий кабінет">
+            <svg class="icon icon-user"/>
+          </a>
+          <a href="#" class="icon-button" aria-label="Обране">
+            <span class="badge warning">10</span>
+            <svg class="icon icon-heart"/>
+          </a>
+          <a href="#" class="icon-button" aria-label="Кошик">
+            <span class="badge success">2</span>
+            <svg class="icon icon-basket"/>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Меню каталогу -->
+    <!-- Меню каталогу в header -->
+<div class="header__catalog">
+
+  <!-- Основна кнопка каталогу і випадаючий список -->
+  <div class="header__catalog--main">
+    <button
+      id="catalog-button"
+      class="catalog-button"
+      aria-label="Каталог товарів"
+    >
+      <svg class="icon icon-menu"/>
+      Каталог товарів
+    </button>
+    <!-- Список категорій каталогу -->
+
+<!-- prettier-ignore -->
+
+
+<!-- Dropdown список категорій -->
+<div class="header__catalog_list">
+  <div class="header__catalog_list-wrapper">
+
+    <!-- Список категорій - ліва частина -->
+    <ul class="category-list">
+      <li class="active" data-category="room-plants">
+        <a href="">
+          <img src="/img/icons/icon-plants-home.svg" alt="Кімнатні рослини"/>
+          <span>Кімнатні рослини</span>
+        </a>
+      </li>
+      <li data-category="plant-pots">
+        <a href="">
+          <img src="/img/icons/icon-pot.svg" alt="Горщики для рослин"/>
+          <span>Горщики для рослин</span>
+        </a>
+      </li>
+      <li data-category="accessories">
+        <a href="">
+          <img
+            src="/img/icons/icon-accessories.svg"
+            alt="Аксесуари для рослин"
+/>
+          <span>Аксесуари для рослин</span>
+        </a>
+      </li>
+      <li data-category="exterior-works">
+        <a href="">
+          <img
+            src="/img/icons/icon-exteriror-works.svg"
+            alt="Екстер'єрні роботи"
+/>
+          <span>Екстер'єрні роботи</span>
+        </a>
+      </li>
+      <li data-category="lawn-autowater">
+        <a href="">
+          <img
+            src="/img/icons/icon-lawn-autowater.svg"
+            alt="Створення газону і автополив"
+/>
+          <span>
+            Створення газону<br/>
+            і автополив</span
+          >
+        </a>
+      </li>
+      <li data-category="care-services">
+        <a href="">
+          <img
+            src="/img/icons/icon-care-services.svg"
+            alt="Послуги з догляду за ділянкою"
+/>
+          <span>
+            Послуги з догляду<br/>
+            за ділянкою</span
+          >
+        </a>
+      </li>
+      <li data-category="landscape-design">
+        <a href="">
+          <img
+            src="/img/icons/icon-landschaft-design.svg"
+            alt="Ландшафтний дизайн"
+/>
+          <span>Ландшафтний дизайн</span>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Контент категорій - права частина -->
+    <div class="category-content">
+      <!-- prettier-ignore -->
+      <!-- Контент категорії "Кімнатні рослини" для меню каталогу -->
+<section class="category-content__item" data-category="room-plants">
+  <ul class="category-content__item-list">
+    <li>
+      <a href="">
+        <img src="/img/category/red-orchid.png" alt="Орхідеї"/>
+        <span>Орхідеї</span>
+      </a>
+    </li>
+    <li>
+      <a href="">
+        <img src="/img/category/zamioculcas.png" alt="Декоративно листяні"/>
+        <span>Декоративно листяні</span>
+      </a>
+    </li>
+    <li>
+      <a href="">
+        <img src="/img/category/palm.png" alt="Пальми"/>
+      </a>
+    </li>
+    <li>
+      <a href="">
+        <img src="/img/category/lemon.png" alt="Цитрусові"/>
+        <span>Цитрусові</span>
+      </a>
+    </li>
+    <li>
+      <a href="">
+        <img src="/img/category/blue-hydrangea.png" alt="Кімнатні рослини"/>
+        <span>Квітучі рослини</span>
+      </a>
+    </li>
+    <li>
+      <a href="">
+        <img src="/img/category/sansevieria.png" alt="Сансевієрія"/>
+        <span>Сансевієрія</span>
+      </a>
+    </li>
+    <li>
+      <a href="">
+        <img src="/img/category/ficus.png" alt="Фікуси"/>
+        <span>Фікуси</span>
+      </a>
+    </li>
+    <li>
+      <a href="">
+        <img src="/img/category/dracena.png" alt="Драцени"/>
+        <span>Драцени</span>
+      </a>
+    </li>
+    <li>
+      <a href="">
+        <img src="/img/category/cactus.png" alt="Кактуси"/>
+        <span>Кактуси</span>
+      </a>
+    </li>
+    <li>
+      <a href="">
+        <img src="/img/category/ivy.png" alt="Виткі та ампельні рослини"/>
+        <span>Виткі та ампельні рослини</span>
+      </a>
+    </li>
+    <li>
+      <a href="">
+        <img src="/img/category/bonsai-tree.png" alt="Бонсай"/>
+        <span>Бонсай</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="">
+        <img src="/img/category/part-of-the-suculent.png" alt="Сукуленти"/>
+        <span>Сукуленти</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="">
+        <img src="/img/category/small-ukka.png" alt="Кімнатні рослини"/>
+        <span>Юкка</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="">
+        <img src="/img/category/surfinia-flower.png" alt="Сезонні рослини"/>
+        <span>Сезонні рослини</span>
+      </a>
+    </li>
+
+    <li>
+      <a href="">
+        <img src="/img/category/christmas-tree.png" alt="Хвойні"/>
+        <span>Хвойні</span>
+      </a>
+    </li>
+  </ul>
+  <ul class="category-content__item-related">
+    <li>
+      <a class="underline" href="">Подарункові сертифікати</a>
+    </li>
+    <li>
+      <a class="underline" href="">Розумний сад Click & Grow</a>
+    </li>
+    <li>
+      <a class="underline" href="">Штучні квіти</a>
+    </li>
+    <li>
+      <a class="underline" href="">Перегородки з рослинами</a>
+    </li>
+    <li>
+      <a class="underline" href="">Аксесуари для рослин</a>
+    </li>
+  </ul>
+</section>
+      <!-- Контент категорії "Горщики для рослин" для меню каталогу -->
+<section class="category-content__item" data-category="plant-pots">
+  <ul class="category-content__item-related">
+    <li>
+      <a class="underline" href="/ua/planters/">Усі горщики</a>
+    </li>
+    <li>
+      <a class="underline" href="/ua/planters/ceramic/">Керамічні горщики</a>
+    </li>
+    <li>
+      <a class="underline" href="/ua/planters/lechuza/">Горщики Lechuza</a>
+    </li>
+    <li>
+      <a class="underline" href="/ua/planters/lamela/">Горщики "Lamela"</a>
+    </li>
+    <li>
+      <a class="underline" href="/ua/planters/elho/">Горщики ELHO</a>
+    </li>
+    <li>
+      <a class="underline" href="/ua/planters/wood-planters/"
+        >Горщики з дерева</a
+      >
+    </li>
+    <li>
+      <a class="underline" href="/ua/planters/metal-pots/">Металеві кашпо</a>
+    </li>
+    <li>
+      <a class="underline" href="/ua/planters/beton/">Горщики з бетону</a>
+    </li>
+    <li>
+      <a class="underline" href="/ua/aksessuary/">Аксесуари для рослин</a>
+    </li>
+  </ul>
+</section>
+      
+        
+        <!-- Універсальний контент категорії для меню каталогу -->
+<section class="category-content__item" data-category="accessories">
+  <ul class="category-content__item-related">
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Аксесуари для рослин 1</a>
+    </li>
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Аксесуари для рослин 2</a>
+    </li>
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Аксесуари для рослин 3</a>
+    </li>
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Аксесуари для рослин 4</a>
+    </li>
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Аксесуари для рослин 5</a>
+    </li>
+  </ul>
+</section>
+      
+        
+        <!-- Універсальний контент категорії для меню каталогу -->
+<section class="category-content__item" data-category="exterior-works">
+  <ul class="category-content__item-related">
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Екстер&#39;єрні роботи 1</a>
+    </li>
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Екстер&#39;єрні роботи 2</a>
+    </li>
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Екстер&#39;єрні роботи 3</a>
+    </li>
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Екстер&#39;єрні роботи 4</a>
+    </li>
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Екстер&#39;єрні роботи 5</a>
+    </li>
+  </ul>
+</section>
+      
+        
+        <!-- Універсальний контент категорії для меню каталогу -->
+<section class="category-content__item" data-category="lawn-autowater">
+  <ul class="category-content__item-related">
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Створення газону і автополив 1</a>
+    </li>
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Створення газону і автополив 2</a>
+    </li>
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Створення газону і автополив 3</a>
+    </li>
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Створення газону і автополив 4</a>
+    </li>
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Створення газону і автополив 5</a>
+    </li>
+  </ul>
+</section>
+      
+        
+        <!-- Універсальний контент категорії для меню каталогу -->
+<section class="category-content__item" data-category="care-services">
+  <ul class="category-content__item-related">
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Послуги з догляду за ділянкою 1</a>
+    </li>
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Послуги з догляду за ділянкою 2</a>
+    </li>
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Послуги з догляду за ділянкою 3</a>
+    </li>
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Послуги з догляду за ділянкою 4</a>
+    </li>
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Послуги з догляду за ділянкою 5</a>
+    </li>
+  </ul>
+</section>
+      
+        
+        <!-- Універсальний контент категорії для меню каталогу -->
+<section class="category-content__item" data-category="landscape-design">
+  <ul class="category-content__item-related">
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Ландшафтний дизайн 1</a>
+    </li>
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Ландшафтний дизайн 2</a>
+    </li>
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Ландшафтний дизайн 3</a>
+    </li>
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Ландшафтний дизайн 4</a>
+    </li>
+    <li>
+      <a class="underline" href="">Lorem ipsum item - Ландшафтний дизайн 5</a>
+    </li>
+  </ul>
+</section>
+      
+    </div>
+  </div>
+</div>
+  </div>
+
+  <!-- Додаткові категорії: фітодизайн, вертикальне озеленення, флораріуми -->
+  <ul class="header__catalog--secondary">
+    <li class="secondary-item">
+      <button class="secondary-item--button" aria-label="Фітодизайн">
+        <svg class="icon icon-fitodesign"/>
+        <div class="secondary-item--button-text">
+          <b>Фітодизайн</b>
+          <span>Озеленення простору</span>
+        </div>
+      </button>
+      <section class="secondary-item--content">
+        <ul class="secondary-item--content-list">
+          <li>
+            <img
+              src="/img/sevices/apartment-phytodesign.png"
+              alt="Фітодизайн квартири"
+/>
+            <a class="underline" href="">Фітодизайн квартири</a>
+          </li>
+          <li>
+            <img
+              src="/img/sevices/office-phytodesign.png"
+              alt="Фітодизайн офісу"
+/>
+            <a class="underline" href="">Фітодизайн офісу</a>
+          </li>
+          <li>
+            <img
+              src="/img/sevices/landscaping-of-summer-terraces.png"
+              alt="Фітодизайн квартири"
+/>
+            <a class="underline" href="">Озеленення літніх терас</a>
+          </li>
+          <li>
+            <img
+              src="/img/sevices/zoning-space-with-indoor-plants.png"
+              alt="Зонування простору кімнатними рослинами"
+/>
+            <a class="underline" href=""
+              >Зонування простору кімнатними рослинами</a
+            >
+          </li>
+          <li>
+            <img
+              src="/img/sevices/plant-rental.png"
+              alt="Зелені рішення для HoReCa"
+/>
+            <a class="underline" href="">Зелені рішення для HoReCa</a>
+          </li>
+          <li>
+            <img
+              src="/img/sevices/landscaping-artificial-plants.png"
+              alt="Озеленення штучними рослинами"
+/>
+            <a class="underline" href="">Озеленення штучними рослинами</a>
+          </li>
+        </ul>
+      </section>
+    </li>
+    <li class="secondary-item">
+      <button
+        class="secondary-item--button"
+        aria-label="Вертикальне озеленення"
+      >
+        <svg class="icon icon-vertical"/>
+        <div class="secondary-item--button-text">
+          <b>Вертикальне озеленення</b>
+          <span>Зелені стіни</span>
+        </div>
+      </button>
+      <section class="secondary-item--content">
+        <ul class="secondary-item--content-list">
+          <li>
+            <img
+              src="/img/sevices/green-walls.png"
+              alt="Зелені стіни з рослинами"
+/>
+            <a class="underline" href="">Зелені стіни з рослинами</a>
+          </li>
+          <li>
+            <img
+              src="/img/sevices/landscaping-using-vertical-structures.png"
+              alt="Озеленення за допомогою вертикальних конструкцій"
+/>
+            <a class="underline" href=""
+              >Озеленення за допомогою вертикальних конструкцій</a
+            >
+          </li>
+          <li>
+            <img
+              src="/img/sevices/green-moss-walls.png"
+              alt="Зелені стіни з моху"
+/>
+            <a class="underline" href="">Зелені стіни з моху</a>
+          </li>
+        </ul>
+      </section>
+    </li>
+    <li class="secondary-item">
+      <button class="secondary-item--button" aria-label="Догляд за рослинами">
+        <svg class="icon icon-care"/>
+        <div class="secondary-item--button-text">
+          <b>Догляд</b>
+          <span>За рослинами</span>
+        </div>
+      </button>
+      <section class="secondary-item--content">
+        <ul class="secondary-item--content-list">
+          <li>
+            <img
+              src="/img/sevices/plant-transplantation.png"
+              alt="Пересадка рослин"
+/>
+            <a class="underline" href="">Пересадка рослин</a>
+          </li>
+          <li>
+            <img
+              src="/img/sevices/plant-transportation.png"
+              alt="Перевезення рослин"
+/>
+            <a class="underline" href="">Перевезення рослин</a>
+          </li>
+          <li>
+            <img src="/img/sevices/plant-rental.png" alt="Оренда рослин"/>
+            <a class="underline" href="">Оренда рослин</a>
+          </li>
+        </ul>
+      </section>
+    </li>
+    <li class="secondary-item">
+      <button class="secondary-item--button" aria-label="Галерея фотографій">
+        <svg class="icon icon-photogallery"/>
+        <div class="secondary-item--button-text">
+          <b>Портфоліо</b>
+          <span>Галерея фотографій</span>
+        </div>
+      </button>
+    </li>
+  </ul>
+</div>
+  </div>
+</header>
+    
+    <!-- Основний контент сторінки -->
+    
+
+  <main class="catalog-page">
+    <div class="container">
+      <div class="catalog-page__grid">
+
+        <!-- Sidebar navigation - категорії каталогу -->
+        <aside class="catalog-page__nav">
+          
+            <section class="catalog-page__nav_section">
+              <h3>Кімнатні рослини</h3>
+              <ul>
+                
+                  <li>
+                    <a class="underline" href="/catalog/orchids">Орхідеї</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/decorative-leafy">Декоративно листяні рослини</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/palms">Пальми</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/ficus">Фікус</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/dracaena">Драцена</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/cacti">Кактуси</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/succulents">Сукуленти</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/philodendron">Філодендрон</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/epipremnum">Епіпремнум</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/croton">Кротон</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/sansevieria">Сансевієрія</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/alocasia">Алоказія</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/aglaonema">Аглаонема</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/yucca">Юкка</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/citrus">Цитрусові рослини</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/seasonal">Сезонні рослини</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/flowering">Квіткові рослини</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/fern">Папороть</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/calathea">Калатея</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/dieffenbachia">Дифенбахія</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/coniferous">Хвойні</a>
+                  </li>
+                
+              </ul>
+            </section>
+          
+            <section class="catalog-page__nav_section">
+              <h3>Горщики та кашпо</h3>
+              <ul>
+                
+                  <li>
+                    <a class="underline" href="/catalog/lechuza">Горщики Lechuza (Лечуза)</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/ceramic">Горщики керамічні</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/lamela">Горщики Lamela</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/wooden">Горщики з дерева</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/metal">Металеві кашпо</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/concrete">Горщики з бетону</a>
+                  </li>
+                
+              </ul>
+            </section>
+          
+            <section class="catalog-page__nav_section">
+              <h3>Готові рішення</h3>
+              <ul>
+                
+                  <li>
+                    <a class="underline" href="/catalog/click-and-grow">Розумний сад Click &amp; Grow</a>
+                  </li>
+                
+              </ul>
+            </section>
+          
+            <section class="catalog-page__nav_section">
+              <h3>Штучні квіти</h3>
+              <ul>
+                
+                  <li>
+                    <a class="underline" href="/catalog/art-palms">Штучні пальми</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/art-trees">Штучні дерева</a>
+                  </li>
+                
+              </ul>
+            </section>
+          
+            <section class="catalog-page__nav_section">
+              <h3>Аксесуари для рослин</h3>
+              <ul>
+                
+                  <li>
+                    <a class="underline" href="/catalog/fertilizers">Добрива для рослин</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/soils-substrates">Ґрунти та субстрати</a>
+                  </li>
+                
+                  <li>
+                    <a class="underline" href="/catalog/plant-care-tools">Інвентар для догляду за рослинами</a>
+                  </li>
+                
+              </ul>
+            </section>
+          
+        </aside>
+
+        <!-- Main content area -->
+        <div class="catalog-page__content">
+
+          <!-- Breadcrumbs -->
+          <sl-breadcrumb>
+            <sl-breadcrumb-item href="#">Озеленення і Фітодизайн</sl-breadcrumb-item>
+            <sl-breadcrumb-item href="#">Кімнатні рослини</sl-breadcrumb-item>
+          </sl-breadcrumb>
+
+          <!-- Info показано скільки товарів -->
+          <div class="catalog-page__content_showed">
+          Показано <span>1 - 25</span> з <span>1230</span>
+          </div>
+
+          <!-- Заголовок і опис категорії -->
+          <h1>Кімнатні рослини</h1>
+          <div class="catalog-page__content_description">
+          Правильно підібрати кімнатні рослини вам допоможе консультант студії фітодизайну «Флорен». Також ви завжди можете отримати консультацію та купити кімнатні рослини та квіти в горщиках з доставкою в нашому магазині за адресою м. Київ, пр. Берестейський (Перемоги) 70.
+        </div>
+
+          <!-- Сітка товарів -->
+          <div class="catalog-page__content_products">
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/orchids">
+                      <img src="/img/homepage/product-1.png" alt="Орхідея Фаленопсис Муса Пінк"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/orchids">Орхідея Фаленопсис Муса Пінк</a>
+                  </div>
+                  
+                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/decorative-leafy">
+                      <img src="/img/homepage/product-2.png" alt="Монстера Делісіоза"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/decorative-leafy">Монстера Делісіоза</a>
+                  </div>
+                  
+                    <div class="product-card__custom-order">Під замовлення</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/palms">
+                      <img src="/img/homepage/product-3.png" alt="Пальма Хамеропс"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/palms">Пальма Хамеропс</a>
+                  </div>
+                  
+                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/ficus">
+                      <img src="/img/homepage/product-4.png" alt="Фікус Бенджаміна"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/ficus">Фікус Бенджаміна</a>
+                  </div>
+                  
+                    <div class="product-card__custom-order">Під замовлення</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/dracaena">
+                      <img src="/img/homepage/product-5.png" alt="Драцена Маргіната"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/dracaena">Драцена Маргіната</a>
+                  </div>
+                  
+                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/orchids">
+                      <img src="/img/homepage/product-1.png" alt="Орхідея Каттлея Ауреа"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/orchids">Орхідея Каттлея Ауреа</a>
+                  </div>
+                  
+                    <div class="product-card__custom-order">Під замовлення</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/decorative-leafy">
+                      <img src="/img/homepage/product-2.png" alt="Калатея Орнатіфолія"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/decorative-leafy">Калатея Орнатіфолія</a>
+                  </div>
+                  
+                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/palms">
+                      <img src="/img/homepage/product-3.png" alt="Рафія Вікторія"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/palms">Рафія Вікторія</a>
+                  </div>
+                  
+                    <div class="product-card__custom-order">Під замовлення</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/ficus">
+                      <img src="/img/homepage/product-4.png" alt="Фікус Лірата (Фікове дерево)"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/ficus">Фікус Лірата (Фікове дерево)</a>
+                  </div>
+                  
+                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/dracaena">
+                      <img src="/img/homepage/product-5.png" alt="Драцена Компакта"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/dracaena">Драцена Компакта</a>
+                  </div>
+                  
+                    <div class="product-card__custom-order">Під замовлення</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/orchids">
+                      <img src="/img/homepage/product-1.png" alt="Орхідея Ванда Блю"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/orchids">Орхідея Ванда Блю</a>
+                  </div>
+                  
+                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/decorative-leafy">
+                      <img src="/img/homepage/product-2.png" alt="Сансевієрія Тріхома"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/decorative-leafy">Сансевієрія Тріхома</a>
+                  </div>
+                  
+                    <div class="product-card__custom-order">Під замовлення</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/palms">
+                      <img src="/img/homepage/product-3.png" alt="Ховея Форстеріана"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/palms">Ховея Форстеріана</a>
+                  </div>
+                  
+                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/ficus">
+                      <img src="/img/homepage/product-4.png" alt="Фікус Еластика (Робуста)"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/ficus">Фікус Еластика (Робуста)</a>
+                  </div>
+                  
+                    <div class="product-card__custom-order">Під замовлення</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/dracaena">
+                      <img src="/img/homepage/product-5.png" alt="Драцена Фрагранс (Massangeana)"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/dracaena">Драцена Фрагранс (Massangeana)</a>
+                  </div>
+                  
+                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/orchids">
+                      <img src="/img/homepage/product-1.png" alt="Орхідея Онцидіум Золотий"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/orchids">Орхідея Онцидіум Золотий</a>
+                  </div>
+                  
+                    <div class="product-card__custom-order">Під замовлення</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/decorative-leafy">
+                      <img src="/img/homepage/product-2.png" alt="Філодендрон Сканденс"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/decorative-leafy">Філодендрон Сканденс</a>
+                  </div>
+                  
+                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/palms">
+                      <img src="/img/homepage/product-3.png" alt="Арека (Dypsis lutescens)"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/palms">Арека (Dypsis lutescens)</a>
+                  </div>
+                  
+                    <div class="product-card__custom-order">Під замовлення</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/ficus">
+                      <img src="/img/homepage/product-4.png" alt="Фікус Мікрокарпа"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/ficus">Фікус Мікрокарпа</a>
+                  </div>
+                  
+                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/dracaena">
+                      <img src="/img/homepage/product-5.png" alt="Драцена Сандера (Song of India)"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/dracaena">Драцена Сандера (Song of India)</a>
+                  </div>
+                  
+                    <div class="product-card__custom-order">Під замовлення</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/orchids">
+                      <img src="/img/homepage/product-1.png" alt="Орхідея Зигопеталум Рожевий"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/orchids">Орхідея Зигопеталум Рожевий</a>
+                  </div>
+                  
+                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/decorative-leafy">
+                      <img src="/img/homepage/product-2.png" alt="Аглаонема Сільвер Квін"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/decorative-leafy">Аглаонема Сільвер Квін</a>
+                  </div>
+                  
+                    <div class="product-card__custom-order">Під замовлення</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/palms">
+                      <img src="/img/homepage/product-3.png" alt="Пальма Кентія"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/palms">Пальма Кентія</a>
+                  </div>
+                  
+                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/ficus">
+                      <img src="/img/homepage/product-4.png" alt="Фікус Бенджаміна Ретуса"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/ficus">Фікус Бенджаміна Ретуса</a>
+                  </div>
+                  
+                    <div class="product-card__custom-order">Під замовлення</div>
+                  
+                </div>
+              </div>
+            
+              <!-- Картка продукту -->
+              <div class="catalog-page__content_product-card">
+                <div class="product-card__wrapper">
+                  <div class="product-card__image">
+                    <a href="/catalog/dracaena">
+                      <img src="/img/homepage/product-5.png" alt="Драцена Маргіната Тортоза"/>
+                    </a>
+                  </div>
+                  <div class="product-card__name">
+                    <a href="/catalog/dracaena">Драцена Маргіната Тортоза</a>
+                  </div>
+                  
+                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
+                  
+                </div>
+              </div>
+            
+          </div>
+
+          <!-- Кнопка "Показати ще" -->
+          <div class="catalog-page__content_more">
+            <button class="button button--primary button--pill">Показати ще 24 товара</button>
+          </div>
+
+          <!-- Pagination -->
+          <div class="pagination">
+            <a href="" class="pagination__link disabled">
+              <img src="/img/icons/icon-arrow-left-long.svg.svg" alt="Попередня сторінка">
+            </a>
+            <a href="" class="pagination__link active">1</a>
+            <a href="" class="pagination__link">2</a>
+            <a href="" class="pagination__link">3</a>
+            <a href="" class="pagination__link">4</a>
+            <a href="" class="pagination__link">5</a>
+            <a href="" class="pagination__link">
+              <img src="/img/icons/icon-arrow-right-long.svg" alt="Наступна сторінка">
+            </a>
+          </div>
+
+          <!-- SEO article section -->
+          <article class="catalog-page__content_article">
+            <section class="article-section">
+              <h3 class="article-section__title">Кімнатні рослини для затишку та гармонії</h3>
+              <div class="article-section__content">
+                <p>
+                Мрієте про живий куточок у своїй квартирі чи офісі? Ви у правильному місці! У студії фітодизайну «Флорен» ми зібрали рослини голландської селекції, які прикрасять ваш дім або офіс. Кімнатні рослини — не просто зелень у горщику. Це спосіб створити затишок, підняти настрій і навіть покращити якість повітря у приміщенні. Квіти додають життя, очищають повітря та допомагають зменшити рівень стресу.                
+              </p>
+                <p>Для озеленення приміщення ми пропонуємо купити кімнатні рослини найдекоративніші, корисні, водночас унікальні, які здивують і колекціонерів.</p>
+                <h4>Декоративні кімнатні рослини: вибір із характером</h4>
+                <p>Серед наявних у нас можна вибрати квітучі види, кактуси, деревоподібні пальми, фікуси тощо. Кожна рослина має свій темперамент. Допоможемо вам вибрати ту, яка наповнить фарбами ваше життя.</p>
+                <ol>
+                  <li>Листяні вирізняються декоративною формою, кольорами та текстурою. Попри незвичайний, часто екзотичний вигляд, ця група рослин невибаглива. Фікус, папороті, філодендрон найчастіше використовують і новачки, й фітодизайнери для створення зелених акцентів.</li>
+                  <li>Хочете барв? Вибирайте <a href="">вазони квітучі</a>! Бегонія з бархатистими квітками оживить інтер'єр. Антуріум розквітне навіть за мінімального догляду. Зауважимо: непримхлива гузманія обдарує цвітінням навіть неуважного господаря.</li>
+                  <li>Любите «мінімалізм»? Чарівне алое, як і екзотична хавортія, – це сучасний декор і природний «антистрес». Вони не образяться, якщо ви забудете їх полити.</li>
+                  <li>Химерна зелень тропічних рослин якісно збагачує киснем повітря і офісного, і домашнього приміщення. Уявіть, як розкішні листки монстери перетворюють куточок кімнати на маленькі джунглі – і все це без складного догляду!</li>
+                  <li>Плющ, як і сланка хоя з довгими стеблами підходять для підвісних кошиків. Вічнозелені ліани для вертикального озеленення зберігають декоративність навіть у спартанських умовах.</li>
+                </ol>
+              </div>
+
+            </section>
+            <section class="article-section">
+              <h3 class="article-section__title">Кімнатні рослини для дому і офісу</h3>
+              <div class="article-section__content">
+                <p>Чому варто купити кімнатні квіти у нас? Задумувалися, чому всі так люблять озеленювати будинки та офіси? Ось лише кілька причин, щоб вибрати у нас горщикові рослини й купити вазони кімнатні:</p>
+                <ul>
+                  <li>
+                    <b>Очищення повітря.</b> Бажаєте освіжити приміщення? Варто купити кімнатну рослину сансевієрію чи хлорофітум. Вчені довели: вони знижують рівень токсинів і покращують якість життя.</li>
+                  <li>
+                    <b>Зниження рівня стресу.</b>Психологи переконують: кімнатні вазони мають терапевтичний ефект, оскільки зменшують тривожність і наповнюють гармонією.</li>
+                  <li>
+                    <b>Естетика.</b> Відчуваєте нестачу затишку? Уявіть, як монстера, королева джунглів, перетворює ваш куточок на зелено-розкішну оазу. Вазони квітучої орхідеї в сучасному дизайні – вишуканий шарм.</li>
+                </ul>
+                <h4>Які кімнатні квіти купити?</h4>
+                <p>Не знаєте, що вибрати для вашого дизайну? Ось кілька ідей:</p>
+                <ul>
+                  <li>
+                    <b>для спальні:</b> затишок подарують лаванда або спатифілум. Домашні вазони, живі квіти корисно тримати біля ліжка для гарного сну. Сприяють очищенню повітря та створюють спокійну атмосферу;</li>
+                  <li>
+                    <b>вазони кімнатні для офісу:</b> заміокулькас зробить кабінетний простір затишним. Навіть якщо у вас немає часу, сансевієрія залишиться вірним другом — її навіть поливати раз на два тижні забагато. Фінікові, пальми й благородні драцени – не тільки найдекоративніші живі вазони для офісу, а й флористичний декор;</li>
+                  <li>
+                    <b>для кухні:</b> хлорофітум або м’ята — функціональні та невибагливі. Хлорофітум поглинає токсини з повітря, а м’ята порадує ароматом.
+                </li>
+                </ul>
+                <h4>Кому і на які свята можна дарувати квіти в горщиках?</h4>
+                <p>Дарувати кімнатні квіти — це завжди чудова ідея! Уявіть, як подруга чи колега розпаковує подарунок і бачить вазон з квітучою бегонією або елегантною орхідеєю. Ідеально на дні народження, новосілля або навіть як вдячність. </p>
+                <p>На сайті представлений каталог кімнатних рослин, де ви можете підібрати рослину для умов у вашому домі. </p>
+              </div>
+
+            </section>
+            <section class="article-section">
+              <h3 class="article-section__title">Як доглядати за живими вазонами?</h3>
+              <div class="article-section__content">
+                <div class="grid">
+                  <div>
+                    <p>Багато хто думає, що догляд за кімнатними рослинами – це складно. Насправді все простіше, ніж здається! Поділимося з вами <a href="">секретами успішного вирощування</a>:</p>
+                    <ul>
+                      <li>поливайте помірно: квіти у вазоні не люблять застою води;</li>
+                      <li>
+                      забезпечте освітлення: наприклад, фікусам потрібне розсіяне світло. Вазон кімнатний із сукулентом добре почувається на сонячному підвіконні;
+                    </li>
+                      <li>не забувайте удобрювати: навесні та влітку квітучі й декоративно-листяні потребують додаткового підживлення.</li>
+                    </ul>
+                    <p>Рослини – це маленькі джунглі, які ми приручили, щоб вони шепотіли нам про природу, коли за вікном шелестить бетонний ліс. Розглянемо, наскільки складно вирощувати вазони кімнатні та що потрібно для догляду.</p>
+                  </div>
+                  <div class="swiper article-swiper" data-swiper="delivery-swiper">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide">
+                        <img src="/img/delivery-1.jpg"/>
+                        <span>Доставка кімнатних рослин в зимовий період</span>
+                      </div>
+                      <div class="swiper-slide">
+                        <img src="/img/delivery-2.jpg"/>
+                        <span>Магазин рослин – доставка по Києву</span>
+                      </div>
+                      <div class="swiper-slide">
+                        <img src="/img/delivery-3.jpg"/>
+                        <span>Доставка кімнатних рослин</span>
+                      </div>
+                    </div>
+                    <div class="swiper-button swiper-button--next">
+                      <img src="/img/icons/icon-arrow-angle-right.svg" alt="">
+                    </div>
+                    <div class="swiper-button swiper-button--prev">
+                      <img src="/img/icons/icon-arrow-angle-left.svg" alt="">
+                    </div>
+                  </div>
+                </div>
+                <div class="article-section__table">
+                  <div class="article-section__table-title">Таблиця догляду за кімнатними рослинами</div>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Рослина</th>
+                        <th>Рівень догляду</th>
+                        <th>Освітлення</th>
+                        <th>Особливості</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Монстера делікатесна</td>
+                        <td>Середній</td>
+                        <td>Яскраве, розсіяне</td>
+                        <td>Тропічний акцент, велике листя</td>
+                      </tr>
+                      <tr>
+                        <td>Фікус Бенджаміна</td>
+                        <td>Легкий</td>
+                        <td>Розсіяне, півтінь</td>
+                        <td>Класика для офісів і квартир</td>
+                      </tr>
+                      <tr>
+                        <td>Сансевієрія</td>
+                        <td>Дуже легкий</td>
+                        <td>Тінь або сонячне</td>
+                        <td>Очищає повітря, «рослина для лінивих»</td>
+                      </tr>
+                      <tr>
+                        <td>Алоказія Поллі</td>
+                        <td>Середній</td>
+                        <td>Яскраве, розсіяне</td>
+                        <td>Екзотичний вигляд, потребує зволоження</td>
+                      </tr>
+                      <tr>
+                        <td>Пеперомія</td>
+                        <td>Легкий</td>
+                        <td>М'яке, рівномірне</td>
+                        <td>Компактна, яскраве забарвлення</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+              <section class="article-section">
+                <h3 class="article-section__title">Кімнатні рослини купити в інтернет-магазині в Києві: відкрийте для себе фітостудію «Флорен»</h3>
+                <div class="article-section__content">
+                  <p>Чи думали ви, як багато можна змінити, якщо вазони кімнатні купити для дому чи офісу? Хочете знайти ідеальні здорові рослини з провідних європейських теплиць? Тоді студія фітодизайну «Флорен» — саме те, що вам потрібно.</p>
+                  <h4>Чому саме ми?</h4>
+                  <p>А тому, що ми розуміємо ваші потреби й пропонуємо як онлайн-шопінг, так і вибір декоративних рослин у салоні квітів «Флорен» у Києві, проспект Берестейський, 70. Хоч який спосіб виберете, у нас гарантовано зможете купити кімнатні вазони й отримаєте переваги:</p>
+                  <ol class="bold-numbers">
+                    <li>
+                      <b>Зручність.</b> Залишайтеся вдома й вибирайте рослини на нашому сайті. Або ж завітайте до магазину квітів.</li>
+                    <li>
+                      <b>Експертні поради.</b>  Не впевнені, яка рослина для вашого інтер'єру? Наші консультанти у салоні чи телефоном порадять, підберуть найкращі, враховуючи освітлення, вологість, стиль вашого простору.</li>
+                    <li>
+                      <b>Швидке отримання.</b>  Не витрачайте час на пошук транспорту. Ми дбайливо запаковуємо рослини. Одержите їх у Києві, області, по всій Україні. Гарантуємо: кожен листочок залишиться цілим і здоровим.</li>
+                    <li>
+                      <b>Доступні ціни без шкоди для якості.</b> У нас високоякісні декоративні культури європейського постачальника за доступною ціною. Нам важливо, щоб голландські квіти дарували радість і не порушували ваш бюджет.</li>
+                    <li>
+                      <b>Гарантія задоволення.</b> Ми впевнені: рослина від нас стане і декоративним елементом, і справжньою прикрасою. Якщо ви не задоволені покупкою, ми завжди знайдемо рішення!</li>
+                  </ol>
+                  <h4>Наша доставка – комфорт для покупця</h4>
+                  <p>Ми подбали про всі деталі. Товар доставимо в спеціально обладнаній машині. Ба більше, навіть взимку не варто турбуватися за стан квітів, живі вазони захистить від холоду тепле авто.</p>
+                  <ul>
+                    <li>Кур'єр привезе квіти в вазоні з магазину, якщо сума замовлення перевищує 1000,00 грн.</li>
+                    <li>Нова Пошта – наш логістичний партнер для безпечної доставки по всій Україні.</li>
+                  </ul>
+                  <p>Також ми піднімемо на поверх і розмістимо вазони в офісі, що значно полегшує життя вам і співробітникам.</p>
+                  <p>
+                    <b>Ваша рослина вже чекає на вас. Купити декоративні кімнатні квіти у фітостудії «Флорен» – це не тільки інвестиція в красу, а й піклування про здоров'я.</b>
+                  </p>
+                </div>
+              </section>
+
+            </article>
+          </div>
+        </div>
+      </div>
+      <div class="main__last-works">
+        <!-- Swiper з останніми роботами -->
+<div class="container last-works">
+  <img class="homepage__last-works-leaf-1" src="/img/leaf-3.png" alt="leaf"/>
+  <img class="homepage__last-works-leaf-2" src="/img/leaf-4.png" alt="leaf"/>
+
+  <div class="works-swiper">
+    <h2>Останні роботи</h2>
+    <div class="swiper" data-swiper="works-swiper">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper">
+        <!-- Slides -->
+        <div class="swiper-slide works-slide">
+          <div class="works-slide__image">
+            <img
+              src="/img/homepage/last-work-1.png"
+              alt="Озеленення одного з офісів компанії Synexus"
+/>
+          </div>
+          <div class="works-slide__content">
+            <a
+              class="not-underline"
+              href="Озеленення одного з офісів компанії Synexus"
+              >Озеленення одного з офісів компанії Synexus</a
+            >
+            <time> 09 липня 2025 </time>
+          </div>
+        </div>
+
+        <div class="swiper-slide works-slide">
+          <div class="works-slide__image">
+            <img src="/img/homepage/last-work-2.png" alt="DV Bank"/>
+          </div>
+          <div class="works-slide__content">
+            <a class="not-underline" href="">DV Bank</a>
+            <time>09 липня 2025</time>
+          </div>
+        </div>
+
+        <div class="swiper-slide works-slide">
+          <div class="works-slide__image">
+            <img
+              src="/img/homepage/last-work-3.png"
+              alt="Озеленення автосалону AWT Баварія"
+/>
+          </div>
+          <div class="works-slide__content">
+            <a class="not-underline" href=""
+              >Озеленення автосалону AWT Баварія</a
+            >
+            <time>09 липня 2025</time>
+          </div>
+        </div>
+
+        <div class="swiper-slide works-slide">
+          <div class="works-slide__image">
+            <img
+              src="/img/homepage/last-work-4.png"
+              alt="ЖК Оболонь Residences"
+/>
+          </div>
+          <div class="works-slide__content">
+            <a class="not-underline" href="">ЖК Оболонь Residences</a>
+            <time>09 липня 2025</time>
+          </div>
+        </div>
+
+        <div class="swiper-slide works-slide">
+          <div class="works-slide__image">
+            <img src="/img/homepage/last-work-5.png" alt="БЦ Днепр плаза"/>
+          </div>
+          <div class="works-slide__content">
+            <a class="not-underline" href="">БЦ Днепр плаза</a>
+            <time>09 липня 2025</time>
+          </div>
+        </div>
+
+        <div class="swiper-slide works-slide">
+          <div class="works-slide__image">
+            <img src="/img/homepage/last-work-5.png" alt="БЦ Днепр плаза"/>
+          </div>
+          <div class="works-slide__content">
+            <a class="not-underline" href="">БЦ Днепр плаза</a>
+            <time>09 липня 2025</time>
+          </div>
+        </div>
+        <div class="swiper-slide works-slide">
+          <div class="works-slide__image">
+            <img src="/img/homepage/last-work-5.png" alt="БЦ Днепр плаза"/>
+          </div>
+          <div class="works-slide__content">
+            <a class="not-underline" href="">БЦ Днепр плаза</a>
+            <time>09 липня 2025</time>
+          </div>
+        </div>
+        <div class="swiper-slide works-slide">
+          <div class="works-slide__image">
+            <img src="/img/homepage/last-work-5.png" alt="БЦ Днепр плаза"/>
+          </div>
+          <div class="works-slide__content">
+            <a class="not-underline" href="">БЦ Днепр плаза</a>
+            <time>09 липня 2025</time>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- If we need navigation buttons -->
+    <button class="swiper-button swiper-button--prev">
+      <img src="/img/icons/icon-arrow-angle-left.svg" alt=""/>
+    </button>
+    <button class="swiper-button swiper-button--next">
+      <img src="/img/icons/icon-arrow-angle-right.svg" alt=""/>
+    </button>
+  </div>
+  <div class="last-works_more">
+    <button class="button button--primary button--pill">Подивитись ще</button>
+  </div>
+</div>
+      </div>
+
+    </main>
+
+  
+    
+    <!-- Підвал сайту -->
+    <!-- Footer site -->
+<footer class="footer">
+
+  <!-- Топ категорії і теги -->
+  <div class="footer__catalog">
+    <div class="container">
+      <div class="footer__catalog-top">
+        <span>ТОП Категорії</span>
+        <a href="">ТОП Тегі</a>
+        <a href="">Міста</a>
+        <a href="">FAQ</a>
+        <a href="">Пропозиції</a>
+      </div>
+      <ul class="footer__catalog-list">
+        <li>
+          <a href="">Лавровое дерево в горшке</a>
+          <a href="">Комнатное растение мирт</a>
+          <a href="">Пальма комнатная хамедорея</a>
+          <a href="">Горшок керамический</a>
+          <a href="">Драцена golden</a>
+          <a href="">Пальма цветы</a>
+          <a href="">Маранта вазон</a>
+          <a href="">Кактусы маленькие</a>
+        </li>
+        <li>
+          <a href="">Растение денежное дерево</a>
+          <a href="">Домашний вьющийся цветок</a>
+          <a href="">Кипарис декоративный</a>
+          <a href="">Горшок с автополивом лечуза</a>
+          <a href="">Горшки для цветов из бетона</a>
+          <a href="">Орхидеи в стеклянной вазе</a>
+          <a href="">Лимон декоративный</a>
+          <a href="">Пальмы домашние</a>
+        </li>
+        <li>
+          <a href="">Сансевиерия голден ханни</a>
+          <a href="">Комнатные растения фикус</a>
+          <a href="">Замиокулькас цветок</a>
+          <a href="">Фикус наташа</a>
+          <a href="">Перегородки из живых растений</a>
+          <a href="">Купить аглаонемы</a>
+          <a href="">Аглаонема цена</a>
+          <a href="">Алоказия цена</a>
+        </li>
+        <li>
+          <a href="">Цветущие растения</a>
+          <a href="">Бокарнея нолина</a>
+          <a href="">Комнатная азалия</a>
+          <a href="">Горшки с автополивом</a>
+          <a href="">Хвойные деревья</a>
+          <a href="">Lechuza вазоны</a>
+          <a href="">Банан домашний</a>
+          <a href="">Лавровый лист</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Основна частина footer з логотипом, меню, контактами -->
+  <div class="footer__body">
+    <div class="container">
+      <img
+        class="footer__body-bg footer__body-bg-1"
+        src="/img/palm.svg"
+        alt="background"
+/>
+      <img
+        class="footer__body-bg footer__body-bg-2"
+        src="/img/palm.svg"
+        alt="background"
+/>
+      <img
+        class="footer__body-bg footer__body-bg-3"
+        src="/img/palm.svg"
+        alt="background"
+/>
+      <img
+        class="footer__body-bg footer__body-bg-4"
+        src="/img/leaf.svg"
+        alt="background"
+/>
+      <img
+        class="footer__body-bg footer__body-bg-5"
+        src="/img/leaf.svg"
+        alt="background"
+/>
+      <img
+        class="footer__body-bg footer__body-bg-6"
+        src="/img/leaf.svg"
+        alt="background"
+/>
+
+      <div class="footer__body-grid">
+        <section>
+          <a
+            href="/"
+            class="footer__body-logo"
+            aria-label="Флорен - студія фітодизайну"
+          >
+            <img src="/img/footer-logo.png" alt="Флорен - студія фітодизайну"/>
+          </a>
+        </section>
+        <section>
+          <h3>Інформація</h3>
+          <ul class="footer__body-list">
+            <li>
+              <a href="">Про компанію</a>
+            </li>
+            <li>
+              <a href="">Повернення товарів</a>
+            </li>
+            <li>
+              <a href="">Співпраця</a>
+            </li>
+            <li>
+              <a href="">Контакти </a>
+            </li>
+            <li>
+              <a href="">Мапа сайту</a>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>Товари та сервіси</h3>
+          <ul class="footer__body-list">
+            <li>
+              <a href="">Фітодизайн</a>
+            </li>
+            <li>
+              <a href="">Вертикальне озеленення</a>
+            </li>
+            <li>
+              <a href="">Ландшафтний дизайн</a>
+            </li>
+            <li>
+              <a href="">Кімнатні рослини</a>
+            </li>
+            <li>
+              <a href="">Горщики та Кашпо</a>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>Контакти</h3>
+          <ul class="footer__body-contacts">
+            <li>
+              <p class="contacts-street">
+                <svg class="icon icon-location"/>
+                <a href="https://goo.gl/maps/UPpaCBkrMd2TWfXq7" target="_blank"
+                  >пр. Берестейський, 70</a
+                >
+              </p>
+              <p>03113, Київ, Україна</p>
+            </li>
+            <li class="contacts-phone">
+              <div class="contacts-phone--hidden">
+                <p>
+                  (044) 344..
+                  <button
+                    data-event="click"
+                    data-callback="toggleFooterPhones"
+                    aria-label="Показати телефон"
+                  >
+                    показати
+                  </button>
+                </p>
+                <p>(050) 660..</p>
+              </div>
+              <div class="contacts-phone--shown">
+                <p>(044) 344-28-95</p>
+                <p>(050) 660-52-75</p>
+              </div>
+            </li>
+            <li class="contacts-socials">
+              <a href="">
+                <svg class="icon icon-facebook"/>
+              </a>
+              <a href="">
+                <svg class="icon icon-youtube"/>
+              </a>
+              <a href="">
+                <svg class="icon icon-instagram"/>
+              </a>
+            </li>
+          </ul>
+        </section>
+      </div>
+      <sl-divider class="footer__body-divider"></sl-divider>
+
+      <!-- Copyright і платіжні системи -->
+      <div class="footer__body-bottom">
+        <section class="footer__body-bottom--copyright">
+          <span>© 2025 “Флорен”</span>
+          <a class="not-underline" href="">Договір оферта</a>
+        </section>
+        <section class="footer__body-bottom--cards">
+          <img src="/img/payment-visa.svg" alt="Visa"/>
+          <img src="/img/payment-master.svg" alt="MasterCard"/>
+          <img src="/img/payment-google.svg" alt="Google Pay"/>
+          <img src="/img/payment-apple.svg" alt="Apple Pay"/>
+        </section>
+      </div>
+    </div>
+  </div>
+</footer>
+    
+    <!-- Головний JS файл -->
+  </body>
+</html>
