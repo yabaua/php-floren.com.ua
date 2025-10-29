@@ -17,15 +17,6 @@ if	(
 	//=============404===================
 } else
 
-/*
-include($_SERVER['DOCUMENT_ROOT'].'/include/inwidget/inwidget.php');
-$inWidget = new inWidget();
-$inWidget->getData();
-if(!$inWidget) die('inWidget object is not init.');
-if(!is_object($inWidget->data)) die('<b style="color:red;">Cache file contains plain text:</b><br />'.$inWidget->data);
-*/
-
-
 $db->query("SELECT * FROM tree".$db_sufix." WHERE alias='index'");
 $f=$db->fetch();
 $smarty->assign("META_TITLE",$f['meta_title']);
@@ -83,25 +74,6 @@ while($f=$db->fetch()){
 //	$indx_lastPhotos[count($indx_lastPhotos)-1]['photo_dsc']=$f['photo_dsc'.$db_sufix];
 }
 $smarty->assign("LASTPHOTOS", $indx_lastPhotos);
-
-/*
-//instagram
-if(!empty($inWidget->data->images)){
-	$inWGT=array();
-	if($inWidget->config['imgRandom'] === true) shuffle($inWidget->data->images);
-	$inWidget->data->images = array_slice($inWidget->data->images,0,$inWidget->view);
-	foreach ($inWidget->data->images as $key=>$item){
-		if(strpos(($item->fullsize),'null.jpg')>0){}
-		else{
-			$inWGT[$key]['fullsize']=$item->fullsize;
-			$inWGT[$key]['large']=$item->large;
-			$inWGT[$key]['small']=$item->small;
-		}
-	}
-	$smarty->assign("inWIDGET", $inWGT);
-}
-*/
-//=====================================
 
 $smarty->assign("SERVER_NAME",$_SERVER['SERVER_NAME']);
 ?>

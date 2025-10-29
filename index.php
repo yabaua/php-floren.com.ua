@@ -384,7 +384,7 @@ if ($URL[0] =='florist') {
 if (isset($dept) && $dept=='landscape'){
 	$smarty->assign("LEFT_TPL",'left_col_landscape.tpl');
 } else {
-	$smarty->assign("LEFT_TPL",'left_col.tpl');
+	$smarty->assign("LEFT_TPL",'nav_catalog.tpl');
 }
 // дерево сайта
 function gen_tree($ID,$level) {
@@ -546,7 +546,7 @@ elseif (count($URL)==1 && ($URL[0]=='' || $URL[0]=='indexphp')) {
 	exit();
   }
 }
-
+$smarty->assign("LAST_WORKS",'last_works.tpl');
 
 // SLIDER
 
