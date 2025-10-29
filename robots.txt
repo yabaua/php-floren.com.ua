@@ -1,0 +1,31 @@
+User-agent: *
+Disallow: /*utm_
+Disallow: /*gclid=
+Disallow: /*search/
+Disallow: /*basket/
+
+User-agent: Googlebot
+Disallow: /*utm_
+Disallow: /*gclid=
+Disallow: /*search/
+Disallow: /*basket/
+
+User-agent: Yandex
+Disallow: /*utm_
+Disallow: /*gclid=
+Disallow: /*search/
+Disallow: /*basket/
+
+Disallow: /images/
+
+Disallow: /img/
+
+
+User-agent: YandexImages
+Disallow: /
+Allow: /images/
+Allow: /img/
+
+
+Host: https://floren.com.ua
+Sitemap: https://floren.com.ua/sitemap.xml/
