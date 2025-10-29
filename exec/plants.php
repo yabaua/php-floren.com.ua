@@ -99,6 +99,9 @@ while($f = $db->fetch()) {
 	$category_aliases[] = $f['alias'];
 	$category_ids[] = $f['ID'];
 }
+//	=======================================================
+//	===========		Lets merge plants.php and goods.php
+//	=======================================================
 
 if ((isset($URL[1]) && in_array($URL[1], $category_aliases))) {
 
