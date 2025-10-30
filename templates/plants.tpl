@@ -4,438 +4,81 @@
           </div>
 
           <!-- Заголовок і опис категорії -->
-          <h1>Кімнатні рослини</h1>
-          <div class="catalog-page__content_description">
-          Правильно підібрати кімнатні рослини вам допоможе консультант студії фітодизайну «Флорен». Також ви завжди можете отримати консультацію та купити кімнатні рослини та квіти в горщиках з доставкою в нашому магазині за адресою м. Київ, пр. Берестейський (Перемоги) 70.
-          </div>
-		
+          <h1>{$PAGE_TITLE}</h1>
+            {if TOP_SEO_TEXT}
+            <div class="catalog-page__content_description">
+            {$TOP_SEO_TEXT}
+            </div>
+		    {/if}
 		<!-- Сітка товарів -->
+		<!--seoshield_formulas--kategorii-->
           <div class="catalog-page__content_products">
             
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/orchids">
-                      <img src="/img/homepage/product-1.png" alt="Орхідея Фаленопсис Муса Пінк"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/orchids">Орхідея Фаленопсис Муса Пінк</a>
-                  </div>
-                  
-                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
-                  
+            <!--isset_listing_page-->
+		    {foreach from=$PROMO item=P}
+            <!-- Product Card Start-->
+            <!--product_in_listingEX-->
+			<!--dg_prod_in_lisintg_href:{$LANGURL}/product/{$P.ID}_{$P.link}/;;dg_prod_in_lisintg_anchor:{$P.name}-->
+            <div class="catalog-page__content_product-card">
+              <div class="product-card__wrapper">
+                <div class="product-card__image">
+                  <a href="{$P.product_path}">
+                    <img src="{$P.img_path}" alt="Фото {$P.name}"/>
+                  </a>
                 </div>
-              </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/decorative-leafy">
-                      <img src="/img/homepage/product-2.png" alt="Монстера Делісіоза"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/decorative-leafy">Монстера Делісіоза</a>
-                  </div>
-                  
-                    <div class="product-card__custom-order">Під замовлення</div>
-                  
+                <div class="product-card__name">
+                  <a href="{$P.product_path}">{$P.name}</a>
                 </div>
-              </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/palms">
-                      <img src="/img/homepage/product-3.png" alt="Пальма Хамеропс"/>
-                    </a>
+                {if $P.not_available === 0}
+                <div class="product-card__price">
+                {$P.min_price} ₴
+                    {if $P.min_price != $P.max_price}
+                    – {$P.max_price} ₴
+                    {/if}{** <del>200,99 ₴</del> **}
+                {**
+                  <!-- If in cart add this block -->
+                  <div class="product-card__in-cart">
+                    <span class="icon icon-basket"></span>
                   </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/palms">Пальма Хамеропс</a>
-                  </div>
-                  
-                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
-                  
+                **}
                 </div>
-              </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/ficus">
-                      <img src="/img/homepage/product-4.png" alt="Фікус Бенджаміна"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/ficus">Фікус Бенджаміна</a>
-                  </div>
-                  
-                    <div class="product-card__custom-order">Під замовлення</div>
-                  
+
+                <div class="product-card__options">
+                  <section>
+                    <h5>{$LINGVO.varianty}:</h5>
+                    <ul>
+                    {foreach from=$P.forms item=F}
+                      <li>{if $F.dia}&#216; {$F.dia} {/if}
+    						{if $F.wdt}{$F.wdt} 
+    						{if $F.depth}x {$F.depth} {/if}{/if}
+    						{if $F.hgt}x {$F.hgt}{/if}
+    						{if $F.measure_qt}{$F.measure_qt} {$F.unit}{/if}</li>
+                    {/foreach}
+                    </ul>
+                  </section>
+                  {if $P.colors}
+                  <section>
+                    <h5>{$LINGVO.colors}:</h5>
+                    <div class="colors-list">
+                        {foreach from=$P.colors item=FC}
+                        {** <span style="background-color: #C33494;"></span>    **}
+                            <span style="background: url('{$FC.image}');" title="Фото {$FC.name_ru}"></span>
+                        {/foreach}
+
+                    </div>
+                  </section>
+                  {/if} {** if colors **}
                 </div>
+                {elseif $P.preorder==1 && $P.act=='Y'}
+					<div class="product-card__custom-order">{$LINGVO.good_preorder}</div>
+				{else}
+					<div class="product-card__custom-order">{$LINGVO.not_available}</div>
+				{/if}
               </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/dracaena">
-                      <img src="/img/homepage/product-5.png" alt="Драцена Маргіната"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/dracaena">Драцена Маргіната</a>
-                  </div>
-                  
-                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
-                  
-                </div>
-              </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/orchids">
-                      <img src="/img/homepage/product-1.png" alt="Орхідея Каттлея Ауреа"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/orchids">Орхідея Каттлея Ауреа</a>
-                  </div>
-                  
-                    <div class="product-card__custom-order">Під замовлення</div>
-                  
-                </div>
-              </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/decorative-leafy">
-                      <img src="/img/homepage/product-2.png" alt="Калатея Орнатіфолія"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/decorative-leafy">Калатея Орнатіфолія</a>
-                  </div>
-                  
-                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
-                  
-                </div>
-              </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/palms">
-                      <img src="/img/homepage/product-3.png" alt="Рафія Вікторія"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/palms">Рафія Вікторія</a>
-                  </div>
-                  
-                    <div class="product-card__custom-order">Під замовлення</div>
-                  
-                </div>
-              </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/ficus">
-                      <img src="/img/homepage/product-4.png" alt="Фікус Лірата (Фікове дерево)"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/ficus">Фікус Лірата (Фікове дерево)</a>
-                  </div>
-                  
-                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
-                  
-                </div>
-              </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/dracaena">
-                      <img src="/img/homepage/product-5.png" alt="Драцена Компакта"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/dracaena">Драцена Компакта</a>
-                  </div>
-                  
-                    <div class="product-card__custom-order">Під замовлення</div>
-                  
-                </div>
-              </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/orchids">
-                      <img src="/img/homepage/product-1.png" alt="Орхідея Ванда Блю"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/orchids">Орхідея Ванда Блю</a>
-                  </div>
-                  
-                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
-                  
-                </div>
-              </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/decorative-leafy">
-                      <img src="/img/homepage/product-2.png" alt="Сансевієрія Тріхома"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/decorative-leafy">Сансевієрія Тріхома</a>
-                  </div>
-                  
-                    <div class="product-card__custom-order">Під замовлення</div>
-                  
-                </div>
-              </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/palms">
-                      <img src="/img/homepage/product-3.png" alt="Ховея Форстеріана"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/palms">Ховея Форстеріана</a>
-                  </div>
-                  
-                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
-                  
-                </div>
-              </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/ficus">
-                      <img src="/img/homepage/product-4.png" alt="Фікус Еластика (Робуста)"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/ficus">Фікус Еластика (Робуста)</a>
-                  </div>
-                  
-                    <div class="product-card__custom-order">Під замовлення</div>
-                  
-                </div>
-              </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/dracaena">
-                      <img src="/img/homepage/product-5.png" alt="Драцена Фрагранс (Massangeana)"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/dracaena">Драцена Фрагранс (Massangeana)</a>
-                  </div>
-                  
-                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
-                  
-                </div>
-              </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/orchids">
-                      <img src="/img/homepage/product-1.png" alt="Орхідея Онцидіум Золотий"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/orchids">Орхідея Онцидіум Золотий</a>
-                  </div>
-                  
-                    <div class="product-card__custom-order">Під замовлення</div>
-                  
-                </div>
-              </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/decorative-leafy">
-                      <img src="/img/homepage/product-2.png" alt="Філодендрон Сканденс"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/decorative-leafy">Філодендрон Сканденс</a>
-                  </div>
-                  
-                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
-                  
-                </div>
-              </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/palms">
-                      <img src="/img/homepage/product-3.png" alt="Арека (Dypsis lutescens)"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/palms">Арека (Dypsis lutescens)</a>
-                  </div>
-                  
-                    <div class="product-card__custom-order">Під замовлення</div>
-                  
-                </div>
-              </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/ficus">
-                      <img src="/img/homepage/product-4.png" alt="Фікус Мікрокарпа"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/ficus">Фікус Мікрокарпа</a>
-                  </div>
-                  
-                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
-                  
-                </div>
-              </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/dracaena">
-                      <img src="/img/homepage/product-5.png" alt="Драцена Сандера (Song of India)"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/dracaena">Драцена Сандера (Song of India)</a>
-                  </div>
-                  
-                    <div class="product-card__custom-order">Під замовлення</div>
-                  
-                </div>
-              </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/orchids">
-                      <img src="/img/homepage/product-1.png" alt="Орхідея Зигопеталум Рожевий"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/orchids">Орхідея Зигопеталум Рожевий</a>
-                  </div>
-                  
-                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
-                  
-                </div>
-              </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/decorative-leafy">
-                      <img src="/img/homepage/product-2.png" alt="Аглаонема Сільвер Квін"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/decorative-leafy">Аглаонема Сільвер Квін</a>
-                  </div>
-                  
-                    <div class="product-card__custom-order">Під замовлення</div>
-                  
-                </div>
-              </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/palms">
-                      <img src="/img/homepage/product-3.png" alt="Пальма Кентія"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/palms">Пальма Кентія</a>
-                  </div>
-                  
-                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
-                  
-                </div>
-              </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/ficus">
-                      <img src="/img/homepage/product-4.png" alt="Фікус Бенджаміна Ретуса"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/ficus">Фікус Бенджаміна Ретуса</a>
-                  </div>
-                  
-                    <div class="product-card__custom-order">Під замовлення</div>
-                  
-                </div>
-              </div>
-            
-              <!-- Картка продукту -->
-              <div class="catalog-page__content_product-card">
-                <div class="product-card__wrapper">
-                  <div class="product-card__image">
-                    <a href="/catalog/dracaena">
-                      <img src="/img/homepage/product-5.png" alt="Драцена Маргіната Тортоза"/>
-                    </a>
-                  </div>
-                  <div class="product-card__name">
-                    <a href="/catalog/dracaena">Драцена Маргіната Тортоза</a>
-                  </div>
-                  
-                    <div class="product-card__price">104,99 ₴ – 114,99 ₴</div>
-                  
-                </div>
-              </div>
+            </div>
+            <!-- Product Card End -->
+            {/foreach}
+              
             
           </div>
 
