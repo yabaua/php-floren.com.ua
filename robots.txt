@@ -24,7 +24,7 @@ Disallow: /img/
 User-agent: YandexImages
 Disallow: /
 Allow: /images/
-Allow: /img/
+Allow: /img/ 
 
 
 Host: https://floren.com.ua
