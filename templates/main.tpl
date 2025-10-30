@@ -206,7 +206,7 @@
             <span class="badge warning">10</span>
             <svg class="icon icon-heart"/>
           </a>
-          <a href="#" class="icon-button" aria-label="{$LINGVO.korzina}">
+          <a href="#" class="icon-button" aria-label="{$LINGVO.basket}">
             <span class="badge success">2</span>
             <svg class="icon icon-basket"/>
           </a>
@@ -240,7 +240,7 @@
     <!-- Список категорій - ліва частина -->
     <ul class="category-list">
       <li class="active" data-category="room-plants">
-        <a href="">
+        <a href="{$LANGURL}/komnatnie-rasteniya/">
           <img src="/img/icons/icon-plants-home.svg" alt="Кімнатні рослини"/>
           <span>Кімнатні рослини</span>
         </a>

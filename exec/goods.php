@@ -1,4 +1,4 @@
-<?
+<?php
 include_once("good_comment.php");
 
 if(!isset($PARAM[0]) || $PARAM[0]=='' || isset($PARAM[2])){
