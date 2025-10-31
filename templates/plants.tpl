@@ -95,7 +95,7 @@
             </a>
             {foreach item=P from=$PAGES}
             {if $P.page>5}
-            {continue}
+                {continue}
             {else}
             {if $FROM_GOODS}         
             <a title="{$LINGVO.pages_goto} {$P.page}" href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if $URL[2]}{$URL[2]}/{/if}{if $P.page!=1}?p={$P.page}{/if}" class="pagination__link{if $P.active} active{/if}">{$P.page}</a>           
@@ -109,7 +109,10 @@
             </a>
           </div>
         {/if} {** if pagination **}
+        
           <!-- SEO article section -->
-          <article class="catalog-page__content_article">
+            {if $CUR_PAGE==1}
+            <article class="catalog-page__content_article">
             {$CENTER_SEO_TEXT}
-          </article>
+            </article>
+            {/if}

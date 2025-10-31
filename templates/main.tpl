@@ -226,7 +226,7 @@
       aria-label="Каталог товарів"
     >
       <svg class="icon icon-menu"/>
-      Каталог товарів
+      {$LINGVO.catalog}
     </button>
     <!-- Список категорій каталогу -->
 
@@ -239,334 +239,42 @@
 
     <!-- Список категорій - ліва частина -->
     <ul class="category-list">
-      <li class="active" data-category="room-plants">
-        <a href="{$LANGURL}/komnatnie-rasteniya/">
-          <img src="/img/icons/icon-plants-home.svg" alt="Кімнатні рослини"/>
-          <span>Кімнатні рослини</span>
-        </a>
-      </li>
-      <li data-category="plant-pots">
-        <a href="">
-          <img src="/img/icons/icon-pot.svg" alt="Горщики для рослин"/>
-          <span>Горщики для рослин</span>
-        </a>
-      </li>
-      <li data-category="accessories">
-        <a href="">
-          <img
-            src="/img/icons/icon-accessories.svg"
-            alt="Аксесуари для рослин"
-/>
-          <span>Аксесуари для рослин</span>
-        </a>
-      </li>
-      <li data-category="exterior-works">
-        <a href="">
-          <img
-            src="/img/icons/icon-exteriror-works.svg"
-            alt="Екстер'єрні роботи"
-/>
-          <span>Екстер'єрні роботи</span>
-        </a>
-      </li>
-      <li data-category="lawn-autowater">
-        <a href="">
-          <img
-            src="/img/icons/icon-lawn-autowater.svg"
-            alt="Створення газону і автополив"
-/>
-          <span>
-            Створення газону<br/>
-            і автополив</span
-          >
-        </a>
-      </li>
-      <li data-category="care-services">
-        <a href="">
-          <img
-            src="/img/icons/icon-care-services.svg"
-            alt="Послуги з догляду за ділянкою"
-/>
-          <span>
-            Послуги з догляду<br/>
-            за ділянкою</span
-          >
-        </a>
-      </li>
-      <li data-category="landscape-design">
-        <a href="">
-          <img
-            src="/img/icons/icon-landschaft-design.svg"
-            alt="Ландшафтний дизайн"
-/>
-          <span>Ландшафтний дизайн</span>
-        </a>
-      </li>
+        {foreach item=C name=C key=I from=$CATEGORY_LEFT}
+        <li class="active" data-category="{$C.alias}">
+            <a href="{$LANGURL}/{$C.alias}/">
+              <img src="/img/icons/icon-mmenu-{$C.alias}.svg" alt="{$C.name}"/>
+              <span>{$C.name}</span>
+            </a>
+        </li>
+        {/foreach}
     </ul>
 
     <!-- Контент категорій - права частина -->
     <div class="category-content">
       <!-- prettier-ignore -->
       <!-- Контент категорії "Кімнатні рослини" для меню каталогу -->
-<section class="category-content__item" data-category="room-plants">
-  <ul class="category-content__item-list">
-    <li>
-      <a href="">
-        <img src="/img/category/red-orchid.png" alt="Орхідеї"/>
-        <span>Орхідеї</span>
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <img src="/img/category/zamioculcas.png" alt="Декоративно листяні"/>
-        <span>Декоративно листяні</span>
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <img src="/img/category/palm.png" alt="Пальми"/>
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <img src="/img/category/lemon.png" alt="Цитрусові"/>
-        <span>Цитрусові</span>
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <img src="/img/category/blue-hydrangea.png" alt="Кімнатні рослини"/>
-        <span>Квітучі рослини</span>
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <img src="/img/category/sansevieria.png" alt="Сансевієрія"/>
-        <span>Сансевієрія</span>
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <img src="/img/category/ficus.png" alt="Фікуси"/>
-        <span>Фікуси</span>
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <img src="/img/category/dracena.png" alt="Драцени"/>
-        <span>Драцени</span>
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <img src="/img/category/cactus.png" alt="Кактуси"/>
-        <span>Кактуси</span>
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <img src="/img/category/ivy.png" alt="Виткі та ампельні рослини"/>
-        <span>Виткі та ампельні рослини</span>
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <img src="/img/category/bonsai-tree.png" alt="Бонсай"/>
-        <span>Бонсай</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="">
-        <img src="/img/category/part-of-the-suculent.png" alt="Сукуленти"/>
-        <span>Сукуленти</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="">
-        <img src="/img/category/small-ukka.png" alt="Кімнатні рослини"/>
-        <span>Юкка</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="">
-        <img src="/img/category/surfinia-flower.png" alt="Сезонні рослини"/>
-        <span>Сезонні рослини</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="">
-        <img src="/img/category/christmas-tree.png" alt="Хвойні"/>
-        <span>Хвойні</span>
-      </a>
-    </li>
-  </ul>
-  <ul class="category-content__item-related">
-    <li>
-      <a class="underline" href="">Подарункові сертифікати</a>
-    </li>
-    <li>
-      <a class="underline" href="">Розумний сад Click & Grow</a>
-    </li>
-    <li>
-      <a class="underline" href="">Штучні квіти</a>
-    </li>
-    <li>
-      <a class="underline" href="">Перегородки з рослинами</a>
-    </li>
-    <li>
-      <a class="underline" href="">Аксесуари для рослин</a>
-    </li>
-  </ul>
-</section>
-      <!-- Контент категорії "Горщики для рослин" для меню каталогу -->
-<section class="category-content__item" data-category="plant-pots">
-  <ul class="category-content__item-related">
-    <li>
-      <a class="underline" href="/ua/planters/">Усі горщики</a>
-    </li>
-    <li>
-      <a class="underline" href="/ua/planters/ceramic/">Керамічні горщики</a>
-    </li>
-    <li>
-      <a class="underline" href="/ua/planters/lechuza/">Горщики Lechuza</a>
-    </li>
-    <li>
-      <a class="underline" href="/ua/planters/lamela/">Горщики "Lamela"</a>
-    </li>
-    <li>
-      <a class="underline" href="/ua/planters/elho/">Горщики ELHO</a>
-    </li>
-    <li>
-      <a class="underline" href="/ua/planters/wood-planters/"
-        >Горщики з дерева</a
-      >
-    </li>
-    <li>
-      <a class="underline" href="/ua/planters/metal-pots/">Металеві кашпо</a>
-    </li>
-    <li>
-      <a class="underline" href="/ua/planters/beton/">Горщики з бетону</a>
-    </li>
-    <li>
-      <a class="underline" href="/ua/aksessuary/">Аксесуари для рослин</a>
-    </li>
-  </ul>
-</section>
-      
-        
-        <!-- Універсальний контент категорії для меню каталогу -->
-<section class="category-content__item" data-category="accessories">
-  <ul class="category-content__item-related">
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Аксесуари для рослин 1</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Аксесуари для рослин 2</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Аксесуари для рослин 3</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Аксесуари для рослин 4</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Аксесуари для рослин 5</a>
-    </li>
-  </ul>
-</section>
-      
-        
-        <!-- Універсальний контент категорії для меню каталогу -->
-<section class="category-content__item" data-category="exterior-works">
-  <ul class="category-content__item-related">
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Екстер&#39;єрні роботи 1</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Екстер&#39;єрні роботи 2</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Екстер&#39;єрні роботи 3</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Екстер&#39;єрні роботи 4</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Екстер&#39;єрні роботи 5</a>
-    </li>
-  </ul>
-</section>
-      
-        
-        <!-- Універсальний контент категорії для меню каталогу -->
-<section class="category-content__item" data-category="lawn-autowater">
-  <ul class="category-content__item-related">
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Створення газону і автополив 1</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Створення газону і автополив 2</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Створення газону і автополив 3</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Створення газону і автополив 4</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Створення газону і автополив 5</a>
-    </li>
-  </ul>
-</section>
-      
-        
-        <!-- Універсальний контент категорії для меню каталогу -->
-<section class="category-content__item" data-category="care-services">
-  <ul class="category-content__item-related">
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Послуги з догляду за ділянкою 1</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Послуги з догляду за ділянкою 2</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Послуги з догляду за ділянкою 3</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Послуги з догляду за ділянкою 4</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Послуги з догляду за ділянкою 5</a>
-    </li>
-  </ul>
-</section>
-      
-        
-        <!-- Універсальний контент категорії для меню каталогу -->
-<section class="category-content__item" data-category="landscape-design">
-  <ul class="category-content__item-related">
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Ландшафтний дизайн 1</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Ландшафтний дизайн 2</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Ландшафтний дизайн 3</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Ландшафтний дизайн 4</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Ландшафтний дизайн 5</a>
-    </li>
-  </ul>
-</section>
-      
+        {foreach item=C name=C key=I from=$CATEGORY_LEFT}
+        <section class="category-content__item" data-category="{$C.alias}">
+          <ul class="category-content__item-list">
+            {foreach item=CC name=CC from=$C.category}
+            <li>
+              <a href="{$LANGURL}/{$C.alias}/{$CC.cur_alias}/">
+                <img src="/img/category/{$CC.cur_alias}.png" alt="{$CC.name}"/>
+                <span>{$CC.name}</span>
+              </a>
+            </li>
+            {/foreach}
+          </ul>
+          <ul class="category-content__item-related">
+            <li>
+              <a class="underline" href="{$LANG_URL}/gift-card/">{$LINGVO.gift_card}</a>
+            </li>
+            <li>
+              <a class="underline" href="{$LANG_URL}/services/peregorodki-iz-rasteniy/">{$LINGVO.peregorodki_iz_rasteniy}</a>
+            </li>
+          </ul>
+        </section>
+        {/foreach}
     </div>
   </div>
 </div>
@@ -728,13 +436,22 @@
       			
       				{include file="$LEFT_TPL"}
 	      			<div class="catalog-page__content">
-	
+	              {if $URL[0]!=''}
 			          <!-- Breadcrumbs -->
-			          <sl-breadcrumb>
-			            <sl-breadcrumb-item href="#">Озеленення і Фітодизайн</sl-breadcrumb-item>
-			            <sl-breadcrumb-item href="#">Кімнатні рослини</sl-breadcrumb-item>
+			          <sl-breadcrumb itemscope itemtype="http://schema.org/BreadcrumbList">
+			            {foreach item=H name=H from=$HLEB}
+			            {if $smarty.foreach.H.iteration==1}
+			            <sl-breadcrumb-item href="{if $LANGURL=='/ua'}/{else}/ru/{/if}" itemprop="item" itemscope itemprop="itemListElement" itemtype="http://schema.org/ListItem"><span itemprop="name">{$LINGVO.main_page}</span></sl-breadcrumb-item>
+			            {elseif $H.link!=''}{** not last item **}
+			            <sl-breadcrumb-item href="{$LANGURL}{$H.link}" itemprop="item"><span itemprop="name">{$H.name}</span></sl-breadcrumb-item>
+			            <meta itemprop="position" content="{$smarty.foreach.H.iteration}">
+			            {else}{** last item without arrows **}
+			            <sl-breadcrumb-item href="{$smarty.server.REQUEST_URI}" itemprop="item"><span itemprop="name">{$H.name}</span></sl-breadcrumb-item>
+			            <meta itemprop="position" content="{$smarty.foreach.H.iteration}">
+			            {/if}
+			            {/foreach}
 			          </sl-breadcrumb>
-	      			
+	      			  {/if}
 	      			
 	      			{include file="$CONTENT_TPL"}
 	      			</div>
