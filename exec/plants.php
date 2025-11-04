@@ -1,4 +1,4 @@
-<?
+<?php
 include_once($_SERVER['DOCUMENT_ROOT'] . "/exec/good_comment.php");
 $TITLE=array();
 $product_path = '';
@@ -492,10 +492,10 @@ if ((isset($URL[1]) && in_array($URL[1], $category_aliases))) {
 
 			if ($is_plant || $is_aksessuary) {
 				$product_path = $lang_url . '/product/' . $f['ID'] . '_' . $f['link'] . '/';
-				$img_path = '/images/ins/s/' . $f['image'];
+				$img_path = 'https://floren.com.ua/images/ins/s/' . $f['image'];
 			} elseif ($is_bouquet) {
 				$product_path = $lang_url . '/buket/' . $f['ID'] . '/';
-				$img_path = '/images/ins/s/'. $f['image'];
+				$img_path = 'https://floren.com.ua/images/ins/s/'. $f['image'];
 			}
 
 			$db->query("SELECT gf.*, gf.old_price, gf.visibility, gf.measure_qt, gf.color, gmg.unit, gmg.name_ru AS mg_name_ru, gmg.name_ua AS mg_name_ua FROM goods_forms gf LEFT JOIN goods_measures gmg ON gf.measure_id=gmg.ID WHERE goodID='".$f['ID']."' AND gf.visibility=1 AND gf.price > 0", 1);
@@ -563,7 +563,10 @@ if ((isset($URL[1]) && in_array($URL[1], $category_aliases))) {
 
 				$promo[count($promo)-1]['min_price'] = min(array_filter($prices[$f['ID']]));
 				$promo[count($promo)-1]['max_price'] = max(array_filter($prices[$f['ID']]));
-				$promo[count($promo)-1]['min_old_price'] = @min(array_filter($old_prices[$f['ID']]));
+				
+				$filtered_old_prices = array_filter($old_prices[$f['ID']]);
+				$promo[count($promo)-1]['min_old_price'] = !empty($filtered) ? min($filtered) : 0;
+				
 			}
 			
 			

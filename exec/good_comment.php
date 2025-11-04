@@ -1,5 +1,4 @@
-<?
-include($_SERVER['DOCUMENT_ROOT'].'/include/rand.php');
+<?php
 // добавление комментария
 if (isset($_POST['n_comment_add']) && isset($POST['n_good_message'])) {
 	
@@ -18,7 +17,7 @@ if (isset($_POST['n_comment_add']) && isset($POST['n_good_message'])) {
 	if (isset($POST['subscribe'])) $subscribe='Y';
 		else $subscribe='';
 	$IP2=@$_SERVER['HTTP_X_FORWARDED_FOR'];
-	$md5_del=md5(myrand());
+	$md5_del=md5(time());
     
 	$db->query("INSERT INTO goods_voting SET
 		pageID='".$pageID."',
