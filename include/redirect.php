@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 $db->query("SELECT * FROM goods_class WHERE motherID='0'");
 while ($f=$db->fetch()) {

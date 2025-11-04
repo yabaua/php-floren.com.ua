@@ -28,7 +28,7 @@ Allow from env=!require_auth
 RewriteRule ^plants/?([^/].*)?$ komnatnie-rasteniya/$1 [L,R=301]
 
 
-RewriteCond %{REQUEST_URI} !^/(del_img\.php|404\.php|exec/|stock/|report/|templates/|admin/|images/|bsk/|assets/|img/|files/|css/|.json|js/|robots\.txt|favicon_\.ico|index\.php|seoshield-client)(.*)
+RewriteCond %{REQUEST_URI} !^/(del_img\.php|404\.php|exec/|stock/|report/|templates/|admin/|images/|bsk/|assets/|img/|files/|css/|.json|js/|robots\.txt|database\.php|favicon_\.ico|index\.php|seoshield-client)(.*)
 RewriteRule ^(.+)$ /index.php [NC]
 
 DirectoryIndex index.php

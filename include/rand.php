@@ -1,7 +1,7 @@
 <?
 
 function myrand() {
-  mt_srand((double)microtime()*100000000);
+  //mt_srand((double)microtime()*100000000);
   return mt_rand(0,1000000)/1000000;
 }
 
