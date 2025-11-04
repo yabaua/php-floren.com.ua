@@ -18,6 +18,18 @@ const clickHandlers = {
   },
   toggleAdvicesPhones: (event) => {
     event.currentTarget.closest(".homepage__advices_content--phones").classList.toggle("active");
+  },
+  openModal: (e) => {
+    const modalId = e.currentTarget.dataset.modalId;
+    const modal = document.getElementById(modalId);
+    console.log("modal", modal);
+    if (modal) {
+      modal.show();
+    }
+  },
+  closeModal: () => {
+    const modals = document.querySelectorAll("sl-dialog");
+    modals.forEach((modal) => modal.hide());
   }
 };
 const initEvents = () => {

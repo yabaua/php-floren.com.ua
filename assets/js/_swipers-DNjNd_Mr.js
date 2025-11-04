@@ -1,3 +1,10 @@
+/* empty css               */
+import { i as initIntlTelInput } from "./_shoelace-BXZYAA3C.js";
+import { i as initEvents } from "./_events-Cz7VOvdc.js";
+import { i as initScroll } from "./_scroll-j-dKnIcM.js";
+import { i as initCatalog } from "./_catalog-64HryAnt.js";
+import { i as initClickOutsideHandlers } from "./_clickOutside-BYa46nKa.js";
+import { i as initExpandableText } from "./_expandableText-Bi2QDYtX.js";
 function isObject$1(obj) {
   return obj !== null && typeof obj === "object" && "constructor" in obj && obj.constructor === Object;
 }
@@ -5499,9 +5506,21 @@ const initSwipers = () => {
         }
       }
     );
+    window.swipers.mainSwiper.on("slideChange", () => {
+      window.youtubePlayers.forEach((player) => {
+        if (player.stopVideo) {
+          player.stopVideo();
+        }
+      });
+    });
     document.querySelectorAll(".photo-viewer__overlay, .photo-viewer__close-button")?.forEach((el) => {
       el.addEventListener("click", () => {
         document.querySelector(".photo-viewer")?.classList.remove("active");
+        window.youtubePlayers.forEach((player) => {
+          if (player.stopVideo) {
+            player.stopVideo();
+          }
+        });
       });
     });
   }
@@ -5510,6 +5529,7 @@ const initHoverPhotoViewers = () => {
   document.querySelectorAll("[data-photo-viewer]").forEach((viewer) => {
     const main = viewer.querySelector(".hover-photo-viewer__main");
     const mainimage = viewer.querySelector(".hover-photo-viewer__main > img");
+    const thumbsBox = viewer.querySelector(".hover-photo-viewer__thumbs");
     const thumbs = viewer.querySelectorAll(".hover-photo-viewer__thumbs li");
     thumbs.forEach((thumb) => {
       thumb.addEventListener("mouseenter", (e) => {
@@ -5521,10 +5541,24 @@ const initHoverPhotoViewers = () => {
         mainimage.src = img.src;
       });
     });
-    main.addEventListener("click", (e) => {
-      const images = Array.from(thumbs).map(
-        (thumb) => thumb.querySelector("img").src
-      );
+    thumbsBox.addEventListener("click", (e) => {
+      const li = e.target.closest("li");
+      let activeIndex = 0;
+      let prev = li;
+      while (prev = prev.previousElementSibling) {
+        activeIndex++;
+      }
+      const images = Array.from(thumbs).map((thumb) => ({
+        src: thumb.querySelector("img")?.src || thumb.querySelector("[data-video-src]")?.dataset.videoSrc,
+        type: thumb.querySelector("img") ? "image" : "video"
+      }));
+      activatePhotoViewer(images, activeIndex);
+    });
+    main.addEventListener("click", () => {
+      const images = Array.from(thumbs).map((thumb) => ({
+        src: thumb.querySelector("img")?.src || thumb.querySelector("[data-video-src]")?.dataset.videoSrc,
+        type: thumb.querySelector("img") ? "image" : "video"
+      }));
       const activeIndex = Array.from(thumbs).findIndex(
         (thumb) => thumb.classList.contains("active")
       );
@@ -5539,15 +5573,65 @@ function activatePhotoViewer(images, index = 0) {
   if (!mainSwiper || !thumbsSwiper) return;
   mainSwiper.removeAllSlides();
   thumbsSwiper.removeAllSlides();
-  const slides = images.map(
-    (src) => `<div class="swiper-slide"><img src="${src}" /></div>`
-  );
+  const thumbs = images.map((item) => {
+    if (item.type === "image") {
+      return `<div class="swiper-slide"><img src="${item.src}" /></div>`;
+    } else {
+      return `<div class="swiper-slide"><button><span class="icon icon-video-button"></span><span>Відео</span></button></div>`;
+    }
+  });
+  const videoIdArray = [];
+  const slides = images.map((item) => {
+    if (item.type === "image") {
+      return `<div class="swiper-slide"><img src="${item.src}" /></div>`;
+    } else {
+      const videoId = generateRandomId();
+      videoIdArray.push(videoId);
+      return `
+      <div class="swiper-slide">
+        <iframe id="${videoId}"       
+          src="${item.src}&enablejsapi=1" 
+          title="YouTube video player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          referrerpolicy="strict-origin-when-cross-origin" 
+          allowfullscreen>
+        </iframe>
+      </div>`;
+    }
+  });
   mainSwiper.appendSlide(slides);
-  thumbsSwiper.appendSlide(slides);
+  thumbsSwiper.appendSlide(thumbs);
   mainSwiper.slideToLoop(index);
   photoViewer.classList.add("active");
+  videoIdArray.forEach((videoId) => {
+    const player = new YT.Player(videoId);
+    window.youtubePlayers.push(player);
+  });
 }
+window.youtubePlayers = [];
+function startApp() {
+  initEvents();
+  initScroll();
+  initCatalog();
+  initClickOutsideHandlers();
+  initSwipers();
+  initExpandableText();
+  initHoverPhotoViewers();
+  initIntlTelInput();
+}
+const generateRandomId = (length = 10) => {
+  return Math.random().toString(36).substring(2, 2 + length);
+};
+document.addEventListener("DOMContentLoaded", () => {
+  startApp();
+});
 export {
-  initHoverPhotoViewers as a,
-  initSwipers as i
+  Autoplay as A,
+  Navigation as N,
+  Pagination as P,
+  Swiper as S,
+  Thumb as T,
+  generateRandomId as g,
+  startApp as s
 };

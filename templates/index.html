@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <meta
       name="viewport"
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-    />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Головна сторінка</title>
     <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,20 +16,18 @@
     /> -->
     <!-- <link rel="stylesheet" href="../styles/style.css" /> -->
     <script type="module" crossorigin src="/assets/js/modulepreload-polyfill-COaX8i6R.js"></script>
-    <script type="module" crossorigin src="/assets/js/_swipers-W78pJMEt.js"></script>
-    <script type="module" crossorigin src="/assets/js/_shoelace-93ZMtKYV.js"></script>
-    <script type="module" crossorigin src="/assets/js/_events-B9TtzH4c.js"></script>
-    <script type="module" crossorigin src="/assets/js/_scroll-qwBtBhbR.js"></script>
+    <script type="module" crossorigin src="/assets/js/_shoelace-BXZYAA3C.js"></script>
+    <script type="module" crossorigin src="/assets/js/_events-Cz7VOvdc.js"></script>
+    <script type="module" crossorigin src="/assets/js/_scroll-j-dKnIcM.js"></script>
     <script type="module" crossorigin src="/assets/js/_catalog-64HryAnt.js"></script>
     <script type="module" crossorigin src="/assets/js/_clickOutside-BYa46nKa.js"></script>
     <script type="module" crossorigin src="/assets/js/_expandableText-Bi2QDYtX.js"></script>
-    <script type="module" crossorigin src="/assets/js/main-DDObV7Ms.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/css/main-8pNQGu6Z.css">
-    <link rel="stylesheet" crossorigin href="/assets/css/index-DOaU0IMu.css">
+    <script type="module" crossorigin src="/assets/js/_swipers-DNjNd_Mr.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/css/_swipers-DeV-HnW4.css">
+    <link rel="stylesheet" crossorigin href="/assets/css/index-Ce4W_b7v.css">
   </head>
   <body>
     <!-- Шапка сайту -->
-    <!-- prettier-ignore -->
     <!-- Overlay для каталогу -->
 <div class="catalog-overlay" id="catalog-overlay"></div>
 
@@ -190,8 +188,7 @@
             <img
               class="search-icon"
               src="/img/icons/icon-search.svg"
-              alt="Search"
-/>
+              alt="Search"/>
             <input class="search-input" type="search" placeholder="Шефлера"/>
             <button class="search-button">Пошук</button>
           </div>
@@ -199,24 +196,156 @@
         <!-- Search form end -->
 
         <div class="header__main--profile">
-          <a href="#" class="icon-button" aria-label="Особистий кабінет">
+          <a href="#" class="icon-button" aria-label="Особистий кабінет" data-event="click" data-callback="openModal" data-modal-id="sign-in-modal">
             <svg class="icon icon-user"/>
           </a>
           <a href="#" class="icon-button" aria-label="Обране">
             <span class="badge warning">10</span>
             <svg class="icon icon-heart"/>
           </a>
-          <a href="#" class="icon-button" aria-label="Кошик">
+
+          
+          <button class="icon-button" aria-label="Кошик" data-event="click" data-callback="openModal" data-modal-id="cart-modal">
             <span class="badge success">2</span>
             <svg class="icon icon-basket"/>
-          </a>
+          </button>
+
+          <!-- Cart modal -->
+          <sl-dialog id="cart-modal" label="Кошик" class="cart-modal">
+  <div class="alert alert-success" role="alert">
+    Товар <a href="/" class="underline">Орхідея Фаленопсис Муса</a> Пінк доданий у ваш <a href="/basket" class="underline">кошик</a>
+  </div>
+  <ul class="cart-items">
+    <li class="cart-item">
+      <div class="cart-item__image">
+        <a href="">
+          <img src="/img/sevices/landscaping-artificial-plants.png" alt="">
+        </a>
+      </div>
+      <div class="cart-item__details">
+        <button class="cart-item__remove">
+          <svg class="icon icon-trash"/>
+        </button>
+        <h3>
+          <a href="">Орхідея Фаленопсис Муса Пінк</a>
+        </h3>
+        <div class="cart-item__details_options">Ø 10, висота 45 см</div>
+        <div class="cart-item__details_controls">
+          <div class="counter-input">
+            <button>
+              <img src="/img/icons/icon-minus.svg" alt="Видалити один товар"/>
+            </button>
+            <input type="number" value="1" min="1"/>
+            <button>
+              <img src="/img/icons/icon-plus.svg" alt="Додати один товар"/>
+            </button>
+          </div>
+          <div class="cart-item__details_price">450 ₴</div>
+        </div>
+      </div>
+    </li>
+    <li class="cart-item">
+      <div class="cart-item__image">
+        <a href="">
+          <img src="/img/sevices/plant-transplantation.png" alt="">
+        </a>
+      </div>
+      <div class="cart-item__details">
+        <button class="cart-item__remove">
+          <svg class="icon icon-trash"/>
+        </button>
+        <h3>
+          <a href="">Орхідея Фаленопсис Муса Пінк</a>
+        </h3>
+        <div class="cart-item__details_options">Ø 10, висота 45 см</div>
+        <div class="cart-item__details_controls">
+          <div class="counter-input">
+            <button>
+              <img src="/img/icons/icon-minus.svg" alt="Видалити один товар"/>
+            </button>
+            <input type="number" value="1" min="1"/>
+            <button>
+              <img src="/img/icons/icon-plus.svg" alt="Додати один товар"/>
+            </button>
+          </div>
+          <div class="cart-item__details_price">450 ₴</div>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div class="cart-modal__footer">
+    <button class="cart-modal__footer_continue underline" data-event="click" data-callback="closeModal">Продовжити покупки</button>
+    <div class="cart-modal__footer_total">Разом: <b>900 ₴</b>
+    </div>
+    <a href="/basket" class="button button--small button--primary">Оформити замовлення</a>
+  </div>
+</sl-dialog>
+
+          <!-- Sign in modal -->
+          <sl-dialog id="sign-in-modal" label="Вхід" class="login-modal">
+  <form class="login-modal__form">
+    <div class="form-control">
+      
+      <label for="phone">Ваш телефон</label>
+      <input id="phone" data-tel-input type="tel">
+    </div>
+    <div class="form-control">
+      <sl-input label="Пароль" type="password" placeholder="********"></sl-input>
+    </div>
+    <div class="form-control form-control--double">
+      <sl-checkbox>
+        Запам'ятати мене
+      </sl-checkbox>
+      <a href="" class="underline">Нагадати пароль</a>
+    </div>
+    <div class="form-control">
+      <button class="button button--primary" type="submit">Увійти</button>
+    </div>
+    <div class="form-control text-center">
+      <a href="" class="underline">Зарєструватись</a>
+    </div>
+  </form>
+</sl-dialog>
+
+          <!-- Sign up modal -->
+          <sl-dialog id="sign-up-modal" label="Вхід" class="login-modal">
+  <form class="login-modal__form">
+    <div class="form-control">
+      <sl-input label="ПІБ" placeholder="Прізвище Імʼя По батькові"></sl-input>
+    </div>
+    <div class="form-control">
+      <label for="phone">Ваш телефон</label>
+      <input id="phone" data-tel-input type="tel">
+    </div>
+    <div class="form-control">
+      <sl-input label="Email" type="email" placeholder="E-mail"></sl-input>
+    </div>
+    <div class="form-control">
+      <sl-input label="Пароль" type="password" placeholder="********"></sl-input>
+    </div>
+    <div class="form-control form-control--double">
+      <sl-checkbox>
+        Запам'ятати мене
+      </sl-checkbox>
+      <a href="" class="underline">Нагадати пароль</a>
+    </div>
+    <div class="form-control">
+      <button class="button button--primary" type="submit">Увійти</button>
+    </div>
+    <div class="form-control text-center">
+      <a href="" class="underline">Зарєструватись</a>
+    </div>
+  </form>
+</sl-dialog>
+
         </div>
       </div>
     </div>
-
+  </div>
+</header>
     <!-- Меню каталогу -->
     <!-- Меню каталогу в header -->
-<div class="header__catalog">
+<div class="header__catalog container" id="catalog-menu">
 
   <!-- Основна кнопка каталогу і випадаючий список -->
   <div class="header__catalog--main">
@@ -712,9 +841,7 @@
     </li>
   </ul>
 </div>
-  </div>
-</header>
-    
+
     <!-- Основний контент сторінки -->
     
 
@@ -1860,7 +1987,7 @@
 </div>
 
 
-    
+
     <!-- Підвал сайту -->
     <!-- Footer site -->
 <footer class="footer">
@@ -2067,7 +2194,8 @@
     </div>
   </div>
 </footer>
-    
+
+    <script src="https://www.youtube.com/iframe_api"></script>
     <!-- Головний JS файл -->
   </body>
 </html>
