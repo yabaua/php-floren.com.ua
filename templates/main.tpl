@@ -222,216 +222,216 @@
               </a>
             </div>
           </div>
-        </div>        
+        </div>
       </div>
     </header>
     <!-- Меню каталогу -->
-        <!-- Меню каталогу в header -->
-        <div class="header__catalog container" id="catalog-menu">
+    <!-- Меню каталогу в header -->
+    <div class="header__catalog container" id="catalog-menu">
 
-          <!-- Основна кнопка каталогу і випадаючий список -->
-          <div class="header__catalog--main">
-            <button
+      <!-- Основна кнопка каталогу і випадаючий список -->
+      <div class="header__catalog--main">
+        <button
       id="catalog-button"
       class="catalog-button"
       aria-label="Каталог товарів"
     >
-              <svg class="icon icon-menu"/>
+          <svg class="icon icon-menu"/>
       {$LINGVO.catalog}
     </button>
-            <!-- Список категорій каталогу -->
+        <!-- Список категорій каталогу -->
 
-            <!-- prettier-ignore -->
+        <!-- prettier-ignore -->
 
-            <!-- Dropdown список категорій -->
-            <div class="header__catalog_list">
-              <div class="header__catalog_list-wrapper">
+        <!-- Dropdown список категорій -->
+        <div class="header__catalog_list">
+          <div class="header__catalog_list-wrapper">
 
-                <!-- Список категорій - ліва частина -->
-                <ul class="category-list">
+            <!-- Список категорій - ліва частина -->
+            <ul class="category-list">
         {foreach item=C name=C key=I from=$CATEGORY_LEFT}
         <li class="active" data-category="{$C.alias}">
-                    <a href="{$LANGURL}/{$C.alias}/">
-                      <img src="/img/icons/icon-mmenu-{$C.alias}.svg" alt="{$C.name}"/>
-                      <span>{$C.name}</span>
-                    </a>
-                  </li>
+                <a href="{$LANGURL}/{$C.alias}/">
+                  <img src="/img/icons/icon-mmenu-{$C.alias}.svg" alt="{$C.name}"/>
+                  <span>{$C.name}</span>
+                </a>
+              </li>
         {/foreach}
     </ul>
 
-                <!-- Контент категорій - права частина -->
-                <div class="category-content">
-                  <!-- prettier-ignore -->
-                  <!-- Контент категорії "Кімнатні рослини" для меню каталогу -->
+            <!-- Контент категорій - права частина -->
+            <div class="category-content">
+              <!-- prettier-ignore -->
+              <!-- Контент категорії "Кімнатні рослини" для меню каталогу -->
         {foreach item=C name=C key=I from=$CATEGORY_LEFT}
         <section class="category-content__item" data-category="{$C.alias}">
-                    <ul class="category-content__item-list">
+                <ul class="category-content__item-list">
             {foreach item=CC name=CC from=$C.category}
             <li>
-                        <a href="{$LANGURL}/{$C.alias}/{$CC.cur_alias}/">
-                          <img src="/img/category/{$CC.cur_alias}.png" alt="{$CC.name}"/>
-                          <span>{$CC.name}</span>
-                        </a>
-                      </li>
+                    <a href="{$LANGURL}/{$C.alias}/{$CC.cur_alias}/">
+                      <img src="/img/category/{$CC.cur_alias}.png" alt="{$CC.name}"/>
+                      <span>{$CC.name}</span>
+                    </a>
+                  </li>
             {/foreach}
           </ul>
-                    <ul class="category-content__item-related">
-                      <li>
-                        <a class="underline" href="{$LANG_URL}/gift-card/">{$LINGVO.gift_card}</a>
-                      </li>
-                      <li>
-                        <a class="underline" href="{$LANG_URL}/services/peregorodki-iz-rasteniy/">{$LINGVO.peregorodki_iz_rasteniy}</a>
-                      </li>
-                    </ul>
-                  </section>
-        {/foreach}
-    </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Додаткові категорії: фітодизайн, вертикальне озеленення, флораріуми -->
-          <ul class="header__catalog--secondary">
-            <li class="secondary-item">
-              <button class="secondary-item--button" aria-label="Фітодизайн">
-                <svg class="icon icon-fitodesign"/>
-                <div class="secondary-item--button-text">
-                  <b>Фітодизайн</b>
-                  <span>Озеленення простору</span>
-                </div>
-              </button>
-              <section class="secondary-item--content">
-                <ul class="secondary-item--content-list">
+                <ul class="category-content__item-related">
                   <li>
-                    <img
-              src="/img/sevices/apartment-phytodesign.png"
-              alt="Фітодизайн квартири"
-/>
-                    <a class="underline" href="">Фітодизайн квартири</a>
+                    <a class="underline" href="{$LANG_URL}/gift-card/">{$LINGVO.gift_card}</a>
                   </li>
                   <li>
-                    <img
-              src="/img/sevices/office-phytodesign.png"
-              alt="Фітодизайн офісу"
-/>
-                    <a class="underline" href="">Фітодизайн офісу</a>
-                  </li>
-                  <li>
-                    <img
-              src="/img/sevices/landscaping-of-summer-terraces.png"
-              alt="Фітодизайн квартири"
-/>
-                    <a class="underline" href="">Озеленення літніх терас</a>
-                  </li>
-                  <li>
-                    <img
-              src="/img/sevices/zoning-space-with-indoor-plants.png"
-              alt="Зонування простору кімнатними рослинами"
-/>
-                    <a class="underline" href=""
-              >Зонування простору кімнатними рослинами</a
-            >
-                  </li>
-                  <li>
-                    <img
-              src="/img/sevices/plant-rental.png"
-              alt="Зелені рішення для HoReCa"
-/>
-                    <a class="underline" href="">Зелені рішення для HoReCa</a>
-                  </li>
-                  <li>
-                    <img
-              src="/img/sevices/landscaping-artificial-plants.png"
-              alt="Озеленення штучними рослинами"
-/>
-                    <a class="underline" href="">Озеленення штучними рослинами</a>
+                    <a class="underline" href="{$LANG_URL}/services/peregorodki-iz-rasteniy/">{$LINGVO.peregorodki_iz_rasteniy}</a>
                   </li>
                 </ul>
               </section>
-            </li>
-            <li class="secondary-item">
-              <button
+        {/foreach}
+    </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Додаткові категорії: фітодизайн, вертикальне озеленення, флораріуми -->
+      <ul class="header__catalog--secondary">
+        <li class="secondary-item">
+          <button class="secondary-item--button" aria-label="Фітодизайн">
+            <svg class="icon icon-fitodesign"/>
+            <div class="secondary-item--button-text">
+              <b>Фітодизайн</b>
+              <span>Озеленення простору</span>
+            </div>
+          </button>
+          <section class="secondary-item--content">
+            <ul class="secondary-item--content-list">
+              <li>
+                <img
+              src="/img/sevices/apartment-phytodesign.png"
+              alt="Фітодизайн квартири"
+/>
+                <a class="underline" href="">Фітодизайн квартири</a>
+              </li>
+              <li>
+                <img
+              src="/img/sevices/office-phytodesign.png"
+              alt="Фітодизайн офісу"
+/>
+                <a class="underline" href="">Фітодизайн офісу</a>
+              </li>
+              <li>
+                <img
+              src="/img/sevices/landscaping-of-summer-terraces.png"
+              alt="Фітодизайн квартири"
+/>
+                <a class="underline" href="">Озеленення літніх терас</a>
+              </li>
+              <li>
+                <img
+              src="/img/sevices/zoning-space-with-indoor-plants.png"
+              alt="Зонування простору кімнатними рослинами"
+/>
+                <a class="underline" href=""
+              >Зонування простору кімнатними рослинами</a
+            >
+              </li>
+              <li>
+                <img
+              src="/img/sevices/plant-rental.png"
+              alt="Зелені рішення для HoReCa"
+/>
+                <a class="underline" href="">Зелені рішення для HoReCa</a>
+              </li>
+              <li>
+                <img
+              src="/img/sevices/landscaping-artificial-plants.png"
+              alt="Озеленення штучними рослинами"
+/>
+                <a class="underline" href="">Озеленення штучними рослинами</a>
+              </li>
+            </ul>
+          </section>
+        </li>
+        <li class="secondary-item">
+          <button
         class="secondary-item--button"
         aria-label="Вертикальне озеленення"
       >
-                <svg class="icon icon-vertical"/>
-                <div class="secondary-item--button-text">
-                  <b>Вертикальне озеленення</b>
-                  <span>Зелені стіни</span>
-                </div>
-              </button>
-              <section class="secondary-item--content">
-                <ul class="secondary-item--content-list">
-                  <li>
-                    <img
+            <svg class="icon icon-vertical"/>
+            <div class="secondary-item--button-text">
+              <b>Вертикальне озеленення</b>
+              <span>Зелені стіни</span>
+            </div>
+          </button>
+          <section class="secondary-item--content">
+            <ul class="secondary-item--content-list">
+              <li>
+                <img
               src="/img/sevices/green-walls.png"
               alt="Зелені стіни з рослинами"
 />
-                    <a class="underline" href="">Зелені стіни з рослинами</a>
-                  </li>
-                  <li>
-                    <img
+                <a class="underline" href="">Зелені стіни з рослинами</a>
+              </li>
+              <li>
+                <img
               src="/img/sevices/landscaping-using-vertical-structures.png"
               alt="Озеленення за допомогою
 вертикальних конструкцій"
 />
-                    <a class="underline" href=""
+                <a class="underline" href=""
               >Озеленення за допомогою
 вертикальних конструкцій</a
             >
-                  </li>
-                  <li>
-                    <img
+              </li>
+              <li>
+                <img
               src="/img/sevices/green-moss-walls.png"
               alt="Зелені стіни з моху"
 />
-                    <a class="underline" href="">Зелені стіни з моху</a>
-                  </li>
-                </ul>
-              </section>
-            </li>
-            <li class="secondary-item">
-              <button class="secondary-item--button" aria-label="Догляд за рослинами">
-                <svg class="icon icon-care"/>
-                <div class="secondary-item--button-text">
-                  <b>Догляд</b>
-                  <span>За рослинами</span>
-                </div>
-              </button>
-              <section class="secondary-item--content">
-                <ul class="secondary-item--content-list">
-                  <li>
-                    <img
+                <a class="underline" href="">Зелені стіни з моху</a>
+              </li>
+            </ul>
+          </section>
+        </li>
+        <li class="secondary-item">
+          <button class="secondary-item--button" aria-label="Догляд за рослинами">
+            <svg class="icon icon-care"/>
+            <div class="secondary-item--button-text">
+              <b>Догляд</b>
+              <span>За рослинами</span>
+            </div>
+          </button>
+          <section class="secondary-item--content">
+            <ul class="secondary-item--content-list">
+              <li>
+                <img
               src="/img/sevices/plant-transplantation.png"
               alt="Пересадка рослин"
 />
-                    <a class="underline" href="">Пересадка рослин</a>
-                  </li>
-                  <li>
-                    <img
+                <a class="underline" href="">Пересадка рослин</a>
+              </li>
+              <li>
+                <img
               src="/img/sevices/plant-transportation.png"
               alt="Перевезення рослин"
 />
-                    <a class="underline" href="">Перевезення рослин</a>
-                  </li>
-                  <li>
-                    <img src="/img/sevices/plant-rental.png" alt="Оренда рослин"/>
-                    <a class="underline" href="">Оренда рослин</a>
-                  </li>
-                </ul>
-              </section>
-            </li>
-            <li class="secondary-item">
-              <button class="secondary-item--button" aria-label="Галерея фотографій">
-                <svg class="icon icon-photogallery"/>
-                <div class="secondary-item--button-text">
-                  <b>Портфоліо</b>
-                  <span>Галерея фотографій</span>
-                </div>
-              </button>
-            </li>
-          </ul>
-        </div>
+                <a class="underline" href="">Перевезення рослин</a>
+              </li>
+              <li>
+                <img src="/img/sevices/plant-rental.png" alt="Оренда рослин"/>
+                <a class="underline" href="">Оренда рослин</a>
+              </li>
+            </ul>
+          </section>
+        </li>
+        <li class="secondary-item">
+          <button class="secondary-item--button" aria-label="Галерея фотографій">
+            <svg class="icon icon-photogallery"/>
+            <div class="secondary-item--button-text">
+              <b>Портфоліо</b>
+              <span>Галерея фотографій</span>
+            </div>
+          </button>
+        </li>
+      </ul>
+    </div>
 
     <!-- Основний контент сторінки -->
 	{if $URL[0]==''}
