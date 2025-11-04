@@ -16269,7 +16269,7 @@ const initIntlTelInput = () => {
   const inputs = document.querySelectorAll("[data-tel-input]");
   inputs.forEach((input) => {
     const iti = intlTelInput(input, {
-      loadUtils: () => __vitePreload(() => import("./utils-DADm_rpb.js"), true ? [] : void 0),
+      loadUtils: () => __vitePreload(() => import("./utils.js"), true ? [] : void 0),
       initialCountry: "ua",
       strictMode: true,
       separateDialCode: true,
