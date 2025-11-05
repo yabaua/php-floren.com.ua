@@ -7,7 +7,7 @@ $img_path = '';
 $is_plant = 0;
 $is_pot = 0;
 $is_bouquet = 0;
-$max_pages_links = 20;
+$max_pages_links = 25;
 
 if($URL[0]=='komnatnie-rasteniya') {
 	$categoryID = '3';
@@ -492,7 +492,32 @@ if ((isset($URL[1]) && in_array($URL[1], $category_aliases))) {
 
 			if ($is_plant || $is_aksessuary) {
 				$product_path = $lang_url . '/product/' . $f['ID'] . '_' . $f['link'] . '/';
-				$img_path = 'https://floren.com.ua/images/ins/s/' . $f['image'];
+			//	$img_path = 'https://floren.com.ua/images/ins/b/gmcxml-' . $f['image'];
+			if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/images/goods/b/' . str_replace('jpg', 'webp', $f['image']))){
+					$img_path = '/images/goods/b/' . str_replace('jpg', 'webp', $f['image']);
+			}else{
+				// Исходный JPG-файл
+$input = 'https://floren.com.ua/images/ins/b/gmcxml-' . $f['image'];
+
+// Имя выходного WEBP-файла
+$output = $_SERVER['DOCUMENT_ROOT'] . '/images/goods/b/' .str_replace('jpg', 'webp', $f['image']);
+
+
+
+// Загружаем изображение из JPG
+$image = imagecreatefromjpeg($input);
+
+if (!$image) {
+    die("Не удалось открыть изображение $input");
+}
+
+$quality = 85;
+
+imagewebp($image, $output, $quality);
+imagedestroy($image);
+$img_path = '/images/goods/b/' . str_replace('jpg', 'webp', $f['image']);
+			}
+				
 			} elseif ($is_bouquet) {
 				$product_path = $lang_url . '/buket/' . $f['ID'] . '/';
 				$img_path = 'https://floren.com.ua/images/ins/s/'. $f['image'];

@@ -229,6 +229,7 @@ $smarty->setTemplateDir(__DIR__ . '/templates/');
 $smarty->setCompileDir(__DIR__ . '/smarty5/templates_c/');
 $smarty->setCacheDir(__DIR__ . '/smarty5/cache/');
 $smarty->setConfigDir(__DIR__ . '/smarty5/src/');
+$smarty->muteUndefinedOrNullWarnings(true);
 // $smarty->debugging=true;
 
 $smarty->assign('CLIENT_COUNTRY', $_SESSION['clientCountry']);
