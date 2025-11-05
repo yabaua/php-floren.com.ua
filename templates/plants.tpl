@@ -88,6 +88,7 @@
             <button class="button button--primary button--pill">{$LINGVO.show_more}</button>
           </div>
         {/if}
+
           <!-- Pagination -->
           <div class="pagination">
             <a href="" class="pagination__link disabled">
@@ -97,7 +98,8 @@
             {if $P.page>5}
                 {continue}
             {else}
-            {if $FROM_GOODS}         
+            {if $FROM_GOODS}
+            
             <a title="{$LINGVO.pages_goto} {$P.page}" href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if $URL[2]}{$URL[2]}/{/if}{if $P.page!=1}?p={$P.page}{/if}" class="pagination__link{if $P.active} active{/if}">{$P.page}</a>           
             {else}
             <a title="{$LINGVO.pages_goto} {$P.page}" id="p{$P.page}" rel="{if $P.prev}prev{/if}{if $P.next}next{/if}" href="{$LANGURL}/{$ALIAS}{$FILTERS_URL}{if $P.page==1}/{else}/page{$P.page}/{/if}" class="pagination__link{if $P.active} active{/if}">{$P.page}</a>

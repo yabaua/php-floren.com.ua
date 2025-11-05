@@ -1,5 +1,5 @@
 <?php
-include_once("good_comment.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . "/exec/good_comment.php");
 
 if(!isset($PARAM[0]) || $PARAM[0]=='' || isset($PARAM[2])){
 	header('HTTP/1.0 404 Not Found', true, '404');
@@ -409,7 +409,7 @@ $smarty->assign("META_KEYWORDS",		$meta_keywords);
 			while($rs_goods = $db->fetch()) {
 
 				$product_path = $lang_url . '/product/' . $rs_goods['ID'] . '_' . $rs_goods['link'] . '/';
-				$img_path = '/images/ins/s/' . $rs_goods['image'];
+				$img_path = 'https://floren.com.ua/images/ins/s/' . $rs_goods['image'];
 
 				if ($rs_goods['availability'] == 0) {
 					$not_available = 1;
