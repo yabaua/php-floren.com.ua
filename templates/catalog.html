@@ -15,16 +15,16 @@
       rel="stylesheet"
     /> -->
     <!-- <link rel="stylesheet" href="../styles/style.css" /> -->
-    <script type="module" crossorigin src="/assets/js/modulepreload-polyfill-COaX8i6R.js"></script>
-    <script type="module" crossorigin src="/assets/js/_shoelace-BXZYAA3C.js"></script>
-    <script type="module" crossorigin src="/assets/js/_events-Cz7VOvdc.js"></script>
-    <script type="module" crossorigin src="/assets/js/_scroll-j-dKnIcM.js"></script>
-    <script type="module" crossorigin src="/assets/js/_catalog-64HryAnt.js"></script>
-    <script type="module" crossorigin src="/assets/js/_clickOutside-BYa46nKa.js"></script>
-    <script type="module" crossorigin src="/assets/js/_expandableText-Bi2QDYtX.js"></script>
-    <script type="module" crossorigin src="/assets/js/_swipers-DNjNd_Mr.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/css/_swipers-DeV-HnW4.css">
-    <link rel="stylesheet" crossorigin href="/assets/css/index-Ce4W_b7v.css">
+    <script type="module" crossorigin src="/assets/js/modulepreload-polyfill.js"></script>
+    <script type="module" crossorigin src="/assets/js/_shoelace.js"></script>
+    <script type="module" crossorigin src="/assets/js/_events.js"></script>
+    <script type="module" crossorigin src="/assets/js/_scroll2.js"></script>
+    <script type="module" crossorigin src="/assets/js/_catalog.js"></script>
+    <script type="module" crossorigin src="/assets/js/_clickOutside.js"></script>
+    <script type="module" crossorigin src="/assets/js/_expandableText.js"></script>
+    <script type="module" crossorigin src="/assets/js/_swipers.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/css/_swipers.css">
+    <link rel="stylesheet" crossorigin href="/assets/css/index.css">
   </head>
   <body>
     <!-- Шапка сайту -->
@@ -210,12 +210,12 @@
             <svg class="icon icon-basket"/>
           </button>
 
-          <!-- Cart modal -->
+          <!-- Start Cart modal -->
           <sl-dialog id="cart-modal" label="Кошик" class="cart-modal">
   <div class="alert alert-success" role="alert">
     Товар <a href="/" class="underline">Орхідея Фаленопсис Муса</a> Пінк доданий у ваш <a href="/basket" class="underline">кошик</a>
   </div>
-  <ul class="cart-items">
+  <ul class="cart-items-list">
     <li class="cart-item">
       <div class="cart-item__image">
         <a href="">
@@ -280,8 +280,9 @@
     <a href="/basket" class="button button--small button--primary">Оформити замовлення</a>
   </div>
 </sl-dialog>
+          <!-- End Cart modal -->
 
-          <!-- Sign in modal -->
+          <!-- Start Sign in modal -->
           <sl-dialog id="sign-in-modal" label="Вхід" class="login-modal">
   <form class="login-modal__form">
     <div class="form-control">
@@ -306,9 +307,10 @@
     </div>
   </form>
 </sl-dialog>
+          <!-- End Sign in modal -->
 
-          <!-- Sign up modal -->
-          <sl-dialog id="sign-up-modal" label="Вхід" class="login-modal">
+          <!-- Start Sign up modal -->
+          <sl-dialog id="sign-up-modal" label="Реєстрація" class="login-modal">
   <form class="login-modal__form">
     <div class="form-control">
       <sl-input label="ПІБ" placeholder="Прізвище Імʼя По батькові"></sl-input>
@@ -337,6 +339,18 @@
     </div>
   </form>
 </sl-dialog>
+          <!-- End Sign up modal -->
+
+          <!-- Start Sign up modal greeting -->
+          <sl-dialog id="sign-up-modal-greeting" label="Реєстрація" class="login-modal">
+  <div class="login-modal__greeting">
+    <img src="/img/Illustration.png" alt="Вітаємо!">
+    <p>Вітаємо! Ви успішно зареєструвались. Тепер Ви можете користуватись Вашим кабінетом і здійснювати замовлення</p>
+    <a href="" class="button button--outline">Перейти до кабінету</a>
+    <button href="" class="underline" data-event="click" data-callback="closeModal">Закрити</button>
+  </div>
+</sl-dialog>
+          <!-- End Sign up modal greeting -->
 
         </div>
       </div>

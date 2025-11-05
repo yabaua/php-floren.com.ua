@@ -1,5 +1,5 @@
-/* empty css      */
 import { A, N, P, S, T, g, s } from "./_swipers.js";
+/* empty css      */
 import "./_shoelace.js";
 import "./_events.js";
 import "./_scroll2.js";

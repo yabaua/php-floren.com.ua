@@ -24,17 +24,8 @@
     <script type="module" crossorigin src="/assets/js/_clickOutside.js"></script>
     <script type="module" crossorigin src="/assets/js/_expandableText.js"></script>
     <script type="module" crossorigin src="/assets/js/main.js"></script>
-    <link rel="stylesheet" href="/assets/css/swiper.css"/>
-    <link rel="stylesheet" href="/assets/css/_colors.css"/>
-    <link rel="stylesheet" href="/assets/css/_functions.css"/>
-    <link rel="stylesheet" href="/assets/css/_icons.css"/>
-    <link rel="stylesheet" href="/assets/css/_layout.css"/>
-    <link rel="stylesheet" href="/assets/css/_mixins.css"/>
-    <link rel="stylesheet" href="/assets/css/_reset.css"/>
-    <link rel="stylesheet" href="/assets/css/_scroll.css"/>
+
     <link rel="stylesheet" href="/assets/css/_swipers.css"/>
-    <link rel="stylesheet" href="/assets/css/_typography.css"/>
-    <link rel="stylesheet" href="/assets/css/_ui.css"/>
     <link rel="stylesheet" href="/assets/css/index.css"/>
   </head>
   <body>
@@ -209,18 +200,161 @@
             <!-- Search form end -->
 
             <div class="header__main--profile">
-              <a href="#" class="icon-button" aria-label="{$LINGVO.cabinet}">
+              <a href="#" class="icon-button" aria-label="{$LINGVO.cabinet}"  data-event="click" data-callback="openModal" data-modal-id="sign-in-modal">
                 <svg class="icon icon-user"/>
               </a>
               <a href="#" class="icon-button" aria-label="{$LINGVO.cabinet_favorites}">
                 <span class="badge warning">10</span>
                 <svg class="icon icon-heart"/>
               </a>
-              <a href="#" class="icon-button" aria-label="{$LINGVO.basket}">
+              <a href="#" class="icon-button" aria-label="{$LINGVO.basket}" data-event="click" data-callback="openModal" data-modal-id="cart-modal">
                 <span class="badge success">2</span>
                 <svg class="icon icon-basket"/>
               </a>
             </div>
+
+            <!-- Start Cart modal -->
+            <sl-dialog id="cart-modal" label="Кошик" class="cart-modal">
+              <div class="alert alert-success" role="alert">
+    Товар <a href="/" class="underline">Орхідея Фаленопсис Муса</a> Пінк доданий у ваш <a href="/basket" class="underline">кошик</a>
+              </div>
+              <ul class="cart-items-list">
+                <li class="cart-item">
+                  <div class="cart-item__image">
+                    <a href="">
+                      <img src="/img/sevices/landscaping-artificial-plants.png" alt="">
+                    </a>
+                  </div>
+                  <div class="cart-item__details">
+                    <button class="cart-item__remove">
+                      <svg class="icon icon-trash"/>
+                    </button>
+                    <h3>
+                      <a href="">Орхідея Фаленопсис Муса Пінк</a>
+                    </h3>
+                    <div class="cart-item__details_options">Ø 10, висота 45 см</div>
+                    <div class="cart-item__details_controls">
+                      <div class="counter-input">
+                        <button>
+                          <img src="/img/icons/icon-minus.svg" alt="Видалити один товар"/>
+                        </button>
+                        <input type="number" value="1" min="1"/>
+                        <button>
+                          <img src="/img/icons/icon-plus.svg" alt="Додати один товар"/>
+                        </button>
+                      </div>
+                      <div class="cart-item__details_price">450 ₴</div>
+                    </div>
+                  </div>
+                </li>
+                <li class="cart-item">
+                  <div class="cart-item__image">
+                    <a href="">
+                      <img src="/img/sevices/plant-transplantation.png" alt="">
+                    </a>
+                  </div>
+                  <div class="cart-item__details">
+                    <button class="cart-item__remove">
+                      <svg class="icon icon-trash"/>
+                    </button>
+                    <h3>
+                      <a href="">Орхідея Фаленопсис Муса Пінк</a>
+                    </h3>
+                    <div class="cart-item__details_options">Ø 10, висота 45 см</div>
+                    <div class="cart-item__details_controls">
+                      <div class="counter-input">
+                        <button>
+                          <img src="/img/icons/icon-minus.svg" alt="Видалити один товар"/>
+                        </button>
+                        <input type="number" value="1" min="1"/>
+                        <button>
+                          <img src="/img/icons/icon-plus.svg" alt="Додати один товар"/>
+                        </button>
+                      </div>
+                      <div class="cart-item__details_price">450 ₴</div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <div class="cart-modal__footer">
+                <button class="cart-modal__footer_continue underline" data-event="click" data-callback="closeModal">Продовжити покупки</button>
+                <div class="cart-modal__footer_total">Разом: <b>900 ₴</b>
+                </div>
+                <a href="/basket" class="button button--small button--primary">Оформити замовлення</a>
+              </div>
+            </sl-dialog>
+            <!-- End Cart modal -->
+
+            <!-- Start Sign in modal -->
+            <sl-dialog id="sign-in-modal" label="Вхід" class="login-modal">
+              <form class="login-modal__form">
+                <div class="form-control">
+
+                  <label for="phone">Ваш телефон</label>
+                  <input id="phone" data-tel-input type="tel">
+                </div>
+                <div class="form-control">
+                  <sl-input label="Пароль" type="password" placeholder="********"></sl-input>
+                </div>
+                <div class="form-control form-control--double">
+                  <sl-checkbox>
+        Запам'ятати мене
+      </sl-checkbox>
+                  <a href="" class="underline">Нагадати пароль</a>
+                </div>
+                <div class="form-control">
+                  <button class="button button--primary" type="submit">Увійти</button>
+                </div>
+                <div class="form-control text-center">
+                  <a href="" class="underline">Зарєструватись</a>
+                </div>
+              </form>
+            </sl-dialog>
+            <!-- End Sign in modal -->
+
+            <!-- Start Sign up modal -->
+            <sl-dialog id="sign-up-modal" label="Реєстрація" class="login-modal">
+              <form class="login-modal__form">
+                <div class="form-control">
+                  <sl-input label="ПІБ" placeholder="Прізвище Імʼя По батькові"></sl-input>
+                </div>
+                <div class="form-control">
+                  <label for="phone">Ваш телефон</label>
+                  <input id="phone" data-tel-input type="tel">
+                </div>
+                <div class="form-control">
+                  <sl-input label="Email" type="email" placeholder="E-mail"></sl-input>
+                </div>
+                <div class="form-control">
+                  <sl-input label="Пароль" type="password" placeholder="********"></sl-input>
+                </div>
+                <div class="form-control form-control--double">
+                  <sl-checkbox>
+        Запам'ятати мене
+      </sl-checkbox>
+                  <a href="" class="underline">Нагадати пароль</a>
+                </div>
+                <div class="form-control">
+                  <button class="button button--primary" type="submit">Увійти</button>
+                </div>
+                <div class="form-control text-center">
+                  <a href="" class="underline">Зарєструватись</a>
+                </div>
+              </form>
+            </sl-dialog>
+            <!-- End Sign up modal -->
+
+            <!-- Start Sign up modal greeting -->
+            <sl-dialog id="sign-up-modal-greeting" label="Реєстрація" class="login-modal">
+              <div class="login-modal__greeting">
+                <img src="/img/Illustration.png" alt="Вітаємо!">
+                <p>Вітаємо! Ви успішно зареєструвались. Тепер Ви можете користуватись Вашим кабінетом і здійснювати замовлення</p>
+                <a href="" class="button button--outline">Перейти до кабінету</a>
+                <button href="" class="underline" data-event="click" data-callback="closeModal">Закрити</button>
+              </div>
+            </sl-dialog>
+            <!-- End Sign up modal greeting -->
+
           </div>
         </div>
       </div>
