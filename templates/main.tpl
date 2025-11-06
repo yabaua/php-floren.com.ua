@@ -907,7 +907,9 @@
         </div>
       </div>
     </footer>
-
+    {if $URL[0]=='product'}
+    <script src="https://www.youtube.com/iframe_api"></script>
+    {/if}
     <!-- Головний JS файл -->
   </body>
 </html>

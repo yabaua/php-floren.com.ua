@@ -89,6 +89,7 @@ if ($URL[1] == 'sezon') {
 	$filter_selected_groups=array();
 	$filter_selected_goods_SQL='';
 	$show_more_IDDs='';
+	$active_filters_flag=0;
 
 	//check if filters in rubric
 	$db->query("SELECT count(ID) AS cnt FROM goods_filters WHERE classID='".$f_cat['ID']."'");
@@ -158,6 +159,7 @@ if ($URL[1] == 'sezon') {
 						$smarty->assign("FILTERS_URL", "/".implode("-", $filters_url));
 
 		}//if isset filters
+		
 		
 		//BUILD FILTERS
 		$db->query("SELECT gfg.ID AS gfgID, gfg.name".$db_sufix." AS gfgName FROM goods_filter_groups gfg WHERE gfg.classID IN ('".$f_cat['ID']."')  ORDER BY gfg.sort DESC");
@@ -233,6 +235,17 @@ if ($URL[1] == 'sezon') {
 				$tmp_filters[]=$fff['alias'];
 			}//filters in 1 group
 		}//filters_group	
+		
+		foreach($filters AS $k=>$v){
+			foreach($v AS $kk=>$vv){
+				if (is_array($vv)){
+					foreach($vv AS $vvv){
+						if(isset($vvv['act']) && $vvv['act']=='1') $active_filters_flag=1;
+					}
+				}
+			}
+		}
+		$smarty->assign("ACTIVE_FILTERS_FLAG", $active_filters_flag);
 		$smarty->assign("FILTERS", $filters);
 		
 		//================		/	FILTERS		=================
@@ -409,7 +422,24 @@ $smarty->assign("META_KEYWORDS",		$meta_keywords);
 			while($rs_goods = $db->fetch()) {
 
 				$product_path = $lang_url . '/product/' . $rs_goods['ID'] . '_' . $rs_goods['link'] . '/';
-				$img_path = 'https://floren.com.ua/images/ins/s/' . $rs_goods['image'];
+			//	$img_path = 'https://floren.com.ua/images/ins/s/' . $rs_goods['image'];
+				if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/images/goods/s/' . str_replace('jpg', 'webp', $rs_goods['image']))){
+						$img_path = '/images/goods/s/' . str_replace('jpg', 'webp', $rs_goods['image']);
+				}else{
+						$src= 'https://floren.com.ua/images/ins/b/gmcxml-' . $rs_goods['image'];
+					
+						$dest_s		=	$_SERVER['DOCUMENT_ROOT'] . '/images/goods/s/' .str_replace('jpg', 'webp', $rs_goods['image']);
+						$dest_m		=	$_SERVER['DOCUMENT_ROOT'] . '/images/goods/m/' .str_replace('jpg', 'webp', $rs_goods['image']);
+						$dest_b		=	$_SERVER['DOCUMENT_ROOT'] . '/images/goods/b/' .str_replace('jpg', 'webp', $rs_goods['image']);
+						$dest_gmcxml	=	$_SERVER['DOCUMENT_ROOT'] . '/images/goods/gmcxml/' .str_replace('.jpg', '-gmcxml.webp', $rs_goods['image']);
+						
+											
+						img_resize($src, $dest_s, 200, 200, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=false);
+					//	img_resize($src, $dest_m, 600, 500, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=true);
+					//	img_resize($src, $dest_b, 1600, 1200, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=true, $trim=false, $resize_max=true, $apply_mask=true);
+					//	img_resize($src, $dest_gmcxml, 1600, 1200, $rgb=0xFFFFFF, $quality=90, $keep_origin_size=true, $trim=false, $resize_max=true, $apply_mask=false);
+					$img_path = '/images/goods/s/' . str_replace('jpg', 'webp', $rs_goods['image']);
+				}
 
 				if ($rs_goods['availability'] == 0) {
 					$not_available = 1;
@@ -503,8 +533,8 @@ $smarty->assign("META_KEYWORDS",		$meta_keywords);
 			}
 			
 			$schema_offers_count=$total_goods;
-			$schema_min_price=@min($schema_prices_min);
-			$schema_max_price=@max($schema_prices_max);
+			$schema_min_price=!empty($schema_prices_min) ? min($schema_prices_min) : 0;
+			$schema_max_price=!empty($schema_prices_max) ? max($schema_prices_max) : 0;
 			
 			$schema_offers_txt='';
 			$schema_offers_txt.='<script type="application/ld+json">

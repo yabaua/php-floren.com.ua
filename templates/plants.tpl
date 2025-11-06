@@ -1,3 +1,44 @@
+		{if $FILTERS}
+      
+		<!-- Фільтри товарів -->
+          <div class="catalog-page__content_filters">
+          {foreach from=$FILTERS item=F}
+            <sl-select placeholder="{$F.groupName}">
+              {foreach from=$F.sub_filters item=SUBF}
+              {if $CATEGORY_ID == '80' ||  $FROM_GOODS == 1}
+              <sl-option value="option-1"><a href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{$SUBF.link}{$SUBF.need_slash}">{$SUBF.gfName} ({$SUBF.cnt})</a></sl-option>
+              {else}
+              <sl-option value="option-1"><a href="{$LANGURL}/{$URL[0]}/{$SUBF.link}{$SUBF.need_slash}">{$SUBF.gfName} ({$SUBF.cnt})</a></sl-option>
+              {/if}
+              {/foreach}
+            </sl-select>
+          {/foreach}
+          </div>
+          {if $ACTIVE_FILTERS_FLAG}
+          <!-- Активні теги фільтрів -->
+          <div class="catalog-page__content_tags">
+          {foreach from=$FILTERS item=F}
+            {foreach from=$F.sub_filters item=SUBF}
+              {if $SUBF.act==1}
+                {if $CATEGORY_ID == '80' ||  $FROM_GOODS == 1}
+                <sl-tag removable><a href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{$SUBF.link}{$SUBF.need_slash}">{$SUBF.gfName}</a></sl-tag>
+                {else}
+                <sl-tag removable><a href="{$LANGURL}/{$URL[0]}/{$SUBF.link}{$SUBF.need_slash}">{$SUBF.gfName}</a></sl-tag>
+                {/if}
+              {/if}
+            {/foreach}
+          {/foreach}
+          
+            {if $CATEGORY_ID == '80' ||  $FROM_GOODS == 1}
+            <button class="button button--text"><a href="{$LANGURL}/{$URL[0]}/{$URL[1]}/">{$LINGVO.deactivate_filters}</a></button>
+            {else}
+            <button class="button button--text"><a href="{$LANGURL}/{$URL[0]}/">{$LINGVO.deactivate_filters}</a></button>
+            {/if}
+          </div>
+          {/if}
+          
+    <!-- Кінець Фільтри товарів -->
+  {/if}{** IF FILTERS **}
 		<!-- Info показано скільки товарів -->
           <div class="catalog-page__content_showed">
           Показано <span>1 - 25</span> з <span>1230</span>
@@ -35,12 +76,12 @@
                     {if $P.min_price != $P.max_price}
                     – {$P.max_price} ₴
                     {/if}{** <del>200,99 ₴</del> **}
-                {**
+                
                   <!-- If in cart add this block -->
                   <div class="product-card__in-cart">
                     <span class="icon icon-basket"></span>
                   </div>
-                **}
+                
                 </div>
 
                 <div class="product-card__options">
