@@ -1,2066 +1,594 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8"/>
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-/>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Сторінка продукту</title>
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;600;900&display=swap"
-      rel="stylesheet"
-    /> -->
-    <!-- <link rel="stylesheet" href="../styles/style.css" /> -->
-    <script type="module" crossorigin src="/assets/js/modulepreload-polyfill.js"></script>
-    <script type="module" crossorigin src="/assets/js/_shoelace.js"></script>
-    <script type="module" crossorigin src="/assets/js/_events.js"></script>
-    <script type="module" crossorigin src="/assets/js/_scroll2.js"></script>
-    <script type="module" crossorigin src="/assets/js/_catalog.js"></script>
-    <script type="module" crossorigin src="/assets/js/_clickOutside.js"></script>
-    <script type="module" crossorigin src="/assets/js/_expandableText.js"></script>
-    <script type="module" crossorigin src="/assets/js/_swipers.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/css/_swipers.css">
-    <link rel="stylesheet" crossorigin href="/assets/css/index.css">
-  </head>
-  <body>
-    <!-- Шапка сайту -->
-    <!-- Overlay для каталогу -->
-<div class="catalog-overlay" id="catalog-overlay"></div>
-
-<!-- Header site -->
-<header class="header">
-  <div class="container">
-    <nav class="header__nav" aria-label="Головне меню сайту">
-
-      <!-- Dropdown локації/магазинів -->
-      <!-- Location dropdown element start -->
-      <sl-tooltip
-        id="location-tooltip"
-        class="tooltip header__nav-location"
-        trigger="manual"
-        placement="bottom-start"
-        style="--sl-tooltip-arrow-size: 0"
-        distance="0"
-      >
-        <div slot="content" class="header__nav-location--content">
-          <img src="/img/icon-shop.svg" alt="icon-shop"/>
-          <div class="description">
-            <button
-              class="icon-button header__nav-location--close"
-              aria-label="Закрити вікно"
-              data-event="click"
-              data-callback="toggleLocation"
-            >
-              <svg class="icon icon-close"/>
-            </button>
-            <a
-              href="https://goo.gl/maps/UPpaCBkrMd2TWfXq7"
-              target="_blank"
-              rel="noopener noreferrer"
-              >м. Київ, пр. Берестейський, 70</a
-            >
-            <p>Графік роботи магазинів:</p>
-            <p>пн-сб: 09:00 - 19:30</p>
-            <p>нд: 10:00 - 18:00</p>
-          </div>
-        </div>
-        <sl-button
-          class="header__nav-location--button"
-          data-event="click"
-          data-callback="toggleLocation"
-        >
-          <svg class="icon icon-location"/>
-          Магазини у Києві
-        </sl-button>
-      </sl-tooltip>
-      <!-- Location dropdown element end -->
-
-      <!-- Меню навігації -->
-      <!-- Navigation menu start -->
-      <ul class="header__nav-list">
-        <li class="header__nav-item">
-          <a href="#" class="header__nav-link">Про компанію</a>
+<div class="product-page__content_grid">
+  <!-- Галерея фото продукту -->
+  <!-- Product gallery -->
+  <div class="product-page__gallery">
+    <div class="hover-photo-viewer" data-photo-viewer="project-photo-viewer">
+      <div class="hover-photo-viewer__main">
+        <img src="/img/homepage/ozelenenie-restorana-7.jpg" alt="" alt=""/>
+      </div>
+      <ul class="hover-photo-viewer__thumbs">
+        <li class="active">
+          <img src="/img/homepage/ozelenenie-restorana-7.jpg" alt=""/>
         </li>
-        <li class="header__nav-item">
-          <a href="#" class="header__nav-link">Оплата та Доставка</a>
+        <li>
+          <img src="/img/homepage/ozelenenie-restorana-6.jpg" alt=""/>
         </li>
-        <li class="header__nav-item">
-          <a href="#" class="header__nav-link">Корисні матеріали</a>
+        <li>
+          <img src="/img/homepage/ozelenenie-restorana-5.jpg" alt=""/>
         </li>
-        <li class="header__nav-item">
-          <a href="#" class="header__nav-link">Контакти</a>
+        <li>
+          <img src="/img/homepage/ozelenenie-office-kiev-4.jpg" alt=""/>
+        </li>
+        <li>
+          <img src="/img/homepage/ozelenenie-office-kiev-3.jpg" alt=""/>
+        </li>
+        <li>
+          <button class="hover-photo-viewer__thumbs_video" data-video-src="https://www.youtube.com/embed/P28wZDVvPO0?si=pbVGgShKp0K3KFyx">
+            <span class="icon icon-video-button"></span>
+            <span>Відео</span>
+          </button>
+        </li>
+        <li>
+          <button class="hover-photo-viewer__thumbs_video" data-video-src="https://www.youtube.com/embed/HMBRjo33cUE?si=t9ObdQBe4qlul_bo">
+            <span class="icon icon-video-button"></span>
+            <span>Відео</span>
+          </button>
         </li>
       </ul>
-      <!-- Navigation menu end -->
-
-      <!-- Вибір мови -->
-      <!-- Language dropdown element start -->
-      <div class="header__nav-lang">
-        <sl-dropdown class="dropdown">
-          <sl-button class="header__nav-lang--button" slot="trigger" caret
-            >Українською
-            <svg class="icon icon-down"/>
-          </sl-button>
-          <sl-menu>
-            <sl-menu-item data-checked value="ua">Українською</sl-menu-item>
-            <sl-divider></sl-divider>
-            <sl-menu-item value="ru">Російською</sl-menu-item>
-          </sl-menu>
-        </sl-dropdown>
-      </div>
-      <!-- Language dropdown element end -->
-    </nav>
-
-    <!-- Основна частина header з лого, телефонами, пошуком, кошиком -->
-    <div class="header__main">
-      <div class="header__main--left">
-        <a href="/" class="header__main--logo">
-          <img src="/img/main-logo.svg" alt="Logo"/>
-        </a>
-        <sl-tooltip
-          id="phones-tooltip"
-          class="tooltip header__main--phones-tooltip"
-          trigger="manual"
-          placement="bottom-start"
-          style="--sl-tooltip-arrow-size: 0"
-          distance="0"
-        >
-          <div slot="content" class="header__main--phones-content">
-            <button
-              class="icon-button"
-              aria-label="Закрити вікно"
-              data-event="click"
-              data-callback="togglePhones"
-            >
-              <svg class="icon icon-close"/>
-            </button>
-            <div class="phones-tooltip--item">
-              <img src="/img/icons/icon-phone.svg" alt="Phone"/>
-              <div class="phones-tooltip--item-wrapper">
-                <p class="item-phone">(044) 344-28-95, (050) 660-52-75</p>
-                <p class="item-hours">По буднях 09:00 - 19:30</p>
-                <p class="item-messengers">
-                  <a href="">
-                    <svg class="icon icon-whatsapp"/>
-                  </a>
-                  <a href="">
-                    <svg class="icon icon-telegram"/>
-                  </a>
-                </p>
-              </div>
-            </div>
-            <div class="phones-tooltip--item">
-              <img src="/img/icons/icon-feedback.svg" alt="Feedback"/>
-              <div class="phones-tooltip--item-wrapper">
-                <a class="item-feedback" href="">Форма зворотнього звʼязку</a>
-              </div>
-            </div>
-          </div>
-          <div class="header__main--phones">
-            <img src="/img/icons/icon-phone.svg" alt="Phone"/>
-            <div class="header__main--phones-wrapper">
-              <div class="header__main--phones-hidden">
-                (044) 344..
-                <button data-event="click" data-callback="togglePhones">
-                  показати
-                </button>
-              </div>
-              <div class="header__main--phones-showed">
-                (044) 344-28-95, (050) 660-52-75
-              </div>
-              <div class="header__main--phones-hours">
-                По буднях 9:00 - 19:30
-              </div>
-            </div>
-          </div>
-        </sl-tooltip>
-      </div>
-
-      <!-- Права частина: пошук, профіль, улюблені, кошик -->
-      <div class="header__main--right">
-        <!-- Search form start -->
-        <form action="" class="header__main--search">
-          <div class="search-wrapper">
-            <img
-              class="search-icon"
-              src="/img/icons/icon-search.svg"
-              alt="Search"/>
-            <input class="search-input" type="search" placeholder="Шефлера"/>
-            <button class="search-button">Пошук</button>
-          </div>
-        </form>
-        <!-- Search form end -->
-
-        <div class="header__main--profile">
-          <a href="#" class="icon-button" aria-label="Особистий кабінет" data-event="click" data-callback="openModal" data-modal-id="sign-in-modal">
-            <svg class="icon icon-user"/>
-          </a>
-          <a href="#" class="icon-button" aria-label="Обране">
-            <span class="badge warning">10</span>
-            <svg class="icon icon-heart"/>
-          </a>
-
-          
-          <button class="icon-button" aria-label="Кошик" data-event="click" data-callback="openModal" data-modal-id="cart-modal">
-            <span class="badge success">2</span>
-            <svg class="icon icon-basket"/>
-          </button>
-
-          <!-- Start Cart modal -->
-          <sl-dialog id="cart-modal" label="Кошик" class="cart-modal">
-  <div class="alert alert-success" role="alert">
-    Товар <a href="/" class="underline">Орхідея Фаленопсис Муса</a> Пінк доданий у ваш <a href="/basket" class="underline">кошик</a>
+    </div>
+    <a href="" class="product-page__gallery_link">
+      <span class="icon icon-photogallery"></span> Орхідея Фаленопсис Муса Пінк – фото в інтер'єрі</a>
   </div>
-  <ul class="cart-items-list">
-    <li class="cart-item">
-      <div class="cart-item__image">
-        <a href="">
-          <img src="/img/sevices/landscaping-artificial-plants.png" alt="">
-        </a>
+
+  <!-- Деталі продукту: артикул, назва, опції, ціна, кнопки -->
+  <!-- Product details -->
+  <div class="product-page__details">
+    <div class="product-page__details_artikul">Артикул: 7000</div>
+    <h1>Орхідея Фаленопсис Муса Пінк</h1>
+
+    <!-- Опції: розмір і колір -->
+    <section class="product-page__options">
+      <h3>Доступні варіанти:</h3>
+      <div class="product-page__options_size">
+        <sl-radio-group name="size" value="1">
+          <sl-radio value="1">
+            <label>
+              <div class="size__name">Ø 10, висота 45 см</div>
+              <div class="size__price">450<sup>грн</sup>
+              </div>
+              <sl-tag variant="success">Є в наявності</sl-tag>
+              <button href="" class="size__video-link" aria-label="Переглянути відеоогляд товару">
+                <img src="/img/icons/icon-video-button.svg" alt="Відеоогляд товару"/>
+              </button>
+            </label>
+          </sl-radio>
+          <sl-radio value="2">
+            <label>
+              <div class="size__name">Ø 27, висота 100 см</div>
+              <div class="size__price">660<sup>грн</sup>
+              </div>
+              <sl-tag variant="success">Є в наявності</sl-tag>
+              <button href="" class="size__video-link" aria-label="Переглянути відеоогляд товару">
+                <img src="/img/icons/icon-video-button.svg" alt="Відеоогляд товару"/>
+              </button>
+            </label>
+          </sl-radio>
+          <sl-radio value="3">
+            <label>
+              <div class="size__name">Ø 24, висота 100 см</div>
+              <div class="size__price">760<sup>грн</sup>
+              </div>
+              <sl-tag variant="success">Є в наявності</sl-tag>
+              <button href="" class="size__video-link" aria-label="Переглянути відеоогляд товару">
+                <img src="/img/icons/icon-video-button.svg" alt="Відеоогляд товару"/>
+              </button>
+            </label>
+          </sl-radio>
+          <sl-radio value="3">
+            <label>
+              <div class="size__name">Ø 17, висота 70 см</div>
+              <div class="size__price">960<sup>грн</sup>
+              </div>
+              <sl-tag variant="success">Є в наявності</sl-tag>
+              <button href="" class="size__video-link" aria-label="Переглянути відеоогляд товару">
+                <img src="/img/icons/icon-video-button.svg" alt="Відеоогляд товару"/>
+              </button>
+            </label>
+          </sl-radio>
+          <sl-radio value="3" disabled>
+            <label>
+              <div class="size__name">Ø 14, висота 50 см</div>
+              <div class="size__price">1260<sup>грн</sup>
+              </div>
+              <sl-tag variant="success">Є в наявності</sl-tag>
+              <button href="" class="size__video-link" aria-label="Переглянути відеоогляд товару">
+                <img src="/img/icons/icon-video-button.svg" alt="Відеоогляд товару"/>
+              </button>
+            </label>
+          </sl-radio>
+        </sl-radio-group>
       </div>
-      <div class="cart-item__details">
-        <button class="cart-item__remove">
-          <svg class="icon icon-trash"/>
+      <div class="product-page__options_color">
+        <sl-radio-group label="Оберіть колір" name="color" value="blue">
+          <sl-radio-button value="blue">
+            <img src="/img/product/product-color-blue.png" alt=""/>
+          </sl-radio-button>
+          <sl-radio-button value="green">
+            <img src="/img/product/product-color-green.png" alt=""/>
+          </sl-radio-button>
+          <sl-radio-button value="pink">
+            <img src="/img/product/product-color-pink.png" alt=""/>
+          </sl-radio-button>
+          <sl-radio-button value="red">
+            <img src="/img/product/product-color-red.png" alt=""/>
+          </sl-radio-button>
+          <sl-radio-button value="yellow">
+            <img src="/img/product/product-color-yellow.png" alt=""/>
+          </sl-radio-button>
+        </sl-radio-group>
+      </div>
+    </section>
+
+    <!-- Ціна і кнопки дій -->
+    <section class="product-page__actions">
+      <div class="product-page__price">
+        1965
+        <sup>грн</sup>
+      </div>
+      <div class="product-page__actions_buttons">
+        <button href="" class="button button--primary">До кошика</button>
+        <button href="#" class="button button--outline button--icon button--small" aria-label="Додати до улюблених">
+          <span class="icon icon-heart"/>
         </button>
-        <h3>
-          <a href="">Орхідея Фаленопсис Муса Пінк</a>
-        </h3>
-        <div class="cart-item__details_options">Ø 10, висота 45 см</div>
-        <div class="cart-item__details_controls">
-          <div class="counter-input">
-            <button>
-              <img src="/img/icons/icon-minus.svg" alt="Видалити один товар"/>
-            </button>
-            <input type="number" value="1" min="1"/>
-            <button>
-              <img src="/img/icons/icon-plus.svg" alt="Додати один товар"/>
-            </button>
-          </div>
-          <div class="cart-item__details_price">450 ₴</div>
-        </div>
-      </div>
-    </li>
-    <li class="cart-item">
-      <div class="cart-item__image">
-        <a href="">
-          <img src="/img/sevices/plant-transplantation.png" alt="">
-        </a>
-      </div>
-      <div class="cart-item__details">
-        <button class="cart-item__remove">
-          <svg class="icon icon-trash"/>
+        <button href="#" class="button button--outline button--small consult" aria-label="Порадитись з фахівцем">
+          <img src="/img/icons/icon-question.svg" alt=""/>
+          <b>Порадитись</b>
         </button>
-        <h3>
-          <a href="">Орхідея Фаленопсис Муса Пінк</a>
-        </h3>
-        <div class="cart-item__details_options">Ø 10, висота 45 см</div>
-        <div class="cart-item__details_controls">
-          <div class="counter-input">
-            <button>
-              <img src="/img/icons/icon-minus.svg" alt="Видалити один товар"/>
-            </button>
-            <input type="number" value="1" min="1"/>
-            <button>
-              <img src="/img/icons/icon-plus.svg" alt="Додати один товар"/>
-            </button>
-          </div>
-          <div class="cart-item__details_price">450 ₴</div>
-        </div>
       </div>
-    </li>
-  </ul>
-  <div class="cart-modal__footer">
-    <button class="cart-modal__footer_continue underline" data-event="click" data-callback="closeModal">Продовжити покупки</button>
-    <div class="cart-modal__footer_total">Разом: <b>900 ₴</b>
-    </div>
-    <a href="/basket" class="button button--small button--primary">Оформити замовлення</a>
-  </div>
-</sl-dialog>
-          <!-- End Cart modal -->
+    </section>
 
-          <!-- Start Sign in modal -->
-          <sl-dialog id="sign-in-modal" label="Вхід" class="login-modal">
-  <form class="login-modal__form">
-    <div class="form-control">
-      
-      <label for="phone">Ваш телефон</label>
-      <input id="phone" data-tel-input type="tel">
-    </div>
-    <div class="form-control">
-      <sl-input label="Пароль" type="password" placeholder="********"></sl-input>
-    </div>
-    <div class="form-control form-control--double">
-      <sl-checkbox>
-        Запам'ятати мене
-      </sl-checkbox>
-      <a href="" class="underline">Нагадати пароль</a>
-    </div>
-    <div class="form-control">
-      <button class="button button--primary" type="submit">Увійти</button>
-    </div>
-    <div class="form-control text-center">
-      <a href="" class="underline">Зарєструватись</a>
-    </div>
-  </form>
-</sl-dialog>
-          <!-- End Sign in modal -->
+    <!-- Табси: інформація, доставка, оплата -->
+    <section class="product-page__delivery">
+      <sl-tab-group>
+        <sl-tab slot="nav" panel="info">Інформація</sl-tab>
+        <sl-tab slot="nav" panel="delivery">Доставка</sl-tab>
+        <sl-tab slot="nav" panel="payment">Оплата</sl-tab>
 
-          <!-- Start Sign up modal -->
-          <sl-dialog id="sign-up-modal" label="Реєстрація" class="login-modal">
-  <form class="login-modal__form">
-    <div class="form-control">
-      <sl-input label="ПІБ" placeholder="Прізвище Імʼя По батькові"></sl-input>
-    </div>
-    <div class="form-control">
-      <label for="phone">Ваш телефон</label>
-      <input id="phone" data-tel-input type="tel">
-    </div>
-    <div class="form-control">
-      <sl-input label="Email" type="email" placeholder="E-mail"></sl-input>
-    </div>
-    <div class="form-control">
-      <sl-input label="Пароль" type="password" placeholder="********"></sl-input>
-    </div>
-    <div class="form-control form-control--double">
-      <sl-checkbox>
-        Запам'ятати мене
-      </sl-checkbox>
-      <a href="" class="underline">Нагадати пароль</a>
-    </div>
-    <div class="form-control">
-      <button class="button button--primary" type="submit">Увійти</button>
-    </div>
-    <div class="form-control text-center">
-      <a href="" class="underline">Зарєструватись</a>
-    </div>
-  </form>
-</sl-dialog>
-          <!-- End Sign up modal -->
-
-          <!-- Start Sign up modal greeting -->
-          <sl-dialog id="sign-up-modal-greeting" label="Реєстрація" class="login-modal">
-  <div class="login-modal__greeting">
-    <img src="/img/Illustration.png" alt="Вітаємо!">
-    <p>Вітаємо! Ви успішно зареєструвались. Тепер Ви можете користуватись Вашим кабінетом і здійснювати замовлення</p>
-    <a href="" class="button button--outline">Перейти до кабінету</a>
-    <button href="" class="underline" data-event="click" data-callback="closeModal">Закрити</button>
-  </div>
-</sl-dialog>
-          <!-- End Sign up modal greeting -->
-
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
-    <!-- Меню каталогу -->
-    <!-- Меню каталогу в header -->
-<div class="header__catalog container" id="catalog-menu">
-
-  <!-- Основна кнопка каталогу і випадаючий список -->
-  <div class="header__catalog--main">
-    <button
-      id="catalog-button"
-      class="catalog-button"
-      aria-label="Каталог товарів"
-    >
-      <svg class="icon icon-menu"/>
-      Каталог товарів
-    </button>
-    <!-- Список категорій каталогу -->
-
-<!-- prettier-ignore -->
-
-
-<!-- Dropdown список категорій -->
-<div class="header__catalog_list">
-  <div class="header__catalog_list-wrapper">
-
-    <!-- Список категорій - ліва частина -->
-    <ul class="category-list">
-      <li class="active" data-category="room-plants">
-        <a href="">
-          <img src="/img/icons/icon-plants-home.svg" alt="Кімнатні рослини"/>
-          <span>Кімнатні рослини</span>
-        </a>
-      </li>
-      <li data-category="plant-pots">
-        <a href="">
-          <img src="/img/icons/icon-pot.svg" alt="Горщики для рослин"/>
-          <span>Горщики для рослин</span>
-        </a>
-      </li>
-      <li data-category="accessories">
-        <a href="">
-          <img
-            src="/img/icons/icon-accessories.svg"
-            alt="Аксесуари для рослин"
-/>
-          <span>Аксесуари для рослин</span>
-        </a>
-      </li>
-      <li data-category="exterior-works">
-        <a href="">
-          <img
-            src="/img/icons/icon-exteriror-works.svg"
-            alt="Екстер'єрні роботи"
-/>
-          <span>Екстер'єрні роботи</span>
-        </a>
-      </li>
-      <li data-category="lawn-autowater">
-        <a href="">
-          <img
-            src="/img/icons/icon-lawn-autowater.svg"
-            alt="Створення газону і автополив"
-/>
-          <span>
-            Створення газону<br/>
-            і автополив</span
-          >
-        </a>
-      </li>
-      <li data-category="care-services">
-        <a href="">
-          <img
-            src="/img/icons/icon-care-services.svg"
-            alt="Послуги з догляду за ділянкою"
-/>
-          <span>
-            Послуги з догляду<br/>
-            за ділянкою</span
-          >
-        </a>
-      </li>
-      <li data-category="landscape-design">
-        <a href="">
-          <img
-            src="/img/icons/icon-landschaft-design.svg"
-            alt="Ландшафтний дизайн"
-/>
-          <span>Ландшафтний дизайн</span>
-        </a>
-      </li>
-    </ul>
-
-    <!-- Контент категорій - права частина -->
-    <div class="category-content">
-      <!-- prettier-ignore -->
-      <!-- Контент категорії "Кімнатні рослини" для меню каталогу -->
-<section class="category-content__item" data-category="room-plants">
-  <ul class="category-content__item-list">
-    <li>
-      <a href="">
-        <img src="/img/category/red-orchid.png" alt="Орхідеї"/>
-        <span>Орхідеї</span>
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <img src="/img/category/zamioculcas.png" alt="Декоративно листяні"/>
-        <span>Декоративно листяні</span>
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <img src="/img/category/palm.png" alt="Пальми"/>
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <img src="/img/category/lemon.png" alt="Цитрусові"/>
-        <span>Цитрусові</span>
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <img src="/img/category/blue-hydrangea.png" alt="Кімнатні рослини"/>
-        <span>Квітучі рослини</span>
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <img src="/img/category/sansevieria.png" alt="Сансевієрія"/>
-        <span>Сансевієрія</span>
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <img src="/img/category/ficus.png" alt="Фікуси"/>
-        <span>Фікуси</span>
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <img src="/img/category/dracena.png" alt="Драцени"/>
-        <span>Драцени</span>
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <img src="/img/category/cactus.png" alt="Кактуси"/>
-        <span>Кактуси</span>
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <img src="/img/category/ivy.png" alt="Виткі та ампельні рослини"/>
-        <span>Виткі та ампельні рослини</span>
-      </a>
-    </li>
-    <li>
-      <a href="">
-        <img src="/img/category/bonsai-tree.png" alt="Бонсай"/>
-        <span>Бонсай</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="">
-        <img src="/img/category/part-of-the-suculent.png" alt="Сукуленти"/>
-        <span>Сукуленти</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="">
-        <img src="/img/category/small-ukka.png" alt="Кімнатні рослини"/>
-        <span>Юкка</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="">
-        <img src="/img/category/surfinia-flower.png" alt="Сезонні рослини"/>
-        <span>Сезонні рослини</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="">
-        <img src="/img/category/christmas-tree.png" alt="Хвойні"/>
-        <span>Хвойні</span>
-      </a>
-    </li>
-  </ul>
-  <ul class="category-content__item-related">
-    <li>
-      <a class="underline" href="">Подарункові сертифікати</a>
-    </li>
-    <li>
-      <a class="underline" href="">Розумний сад Click & Grow</a>
-    </li>
-    <li>
-      <a class="underline" href="">Штучні квіти</a>
-    </li>
-    <li>
-      <a class="underline" href="">Перегородки з рослинами</a>
-    </li>
-    <li>
-      <a class="underline" href="">Аксесуари для рослин</a>
-    </li>
-  </ul>
-</section>
-      <!-- Контент категорії "Горщики для рослин" для меню каталогу -->
-<section class="category-content__item" data-category="plant-pots">
-  <ul class="category-content__item-related">
-    <li>
-      <a class="underline" href="/ua/planters/">Усі горщики</a>
-    </li>
-    <li>
-      <a class="underline" href="/ua/planters/ceramic/">Керамічні горщики</a>
-    </li>
-    <li>
-      <a class="underline" href="/ua/planters/lechuza/">Горщики Lechuza</a>
-    </li>
-    <li>
-      <a class="underline" href="/ua/planters/lamela/">Горщики "Lamela"</a>
-    </li>
-    <li>
-      <a class="underline" href="/ua/planters/elho/">Горщики ELHO</a>
-    </li>
-    <li>
-      <a class="underline" href="/ua/planters/wood-planters/"
-        >Горщики з дерева</a
-      >
-    </li>
-    <li>
-      <a class="underline" href="/ua/planters/metal-pots/">Металеві кашпо</a>
-    </li>
-    <li>
-      <a class="underline" href="/ua/planters/beton/">Горщики з бетону</a>
-    </li>
-    <li>
-      <a class="underline" href="/ua/aksessuary/">Аксесуари для рослин</a>
-    </li>
-  </ul>
-</section>
-      
-        
-        <!-- Універсальний контент категорії для меню каталогу -->
-<section class="category-content__item" data-category="accessories">
-  <ul class="category-content__item-related">
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Аксесуари для рослин 1</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Аксесуари для рослин 2</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Аксесуари для рослин 3</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Аксесуари для рослин 4</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Аксесуари для рослин 5</a>
-    </li>
-  </ul>
-</section>
-      
-        
-        <!-- Універсальний контент категорії для меню каталогу -->
-<section class="category-content__item" data-category="exterior-works">
-  <ul class="category-content__item-related">
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Екстер&#39;єрні роботи 1</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Екстер&#39;єрні роботи 2</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Екстер&#39;єрні роботи 3</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Екстер&#39;єрні роботи 4</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Екстер&#39;єрні роботи 5</a>
-    </li>
-  </ul>
-</section>
-      
-        
-        <!-- Універсальний контент категорії для меню каталогу -->
-<section class="category-content__item" data-category="lawn-autowater">
-  <ul class="category-content__item-related">
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Створення газону і автополив 1</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Створення газону і автополив 2</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Створення газону і автополив 3</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Створення газону і автополив 4</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Створення газону і автополив 5</a>
-    </li>
-  </ul>
-</section>
-      
-        
-        <!-- Універсальний контент категорії для меню каталогу -->
-<section class="category-content__item" data-category="care-services">
-  <ul class="category-content__item-related">
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Послуги з догляду за ділянкою 1</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Послуги з догляду за ділянкою 2</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Послуги з догляду за ділянкою 3</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Послуги з догляду за ділянкою 4</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Послуги з догляду за ділянкою 5</a>
-    </li>
-  </ul>
-</section>
-      
-        
-        <!-- Універсальний контент категорії для меню каталогу -->
-<section class="category-content__item" data-category="landscape-design">
-  <ul class="category-content__item-related">
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Ландшафтний дизайн 1</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Ландшафтний дизайн 2</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Ландшафтний дизайн 3</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Ландшафтний дизайн 4</a>
-    </li>
-    <li>
-      <a class="underline" href="">Lorem ipsum item - Ландшафтний дизайн 5</a>
-    </li>
-  </ul>
-</section>
-      
-    </div>
-  </div>
-</div>
-  </div>
-
-  <!-- Додаткові категорії: фітодизайн, вертикальне озеленення, флораріуми -->
-  <ul class="header__catalog--secondary">
-    <li class="secondary-item">
-      <button class="secondary-item--button" aria-label="Фітодизайн">
-        <svg class="icon icon-fitodesign"/>
-        <div class="secondary-item--button-text">
-          <b>Фітодизайн</b>
-          <span>Озеленення простору</span>
-        </div>
-      </button>
-      <section class="secondary-item--content">
-        <ul class="secondary-item--content-list">
-          <li>
-            <img
-              src="/img/sevices/apartment-phytodesign.png"
-              alt="Фітодизайн квартири"
-/>
-            <a class="underline" href="">Фітодизайн квартири</a>
-          </li>
-          <li>
-            <img
-              src="/img/sevices/office-phytodesign.png"
-              alt="Фітодизайн офісу"
-/>
-            <a class="underline" href="">Фітодизайн офісу</a>
-          </li>
-          <li>
-            <img
-              src="/img/sevices/landscaping-of-summer-terraces.png"
-              alt="Фітодизайн квартири"
-/>
-            <a class="underline" href="">Озеленення літніх терас</a>
-          </li>
-          <li>
-            <img
-              src="/img/sevices/zoning-space-with-indoor-plants.png"
-              alt="Зонування простору кімнатними рослинами"
-/>
-            <a class="underline" href=""
-              >Зонування простору кімнатними рослинами</a
-            >
-          </li>
-          <li>
-            <img
-              src="/img/sevices/plant-rental.png"
-              alt="Зелені рішення для HoReCa"
-/>
-            <a class="underline" href="">Зелені рішення для HoReCa</a>
-          </li>
-          <li>
-            <img
-              src="/img/sevices/landscaping-artificial-plants.png"
-              alt="Озеленення штучними рослинами"
-/>
-            <a class="underline" href="">Озеленення штучними рослинами</a>
-          </li>
-        </ul>
-      </section>
-    </li>
-    <li class="secondary-item">
-      <button
-        class="secondary-item--button"
-        aria-label="Вертикальне озеленення"
-      >
-        <svg class="icon icon-vertical"/>
-        <div class="secondary-item--button-text">
-          <b>Вертикальне озеленення</b>
-          <span>Зелені стіни</span>
-        </div>
-      </button>
-      <section class="secondary-item--content">
-        <ul class="secondary-item--content-list">
-          <li>
-            <img
-              src="/img/sevices/green-walls.png"
-              alt="Зелені стіни з рослинами"
-/>
-            <a class="underline" href="">Зелені стіни з рослинами</a>
-          </li>
-          <li>
-            <img
-              src="/img/sevices/landscaping-using-vertical-structures.png"
-              alt="Озеленення за допомогою вертикальних конструкцій"
-/>
-            <a class="underline" href=""
-              >Озеленення за допомогою вертикальних конструкцій</a
-            >
-          </li>
-          <li>
-            <img
-              src="/img/sevices/green-moss-walls.png"
-              alt="Зелені стіни з моху"
-/>
-            <a class="underline" href="">Зелені стіни з моху</a>
-          </li>
-        </ul>
-      </section>
-    </li>
-    <li class="secondary-item">
-      <button class="secondary-item--button" aria-label="Догляд за рослинами">
-        <svg class="icon icon-care"/>
-        <div class="secondary-item--button-text">
-          <b>Догляд</b>
-          <span>За рослинами</span>
-        </div>
-      </button>
-      <section class="secondary-item--content">
-        <ul class="secondary-item--content-list">
-          <li>
-            <img
-              src="/img/sevices/plant-transplantation.png"
-              alt="Пересадка рослин"
-/>
-            <a class="underline" href="">Пересадка рослин</a>
-          </li>
-          <li>
-            <img
-              src="/img/sevices/plant-transportation.png"
-              alt="Перевезення рослин"
-/>
-            <a class="underline" href="">Перевезення рослин</a>
-          </li>
-          <li>
-            <img src="/img/sevices/plant-rental.png" alt="Оренда рослин"/>
-            <a class="underline" href="">Оренда рослин</a>
-          </li>
-        </ul>
-      </section>
-    </li>
-    <li class="secondary-item">
-      <button class="secondary-item--button" aria-label="Галерея фотографій">
-        <svg class="icon icon-photogallery"/>
-        <div class="secondary-item--button-text">
-          <b>Портфоліо</b>
-          <span>Галерея фотографій</span>
-        </div>
-      </button>
-    </li>
-  </ul>
-</div>
-
-    <!-- Основний контент сторінки -->
-    
-
-  <main class="product-page">
-    <div class="container">
-      <div class="product-page__grid">
-
-        <!-- Sidebar navigation - категорії каталогу -->
-        <aside class="product-page__nav">
-          
-            <section class="product-page__nav_section">
-              <h3>Кімнатні рослини</h3>
-              <ul>
-                
-                  <li class="active">
-                    <a class="underline" href="/catalog/orchids">Орхідеї</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/decorative-leafy">Декоративно листяні рослини</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/palms">Пальми</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/ficus">Фікус</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/dracaena">Драцена</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/cacti">Кактуси</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/succulents">Сукуленти</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/philodendron">Філодендрон</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/epipremnum">Епіпремнум</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/croton">Кротон</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/sansevieria">Сансевієрія</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/alocasia">Алоказія</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/aglaonema">Аглаонема</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/yucca">Юкка</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/citrus">Цитрусові рослини</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/seasonal">Сезонні рослини</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/flowering">Квіткові рослини</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/fern">Папороть</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/calathea">Калатея</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/dieffenbachia">Дифенбахія</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/coniferous">Хвойні</a>
-                  </li>
-                
-              </ul>
-            </section>
-          
-            <section class="product-page__nav_section">
-              <h3>Горщики та кашпо</h3>
-              <ul>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/lechuza">Горщики Lechuza (Лечуза)</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/ceramic">Горщики керамічні</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/lamela">Горщики Lamela</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/wooden">Горщики з дерева</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/metal">Металеві кашпо</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/concrete">Горщики з бетону</a>
-                  </li>
-                
-              </ul>
-            </section>
-          
-            <section class="product-page__nav_section">
-              <h3>Готові рішення</h3>
-              <ul>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/click-and-grow">Розумний сад Click &amp; Grow</a>
-                  </li>
-                
-              </ul>
-            </section>
-          
-            <section class="product-page__nav_section">
-              <h3>Штучні квіти</h3>
-              <ul>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/art-palms">Штучні пальми</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/art-trees">Штучні дерева</a>
-                  </li>
-                
-              </ul>
-            </section>
-          
-            <section class="product-page__nav_section">
-              <h3>Аксесуари для рослин</h3>
-              <ul>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/fertilizers">Добрива для рослин</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/soils-substrates">Ґрунти та субстрати</a>
-                  </li>
-                
-                  <li class="">
-                    <a class="underline" href="/catalog/plant-care-tools">Інвентар для догляду за рослинами</a>
-                  </li>
-                
-              </ul>
-            </section>
-          
-        </aside>
-
-        <!-- Main content area -->
-        <div class="product-page__content">
-          <!-- Breadcrumbs -->
-          <sl-breadcrumb>
-            <sl-breadcrumb-item href="#">Озеленення і Фітодизайн</sl-breadcrumb-item>
-            <sl-breadcrumb-item href="#">Кімнатні рослини</sl-breadcrumb-item>
-            <sl-breadcrumb-item href="#">Орхідеї</sl-breadcrumb-item>
-          </sl-breadcrumb>
-
-          <div class="product-page__content_grid">
-            <!-- Галерея фото продукту -->
-            <!-- Product gallery -->
-            <div class="product-page__gallery">
-              <div
-              class="hover-photo-viewer"
-              data-photo-viewer="project-photo-viewer">
-                <div class="hover-photo-viewer__main">
-                  <img src="/img/homepage/ozelenenie-restorana-7.jpg" alt=""/>
-                </div>
-                <ul class="hover-photo-viewer__thumbs">
-                  <li class="active">
-                    <img src="/img/homepage/ozelenenie-restorana-7.jpg" alt=""/>
-                  </li>
-                  <li>
-                    <img src="/img/homepage/ozelenenie-restorana-6.jpg" alt=""/>
-                  </li>
-                  <li>
-                    <img src="/img/homepage/ozelenenie-restorana-5.jpg" alt=""/>
-                  </li>
-                  <li>
-                    <img
-                    src="/img/homepage/ozelenenie-office-kiev-4.jpg"
-                    alt=""/>
-                  </li>
-                  <li>
-                    <img
-                    src="/img/homepage/ozelenenie-office-kiev-3.jpg"
-                    alt=""/>
-                  </li>
-                  <li>
-                    <button class="hover-photo-viewer__thumbs_video" data-video-src="https://www.youtube.com/embed/P28wZDVvPO0?si=pbVGgShKp0K3KFyx">
-                      <span class="icon icon-video-button"></span>
-                      <span>Відео</span>
-                    </button>
-                  </li>
-                  <li>
-                    <button class="hover-photo-viewer__thumbs_video" data-video-src="https://www.youtube.com/embed/HMBRjo33cUE?si=t9ObdQBe4qlul_bo">
-                      <span class="icon icon-video-button"></span>
-                      <span>Відео</span>
-                    </button>
-                  </li>
+        <sl-tab-panel name="info" class="product-page__delivery_info">
+          <ul>
+            <li>Висота від підлоги вказана разом із горщиком</li>
+            <li>Рослина поставляється в пластиковому горщику для транспортування</li>
+            <li>100% оригінальний товар, сертифікат</li>
+            <li>Надсилаємо фото реальної рослини після оформлення замовлення</li>
+            <li>Доставляємо в упаковці та теплій машині</li>
+          </ul>
+        </sl-tab-panel>
+        <sl-tab-panel name="delivery">
+          <div class="product-page__delivery_list">
+            <div class="delivery__item">
+              <img class="delivery__item_icon" src="/img/icons/icon-post.svg" alt=""/>
+              <div class="delivery__item_info">
+                <p>Самовивіз із магазинів у Києві:</p>
+                <ul>
+                  <li>пр. Берестейський, 70</li>
                 </ul>
               </div>
-              <a href="" class="product-page__gallery_link">
-                <span class="icon icon-photogallery"></span> Орхідея Фаленопсис Муса Пінк – фото в інтер'єрі</a>
+              <div class="delivery__item_price">безкоштовно</div>
             </div>
-
-            <!-- Деталі продукту: артикул, назва, опції, ціна, кнопки -->
-            <!-- Product details -->
-            <div class="product-page__details">
-              <div class="product-page__details_artikul">Артикул: 7000</div>
-              <h1>Орхідея Фаленопсис Муса Пінк</h1>
-
-              <!-- Опції: розмір і колір -->
-              <section class="product-page__options">
-                <h3>Доступні варіанти:</h3>
-                <div class="product-page__options_size">
-                  <sl-radio-group name="size" value="1">
-                    <sl-radio value="1">
-                      <label>
-                        <div class="size__name">Ø 10, висота 45 см</div>
-                        <div class="size__price">
-                          450<sup>грн</sup>
-                        </div>
-                        <sl-tag variant="success">Є в наявності</sl-tag>
-                        <button href="" class="size__video-link" aria-label="Переглянути відеоогляд товару">
-                          <img src="/img/icons/icon-video-button.svg" alt="Відеоогляд товару"/>
-                        </button>
-                      </label>
-                    </sl-radio>
-                    <sl-radio value="2">
-                      <label>
-                        <div class="size__name">Ø 27, висота 100 см</div>
-                        <div class="size__price">
-                          660<sup>грн</sup>
-                        </div>
-                        <sl-tag variant="success">Є в наявності</sl-tag>
-                        <button href="" class="size__video-link" aria-label="Переглянути відеоогляд товару">
-                          <img src="/img/icons/icon-video-button.svg" alt="Відеоогляд товару"/>
-                        </button>
-                      </label>
-                    </sl-radio>
-                    <sl-radio value="3">
-                      <label>
-                        <div class="size__name">Ø 24, висота 100 см</div>
-                        <div class="size__price">
-                          760<sup>грн</sup>
-                        </div>
-                        <sl-tag variant="success">Є в наявності</sl-tag>
-                        <button href="" class="size__video-link" aria-label="Переглянути відеоогляд товару">
-                          <img src="/img/icons/icon-video-button.svg" alt="Відеоогляд товару"/>
-                        </button>
-                      </label>
-                    </sl-radio>
-                    <sl-radio value="3">
-                      <label>
-                        <div class="size__name">Ø 17, висота 70 см</div>
-                        <div class="size__price">
-                          960<sup>грн</sup>
-                        </div>
-                        <sl-tag variant="success">Є в наявності</sl-tag>
-                        <button href="" class="size__video-link" aria-label="Переглянути відеоогляд товару">
-                          <img src="/img/icons/icon-video-button.svg" alt="Відеоогляд товару"/>
-                        </button>
-                      </label>
-                    </sl-radio>
-                    <sl-radio value="3" disabled>
-                      <label>
-                        <div class="size__name">Ø 14, висота 50 см</div>
-                        <div class="size__price">
-                          1260<sup>грн</sup>
-                        </div>
-                        <sl-tag variant="success">Є в наявності</sl-tag>
-                        <button href="" class="size__video-link" aria-label="Переглянути відеоогляд товару">
-                          <img src="/img/icons/icon-video-button.svg" alt="Відеоогляд товару"/>
-                        </button>
-                      </label>
-                    </sl-radio>
-                  </sl-radio-group>
-                </div>
-                <div class="product-page__options_color">
-                  <sl-radio-group label="Оберіть колір" name="color" value="blue">
-                    <sl-radio-button value="blue">
-                      <img src="/img/product/product-color-blue.png" alt="">
-                    </sl-radio-button>
-                    <sl-radio-button value="green">
-                      <img src="/img/product/product-color-green.png" alt="">
-                    </sl-radio-button>
-                    <sl-radio-button value="pink">
-                      <img src="/img/product/product-color-pink.png" alt="">
-                    </sl-radio-button>
-                    <sl-radio-button value="red">
-                      <img src="/img/product/product-color-red.png" alt="">
-                    </sl-radio-button>
-                    <sl-radio-button value="yellow">
-                      <img src="/img/product/product-color-yellow.png" alt="">
-                    </sl-radio-button>
-                  </sl-radio-group>
-                </div>
-              </section>
-
-              <!-- Ціна і кнопки дій -->
-              <section class="product-page__actions">
-                <div class="product-page__price">
-                  1965
-                  <sup>грн</sup>
-                </div>
-                <div class="product-page__actions_buttons">
-                  <button href="" class="button button--primary">
-                    До кошика
-                  </button>
-                  <button href="#" class="button button--outline button--icon button--small" aria-label="Додати до улюблених">
-                    <span class="icon icon-heart"/>
-                  </button>
-                  <button href="#" class="button button--outline button--small consult" aria-label="Порадитись з фахівцем">
-                    <img src="/img/icons/icon-question.svg" alt="">
-                    <b>Порадитись</b>
-                  </button>
-                </div>
-              </section>
-
-              <!-- Табси: інформація, доставка, оплата -->
-              <section class="product-page__delivery">
-                <sl-tab-group>
-                  <sl-tab slot="nav" panel="info">Інформація</sl-tab>
-                  <sl-tab slot="nav" panel="delivery">Доставка</sl-tab>
-                  <sl-tab slot="nav" panel="payment">Оплата</sl-tab>
-
-                  <sl-tab-panel name="info" class="product-page__delivery_info">
-                    <ul>
-                      <li>Висота від підлоги вказана разом із горщиком</li>
-                      <li>Рослина поставляється в пластиковому горщику для транспортування</li>
-                      <li>100% оригінальний товар, сертифікат</li>
-                      <li>Надсилаємо фото реальної рослини після оформлення замовлення</li>
-                      <li>Доставляємо в упаковці та теплій машині</li>
-                    </ul>
-                  </sl-tab-panel>
-                  <sl-tab-panel name="delivery">
-                    <div class="product-page__delivery_list">
-                      <div class="delivery__item">
-                        <img class="delivery__item_icon" src="/img/icons/icon-post.svg" alt="">
-                        <div class="delivery__item_info">
-                          <p>Самовивіз із магазинів у Києві:</p>
-                          <ul>
-                            <li>пр. Берестейський, 70</li>
-                          </ul>
-                        </div>
-                        <div class="delivery__item_price">безкоштовно</div>
-                      </div>
-                      <div class="delivery__item">
-                        <img class="delivery__item_icon" src="/img/icons/icon-track.svg" alt="">
-                        <div class="delivery__item_info">
-                          <p>Кур'єром по Києву:</p>
-                          <p>
-                            <a href="">Детальніше</a>
-                          </p>
-                        </div>
-                        <div class="delivery__item_price">от 200 <sup>грн</sup>
-                        </div>
-                      </div>
-                      <div class="delivery__item">
-                        <img class="delivery__item_icon" src="/img/icons/icon-nova-poshta.svg" alt="">
-                        <div class="delivery__item_info">
-                          <p>Доставка у відділення Нової Пошти:</p>
-                          <p>
-                            <a href="">Детальніше</a>
-                          </p>
-                        </div>
-                        <div class="delivery__item_price">от 80 <sup>грн</sup>
-                        </div>
-                      </div>
-                    </div>
-                  </sl-tab-panel>
-                  <sl-tab-panel name="payment">
-                    <div class="product-page__delivery_list">
-                      <div class="delivery__item">
-                        <img class="delivery__item_icon" src="/img/icons/icon-cash.svg" alt="">
-                        <div class="delivery__item_info">
-                          Готівкою при отриманні
-                        </div>
-                      </div>
-                      <div class="delivery__item">
-                        <img class="delivery__item_icon" src="/img/icons/icon-card.svg" alt="">
-                        <div class="delivery__item_info">
-                          Картою на сайті VISA / Mastercard
-                        </div>
-                      </div>
-                      <div class="delivery__item">
-                        <img class="delivery__item_icon" src="/img/icons/icon-order.svg" alt="">
-                        <div class="delivery__item_info">
-                          Безготівковий розрахунок для юридичних осіб
-                        </div>
-                      </div>
-                    </div>
-                  </sl-tab-panel>
-                </sl-tab-group>
-              </section>
-            </div>
-          </div>
-
-          <!-- Додаткові послуги -->
-          <!-- Services -->
-          <div class="product-page__services">
-            <section class="services__item">
-              <div class="services__item_icon">
-                <img src="/img/icons/icon-fitodesign.svg" alt="">
-              </div>
-              <div class="services__item_link">
-                <a class="underline" href="/">Озеленення інтер'єру</a>
-              </div>
-            </section>
-            <section class="services__item">
-              <div class="services__item_icon">
-                <img src="/img/icons/icon-transplantation.svg" alt="">
-              </div>
-              <div class="services__item_link">
-                <a class="underline" href="/">Послуги з пересадки рослин</a>
-              </div>
-            </section>
-            <section class="services__item">
-              <div class="services__item_icon">
-                <img src="/img/icons/icon-care.svg" alt="">
-              </div>
-              <div class="services__item_link">
-                <a class="underline" href="/">Професійний догляд за рослинами</a>
-              </div>
-            </section>
-          </div>
-
-          <!-- Табси з описом продукту, аксесуарами, доглядом, відгуками -->
-          <div class="product-page__description">
-            <sl-tab-group>
-              <sl-tab slot="nav" panel="description">Опис</sl-tab>
-              <sl-tab slot="nav" panel="accessories">Аксесуари для рослин</sl-tab>
-              <sl-tab slot="nav" panel="care">Особливості догляду</sl-tab>
-              <sl-tab slot="nav" panel="reviews">Відгуки</sl-tab>
-
-              <!-- Опис -->
-              <sl-tab-panel name="description" >
-                <div class="product-page__description_info">
-                  <section>
-                    <h3>Освітлення</h3>
-                    <p>Для довгого цвітіння орхідеям потрібно багато світла. Ідеальні умови для них в місцях куди сонце потрапляє на декілька годин в день (зранку чи ввечері). Якщо ж орхідею поставити біля північного вікна (пряме сонце не потрапляє), то бажано тримати її якомога ближче до скла та не притіняти вікна шторами. Тоді вона зможе рости та розвиватись, але буде менша ймовірність цвітіння. Якщо розмістити орхідею біля південного вікна (пряме сонце цілий день), то на листках будуть з’являтись білі сухі плями (опіки), вони жовтітимуть та з часом орхідея може загинути. </p>
-                  </section>
-
-                  <section>
-                    <h3>Температура повітря</h3>
-                    <p>Навесні та влітку температура бажана вище 18 °C , ідеально — 20-25°C. Взимку і восени (після цвітіння) температура може бути прохолодна — 15-18°C, в цей час полив проводять через декілька днів після висихання коренів.</p>
-                  </section>
-                  <section>
-                    <h3>Полив</h3>
-                    <p>Поливаючи орхідеї, варто орієнтуватись на рівень просихання їх коренів. Якщо рослина знаходиться у прозорому пластиковому горщику та вставлена в кашпо — просто 1 раз на тиждень оглядайте корені. Якщо за тиждень корені не змінили колір — залиште орхідею без поливу ще на декілька днів. Для них нормапьно просихати між поливами 2-3 тижні. Коли корені в горщику змінюють свій колір з зеленого на сріблястий, то замочіть орхідею у воді будь-яким зручним способом: </p>
-                    <p>— налийте теплої води повне кашпо та залишіть на 1-2 години (можна на ніч); </p>
-                    <p>— поставте в ванну/душ та пролийте з душу теплою водою, змочуючи листя (але не потрапляючи на квіти), залишіть в вологій ванні на декілька годин; </p>
-                    <p>— якщо рослина в теплому та сонячному місці, то після відстоювання у воді залиште 1-2 см води на дні кашпо.</p>
-                  </section>
-                </div>
-              </sl-tab-panel>
-
-              <sl-tab-panel name="accessories">
-                <div class="product-page__description_accessories">
-                  <section>
-                    <h3>Грунт та добрива</h3>
-                    <div class="accessories__list">
-                      <div class="accessories__list_item">
-                        <a href="" class="accessories__list_item-image">
-                          <img src="/img/homepage/product-1.png" alt="">
-                        </a>
-                        <div class="accessories__list_item-info">
-                          <a href="">
-                            <b>Заміокулькас</b>
-                          </a>
-                          <span>129,99 ₴</span>
-                          <sl-rating value="5" readonly></sl-rating>
-                        </div>
-                      </div>
-                      <div class="accessories__list_item">
-                        <a href="" class="accessories__list_item-image">
-                          <img src="/img/homepage/product-2.png" alt="">
-                        </a>
-                        <div class="accessories__list_item-info">
-                          <a href="">
-                            <b>Антуріум</b>
-                          </a>
-                          <span>114,99 ₴</span>
-                          <sl-rating value="5" readonly></sl-rating>
-                        </div>
-                      </div>
-                      <div class="accessories__list_item">
-                        <a href="" class="accessories__list_item-image">
-                          <img src="/img/homepage/product-3.png" alt="">
-                        </a>
-                        <div class="accessories__list_item-info">
-                          <a href="">
-                            <b>Розумний вазон Lechuza Delta</b>
-                          </a>
-                          <span>114,99 ₴</span>
-                          <sl-rating value="5" readonly></sl-rating>
-                        </div>
-                      </div>
-                      <div class="accessories__list_item">
-                        <a href="" class="accessories__list_item-image">
-                          <img src="/img/homepage/product-4.png" alt="">
-                        </a>
-                        <div class="accessories__list_item-info">
-                          <a href="">
-                            <b>Антуріум</b>
-                          </a>
-                          <span>114,99 ₴</span>
-                          <sl-rating value="5" readonly></sl-rating>
-                        </div>
-                      </div>
-                      <div class="accessories__list_item">
-                        <a href="" class="accessories__list_item-image">
-                          <img src="/img/homepage/product-5.png" alt="">
-                        </a>
-                        <div class="accessories__list_item-info">
-                          <a href="">
-                            <b>Антуріум</b>
-                          </a>
-                          <span>114,99 ₴</span>
-                          <sl-rating value="5" readonly></sl-rating>
-                        </div>
-                      </div>
-                    </div>
-                  </section>
-
-                  <section>
-                    <h3>Інші товари у категорії: Орхідеї</h3>
-                    <div class="accessories__list">
-                      <div class="accessories__list_item">
-                        <a href="" class="accessories__list_item-image">
-                          <img src="/img/homepage/product-1.png" alt="">
-                        </a>
-                        <div class="accessories__list_item-info">
-                          <a href="">
-                            <b>Заміокулькас</b>
-                          </a>
-                          <span>129,99 ₴</span>
-                          <sl-rating value="5" readonly></sl-rating>
-                        </div>
-                      </div>
-                      <div class="accessories__list_item">
-                        <a href="" class="accessories__list_item-image">
-                          <img src="/img/homepage/product-2.png" alt="">
-                        </a>
-                        <div class="accessories__list_item-info">
-                          <a href="">
-                            <b>Антуріум</b>
-                          </a>
-                          <span>114,99 ₴</span>
-                          <sl-rating value="5" readonly></sl-rating>
-                        </div>
-                      </div>
-                      <div class="accessories__list_item">
-                        <a href="" class="accessories__list_item-image">
-                          <img src="/img/homepage/product-3.png" alt="">
-                        </a>
-                        <div class="accessories__list_item-info">
-                          <a href="">
-                            <b>Розумний вазон Lechuza Delta</b>
-                          </a>
-                          <span>114,99 ₴</span>
-                          <sl-rating value="5" readonly></sl-rating>
-                        </div>
-                      </div>
-                      <div class="accessories__list_item">
-                        <a href="" class="accessories__list_item-image">
-                          <img src="/img/homepage/product-4.png" alt="">
-                        </a>
-                        <div class="accessories__list_item-info">
-                          <a href="">
-                            <b>Антуріум</b>
-                          </a>
-                          <span>114,99 ₴</span>
-                          <sl-rating value="5" readonly></sl-rating>
-                        </div>
-                      </div>
-                      <div class="accessories__list_item">
-                        <a href="" class="accessories__list_item-image">
-                          <img src="/img/homepage/product-5.png" alt="">
-                        </a>
-                        <div class="accessories__list_item-info">
-                          <a href="">
-                            <b>Антуріум</b>
-                          </a>
-                          <span>114,99 ₴</span>
-                          <sl-rating value="5" readonly></sl-rating>
-                        </div>
-                      </div>
-                    </div>
-                  </section>
-
-                  <section>
-                    <h3>Дивіться також</h3>
-                    <div class="accessories__list">
-                      <div class="accessories__list_item">
-                        <a href="" class="accessories__list_item-image">
-                          <img src="/img/homepage/product-1.png" alt="">
-                        </a>
-                        <div class="accessories__list_item-info">
-                          <a href="">
-                            <b>Заміокулькас</b>
-                          </a>
-                          <span>129,99 ₴</span>
-                          <sl-rating value="5" readonly></sl-rating>
-                        </div>
-                      </div>
-                      <div class="accessories__list_item">
-                        <a href="" class="accessories__list_item-image">
-                          <img src="/img/homepage/product-2.png" alt="">
-                        </a>
-                        <div class="accessories__list_item-info">
-                          <a href="">
-                            <b>Антуріум</b>
-                          </a>
-                          <span>114,99 ₴</span>
-                          <sl-rating value="5" readonly></sl-rating>
-                        </div>
-                      </div>
-                      <div class="accessories__list_item">
-                        <a href="" class="accessories__list_item-image">
-                          <img src="/img/homepage/product-3.png" alt="">
-                        </a>
-                        <div class="accessories__list_item-info">
-                          <a href="">
-                            <b>Розумний вазон Lechuza Delta</b>
-                          </a>
-                          <span>114,99 ₴</span>
-                          <sl-rating value="5" readonly></sl-rating>
-                        </div>
-                      </div>
-                      <div class="accessories__list_item">
-                        <a href="" class="accessories__list_item-image">
-                          <img src="/img/homepage/product-4.png" alt="">
-                        </a>
-                        <div class="accessories__list_item-info">
-                          <a href="">
-                            <b>Антуріум</b>
-                          </a>
-                          <span>114,99 ₴</span>
-                          <sl-rating value="5" readonly></sl-rating>
-                        </div>
-                      </div>
-                      <div class="accessories__list_item">
-                        <a href="" class="accessories__list_item-image">
-                          <img src="/img/homepage/product-5.png" alt="">
-                        </a>
-                        <div class="accessories__list_item-info">
-                          <a href="">
-                            <b>Антуріум</b>
-                          </a>
-                          <span>114,99 ₴</span>
-                          <sl-rating value="5" readonly></sl-rating>
-                        </div>
-                      </div>
-                    </div>
-                  </section>
-                </div>
-              </sl-tab-panel>
-              <sl-tab-panel name="care">
-                <div class="product-page__description_care">
-                  <table>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <b>Температура</b>
-                        </td>
-                        <td>комфортна — 18-25ºC Мінімум: 12 ºC Максимум: 40 ºC</td>
-                        <td>
-                          <b>Освітлення</b>
-                        </td>
-                        <td>Яскраве, розсіяне.</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <b>Полив</b>
-                        </td>
-                        <td>Вологолюбна рослина. Рекомендуємо періодично опускати у воду або наливати її в піддон.</td>
-                        <td>
-                          <b>Вологість повітря</b>
-                        </td>
-                        <td>бажана підвищена вологість повітря.</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </sl-tab-panel>
-              <sl-tab-panel name="reviews">
-                <!-- Секція відгуків: форма і список -->
-
-<!-- Форма відгуків -->
-<!-- Comments Form Section -->
-<div class="reviews-section">
-  <h2>Відгук або запитання</h2>
-  <div class="reviews-section__form">
-    <sl-input placeholder="ПІБ"></sl-input>
-    <sl-input placeholder="Телефон або e-mail (не буде опубліковано)"></sl-input>
-    <sl-textarea placeholder="Комментар" rows="1" resize="auto"></sl-textarea>
-    <div class="reviews-section__form_rating">
-      <span>Ваша оцінка:</span>
-      <sl-rating></sl-rating>
-    </div>
-    <button class="button button--primary button--pill">Відправити</button>
-  </div>
-</div>
-
-<!-- Список відгуків -->
-<!-- Comments List Section -->
-<div class="reviews-section__comments">
-  <!-- Comment Item -->
-  <div class="comments__item">
-    <div class="comments__item-date">11 квітня 2024</div>
-    <div class="comments__item-grid">
-      <div class="comments__item-title">
-        <b>Хивренко Александр</b>
-        <sl-rating size="small" value="5" readonly></sl-rating>
-      </div>
-      <div class="comments__item-text">Купувала у даному магазині онлайн гортензію в горщику, загалом 3 горщика (один замовляли додатково). Дуже ввічливі і відповідальні, весь час були за звʼязку. Надали фото всіх квітів зі святковою упаковкою. Організували доставку по області і вчасно доставили в чудовому вигляді. Дуже були задоволені! Дякую!</div>
-    </div>
-  </div>
-  <!-- Comment Item -->
-  <div class="comments__item">
-    <div class="comments__item-date">12 грудня 2023</div>
-    <div class="comments__item-grid">
-      <div class="comments__item-title">
-        <b>Катерина</b>
-        <sl-rating size="small" value="5" readonly></sl-rating>
-      </div>
-      <div class="comments__item-text">У вас широкий вибір орхідей, що радує. Красиві. Видно, що ви професіонали в своїй справі, тому що рослини доглянуті й цвітуть. Значить, за ними доглядають правильно.</div>
-    </div>
-  </div>
-  <!-- Comment Item -->
-  <div class="comments__item">
-    <div class="comments__item-date">31 липня 2023</div>
-    <div class="comments__item-grid">
-      <div class="comments__item-title">
-        <b>Олеся П.</b>
-        <sl-rating size="small" value="5" readonly></sl-rating>
-      </div>
-      <div class="comments__item-text">Квіти завжди є чудовим подарунком, вони викликають приємні емоції та піднімають настрій. Придбала рослину на подарунок, бо захопилася символізмом квітки кохання)) Задоволена своїм вибором і допомогою професійних консультантів.</div>
-    </div>
-  </div>
-</div>
-              </sl-tab-panel>
-            </sl-tab-group>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Секція "Останні роботи" -->
-      <div class="main__last-works">
-        <!-- Swiper з останніми роботами -->
-<div class="container last-works">
-  <img class="homepage__last-works-leaf-1" src="/img/leaf-3.png" alt="leaf"/>
-  <img class="homepage__last-works-leaf-2" src="/img/leaf-4.png" alt="leaf"/>
-
-  <div class="works-swiper">
-    <h2>Останні роботи</h2>
-    <div class="swiper" data-swiper="works-swiper">
-      <!-- Additional required wrapper -->
-      <div class="swiper-wrapper">
-        <!-- Slides -->
-        <div class="swiper-slide works-slide">
-          <div class="works-slide__image">
-            <img
-              src="/img/homepage/last-work-1.png"
-              alt="Озеленення одного з офісів компанії Synexus"
-/>
-          </div>
-          <div class="works-slide__content">
-            <a
-              class="not-underline"
-              href="Озеленення одного з офісів компанії Synexus"
-              >Озеленення одного з офісів компанії Synexus</a
-            >
-            <time> 09 липня 2025 </time>
-          </div>
-        </div>
-
-        <div class="swiper-slide works-slide">
-          <div class="works-slide__image">
-            <img src="/img/homepage/last-work-2.png" alt="DV Bank"/>
-          </div>
-          <div class="works-slide__content">
-            <a class="not-underline" href="">DV Bank</a>
-            <time>09 липня 2025</time>
-          </div>
-        </div>
-
-        <div class="swiper-slide works-slide">
-          <div class="works-slide__image">
-            <img
-              src="/img/homepage/last-work-3.png"
-              alt="Озеленення автосалону AWT Баварія"
-/>
-          </div>
-          <div class="works-slide__content">
-            <a class="not-underline" href=""
-              >Озеленення автосалону AWT Баварія</a
-            >
-            <time>09 липня 2025</time>
-          </div>
-        </div>
-
-        <div class="swiper-slide works-slide">
-          <div class="works-slide__image">
-            <img
-              src="/img/homepage/last-work-4.png"
-              alt="ЖК Оболонь Residences"
-/>
-          </div>
-          <div class="works-slide__content">
-            <a class="not-underline" href="">ЖК Оболонь Residences</a>
-            <time>09 липня 2025</time>
-          </div>
-        </div>
-
-        <div class="swiper-slide works-slide">
-          <div class="works-slide__image">
-            <img src="/img/homepage/last-work-5.png" alt="БЦ Днепр плаза"/>
-          </div>
-          <div class="works-slide__content">
-            <a class="not-underline" href="">БЦ Днепр плаза</a>
-            <time>09 липня 2025</time>
-          </div>
-        </div>
-
-        <div class="swiper-slide works-slide">
-          <div class="works-slide__image">
-            <img src="/img/homepage/last-work-5.png" alt="БЦ Днепр плаза"/>
-          </div>
-          <div class="works-slide__content">
-            <a class="not-underline" href="">БЦ Днепр плаза</a>
-            <time>09 липня 2025</time>
-          </div>
-        </div>
-        <div class="swiper-slide works-slide">
-          <div class="works-slide__image">
-            <img src="/img/homepage/last-work-5.png" alt="БЦ Днепр плаза"/>
-          </div>
-          <div class="works-slide__content">
-            <a class="not-underline" href="">БЦ Днепр плаза</a>
-            <time>09 липня 2025</time>
-          </div>
-        </div>
-        <div class="swiper-slide works-slide">
-          <div class="works-slide__image">
-            <img src="/img/homepage/last-work-5.png" alt="БЦ Днепр плаза"/>
-          </div>
-          <div class="works-slide__content">
-            <a class="not-underline" href="">БЦ Днепр плаза</a>
-            <time>09 липня 2025</time>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- If we need navigation buttons -->
-    <button class="swiper-button swiper-button--prev">
-      <img src="/img/icons/icon-arrow-angle-left.svg" alt=""/>
-    </button>
-    <button class="swiper-button swiper-button--next">
-      <img src="/img/icons/icon-arrow-angle-right.svg" alt=""/>
-    </button>
-  </div>
-  <div class="last-works_more">
-    <button class="button button--primary button--pill">Подивитись ще</button>
-  </div>
-</div>
-      </div>
-
-    </main>
-
-    <!-- Модальне вікно перегляду фото -->
-    <div class="photo-viewer" id="main-photo-viewer">
-  <div class="photo-viewer__overlay"></div>
-  <div class="photo-viewer__wrapper">
-    <div class="photo-viewer__pagination"></div>
-    <button class="photo-viewer__close-button">
-      <span class="icon icon-close"></span>
-    </button>
-    <div
-      style="--swiper-navigation-color: #fff"
-      class="swiper photo-viewer__main-swiper"
-    >
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img
-            src="https://floren.com.ua/images/gallery/b/ozelenenie-office-kiev-212.jpg"
-          />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-        </div>
-      </div>
-      <div class="photo-viewer__button-next">
-        <span class="icon icon-arrow-angle-right"></span>
-      </div>
-      <div class="photo-viewer__button-prev">
-        <span class="icon icon-arrow-angle-left"></span>
-      </div>
-    </div>
-    <div thumbsSlider="2" class="swiper photo-viewer__thumbs-swiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img
-            src="https://floren.com.ua/images/gallery/b/ozelenenie-office-kiev-212.jpg"
-          />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-  
-
-    <!-- Підвал сайту -->
-    <!-- Footer site -->
-<footer class="footer">
-
-  <!-- Топ категорії і теги -->
-  <div class="footer__catalog">
-    <div class="container">
-      <div class="footer__catalog-top">
-        <span>ТОП Категорії</span>
-        <a href="">ТОП Тегі</a>
-        <a href="">Міста</a>
-        <a href="">FAQ</a>
-        <a href="">Пропозиції</a>
-      </div>
-      <ul class="footer__catalog-list">
-        <li>
-          <a href="">Лавровое дерево в горшке</a>
-          <a href="">Комнатное растение мирт</a>
-          <a href="">Пальма комнатная хамедорея</a>
-          <a href="">Горшок керамический</a>
-          <a href="">Драцена golden</a>
-          <a href="">Пальма цветы</a>
-          <a href="">Маранта вазон</a>
-          <a href="">Кактусы маленькие</a>
-        </li>
-        <li>
-          <a href="">Растение денежное дерево</a>
-          <a href="">Домашний вьющийся цветок</a>
-          <a href="">Кипарис декоративный</a>
-          <a href="">Горшок с автополивом лечуза</a>
-          <a href="">Горшки для цветов из бетона</a>
-          <a href="">Орхидеи в стеклянной вазе</a>
-          <a href="">Лимон декоративный</a>
-          <a href="">Пальмы домашние</a>
-        </li>
-        <li>
-          <a href="">Сансевиерия голден ханни</a>
-          <a href="">Комнатные растения фикус</a>
-          <a href="">Замиокулькас цветок</a>
-          <a href="">Фикус наташа</a>
-          <a href="">Перегородки из живых растений</a>
-          <a href="">Купить аглаонемы</a>
-          <a href="">Аглаонема цена</a>
-          <a href="">Алоказия цена</a>
-        </li>
-        <li>
-          <a href="">Цветущие растения</a>
-          <a href="">Бокарнея нолина</a>
-          <a href="">Комнатная азалия</a>
-          <a href="">Горшки с автополивом</a>
-          <a href="">Хвойные деревья</a>
-          <a href="">Lechuza вазоны</a>
-          <a href="">Банан домашний</a>
-          <a href="">Лавровый лист</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Основна частина footer з логотипом, меню, контактами -->
-  <div class="footer__body">
-    <div class="container">
-      <img
-        class="footer__body-bg footer__body-bg-1"
-        src="/img/palm.svg"
-        alt="background"
-/>
-      <img
-        class="footer__body-bg footer__body-bg-2"
-        src="/img/palm.svg"
-        alt="background"
-/>
-      <img
-        class="footer__body-bg footer__body-bg-3"
-        src="/img/palm.svg"
-        alt="background"
-/>
-      <img
-        class="footer__body-bg footer__body-bg-4"
-        src="/img/leaf.svg"
-        alt="background"
-/>
-      <img
-        class="footer__body-bg footer__body-bg-5"
-        src="/img/leaf.svg"
-        alt="background"
-/>
-      <img
-        class="footer__body-bg footer__body-bg-6"
-        src="/img/leaf.svg"
-        alt="background"
-/>
-
-      <div class="footer__body-grid">
-        <section>
-          <a
-            href="/"
-            class="footer__body-logo"
-            aria-label="Флорен - студія фітодизайну"
-          >
-            <img src="/img/footer-logo.png" alt="Флорен - студія фітодизайну"/>
-          </a>
-        </section>
-        <section>
-          <h3>Інформація</h3>
-          <ul class="footer__body-list">
-            <li>
-              <a href="">Про компанію</a>
-            </li>
-            <li>
-              <a href="">Повернення товарів</a>
-            </li>
-            <li>
-              <a href="">Співпраця</a>
-            </li>
-            <li>
-              <a href="">Контакти </a>
-            </li>
-            <li>
-              <a href="">Мапа сайту</a>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <h3>Товари та сервіси</h3>
-          <ul class="footer__body-list">
-            <li>
-              <a href="">Фітодизайн</a>
-            </li>
-            <li>
-              <a href="">Вертикальне озеленення</a>
-            </li>
-            <li>
-              <a href="">Ландшафтний дизайн</a>
-            </li>
-            <li>
-              <a href="">Кімнатні рослини</a>
-            </li>
-            <li>
-              <a href="">Горщики та Кашпо</a>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <h3>Контакти</h3>
-          <ul class="footer__body-contacts">
-            <li>
-              <p class="contacts-street">
-                <svg class="icon icon-location"/>
-                <a href="https://goo.gl/maps/UPpaCBkrMd2TWfXq7" target="_blank"
-                  >пр. Берестейський, 70</a
-                >
-              </p>
-              <p>03113, Київ, Україна</p>
-            </li>
-            <li class="contacts-phone">
-              <div class="contacts-phone--hidden">
+            <div class="delivery__item">
+              <img class="delivery__item_icon" src="/img/icons/icon-track.svg" alt=""/>
+              <div class="delivery__item_info">
+                <p>Кур'єром по Києву:</p>
                 <p>
-                  (044) 344..
-                  <button
-                    data-event="click"
-                    data-callback="toggleFooterPhones"
-                    aria-label="Показати телефон"
-                  >
-                    показати
-                  </button>
+                  <a href="">Детальніше</a>
                 </p>
-                <p>(050) 660..</p>
               </div>
-              <div class="contacts-phone--shown">
-                <p>(044) 344-28-95</p>
-                <p>(050) 660-52-75</p>
+              <div class="delivery__item_price">от 200 <sup>грн</sup>
               </div>
-            </li>
-            <li class="contacts-socials">
-              <a href="">
-                <svg class="icon icon-facebook"/>
-              </a>
-              <a href="">
-                <svg class="icon icon-youtube"/>
-              </a>
-              <a href="">
-                <svg class="icon icon-instagram"/>
-              </a>
-            </li>
-          </ul>
-        </section>
-      </div>
-      <sl-divider class="footer__body-divider"></sl-divider>
-
-      <!-- Copyright і платіжні системи -->
-      <div class="footer__body-bottom">
-        <section class="footer__body-bottom--copyright">
-          <span>© 2025 “Флорен”</span>
-          <a class="not-underline" href="">Договір оферта</a>
-        </section>
-        <section class="footer__body-bottom--cards">
-          <img src="/img/payment-visa.svg" alt="Visa"/>
-          <img src="/img/payment-master.svg" alt="MasterCard"/>
-          <img src="/img/payment-google.svg" alt="Google Pay"/>
-          <img src="/img/payment-apple.svg" alt="Apple Pay"/>
-        </section>
-      </div>
-    </div>
+            </div>
+            <div class="delivery__item">
+              <img class="delivery__item_icon" src="/img/icons/icon-nova-poshta.svg" alt=""/>
+              <div class="delivery__item_info">
+                <p>Доставка у відділення Нової Пошти:</p>
+                <p>
+                  <a href="">Детальніше</a>
+                </p>
+              </div>
+              <div class="delivery__item_price">от 80 <sup>грн</sup>
+              </div>
+            </div>
+          </div>
+        </sl-tab-panel>
+        <sl-tab-panel name="payment">
+          <div class="product-page__delivery_list">
+            <div class="delivery__item">
+              <img class="delivery__item_icon" src="/img/icons/icon-cash.svg" alt=""/>
+              <div class="delivery__item_info">Готівкою при отриманні</div>
+            </div>
+            <div class="delivery__item">
+              <img class="delivery__item_icon" src="/img/icons/icon-card.svg" alt=""/>
+              <div class="delivery__item_info">Картою на сайті VISA / Mastercard</div>
+            </div>
+            <div class="delivery__item">
+              <img class="delivery__item_icon" src="/img/icons/icon-order.svg" alt=""/>
+              <div class="delivery__item_info">Безготівковий розрахунок для юридичних осіб</div>
+            </div>
+          </div>
+        </sl-tab-panel>
+      </sl-tab-group>
+    </section>
   </div>
-</footer>
+</div>
 
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <!-- Головний JS файл -->
-  </body>
-</html>
+<!-- Додаткові послуги -->
+<!-- Services -->
+<div class="product-page__services">
+  <section class="services__item">
+    <div class="services__item_icon">
+      <img src="/img/icons/icon-fitodesign.svg" alt=""/>
+    </div>
+    <div class="services__item_link">
+      <a class="underline" href="/">Озеленення інтер'єру</a>
+    </div>
+  </section>
+  <section class="services__item">
+    <div class="services__item_icon">
+      <img src="/img/icons/icon-transplantation.svg" alt=""/>
+    </div>
+    <div class="services__item_link">
+      <a class="underline" href="/">Послуги з пересадки рослин</a>
+    </div>
+  </section>
+  <section class="services__item">
+    <div class="services__item_icon">
+      <img src="/img/icons/icon-care.svg" alt=""/>
+    </div>
+    <div class="services__item_link">
+      <a class="underline" href="/">Професійний догляд за рослинами</a>
+    </div>
+  </section>
+</div>
+
+<!-- Табси з описом продукту, аксесуарами, доглядом, відгуками -->
+<div class="product-page__description">
+  <sl-tab-group>
+    <sl-tab slot="nav" panel="description">Опис</sl-tab>
+    <sl-tab slot="nav" panel="accessories">Аксесуари для рослин</sl-tab>
+    <sl-tab slot="nav" panel="care">Особливості догляду</sl-tab>
+    <sl-tab slot="nav" panel="reviews">Відгуки</sl-tab>
+
+    <!-- Опис -->
+    <sl-tab-panel name="description">
+      <div class="product-page__description_info">
+        <section>
+          <h3>Освітлення</h3>
+          <p>
+            Для довгого цвітіння орхідеям потрібно багато світла. Ідеальні умови для них в місцях куди сонце потрапляє на декілька годин в день (зранку чи
+            ввечері). Якщо ж орхідею поставити біля північного вікна (пряме сонце не потрапляє), то бажано тримати її якомога ближче до скла та не притіняти
+            вікна шторами. Тоді вона зможе рости та розвиватись, але буде менша ймовірність цвітіння. Якщо розмістити орхідею біля південного вікна (пряме сонце
+            цілий день), то на листках будуть з’являтись білі сухі плями (опіки), вони жовтітимуть та з часом орхідея може загинути.
+          </p>
+        </section>
+
+        <section>
+          <h3>Температура повітря</h3>
+          <p>
+            Навесні та влітку температура бажана вище 18 °C , ідеально — 20-25°C. Взимку і восени (після цвітіння) температура може бути прохолодна — 15-18°C, в
+            цей час полив проводять через декілька днів після висихання коренів.
+          </p>
+        </section>
+        <section>
+          <h3>Полив</h3>
+          <p>
+            Поливаючи орхідеї, варто орієнтуватись на рівень просихання їх коренів. Якщо рослина знаходиться у прозорому пластиковому горщику та вставлена в
+            кашпо — просто 1 раз на тиждень оглядайте корені. Якщо за тиждень корені не змінили колір — залиште орхідею без поливу ще на декілька днів. Для них
+            нормапьно просихати між поливами 2-3 тижні. Коли корені в горщику змінюють свій колір з зеленого на сріблястий, то замочіть орхідею у воді будь-яким
+            зручним способом:
+          </p>
+          <p>— налийте теплої води повне кашпо та залишіть на 1-2 години (можна на ніч);</p>
+          <p>
+            — поставте в ванну/душ та пролийте з душу теплою водою, змочуючи листя (але не потрапляючи на квіти), залишіть в вологій ванні на декілька годин;
+          </p>
+          <p>— якщо рослина в теплому та сонячному місці, то після відстоювання у воді залиште 1-2 см води на дні кашпо.</p>
+        </section>
+      </div>
+    </sl-tab-panel>
+
+    <sl-tab-panel name="accessories">
+      <div class="product-page__description_accessories">
+        <section>
+          <h3>Грунт та добрива</h3>
+          <div class="accessories__list">
+            <div class="accessories__list_item">
+              <a href="" class="accessories__list_item-image">
+                <img src="/img/homepage/product-1.png" alt=""/>
+              </a>
+              <div class="accessories__list_item-info">
+                <a href="">
+                  <b>Заміокулькас</b>
+                </a>
+                <span>129,99 ₴</span>
+                <sl-rating value="5" readonly></sl-rating>
+              </div>
+            </div>
+            <div class="accessories__list_item">
+              <a href="" class="accessories__list_item-image">
+                <img src="/img/homepage/product-2.png" alt=""/>
+              </a>
+              <div class="accessories__list_item-info">
+                <a href="">
+                  <b>Антуріум</b>
+                </a>
+                <span>114,99 ₴</span>
+                <sl-rating value="5" readonly></sl-rating>
+              </div>
+            </div>
+            <div class="accessories__list_item">
+              <a href="" class="accessories__list_item-image">
+                <img src="/img/homepage/product-3.png" alt=""/>
+              </a>
+              <div class="accessories__list_item-info">
+                <a href="">
+                  <b>Розумний вазон Lechuza Delta</b>
+                </a>
+                <span>114,99 ₴</span>
+                <sl-rating value="5" readonly></sl-rating>
+              </div>
+            </div>
+            <div class="accessories__list_item">
+              <a href="" class="accessories__list_item-image">
+                <img src="/img/homepage/product-4.png" alt=""/>
+              </a>
+              <div class="accessories__list_item-info">
+                <a href="">
+                  <b>Антуріум</b>
+                </a>
+                <span>114,99 ₴</span>
+                <sl-rating value="5" readonly></sl-rating>
+              </div>
+            </div>
+            <div class="accessories__list_item">
+              <a href="" class="accessories__list_item-image">
+                <img src="/img/homepage/product-5.png" alt=""/>
+              </a>
+              <div class="accessories__list_item-info">
+                <a href="">
+                  <b>Антуріум</b>
+                </a>
+                <span>114,99 ₴</span>
+                <sl-rating value="5" readonly></sl-rating>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3>Інші товари у категорії: Орхідеї</h3>
+          <div class="accessories__list">
+            <div class="accessories__list_item">
+              <a href="" class="accessories__list_item-image">
+                <img src="/img/homepage/product-1.png" alt=""/>
+              </a>
+              <div class="accessories__list_item-info">
+                <a href="">
+                  <b>Заміокулькас</b>
+                </a>
+                <span>129,99 ₴</span>
+                <sl-rating value="5" readonly></sl-rating>
+              </div>
+            </div>
+            <div class="accessories__list_item">
+              <a href="" class="accessories__list_item-image">
+                <img src="/img/homepage/product-2.png" alt=""/>
+              </a>
+              <div class="accessories__list_item-info">
+                <a href="">
+                  <b>Антуріум</b>
+                </a>
+                <span>114,99 ₴</span>
+                <sl-rating value="5" readonly></sl-rating>
+              </div>
+            </div>
+            <div class="accessories__list_item">
+              <a href="" class="accessories__list_item-image">
+                <img src="/img/homepage/product-3.png" alt=""/>
+              </a>
+              <div class="accessories__list_item-info">
+                <a href="">
+                  <b>Розумний вазон Lechuza Delta</b>
+                </a>
+                <span>114,99 ₴</span>
+                <sl-rating value="5" readonly></sl-rating>
+              </div>
+            </div>
+            <div class="accessories__list_item">
+              <a href="" class="accessories__list_item-image">
+                <img src="/img/homepage/product-4.png" alt=""/>
+              </a>
+              <div class="accessories__list_item-info">
+                <a href="">
+                  <b>Антуріум</b>
+                </a>
+                <span>114,99 ₴</span>
+                <sl-rating value="5" readonly></sl-rating>
+              </div>
+            </div>
+            <div class="accessories__list_item">
+              <a href="" class="accessories__list_item-image">
+                <img src="/img/homepage/product-5.png" alt=""/>
+              </a>
+              <div class="accessories__list_item-info">
+                <a href="">
+                  <b>Антуріум</b>
+                </a>
+                <span>114,99 ₴</span>
+                <sl-rating value="5" readonly></sl-rating>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3>Дивіться також</h3>
+          <div class="accessories__list">
+            <div class="accessories__list_item">
+              <a href="" class="accessories__list_item-image">
+                <img src="/img/homepage/product-1.png" alt=""/>
+              </a>
+              <div class="accessories__list_item-info">
+                <a href="">
+                  <b>Заміокулькас</b>
+                </a>
+                <span>129,99 ₴</span>
+                <sl-rating value="5" readonly></sl-rating>
+              </div>
+            </div>
+            <div class="accessories__list_item">
+              <a href="" class="accessories__list_item-image">
+                <img src="/img/homepage/product-2.png" alt=""/>
+              </a>
+              <div class="accessories__list_item-info">
+                <a href="">
+                  <b>Антуріум</b>
+                </a>
+                <span>114,99 ₴</span>
+                <sl-rating value="5" readonly></sl-rating>
+              </div>
+            </div>
+            <div class="accessories__list_item">
+              <a href="" class="accessories__list_item-image">
+                <img src="/img/homepage/product-3.png" alt=""/>
+              </a>
+              <div class="accessories__list_item-info">
+                <a href="">
+                  <b>Розумний вазон Lechuza Delta</b>
+                </a>
+                <span>114,99 ₴</span>
+                <sl-rating value="5" readonly></sl-rating>
+              </div>
+            </div>
+            <div class="accessories__list_item">
+              <a href="" class="accessories__list_item-image">
+                <img src="/img/homepage/product-4.png" alt=""/>
+              </a>
+              <div class="accessories__list_item-info">
+                <a href="">
+                  <b>Антуріум</b>
+                </a>
+                <span>114,99 ₴</span>
+                <sl-rating value="5" readonly></sl-rating>
+              </div>
+            </div>
+            <div class="accessories__list_item">
+              <a href="" class="accessories__list_item-image">
+                <img src="/img/homepage/product-5.png" alt=""/>
+              </a>
+              <div class="accessories__list_item-info">
+                <a href="">
+                  <b>Антуріум</b>
+                </a>
+                <span>114,99 ₴</span>
+                <sl-rating value="5" readonly></sl-rating>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </sl-tab-panel>
+    <sl-tab-panel name="care">
+      <div class="product-page__description_care">
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <b>Температура</b>
+              </td>
+              <td>комфортна — 18-25ºC Мінімум: 12 ºC Максимум: 40 ºC</td>
+              <td>
+                <b>Освітлення</b>
+              </td>
+              <td>Яскраве, розсіяне.</td>
+            </tr>
+            <tr>
+              <td>
+                <b>Полив</b>
+              </td>
+              <td>Вологолюбна рослина. Рекомендуємо періодично опускати у воду або наливати її в піддон.</td>
+              <td>
+                <b>Вологість повітря</b>
+              </td>
+              <td>бажана підвищена вологість повітря.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </sl-tab-panel>
+    <sl-tab-panel name="reviews">
+      <!-- Секція відгуків: форма і список -->
+
+      <!-- Форма відгуків -->
+      <!-- Comments Form Section -->
+      <div class="reviews-section">
+        <h2>Відгук або запитання</h2>
+        <div class="reviews-section__form">
+          <sl-input placeholder="ПІБ"></sl-input>
+          <sl-input placeholder="Телефон або e-mail (не буде опубліковано)"></sl-input>
+          <sl-textarea placeholder="Комментар" rows="1" resize="auto"></sl-textarea>
+          <div class="reviews-section__form_rating">
+            <span>Ваша оцінка:</span>
+            <sl-rating></sl-rating>
+          </div>
+          <button class="button button--primary button--pill">Відправити</button>
+        </div>
+      </div>
+
+      <!-- Список відгуків -->
+      <!-- Comments List Section -->
+      <div class="reviews-section__comments">
+        <!-- Comment Item -->
+        <div class="comments__item">
+          <div class="comments__item-date">11 квітня 2024</div>
+          <div class="comments__item-grid">
+            <div class="comments__item-title">
+              <b>Хивренко Александр</b>
+              <sl-rating size="small" value="5" readonly></sl-rating>
+            </div>
+            <div class="comments__item-text">
+              Купувала у даному магазині онлайн гортензію в горщику, загалом 3 горщика (один замовляли додатково). Дуже ввічливі і відповідальні, весь час були
+              за звʼязку. Надали фото всіх квітів зі святковою упаковкою. Організували доставку по області і вчасно доставили в чудовому вигляді. Дуже були
+              задоволені! Дякую!
+            </div>
+          </div>
+        </div>
+        <!-- Comment Item -->
+        <div class="comments__item">
+          <div class="comments__item-date">12 грудня 2023</div>
+          <div class="comments__item-grid">
+            <div class="comments__item-title">
+              <b>Катерина</b>
+              <sl-rating size="small" value="5" readonly></sl-rating>
+            </div>
+            <div class="comments__item-text">
+              У вас широкий вибір орхідей, що радує. Красиві. Видно, що ви професіонали в своїй справі, тому що рослини доглянуті й цвітуть. Значить, за ними
+              доглядають правильно.
+            </div>
+          </div>
+        </div>
+        <!-- Comment Item -->
+        <div class="comments__item">
+          <div class="comments__item-date">31 липня 2023</div>
+          <div class="comments__item-grid">
+            <div class="comments__item-title">
+              <b>Олеся П.</b>
+              <sl-rating size="small" value="5" readonly></sl-rating>
+            </div>
+            <div class="comments__item-text">
+              Квіти завжди є чудовим подарунком, вони викликають приємні емоції та піднімають настрій. Придбала рослину на подарунок, бо захопилася символізмом
+              квітки кохання)) Задоволена своїм вибором і допомогою професійних консультантів.
+            </div>
+          </div>
+        </div>
+      </div>
+    </sl-tab-panel>
+  </sl-tab-group>
+</div>
