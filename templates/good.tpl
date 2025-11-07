@@ -16,7 +16,7 @@
         {/foreach}
         {if $G_SIZES|@count > 0}
 				  {foreach from=$G_SIZES item=v_size key=v_k}
-					{if $v_size.formID==$G_CUR_gfsID && $v_size.video!=''}
+					{if $v_size.formID==$CUR_GFSID && $v_size.video!=''}
         <li>
           <button class="hover-photo-viewer__thumbs_video" data-video-src="https://www.youtube.com/embed/{$v_size.video}">
             <span class="icon icon-video-button"></span>
@@ -41,12 +41,12 @@
 
     <!-- Опції: розмір і колір -->
     <section class="product-page__options">
+      {if $G_SIZES|@count > 0}
       <h3>{$LINGVO.varianty}:</h3>
       <div class="product-page__options_size">
-      {if $G_SIZES|@count > 0}
-        <sl-radio-group name="size" value="1">
+        <sl-radio-group name="size" value="{$CUR_GFSID}">
         {foreach from=$G_SIZES item=size key=k}
-          <sl-radio value="1"{if $size.price==0} disabled{/if}>
+          <sl-radio value="{$size.fID}"{if $size.price==0} disabled{/if}>
             <label>
               <div class="size__name">{$size.measure}</div>
               <div class="size__price">{$size.price}<sup>грн</sup>
@@ -69,35 +69,25 @@
           </sl-radio>
         {/foreach}
         </sl-radio-group>
-      {/if}
-          
-        
       </div>
+      {/if}
+      {if $G_COLOR|@count > 0}
       <div class="product-page__options_color">
-        <sl-radio-group label="Оберіть колір" name="color" value="blue">
-          <sl-radio-button value="blue">
-            <img src="/img/product/product-color-blue.png" alt=""/>
+        <sl-radio-group label="Оберіть колір" name="color" value="{$CUR_COLOR_TTL}">
+        {foreach from=$G_COLOR item=C key=k}
+          <sl-radio-button value="{$C.colorTitle}">
+            <a href="{$C.hrefID}"><img src="{$C.previewImg}" alt="{$C.colorTitle}" /></a>
           </sl-radio-button>
-          <sl-radio-button value="green">
-            <img src="/img/product/product-color-green.png" alt=""/>
-          </sl-radio-button>
-          <sl-radio-button value="pink">
-            <img src="/img/product/product-color-pink.png" alt=""/>
-          </sl-radio-button>
-          <sl-radio-button value="red">
-            <img src="/img/product/product-color-red.png" alt=""/>
-          </sl-radio-button>
-          <sl-radio-button value="yellow">
-            <img src="/img/product/product-color-yellow.png" alt=""/>
-          </sl-radio-button>
+        {/foreach}
         </sl-radio-group>
       </div>
+      {/if}
     </section>
 
     <!-- Ціна і кнопки дій -->
     <section class="product-page__actions">
       <div class="product-page__price">
-        1965
+        {$CUR_PRICE}
         <sup>грн</sup>
       </div>
       <div class="product-page__actions_buttons">
@@ -115,17 +105,51 @@
     <!-- Табси: інформація, доставка, оплата -->
     <section class="product-page__delivery">
       <sl-tab-group>
-        <sl-tab slot="nav" panel="info">Інформація</sl-tab>
-        <sl-tab slot="nav" panel="delivery">Доставка</sl-tab>
-        <sl-tab slot="nav" panel="payment">Оплата</sl-tab>
+        <sl-tab slot="nav" panel="info">{$LINGVO.poleznaya_info}</sl-tab>
+        <sl-tab slot="nav" panel="delivery">{$LINGVO.delivery}</sl-tab>
+        <sl-tab slot="nav" panel="payment">{$LINGVO.payment}</sl-tab>
 
         <sl-tab-panel name="info" class="product-page__delivery_info">
           <ul>
-            <li>Висота від підлоги вказана разом із горщиком</li>
-            <li>Рослина поставляється в пластиковому горщику для транспортування</li>
-            <li>100% оригінальний товар, сертифікат</li>
-            <li>Надсилаємо фото реальної рослини після оформлення замовлення</li>
-            <li>Доставляємо в упаковці та теплій машині</li>
+            {if $PLANT_GOOD}
+    					<li>{$LINGVO.info_height}</li>
+    					<li>{$LINGVO.info_planters}</li>
+    					<li>{$LINGVO.info_original_quality}</li>
+    					<li>{$LINGVO.send_photo}</li>
+    					<li>{$LINGVO.info_good_delivery}</li>
+    				{/if}
+    
+    				{if $SPECIAL_CERAMIC_GOOD}
+    					<li>{$LINGVO.handmade}</li>
+    					<li>{$LINGVO.also_we_have_sizes}</li>
+    					<li>{$LINGVO.also_we_have_colors}</li>
+    				{/if}
+    
+    				{if $CERAMIC_GOOD}
+    					<li>{$LINGVO.made_ua}</li>
+    					<li>{$LINGVO.quality_ceramics}</li>
+    					<li>{$LINGVO.many_colors}</li>
+    					<li>{$LINGVO.perfect_forms}</li>
+    				{/if}
+    
+    				{if $LECHUZA_GOOD}
+    					<li>{$LINGVO.info_original_quality}</li>
+    					<li>{$LINGVO.made_de}</li>
+    					<li>{$LINGVO.quality_plastik}</li>
+    					<li>{$LINGVO.autopoliv}</li>
+    					<li>{$LINGVO.water_level}</li>
+    					<li>{$LINGVO.good_design}</li>
+    					<li>{$LINGVO.uf_rays}</li>
+    				{/if}
+    
+    				{if $LAMELA_GOOD}
+    
+    					<li>{$LINGVO.made_pl}</li>
+    					<li>{$LINGVO.hight_quality_plastik}</li>
+    					<li>{$LINGVO.kashpo_type}</li>
+    					<li>{$LINGVO.inner_kashpo}</li>
+    
+    				{/if}
           </ul>
         </sl-tab-panel>
         <sl-tab-panel name="delivery">
@@ -133,33 +157,33 @@
             <div class="delivery__item">
               <img class="delivery__item_icon" src="/img/icons/icon-post.svg" alt=""/>
               <div class="delivery__item_info">
-                <p>Самовивіз із магазинів у Києві:</p>
+                <p>{$LINGVO.pickup_kiev}:</p>
                 <ul>
-                  <li>пр. Берестейський, 70</li>
+                  <li>{$LINGVO.address_street}</li>
                 </ul>
               </div>
-              <div class="delivery__item_price">безкоштовно</div>
+              <div class="delivery__item_price">{$LINGVO.free}</div>
             </div>
             <div class="delivery__item">
               <img class="delivery__item_icon" src="/img/icons/icon-track.svg" alt=""/>
               <div class="delivery__item_info">
-                <p>Кур'єром по Києву:</p>
+                <p>{$LINGVO.currier_50}:</p>
                 <p>
-                  <a href="">Детальніше</a>
+                  <a href="{$LANGURL}/delivery/">{$LINGVO.more}</a>
                 </p>
               </div>
-              <div class="delivery__item_price">от 200 <sup>грн</sup>
+              <div class="delivery__item_price">{$LINGVO.txt_vid} {$DELIVERY_OPTIONS.courier_std} <sup>грн</sup>
               </div>
             </div>
             <div class="delivery__item">
               <img class="delivery__item_icon" src="/img/icons/icon-nova-poshta.svg" alt=""/>
               <div class="delivery__item_info">
-                <p>Доставка у відділення Нової Пошти:</p>
+                <p>{$LINGVO.pickup_from_np}:</p>
                 <p>
-                  <a href="">Детальніше</a>
+                  <a href="{$LANGURL}/novaposhta/">{$LINGVO.more}</a>
                 </p>
               </div>
-              <div class="delivery__item_price">от 80 <sup>грн</sup>
+              <div class="delivery__item_price">{$LINGVO.txt_vid} 80 <sup>грн</sup>
               </div>
             </div>
           </div>
@@ -168,15 +192,15 @@
           <div class="product-page__delivery_list">
             <div class="delivery__item">
               <img class="delivery__item_icon" src="/img/icons/icon-cash.svg" alt=""/>
-              <div class="delivery__item_info">Готівкою при отриманні</div>
+              <div class="delivery__item_info">{$LINGVO.bsk_cash}</div>
             </div>
             <div class="delivery__item">
               <img class="delivery__item_icon" src="/img/icons/icon-card.svg" alt=""/>
-              <div class="delivery__item_info">Картою на сайті VISA / Mastercard</div>
+              <div class="delivery__item_info">{$LINGVO.bsk_pay_now}</div>
             </div>
             <div class="delivery__item">
               <img class="delivery__item_icon" src="/img/icons/icon-order.svg" alt=""/>
-              <div class="delivery__item_info">Безготівковий розрахунок для юридичних осіб</div>
+              <div class="delivery__item_info">{$LINGVO.bsk_beznal}</div>
             </div>
           </div>
         </sl-tab-panel>
@@ -193,7 +217,7 @@
       <img src="/img/icons/icon-fitodesign.svg" alt=""/>
     </div>
     <div class="services__item_link">
-      <a class="underline" href="/">Озеленення інтер'єру</a>
+      <a class="underline" href="{$LANGURL}/phytodesign/">Озеленення інтер'єру</a>
     </div>
   </section>
   <section class="services__item">
@@ -201,7 +225,7 @@
       <img src="/img/icons/icon-transplantation.svg" alt=""/>
     </div>
     <div class="services__item_link">
-      <a class="underline" href="/">Послуги з пересадки рослин</a>
+      <a class="underline" href="{$LANGURL}/services/peresadka/">{$LINGVO.service_peresedka}</a>
     </div>
   </section>
   <section class="services__item">
@@ -209,7 +233,7 @@
       <img src="/img/icons/icon-care.svg" alt=""/>
     </div>
     <div class="services__item_link">
-      <a class="underline" href="/">Професійний догляд за рослинами</a>
+      <a class="underline" href="{$LANGURL}/services/house_plant_care/">{$LINGVO.uhod_flower}</a>
     </div>
   </section>
 </div>
@@ -217,10 +241,10 @@
 <!-- Табси з описом продукту, аксесуарами, доглядом, відгуками -->
 <div class="product-page__description">
   <sl-tab-group>
-    <sl-tab slot="nav" panel="description">Опис</sl-tab>
-    <sl-tab slot="nav" panel="accessories">Аксесуари для рослин</sl-tab>
-    <sl-tab slot="nav" panel="care">Особливості догляду</sl-tab>
-    <sl-tab slot="nav" panel="reviews">Відгуки</sl-tab>
+    <sl-tab slot="nav" panel="description">{$LINGVO.descr}</sl-tab>
+    <sl-tab slot="nav" panel="accessories">{$LINGVO.accessory}</sl-tab>
+    <sl-tab slot="nav" panel="care">{$LINGVO.plant_care}</sl-tab>
+    <sl-tab slot="nav" panel="reviews">{$LINGVO.rewies}</sl-tab>
 
     <!-- Опис -->
     <sl-tab-panel name="description">

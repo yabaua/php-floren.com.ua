@@ -644,10 +644,16 @@ if (isset($_POST['delete_item']) && $_POST['delete_item']!=''){
 	unset($_SESSION['basket'][$_POST['delete_item']]);
 	header('location:'.$_SERVER["REQUEST_URI"]);
 }
+
+$delivery_options = array();
+$db->query("SELECT * FROM options_delivery");
+while($q = $db->fetch()){
+	$delivery_options[$q['option_alias']] = $q['option_value'];
+};
+$smarty->assign("DELIVERY_OPTIONS", $delivery_options);
+
 //BUILD BASKET
-
 $bsk=array();
-
 if(count($_SESSION['basket'])>0){
 
 	$bsk_stop_post_delivery=0;
@@ -662,15 +668,7 @@ if(count($_SESSION['basket'])>0){
 
 	/* START: delivery options from DB */
 
-	$delivery_options = array();
-
-	$db->query("SELECT * FROM options_delivery");
-
-	while($q = $db->fetch()){
-		$delivery_options[$q['option_alias']] = $q['option_value'];
-	};
-
-	$smarty->assign("DELIVERY_OPTIONS", $delivery_options);
+	
 
 	/* END: delivery options from DB */
 

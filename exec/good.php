@@ -502,14 +502,13 @@ $smarty->assign("CUR_GFSID", $curFID);
 			$goods_sizes[count($goods_sizes)-1]['visibility'] = $f['visibility'];
 			$goods_sizes[count($goods_sizes)-1]['db_1c_availability'] = $uniqueSizes[$good['ID'].'_'.$f['dia'] ."_". $f['wdt']."_".$f['hgt']."_".$f['depth']."_".$f['measure_qt']][$curColor]['db_1c_availability'];
 		}
-
 		if($active_formID!=''){
 			//$main_image	=	$img_path . $active_formIDArray['img'];
 				if(file_exists($_SERVER['DOCUMENT_ROOT'] . $img_path . str_replace('jpg', 'webp', $active_formIDArray['img']))){
 					$main_image	=	$img_path . str_replace('jpg', 'webp', $active_formIDArray['img']);
 				}else{
 					$src= 'https://floren.com.ua/images/ins/b/gmcxml-' . $active_formIDArray['img'];
-					$dest_m		=	$_SERVER['DOCUMENT_ROOT'] . '/images/goods/m/' .str_replace('jpg', 'webp', $f['image']);
+					$dest_m		=	$_SERVER['DOCUMENT_ROOT'] . '/images/goods/m/' .str_replace('jpg', 'webp', $active_formIDArray['img']);
 					img_resize($src, $dest_m, 600, 500, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=true);
 					$main_image	=	$img_path . str_replace('jpg', 'webp', $active_formIDArray['img']);
 				}
@@ -615,16 +614,20 @@ $smarty->assign("CUR_GFSID", $curFID);
 		            $previewImg = " style=\"\"";
 		    
 		            if ($is_wood_pot==1) {
-		                $previewImg = " style=\"background: url('/images/ins/preview/prev_".$gc['color'].".jpg') 0 0 / contain no-repeat\"";
+		              //  $previewImg = " style=\"background: url('/images/ins/preview/prev_".$gc['color'].".jpg') 0 0 / contain no-repeat\"";
+		              		$previewImg = "https://floren.com.ua/images/ins/preview/prev_".$gc['color'].".jpg";
 		            } else {
 		                if ($gc['img'] == '0') {
-		                    $previewImg = " style=\"background: url('/images/ins/s/".$good[$good['ID']]['link']."_".$gc['color'].".jpg') 0 0 / contain no-repeat\"";
+		                //  $previewImg = " style=\"background: url('/images/ins/s/".$good[$good['ID']]['link']."_".$gc['color'].".jpg') 0 0 / contain no-repeat\"";
+		                    $previewImg = "https://floren.com.ua/images/ins/s/".$good[$good['ID']]['link']."_".$gc['color'].".jpg";
 		               } else {
 		            //   		echo 
 		              		if(!file_exists($_SERVER['DOCUMENT_ROOT']."/images/ins/preview/prev_".$gc['img'])){
-		              			$previewImg = " style=\"background: url('/images/ins/s/".$gc['img']."') 0 0 / contain no-repeat\"";
+		              	//		$previewImg = " style=\"background: url('/images/ins/s/".$gc['img']."') 0 0 / contain no-repeat\"";
+		              				$previewImg = "https://floren.com.ua/images/ins/s/".$gc['img'];
 		              		}else{
-		               			$previewImg = " style=\"background: url('/images/ins/preview/prev_".$gc['img']."') 0 0 / contain no-repeat\"";
+		               	//		$previewImg = " style=\"background: url('/images/ins/preview/prev_".$gc['img']."') 0 0 / contain no-repeat\"";
+		               				$previewImg = "https://floren.com.ua/images/ins/preview/prev_".$gc['img'];
 		               		}
 		            //        if (img === jsonGoodOne.image) {
 		                        // IF COLOR WAS SELECTED BUT IMAGE WASN'T DOWNLOADED
@@ -737,7 +740,7 @@ $smarty->assign("CUR_GFSID", $curFID);
 				$hleb[3]['name']=$good[$gID]['name'];
 				
 				$hleb[4]['link']='';
-				$hleb[4]['name']=$good[$gID]['name'] ." ". $measures[$curFID] ." ". $colors[$curColor]['name_'.$lang];
+				$hleb[4]['name']=$good[$gID]['name'] ." ". $measures[$curFID] ." ". ($colors[$curColor]['name_'.$lang] ?? '');
 			}
 		//====Тайтлы
 		
@@ -773,7 +776,7 @@ $smarty->assign("CUR_GFSID", $curFID);
 		
 		$meta_addon='';
 		if($active_formID!=''){
-			$meta_addon	=	" ".$measures[$curFID]." ".$colors[$curColor]['name_'.$lang];
+			$meta_addon	=	" ". $measures[$curFID] ." ". ($colors[$curColor]['name_'.$lang] ?? '');
 		}
 		
 		$good_meta_title		= 	($good[$gID]['meta_title']!='' && $active_formID=='')		?	$good[$gID]['meta_title']	:	$g_name_wo_space.$meta_addon." – ".$lingvo['button_buy']." ".$g_name_4_ttl." ".$lingvo['in_kiev']." ".$lingvo['s_dostavkoy'];
@@ -795,7 +798,7 @@ $smarty->assign("CUR_GFSID", $curFID);
 		if(!$is_plant && $good[$gID]['name_alter']!='') $goodH1=$good[$gID]['name_alter']." ".$good[$gID]['name']; // if planters – add additional name
 		$og_link = "https://floren.com.ua".$lang_url."/product/".$gID."_".$good[$gID]['link']."/";
 		if($active_formID!=''){
-			$goodH1.=" <nobr>".$measures[$curFID]."</nobr> ".$colors[$curColor]['name_'.$lang];
+			$goodH1.=" <nobr>" . $measures[$curFID]."</nobr> " . ($colors[$curColor]['name_'.$lang] ?? '');
 			$og_link	.=	$active_formID."/";
 		}
 		$og_title = str_replace('"','&quot;', str_replace("'", "&#700;", strip_tags($goodH1)));
@@ -1034,7 +1037,7 @@ $good_forms_json = json_encode($gof);
 			$smarty->assign("G_CUR_wdt",$active_formIDArray['wdt']);
 			$smarty->assign("G_CUR_hgt",$active_formIDArray['hgt']);
 			$smarty->assign("G_CUR_dia",$active_formIDArray['dia']);
-			$smarty->assign("G_CUR_dept",$active_formIDArray['dept']);
+			$smarty->assign("G_CUR_dept", ($active_formIDArray['dept'] ?? ''));
 			$smarty->assign("G_CUR_PRICE",$active_formIDArray['price']);
 	//		$smarty->assign("G_CUR_SIZE",$goods_sizes[0]['ttl']);
 			$smarty->assign("G_CUR_COLOR", $active_formIDArray['color']);

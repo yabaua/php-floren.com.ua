@@ -1,5 +1,4 @@
 <?php
-error_reporting(E_ALL);
 //if ($_SERVER["SERVER_NAME"]=="n.floren.com.ua"){
 	$DB_HOST='floren.mysql.tools';
 	$DB_CHARSET='utf8mb4';

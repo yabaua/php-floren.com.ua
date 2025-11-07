@@ -26,3 +26,4 @@ logs
 # Docs
 /docs
 /smarty5/templates_c/*
+.DS_Store
