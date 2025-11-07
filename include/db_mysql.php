@@ -15,7 +15,7 @@ class DB2 {
      * Подключение к базе данных
      */
     public function connect($host = 'floren.mysql.tools', $user ='floren_db2025', $pass='m9286DRfUv', $dbname='floren_db2025', $charset = 'utf8') {
-        $this->link_id = @new mysqli($host, $user, $pass, $dbname);
+        $this->link_id = new mysqli($host, $user, $pass, $dbname);
 
         if ($this->link_id->connect_errno) {
             die("❌ Ошибка подключения к MySQL на хосте '{$host}': " . $this->link_id->connect_error);
@@ -25,8 +25,6 @@ class DB2 {
             die("⚠️ Ошибка установки кодировки ($charset): " . $this->link_id->error);
         }
 
-        // Необязательно: отключаем строгий режим
-        $this->link_id->query("SET sql_mode=''");
         return true;
     }
 
