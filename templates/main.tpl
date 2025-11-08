@@ -91,9 +91,17 @@
               <svg class="icon icon-down" />
             </sl-button>
             <sl-menu>
-              <sl-menu-item {if $LANG=='ua' }data-checked{/if} value="ua">{$LINGVO.lang_sign_ua}</sl-menu-item>
+              <sl-menu-item {if $LANG=='ua' }data-checked{/if} value="ua">
+                {if $LANG!='ua' }<a href="">{/if}
+                {$LINGVO.lang_sign_ua}
+                {if $LANG!='ua' }</a>{/if}
+              </sl-menu-item>
               <sl-divider></sl-divider>
-              <sl-menu-item {if $LANG=='ru' }data-checked{/if} value="ru">{$LINGVO.lang_sign_ru}</sl-menu-item>
+              <sl-menu-item {if $LANG=='ru' }data-checked{/if} value="ru">
+                {if $LANG!='ru' }<a href="">{/if}
+                {$LINGVO.lang_sign_ru}
+                {if $LANG!='ru' }</a>{/if}
+              </sl-menu-item>
             </sl-menu>
           </sl-dropdown>
         </div>

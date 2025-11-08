@@ -108,7 +108,9 @@
           <sl-menu>
             <sl-menu-item data-checked value="ua">Українською</sl-menu-item>
             <sl-divider></sl-divider>
-            <sl-menu-item value="ru">Російською</sl-menu-item>
+            <sl-menu-item value="ru">
+              <a href="">Російською</a>
+            </sl-menu-item>
           </sl-menu>
         </sl-dropdown>
       </div>
@@ -359,19 +361,20 @@
 </header>
     <!-- Меню каталогу -->
     <!-- Меню каталогу в header -->
-<div class="header__catalog container" id="catalog-menu">
-
+<div class="header__catalog" id="catalog-menu">
   <!-- Основна кнопка каталогу і випадаючий список -->
-  <div class="header__catalog--main">
-    <button
+  <div class="container">
+    <div class="header__catalog_wrapper">
+      <div class="header__catalog--main">
+        <button
       id="catalog-button"
       class="catalog-button"
       aria-label="Каталог товарів"
     >
-      <svg class="icon icon-menu"/>
+          <svg class="icon icon-menu"/>
       Каталог товарів
     </button>
-    <!-- Список категорій каталогу -->
+        <!-- Список категорій каталогу -->
 
 <!-- prettier-ignore -->
 
@@ -713,147 +716,149 @@
     </div>
   </div>
 </div>
-  </div>
+      </div>
 
-  <!-- Додаткові категорії: фітодизайн, вертикальне озеленення, флораріуми -->
-  <ul class="header__catalog--secondary">
-    <li class="secondary-item">
-      <button class="secondary-item--button" aria-label="Фітодизайн">
-        <svg class="icon icon-fitodesign"/>
-        <div class="secondary-item--button-text">
-          <b>Фітодизайн</b>
-          <span>Озеленення простору</span>
-        </div>
-      </button>
-      <section class="secondary-item--content">
-        <ul class="secondary-item--content-list">
-          <li>
-            <img
+      <!-- Додаткові категорії: фітодизайн, вертикальне озеленення, флораріуми -->
+      <ul class="header__catalog--secondary">
+        <li class="secondary-item">
+          <button class="secondary-item--button" aria-label="Фітодизайн">
+            <svg class="icon icon-fitodesign"/>
+            <div class="secondary-item--button-text">
+              <b>Фітодизайн</b>
+              <span>Озеленення простору</span>
+            </div>
+          </button>
+          <section class="secondary-item--content">
+            <ul class="secondary-item--content-list">
+              <li>
+                <img
               src="/img/sevices/apartment-phytodesign.png"
               alt="Фітодизайн квартири"
 />
-            <a class="underline" href="">Фітодизайн квартири</a>
-          </li>
-          <li>
-            <img
+                <a class="underline" href="">Фітодизайн квартири</a>
+              </li>
+              <li>
+                <img
               src="/img/sevices/office-phytodesign.png"
               alt="Фітодизайн офісу"
 />
-            <a class="underline" href="">Фітодизайн офісу</a>
-          </li>
-          <li>
-            <img
+                <a class="underline" href="">Фітодизайн офісу</a>
+              </li>
+              <li>
+                <img
               src="/img/sevices/landscaping-of-summer-terraces.png"
               alt="Фітодизайн квартири"
 />
-            <a class="underline" href="">Озеленення літніх терас</a>
-          </li>
-          <li>
-            <img
+                <a class="underline" href="">Озеленення літніх терас</a>
+              </li>
+              <li>
+                <img
               src="/img/sevices/zoning-space-with-indoor-plants.png"
               alt="Зонування простору кімнатними рослинами"
 />
-            <a class="underline" href=""
+                <a class="underline" href=""
               >Зонування простору кімнатними рослинами</a
             >
-          </li>
-          <li>
-            <img
+              </li>
+              <li>
+                <img
               src="/img/sevices/plant-rental.png"
               alt="Зелені рішення для HoReCa"
 />
-            <a class="underline" href="">Зелені рішення для HoReCa</a>
-          </li>
-          <li>
-            <img
+                <a class="underline" href="">Зелені рішення для HoReCa</a>
+              </li>
+              <li>
+                <img
               src="/img/sevices/landscaping-artificial-plants.png"
               alt="Озеленення штучними рослинами"
 />
-            <a class="underline" href="">Озеленення штучними рослинами</a>
-          </li>
-        </ul>
-      </section>
-    </li>
-    <li class="secondary-item">
-      <button
+                <a class="underline" href="">Озеленення штучними рослинами</a>
+              </li>
+            </ul>
+          </section>
+        </li>
+        <li class="secondary-item">
+          <button
         class="secondary-item--button"
         aria-label="Вертикальне озеленення"
       >
-        <svg class="icon icon-vertical"/>
-        <div class="secondary-item--button-text">
-          <b>Вертикальне озеленення</b>
-          <span>Зелені стіни</span>
-        </div>
-      </button>
-      <section class="secondary-item--content">
-        <ul class="secondary-item--content-list">
-          <li>
-            <img
+            <svg class="icon icon-vertical"/>
+            <div class="secondary-item--button-text">
+              <b>Вертикальне озеленення</b>
+              <span>Зелені стіни</span>
+            </div>
+          </button>
+          <section class="secondary-item--content">
+            <ul class="secondary-item--content-list">
+              <li>
+                <img
               src="/img/sevices/green-walls.png"
               alt="Зелені стіни з рослинами"
 />
-            <a class="underline" href="">Зелені стіни з рослинами</a>
-          </li>
-          <li>
-            <img
+                <a class="underline" href="">Зелені стіни з рослинами</a>
+              </li>
+              <li>
+                <img
               src="/img/sevices/landscaping-using-vertical-structures.png"
               alt="Озеленення за допомогою вертикальних конструкцій"
 />
-            <a class="underline" href=""
+                <a class="underline" href=""
               >Озеленення за допомогою вертикальних конструкцій</a
             >
-          </li>
-          <li>
-            <img
+              </li>
+              <li>
+                <img
               src="/img/sevices/green-moss-walls.png"
               alt="Зелені стіни з моху"
 />
-            <a class="underline" href="">Зелені стіни з моху</a>
-          </li>
-        </ul>
-      </section>
-    </li>
-    <li class="secondary-item">
-      <button class="secondary-item--button" aria-label="Догляд за рослинами">
-        <svg class="icon icon-care"/>
-        <div class="secondary-item--button-text">
-          <b>Догляд</b>
-          <span>За рослинами</span>
-        </div>
-      </button>
-      <section class="secondary-item--content">
-        <ul class="secondary-item--content-list">
-          <li>
-            <img
+                <a class="underline" href="">Зелені стіни з моху</a>
+              </li>
+            </ul>
+          </section>
+        </li>
+        <li class="secondary-item">
+          <button class="secondary-item--button" aria-label="Догляд за рослинами">
+            <svg class="icon icon-care"/>
+            <div class="secondary-item--button-text">
+              <b>Догляд</b>
+              <span>За рослинами</span>
+            </div>
+          </button>
+          <section class="secondary-item--content">
+            <ul class="secondary-item--content-list">
+              <li>
+                <img
               src="/img/sevices/plant-transplantation.png"
               alt="Пересадка рослин"
 />
-            <a class="underline" href="">Пересадка рослин</a>
-          </li>
-          <li>
-            <img
+                <a class="underline" href="">Пересадка рослин</a>
+              </li>
+              <li>
+                <img
               src="/img/sevices/plant-transportation.png"
               alt="Перевезення рослин"
 />
-            <a class="underline" href="">Перевезення рослин</a>
-          </li>
-          <li>
-            <img src="/img/sevices/plant-rental.png" alt="Оренда рослин"/>
-            <a class="underline" href="">Оренда рослин</a>
-          </li>
-        </ul>
-      </section>
-    </li>
-    <li class="secondary-item">
-      <button class="secondary-item--button" aria-label="Галерея фотографій">
-        <svg class="icon icon-photogallery"/>
-        <div class="secondary-item--button-text">
-          <b>Портфоліо</b>
-          <span>Галерея фотографій</span>
-        </div>
-      </button>
-    </li>
-  </ul>
+                <a class="underline" href="">Перевезення рослин</a>
+              </li>
+              <li>
+                <img src="/img/sevices/plant-rental.png" alt="Оренда рослин"/>
+                <a class="underline" href="">Оренда рослин</a>
+              </li>
+            </ul>
+          </section>
+        </li>
+        <li class="secondary-item">
+          <button class="secondary-item--button" aria-label="Галерея фотографій">
+            <svg class="icon icon-photogallery"/>
+            <div class="secondary-item--button-text">
+              <b>Портфоліо</b>
+              <span>Галерея фотографій</span>
+            </div>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 
     <!-- Основний контент сторінки -->
@@ -1047,25 +1052,53 @@
 
           <!-- Фільтри товарів -->
           <div class="catalog-page__content_filters">
-            <sl-select placeholder="Розмір">
-              <sl-option value="option-1">Королівські (9)</sl-option>
-              <sl-option value="option-2">Стандарт (53)</sl-option>
-              <sl-option value="option-3">Міді (26)</sl-option>
-              <sl-option value="option-4">Міні (24)</sl-option>
+            <sl-select placeholder="Розмір" value="option-2">
+              <sl-option value="option-1">
+                <a href="">Королівські (9)</a>
+              </sl-option>
+              <sl-option value="option-2">
+                <a href="">Стандарт (53)</a>
+              </sl-option>
+              <sl-option value="option-3">
+                <a href="">Міді (26)</a>
+              </sl-option>
+              <sl-option value="option-4" disabled>
+                <a href="">Міні (0)</a>
+              </sl-option>
             </sl-select>
             <sl-select placeholder="Візерунок">
-              <sl-option value="option-1">Крапочки (30)</sl-option>
-              <sl-option value="option-2">Полоси (17)</sl-option>
-              <sl-option value="option-3">Без візерунку (61)</sl-option>
+              <sl-option value="option-1">
+                <a href="">Крапочки (30)</a>
+              </sl-option>
+              <sl-option value="option-2">
+                <a href="">Полоси (17)</a>
+              </sl-option>
+              <sl-option value="option-3">
+                <a href="">Без візерунку (61)</a>
+              </sl-option>
             </sl-select>
             <sl-select placeholder="Колір" multiple clearable>
-              <sl-option value="option-1">Темно-рожевий (54)</sl-option>
-              <sl-option value="option-2">Світло-рожевий (26)</sl-option>
-              <sl-option value="option-3">Жовтий (25)</sl-option>
-              <sl-option value="option-4">Білий (37)</sl-option>
-              <sl-option value="option-5">Персиковий (11)</sl-option>
-              <sl-option value="option-6">Помаранчевий (3)</sl-option>
-              <sl-option value="option-7">Коричневий (3)</sl-option>
+              <sl-option value="option-1">
+                <a href="">Темно-рожевий (54)</a>
+              </sl-option>
+              <sl-option value="option-2">
+                <a href="">Світло-рожевий (26)</a>
+              </sl-option>
+              <sl-option value="option-3">
+                <a href="">Жовтий (25)</a>
+              </sl-option>
+              <sl-option value="option-4">
+                <a href="">Білий (37)</a>
+              </sl-option>
+              <sl-option value="option-5">
+                <a href="">Персиковий (11)</a>
+              </sl-option>
+              <sl-option value="option-6">
+                <a href="">Помаранчевий (3)</a>
+              </sl-option>
+              <sl-option value="option-7">
+                <a href="">Коричневий (3)</a>
+              </sl-option>
             </sl-select>
           </div>
 
@@ -1074,7 +1107,7 @@
             <sl-tag removable>Стандарт</sl-tag>
             <sl-tag removable>Темно-рожевий</sl-tag>
             <sl-tag removable>Помаранчевий</sl-tag>
-            <button class="button button--text">Скинути фільтри</button>
+            <a href="#" class="button button--text">Скинути фільтри</a>
           </div>
 
           <!-- Info показано скільки товарів -->
