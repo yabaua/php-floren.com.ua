@@ -12,6 +12,7 @@ while($cls=$db->fetch()){
 
 $good=array();
 $img_path = '/images/goods/m/';
+$img_preview_path = '/images/goods/b/';
 
 $deleted_goods=array(161,162,163,164,165,169,170,171,172,173,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,271,273,275,281,285,291,292,293,302,306,307,309,313,317,318,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,386,388,391,393,395,397,399,400,561,588,589,590,591,592,593,594,595,596,597,598,599,600,601,602,603,604,605,606,607,608,609,610,611,612,613,614,615,616,617,618,619,620,621,622,623,624,625,626,627,628,629,630,631,632,633,634,635,636,637,638,639,640,641,642,643,644,645,646,647,648,649,650,651,1627,1628);
 
@@ -242,7 +243,17 @@ if (!isset($PARAM[0]) || (isset($PARAM[2]) && $PARAM[2]!='')) {
 
 			if ($rs_g['images']) {
 				$good[$rs_g['ID']]['images']=array();
-				foreach(explode(",",$rs_g['images']) AS $v) $good_images[]=$good[$rs_g['ID']]['images'][]=$v;
+				foreach(explode(",",$rs_g['images']) AS $v) {
+					if(file_exists($_SERVER['DOCUMENT_ROOT'] . $img_preview_path . str_replace('jpg', 'webp', $v))){
+						$addon_img_src	=	$img_preview_path . str_replace('jpg', 'webp', $v);
+					}else{
+						$src= 'https://floren.com.ua/images/ins/b/' . $v;
+						$dest_b		=	$_SERVER['DOCUMENT_ROOT'] . $img_preview_path .str_replace('jpg', 'webp', $v);
+						img_resize($src, $dest_b, 1600, 1200, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=true, $trim=false, $resize_max=true, $apply_mask=false);
+						$addon_img_src	=	$img_preview_path . str_replace('jpg', 'webp', $v);
+					}
+					$good_images[]=$good[$rs_g['ID']]['images'][]=$addon_img_src;
+				}
 			}
 			
 			if ($rs_g['old_price']>0) $good_is_action=1;

@@ -11,7 +11,7 @@
       <ul class="hover-photo-viewer__thumbs">
         {foreach item=GI name=GI from=$GOOD_IMAGES}
         <li class="active">
-          <img src="/images/goods/s/{$GI}" alt="{$GOOD_ONE.name} фото {$smarty.foreach.GI.iteration}"/>
+          <img src="{$GI}" alt="{$GOOD_ONE.name} фото {$smarty.foreach.GI.iteration}"/>
         </li>
         {/foreach}
         {if $G_SIZES|@count > 0}
