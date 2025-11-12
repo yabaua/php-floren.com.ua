@@ -156,6 +156,7 @@
           <!-- SEO article section -->
             {if $CUR_PAGE==1}
             <article class="catalog-page__content_article">
+            <div><section>
             {$CENTER_SEO_TEXT}
             </article>
             {/if}

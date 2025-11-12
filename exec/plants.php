@@ -523,7 +523,7 @@ if ((isset($URL[1]) && in_array($URL[1], $category_aliases))) {
 					
 										
 					img_resize($src, $dest_s, 200, 200, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=false);
-				//	img_resize($src, $dest_m, 600, 500, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=true);
+				//	img_resize($src, $dest_m, 600, 600, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=true);
 				//	img_resize($src, $dest_b, 1600, 1200, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=true, $trim=false, $resize_max=true, $apply_mask=true);
 				//	img_resize($src, $dest_gmcxml, 1600, 1200, $rgb=0xFFFFFF, $quality=90, $keep_origin_size=true, $trim=false, $resize_max=true, $apply_mask=false);
 					
@@ -661,8 +661,13 @@ $schema_prices_min=array();
 		$smarty->assign("PAGE_TITLE",$page_title);
 		$smarty->assign("TOP_SEO_TEXT",$topSEOtext);
 		$smarty->assign("SEO_TEXT",$leftSEOtext);
-		$smarty->assign("CENTER_SEO_TEXT",$centerSEOtext);
 		$smarty->assign("LIST_OR_TBL",$f_cat['list_or_tbl']);
+		
+		$body_text=$centerSEOtext;
+		$new_body_text=preg_replace('/(<h2\b[^>]*>.*?<\/h2>)/is', '</div></section><section class="article-section">$1<div class="article-section__content">', $body_text);
+		$new_body_text=preg_replace('/(<table\b[^>]*>.*?<\/table>)/is', '<div class="article-section__table">$1</div>', $new_body_text);
+		$smarty->assign("CENTER_SEO_TEXT", $new_body_text.'</div>');
+		
 		
 		$smarty->assign("CATEGORY_M_ID",$f_cat['ID']);
 

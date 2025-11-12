@@ -5,7 +5,7 @@
   <div class="product-page__gallery">
     <div class="hover-photo-viewer" data-photo-viewer="project-photo-viewer">
       <div class="hover-photo-viewer__main">
-        <img src="{$MAIN_IMAGE}" alt="{$GOOD_ONE.name_alter} {$GOOD_ONE.name}" title="{$GOOD_ONE.name_alter} {$GOOD_ONE.name}"/>
+        <img src="{$MAIN_IMAGE}?v=2" alt="{$GOOD_ONE.name_alter} {$GOOD_ONE.name}" title="{$GOOD_ONE.name_alter} {$GOOD_ONE.name}"/>
       </div>
       {if $GOOD_IMAGES}
       <ul class="hover-photo-viewer__thumbs">
@@ -254,11 +254,13 @@
     <!-- Опис -->
     {if $GOOD_ONE.body}
     <sl-tab-panel name="description">
-      <div class="product-page__description_info">
-        <section>
-          {$GOOD_ONE.body}
-        </section>
-      </div>
+      <article class="catalog-page__content_article">
+        <div class="product-page__description_info">
+          <section>
+            {$GOOD_ONE_BODY}
+          </section>
+        </div>
+      </article>
     </sl-tab-panel>
     {/if}
 

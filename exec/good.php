@@ -520,7 +520,7 @@ $smarty->assign("CUR_GFSID", $curFID);
 				}else{
 					$src= 'https://floren.com.ua/images/ins/b/gmcxml-' . $active_formIDArray['img'];
 					$dest_m		=	$_SERVER['DOCUMENT_ROOT'] . '/images/goods/m/' .str_replace('jpg', 'webp', $active_formIDArray['img']);
-					img_resize($src, $dest_m, 600, 500, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=true);
+					img_resize($src, $dest_m, 600, 600, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=true);
 					$main_image	=	$img_path . str_replace('jpg', 'webp', $active_formIDArray['img']);
 				}
 		}else{
@@ -531,7 +531,7 @@ $smarty->assign("CUR_GFSID", $curFID);
 				}else{
 					$src= 'https://floren.com.ua/images/ins/b/gmcxml-' . $gof[0]['img'];
 					$dest_m		=	$_SERVER['DOCUMENT_ROOT'] . '/images/goods/m/' .str_replace('jpg', 'webp', $gof[0]['img']);
-					img_resize($src, $dest_m, 600, 500, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=true);
+					img_resize($src, $dest_m, 600, 600, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=true);
 					$main_image	=	$img_path . str_replace('jpg', 'webp', $gof[0]['img']);
 				}
 			} elseif ($gof[0]['color']) {
@@ -541,7 +541,7 @@ $smarty->assign("CUR_GFSID", $curFID);
 				}else{
 					$src= 'https://floren.com.ua/images/ins/b/gmcxml-' . ($good[$gID]['link'] . '_' . $gof[0]['color'] . '.jpg');
 					$dest_m		=	$_SERVER['DOCUMENT_ROOT'] . '/images/goods/m/' .str_replace('jpg', 'webp', ($good[$gID]['link'] . '_' . $gof[0]['color'] . '.jpg'));
-					img_resize($src, $dest_m, 600, 500, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=true);
+					img_resize($src, $dest_m, 600, 600, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=true);
 					$main_image	=	$img_path . str_replace('jpg', 'webp', ($good[$gID]['link'] . '_' . $gof[0]['color'] . '.jpg'));
 				}
 			} else {
@@ -551,7 +551,7 @@ $smarty->assign("CUR_GFSID", $curFID);
 				}else{
 					$src= 'https://floren.com.ua/images/ins/b/gmcxml-' . $good[$gID]['image'];
 					$dest_m		=	$_SERVER['DOCUMENT_ROOT'] . '/images/goods/m/' .str_replace('jpg', 'webp', $good[$gID]['image']);
-					img_resize($src, $dest_m, 600, 500, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=true);
+					img_resize($src, $dest_m, 600, 600, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=true);
 					$main_image	=	$img_path . str_replace('jpg', 'webp', $good[$gID]['image']);
 				}
 			}
@@ -813,6 +813,13 @@ $smarty->assign("CUR_GFSID", $curFID);
 			$og_link	.=	$active_formID."/";
 		}
 		$og_title = str_replace('"','&quot;', str_replace("'", "&#700;", strip_tags($goodH1)));
+		
+		
+		
+		$body_text=$good[$gID]['body'];
+		$new_body_text=preg_replace('/(<h2\b[^>]*>.*?<\/h2>)/is', '</div></section><section class="article-section">$1<div class="article-section__content">', $body_text);
+		$new_body_text=preg_replace('/(<table\b[^>]*>.*?<\/table>)/i', '<div class="article-section__table">$1</div>', $new_body_text);
+		$smarty->assign("GOOD_ONE_BODY", $new_body_text.'</div>');
 		
 		$smarty->assign("GOOD_ONE",$good[$gID]);
 		$smarty->assign("GOOD_H1", $goodH1);

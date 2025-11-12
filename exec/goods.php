@@ -320,8 +320,12 @@ if(count($filters_url)){
 $smarty->assign("PAGE_TITLE", $page_title);
 $smarty->assign("PAGE_SUB",	$page_sub);
 $smarty->assign("SEO_TEXT",	$leftSEOtext);
-$smarty->assign("CENTER_SEO_TEXT",	$centerSEOtext);
 $smarty->assign("TOP_SEO_TEXT",	$topSEOtext);
+
+$body_text=$centerSEOtext;
+$new_body_text=preg_replace('/(<h2\b[^>]*>.*?<\/h2>)/is', '</div></section><section class="article-section">$1<div class="article-section__content">', $body_text);
+//$new_body_text=preg_replace('/(<h[2]\b[^>]*>)/i', '</section><section>$1', $new_body_text);
+$smarty->assign("CENTER_SEO_TEXT",$new_body_text);
 
 $TITLE[1]=$meta_title;
 $smarty->assign("META_DESCRIPTION",		$meta_description);
@@ -435,7 +439,7 @@ $smarty->assign("META_KEYWORDS",		$meta_keywords);
 						
 											
 						img_resize($src, $dest_s, 200, 200, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=false);
-					//	img_resize($src, $dest_m, 600, 500, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=true);
+					//	img_resize($src, $dest_m, 600, 600, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=true);
 					//	img_resize($src, $dest_b, 1600, 1200, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=true, $trim=false, $resize_max=true, $apply_mask=true);
 					//	img_resize($src, $dest_gmcxml, 1600, 1200, $rgb=0xFFFFFF, $quality=90, $keep_origin_size=true, $trim=false, $resize_max=true, $apply_mask=false);
 					$img_path = '/images/goods/s/' . str_replace('jpg', 'webp', $rs_goods['image']);
