@@ -116,27 +116,16 @@ h2 {
   --color-white: #ffffff;
   /* Brand / accents */
   --color-green-100: #4a8c08;
-  --color-green-100-hover: color-mix(
-    in srgb,
-    var(--color-green-100),
-    transparent 20%
-  );
+  --color-green-100-hover: color-mix(in srgb, var(--color-green-100), transparent 20%);
   --color-green-20: #f1f4ea;
   --color-green-30: #edf2ee;
   --color-green-50: #67c409;
-  --color-green-hover: color-mix(
-    in srgb,
-    var(--color-green-50),
-    transparent 25%
-  );
+  --color-green-hover: color-mix(in srgb, var(--color-green-50), transparent 25%);
   --color-violet: #9f2178;
-  --color-violet-hover: color-mix(
-    in srgb,
-    var(--color-violet),
-    transparent 25%
-  );
+  --color-violet-hover: color-mix(in srgb, var(--color-violet), transparent 25%);
   --color-yellow: #f6bb05;
   --color-red: #ff0000;
+  --color-yellow-light: color-mix(in srgb, var(--color-yellow), transparent 80%);
   /* Gray scale */
   --color-gray-100: #757575;
   --color-gray-80: #999999;
@@ -149,11 +138,7 @@ h2 {
   /* Green gray / neutrals */
   --color-green-gray-30: #edf2ee;
   --color-green-gray-20: #f1f4ea;
-  --color-button-hover: color-mix(
-    in srgb,
-    var(--color-gray-40),
-    transparent 75%
-  );
+  --color-button-hover: color-mix(in srgb, var(--color-gray-40), transparent 75%);
 }
 /* Використання: color: var(--color-green-100); background: var(--color-gray-10); */
 button.button,
@@ -572,6 +557,7 @@ sl-rating {
   max-width: 100%;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  flex-wrap: wrap;
 }
 .hover-photo-viewer__thumbs > li {
   width: 64px;
@@ -619,12 +605,14 @@ sl-textarea::part(form-control-label) {
   font-weight: 300;
   margin-bottom: 0.5rem;
 }
-sl-input::part(input),
-sl-textarea::part(input) {
+sl-input::part(input), sl-input::part(textarea),
+sl-textarea::part(input),
+sl-textarea::part(textarea) {
   font-family: "Geologica", sans-serif;
 }
-sl-input::part(input)::placeholder,
-sl-textarea::part(input)::placeholder {
+sl-input::part(input)::placeholder, sl-input::part(textarea)::placeholder,
+sl-textarea::part(input)::placeholder,
+sl-textarea::part(textarea)::placeholder {
   font-size: 0.875rem;
   font-weight: 300;
   color: var(--color-gray-80);
@@ -3952,11 +3940,25 @@ body.secondary-hovered .catalog-overlay {
 .product-page__options_size label sl-tag,
 .product-page__options_size a sl-tag {
   font-size: 0.875rem;
-  font-weight: 300;
-  color: var(--color-green-100);
-  background: var(--color-green-20) url("/img/icons/icon-check-circle.svg") no-repeat 0.5625rem center/1rem 1rem;
+  font-weight: 400;
   padding: 0.25rem 0.5rem 0.25rem 2rem;
   border-radius: 1.25rem;
+  min-width: 163px;
+}
+.product-page__options_size label sl-tag[variant=success],
+.product-page__options_size a sl-tag[variant=success] {
+  color: var(--color-green-100);
+  background: var(--color-green-20) url("/img/icons/icon-check-circle.svg") no-repeat 0.5625rem center/1rem 1rem;
+}
+.product-page__options_size label sl-tag[variant=danger],
+.product-page__options_size a sl-tag[variant=danger] {
+  color: var(--color-gray-100);
+  background: var(--color-gray-20) url("/img/icons/icon-minus-circle.svg") no-repeat 0.5625rem center/1rem 1rem;
+}
+.product-page__options_size label sl-tag[variant=order],
+.product-page__options_size a sl-tag[variant=order] {
+  color: var(--color-green-100);
+  background: var(--color-green-20) url("/img/icons/icon-warning-circle.svg") no-repeat 0.5625rem center/1rem 1rem;
 }
 .product-page__options_size label .size__video-link,
 .product-page__options_size a .size__video-link {

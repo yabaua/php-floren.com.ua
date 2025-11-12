@@ -56,9 +56,9 @@
                 {if $size.db_1c_availability>0}
                 <sl-tag variant="success">Є в наявності</sl-tag>
                 {elseif $size.visibility==0}
-                <sl-tag variant="success">Немає в наявності</sl-tag>
+                <sl-tag variant="danger">Немає в наявності</sl-tag>
                 {elseif $GOOD_ONE.preorder==1}
-                <sl-tag variant="success">Під замовлення</sl-tag>
+                <sl-tag variant="order">Під замовлення</sl-tag>
                 {else}
                 <sl-tag variant="success">Немає в наявності</sl-tag>
                 {/if}
