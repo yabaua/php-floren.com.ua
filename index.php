@@ -1,6 +1,7 @@
 <?php
 error_reporting(E_ALL);
 register_shutdown_function('sql_stat');
+setlocale(LC_TIME, 'uk_UA.UTF-8');
 //setlocale(LC_ALL, 'ru_RU');
 // SQL+page stat
 $microtime=microtime();
@@ -230,6 +231,7 @@ $smarty->setCompileDir(__DIR__ . '/smarty5/templates_c/');
 $smarty->setCacheDir(__DIR__ . '/smarty5/cache/');
 $smarty->setConfigDir(__DIR__ . '/smarty5/src/');
 $smarty->muteUndefinedOrNullWarnings(true);
+
 // $smarty->debugging=true;
 
 $smarty->assign('CLIENT_COUNTRY', $_SESSION['clientCountry']);
@@ -830,30 +832,27 @@ $gTag.='
 }
 
 if ($URL[0]=="product") {
-		$goods_accessories = array();
-		$board_cnt = 4;
-		$db->query("SELECT *, g.ID AS goodID FROM goods".$db_sufix." g JOIN goods_class gc ON g.classID=gc.ID WHERE gc.motherID=82 ORDER BY RAND() LIMIT ".$board_cnt);
-		
-		while($gb=$db->fetch()){
-			$goods_accessories[]=$gb['goodID'];
-		}
+		$accessories_final = array();
+		$board_cnt = 5;
 	
-		$goods_board_comma = implode(",", $goods_accessories);
-	
-		$db->query("SELECT g.ID, g.classID, g.link, g.name, g.image, min(gf.price) AS min_price, max(gf.price) AS max_price FROM goods".$db_sufix." g
-					LEFT JOIN goods_forms gf ON g.ID=gf.goodID
-					WHERE g.ID IN (".$goods_board_comma.") AND g.availability=1 AND gf.price > 0
-					GROUP BY g.ID");
+		$db->query("SELECT g.ID, g.classID, g.link, g.name, g.image, min(gf.price) AS min_price, max(gf.price) AS max_price, AVG(gv.vote) AS vote
+					FROM goods".$db_sufix." g
+					JOIN goods_forms gf ON g.ID=gf.goodID
+					JOIN goods_class gc ON g.classID=gc.ID
+					LEFT JOIN goods_voting gv ON g.ID=gv.pageID AND pageType='good'
+					WHERE gc.motherID=82 AND g.availability=1 AND gf.price > 0
+					GROUP BY g.ID
+					ORDER BY RAND()
+					LIMIT ".$board_cnt);
 	
 			while($f=$db->fetch()){
 				$accessories_final[]=$f;
 			}
-			
 		$smarty->assign("GOODS_BOARD_ACCESSORIES", $accessories_final);
 }
 
 
-// Перелинковка
+// Перелинковка – товари з тієї ж категорії
 $goods_board=array();
 if($URL[0]=="product" || $URL[0]=="buket"){
 	
@@ -861,7 +860,7 @@ if($URL[0]=="product" || $URL[0]=="buket"){
 	else $cur_gID=intval(substr($PARAM[0], 0, strpos($PARAM[0], '_')));
 
 	$classID_sql=" AND classID='".$classID."' AND g.availability=1";
-	$board_cnt=4;
+	$board_cnt=5;
 
 	$db->query("SELECT DISTINCT ID FROM goods".$db_sufix." g WHERE ID>".$cur_gID.$classID_sql." ORDER BY ID LIMIT ".$board_cnt);
 
@@ -893,8 +892,10 @@ if($URL[0]=="product" || $URL[0]=="buket"){
 
 		$goods_board_comma=implode(",", $goods_board);
         
-		$db->query("SELECT g.ID, g.classID, g.link, g.name, g.image, min(gf.price) AS min_price, max(gf.price) AS max_price FROM goods".$db_sufix." g
-				LEFT JOIN goods_forms gf ON g.ID=gf.goodID
+		$db->query("SELECT g.ID, g.classID, g.link, g.name, g.image, min(gf.price) AS min_price, max(gf.price) AS max_price, ROUND(AVG(gv.vote), 1) AS vote
+				FROM goods".$db_sufix." g
+				JOIN goods_forms gf ON g.ID=gf.goodID
+				LEFT JOIN goods_voting gv ON g.ID=gv.pageID AND pageType='good'
 				WHERE g.ID IN (".$goods_board_comma.") AND g.availability=1 AND gf.price > 0
 				GROUP BY g.ID");
 
@@ -916,52 +917,6 @@ if($URL[0]=="product" || $URL[0]=="buket"){
 
 	$smarty->assign("GOODS_BOARD", $goods_board_final);
 
-	if($URL[0]!='wedding_bouquet' && $URL[0]!='buket'){
-
-		$db->query("SELECT g.ID, g.classID, g.link, g.name, g.image, min(gf.price) AS min_price, max(gf.price) AS max_price, gf.color FROM goods".$db_sufix." g
-					JOIN goods_forms gf	ON g.ID=gf.goodID
-					WHERE g.classID=51 AND g.availability=1 AND gf.price > 0 GROUP BY g.ID ORDER BY RAND() LIMIT 2");
-
-		while($f=$db->fetch()){
-			$goods_board_lechuza[]=$f;
-			$goods_board_lechuza[count($goods_board_lechuza)-1]['image']="/images/ins/s/".$f['image'];
-		}
-
-		if($motherClassID==3){
-			$goods_board_classID="AND g.classID='31'";
-			$goods_board_title_2=array('link'=>$lang_url.'/planters/ceramic/', 'name'=>$lingvo['goods_ceramic']);
-		}elseif ($motherClassID==5){
-			$goods_board_classID="AND g.classID IN (41, 16, 20)";
-			$goods_board_title_2=array('link'=>$lang_url.'/komnatnie-rasteniya/', 'name'=>$lingvo['plants']);
-		}else{}
-			
-		
-		$db->query("SELECT g.ID, g.classID,g.makerID, g.link, g.name, g.image, min(gf.price) AS min_price, max(gf.price) AS max_price, gf.color FROM goods".$db_sufix." g
-						JOIN goods_forms gf	ON g.ID=gf.goodID
-						WHERE 1=1 AND g.availability=1 ".$goods_board_classID." AND gf.price > 0
-						GROUP BY g.ID ORDER BY RAND() LIMIT 2");
-
-		while($f=$db->fetch()){
-			$goods_board_lechuza[]=$f;
-
-			$goods_board_lechuza[count($goods_board_lechuza)-1]['image']="/images/ins/s/".$f['image'];
-		}
-
-
-		foreach ($goods_board_lechuza AS $k=>$v){
-
-			if (in_array($v['classID'], array('78', '79', '80'))) {
-				$goods_board_lechuza[$k]['new_link']=$lang_url.'/buket/'.$v['ID'].'/';
-			} else {
-				$goods_board_lechuza[$k]['new_link']=$lang_url.'/product/'.$v['ID'].'_'.$v['link'].'/';
-			}
-		
-		}
-
-
-		$smarty->assign("GOODS_BOARD_LECHUZA", $goods_board_lechuza);
-		$smarty->assign("GOODS_BOARD_TITLE_2",$goods_board_title_2);
-	}
 }
 
 if (isset($dept) && $dept=='landscape'){

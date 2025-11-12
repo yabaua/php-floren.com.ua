@@ -24,8 +24,8 @@
   <script type="module" crossorigin src="/assets/js/_expandableText.js"></script>
   <script type="module" crossorigin src="/assets/js/main.js"></script>
 
-  <link rel="stylesheet" href="/assets/css/_swipers.css" />
-  <link rel="stylesheet" href="/assets/css/index.css" />
+  <link rel="stylesheet" href="/assets/css/_swipers.css?2" />
+  <link rel="stylesheet" href="/assets/css/index.css?2" />
 </head>
 
 <body>

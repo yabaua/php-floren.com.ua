@@ -319,10 +319,10 @@ function checkProductParams(text){
     <div class="tabs-descr">
 
     <ul class="tabs__header">
-		{if $GOOD_ONE.body}<li class="tabs__headline" data-tab='0'>{$LINGVO.descr}</li>{/if}
-		<li class="tabs__headline" data-tab='1'>{$LINGVO.accessory}</li>
-		{if $GOOD_TECH}<li class="tabs__headline" data-tab='2'>{$LINGVO.plant_care}</li>{/if}
-		<li class="tabs__headline" data-tab='3'>{$LINGVO.rewies}</li>
+		{if $GOOD_ONE.body}	<li class="tabs__headline" data-tab='0'>{$LINGVO.descr}</li>{/if}
+												<li class="tabs__headline" data-tab='1'>{$LINGVO.accessory}</li>
+		{if $GOOD_TECH}			<li class="tabs__headline" data-tab='2'>{$LINGVO.plant_care}</li>{/if}
+												<li class="tabs__headline" data-tab='3'>{$LINGVO.rewies}</li>
     </ul>
 
     <ul class="tabs__body">

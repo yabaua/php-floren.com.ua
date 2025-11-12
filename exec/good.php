@@ -842,7 +842,7 @@ $smarty->assign("CUR_GFSID", $curFID);
 
 
 		//=========ОТЗЫВЫ
-	//	$good_feedback=array();
+		$good_feedback=array(); // it was commented but do not know why (maybe schema script). Without it - warning #963 – if($good_feedback)
 		$db->query("SELECT * FROM goods_voting WHERE pageID='".$gID."' AND pageType='good' AND act='1' ORDER BY date_add DESC");
 		if($db->num_rows()){
 			while($g_fb=$db->fetch()){
