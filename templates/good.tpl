@@ -10,6 +10,7 @@
       {if $GOOD_IMAGES}
       <ul class="hover-photo-viewer__thumbs">
         {foreach item=GI name=GI from=$GOOD_IMAGES}
+        {if $GI@iteration>5}{continue}{/if}
         <li class="active">
           <img src="{$GI}" alt="{$GOOD_ONE.name} фото {$smarty.foreach.GI.iteration}"/>
         </li>
