@@ -11,7 +11,7 @@
       <ul class="hover-photo-viewer__thumbs">
         {foreach item=GI name=GI from=$GOOD_IMAGES}
         {if $GI@iteration>5}{continue}{/if}
-        <li class="active">
+        <li{if $GI@iteration==1} class="active"{/if}>
           <img src="{$GI}" alt="{$GOOD_ONE.name} фото {$smarty.foreach.GI.iteration}"/>
         </li>
         {/foreach}
@@ -77,7 +77,7 @@
         <sl-radio-group label="{$LINGVO.choose_color}" name="color" value="{$CUR_COLOR_TTL}">
         {foreach from=$G_COLOR item=C key=k}
           <sl-radio-button value="{$C.colorTitle}">
-            <a href="{$C.hrefID}"><img src="{$C.previewImg}" alt="{$C.colorTitle}" /></a>
+            <a href="{$C.hrefID}"><img src="{$C.previewImg}" alt="{$C.colorTitle}"/></a>
           </sl-radio-button>
         {/foreach}
         </sl-radio-group>
@@ -114,41 +114,41 @@
           <ul>
             {if $PLANT_GOOD}
     					<li>{$LINGVO.info_height}</li>
-    					<li>{$LINGVO.info_planters}</li>
-    					<li>{$LINGVO.info_original_quality}</li>
-    					<li>{$LINGVO.send_photo}</li>
-    					<li>{$LINGVO.info_good_delivery}</li>
+            <li>{$LINGVO.info_planters}</li>
+            <li>{$LINGVO.info_original_quality}</li>
+            <li>{$LINGVO.send_photo}</li>
+            <li>{$LINGVO.info_good_delivery}</li>
     				{/if}
     
     				{if $SPECIAL_CERAMIC_GOOD}
     					<li>{$LINGVO.handmade}</li>
-    					<li>{$LINGVO.also_we_have_sizes}</li>
-    					<li>{$LINGVO.also_we_have_colors}</li>
+            <li>{$LINGVO.also_we_have_sizes}</li>
+            <li>{$LINGVO.also_we_have_colors}</li>
     				{/if}
     
     				{if $CERAMIC_GOOD}
     					<li>{$LINGVO.made_ua}</li>
-    					<li>{$LINGVO.quality_ceramics}</li>
-    					<li>{$LINGVO.many_colors}</li>
-    					<li>{$LINGVO.perfect_forms}</li>
+            <li>{$LINGVO.quality_ceramics}</li>
+            <li>{$LINGVO.many_colors}</li>
+            <li>{$LINGVO.perfect_forms}</li>
     				{/if}
     
     				{if $LECHUZA_GOOD}
     					<li>{$LINGVO.info_original_quality}</li>
-    					<li>{$LINGVO.made_de}</li>
-    					<li>{$LINGVO.quality_plastik}</li>
-    					<li>{$LINGVO.autopoliv}</li>
-    					<li>{$LINGVO.water_level}</li>
-    					<li>{$LINGVO.good_design}</li>
-    					<li>{$LINGVO.uf_rays}</li>
+            <li>{$LINGVO.made_de}</li>
+            <li>{$LINGVO.quality_plastik}</li>
+            <li>{$LINGVO.autopoliv}</li>
+            <li>{$LINGVO.water_level}</li>
+            <li>{$LINGVO.good_design}</li>
+            <li>{$LINGVO.uf_rays}</li>
     				{/if}
     
     				{if $LAMELA_GOOD}
     
     					<li>{$LINGVO.made_pl}</li>
-    					<li>{$LINGVO.hight_quality_plastik}</li>
-    					<li>{$LINGVO.kashpo_type}</li>
-    					<li>{$LINGVO.inner_kashpo}</li>
+            <li>{$LINGVO.hight_quality_plastik}</li>
+            <li>{$LINGVO.kashpo_type}</li>
+            <li>{$LINGVO.inner_kashpo}</li>
     
     				{/if}
           </ul>
@@ -272,186 +272,187 @@
             <div class="accessories__list_item">
               <a href="{$LANGURL}/product/{$GB.ID}_{$GB.link}/" class="accessories__list_item-image" title="{$GB.name|replace:'"':''}">
                 <img src="/images/goods/s/{$GB.image|replace:'.jpg':'.webp'}" alt="{$GB.name|replace:'"':''}"/>
+            </a>
+            <div class="accessories__list_item-info">
+              <a href="{$LANGURL}/product/{$GB.ID}_{$GB.link}/">
+                <b>{$GB.name}</b>
               </a>
-              <div class="accessories__list_item-info">
-                <a href="{$LANGURL}/product/{$GB.ID}_{$GB.link}/">
-                  <b>{$GB.name}</b>
-                </a>
-                <span>{if $GB.min_price==$GB.max_price}{$GB.min_price}{else}{$GB.min_price}&nbsp;&ndash;&nbsp;{$GB.max_price}{/if}&nbsp;₴</span>
-                <sl-rating value="{$GB.vote}" readonly></sl-rating>
-              </div>
+              <span>{if $GB.min_price==$GB.max_price}{$GB.min_price}{else}{$GB.min_price}&nbsp;&ndash;&nbsp;{$GB.max_price}{/if}&nbsp;₴</span>
+              <sl-rating value="{$GB.vote}" readonly></sl-rating>
             </div>
+          </div>
             {/foreach}
           </div>
-        </section>
+      </section>
       {/if}  
 
         <section>
-          <h3>{$LINGVO.other_in_cat}: {$GOOD_ONE.className}</h3>
-          <div class="accessories__list">
+        <h3>{$LINGVO.other_in_cat}: {$GOOD_ONE.className}</h3>
+        <div class="accessories__list">
           {foreach item=GB name=GB from=$GOODS_BOARD}
             <div class="accessories__list_item">
-              <a href="{$GB.new_link}" class="accessories__list_item-image" title="{$GB.name|replace:'"':''}">
+            <a href="{$GB.new_link}" class="accessories__list_item-image" title="{$GB.name|replace:'"':''}">
                 <img src="/images/goods/s/{$GB.image|replace:'.jpg':'.webp'}" alt="{$GB.name|replace:'"':''}"/>
-              </a>
-              <div class="accessories__list_item-info">
-                <a href="{$GB.new_link}" title="{$LINGVO.button_buy} {$GB.name|replace:'"':''}">
+          </a>
+          <div class="accessories__list_item-info">
+            <a href="{$GB.new_link}" title="{$LINGVO.button_buy} {$GB.name|replace:'"':''}">
                   <b>{$GB.name|replace:'"':''}</b>
                 </a>
                 <span>{if $GB.min_price==$GB.max_price}{$GB.min_price}{else}{$GB.min_price}&nbsp;&ndash;&nbsp;{$GB.max_price}{/if}&nbsp;₴</span>
                 <sl-rating value="{$GB.vote}" readonly title="{$GB.vote}"></sl-rating>
-              </div>
-            </div>
+          </div>
+        </div>
           {/foreach}  
           </div>
-        </section>
+    </section>
 
-        <section>
-          <h3>Дивіться також</h3>
-          <div class="accessories__list">
-            <div class="accessories__list_item">
-              <a href="" class="accessories__list_item-image">
-                <img src="/img/homepage/product-1.png" alt=""/>
-              </a>
-              <div class="accessories__list_item-info">
-                <a href="">
-                  <b>Заміокулькас</b>
-                </a>
-                <span>129,99 ₴</span>
-                <sl-rating value="5" readonly></sl-rating>
-              </div>
-            </div>
-            <div class="accessories__list_item">
-              <a href="" class="accessories__list_item-image">
-                <img src="/img/homepage/product-2.png" alt=""/>
-              </a>
-              <div class="accessories__list_item-info">
-                <a href="">
-                  <b>Антуріум</b>
-                </a>
-                <span>114,99 ₴</span>
-                <sl-rating value="5" readonly></sl-rating>
-              </div>
-            </div>
-            <div class="accessories__list_item">
-              <a href="" class="accessories__list_item-image">
-                <img src="/img/homepage/product-3.png" alt=""/>
-              </a>
-              <div class="accessories__list_item-info">
-                <a href="">
-                  <b>Розумний вазон Lechuza Delta</b>
-                </a>
-                <span>114,99 ₴</span>
-                <sl-rating value="5" readonly></sl-rating>
-              </div>
-            </div>
-            <div class="accessories__list_item">
-              <a href="" class="accessories__list_item-image">
-                <img src="/img/homepage/product-4.png" alt=""/>
-              </a>
-              <div class="accessories__list_item-info">
-                <a href="">
-                  <b>Антуріум</b>
-                </a>
-                <span>114,99 ₴</span>
-                <sl-rating value="5" readonly></sl-rating>
-              </div>
-            </div>
-            <div class="accessories__list_item">
-              <a href="" class="accessories__list_item-image">
-                <img src="/img/homepage/product-5.png" alt=""/>
-              </a>
-              <div class="accessories__list_item-info">
-                <a href="">
-                  <b>Антуріум</b>
-                </a>
-                <span>114,99 ₴</span>
-                <sl-rating value="5" readonly></sl-rating>
-              </div>
-            </div>
+    <section>
+      <h3>Дивіться також</h3>
+      <div class="accessories__list">
+        <div class="accessories__list_item">
+          <a href="" class="accessories__list_item-image">
+            <img src="/img/homepage/product-1.png" alt=""/>
+          </a>
+          <div class="accessories__list_item-info">
+            <a href="">
+              <b>Заміокулькас</b>
+            </a>
+            <span>129,99 ₴</span>
+            <sl-rating value="5" readonly></sl-rating>
           </div>
-        </section>
-      </div>
-    </sl-tab-panel>
-    {if $GOOD_TECH}
-    <sl-tab-panel name="care">
-      <div class="product-page__description_care">
-        <table>
-          <tbody>
-            <tr>
-              {foreach $GOOD_TECH as $GT}
-              <td>
-                <b>{$GT.name}</b>
-              </td>
-              <td>{$GT.val} {$GT.measure}</td>
-              {if $GT@iteration % 3 == 2}</tr><tr>{/if}
-              {/foreach}
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </sl-tab-panel>
-    {/if}
-    <sl-tab-panel name="reviews">
-      <!-- Секція відгуків: форма і список -->
-
-      <!-- Форма відгуків -->
-      <!-- Comments Form Section -->
-      <div class="reviews-section">
-        <h2>Відгук або запитання</h2>
-        <form method="post" action="" onsubmit="return check_form_blog_comment_add(this);">
-        <input type="hidden" name="pageID" value="{$GOOD_ONE.ID}">
-				<input type="hidden" name="pageType" value="good">
-        <div class="reviews-section__form">
-          
-          <sl-input placeholder="{$LINGVO.fb_name}"></sl-input>
-          <sl-input placeholder="{$LINGVO.fb_phone}"></sl-input>
-          <sl-textarea placeholder="{$LINGVO.fb_comment}" rows="1" resize="auto"></sl-textarea>
-          <div class="reviews-section__form_rating">
-            <span>{$LINGVO.fb_stars}:</span>
-            <sl-rating></sl-rating>
+        </div>
+        <div class="accessories__list_item">
+          <a href="" class="accessories__list_item-image">
+            <img src="/img/homepage/product-2.png" alt=""/>
+          </a>
+          <div class="accessories__list_item-info">
+            <a href="">
+              <b>Антуріум</b>
+            </a>
+            <span>114,99 ₴</span>
+            <sl-rating value="5" readonly></sl-rating>
           </div>
-          <button class="button button--primary button--pill">{$LINGVO.send}</button>
+        </div>
+        <div class="accessories__list_item">
+          <a href="" class="accessories__list_item-image">
+            <img src="/img/homepage/product-3.png" alt=""/>
+          </a>
+          <div class="accessories__list_item-info">
+            <a href="">
+              <b>Розумний вазон Lechuza Delta</b>
+            </a>
+            <span>114,99 ₴</span>
+            <sl-rating value="5" readonly></sl-rating>
+          </div>
+        </div>
+        <div class="accessories__list_item">
+          <a href="" class="accessories__list_item-image">
+            <img src="/img/homepage/product-4.png" alt=""/>
+          </a>
+          <div class="accessories__list_item-info">
+            <a href="">
+              <b>Антуріум</b>
+            </a>
+            <span>114,99 ₴</span>
+            <sl-rating value="5" readonly></sl-rating>
+          </div>
+        </div>
+        <div class="accessories__list_item">
+          <a href="" class="accessories__list_item-image">
+            <img src="/img/homepage/product-5.png" alt=""/>
+          </a>
+          <div class="accessories__list_item-info">
+            <a href="">
+              <b>Антуріум</b>
+            </a>
+            <span>114,99 ₴</span>
+            <sl-rating value="5" readonly></sl-rating>
+          </div>
         </div>
       </div>
-      </form>
-      <!-- Список відгуків -->
-      <!-- Comments List Section -->
-      
-      <div class="reviews-section__comments">
-        <!-- Comment Item -->
+    </section>
+  </div>
+</sl-tab-panel>
+    {if $GOOD_TECH}
+    <sl-tab-panel name="care">
+  <div class="product-page__description_care">
+    <table>
+      <tbody>
+        <tr>
+              {foreach $GOOD_TECH as $GT}
+              <td>
+            <b>{$GT.name}</b>
+          </td>
+          <td>{$GT.val} {$GT.measure}</td>
+              {if $GT@iteration % 3 == 2}</tr>
+        <tr>{/if}
+              {/foreach}
+            </tr>
+      </tbody>
+    </table>
+  </div>
+</sl-tab-panel>
+    {/if}
+    <sl-tab-panel name="reviews">
+  <!-- Секція відгуків: форма і список -->
+
+  <!-- Форма відгуків -->
+  <!-- Comments Form Section -->
+  <div class="reviews-section">
+    <h2>Відгук або запитання</h2>
+    <form method="post" action="" onsubmit="return check_form_blog_comment_add(this);">
+      <input type="hidden" name="pageID" value="{$GOOD_ONE.ID}">
+      <input type="hidden" name="pageType" value="good">
+      <div class="reviews-section__form">
+
+        <sl-input placeholder="{$LINGVO.fb_name}"></sl-input>
+        <sl-input placeholder="{$LINGVO.fb_phone}"></sl-input>
+        <sl-textarea placeholder="{$LINGVO.fb_comment}" rows="1" resize="auto"></sl-textarea>
+        <div class="reviews-section__form_rating">
+          <span>{$LINGVO.fb_stars}:</span>
+          <sl-rating></sl-rating>
+        </div>
+        <button class="button button--primary button--pill">{$LINGVO.send}</button>
+      </div>
+    </div>
+  </form>
+  <!-- Список відгуків -->
+  <!-- Comments List Section -->
+
+  <div class="reviews-section__comments">
+    <!-- Comment Item -->
         {if $GOOD_FEEDBACK}
         {foreach item=COMM from=$GOOD_FEEDBACK}
         <div class="comments__item">
-          <div class="comments__item-date">{$COMM.date_add|date_format:"%d %B %Y"|capitalize:true}</div>
-          <div class="comments__item-grid">
-            <div class="comments__item-title">
-              <b>{$COMM.u_name|escape}</b>
-              <sl-rating size="small" value="{$COMM.vote|escape}" readonly title="{$COMM.vote|escape}"></sl-rating>
-            </div>
-            <div class="comments__item-text">
+      <div class="comments__item-date">{$COMM.date_add|date_format:"%d %B %Y"|capitalize:true}</div>
+      <div class="comments__item-grid">
+        <div class="comments__item-title">
+          <b>{$COMM.u_name|escape}</b>
+          <sl-rating size="small" value="{$COMM.vote|escape}" readonly title="{$COMM.vote|escape}"></sl-rating>
+        </div>
+        <div class="comments__item-text">
               {$COMM.message|nl2br}
             </div>
-          </div>
-        </div>
+      </div>
+    </div>
       {/foreach}
       {else}
       <div class="comments__item">
-          <div class="comments__item-date">{$smarty.now|date_format:"%d %B %Y"|capitalize:true}</div>
-          <div class="comments__item-grid">
-            <div class="comments__item-title">
-              <b>Флорен</b>
-              <sl-rating size="small" value="5" readonly></sl-rating>
-            </div>
-            <div class="comments__item-text">
+      <div class="comments__item-date">{$smarty.now|date_format:"%d %B %Y"|capitalize:true}</div>
+      <div class="comments__item-grid">
+        <div class="comments__item-title">
+          <b>Флорен</b>
+          <sl-rating size="small" value="5" readonly></sl-rating>
+        </div>
+        <div class="comments__item-text">
               {$LINGVO.no_rewies_yet}
             </div>
-          </div>
-        </div>
+      </div>
+    </div>
       
       {/if}
       </div>
-      
-    </sl-tab-panel>
-  </sl-tab-group>
+
+</sl-tab-panel>
+</sl-tab-group>
 </div>

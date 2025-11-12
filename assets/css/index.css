@@ -553,7 +553,7 @@ sl-rating {
 }
 .hover-photo-viewer__main {
   width: 100%;
-  aspect-ratio: 1.32;
+  aspect-ratio: 1;
   border-radius: 0.5rem;
   overflow: hidden;
   cursor: pointer;
@@ -3468,6 +3468,7 @@ body.secondary-hovered .catalog-overlay {
   padding: 0rem 2.5rem 0.5rem 0.5rem;
   margin-top: auto;
   position: relative;
+  white-space: nowrap;
 }
 .catalog-page__content_product-card .product-card__price del {
   color: var(--color-gray-60);
