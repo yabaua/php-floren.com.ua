@@ -338,8 +338,8 @@ $smarty->assign("TOP_SEO_TEXT",	$topSEOtext);
 		
 		    $new_body_text .= $block . "\n";
 		}
-
-$smarty->assign("CENTER_SEO_TEXT",$new_body_text);
+	$new_body_text=preg_replace('/(<table\b[^>]*>.*?<\/table>)/is', '<div class="article-section__table">$1</div>', $new_body_text);
+	$smarty->assign("CENTER_SEO_TEXT",$new_body_text);
 
 $TITLE[1]=$meta_title;
 $smarty->assign("META_DESCRIPTION",		$meta_description);

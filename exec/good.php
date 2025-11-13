@@ -814,17 +814,13 @@ $smarty->assign("CUR_GFSID", $curFID);
 		}
 		$og_title = str_replace('"','&quot;', str_replace("'", "&#700;", strip_tags($goodH1)));
 		
-		
-		
 		$body_text=$good[$gID]['body'];
-		
 		preg_match_all('/<h2\b[^>]*>(.*?)<\/h2>(.*?)(?=(<h2\b[^>]*>|$))/is', $body_text, $matches, PREG_SET_ORDER);
 		$new_body_text = '';
-
 		foreach ($matches as $m) {
-		    $body_title = trim($m[1]);
-		    $body_content = trim($m[2]);
-		
+		     $body_title = trim($m[1]);
+		     $body_content = trim($m[2]);
+
 		    // Оборачиваем все <p>... в div.article-section__content
 		    $block = '<section class="article-section">' . "\n";
 		    $block .= '<h2 class="article-section__title">' . $body_title . '</h2>' . "\n";
@@ -833,7 +829,7 @@ $smarty->assign("CUR_GFSID", $curFID);
 		
 		    $new_body_text .= $block . "\n";
 		}
-		$smarty->assign("GOOD_ONE_BODY", $new_body_text.'</div>');
+		$smarty->assign("GOOD_ONE_BODY", $new_body_text);
 		
 		$smarty->assign("GOOD_ONE",$good[$gID]);
 		$smarty->assign("GOOD_H1", $goodH1);

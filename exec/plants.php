@@ -680,7 +680,7 @@ $schema_prices_min=array();
 		    $new_body_text .= $block . "\n";
 		}
 		$new_body_text=preg_replace('/(<table\b[^>]*>.*?<\/table>)/is', '<div class="article-section__table">$1</div>', $new_body_text);
-		$smarty->assign("CENTER_SEO_TEXT", $new_body_text.'</div>');
+		$smarty->assign("CENTER_SEO_TEXT", $new_body_text);
 		
 		
 		$smarty->assign("CATEGORY_M_ID",$f_cat['ID']);
