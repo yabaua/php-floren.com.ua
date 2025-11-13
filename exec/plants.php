@@ -664,7 +664,21 @@ $schema_prices_min=array();
 		$smarty->assign("LIST_OR_TBL",$f_cat['list_or_tbl']);
 		
 		$body_text=$centerSEOtext;
-		$new_body_text=preg_replace('/(<h2\b[^>]*>.*?<\/h2>)/is', '</div></section><section class="article-section">$1<div class="article-section__content">', $body_text);
+		preg_match_all('/<h2\b[^>]*>(.*?)<\/h2>(.*?)(?=(<h2\b[^>]*>|$))/is', $body_text, $matches, PREG_SET_ORDER);
+		$new_body_text = '';
+
+		foreach ($matches as $m) {
+		    $body_title = trim($m[1]);
+		    $body_content = trim($m[2]);
+		
+		    // Оборачиваем все <p>... в div.article-section__content
+		    $block = '<section class="article-section">' . "\n";
+		    $block .= '<h2 class="article-section__title">' . $body_title . '</h2>' . "\n";
+		    $block .= '<div class="article-section__content">' . "\n" . $body_content . "\n" . '</div>' . "\n";
+		    $block .= '</section>';
+		
+		    $new_body_text .= $block . "\n";
+		}
 		$new_body_text=preg_replace('/(<table\b[^>]*>.*?<\/table>)/is', '<div class="article-section__table">$1</div>', $new_body_text);
 		$smarty->assign("CENTER_SEO_TEXT", $new_body_text.'</div>');
 		

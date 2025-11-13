@@ -254,13 +254,11 @@
     <!-- Опис -->
     {if $GOOD_ONE.body}
     <sl-tab-panel name="description">
-      <article class="catalog-page__content_article">
-        <div class="product-page__description_info">
-          <section>
+      <div class="product-page__description_info">
+        <article class="catalog-page__content_article">
             {$GOOD_ONE_BODY}
-          </section>
-        </div>
-      </article>
+        </article>
+      </div>
     </sl-tab-panel>
     {/if}
 
