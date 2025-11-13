@@ -56,11 +56,11 @@
                 {if $size.db_1c_availability>0}
                 <sl-tag variant="success">Є в наявності</sl-tag>
                 {elseif $size.visibility==0}
-                <sl-tag variant="danger">Немає в наявності</sl-tag>
+                <sl-tag variant="danger" disabled>Немає в наявності</sl-tag>
                 {elseif $GOOD_ONE.preorder==1}
                 <sl-tag variant="order">Під замовлення</sl-tag>
                 {else}
-                <sl-tag variant="success">Немає в наявності</sl-tag>
+                <sl-tag variant="danger" disabled>Немає в наявності</sl-tag>
                 {/if}
               {/if}
               <button href="" class="size__video-link" aria-label="{$LINGVO.show_video} {$GOOD_H1} {$size.measure}">

@@ -3957,8 +3957,8 @@ body.secondary-hovered .catalog-overlay {
 }
 .product-page__options_size label sl-tag[variant=order],
 .product-page__options_size a sl-tag[variant=order] {
-  color: var(--color-green-100);
-  background: var(--color-green-20) url("/img/icons/icon-warning-circle.svg") no-repeat 0.5625rem center/1rem 1rem;
+  color: var(--color-gray-100);
+  background: var(--color-gray-20) url("/img/icons/icon-warning-circle.svg") no-repeat 0.5625rem center/1rem 1rem;
 }
 .product-page__options_size label .size__video-link,
 .product-page__options_size a .size__video-link {
