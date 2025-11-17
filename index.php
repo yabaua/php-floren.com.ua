@@ -306,20 +306,20 @@ $smarty->assign("META_REL_ALTERNATE",'<link rel="alternate" href="https://floren
 
 $group_sql = '';
 
+/* this was earlier
 if ($URL[0]=='planters') {
 	$group_sql = ' AND alias !="planters"';
 }
-
+*/
 
 $category_left=array();
 $db->query("SELECT * FROM goods".$db_sufix."_class WHERE motherID=0 AND act='1'".$group_sql." ORDER BY sort DESC,name");
 
 
 while ($f=$db->fetch()) {
+	$category_left[$f['ID']]['ID']=$f['ID'];
 	$category_left[$f['ID']]['name']=$f['name'];
 	$category_left[$f['ID']]['alias']=$f['alias'];
-
-	$category_left[$f['ID']]['ID']=$f['ID'];
 	$category_left[$f['ID']]['img']=$f['img'];
 
 	$db->query("SELECT gc.* FROM goods".$db_sufix."_class gc WHERE motherID=".$f['ID']." AND act='1' ORDER BY sort DESC",1);
@@ -961,7 +961,14 @@ if(isset($_REQUEST['cb_send'])){
 */
 
 
-
+$lastPhotos=array();
+$db->query("SELECT photo_name".$db_sufix." AS photo_name, photo_dsc".$db_sufix." AS photo_dsc, date_add, photo_url  FROM last_photos ORDER BY date_add DESC LIMIT 16");
+while($f=$db->fetch()){
+	$lastPhotos[]=$f;
+//	$indx_lastPhotos[count($indx_lastPhotos)-1]['photo_name']=$f['photo_name'.$db_sufix];
+//	$indx_lastPhotos[count($indx_lastPhotos)-1]['photo_dsc']=$f['photo_dsc'.$db_sufix];
+}
+$smarty->assign("LASTPHOTOS", $lastPhotos);
 
 //clients
 $clients=array();

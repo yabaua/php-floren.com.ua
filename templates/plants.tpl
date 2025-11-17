@@ -1,15 +1,18 @@
 		{if $FILTERS}
-      
 		<!-- Фільтри товарів -->
           <div class="catalog-page__content_filters">
           {foreach from=$FILTERS item=F}
-            <sl-select placeholder="{$F.groupName}">
-              {foreach from=$F.sub_filters item=SUBF}
-              {if $CATEGORY_ID == '80' ||  $FROM_GOODS == 1}
-              <sl-option value="option-1"><a href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{$SUBF.link}{$SUBF.need_slash}">{$SUBF.gfName} ({$SUBF.cnt})</a></sl-option>
-              {else}
-              <sl-option value="option-1"><a href="{$LANGURL}/{$URL[0]}/{$SUBF.link}{$SUBF.need_slash}">{$SUBF.gfName} ({$SUBF.cnt})</a></sl-option>
-              {/if}
+            <sl-select placeholder="{$F.groupName}" value="{$F.active_alias}">
+              {foreach from=$F.sub_filters key=K item=SUBF}
+                {if $SUBF.cnt==0 || $SUBF.disable==1 && $SUBF.act!=1}
+                    <sl-option value="{$K}" disabled>{$SUBF.gfName} ({$SUBF.cnt})</sl-option>
+                {else}
+                  {if $CATEGORY_ID == '80' || $FROM_GOODS == 1}
+                    <sl-option value="{$K}"><a href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{$SUBF.link}{$SUBF.need_slash}">{$SUBF.gfName}{if $SUBF.act} ({$SUBF.cnt}){/if}</a></sl-option>
+                  {else}
+                    <sl-option value="{$K}"><a href="{$LANGURL}/{$URL[0]}/{$SUBF.link}{$SUBF.need_slash}">{$SUBF.gfName}{if !$SUBF.act} ({$SUBF.cnt}){/if}</a></sl-option>
+                  {/if}
+                {/if}
               {/foreach}
             </sl-select>
           {/foreach}
@@ -41,7 +44,7 @@
   {/if}{** IF FILTERS **}
 		<!-- Info показано скільки товарів -->
           <div class="catalog-page__content_showed">
-          Показано <span>1 - 25</span> з <span>1230</span>
+          Показано <span>1 - 25</span> з <span>{$GOODS_CNT}</span>
           </div>
 
           <!-- Заголовок і опис категорії -->
@@ -59,7 +62,7 @@
 		    {foreach from=$PROMO item=P}
             <!-- Product Card Start-->
             <!--product_in_listingEX-->
-			<!--dg_prod_in_lisintg_href:{$LANGURL}/product/{$P.ID}_{$P.link}/;;dg_prod_in_lisintg_anchor:{$P.name}-->
+			      <!--dg_prod_in_lisintg_href:{$LANGURL}/product/{$P.ID}_{$P.link}/;;dg_prod_in_lisintg_anchor:{$P.name}-->
             <div class="catalog-page__content_product-card">
               <div class="product-card__wrapper">
                 <div class="product-card__image">
@@ -90,10 +93,11 @@
                     <ul>
                     {foreach from=$P.forms item=F}
                       <li>{if $F.dia}&#216; {$F.dia} {/if}
-    						{if $F.wdt}{$F.wdt} 
-    						{if $F.depth}x {$F.depth} {/if}{/if}
-    						{if $F.hgt}x {$F.hgt}{/if}
-    						{if $F.measure_qt}{$F.measure_qt} {$F.unit}{/if}</li>
+              						{if $F.wdt}{$F.wdt} 
+              						{if $F.depth}x {$F.depth} {/if}{/if}
+              						{if $F.hgt}x {$F.hgt}{/if}
+              						{if $F.measure_qt}{$F.measure_qt} {$F.unit}{/if}
+              				</li>
                     {/foreach}
                     </ul>
                   </section>

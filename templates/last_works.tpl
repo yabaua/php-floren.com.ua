@@ -5,103 +5,24 @@
   <img class="homepage__last-works-leaf-2" src="/img/leaf-4.png" alt="leaf"/>
 
   <div class="works-swiper">
-    <h2>Останні роботи</h2>
+    <h2>{$LINGVO.last_photos}</h2>
     <div class="swiper" data-swiper="works-swiper">
       <!-- Additional required wrapper -->
       <div class="swiper-wrapper">
         <!-- Slides -->
+        {foreach item=LPH name=LPH from=$LASTPHOTOS}
         <div class="swiper-slide works-slide">
           <div class="works-slide__image">
-            <img
-              src="/img/homepage/last-work-1.png"
-              alt="Озеленення одного з офісів компанії Synexus"
-/>
+            <img src="https://floren.com.ua/images/lastphotos/b/{$LPH.photo_url}" alt="{$LPH.photo_name}"/>
           </div>
           <div class="works-slide__content">
-            <a
-              class="not-underline"
-              href="Озеленення одного з офісів компанії Synexus"
-              >Озеленення одного з офісів компанії Synexus</a
-            >
-            <time> 09 липня 2025 </time>
+            {if $LPH.photo_dsc!=''}
+            <a class="not-underline" href="{$LPH.photo_dsc}">{$LPH.photo_dsc}</a>
+            {/if}
+            <time> {$LPH.date_add|date_format:"%d %B %Y"|capitalize:true} </time>
           </div>
         </div>
-
-        <div class="swiper-slide works-slide">
-          <div class="works-slide__image">
-            <img src="/img/homepage/last-work-2.png" alt="DV Bank"/>
-          </div>
-          <div class="works-slide__content">
-            <a class="not-underline" href="">DV Bank</a>
-            <time>09 липня 2025</time>
-          </div>
-        </div>
-
-        <div class="swiper-slide works-slide">
-          <div class="works-slide__image">
-            <img
-              src="/img/homepage/last-work-3.png"
-              alt="Озеленення автосалону AWT Баварія"
-/>
-          </div>
-          <div class="works-slide__content">
-            <a class="not-underline" href=""
-              >Озеленення автосалону AWT Баварія</a
-            >
-            <time>09 липня 2025</time>
-          </div>
-        </div>
-
-        <div class="swiper-slide works-slide">
-          <div class="works-slide__image">
-            <img
-              src="/img/homepage/last-work-4.png"
-              alt="ЖК Оболонь Residences"
-/>
-          </div>
-          <div class="works-slide__content">
-            <a class="not-underline" href="">ЖК Оболонь Residences</a>
-            <time>09 липня 2025</time>
-          </div>
-        </div>
-
-        <div class="swiper-slide works-slide">
-          <div class="works-slide__image">
-            <img src="/img/homepage/last-work-5.png" alt="БЦ Днепр плаза"/>
-          </div>
-          <div class="works-slide__content">
-            <a class="not-underline" href="">БЦ Днепр плаза</a>
-            <time>09 липня 2025</time>
-          </div>
-        </div>
-
-        <div class="swiper-slide works-slide">
-          <div class="works-slide__image">
-            <img src="/img/homepage/last-work-5.png" alt="БЦ Днепр плаза"/>
-          </div>
-          <div class="works-slide__content">
-            <a class="not-underline" href="">БЦ Днепр плаза</a>
-            <time>09 липня 2025</time>
-          </div>
-        </div>
-        <div class="swiper-slide works-slide">
-          <div class="works-slide__image">
-            <img src="/img/homepage/last-work-5.png" alt="БЦ Днепр плаза"/>
-          </div>
-          <div class="works-slide__content">
-            <a class="not-underline" href="">БЦ Днепр плаза</a>
-            <time>09 липня 2025</time>
-          </div>
-        </div>
-        <div class="swiper-slide works-slide">
-          <div class="works-slide__image">
-            <img src="/img/homepage/last-work-5.png" alt="БЦ Днепр плаза"/>
-          </div>
-          <div class="works-slide__content">
-            <a class="not-underline" href="">БЦ Днепр плаза</a>
-            <time>09 липня 2025</time>
-          </div>
-        </div>
+        {/foreach}
       </div>
     </div>
     <!-- If we need navigation buttons -->

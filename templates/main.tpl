@@ -549,7 +549,7 @@
         </div>
       </div>
 
-      {include file="$LAST_WORKS"}
+      {include file="$last_WORKS"}
     </main>
   {/if}
 

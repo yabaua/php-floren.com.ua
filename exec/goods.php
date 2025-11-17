@@ -16,7 +16,7 @@ $sql_sort_order = "g.act='0', g.availability > 0 DESC, g.preorder=0, sort DESC, 
 
 if($URL[0] == 'planters') {
 	$is_pot = 1;
-	$sql_pot_group = "GROUP BY hgt";
+	$sql_pot_group = "GROUP BY dia, hgt, wdt, depth";
 }
 
 $smarty->assign("FROM_GOODS", $from_goods);
@@ -163,6 +163,7 @@ if ($URL[1] == 'sezon') {
 		
 		//BUILD FILTERS
 		$db->query("SELECT gfg.ID AS gfgID, gfg.name".$db_sufix." AS gfgName FROM goods_filter_groups gfg WHERE gfg.classID IN ('".$f_cat['ID']."')  ORDER BY gfg.sort DESC");
+		
 		while($ff=$db->fetch()){
 
 			$filters[$ff['gfgID']]['groupName']	=	$ff['gfgName'];
@@ -175,18 +176,22 @@ if ($URL[1] == 'sezon') {
 								AND gf.groupID='".$ff['gfgID']."'
 								GROUP BY gf.ID	
 								ORDER BY gf.sort DESC", 1);
-
 			while($fff=$db->fetch(1)){
 			
+				if(isset($URL[2]) && $URL[2]!=''){
+					$active_filter_show_in_group_arr=explode("-",$URL[2]);
+					if(in_array( $fff['alias'], $active_filter_show_in_group_arr)){
+						$filters[$ff['gfgID']]['active_alias']=$fff['alias'];	
+					}	
+				}
 				$db->query("SELECT COUNT(g.ID) AS cnt2, gf.alias
 								FROM goods g
 								JOIN goods_f2g f2g ON f2g.gID=g.ID
 								JOIN goods_filters gf ON gf.ID=f2g.fID
 								WHERE gf.ID='".$fff['gfID']."' AND g.classID IN ('".$f_cat['ID']."')
 								".$filter_selected_goods_SQL, 2);	
-			
-
 				$cnt2=$db->fetch(2);
+				
 				$tmp_filters_url=$filters_url;
 				array_push($tmp_filters_url, $fff['alias']);
 
@@ -224,7 +229,7 @@ if ($URL[1] == 'sezon') {
 				/** =========== **/
 				
 				if(in_array($fff['groupID'], $filter_selected_groups)){
-					$filters[$ff['gfgID']]['sub_filters'][$fff['alias']]['cnt']=($fff['cnt']==0?'':'+').$fff['cnt'];
+					$filters[$ff['gfgID']]['sub_filters'][$fff['alias']]['cnt']=$fff['cnt'];
 					$filters[$ff['gfgID']]['sub_filters'][$fff['alias']]['disable']='1'; 	// vybrat mozhno tolko 1 filtr iz grupi
 				}else{
 					$filters[$ff['gfgID']]['sub_filters'][$fff['alias']]['cnt']=$cnt2['cnt2'];
@@ -489,7 +494,7 @@ $smarty->assign("META_KEYWORDS",		$meta_keywords);
 				// $db->query("SELECT ID, dia, hgt, wdt, depth, price, color, visibility FROM goods_forms WHERE goodID='".$rs_goods['ID']."' AND visibility=1 AND price > 0 ".$sql_pot_group, 1);
 
 				$db->query("SELECT gfs.ID, gfs.dia, gfs.hgt, gfs.wdt, gfs.depth, gfs.price, gfs.old_price, gfs.color, gfs.visibility, gfs.measure_qt, gmg.unit, gmg.name_ru AS mg_name_ru, gmg.name_ua AS mg_name_ua FROM goods_forms gfs LEFT JOIN goods_measures gmg ON gmg.ID=gfs.measure_id
-				WHERE gfs.goodID='".$rs_goods['ID']."' AND gfs.visibility=1 AND gfs.price > 0 ".$sql_pot_group, 1);
+				WHERE gfs.goodID='".$rs_goods['ID']."' AND gfs.visibility=1 AND gfs.price > 0 GROUP BY dia, hgt, wdt, depth", 1);
 
 				$is_action=0;
 				$prices[$rs_goods['ID']]=array();
@@ -501,7 +506,6 @@ $smarty->assign("META_KEYWORDS",		$meta_keywords);
 					}
 
 					$promo[count($promo)-1]['forms'][] = array(
-						'form_id' => $rs_goods_forms['ID'],
 						'dia' => $rs_goods_forms['dia'],
 						'hgt' => $rs_goods_forms['hgt'],
 						'wdt' => $rs_goods_forms['wdt'],
