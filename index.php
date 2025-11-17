@@ -969,6 +969,7 @@ while($f=$db->fetch()){
 //	$indx_lastPhotos[count($indx_lastPhotos)-1]['photo_dsc']=$f['photo_dsc'.$db_sufix];
 }
 $smarty->assign("LASTPHOTOS", $lastPhotos);
+$smarty->assign("LAST_WORKS",'last_works.tpl');
 
 //clients
 $clients=array();
