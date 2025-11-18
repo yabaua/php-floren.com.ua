@@ -9,9 +9,10 @@ require($_SERVER['DOCUMENT_ROOT']."/database.php");
 /*
 $json_string=array(
 	
-//  "lang"		=>	'ru',
+
   "curPage"	=>	0,
-  "perPage"	=>	25,
+  "perPage"	=>	25, // optional
+//  "lang"		=>	'',
 //  "mCat"		=>	'komnatnie-rasteniya',
 //  "cat"			=>	'ficus',
 //  "filters"	=>	['lechuza', 'krugliy']
@@ -36,8 +37,8 @@ $txt_hgt = array('_ua' => 'Висота', '' => 'Высота');
 
 
 
-//$post_data = file_get_contents('php://input');
-$post_data=$dataString;
+$post_data = file_get_contents('php://input');
+// 	$post_data=$dataString;	test string
 $data = json_decode($post_data, true);
 //$url_filters = $data['filters'];
 $url_filters=array();
