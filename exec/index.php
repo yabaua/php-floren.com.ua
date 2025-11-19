@@ -73,7 +73,18 @@ while($f=$db->fetch()){
 //	$indx_lastPhotos[count($indx_lastPhotos)-1]['photo_name']=$f['photo_name'.$db_sufix];
 //	$indx_lastPhotos[count($indx_lastPhotos)-1]['photo_dsc']=$f['photo_dsc'.$db_sufix];
 }
-$smarty->assign("LASTPHOTOS", $indx_lastPhotos);
+//======== GOOGLE REVIEWS
+$indx_google_reviews=array();
+$db->query("SELECT * FROM google_reviews ORDER BY ID DESC LIMIT 3");
+while($f=$db->fetch()) $indx_google_reviews[]=$f;
+$smarty->assign("GOOGLE_RATING", $indx_google_reviews);
 
+$db->query("SELECT * FROM options_delivery WHERE option_alias='google_stars'");
+$f=$db->fetch();
+$smarty->assign("GOOGLESTARS", $f['option_value']);
+
+//========END OF GOOGLE REVIEWS
+
+$smarty->assign("LASTPHOTOS", $indx_lastPhotos);
 $smarty->assign("SERVER_NAME",$_SERVER['SERVER_NAME']);
 ?>

@@ -1000,47 +1000,21 @@
   <div class="container">
     <div class="homepage__rating_grid">
       <div class="homepage__rating_title">
-        <h2>Відгуки про нас</h2>
+        <h2>{$LINGVO.title_care_feedback}</h2>
         <div class="google-logo">
           <img src="/img/google-rating.png" alt="Google"/>
         </div>
       </div>
       <ul class="homepage__rating_list">
+        {foreach from=$GOOGLE_RATING item=GM}
         <li class="rating__item">
           <div class="rating__item_text">
-            Купувала у даному магазині онлайн гортензію в горщику, загалом 3
-            горщика (один замовляли додатково). Дуже ввічливі і відповідальні,
-            весь час були за звʼязку. Надали фото всіх квітів зі святковою
-            упаковкою. Організували доставку по області і вчасно доставили в
-            чудовому вигляді. Дуже були задоволені! Дякую!
+            {$GM.review_text}
           </div>
-          <div class="rating__item_author">Ірина</div>
-          <sl-rating label="Rating" readonly value="5"></sl-rating>
+          <div class="rating__item_author">{$GM.user_name}</div>
+          <sl-rating label="Rating" readonly value="{$GM.stars}"></sl-rating>
         </li>
-        <li class="rating__item">
-          <div class="rating__item_text">
-            Купували онлайн у цієї компанії дерево - велику кімнатну рослину.
-            Дуже відповідальний продавець. Надали фото різних дерев. Обрали
-            рослину за дуже реальну ціну. Продавець організував доставку нашої
-            великої рослини у повній безпеці без затримок. Надали інструкцію по
-            догляду. Дуже задоволені обслуговуванням та якістю рослини. Дякуємо.
-          </div>
-          <div class="rating__item_author">Марія Вершініна</div>
-          <sl-rating label="Rating" readonly value="5"></sl-rating>
-        </li>
-        <li class="rating__item">
-          <div class="rating__item_text">
-            <p>
-              Відмінний сервіс і чудова якість рослин! Замовляла фікус лірату –
-              і залишилася дуже задоволена! Рослина прийшла швидко, добре
-              запакована. Тут же був підібраний горщик і зроблена посадка)) за
-              що окрема подяка 🫶🏻
-            </p>
-            <p>Обов’язково замовлятиму ще, рекомендую магазин</p>
-          </div>
-          <div class="rating__item_author">Роман Мазурець</div>
-          <sl-rating label="Rating" readonly value="5"></sl-rating>
-        </li>
+        {/foreach}
       </ul>
     </div>
   </div>
