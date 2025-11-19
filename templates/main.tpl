@@ -186,22 +186,26 @@
             </a>
             <a href="#" class="icon-button" aria-label="{$LINGVO.basket}" data-event="click" data-callback="openModal"
               data-modal-id="cart-modal">
-              <span class="badge success">2</span>
+              {if $BASKET|@count > 0}
+              <span class="badge success">{$BASKET|@count}</span>
+              {/if}
               <svg class="icon icon-basket" />
             </a>
           </div>
 
           <!-- Start Cart modal -->
-          <sl-dialog id="cart-modal" label="Кошик" class="cart-modal">
+          <sl-dialog id="cart-modal" label="{$LINGVO.basket}" class="cart-modal">
             <div class="alert alert-success" role="alert">
               Товар <a href="/" class="underline">Орхідея Фаленопсис Муса</a> Пінк доданий у ваш <a href="/basket"
                 class="underline">кошик</a>
             </div>
+            {if $BASKET|@count>0}
             <ul class="cart-items-list">
+              {foreach item=B from=$BASKET}
               <li class="cart-item">
                 <div class="cart-item__image">
-                  <a href="">
-                    <img src="/img/sevices/landscaping-artificial-plants.png" alt="">
+                  <a href="{$B.href}">
+                    <img src="{$B.img}" alt="{$B.name}">
                   </a>
                 </div>
                 <div class="cart-item__details">
@@ -209,58 +213,34 @@
                     <svg class="icon icon-trash" />
                   </button>
                   <h3>
-                    <a href="">Орхідея Фаленопсис Муса Пінк</a>
+                    <a href="{$B.href}">{$B.name}</a>
                   </h3>
-                  <div class="cart-item__details_options">Ø 10, висота 45 см</div>
-                  <div class="cart-item__details_controls">
+                  <div class="cart-item__details_options">{$B.goodLegend}</div>
+                  <div class="cart-item__details_controls"> {** Dimon if you need - you can use this id="{$B.formID}"  **}
                     <div class="counter-input">
                       <button>
-                        <img src="/img/icons/icon-minus.svg" alt="Видалити один товар" />
+                        <img src="/img/icons/icon-minus.svg" alt="{$LINGVO.bsk_del_one}" />
                       </button>
-                      <input type="number" value="1" min="1" />
+                      <input type="number" value="{$B.cnt}" min="1" />
                       <button>
-                        <img src="/img/icons/icon-plus.svg" alt="Додати один товар" />
+                        <img src="/img/icons/icon-plus.svg" alt="{$LINGVO.bsk_add_one}" />
                       </button>
                     </div>
-                    <div class="cart-item__details_price">450 ₴</div>
+                    <div class="cart-item__details_price">{$B.price|number_format:2:'.':' '} ₴</div>
                   </div>
                 </div>
               </li>
-              <li class="cart-item">
-                <div class="cart-item__image">
-                  <a href="">
-                    <img src="/img/sevices/plant-transplantation.png" alt="">
-                  </a>
-                </div>
-                <div class="cart-item__details">
-                  <button class="cart-item__remove">
-                    <svg class="icon icon-trash" />
-                  </button>
-                  <h3>
-                    <a href="">Орхідея Фаленопсис Муса Пінк</a>
-                  </h3>
-                  <div class="cart-item__details_options">Ø 10, висота 45 см</div>
-                  <div class="cart-item__details_controls">
-                    <div class="counter-input">
-                      <button>
-                        <img src="/img/icons/icon-minus.svg" alt="Видалити один товар" />
-                      </button>
-                      <input type="number" value="1" min="1" />
-                      <button>
-                        <img src="/img/icons/icon-plus.svg" alt="Додати один товар" />
-                      </button>
-                    </div>
-                    <div class="cart-item__details_price">450 ₴</div>
-                  </div>
-                </div>
-              </li>
+              {/foreach}
             </ul>
+            {else} {** if there no goods **}
+              {** ADD TEXT "YOUR BASKET IS EMPTY" **}
+            {/if}
             <div class="cart-modal__footer">
               <button class="cart-modal__footer_continue underline" data-event="click"
-                data-callback="closeModal">Продовжити покупки</button>
-              <div class="cart-modal__footer_total">Разом: <b>900 ₴</b>
+                data-callback="closeModal">{$LINGVO.continue_shopping}</button>
+              <div class="cart-modal__footer_total">{$LINGVO.total}: <b>{$BSK_TTL|number_format:2:'.':' '} ₴</b>
               </div>
-              <a href="/basket" class="button button--small button--primary">Оформити замовлення</a>
+              <a href="{$LANGURL}/basket/" class="button button--small button--primary">{$LINGVO.checkout}</a>
             </div>
           </sl-dialog>
           <!-- End Cart modal -->
@@ -510,7 +490,7 @@
   </div>
 
   <!-- Основний контент сторінки -->
-  {if $URL[0]==''}
+  {if $URL[0]=='' || $URL[0]=='basket'}
     {include file="$CONTENT_TPL"}
   {else}
     <main class="catalog-page">

@@ -126,31 +126,31 @@ if(substr($URL['path'], 1, 2) == 'ua') {
 			$link="#";
 		}
 	
-		$formName_arr= array();
+		$goodLegend_arr= array();
 		if($ov['dia']){
-			$formName_arr[] = '&#216;' . $ov['dia'] . 'см';
+			$goodLegend_arr[] = '&#216;' . $ov['dia'] . ' см';
 		}
 		if($ov['wdt']){
-			$formName_arr[] = $lingvo['wdt'][$lang] . ' ' . $ov['wdt'] . 'см';
+			$goodLegend_arr[] = $lingvo['wdt'][$lang] . ': ' . $ov['wdt'] . 'см';
 		}
 		if($ov['hgt']){
-			$formName_arr[] = $lingvo['hgt'][$lang] . ' ' . $ov['hgt'] . 'см';
+			$goodLegend_arr[] = $lingvo['hgt'][$lang] . ': ' . $ov['hgt'] . 'см';
 		}
 		if($ov['depth']){
-			$formName_arr[] = $lingvo['depth'][$lang] . ' ' . $ov['depth'] . 'см';
+			$goodLegend_arr[] = $lingvo['depth'][$lang] . ': ' . $ov['depth'] . 'см';
 		}
 		if($ov['measure_qt']){
-			$formName_arr[] = $ov['mg_name_'.$lang] . ' ' . $ov['measure_qt'] . $ov['mg_unit'];
+			$goodLegend_arr[] = $ov['mg_name_'.$lang] . ': ' . $ov['measure_qt'] . $ov['mg_unit'];
 		}
 		if($ov['color']){
-			$formName_arr[] = $lingvo['color'][$lang] . ' ' . $ov['color_name_'.$lang] . 'см';
+			$goodLegend_arr[] = $ov['color_name_'.$lang];
 		}
-		$formName=implode(", ", $formName_arr);
+		$goodLegend=implode(", ", $goodLegend_arr);
 		
 		$goods_in_cart[] = array(
 			"formID"		=>	$ov['formID'],
 			"name"			=>	$ov['name'],
-			"formName"	=>	$formName ?? '',
+			"formName"	=>	$goodLegend ?? '',
 			"price"			=>	$ov['price'],
 			"cnt"				=>	$_SESSION['basket'][$ov['formID']],
 			"goodSum"		=>	$ov['price']*$_SESSION['basket'][$ov['formID']],

@@ -99,6 +99,17 @@ if (!$spiders) {
 	
 	if (!isset($_SESSION['basket'])) $_SESSION['basket']=array();
 	//if (!isset($_SESSION['user'])) $_SESSION['basket']=array();
+	//TEST BSK
+	if(!count($_SESSION['basket'])){
+		$db->query("SELECT gf.ID AS formID FROM goods g JOIN goods_forms gf ON g.ID=gf.goodID WHERE gf.price>0 AND g.availability>0 ORDER BY RAND() LIMIT 10");
+		$cnt_goods=rand(1, 10);
+		$iterator=0;
+		while ($f=$db->fetch()){
+			if($iterator==$cnt_goods) break;
+			$_SESSION['basket'][$f['formID']]=rand(1,3);
+			$iterator++;
+		}
+	}
 
 // стартует индификатор сессии
 /*
@@ -607,18 +618,6 @@ $smarty->assign("SLIDERS_OPTIONS_JSON", $sliders_options_json);
 
 //==================COMMON_FUNC============
 
-function MakePrice($p) {
-	$p=str_replace(",", ".", $p);
-	$p=str_replace("-", "0", $p);
-	if ($p=="") return "0.00";
-	if ($p*1==0) return "0.00";
-	if ($p==round($p)) return ($p*1).".00";
-	$p=round($p*100); $last=substr($p, strlen($p)-1, 1); $res=$p;
-	$p=$res/100;
-	if ($p==round($p)) return $p.".00";
-	if (substr($p, strlen($p)-2, 1)==".") return $p."0";
-	return $p;
-}
 if(isset($_POST['add2cart'])){
 	foreach($_POST['add2cart'] AS $k=>$v){
 		$db->query("SELECT g.ID, g.name, gfs.hgt,gfs.dia, gfs.price
@@ -702,7 +701,7 @@ if(count($_SESSION['basket'])>0){
 	}
 
 	$IDs=implode("','", array_keys($_SESSION['basket']));
-	$db->query("SELECT g.ID, g.makerID, g.classID, g.link, g.image, g.name, g.name_alter, gfs.ID AS formID, makerID, gcl.motherID, gfs.hgt, gfs.img, gfs.dia, gfs.wdt, gfs.depth, gfs.ttl, gfs.price,gfs.color, gfs.measure_qt, gmg.unit, gmg.name_ru AS mg_name_ru, gmg.name_ua AS mg_name_ua, gc.name_ru AS color_name_ru, gc.name_ua AS color_name_ua, (g1c.f1_stock+g1c.f2_stock-g1c.rezerv) AS db_1c_availability
+	$db->query("SELECT g.ID, g.makerID, g.classID, g.link, g.image, g.name, g.name_alter, gfs.ID AS formID, makerID, gcl.motherID, gfs.hgt, gfs.img, gfs.dia, gfs.wdt, gfs.depth, gfs.ttl, gfs.price,gfs.color, gfs.measure_qt, gmg.unit AS mg_unit, gmg.name_ru AS mg_name_ru, gmg.name_ua AS mg_name_ua, gc.name_ru AS color_name_ru, gc.name_ua AS color_name_ua, (g1c.f1_stock+g1c.f2_stock-g1c.rezerv) AS db_1c_availability
 		FROM goods".$db_sufix." g
 		LEFT JOIN goods_forms gfs ON g.ID=gfs.goodID
 		LEFT JOIN goods_class gcl ON g.classID=gcl.ID
@@ -728,27 +727,38 @@ if(count($_SESSION['basket'])>0){
 		$bsk[$f['formID']]['classID']=$f['classID'];
 		$bsk[$f['formID']]['image']=$f['image'];
 		$bsk[$f['formID']]['link']=$f['link'];
-		$bsk[$f['formID']]['color']=$f['color'];
 		$bsk[$f['formID']]['formID']=$f['formID'];
-		$bsk[$f['formID']]['hgt']=$f['hgt'];
-		$bsk[$f['formID']]['dia']=$f['dia'];
-		
-		$bsk[$f['formID']]['wdt']=$f['wdt'];
-		$bsk[$f['formID']]['depth']=$f['depth'];
-		$bsk[$f['formID']]['measure_qt']=$f['measure_qt'];
-		$bsk[$f['formID']]['unit']=$f['unit'];
-		$bsk[$f['formID']]['mg_name_ua']=$f['mg_name_ua'];
-		$bsk[$f['formID']]['mg_name_ru']=$f['mg_name_ru'];
-		$bsk[$f['formID']]['color_name_ru']=$f['color_name_ru'];
-		$bsk[$f['formID']]['color_name_ua']=$f['color_name_ua'];
+
 		$bsk[$f['formID']]['ttl']=$f['ttl'];
 		$bsk[$f['formID']]['name']=$f['name'];
 		$bsk[$f['formID']]['name_alter']=$f['name_alter'];
 		$bsk[$f['formID']]['price']=$f['price'];
 		$bsk[$f['formID']]['not_available']=0;
 		
+				$goodLegend_arr= array();
+				if(!empty($f['dia'])){
+					$goodLegend_arr[] = '&#216;' . $f['dia'] . 'см';
+				}
+				if(!empty($f['wdt'])){
+					$goodLegend_arr[] = $lingvo['wdt'] . ': ' . $f['wdt'] . 'см';
+				}
+				if(!empty($f['hgt'])){
+					$goodLegend_arr[] = $lingvo['hgt'] . ': ' . $f['hgt'] . 'см';
+				}
+				if(!empty($f['depth'])){
+					$goodLegend_arr[] = $lingvo['depth'] . ': ' . $f['depth'] . 'см';
+				}
+				if(!empty($f['measure_qt'])){
+					$goodLegend_arr[] = $f['mg_name_'.$lang] . ': ' . $f['measure_qt'] . $f['mg_unit'];
+				}
+				if(!empty($f['color'])){
+					$goodLegend_arr[] = $f['color_name_'.$lang];
+				}
+				$goodLegend=implode(", ", $goodLegend_arr);
+		$bsk[$f['formID']]['goodLegend'] = $goodLegend;
+		
 		$cnt=$bsk[$f['formID']]['cnt']=$_SESSION['basket'][$f['formID']];
-		$bsk[$f['formID']]['sttl']=MakePrice($f['price']*$cnt);
+		$bsk[$f['formID']]['sttl']=$floren->MakePrice($f['price']*$cnt);
 
 		$bsk_img = "/images/ins/s/";
 
@@ -793,11 +803,11 @@ if(count($_SESSION['basket'])>0){
 			$bsk_buket_delivery=1;
 		}
 	
-		$ttl+=MakePrice($f['price']*$cnt);
+		$ttl+=$floren->MakePrice($f['price']*$cnt);
 	}
 
 	$smarty->assign("NO_COMMON_INFO", array(25,12,14,26,27,28,29,64));
-	$smarty->assign("BSK_TTL", MakePrice($ttl));
+	$smarty->assign("BSK_TTL", $floren->MakePrice($ttl));
 	$smarty->assign("BASKET", $bsk);
 	$smarty->assign("BSK_STOP_POST_DELIVERY", $bsk_stop_post_delivery);
 	$smarty->assign("BSK_STOP_PRIVAT", $bsk_stop_privat);
