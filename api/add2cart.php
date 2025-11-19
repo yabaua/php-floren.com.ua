@@ -104,6 +104,7 @@ if(substr($URL['path'], 1, 2) == 'ua') {
 
 	$counter=0;
 	$cart_sum=0;
+	$goods_in_cart=array();
 	foreach ($od AS $ov){
 		$product_path = $lang_url."/product/".$ov['ID']."_".$ov['link']."/";
 		$img_path 					= "/images/ins/s/";
@@ -167,9 +168,10 @@ if(substr($URL['path'], 1, 2) == 'ua') {
 		
 
 	$cart = array(
-	'cart_sum'		=>	$cart_sum,
-	'cart_error'	=>	$goods_in_cart_error,
-	'cart_items'	=>	$goods_in_cart
+	'basket_sum'		=>	$cart_sum,
+	'basket_error'	=>	$goods_in_cart_error,
+	'basket_count'	=>	count($goods_in_cart),
+	'basket_items'	=>	$goods_in_cart
 	);
 
 echo json_encode($cart, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
