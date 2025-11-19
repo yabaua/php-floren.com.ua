@@ -191,7 +191,7 @@
     </div>
   </main>
   <script>
-    const messages = {literal}{{/literal}
+    const messages = {literal}{{/literal}									{** "–" - not used now, "+" used now **}
             smallOrderText: "{$LINGVO.small_order}",				{** + **}
             bigGoodsText: "{$LINGVO.notice_biggoods}",			{** + **}
             notNpWarningText: "{$LINGVO.sorry_but_not_np}",	{** + **}
@@ -203,7 +203,7 @@
             lessZeroText: "{$LINGVO.less_zero}",						{** + **}
             cityDeliveryText: "{$LINGVO.city_delivery}",		{** + **}
             elevatorPriceText: "{$LINGVO.elevator_price}", 	{** – **}
-            minimumOrderText: "{$LINGVO.minimumOrder}", 	{** – **}
+            minimumOrderText: "{$LINGVO.minimumOrder}", 		{** – **}
         {literal}}{/literal};
 
     const defaultOptions = {literal}{{/literal}
