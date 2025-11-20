@@ -1,4 +1,5 @@
 <?php
+//query is provided in goods.php, plants.php, showMoreGoods.php
 		$db->query($main_query);
 		$promo=array();
 		while ($f=$db->fetch()){

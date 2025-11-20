@@ -489,6 +489,9 @@ $smarty->assign("META_KEYWORDS",		$meta_keywords);
 				
 				
 			$smarty->assign("SCHEMA_OFFERS", $schema_offers_txt);
+			
+			
+			
 			$smarty->assign("PROMO", $promo);
 
 			if($PARAM[0]=='metal-pots'){

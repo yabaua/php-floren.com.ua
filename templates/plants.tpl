@@ -155,3 +155,4 @@
               {$CENTER_SEO_TEXT}
             </article>
             {/if}
+{$SCHEMA_OFFERS}
