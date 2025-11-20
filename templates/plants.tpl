@@ -87,10 +87,7 @@
       </div>
                 {if $P.not_available === 0}
                 <div class="product-card__price">
-                {$P.min_price} ₴
-                    {if $P.min_price != $P.max_price}
-                    – {$P.max_price} ₴
-                    {/if}{** <del>200,99 ₴</del> **}
+                {$P.price} ₴{** <del>200,99 ₴</del> **}
                 
                   <!-- If in cart add this block -->
         <div class="product-card__in-cart">
@@ -104,12 +101,7 @@
           <h5>{$LINGVO.varianty}:</h5>
           <ul>
                     {foreach from=$P.forms item=F}
-                      <li>{if $F.dia}&#216; {$F.dia} {/if}
-              						{if $F.wdt}{$F.wdt} 
-              						{if $F.depth}x {$F.depth} {/if}{/if}
-              						{if $F.hgt}x {$F.hgt}{/if}
-              						{if $F.measure_qt}{$F.measure_qt} {$F.unit}{/if}
-              				</li>
+                      <li>{$F.form_measure}</li>
                     {/foreach}
                     </ul>
         </section>
@@ -119,14 +111,14 @@
           <div class="colors-list">
                         {foreach from=$P.colors item=FC}
                         {** <span style="background-color: #C33494;"></span>    **}
-                            <span style="background: url('{$FC.image}');" title="Фото {$FC.name_ru}"></span>
+                            <span style="background: url('{$FC.image}');" title="Фото {$FC.name}"></span>
                         {/foreach}
 
                     </div>
         </section>
                   {/if} {** if colors **}
                 </div>
-                {elseif $P.preorder==1 && $P.act=='Y'}
+                {elseif $P.good_status =='preorder'}
 					<div class="product-card__custom-order">{$LINGVO.good_preorder}</div>
 				{else}
 					<div class="product-card__custom-order">{$LINGVO.not_available}</div>

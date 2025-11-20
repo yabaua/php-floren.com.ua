@@ -334,8 +334,8 @@ if ((isset($URL[1]) && in_array($URL[1], $category_aliases))) {
 			$db->query("SELECT 
 				g.ID AS c
 				FROM goods".$db_sufix." g
-				LEFT JOIN goods_forms gf ON g.ID=gf.goodID
-				WHERE g.classID IN ('".implode("','", $category_ids)."')
+				JOIN goods_forms gf ON g.ID=gf.goodID
+				WHERE gf.visibility=1 AND g.classID IN ('".implode("','", $category_ids)."')
 				".$filter_selected_goods_SQL."
 				GROUP BY g.ID
 				");
@@ -471,135 +471,19 @@ if ((isset($URL[1]) && in_array($URL[1], $category_aliases))) {
 		
 	//==========		/ META			===============
 		
-		
-		//	====================  LET'S BUILD GOODS LIST===============
-
-		$promo=array();	
-		$not_available = 0;	
-		$prices = array();
-
-		$db->query("SELECT g.*, min(NULLIF(gf.price, 0)) AS min_price, max(gf.price) AS max_price FROM goods".$db_sufix." g
+	// =========== LETS BUILD GOODS LIST============
+	$main_query = "SELECT g.*, min(NULLIF(gf.price, 0)) AS min_price, max(gf.price) AS max_price, min(NULLIF(gf.old_price, 0)) AS min_old_price, max(gf.old_price) AS max_old_price
+					FROM goods".$db_sufix." g
 					LEFT JOIN goods_forms gf
 					ON g.ID=gf.goodID
-					WHERE g.classID IN ('".implode("','", $category_ids)."')
+					WHERE gf.visibility=1 AND g.classID IN ('".implode("','", $category_ids)."')
 					".$filter_selected_goods_SQL."
 					GROUP BY g.ID
 					ORDER BY ".$sql_sort_order.", gf.price > 0 DESC, g.classID DESC, g.name
-					LIMIT ".$ofset.",".$max_pages_links);
+					LIMIT ".$ofset.",".$max_pages_links;
 
-		for ($i=0; $f=$db->fetch(); $i++){
-
-			if ($is_plant || $is_aksessuary || $is_pot) {
-				$product_path = $lang_url . '/product/' . $f['ID'] . '_' . $f['link'] . '/';
-			//	$img_path = 'https://floren.com.ua/images/ins/b/gmcxml-' . $f['image'];
-			if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/images/goods/s/' . str_replace('jpg', 'webp', $f['image']))){
-					$img_path = '/images/goods/s/' . str_replace('jpg', 'webp', $f['image']);
-			}else{
-					/*
-					$input 	= 'https://floren.com.ua/images/ins/b/gmcxml-' . $f['image'];
-					$output = $_SERVER['DOCUMENT_ROOT'] . '/images/goods/b/' .str_replace('jpg', 'webp', $f['image']);
-					$image = imagecreatefromjpeg($input);
-					$quality = 85;
-					imagewebp($image, $output, $quality);
-					imagedestroy($image);
-					$img_path = '/images/goods/b/' . str_replace('jpg', 'webp', $f['image']);
-					*/
-					
-					$src= 'https://floren.com.ua/images/ins/b/gmcxml-' . $f['image'];
-				
-					$dest_s		=	$_SERVER['DOCUMENT_ROOT'] . '/images/goods/s/' .str_replace('jpg', 'webp', $f['image']);
-					$dest_m		=	$_SERVER['DOCUMENT_ROOT'] . '/images/goods/m/' .str_replace('jpg', 'webp', $f['image']);
-					$dest_b		=	$_SERVER['DOCUMENT_ROOT'] . '/images/goods/b/' .str_replace('jpg', 'webp', $f['image']);
-					$dest_gmcxml	=	$_SERVER['DOCUMENT_ROOT'] . '/images/goods/gmcxml/' .str_replace('.jpg', '-gmcxml.webp', $f['image']);
-					
-										
-					img_resize($src, $dest_s, 200, 200, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=false);
-				//	img_resize($src, $dest_m, 600, 600, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=true);
-				//	img_resize($src, $dest_b, 1600, 1200, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=true, $trim=false, $resize_max=true, $apply_mask=true);
-				//	img_resize($src, $dest_gmcxml, 1600, 1200, $rgb=0xFFFFFF, $quality=90, $keep_origin_size=true, $trim=false, $resize_max=true, $apply_mask=false);
-					
-			}
-				
-			} elseif ($is_bouquet) {
-				$product_path = $lang_url . '/buket/' . $f['ID'] . '/';
-				$img_path = 'https://floren.com.ua/images/ins/s/'. $f['image'];
-			}
-
-			
-				
-
-			$colors[$f['ID']] = array();
-			$prices[$f['ID']] = array();
-			$not_available = $f['availability'] == 0 ? 1:0;
-			$is_action=0;
-			
-			$promo[] = array(
-				'ID' => $f['ID'],
-				'name' => $f['name'],
-				'link' => $f['link'],
-				'product_path' => $product_path,
-				'img_path' => $img_path,
-				'image' => $f['image'],
-				'act' => $f['act'],
-				'not_available' => $not_available,
-				'preorder' => $f['preorder'],
-				'colors' => $colors[$f['ID']]
-			);
-			
-			
-			
-			$db->query("SELECT gf.*, gf.old_price, gf.visibility, gf.measure_qt, gf.color, gmg.unit, gmg.name_ru AS mg_name_ru, gmg.name_ua AS mg_name_ua FROM goods_forms gf LEFT JOIN goods_measures gmg ON gf.measure_id=gmg.ID WHERE goodID='".$f['ID']."' AND gf.visibility=1 AND gf.price > 0 GROUP BY dia, hgt, wdt, depth", 1);
-
-			while ($ff=$db->fetch(1)) {
-					if ($f['availability'] == 1 && intval($ff['price']) > 0) {
-						$prices[$f['ID']][] = intval($ff['price']);
-						$old_prices[$f['ID']][] = intval($ff['old_price']);
-					}
-										
-					$promo[count($promo)-1]['forms'][] = array(
-						'dia' => $ff['dia'],
-						'hgt' => $ff['hgt'],
-						'wdt' => $ff['wdt'],
-						'depth' => $ff['depth'],
-						'price' => $ff['price'],
-						'measure_qt' => $ff['measure_qt'],
-						'unit' => $ff['unit'],
-						'mg_name_ru' => $ff['mg_name_ru'],
-						'mg_name_ua' => $ff['mg_name_ua']
-					);
-
-					
-					if ($ff['color'] != '0') {
-						$db->query("SELECT gf.color, gc.name_ru, gc.name_ua, gc.preview FROM goods_forms gf LEFT JOIN goods_colors gc ON gf.color=gc.alias WHERE gf.goodID='".$f['ID']."' AND visibility=1 AND price > 0 ", 2);
-
-						while ($fc = $db->fetch(2)) {	
-							if ($fc['color'] != '0') {
-								$colors[$f['ID']][] = array(
-									'name_ru' => $fc['name_ru'],
-									'name_ua' => $fc['name_ua'],
-									'image' => $fc['preview'],
-								);
-							}					
-						}
-					}
-					if($ff['old_price']>0) $is_action=1;
-					$promo[count($promo)-1]['is_action']=$is_action;
-			};
-
-			if (count($prices[$f['ID']]) > 0) {
-
-				$promo[count($promo)-1]['min_price'] = min(array_filter($prices[$f['ID']]));
-				$promo[count($promo)-1]['max_price'] = max(array_filter($prices[$f['ID']]));
-				
-				$filtered_old_prices = array_filter($old_prices[$f['ID']]);
-				$promo[count($promo)-1]['min_old_price'] = !empty($filtered) ? min($filtered) : 0;
-				
-			}
-			
-			
-			$promo[count($promo)-1]['colors'] = array_unique($colors[$f['ID']], SORT_REGULAR);
-		//	array_unique($promo[count($promo)-1]['forms']);
-		}
+	include("goods_build_list.php");
+	// =========== LETS BUILD GOODS LIST============
 		
 $schema_prices_min=array();
 	foreach ($promo AS $k=>$v){
@@ -694,4 +578,3 @@ if ($error_404){
 $smarty->assign("HLEB",$hleb);
 
 ?>
-
