@@ -681,117 +681,23 @@
       <!-- Additional required wrapper -->
       <div class="swiper-wrapper">
         <!-- Slides -->
+        {foreach from=$PROMO_PLANTS item=PP}
         <div class="swiper-slide popular-slide">
           <div class="popular-slide__image">
-            <a href="">
+            <a href="{$PP.product_path}">
               <img
-                src="/img/homepage/product-1.png"
-                alt="Озеленення одного з офісів компанії Synexus"
+                src="{$PP.img_path}"
+                alt="{$LINGVO.buy} {$PP.name}"
 />
             </a>
           </div>
           <div class="popular-slide__title">
-            <a href="">Орхідея Фаленопсис Муса Пінк</a>
+            <a href="{$PP.product_path}">{$PP.name}</a>
           </div>
-          <div class="popular-slide__price">114,99 ₴</div>
-          <sl-rating label="Rating" readonly value="3"></sl-rating>
+          <div class="popular-slide__price">{$PP.price}</div>
+          <sl-rating label="Rating" readonly value="{$PP.stars}"></sl-rating>
         </div>
-
-        <div class="swiper-slide popular-slide">
-          <div class="popular-slide__image">
-            <a href="">
-              <img
-                src="/img/homepage/product-2.png"
-                alt="Озеленення одного з офісів компанії Synexus"
-/>
-            </a>
-          </div>
-          <div class="popular-slide__title">
-            <a href="">Антуріум</a>
-          </div>
-          <div class="popular-slide__price">114,99 ₴</div>
-          <sl-rating label="Rating" readonly value="5"></sl-rating>
-        </div>
-
-        <div class="swiper-slide popular-slide">
-          <div class="popular-slide__image">
-            <a href="">
-              <img
-                src="/img/homepage/product-3.png"
-                alt="Розумний вазон Lechuza Delta"
-/>
-            </a>
-          </div>
-          <div class="popular-slide__title">
-            <a href="">Розумний вазон Lechuza Delta</a>
-          </div>
-          <div class="popular-slide__price">114,99 ₴</div>
-          <sl-rating label="Rating" readonly value="4"></sl-rating>
-        </div>
-
-        <div class="swiper-slide popular-slide">
-          <div class="popular-slide__image">
-            <a href="">
-              <img
-                src="/img/homepage/product-4.png"
-                alt="Розумний вазон Lechuza Delta"
-/>
-            </a>
-          </div>
-          <div class="popular-slide__title">
-            <a href="">Антуріум</a>
-          </div>
-          <div class="popular-slide__price">114,99 ₴</div>
-          <sl-rating label="Rating" readonly value="4"></sl-rating>
-        </div>
-
-        <div class="swiper-slide popular-slide">
-          <div class="popular-slide__image">
-            <a href="">
-              <img
-                src="/img/homepage/product-5.png"
-                alt="Розумний вазон Lechuza Delta"
-/>
-            </a>
-          </div>
-          <div class="popular-slide__title">
-            <a href="">Заміокулькас</a>
-          </div>
-          <div class="popular-slide__price">114,99 ₴</div>
-          <sl-rating label="Rating" readonly value="4"></sl-rating>
-        </div>
-
-        <div class="swiper-slide popular-slide">
-          <div class="popular-slide__image">
-            <a href="">
-              <img
-                src="/img/homepage/product-4.png"
-                alt="Розумний вазон Lechuza Delta"
-/>
-            </a>
-          </div>
-          <div class="popular-slide__title">
-            <a href="">Антуріум</a>
-          </div>
-          <div class="popular-slide__price">114,99 ₴</div>
-          <sl-rating label="Rating" readonly value="4"></sl-rating>
-        </div>
-
-        <div class="swiper-slide popular-slide">
-          <div class="popular-slide__image">
-            <a href="">
-              <img
-                src="/img/homepage/product-5.png"
-                alt="Розумний вазон Lechuza Delta"
-/>
-            </a>
-          </div>
-          <div class="popular-slide__title">
-            <a href="">Заміокулькас</a>
-          </div>
-          <div class="popular-slide__price">114,99 ₴</div>
-          <sl-rating label="Rating" readonly value="4"></sl-rating>
-        </div>
+        {/foreach}
       </div>
     </div>
     <button class="swiper-button swiper-button--prev">
@@ -801,7 +707,7 @@
       <img src="/img/icons/icon-arrow-angle-right.svg" alt=""/>
     </button>
     <div class="homepage__popular_more">
-      <button class="button button--primary button--pill button--arrow">До каталогу</button>
+      <button class="button button--primary button--pill button--arrow">{$LINGVO.do_catalog}</button>
     </div>
   </div>
 </div>
