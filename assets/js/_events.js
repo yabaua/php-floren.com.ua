@@ -1,3 +1,4 @@
+import { f as fetchShowMoreGoods } from "./fetchApi.js";
 const clickHandlers = {
   toggleLocation: (event) => {
     const element = event.currentTarget;
@@ -17,7 +18,9 @@ const clickHandlers = {
     event.currentTarget.closest(".contacts-phone").classList.toggle("active");
   },
   toggleAdvicesPhones: (event) => {
-    event.currentTarget.closest(".homepage__advices_content--phones").classList.toggle("active");
+    event.currentTarget
+      .closest(".homepage__advices_content--phones")
+      .classList.toggle("active");
   },
   openModal: (e) => {
     const modalId = e.currentTarget.dataset.modalId;
@@ -30,7 +33,15 @@ const clickHandlers = {
   closeModal: () => {
     const modals = document.querySelectorAll("sl-dialog");
     modals.forEach((modal) => modal.hide());
-  }
+  },
+  showMoreGoods: async () => {
+    try {
+      const data = await fetchShowMoreGoods();
+      console.log("Fetched more goods:", data);
+    } catch (error) {
+      console.error("Error fetching more goods:", error);
+    }
+  },
 };
 const initEvents = () => {
   const targets = document.querySelectorAll("[data-event]");
@@ -47,6 +58,4 @@ const initEvents = () => {
     el.addEventListener(event, callback);
   });
 };
-export {
-  initEvents as i
-};
+export { initEvents as i };

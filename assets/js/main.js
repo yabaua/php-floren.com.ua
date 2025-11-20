@@ -6,6 +6,7 @@ import "./_scroll2.js";
 import "./_catalog.js";
 import "./_clickOutside.js";
 import "./_expandableText.js";
+import "./fetchApi.js";
 export {
   A as Autoplay,
   N as Navigation,

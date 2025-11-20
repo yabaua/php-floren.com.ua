@@ -1,6 +1,6 @@
 		{if $FILTERS}
 		<!-- Фільтри товарів -->
-          <div class="catalog-page__content_filters">
+<div class="catalog-page__content_filters">
           {foreach from=$FILTERS item=F}
             <sl-select placeholder="{$F.groupName}" value="{$F.active_alias}">
               {foreach from=$F.sub_filters key=K item=SUBF}
@@ -8,9 +8,13 @@
                     <sl-option value="{$K}" disabled>{$SUBF.gfName} ({$SUBF.cnt})</sl-option>
                 {else}
                   {if $CATEGORY_ID == '80' || $FROM_GOODS == 1}
-                    <sl-option value="{$K}"><a href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{$SUBF.link}{$SUBF.need_slash}">{$SUBF.gfName}{if $SUBF.act} ({$SUBF.cnt}){/if}</a></sl-option>
+                    <sl-option value="{$K}">
+      <a href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{$SUBF.link}{$SUBF.need_slash}">{$SUBF.gfName}{if $SUBF.act} ({$SUBF.cnt}){/if}</a>
+    </sl-option>
                   {else}
-                    <sl-option value="{$K}"><a href="{$LANGURL}/{$URL[0]}/{$SUBF.link}{$SUBF.need_slash}">{$SUBF.gfName}{if !$SUBF.act} ({$SUBF.cnt}){/if}</a></sl-option>
+                    <sl-option value="{$K}">
+      <a href="{$LANGURL}/{$URL[0]}/{$SUBF.link}{$SUBF.need_slash}">{$SUBF.gfName}{if !$SUBF.act} ({$SUBF.cnt}){/if}</a>
+    </sl-option>
                   {/if}
                 {/if}
               {/foreach}
@@ -19,23 +23,31 @@
           </div>
           {if $ACTIVE_FILTERS_FLAG}
           <!-- Активні теги фільтрів -->
-          <div class="catalog-page__content_tags">
+<div class="catalog-page__content_tags">
           {foreach from=$FILTERS item=F}
             {foreach from=$F.sub_filters item=SUBF}
               {if $SUBF.act==1}
                 {if $CATEGORY_ID == '80' ||  $FROM_GOODS == 1}
-                <sl-tag removable><a href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{$SUBF.link}{$SUBF.need_slash}">{$SUBF.gfName}</a></sl-tag>
+                <sl-tag removable>
+    <a href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{$SUBF.link}{$SUBF.need_slash}">{$SUBF.gfName}</a>
+  </sl-tag>
                 {else}
-                <sl-tag removable><a href="{$LANGURL}/{$URL[0]}/{$SUBF.link}{$SUBF.need_slash}">{$SUBF.gfName}</a></sl-tag>
+                <sl-tag removable>
+    <a href="{$LANGURL}/{$URL[0]}/{$SUBF.link}{$SUBF.need_slash}">{$SUBF.gfName}</a>
+  </sl-tag>
                 {/if}
               {/if}
             {/foreach}
           {/foreach}
           
             {if $CATEGORY_ID == '80' ||  $FROM_GOODS == 1}
-            <button class="button button--text"><a href="{$LANGURL}/{$URL[0]}/{$URL[1]}/">{$LINGVO.deactivate_filters}</a></button>
+            <button class="button button--text">
+    <a href="{$LANGURL}/{$URL[0]}/{$URL[1]}/">{$LINGVO.deactivate_filters}</a>
+  </button>
             {else}
-            <button class="button button--text"><a href="{$LANGURL}/{$URL[0]}/">{$LINGVO.deactivate_filters}</a></button>
+            <button class="button button--text">
+    <a href="{$LANGURL}/{$URL[0]}/">{$LINGVO.deactivate_filters}</a>
+  </button>
             {/if}
           </div>
           {/if}
@@ -43,36 +55,36 @@
     <!-- Кінець Фільтри товарів -->
   {/if}{** IF FILTERS **}
 		<!-- Info показано скільки товарів -->
-          <div class="catalog-page__content_showed">
+<div class="catalog-page__content_showed">
           Показано <span>1 - 25</span> з <span>{$GOODS_CNT}</span>
-          </div>
+</div>
 
-          <!-- Заголовок і опис категорії -->
-          <h1>{$PAGE_TITLE}</h1>
+<!-- Заголовок і опис категорії -->
+<h1>{$PAGE_TITLE}</h1>
             {if TOP_SEO_TEXT}
             <div class="catalog-page__content_description">
             {$TOP_SEO_TEXT}
             </div>
 		    {/if}
 		<!-- Сітка товарів -->
-		<!--seoshield_formulas--kategorii-->
-          <div class="catalog-page__content_products">
-            
-            <!--isset_listing_page-->
+<!--seoshield_formulas--kategorii-->
+<div class="catalog-page__content_products">
+
+  <!--isset_listing_page-->
 		    {foreach from=$PROMO item=P}
             <!-- Product Card Start-->
-            <!--product_in_listingEX-->
-			      <!--dg_prod_in_lisintg_href:{$LANGURL}/product/{$P.ID}_{$P.link}/;;dg_prod_in_lisintg_anchor:{$P.name}-->
-            <div class="catalog-page__content_product-card">
-              <div class="product-card__wrapper">
-                <div class="product-card__image">
-                  <a href="{$P.product_path}">
-                    <img src="{$P.img_path}" alt="Фото {$P.name}"/>
-                  </a>
-                </div>
-                <div class="product-card__name">
-                  <a href="{$P.product_path}">{$P.name}</a>
-                </div>
+  <!--product_in_listingEX-->
+  <!--dg_prod_in_lisintg_href:{$LANGURL}/product/{$P.ID}_{$P.link}/;;dg_prod_in_lisintg_anchor:{$P.name}-->
+  <div class="catalog-page__content_product-card">
+    <div class="product-card__wrapper">
+      <div class="product-card__image">
+        <a href="{$P.product_path}">
+          <img src="{$P.img_path}" alt="Фото {$P.name}"/>
+        </a>
+      </div>
+      <div class="product-card__name">
+        <a href="{$P.product_path}">{$P.name}</a>
+      </div>
                 {if $P.not_available === 0}
                 <div class="product-card__price">
                 {$P.min_price} ₴
@@ -81,16 +93,16 @@
                     {/if}{** <del>200,99 ₴</del> **}
                 
                   <!-- If in cart add this block -->
-                  <div class="product-card__in-cart">
-                    <span class="icon icon-basket"></span>
-                  </div>
-                
-                </div>
+        <div class="product-card__in-cart">
+          <span class="icon icon-basket"></span>
+        </div>
 
-                <div class="product-card__options">
-                  <section>
-                    <h5>{$LINGVO.varianty}:</h5>
-                    <ul>
+      </div>
+
+      <div class="product-card__options">
+        <section>
+          <h5>{$LINGVO.varianty}:</h5>
+          <ul>
                     {foreach from=$P.forms item=F}
                       <li>{if $F.dia}&#216; {$F.dia} {/if}
               						{if $F.wdt}{$F.wdt} 
@@ -100,18 +112,18 @@
               				</li>
                     {/foreach}
                     </ul>
-                  </section>
+        </section>
                   {if $P.colors}
                   <section>
-                    <h5>{$LINGVO.colors}:</h5>
-                    <div class="colors-list">
+          <h5>{$LINGVO.colors}:</h5>
+          <div class="colors-list">
                         {foreach from=$P.colors item=FC}
                         {** <span style="background-color: #C33494;"></span>    **}
                             <span style="background: url('{$FC.image}');" title="Фото {$FC.name_ru}"></span>
                         {/foreach}
 
                     </div>
-                  </section>
+        </section>
                   {/if} {** if colors **}
                 </div>
                 {elseif $P.preorder==1 && $P.act=='Y'}
@@ -120,8 +132,8 @@
 					<div class="product-card__custom-order">{$LINGVO.not_available}</div>
 				{/if}
               </div>
-            </div>
-            <!-- Product Card End -->
+  </div>
+  <!-- Product Card End -->
             {/foreach}
               
             
@@ -129,16 +141,16 @@
         {if $PAGE_MAX>1}
         {if !$FROM_GOODS}{** if from goods.php **}
           <!-- Кнопка "Показати ще" -->
-          <div class="catalog-page__content_more">
-            <button class="button button--primary button--pill">{$LINGVO.show_more}</button>
-          </div>
+<div class="catalog-page__content_more">
+  <button class="button button--primary button--pill">{$LINGVO.show_more}</button>
+</div>
         {/if}
 
           <!-- Pagination -->
-          <div class="pagination">
-            <a href="" class="pagination__link disabled">
-              <img src="/img/icons/icon-arrow-left-long.svg.svg" alt="Попередня сторінка">
-            </a>
+<div class="pagination">
+  <a href="" class="pagination__link disabled">
+    <img src="/img/icons/icon-arrow-left-long.svg.svg" alt="Попередня сторінка">
+  </a>
             {foreach item=P from=$PAGES}
             {if $P.page>5}
                 {continue}
@@ -152,9 +164,9 @@
             {/if} {** if more than 5 pages  **}
             {/foreach}
             <a href="" class="pagination__link">
-              <img src="/img/icons/icon-arrow-right-long.svg" alt="Наступна сторінка">
-            </a>
-          </div>
+    <img src="/img/icons/icon-arrow-right-long.svg" alt="Наступна сторінка">
+  </a>
+</div>
         {/if} {** if pagination **}
         
           <!-- SEO article section -->
@@ -162,4 +174,4 @@
             <article class="catalog-page__content_article">
               {$CENTER_SEO_TEXT}
             </article>
-            {/if}
+{/if}

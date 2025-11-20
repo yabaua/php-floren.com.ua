@@ -5,6 +5,7 @@ import { i as initScroll } from "./_scroll2.js";
 import { i as initCatalog } from "./_catalog.js";
 import { i as initClickOutsideHandlers } from "./_clickOutside.js";
 import { i as initExpandableText } from "./_expandableText.js";
+import "./fetchApi.js";
 function isObject$1(obj) {
   return obj !== null && typeof obj === "object" && "constructor" in obj && obj.constructor === Object;
 }
@@ -5472,40 +5473,34 @@ const initSwipers = () => {
     new Swiper(el, swiperConfig);
   });
   if (document.getElementById("main-photo-viewer")) {
-    window.swipers.thumbsSwiper = new Swiper(
-      ".swiper.photo-viewer__thumbs-swiper",
-      {
-        modules: [Manipulation],
-        loop: true,
-        spaceBetween: 16,
-        slidesPerView: "auto",
-        freeMode: true,
-        watchSlidesProgress: true
-      }
-    );
-    window.swipers.mainSwiper = new Swiper(
-      ".swiper.photo-viewer__main-swiper",
-      {
-        modules: [Navigation, Thumb, Pagination, Manipulation],
-        loop: true,
-        spaceBetween: 10,
-        navigation: {
-          nextEl: ".photo-viewer__button-next",
-          prevEl: ".photo-viewer__button-prev"
-        },
-        pagination: {
-          el: ".photo-viewer__pagination",
-          type: "custom",
-          // formatFractionCurrent: (number) => `aaa0${number}`,
-          renderCustom: function(swiper, current, total) {
-            return `Фото ${current} з ${total}`;
-          }
-        },
-        thumbs: {
-          swiper: window.swipers.thumbsSwiper
+    window.swipers.thumbsSwiper = new Swiper(".swiper.photo-viewer__thumbs-swiper", {
+      modules: [Manipulation],
+      loop: true,
+      spaceBetween: 16,
+      slidesPerView: "auto",
+      freeMode: true,
+      watchSlidesProgress: true
+    });
+    window.swipers.mainSwiper = new Swiper(".swiper.photo-viewer__main-swiper", {
+      modules: [Navigation, Thumb, Pagination, Manipulation],
+      loop: true,
+      spaceBetween: 10,
+      navigation: {
+        nextEl: ".photo-viewer__button-next",
+        prevEl: ".photo-viewer__button-prev"
+      },
+      pagination: {
+        el: ".photo-viewer__pagination",
+        type: "custom",
+        // formatFractionCurrent: (number) => `aaa0${number}`,
+        renderCustom: function(swiper, current, total) {
+          return `Фото ${current} з ${total}`;
         }
+      },
+      thumbs: {
+        swiper: window.swipers.thumbsSwiper
       }
-    );
+    });
     window.swipers.mainSwiper.on("slideChange", () => {
       window.youtubePlayers.forEach((player) => {
         if (player.stopVideo) {
@@ -5559,9 +5554,7 @@ const initHoverPhotoViewers = () => {
         src: thumb.querySelector("img")?.src || thumb.querySelector("[data-video-src]")?.dataset.videoSrc,
         type: thumb.querySelector("img") ? "image" : "video"
       }));
-      const activeIndex = Array.from(thumbs).findIndex(
-        (thumb) => thumb.classList.contains("active")
-      );
+      const activeIndex = Array.from(thumbs).findIndex((thumb) => thumb.classList.contains("active"));
       activatePhotoViewer(images, activeIndex);
     });
   });
@@ -5609,6 +5602,25 @@ function activatePhotoViewer(images, index = 0) {
     window.youtubePlayers.push(player);
   });
 }
+const initLastworkViewers = () => {
+  document.querySelectorAll("[data-lastwork-viewer]").forEach((viewer) => {
+    const thumbsBox = viewer.querySelector(".swiper-wrapper");
+    const thumbs = viewer.querySelectorAll(".swiper-wrapper .swiper-slide");
+    thumbsBox.addEventListener("click", (e) => {
+      const li = e.target.closest(".swiper-slide");
+      let activeIndex = 0;
+      let prev = li;
+      while (prev = prev.previousElementSibling) {
+        activeIndex++;
+      }
+      const images = Array.from(thumbs).map((thumb) => ({
+        src: thumb.querySelector("img")?.src || thumb.querySelector("[data-video-src]")?.dataset.videoSrc,
+        type: thumb.querySelector("img") ? "image" : "video"
+      }));
+      activatePhotoViewer(images, activeIndex);
+    });
+  });
+};
 window.youtubePlayers = [];
 function startApp() {
   initEvents();
@@ -5618,6 +5630,7 @@ function startApp() {
   initSwipers();
   initExpandableText();
   initHoverPhotoViewers();
+  initLastworkViewers();
   initIntlTelInput();
 }
 const generateRandomId = (length = 10) => {
