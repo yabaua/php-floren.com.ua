@@ -72,12 +72,12 @@
 				'name'					=>	$f['name'],
 				'product_path'	=>	$product_path,
 				'img_path'			=>	$img_path,
-				'image'					=> 	$f['image'],
+//				'image'					=> 	$f['image'],
 				'act'						=>	$f['act'],
 				'good_status'		=>	$good_status,
 				'price'					=>	$price,
-				'min_price'					=>	$f['min_price'],
-				'max_price'					=>	$f['max_price'],
+//				'min_price'					=>	$f['min_price'],
+//				'max_price'					=>	$f['max_price'],
 				'colors'				=>	$colors[$f['ID']]
 			);
 			

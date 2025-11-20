@@ -6,6 +6,7 @@ require($_SERVER['DOCUMENT_ROOT']."/database.php");
 //require($_SERVER['DOCUMENT_ROOT']."/include/floren.class.php");
 
 /* ==============. TEST DATA ============ */ 
+
 $json_string=array(
   "curPage"	=>	3,
   "perPage"	=>	25, // optional
@@ -17,22 +18,25 @@ $json_string=array(
 $dataString = json_encode($json_string, JSON_UNESCAPED_UNICODE);
 $post_data=$dataString;
 $REFERER = ('https://floren33:8890/ua/komnatnie-rasteniya/ficus/');
+
 /* ==============. TEST DATA ============ */ 
 
 
 /* ==========.  NOT TEST DATA	============*/
+/*
 if(!isset($_SERVER['HTTP_REFERER'])){
 	echo json_encode('invalid', JSON_UNESCAPED_UNICODE);
 	exit();
 }
 $REFERER = $_SERVER['HTTP_REFERER'];
 $post_data = file_get_contents('php://input');
+*/
 /*==============. NOT TEST DATA ============*/ 
 
 $URL = parse_url($REFERER);
 $data = json_decode($post_data, true);
 
-$lingvo['hgt'] = 
+
 
 //$url_filters = $data['filters'];
 $url_filters=array();
