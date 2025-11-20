@@ -1,6 +1,6 @@
 <?php
 header("Content-type: application/json; charset=utf-8");
-
+include_once($_SERVER['DOCUMENT_ROOT'] . "/include/resize.php");
 require($_SERVER['DOCUMENT_ROOT']."/database.php");
 //require($_SERVER['DOCUMENT_ROOT']."/smarty/Smarty.class.php");
 //require($_SERVER['DOCUMENT_ROOT']."/include/floren.class.php");
