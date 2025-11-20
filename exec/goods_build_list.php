@@ -1,4 +1,6 @@
 <?php
+// this is include code for pages goods.php, plants.php, showMoreGoods.php
+// Please Do not add too much
 //query is provided in goods.php, plants.php, showMoreGoods.php
 		$db->query($main_query);
 		$promo=array();
