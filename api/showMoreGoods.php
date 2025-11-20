@@ -5,44 +5,39 @@ require($_SERVER['DOCUMENT_ROOT']."/database.php");
 //require($_SERVER['DOCUMENT_ROOT']."/smarty/Smarty.class.php");
 //require($_SERVER['DOCUMENT_ROOT']."/include/floren.class.php");
 
-//test JSON string
-/*
+/* ==============. TEST DATA ============*/ 
 $json_string=array(
-	
-
-  "curPage"	=>	0,
+  "curPage"	=>	3,
   "perPage"	=>	25, // optional
 //  "lang"		=>	'',
 //  "mCat"		=>	'komnatnie-rasteniya',
 //  "cat"			=>	'ficus',
 //  "filters"	=>	['lechuza', 'krugliy']
 );
-
-
 $dataString = json_encode($json_string, JSON_UNESCAPED_UNICODE);
-*/
-//echo $dataString;
-//print_r( json_decode($dataString, true));
-//exit();
+$post_data=$dataString;
+$REFERER = ('https://floren33:8890/ua/komnatnie-rasteniya/ficus/');
+/* ==============. TEST DATA ============*/ 
 
 
+/* ==========.  NOT TEST DATA	============* /
 if(!isset($_SERVER['HTTP_REFERER'])){
 	echo json_encode('invalid', JSON_UNESCAPED_UNICODE);
 	exit();
 }
 $REFERER = $_SERVER['HTTP_REFERER'];
-//$REFERER = ('https://floren33:8890/ua/komnatnie-rasteniya/ficus/benjamina/');
-$URL = parse_url($REFERER);
-$txt_hgt = array('_ua' => 'Висота', '' => 'Высота');
-
-
-
 $post_data = file_get_contents('php://input');
-// 	$post_data=$dataString;	test string
+/ *==============. NOT TEST DATA ============*/ 
+
+$URL = parse_url($REFERER);
 $data = json_decode($post_data, true);
+
+$lingvo['hgt'] = 
+
 //$url_filters = $data['filters'];
 $url_filters=array();
 $perPage = $data['perPage'] ?? '25';
+$curPage = $data['curPage']-1 ?? '0';
 
 $categoryID='';
 $product_path = '';
@@ -58,10 +53,14 @@ if (substr($URL['path'], 1, 2) == 'ua') {
 	$lang_url='/ua';
 	$db_sufix='_ua';
 	$url_whiout_lang = substr($URL['path'], 3);
+	$lingvo['hgt'] = 'Висота';
+	$lang='ua';
 } else {
 	$lang_url = '';
 	$db_sufix = '';
 	$url_whiout_lang = $URL['path'];
+	$lingvo['hgt'] = 'Высота';
+	$lang='ru';
 }
 
 $parsedURL = explode('/',$url_whiout_lang);
@@ -173,7 +172,7 @@ if(!count($url_filters)){ // if steel no filters detected
 
 
 $limFirstPar = 0;
-if (isset($data['curPage'])) $limFirstPar = $data['curPage'] * $perPage;
+if (isset($data['curPage'])) $limFirstPar = ($data['curPage']-1) * $perPage;
 
 $tmp_filter_selected_goods = array();
 $filter_selected_groups = array();
@@ -211,140 +210,31 @@ if (count($url_filters) > 0) {
 	$filter_selected_goods_str = implode(',', $filter_selected_goods);
 
 
-	$query = "SELECT g.ID, g.link, g.classID, g.name, g.image, g.availability, min(NULLIF(gf.price, 0)) AS min_price, max(gf.price) AS max_price, g.act FROM goods".$db_sufix." g
-						LEFT JOIN goods_forms gf
+	$main_query = "SELECT g.ID, g.link, g.classID, g.name, g.image, g.availability, g.preorder, min(NULLIF(gf.price, 0)) AS min_price, max(gf.price) AS max_price, min(gf.old_price) AS min_old_price, max(gf.old_price) AS max_old_price, g.act FROM goods".$db_sufix." g
+						JOIN goods_forms gf
 						ON g.ID=gf.goodID WHERE g.ID IN (
 						".$filter_selected_goods_str.")
+						WHERE gf.visibility=1
 						GROUP BY g.ID
 						ORDER BY g.availability > 0 DESC, gf.price > 0 DESC, sort DESC, ".$sql_sort_order.", g.classID DESC, sort DESC, g.name
 						LIMIT ".($limFirstPar).", ". $perPage;
 
 } else {
 
-	$query = "SELECT g.ID, g.link, g.classID, g.name, g.image, g.availability, min(NULLIF(gf.price, 0)) AS min_price, max(gf.price) AS max_price, g.act FROM goods".$db_sufix." g
-						LEFT JOIN goods_forms gf
+	$main_query = "SELECT g.ID, g.link, g.classID, g.name, g.image, g.availability, g.preorder, min(NULLIF(gf.price, 0)) AS min_price, max(gf.price) AS max_price, min(NULLIF(gf.old_price, 0)) AS min_old_price, max(gf.old_price) AS max_old_price, g.act
+						FROM goods".$db_sufix." g
+						JOIN goods_forms gf
 						ON g.ID=gf.goodID
-						WHERE ".$subCat_sql."
+						WHERE ".$subCat_sql." AND gf.visibility=1
 						GROUP BY g.ID
 						ORDER BY g.availability > 0 DESC, gf.price > 0 DESC, ".$sql_sort_order.", g.classID DESC, sort DESC, g.name
 						LIMIT ".($limFirstPar).", " . $perPage;
 }
 
 //echo $query;
-$db->query($query);
-
-$zero_price = 0;
-$not_available = 0;	
-$prices = array();
-$promo=array();
-while($f=$db->fetch()){
-
-	$colors[$f['ID']] = array();
-	$prices[$f['ID']] = array();
-
-
-	if (intval($f['min_price']) == 0 && intval($f['max_price']) == 0) {
-		$zero_price = 1;
-	}
-
-	if ($f['act'] === "0" || $zero_price === 1) {
-		$not_available = 1;
-	}
-
-	if ($is_bouquet) {
-		$product_path = $lang_url . '/buket/' . $f['ID'] . '/';
-	} else {
-		$product_path = $lang_url . '/product/' . $f['ID'] . '_' . $f['link'] . '/';
-	}
-	$image_path = '/images/goods/s/'.$f['image'];
-
-	$promo[] = array(
-		'ID' => $f['ID'],
-		'name' => $f['name'],
-	//	'link' => $f['link'],
-		'product_path' => $product_path,
-		'image' => $image_path,
-		'act' => $f['act'],
-		'not_available' => $not_available,
-		'colors' => $colors[$f['ID']]
-	);
-
-	$db->query("SELECT gfs.ID, gfs.dia, gfs.hgt, gfs.wdt, gfs.depth, gfs.price, gfs.old_price, gfs.color, gfs.visibility, gfs.measure_id, gfs.measure_qt, gmg.unit FROM goods_forms gfs LEFT JOIN goods_measures gmg ON gmg.ID=gfs.measure_id WHERE gfs.goodID='".$f['ID']."' AND gfs.visibility=1 AND gfs.price > 0 $sql_pot_group", 1);
-	
-	$is_action=0;
-	
-	while($ff=$db->fetch(1)) {
-
-		if ($f['availability'] == 1 && intval($ff['price']) > 0) {
-			$prices[$f['ID']][] = intval($ff['price']);
-		}
-
-		$form_measure = '';
-
-			if ($ff['dia']) {
-				$form_measure = $form_measure . '&#216; ' . $ff['dia'];
-			}
-			if ($ff['wdt']) {
-				$form_measure = $form_measure . $ff['wdt'];
-			}
-			if ($ff['depth']) {
-				$form_measure = $ff['depth'] ? $form_measure . ' x ' . $ff['depth'] : $form_measure . $ff['depth'];
-			}
-			if ($ff['hgt']) {
-				$form_measure = $ff['dia'] ? $form_measure . ', ' . $txt_hgt[$db_sufix] . ' ' . $ff['hgt'] : $form_measure . ', ' . $txt_hgt[$db_sufix] . ' ' . $ff['hgt'];
-			}
-			if ($ff['measure_qt']) {
-
-				if ($ff['dia'] || $ff['wdt'] || $$ff['hgt']) {
-					$form_measure = $form_measure . ', ' . $ff['measure_qt'];
-				} else {
-					$form_measure = $form_measure . $ff['measure_qt'];
-				}
-			}
-		
-		$form_measure = $form_measure . ' ' .$ff['unit'];
-
-		$promo[count($promo)-1]['forms'][] = array(
-		//	'form_id' => $ff['ID'],
-			'dia' => $ff['dia'],
-			'hgt' => $ff['hgt'],
-			'wdt' => $ff['wdt'],
-			'depth' => $ff['depth'],
-		//	'price' => $ff['price'],
-			'form_measure' => $form_measure
-		);
-
-		if (!is_numeric($ff['color'])) {
-
-			$db->query("SELECT DISTINCT gc.preview, gc.alias, gc.name_ru, gc.name_ua FROM goods_colors gc LEFT JOIN goods_forms gf ON gc.alias=gf.color WHERE gf.goodID='".$f['ID']."' AND gf.visibility=1 AND gf.price > 0 ", 2);
-
-			while ($fc = $db->fetch(2)) {
-
-				
-				$colors[$f['ID']][] = array(
-					'name' => $db_sufix== '' ? $fc['name_ru'] : $fc['name_ua'],
-					'image' => $fc['preview'],
-				);
-
-			}
-
-		}
-		if($ff['old_price']>0) $is_action=1;
-		$promo[count($promo)-1]['is_action']=$is_action;
-	};
-
-	if (count($prices[$f['ID']]) > 0) {
-
-		$promo[count($promo)-1]['min_price'] = min(array_filter($prices[$f['ID']]));
-		$promo[count($promo)-1]['max_price'] = max(array_filter($prices[$f['ID']]));
-	
-	}
-
-	$promo[count($promo)-1]['colors'] = array_unique($colors[$f['ID']], SORT_REGULAR);
-
-};
+include($_SERVER['DOCUMENT_ROOT'] . "/exec/goods_build_list.php");
 //print_r($promo);
-echo json_encode($promo, JSON_UNESCAPED_UNICODE);
+echo json_encode($promo, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
 
 ?>

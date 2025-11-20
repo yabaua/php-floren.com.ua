@@ -64,7 +64,7 @@ $smarty->assign("META_REL_CANONICAL",'<link rel="canonical" href="https://floren
 					$goods[$rs_goods['ID']]['is_action']=1;
 				}
 			}
-			$smarty->assign("PROMO_PLANTS",$goods);
+$smarty->assign("PROMO_PLANTS",$goods);
 
 //Articles
 $pub_ind=array();

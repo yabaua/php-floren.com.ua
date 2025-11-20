@@ -407,7 +407,7 @@ $smarty->assign("META_KEYWORDS",		$meta_keywords);
 			$smarty->assign("GOODS_CNT",$total_goods);
 			$ofset=0;
 
-			$max_pages_links=20;
+			$max_pages_links=25;
 			$page=max(1,(int)@$_REQUEST['p']);
 
 			$ofset=($page-1)*$max_pages_links;
@@ -433,118 +433,21 @@ $smarty->assign("META_KEYWORDS",		$meta_keywords);
 			$smarty->assign("PAGE_MAX",$total_goods>$max_pages_links?100:1);//Выводить пагинацию или нет
 			//===/Страницы
 			
-			$db->query("SELECT g.*, gf.ID AS gfID, min(gf.price) AS min_price, max(gf.price) AS max_price FROM goods".$db_sufix." g
+			
+			
+	// =========== LETS BUILD GOODS LIST============
+	$main_query = "SELECT g.*, gf.ID AS gfID, min(gf.price) AS min_price, max(gf.price) AS max_price, min(NULLIF(gf.old_price, 0)) AS min_old_price, max(gf.old_price) AS max_old_price
+			FROM goods".$db_sufix." g
 			LEFT JOIN goods_forms gf
 			ON g.ID=gf.goodID
-			WHERE ".$goods_WHERE."
+			WHERE gf.visibility=1 AND ".$goods_WHERE."
 			".$filter_selected_goods_SQL."
 			GROUP BY g.ID
 			ORDER BY ".$sql_sort_order."
-			LIMIT ".$ofset.",".$max_pages_links);
-
-			while($rs_goods = $db->fetch()) {
-
-				$product_path = $lang_url . '/product/' . $rs_goods['ID'] . '_' . $rs_goods['link'] . '/';
-			//	$img_path = 'https://floren.com.ua/images/ins/s/' . $rs_goods['image'];
-				if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/images/goods/s/' . str_replace('jpg', 'webp', $rs_goods['image']))){
-						$img_path = '/images/goods/s/' . str_replace('jpg', 'webp', $rs_goods['image']);
-				}else{
-						$src= 'https://floren.com.ua/images/ins/b/gmcxml-' . $rs_goods['image'];
-					
-						$dest_s		=	$_SERVER['DOCUMENT_ROOT'] . '/images/goods/s/' .str_replace('jpg', 'webp', $rs_goods['image']);
-						$dest_m		=	$_SERVER['DOCUMENT_ROOT'] . '/images/goods/m/' .str_replace('jpg', 'webp', $rs_goods['image']);
-						$dest_b		=	$_SERVER['DOCUMENT_ROOT'] . '/images/goods/b/' .str_replace('jpg', 'webp', $rs_goods['image']);
-						$dest_gmcxml	=	$_SERVER['DOCUMENT_ROOT'] . '/images/goods/gmcxml/' .str_replace('.jpg', '-gmcxml.webp', $rs_goods['image']);
-						
-											
-						img_resize($src, $dest_s, 200, 200, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=false);
-					//	img_resize($src, $dest_m, 600, 600, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=true);
-					//	img_resize($src, $dest_b, 1600, 1200, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=true, $trim=false, $resize_max=true, $apply_mask=true);
-					//	img_resize($src, $dest_gmcxml, 1600, 1200, $rgb=0xFFFFFF, $quality=90, $keep_origin_size=true, $trim=false, $resize_max=true, $apply_mask=false);
-					$img_path = '/images/goods/s/' . str_replace('jpg', 'webp', $rs_goods['image']);
-				}
-
-				if ($rs_goods['availability'] == 0) {
-					$not_available = 1;
-				} else {
-					$not_available = 0;
-				}
-
-				$colors[$rs_goods['ID']] = array();
-
-				$promo[] = array(
-					'ID' => $rs_goods['ID'],
-					'name' => $rs_goods['name'],
-					'link' => $rs_goods['link'],
-					'product_path' => $product_path,
-					'img_path' => $img_path,
-					'image' => $rs_goods['image'],
-					'act' => $rs_goods['act'],
-					'not_available' => $not_available,
-					'preorder' => $rs_goods['preorder'],
-					'colors' => $colors[$rs_goods['ID']]
-				);
-
-				
-
-				$order_type = 'DESC';
-
-				if ($f_cat['motherID'] == 5) $order_type=''; //Горшки отсортированы по цене от 0 до 100
-
-				// $db->query("SELECT ID, dia, hgt, wdt, depth, price, color, visibility FROM goods_forms WHERE goodID='".$rs_goods['ID']."' AND visibility=1 AND price > 0 ".$sql_pot_group, 1);
-
-				$db->query("SELECT gfs.ID, gfs.dia, gfs.hgt, gfs.wdt, gfs.depth, gfs.price, gfs.old_price, gfs.color, gfs.visibility, gfs.measure_qt, gmg.unit, gmg.name_ru AS mg_name_ru, gmg.name_ua AS mg_name_ua FROM goods_forms gfs LEFT JOIN goods_measures gmg ON gmg.ID=gfs.measure_id
-				WHERE gfs.goodID='".$rs_goods['ID']."' AND gfs.visibility=1 AND gfs.price > 0 GROUP BY dia, hgt, wdt, depth", 1);
-
-				$is_action=0;
-				$prices[$rs_goods['ID']]=array();
-				
-				while($rs_goods_forms = $db->fetch(1)) {
-				
-					if ($rs_goods['availability'] == 1 && intval($rs_goods_forms['price']) > 0) {
-						$prices[$rs_goods['ID']][] = intval($rs_goods_forms['price']);
-					}
-
-					$promo[count($promo)-1]['forms'][] = array(
-						'dia' => $rs_goods_forms['dia'],
-						'hgt' => $rs_goods_forms['hgt'],
-						'wdt' => $rs_goods_forms['wdt'],
-						'depth' => $rs_goods_forms['depth'],
-						'price' => $rs_goods_forms['price'],
-						'measure_qt' => $rs_goods_forms['measure_qt'],
-						'unit' => $rs_goods_forms['unit'],
-						'mg_name_ru' => $rs_goods_forms['mg_name_ru'],
-						'mg_name_ua' => $rs_goods_forms['mg_name_ua']
-					);
-					
-					if ($rs_goods_forms['color'] != '0') {
-
-						$db->query("SELECT gf.color, gc.name_ru, gc.name_ua, gc.preview FROM goods_forms gf LEFT JOIN goods_colors gc ON gf.color=gc.alias WHERE goodID='".$rs_goods['ID']."' AND visibility=1 AND price > 0 ", 2);
-
-						while ($rs_goods_colors = $db->fetch(2)) {
-							if ($rs_goods_colors['color'] != '0') {
-								$colors[$rs_goods['ID']][] = array(
-									'name_ru' => $rs_goods_colors['name_ru'],
-									'name_ua' => $rs_goods_colors['name_ua'],
-									'image' => $rs_goods_colors['preview'],
-								);
-							}
-						}
-					}
-					
-				if($rs_goods_forms['old_price']>0) $is_action=1;
-				$promo[count($promo)-1]['is_action']=$is_action;
-				}
-				
-				
-				if (count($prices[$rs_goods['ID']]) > 0) {
-					$promo[count($promo)-1]['min_price'] = min(array_filter($prices[$rs_goods['ID']]));
-					$promo[count($promo)-1]['max_price'] = max(array_filter($prices[$rs_goods['ID']]));
-				}
-
-				$promo[count($promo)-1]['colors'] = array_unique($colors[$rs_goods['ID']], SORT_REGULAR);
-				
-			}
+			LIMIT ".$ofset.",".$max_pages_links;
+			
+	include("goods_build_list.php");
+	// =========== LETS BUILD GOODS LIST============
 			$schema_prices_min=array();
 			foreach ($promo AS $k=>$v){
 					if(!isset($v['min_price']) || !$v['min_price']) continue;
@@ -600,12 +503,3 @@ $smarty->assign("META_KEYWORDS",		$meta_keywords);
 	$smarty->assign("META_REL_CANONICAL",$meta_rel_canonical);
 
 ?>
-
-
-
-
-
-
-
-
-
