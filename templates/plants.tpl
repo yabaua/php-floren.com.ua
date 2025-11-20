@@ -134,7 +134,7 @@
         {if !$FROM_GOODS}{** if from goods.php **}
           <!-- Кнопка "Показати ще" -->
 <div class="catalog-page__content_more">
-  <button class="button button--primary button--pill">{$LINGVO.show_more}</button>
+  <button class="button button--primary button--pill"  data-event="click" data-callback="showMoreGoods">{$LINGVO.show_more}</button>
 </div>
         {/if}
 

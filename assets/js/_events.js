@@ -36,7 +36,7 @@ const clickHandlers = {
   },
   showMoreGoods: async () => {
     try {
-      const data = await fetchShowMoreGoods();
+      const data = await fetchShowMoreGoods(1);
       console.log("Fetched more goods:", data);
     } catch (error) {
       console.error("Error fetching more goods:", error);
