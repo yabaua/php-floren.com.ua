@@ -1,3 +1,4 @@
+import { u as updateGoodsList } from "./_catalog.js";
 import { f as fetchShowMoreGoods } from "./fetchApi.js";
 const clickHandlers = {
   toggleLocation: (event) => {
@@ -18,9 +19,7 @@ const clickHandlers = {
     event.currentTarget.closest(".contacts-phone").classList.toggle("active");
   },
   toggleAdvicesPhones: (event) => {
-    event.currentTarget
-      .closest(".homepage__advices_content--phones")
-      .classList.toggle("active");
+    event.currentTarget.closest(".homepage__advices_content--phones").classList.toggle("active");
   },
   openModal: (e) => {
     const modalId = e.currentTarget.dataset.modalId;
@@ -36,12 +35,12 @@ const clickHandlers = {
   },
   showMoreGoods: async () => {
     try {
-      const data = await fetchShowMoreGoods(1);
-      console.log("Fetched more goods:", data);
+      const data = await fetchShowMoreGoods(window.currentPage);
+      updateGoodsList(data);
     } catch (error) {
       console.error("Error fetching more goods:", error);
     }
-  },
+  }
 };
 const initEvents = () => {
   const targets = document.querySelectorAll("[data-event]");
@@ -49,13 +48,12 @@ const initEvents = () => {
     const event = el.dataset.event;
     const callback = clickHandlers[el.dataset.callback];
     if (!callback) {
-      console.warn(
-        `Callback function "${el.dataset.callback}" not found for element:`,
-        el
-      );
+      console.warn(`Callback function "${el.dataset.callback}" not found for element:`, el);
       return;
     }
     el.addEventListener(event, callback);
   });
 };
-export { initEvents as i };
+export {
+  initEvents as i
+};
