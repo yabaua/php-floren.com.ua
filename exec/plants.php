@@ -65,7 +65,7 @@ if($URL[0]=='aksessuary') {
 	$is_aksessuary = 1;
 	$smarty->assign("ALIAS", "aksessuary");
 	$hleb[1]['link']='/aksessuary/';
-	$hleb[1]['name']=$lingvo['aksessuary'];
+	$hleb[1]['name']=$lingvo['accessory'];
 }
 if($URL[0]=='iskusstvennie-cvety') {
 	$dept = "iskusstvennie-cvety";

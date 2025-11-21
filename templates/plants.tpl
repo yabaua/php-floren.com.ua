@@ -85,15 +85,13 @@
       <div class="product-card__name">
         <a href="{$P.product_path}">{$P.name}</a>
       </div>
-                {if $P.not_available === 0}
-                <div class="product-card__price">
-                {$P.price} ₴{** <del>200,99 ₴</del> **}
-                
-                  <!-- If in cart add this block -->
+      {if $P.good_status == 'in_stock'}
+      <div class="product-card__price">
+      {$P.price} {** <del>200,99 ₴</del> **}        
+        <!-- If in cart add this block -->
         <div class="product-card__in-cart">
           <span class="icon icon-basket"></span>
         </div>
-
       </div>
 
       <div class="product-card__options">
@@ -118,7 +116,7 @@
         </section>
                   {/if} {** if colors **}
                 </div>
-                {elseif $P.good_status =='preorder'}
+        {elseif $P.good_status =='preorder'}
 					<div class="product-card__custom-order">{$LINGVO.good_preorder}</div>
 				{else}
 					<div class="product-card__custom-order">{$LINGVO.not_available}</div>
