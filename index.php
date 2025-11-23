@@ -96,13 +96,16 @@ if (!$spiders) {
 	} // if NOT SESSION['ID']
 }// if NOT spyder
 
-	
+//unset($_SESSION);	
 	if (!isset($_SESSION['basket'])) $_SESSION['basket']=array();
 	//if (!isset($_SESSION['user'])) $_SESSION['basket']=array();
+	
 	//TEST BSK
-	if(!count($_SESSION['basket'])){
+	/*
+	//========IT WILL BE DELETETD
+	if(count($_SESSION['basket'])<1){
 		$db->query("SELECT gf.ID AS formID FROM goods g JOIN goods_forms gf ON g.ID=gf.goodID WHERE gf.price>0 AND g.availability>0 ORDER BY RAND() LIMIT 10");
-		$cnt_goods=rand(1, 10);
+		$cnt_goods=rand(1, 3);
 		$iterator=0;
 		while ($f=$db->fetch()){
 			if($iterator==$cnt_goods) break;
@@ -110,7 +113,9 @@ if (!$spiders) {
 			$iterator++;
 		}
 	}
-
+	//=========IT WILL BE DELETETD
+	*/
+	ksort($_SESSION['basket']); // THIS SHIT BECAUSE AFTER RENDERING CART ITEMS ARE JUMPING
 // стартует индификатор сессии
 /*
 if(isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/admin') === false && $_SERVER['REQUEST_METHOD'] === 'GET'){
