@@ -7,6 +7,10 @@ const initCartModal = async () => {
       updateCartDisplay();
     });
   });
+  document.getElementById("cart-recipient-checkbox").addEventListener("sl-change", (e) => {
+    const isChecked = e.target.checked;
+    document.getElementById("cart-recipient-grid").classList.toggle("hidden", isChecked);
+  });
 };
 async function updateCartDisplay() {
   const cartTotal = [];

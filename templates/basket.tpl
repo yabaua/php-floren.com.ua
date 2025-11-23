@@ -22,9 +22,9 @@
               </div>
               <div class="form-control form-control--checkbox">
                 <h3>{$LINGVO.rec_data}</h3>
-                <sl-checkbox>{$LINGVO.iam_rec}</sl-checkbox>
+                <sl-checkbox id="cart-recipient-checkbox">{$LINGVO.iam_rec}</sl-checkbox>
               </div>
-              <div class="form-grid">
+              <div class="form-grid" id="cart-recipient-grid">
                 <div class="form-control">
                   <sl-input label="{$LINGVO.fb_name}" placeholder="{$LINGVO.fb_name}"></sl-input>
                 </div>
