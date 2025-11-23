@@ -242,7 +242,7 @@ if (count($url_filters) > 0) {
 
 //echo $query;
 include($_SERVER['DOCUMENT_ROOT'] . "/exec/goods_build_list.php");
-$promo['curPage']=$curPage;
+
 //print_r($promo);
 echo json_encode($promo, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
