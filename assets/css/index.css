@@ -599,6 +599,7 @@ sl-textarea {
   --sl-input-border-color-hover: var(--color-green-50);
   --sl-input-border-color-focus: var(--color-green-50);
   --sl-focus-ring-width: 0px;
+  --sl-input-required-content-color: #ff0000;
 }
 sl-input::part(form-control-label),
 sl-textarea::part(form-control-label) {
@@ -3456,6 +3457,7 @@ body.secondary-hovered .catalog-overlay {
   font-weight: 500;
   padding: 0.5rem 0.5rem 0.25rem 0.5rem;
   font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 .catalog-page__content_product-card .product-card__price {
   font-weight: 300;
@@ -4326,6 +4328,11 @@ body.secondary-hovered .catalog-overlay {
   font-weight: 300;
   margin-bottom: 8px;
   color: var(--color-gray-100);
+}
+.cart-page__order-information .information__contact_form label[required]::after {
+  content: "*";
+  margin-inline-start: 2px;
+  color: red;
 }
 .cart-page__order-information .information__contact_form sl-input::part(form-control-label) {
   font-size: 0.875rem;

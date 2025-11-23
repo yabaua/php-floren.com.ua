@@ -1,39 +1,30 @@
 import { f as fetchEditCart } from "./fetchApi.js";
 const initCartModal = async () => {
-  document
-    .querySelectorAll("#cart-modal-items-list .cart-item")
-    .forEach((item) => {
-      item
-        .querySelector("quantity-counter")
-        .addEventListener("change", () => updateCartDisplay());
-      item.querySelector(".cart-item__remove").addEventListener("click", () => {
-        item.querySelector("quantity-counter").value = 0;
-        updateCartDisplay();
-      });
+  document.querySelectorAll("#cart-modal-items-list .cart-item").forEach((item) => {
+    item.querySelector("quantity-counter").addEventListener("change", () => updateCartDisplay());
+    item.querySelector(".cart-item__remove").addEventListener("click", () => {
+      item.querySelector("quantity-counter").value = 0;
+      updateCartDisplay();
     });
+  });
 };
 async function updateCartDisplay() {
   const cartTotal = [];
-  document
-    .querySelectorAll("#cart-modal-items-list .cart-item")
-    .forEach((item) => {
-      const productId = item.dataset.id;
-      const quantity = item.querySelector("quantity-counter").value;
-      if (quantity > 0) {
-        cartTotal.push({
-          [productId]: quantity,
-        });
-      }
-    });
+  document.querySelectorAll("#cart-modal-items-list .cart-item").forEach((item) => {
+    const productId = item.dataset.id;
+    const quantity = item.querySelector("quantity-counter").value;
+    if (quantity > 0) {
+      cartTotal.push({
+        [productId]: quantity
+      });
+    }
+  });
   const data = await fetchEditCart(cartTotal);
   const list = document.getElementById("cart-modal-items-list");
   if (list && data.basket_items) {
-    list.innerHTML = data.basket_items
-      .map((item) => {
-        const price = Number(item.price)
-          .toFixed(2)
-          .replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-        return `
+    list.innerHTML = data.basket_items.map((item) => {
+      const price = Number(item.price).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+      return `
         <li class="cart-item" data-id="${item.formID}">
           <div class="cart-item__image">
             <a href="${item.product_path}">
@@ -54,16 +45,15 @@ async function updateCartDisplay() {
             </div>
           </div>
         </li>`;
-      })
-      .join("");
+    }).join("");
     initCartModal();
   }
   const totalEl = document.getElementById("cart-modal-total-ammount");
   if (totalEl && data.basket_sum !== void 0) {
-    const total = Number(data.basket_sum)
-      .toFixed(2)
-      .replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    const total = Number(data.basket_sum).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     totalEl.textContent = `${total} ₴`;
   }
 }
-export { initCartModal as i };
+export {
+  initCartModal as i
+};
