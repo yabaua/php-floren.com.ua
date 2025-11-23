@@ -343,7 +343,7 @@ while ($f=$db->fetch()) {
 
 	$category_left[$f['ID']]['category'][] = $ff;
 
-	$old_aliases = array('lamela-old', 'elho-old', 'ceramic-old', 'beton-old');
+	$old_aliases = array('lamela-old', 'elho-old', 'ceramic-old', 'beton-old', 'lechuza-old');
 	
 	if (in_array($ff['alias'], $old_aliases)) {
 		$tmp_arr = explode('-', $ff['alias']);

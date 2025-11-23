@@ -129,12 +129,12 @@
             
           </div>
         {if $PAGE_MAX>1}
-        {if !$FROM_GOODS}{** if from goods.php **}
+        {** if !$FROM_GOODS **}{** if from goods.php **}
           <!-- Кнопка "Показати ще" -->
 <div class="catalog-page__content_more">
   <button class="button button--primary button--pill"  data-event="click" data-callback="showMoreGoods">{$LINGVO.show_more}</button>
 </div>
-        {/if}
+        {** /if **}
 
           <!-- Pagination -->
 <div class="pagination">

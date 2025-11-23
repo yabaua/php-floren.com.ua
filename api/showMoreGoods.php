@@ -6,7 +6,7 @@ require($_SERVER['DOCUMENT_ROOT']."/database.php");
 //require($_SERVER['DOCUMENT_ROOT']."/include/floren.class.php");
 
 /* ==============. TEST DATA ============ */ 
-
+/*
 $json_string=array(
   "curPage"	=>	3,
   "perPage"	=>	25, // optional
@@ -18,19 +18,19 @@ $json_string=array(
 $dataString = json_encode($json_string, JSON_UNESCAPED_UNICODE);
 $post_data=$dataString;
 $REFERER = ('https://floren33:8890/ua/komnatnie-rasteniya/ficus/');
-
+*/
 /* ==============. TEST DATA ============ */ 
 
 
 /* ==========.  NOT TEST DATA	============*/
-/*
+
 if(!isset($_SERVER['HTTP_REFERER'])){
 	echo json_encode('invalid', JSON_UNESCAPED_UNICODE);
 	exit();
 }
 $REFERER = $_SERVER['HTTP_REFERER'];
 $post_data = file_get_contents('php://input');
-*/
+
 /*==============. NOT TEST DATA ============*/ 
 
 $URL = parse_url($REFERER);
@@ -49,6 +49,7 @@ $img_path = '';
 $sql_pot_group = '';
 $is_plant = 0;
 $is_pot = 0;
+$is_aksessuary = 0;
 $is_bouquet = 0;
 $is_sezon = 0;
 $is_accessory = 0;
@@ -112,7 +113,11 @@ if ($parsedURL[1]=='aksessuary') {
 	$categoryID = 82;
 	$sql_pot_group = "GROUP BY gfs.measure_qt";
 }
-
+if($parsedURL[1]=='iskusstvennie-cvety') {
+	$is_plant = 99;
+	$categoryID = 3;
+	$sql_sort_order = "g.sort DESC";
+}
 
 $subCatAlias='';
 $subCatID='';
@@ -218,7 +223,7 @@ if (count($url_filters) > 0) {
 						JOIN goods_forms gf
 						ON g.ID=gf.goodID WHERE g.ID IN (
 						".$filter_selected_goods_str.")
-						WHERE gf.visibility=1
+						AND gf.visibility=1
 						GROUP BY g.ID
 						ORDER BY g.availability > 0 DESC, gf.price > 0 DESC, sort DESC, ".$sql_sort_order.", g.classID DESC, sort DESC, g.name
 						LIMIT ".($limFirstPar).", ". $perPage;
@@ -237,6 +242,7 @@ if (count($url_filters) > 0) {
 
 //echo $query;
 include($_SERVER['DOCUMENT_ROOT'] . "/exec/goods_build_list.php");
+$promo['curPage']=$curPage;
 //print_r($promo);
 echo json_encode($promo, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
