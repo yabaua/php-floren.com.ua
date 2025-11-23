@@ -1,5 +1,5 @@
 import { u as updateGoodsList } from "./_catalog.js";
-import { f as fetchShowMoreGoods } from "./fetchApi.js";
+import { a as fetchShowMoreGoods } from "./fetchApi.js";
 const clickHandlers = {
   toggleLocation: (event) => {
     const element = event.currentTarget;

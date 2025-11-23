@@ -63,7 +63,7 @@ function createProductCard(product) {
     priceContent = `
         <div class="product-card__custom-order">Немає в наявності</div>                    
     `;
-  } else {
+  } else if (product.good_status === "in_stock") {
     priceContent = `
       <div class="product-card__price">
         ${product.price}

@@ -6,6 +6,8 @@ import "./_scroll2.js";
 import "./_catalog.js";
 import "./_clickOutside.js";
 import "./_expandableText.js";
+import "./_quantityCounter.js";
+import "./_cart.js";
 import "./fetchApi.js";
 export {
   A as Autoplay,

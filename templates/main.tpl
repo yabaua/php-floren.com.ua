@@ -200,9 +200,9 @@
                 class="underline">кошик</a>
             </div>
             {if $BASKET|@count>0}
-            <ul class="cart-items-list">
+            <ul class="cart-items-list" id="cart-modal-items-list">
               {foreach item=B from=$BASKET}
-              <li class="cart-item">
+              <li class="cart-item" data-id="{$B.formID}">
                 <div class="cart-item__image">
                   <a href="{$B.href}">
                     <img src="{$B.img}" alt="{$B.name}">
@@ -217,15 +217,7 @@
                   </h3>
                   <div class="cart-item__details_options">{$B.goodLegend}</div>
                   <div class="cart-item__details_controls"> {** Dimon if you need - you can use this id="{$B.formID}"  **}
-                    <div class="counter-input">
-                      <button>
-                        <img src="/img/icons/icon-minus.svg" alt="{$LINGVO.bsk_del_one}" />
-                      </button>
-                      <input type="number" value="{$B.cnt}" min="1" />
-                      <button>
-                        <img src="/img/icons/icon-plus.svg" alt="{$LINGVO.bsk_add_one}" />
-                      </button>
-                    </div>
+                  <quantity-counter value="{$B.cnt}" min="1"></quantity-counter>                    
                     <div class="cart-item__details_price">{$B.price|number_format:2:'.':' '} ₴</div>
                   </div>
                 </div>
@@ -238,7 +230,7 @@
             <div class="cart-modal__footer">
               <button class="cart-modal__footer_continue underline" data-event="click"
                 data-callback="closeModal">{$LINGVO.continue_shopping}</button>
-              <div class="cart-modal__footer_total">{$LINGVO.total}: <b>{$BSK_TTL|number_format:2:'.':' '} ₴</b>
+              <div class="cart-modal__footer_total">{$LINGVO.total}: <b id="cart-modal-total-ammount">{$BSK_TTL|number_format:2:'.':' '} ₴</b>
               </div>
               <a href="{$LANGURL}/basket/" class="button button--small button--primary">{$LINGVO.checkout}</a>
             </div>
