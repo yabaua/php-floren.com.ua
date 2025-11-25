@@ -191,33 +191,41 @@
   </div>
 </main>
 
-<!-- <script>        
-    const messages = {literal}{{/literal}									{** "–" - not used now, "+" used now **}
-            smallOrderText: "{$LINGVO.small_order}",				{** + **}
-            bigGoodsText: "{$LINGVO.notice_biggoods}",			{** + **}
-            notNpWarningText: "{$LINGVO.sorry_but_not_np}",	{** + **}
-            notNpText: "{$LINGVO.not_np_delivery}"					{** + **} 
-            npDeliveryText: "{$LINGVO.notice_nptarif}",			{** – **}
-            paymentTextNp: "{$LINGVO.nova_poshta_money}",		{** + **}
-            paymentTextCash: "{$LINGVO.bsk_cash}",					{** + **}
-            moneyFreezeText: "{$LINGVO.money_freeze}",			{** – **}
-            lessZeroText: "{$LINGVO.less_zero}",						{** + **}
-            cityDeliveryText: "{$LINGVO.city_delivery}",		{** + **}
-            elevatorPriceText: "{$LINGVO.elevator_price}", 	{** – **}
-            minimumOrderText: "{$LINGVO.minimumOrder}", 		{** – **}
-        {literal}}{/literal};
+<script>
+  const messages = {
+    smallOrderText: "{$LINGVO.small_order}",
+    bigGoodsText: "{$LINGVO.notice_biggoods}",
+    notNpWarningText: "{$LINGVO.sorry_but_not_np}",
+    notNpText: "{$LINGVO.not_np_delivery}",
+    npDeliveryText: "{$LINGVO.notice_nptarif}",
+    paymentTextNp: "{$LINGVO.nova_poshta_money}",
+    paymentTextCash: "{$LINGVO.bsk_cash}",
+    moneyFreezeText: "{$LINGVO.money_freeze}",
+    lessZeroText: "{$LINGVO.less_zero}",
+    cityDeliveryText: "{$LINGVO.city_delivery}",
+    elevatorPriceText: "{$LINGVO.elevator_price}",
+    minimumOrderText: "{$LINGVO.minimumOrder}"
+  };
 
-    const defaultOptions = {literal}{{/literal}
-            courierDeliveryPrice: parseFloat("{$DELIVERY_OPTIONS.courier_std}"),							{** + **}
-            fastDeliveryPrice: parseFloat("{$DELIVERY_OPTIONS.courier_fast_delivery}"),				{** – **}
-            exactTimeDeliveryPrice: parseFloat("{$DELIVERY_OPTIONS.courier_exact_delivery}"),	{** – **}
-            earlyDeliveryPrice: parseFloat("{$DELIVERY_OPTIONS.courier_early_delivery}"),			{** – **}
-            lateDeliveryPrice: parseFloat("{$DELIVERY_OPTIONS.courier_late_delivery}"),				{** – **}
-            smallOrder: parseFloat("{$DELIVERY_OPTIONS.small_order}"),												{** + **}
-            smallOrderDeliveryPrice: parseFloat("{$DELIVERY_OPTIONS.small_order_delivery}"),	{** + **}
-            minimumOrderDelivery: parseFloat("{$DELIVERY_OPTIONS.minimum_order}"),						{** + **}
-            delivery: 'magazin',																															{** + **}
-            payment: 'cash',																																	{** + **}
-        {literal}}{/literal};
+  const defaultOptions = {
+    courierDeliveryPrice: parseFloat("{$DELIVERY_OPTIONS.courier_std}"),
 
-  </script> -->
+    fastDeliveryPrice: parseFloat("{$DELIVERY_OPTIONS.courier_fast_delivery}"),
+
+    exactTimeDeliveryPrice: parseFloat("{$DELIVERY_OPTIONS.courier_exact_delivery}"),
+
+    earlyDeliveryPrice: parseFloat("{$DELIVERY_OPTIONS.courier_early_delivery}"),
+
+    lateDeliveryPrice: parseFloat("{$DELIVERY_OPTIONS.courier_late_delivery}"),
+
+    smallOrder: parseFloat("{$DELIVERY_OPTIONS.small_order}"),
+
+    smallOrderDeliveryPrice: parseFloat("{$DELIVERY_OPTIONS.small_order_delivery}"),
+
+    minimumOrderDelivery: parseFloat("{$DELIVERY_OPTIONS.minimum_order}"),
+
+    delivery: 'magazin',
+
+    payment: 'cash'
+  };
+</script>
