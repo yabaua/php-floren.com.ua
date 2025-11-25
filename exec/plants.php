@@ -353,7 +353,7 @@ if ((isset($URL[1]) && in_array($URL[1], $category_aliases))) {
 
 			$pages=array();
 			$lastPage=ceil($total_goods/$max_pages_links);
-			$smarty->assign("LASTPAGE",$lastPage);
+			
 
 			if($cur_page>$lastPage){
                 // --- [dg] redirects form overlimited pagitation to last one --- //
@@ -374,6 +374,7 @@ if ((isset($URL[1]) && in_array($URL[1], $category_aliases))) {
 				$pages[]=array('active'=>($i==$page), 'page'=>$i, 'prev'=>$i+1==$page, 'next'=>$i-1==$page);
 			}
 
+			$smarty->assign("LASTPAGE",$lastPage);
 			$smarty->assign("PAGES",$pages);
 			$smarty->assign("CUR_PAGE",$page);
 			$smarty->assign("PAGE_MAX",$total_goods>$max_pages_links?100:1);

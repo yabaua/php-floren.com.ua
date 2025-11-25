@@ -89,5 +89,18 @@ class DB2 {
             $this->link_id = null;
         }
     }
+    public function error($echo = false) {
+        $error = $this->last_error;
+
+        if ($this->link_id instanceof mysqli && $this->link_id->error) {
+            $error = $this->link_id->error;
+        }
+
+        if ($echo) {
+            echo "❌ Ошибка SQL: " . htmlspecialchars($error);
+        }
+
+        return $error;
+    }
 }
 ?>

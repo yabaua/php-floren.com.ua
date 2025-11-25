@@ -413,7 +413,7 @@ $smarty->assign("META_KEYWORDS",		$meta_keywords);
 			$ofset=($page-1)*$max_pages_links;
 			$pages=array();
 			$lastPage=ceil($total_goods/$max_pages_links);
-			$smarty->assign("LASTPAGE",$lastPage);
+			
 			
 			
 			
@@ -428,6 +428,7 @@ $smarty->assign("META_KEYWORDS",		$meta_keywords);
 				exit();
 			}		
 			
+			$smarty->assign("LASTPAGE",$lastPage);
 			$smarty->assign("PAGES",$pages);
 			$smarty->assign("CUR_PAGE",$page);
 			$smarty->assign("PAGE_MAX",$total_goods>$max_pages_links?100:1);//Выводить пагинацию или нет

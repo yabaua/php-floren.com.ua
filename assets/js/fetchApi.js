@@ -22,6 +22,7 @@ const fetchEditCart = async (cartData) => {
   try {
     const response = await fetch("/api/add2cart.php", {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json"
       },
