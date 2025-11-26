@@ -2335,6 +2335,9 @@ body.secondary-hovered .catalog-overlay {
   font-weight: 600;
   color: var(--color-violet);
 }
+.cart-modal__message {
+  display: none;
+}
 .cart-modal__footer {
   margin-top: 1.25rem;
   display: flex;
@@ -3852,7 +3855,7 @@ body.secondary-hovered .catalog-overlay {
 }
 .product-page__content_grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 3rem;
 }
 .product-page__gallery_link {

@@ -6,7 +6,7 @@ import { i as initCatalog } from "./_catalog.js";
 import { i as initClickOutsideHandlers } from "./_clickOutside.js";
 import { i as initExpandableText } from "./_expandableText.js";
 import { Q as QuantityCounter } from "./_quantityCounter.js";
-import { i as initCartModal } from "./_cart.js";
+import { i as initCart } from "./_cart.js";
 import "./fetchApi.js";
 function isObject$1(obj) {
   return obj !== null && typeof obj === "object" && "constructor" in obj && obj.constructor === Object;
@@ -5634,7 +5634,7 @@ function startApp() {
   initHoverPhotoViewers();
   initLastworkViewers();
   initIntlTelInput();
-  initCartModal();
+  initCart();
   customElements.define("quantity-counter", QuantityCounter);
 }
 const generateRandomId = (length = 10) => {

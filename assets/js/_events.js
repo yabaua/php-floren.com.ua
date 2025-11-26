@@ -1,5 +1,6 @@
+import { a as addToCart } from "./_cart.js";
 import { u as updateGoodsList } from "./_catalog.js";
-import { a as fetchShowMoreGoods } from "./fetchApi.js";
+import { f as fetchShowMoreGoods } from "./fetchApi.js";
 const clickHandlers = {
   toggleLocation: (event) => {
     const element = event.currentTarget;
@@ -24,7 +25,6 @@ const clickHandlers = {
   openModal: (e) => {
     const modalId = e.currentTarget.dataset.modalId;
     const modal = document.getElementById(modalId);
-    console.log("modal", modal);
     if (modal) {
       modal.show();
     }
@@ -40,7 +40,8 @@ const clickHandlers = {
     } catch (error) {
       console.error("Error fetching more goods:", error);
     }
-  }
+  },
+  addToCart
 };
 const initEvents = () => {
   const targets = document.querySelectorAll("[data-event]");

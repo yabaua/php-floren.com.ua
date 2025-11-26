@@ -84,6 +84,7 @@
       </div>
       {/if}
     </section>
+    
 
     <!-- Ціна і кнопки дій -->
     <section class="product-page__actions">
@@ -92,7 +93,7 @@
         <sup>грн</sup>
       </div>
       <div class="product-page__actions_buttons">
-        <button href="" class="button button--primary">{$LINGVO.add_prod}</button>
+        <button class="button button--primary" data-id="{$CUR_GFSID}" data-name="{$GOOD_ONE.name}" data-href="{$GOOD_ONE.hrefID}" data-event="click" data-callback="addToCart">{$LINGVO.add_prod}</button>
         <button href="#" class="button button--outline button--icon button--small" aria-label="{$LINGVO.add_to_fav}">
           <span class="icon icon-heart"/>
         </button>

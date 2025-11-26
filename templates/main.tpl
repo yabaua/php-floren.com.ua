@@ -195,9 +195,8 @@
 
           <!-- Start Cart modal -->
           <sl-dialog id="cart-modal" label="{$LINGVO.basket}" class="cart-modal">
-            <div class="alert alert-success" role="alert">
-              Товар <a href="/" class="underline">Орхідея Фаленопсис Муса</a> Пінк доданий у ваш <a href="/basket"
-                class="underline">кошик</a>
+            <div class="alert alert-success cart-modal__message" role="alert">
+              Товар <a href="#" class="underline" id="cart-modal-product-name"></a> доданий у ваш <a href="/basket" class="underline">кошик</a>
             </div>
             {if $BASKET|@count>0}
             <ul class="cart-items-list" id="cart-modal-items-list">
