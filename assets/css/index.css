@@ -3548,9 +3548,11 @@ body.secondary-hovered .catalog-overlay {
 }
 .catalog-page__content_product-card .product-card__options .colors-list {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
 }
 .catalog-page__content_product-card .product-card__options .colors-list > span {
+  flex-shrink: 0;
   display: inline-block;
   width: 1.25rem;
   height: 1.25rem;
@@ -3995,6 +3997,10 @@ body.secondary-hovered .catalog-overlay {
 .product-page__options_color sl-radio-group {
   display: flex;
 }
+.product-page__options_color sl-radio-group::part(button-group__base) {
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
 .product-page__options_color sl-radio-group::part(form-control-label) {
   font-size: 0.875rem;
   font-weight: 600;
@@ -4003,7 +4009,7 @@ body.secondary-hovered .catalog-overlay {
 }
 .product-page__options_color sl-radio-group sl-radio-button {
   padding: 0;
-  margin-right: 12px;
+  flex-shrink: 0;
   --sl-spacing-medium: 0;
 }
 .product-page__options_color sl-radio-group sl-radio-button::part(button--checked) {
