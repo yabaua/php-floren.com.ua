@@ -187,7 +187,7 @@
             <a href="#" class="icon-button" aria-label="{$LINGVO.basket}" data-event="click" data-callback="openModal"
               data-modal-id="cart-modal">
               {if $BASKET|@count > 0}
-              <span class="badge success">{$BASKET|@count}</span>
+              <span class="badge success" id="cart-modal-button-badge">{$BASKET|@count}</span>
               {/if}
               <svg class="icon icon-basket" />
             </a>
@@ -197,35 +197,33 @@
           <sl-dialog id="cart-modal" label="{$LINGVO.basket}" class="cart-modal">
             <div class="alert alert-success cart-modal__message" role="alert">
               Товар <a href="#" class="underline" id="cart-modal-product-name"></a> доданий у ваш <a href="/basket" class="underline">кошик</a>
-            </div>
-            {if $BASKET|@count>0}
+            </div>            
             <ul class="cart-items-list" id="cart-modal-items-list">
-              {foreach item=B from=$BASKET}
-              <li class="cart-item" data-id="{$B.formID}">
-                <div class="cart-item__image">
-                  <a href="{$B.href}">
-                    <img src="{$B.img}" alt="{$B.name}">
-                  </a>
-                </div>
-                <div class="cart-item__details">
-                  <button class="cart-item__remove">
-                    <svg class="icon icon-trash" />
-                  </button>
-                  <h3>
-                    <a href="{$B.href}">{$B.name}</a>
-                  </h3>
-                  <div class="cart-item__details_options">{$B.goodLegend}</div>
-                  <div class="cart-item__details_controls"> {** Dimon if you need - you can use this id="{$B.formID}"  **}
-                  <quantity-counter value="{$B.cnt}" min="1"></quantity-counter>                    
-                    <div class="cart-item__details_price">{$B.price|number_format:2:'.':' '} ₴</div>
-                  </div>
-                </div>
-              </li>
-              {/foreach}
+              {if $BASKET|@count>0}
+                {foreach item=B from=$BASKET}
+                  <li class="cart-item" data-id="{$B.formID}">
+                    <div class="cart-item__image">
+                      <a href="{$B.href}">
+                        <img src="{$B.img}" alt="{$B.name}">
+                      </a>
+                    </div>
+                    <div class="cart-item__details">
+                      <button class="cart-item__remove">
+                        <svg class="icon icon-trash" />
+                      </button>
+                      <h3>
+                        <a href="{$B.href}">{$B.name}</a>
+                      </h3>
+                      <div class="cart-item__details_options">{$B.goodLegend}</div>
+                      <div class="cart-item__details_controls"> {** Dimon if you need - you can use this id="{$B.formID}"  **}
+                      <quantity-counter value="{$B.cnt}" min="1"></quantity-counter>                    
+                        <div class="cart-item__details_price">{$B.price|number_format:2:'.':' '} ₴</div>
+                      </div>
+                    </div>
+                  </li>
+                {/foreach}
+              {/if}
             </ul>
-            {else} {** if there no goods **}
-              {** ADD TEXT "YOUR BASKET IS EMPTY" **}
-            {/if}
             <div class="cart-modal__footer">
               <button class="cart-modal__footer_continue underline" data-event="click"
                 data-callback="closeModal">{$LINGVO.continue_shopping}</button>

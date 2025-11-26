@@ -55,6 +55,16 @@ async function updateCartDisplay(cartData) {
           </div>
         </li>`;
     }).join("");
+    const badgeEl = document.getElementById("cart-modal-button-badge");
+    if (badgeEl) {
+      if (data.basket_items.length > 0) {
+        badgeEl.textContent = data.basket_items.length;
+      } else {
+        badgeEl.remove();
+      }
+    } else {
+      document.querySelector('a[data-modal-id="cart-modal"]').insertAdjacentHTML("beforeend", `<span id="cart-modal-button-badge" class="badge success">${data.basket_items.length}</span>`);
+    }
     initCart();
   }
   const totalEl = document.getElementById("cart-modal-total-ammount");
