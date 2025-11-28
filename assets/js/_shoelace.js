@@ -12245,6 +12245,387 @@ setDefaultAnimation("dialog.overlay.hide", {
   options: { duration: 250 }
 });
 SlDialog.define("sl-dialog");
+var alert_styles_default = i$7`
+  :host {
+    display: contents;
+
+    /* For better DX, we'll reset the margin here so the base part can inherit it */
+    margin: 0;
+  }
+
+  .alert {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    background-color: var(--sl-panel-background-color);
+    border: solid var(--sl-panel-border-width) var(--sl-panel-border-color);
+    border-top-width: calc(var(--sl-panel-border-width) * 3);
+    border-radius: var(--sl-border-radius-medium);
+    font-family: var(--sl-font-sans);
+    font-size: var(--sl-font-size-small);
+    font-weight: var(--sl-font-weight-normal);
+    line-height: 1.6;
+    color: var(--sl-color-neutral-700);
+    margin: inherit;
+    overflow: hidden;
+  }
+
+  .alert:not(.alert--has-icon) .alert__icon,
+  .alert:not(.alert--closable) .alert__close-button {
+    display: none;
+  }
+
+  .alert__icon {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    font-size: var(--sl-font-size-large);
+    padding-inline-start: var(--sl-spacing-large);
+  }
+
+  .alert--has-countdown {
+    border-bottom: none;
+  }
+
+  .alert--primary {
+    border-top-color: var(--sl-color-primary-600);
+  }
+
+  .alert--primary .alert__icon {
+    color: var(--sl-color-primary-600);
+  }
+
+  .alert--success {
+    border-top-color: var(--sl-color-success-600);
+  }
+
+  .alert--success .alert__icon {
+    color: var(--sl-color-success-600);
+  }
+
+  .alert--neutral {
+    border-top-color: var(--sl-color-neutral-600);
+  }
+
+  .alert--neutral .alert__icon {
+    color: var(--sl-color-neutral-600);
+  }
+
+  .alert--warning {
+    border-top-color: var(--sl-color-warning-600);
+  }
+
+  .alert--warning .alert__icon {
+    color: var(--sl-color-warning-600);
+  }
+
+  .alert--danger {
+    border-top-color: var(--sl-color-danger-600);
+  }
+
+  .alert--danger .alert__icon {
+    color: var(--sl-color-danger-600);
+  }
+
+  .alert__message {
+    flex: 1 1 auto;
+    display: block;
+    padding: var(--sl-spacing-large);
+    overflow: hidden;
+  }
+
+  .alert__close-button {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    font-size: var(--sl-font-size-medium);
+    margin-inline-end: var(--sl-spacing-medium);
+    align-self: center;
+  }
+
+  .alert__countdown {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: calc(var(--sl-panel-border-width) * 3);
+    background-color: var(--sl-panel-border-color);
+    display: flex;
+  }
+
+  .alert__countdown--ltr {
+    justify-content: flex-end;
+  }
+
+  .alert__countdown .alert__countdown-elapsed {
+    height: 100%;
+    width: 0;
+  }
+
+  .alert--primary .alert__countdown-elapsed {
+    background-color: var(--sl-color-primary-600);
+  }
+
+  .alert--success .alert__countdown-elapsed {
+    background-color: var(--sl-color-success-600);
+  }
+
+  .alert--neutral .alert__countdown-elapsed {
+    background-color: var(--sl-color-neutral-600);
+  }
+
+  .alert--warning .alert__countdown-elapsed {
+    background-color: var(--sl-color-warning-600);
+  }
+
+  .alert--danger .alert__countdown-elapsed {
+    background-color: var(--sl-color-danger-600);
+  }
+
+  .alert__timer {
+    display: none;
+  }
+`;
+var _SlAlert = class _SlAlert2 extends ShoelaceElement {
+  constructor() {
+    super(...arguments);
+    this.hasSlotController = new HasSlotController(this, "icon", "suffix");
+    this.localize = new LocalizeController2(this);
+    this.open = false;
+    this.closable = false;
+    this.variant = "primary";
+    this.duration = Infinity;
+    this.remainingTime = this.duration;
+  }
+  static get toastStack() {
+    if (!this.currentToastStack) {
+      this.currentToastStack = Object.assign(document.createElement("div"), {
+        className: "sl-toast-stack"
+      });
+    }
+    return this.currentToastStack;
+  }
+  firstUpdated() {
+    this.base.hidden = !this.open;
+  }
+  restartAutoHide() {
+    this.handleCountdownChange();
+    clearTimeout(this.autoHideTimeout);
+    clearInterval(this.remainingTimeInterval);
+    if (this.open && this.duration < Infinity) {
+      this.autoHideTimeout = window.setTimeout(() => this.hide(), this.duration);
+      this.remainingTime = this.duration;
+      this.remainingTimeInterval = window.setInterval(() => {
+        this.remainingTime -= 100;
+      }, 100);
+    }
+  }
+  pauseAutoHide() {
+    var _a;
+    (_a = this.countdownAnimation) == null ? void 0 : _a.pause();
+    clearTimeout(this.autoHideTimeout);
+    clearInterval(this.remainingTimeInterval);
+  }
+  resumeAutoHide() {
+    var _a;
+    if (this.duration < Infinity) {
+      this.autoHideTimeout = window.setTimeout(() => this.hide(), this.remainingTime);
+      this.remainingTimeInterval = window.setInterval(() => {
+        this.remainingTime -= 100;
+      }, 100);
+      (_a = this.countdownAnimation) == null ? void 0 : _a.play();
+    }
+  }
+  handleCountdownChange() {
+    if (this.open && this.duration < Infinity && this.countdown) {
+      const { countdownElement } = this;
+      const start = "100%";
+      const end = "0";
+      this.countdownAnimation = countdownElement.animate([{ width: start }, { width: end }], {
+        duration: this.duration,
+        easing: "linear"
+      });
+    }
+  }
+  handleCloseClick() {
+    this.hide();
+  }
+  async handleOpenChange() {
+    if (this.open) {
+      this.emit("sl-show");
+      if (this.duration < Infinity) {
+        this.restartAutoHide();
+      }
+      await stopAnimations(this.base);
+      this.base.hidden = false;
+      const { keyframes, options } = getAnimation(this, "alert.show", { dir: this.localize.dir() });
+      await animateTo(this.base, keyframes, options);
+      this.emit("sl-after-show");
+    } else {
+      blurActiveElement(this);
+      this.emit("sl-hide");
+      clearTimeout(this.autoHideTimeout);
+      clearInterval(this.remainingTimeInterval);
+      await stopAnimations(this.base);
+      const { keyframes, options } = getAnimation(this, "alert.hide", { dir: this.localize.dir() });
+      await animateTo(this.base, keyframes, options);
+      this.base.hidden = true;
+      this.emit("sl-after-hide");
+    }
+  }
+  handleDurationChange() {
+    this.restartAutoHide();
+  }
+  /** Shows the alert. */
+  async show() {
+    if (this.open) {
+      return void 0;
+    }
+    this.open = true;
+    return waitForEvent(this, "sl-after-show");
+  }
+  /** Hides the alert */
+  async hide() {
+    if (!this.open) {
+      return void 0;
+    }
+    this.open = false;
+    return waitForEvent(this, "sl-after-hide");
+  }
+  /**
+   * Displays the alert as a toast notification. This will move the alert out of its position in the DOM and, when
+   * dismissed, it will be removed from the DOM completely. By storing a reference to the alert, you can reuse it by
+   * calling this method again. The returned promise will resolve after the alert is hidden.
+   */
+  async toast() {
+    return new Promise((resolve) => {
+      this.handleCountdownChange();
+      if (_SlAlert2.toastStack.parentElement === null) {
+        document.body.append(_SlAlert2.toastStack);
+      }
+      _SlAlert2.toastStack.appendChild(this);
+      requestAnimationFrame(() => {
+        this.clientWidth;
+        this.show();
+      });
+      this.addEventListener(
+        "sl-after-hide",
+        () => {
+          _SlAlert2.toastStack.removeChild(this);
+          resolve();
+          if (_SlAlert2.toastStack.querySelector("sl-alert") === null) {
+            _SlAlert2.toastStack.remove();
+          }
+        },
+        { once: true }
+      );
+    });
+  }
+  render() {
+    return x`
+      <div
+        part="base"
+        class=${e$4({
+      alert: true,
+      "alert--open": this.open,
+      "alert--closable": this.closable,
+      "alert--has-countdown": !!this.countdown,
+      "alert--has-icon": this.hasSlotController.test("icon"),
+      "alert--primary": this.variant === "primary",
+      "alert--success": this.variant === "success",
+      "alert--neutral": this.variant === "neutral",
+      "alert--warning": this.variant === "warning",
+      "alert--danger": this.variant === "danger"
+    })}
+        role="alert"
+        aria-hidden=${this.open ? "false" : "true"}
+        @mouseenter=${this.pauseAutoHide}
+        @mouseleave=${this.resumeAutoHide}
+      >
+        <div part="icon" class="alert__icon">
+          <slot name="icon"></slot>
+        </div>
+
+        <div part="message" class="alert__message" aria-live="polite">
+          <slot></slot>
+        </div>
+
+        ${this.closable ? x`
+              <sl-icon-button
+                part="close-button"
+                exportparts="base:close-button__base"
+                class="alert__close-button"
+                name="x-lg"
+                library="system"
+                label=${this.localize.term("close")}
+                @click=${this.handleCloseClick}
+              ></sl-icon-button>
+            ` : ""}
+
+        <div role="timer" class="alert__timer">${this.remainingTime}</div>
+
+        ${this.countdown ? x`
+              <div
+                class=${e$4({
+      alert__countdown: true,
+      "alert__countdown--ltr": this.countdown === "ltr"
+    })}
+              >
+                <div class="alert__countdown-elapsed"></div>
+              </div>
+            ` : ""}
+      </div>
+    `;
+  }
+};
+_SlAlert.styles = [component_styles_default, alert_styles_default];
+_SlAlert.dependencies = { "sl-icon-button": SlIconButton };
+__decorateClass([
+  e$6('[part~="base"]')
+], _SlAlert.prototype, "base", 2);
+__decorateClass([
+  e$6(".alert__countdown-elapsed")
+], _SlAlert.prototype, "countdownElement", 2);
+__decorateClass([
+  n$4({ type: Boolean, reflect: true })
+], _SlAlert.prototype, "open", 2);
+__decorateClass([
+  n$4({ type: Boolean, reflect: true })
+], _SlAlert.prototype, "closable", 2);
+__decorateClass([
+  n$4({ reflect: true })
+], _SlAlert.prototype, "variant", 2);
+__decorateClass([
+  n$4({ type: Number })
+], _SlAlert.prototype, "duration", 2);
+__decorateClass([
+  n$4({ type: String, reflect: true })
+], _SlAlert.prototype, "countdown", 2);
+__decorateClass([
+  r$2()
+], _SlAlert.prototype, "remainingTime", 2);
+__decorateClass([
+  watch("open", { waitUntilFirstUpdate: true })
+], _SlAlert.prototype, "handleOpenChange", 1);
+__decorateClass([
+  watch("duration")
+], _SlAlert.prototype, "handleDurationChange", 1);
+var SlAlert = _SlAlert;
+setDefaultAnimation("alert.show", {
+  keyframes: [
+    { opacity: 0, scale: 0.8 },
+    { opacity: 1, scale: 1 }
+  ],
+  options: { duration: 250, easing: "ease" }
+});
+setDefaultAnimation("alert.hide", {
+  keyframes: [
+    { opacity: 1, scale: 1 },
+    { opacity: 0, scale: 0.8 }
+  ],
+  options: { duration: 250, easing: "ease" }
+});
+SlAlert.define("sl-alert");
 function getDefaultExportFromCjs(x2) {
   return x2 && x2.__esModule && Object.prototype.hasOwnProperty.call(x2, "default") ? x2["default"] : x2;
 }

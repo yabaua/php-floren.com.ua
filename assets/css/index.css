@@ -1024,6 +1024,17 @@ sl-dialog::part(panel) {
 .cart-items-list .cart-item__details_controls-grid span {
   font-weight: 300;
 }
+sl-alert[variant=warning]::part(base) {
+  border-top-color: var(--color-yellow);
+  background-color: var(--color-yellow-light);
+}
+sl-alert[variant=warning] .icon {
+  width: 32px;
+  height: 32px;
+}
+sl-alert[variant=warning]::part(icon) .icon {
+  opacity: 0.6;
+}
 .icon {
   display: inline-block;
   width: 1em;
@@ -1098,6 +1109,12 @@ sl-dialog::part(panel) {
 }
 .icon-trash {
   mask-image: url("/img/icons/icon-trash.svg");
+}
+.icon-phone {
+  mask-image: url("/img/icons/icon-phone.svg");
+}
+.icon-info-circle {
+  mask-image: url("/img/icons/icon-warning-circle.svg");
 }
 body.scroll-blocked {
   overflow: hidden;
@@ -4280,7 +4297,7 @@ body.secondary-hovered .catalog-overlay {
 .cart-page__order-information .form-grid {
   display: grid;
   gap: 1.5rem;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: flex-end;
 }
 .cart-page__order-information > section {
@@ -4403,8 +4420,18 @@ body.secondary-hovered .catalog-overlay {
   flex-direction: column;
   gap: 24px;
 }
+.cart-page__order-information .information__shipping form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
 .cart-page__order-information .information__payment {
   padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.cart-page__order-information .information__payment form {
   display: flex;
   flex-direction: column;
   gap: 24px;

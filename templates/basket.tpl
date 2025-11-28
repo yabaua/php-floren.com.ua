@@ -47,15 +47,15 @@
 
         <section class="information__shipping">
           <h2>2. {$LINGVO.way_to_deliver}</h2>
-          <sl-radio-group name="shipping" value="1">
-            <sl-radio value="1">
+          <sl-radio-group name="shipping" value="magazin" id="delivery-methods" data-product-price="{$BSK_TTL}" data-is-plant="{$IS_BSK_PLANT}">
+            <sl-radio value="magazin">
               <div class="radio-option">
                 <img src="/img/icons/icon-post.svg" alt="">
                 <span>{$LINGVO.kiev_addr}</span>
                 <b>{$LINGVO.free}</b>
               </div>
             </sl-radio>
-            <sl-radio value="2">
+            <sl-radio value="courier">
               <div class="radio-option">
                 <img src="/img/icons/icon-track.svg" alt="">
                 <span>{$LINGVO.courier}</span>
@@ -63,7 +63,7 @@
                 </b>
               </div>
             </sl-radio>
-            <sl-radio value="3">
+            <sl-radio value="nova-poshta" {if $BSK_STOP_POST_DELIVERY}disabled{/if}>
               <div class="radio-option">
                 <img src="/img/icons/icon-nova-poshta.svg" alt="">
                 <span>{$LINGVO.pickup_from_np}</span>
@@ -72,25 +72,85 @@
               </div>
             </sl-radio>
           </sl-radio-group>
-          <div class="form-grid">
-            <div class="form-control">
-              <sl-input label="{$LINGVO.pickup_date}" type="date" placeholder="Date" value="{$smarty.now|date_format:"%Y.%m.%d"}"></sl-input>
+
+          {* Форма для самовивозу *}
+          <form id="magazin-form">
+            <div class="form-grid">
+              <div class="form-control">
+                <sl-input label="{$LINGVO.pickup_date}" type="date" placeholder="Date" value="{$smarty.now|date_format:"%Y.%m.%d"}"></sl-input>
+              </div>
+              <div class="form-control">
+                <sl-select placeholder="{$LINGVO.pickup_time}" label="{$LINGVO.pickup_time}">
+                  <sl-option value="09:00 - 11:00">09:00 - 11:00</sl-option>
+                  <sl-option value="11:00 - 14:00">11:00 - 14:00</sl-option>
+                  <sl-option value="14:00 - 17:00">14:00 - 17:00</sl-option>
+                  <sl-option value="17:00 - 19:00">17:00 - 19:00</sl-option>
+                </sl-select>
+              </div>
             </div>
             <div class="form-control">
-              <sl-select placeholder="{$LINGVO.pickup_time}" label="{$LINGVO.pickup_time}">
-                <sl-option value="09:00 - 11:00">09:00 - 11:00</sl-option>
-                <sl-option value="11:00 - 14:00">11:00 - 14:00</sl-option>
-                <sl-option value="14:00 - 17:00">14:00 - 17:00</sl-option>
-                <sl-option value="17:00 - 19:00">17:00 - 19:00</sl-option>
-              </sl-select>
-            </div>
-          </div>
-          <div class="form-control">
-            <sl-select placeholder="{$LINGVO.store_address}" label="{$LINGVO.store_address}" value="1">
-              <sl-option value="1">{$LINGVO.kiev_addr}</sl-option>
+              <sl-select placeholder="{$LINGVO.store_address}" label="{$LINGVO.store_address}" value="1">
+                <sl-option value="1">{$LINGVO.kiev_addr}</sl-option>
               {**  <sl-option value="{$LINGVO.kiev_addr}">{$LINGVO.bsk_address_akhmatova}</sl-option>	**}
               </sl-select>
-          </div>
+            </div>
+          </form>          
+
+          {* Форма для кур'єрської доставки *}
+          <form id="courier-form" class="hidden">
+            <div class="form-grid">
+              <div class="form-control">
+                <sl-input label="{$LINGVO.city}" type="text" name="city" value="{$LINGVO.city_kiev}" placeholder="{$LINGVO.city}" readonly></sl-input>
+              </div>
+              <div class="form-control">
+                <sl-checkbox id="another-city-checkbox">{$LINGVO.another_city}</sl-checkbox>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-control">
+                <sl-input label="{$LINGVO.bsk_address}" type="text" name="address" placeholder="{$LINGVO.bsk_address}"></sl-input>
+              </div>
+              <div class="form-grid">
+                <div class="form-control">
+                  <sl-input label="{$LINGVO.dom}" type="text" name="dom" placeholder="{$LINGVO.dom}"></sl-input>
+                </div>
+                <div class="form-control">
+                  <sl-input label="{$LINGVO.flat}" type="text" name="flat" placeholder="{$LINGVO.flat}"></sl-input>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          {* Форма для Нова пошта *}
+          <form id="nova-poshta-form" class="hidden">
+            <div class="form-grid">
+              <div class="form-control">
+                <sl-input label="{$LINGVO.city}" type="text" name="np_city" placeholder="{$LINGVO.city}"></sl-input>
+              </div>
+              <div class="form-control">
+                <sl-input label="{$LINGVO.np_number}" type="text" name="np_number" placeholder="{$LINGVO.np_number}"></sl-input>
+              </div>
+            </div>
+          </form>
+
+          <sl-alert variant="warning" data-name="small-order">
+            <span slot="icon" class="icon icon-phone"></span>
+            {$LINGVO.small_order}
+          </sl-alert>
+          <sl-alert variant="warning" data-name="not-nova-poshta">
+            <span slot="icon" class="icon icon-info-circle"></span>
+            {$LINGVO.sorry_but_not_np}
+          </sl-alert>
+          <sl-alert variant="warning" data-name="not-np-delivery" {if $BSK_STOP_POST_DELIVERY}open{/if}>
+            <span slot="icon" class="icon icon-info-circle"></span>
+            {$LINGVO.not_np_delivery}
+          </sl-alert>
+
+          <sl-alert variant="warning" data-name="city-delivery">
+            <span slot="icon" class="icon icon-info-circle"></span>
+            {$LINGVO.city_delivery}
+          </sl-alert>
+
         </section>
 
         <section class="information__payment">
@@ -147,20 +207,7 @@
                 </h3>
                 <div class="cart-item__details_options">{$B.goodLegend}</div>
                 <div class="cart-item__details_controls"> {** Dimon if you need - you can use this id="{$B.formID}"  **}
-                  <div class="cart-item__details_controls-grid">
-                    <quantity-counter value="{$B.cnt}" min="1"></quantity-counter>
-                    <span>x {$B.price|number_format:2:'.':' '} ₴</span>
-                  </div>
-
-                  {# <div class="counter-input">
-                    <button>
-                      <img src="/img/icons/icon-minus.svg" alt="{$LINGVO.bsk_del_one}"/>
-                    </button>
-                    <input type="number" value="{$B.cnt}" min="1"/>
-                    <button>
-                      <img src="/img/icons/icon-plus.svg" alt="{$LINGVO.bsk_add_one}"/>
-                    </button>
-                  </div> #}
+                  <quantity-counter value="{$B.cnt}" min="1"></quantity-counter>
                   <div class="cart-item__details_price">{$B.price|number_format:2:'.':' '} ₴</div>
                 </div>
               </div>
@@ -168,7 +215,7 @@
               {/foreach}
             </ul>
             {if $IS_BSK_PLANT || $IS_BSK_POT}
-            <div class="form-control">
+              <div class="form-control">
             <sl-checkbox>{$LINGVO.i_need_peresadka}</sl-checkbox>
           </div>
             {/if}
@@ -179,11 +226,11 @@
             </div>
             <div class="summary__item">
               <div class="summary__item_label">{$LINGVO.delivery_cost}:</div>
-              <div class="summary__item_value">0 ₴</div>
+              <div class="summary__item_value" id="delivery-cost">0 ₴</div>
             </div>
             <div class="summary__item total">
               <div class="summary__item_label">{$LINGVO.total_topay}:</div>
-              <div class="summary__item_value">900 ₴</div>
+              <div class="summary__item_value" id="total-to-pay">900 ₴</div>
             </div>
           </div>
           <div class="cart-page__order-list_actions">
@@ -195,6 +242,12 @@
     </div>
   </div>
 </main>
+
+<ul>
+  {foreach $LINGVO as $key => $val}
+    <li>{$key} - {$val}</li>
+  {/foreach}
+</ul>
 
 <script>
   const messages = {
@@ -231,6 +284,15 @@
 
     delivery: 'magazin',
 
-    payment: 'cash'
+    payment: 'cash',
+
+    cityKiev: "{$LINGVO.city_kiev}"
   };
+
+  const cartState = {
+    productPrice: parseFloat("{$BSK_TTL}"),
+    isPlant: parseFloat("{$IS_BSK_PLANT}"),
+    stopPostDelivery: parseFloat("{$BSK_STOP_POST_DELIVERY}"),
+    notKiev: false
+  }
 </script>
