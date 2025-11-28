@@ -1016,6 +1016,14 @@ sl-dialog::part(panel) {
   gap: 1rem;
   justify-content: space-between;
 }
+.cart-items-list .cart-item__details_controls-grid {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.cart-items-list .cart-item__details_controls-grid span {
+  font-weight: 300;
+}
 .icon {
   display: inline-block;
   width: 1em;

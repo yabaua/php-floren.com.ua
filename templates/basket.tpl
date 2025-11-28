@@ -147,7 +147,12 @@
                 </h3>
                 <div class="cart-item__details_options">{$B.goodLegend}</div>
                 <div class="cart-item__details_controls"> {** Dimon if you need - you can use this id="{$B.formID}"  **}
-                    <div class="counter-input">
+                  <div class="cart-item__details_controls-grid">
+                    <quantity-counter value="{$B.cnt}" min="1"></quantity-counter>
+                    <span>x {$B.price|number_format:2:'.':' '} ₴</span>
+                  </div>
+
+                  {# <div class="counter-input">
                     <button>
                       <img src="/img/icons/icon-minus.svg" alt="{$LINGVO.bsk_del_one}"/>
                     </button>
@@ -155,7 +160,7 @@
                     <button>
                       <img src="/img/icons/icon-plus.svg" alt="{$LINGVO.bsk_add_one}"/>
                     </button>
-                  </div>
+                  </div> #}
                   <div class="cart-item__details_price">{$B.price|number_format:2:'.':' '} ₴</div>
                 </div>
               </div>

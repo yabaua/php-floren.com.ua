@@ -1,39 +1,52 @@
 import { a as fetchEditCart } from "./fetchApi.js";
 const initCart = async () => {
-  document.querySelectorAll("#cart-modal-items-list .cart-item").forEach((item) => {
-    item.querySelector("quantity-counter").addEventListener("change", () => updateCartDisplay());
-    item.querySelector(".cart-item__remove").addEventListener("click", () => {
-      item.querySelector("quantity-counter").value = 0;
-      updateCartDisplay();
+  document
+    .querySelectorAll("#cart-modal-items-list .cart-item")
+    .forEach((item) => {
+      item
+        .querySelector("quantity-counter")
+        .addEventListener("change", () => updateCartDisplay());
+      item.querySelector(".cart-item__remove").addEventListener("click", () => {
+        item.querySelector("quantity-counter").value = 0;
+        updateCartDisplay();
+      });
     });
-  });
   document.getElementById("cart-modal").addEventListener("sl-hide", (e) => {
     e.target.querySelector(".cart-modal__message").style.display = "none";
   });
-  document.getElementById("cart-recipient-checkbox")?.addEventListener("sl-change", (e) => {
-    const isChecked = e.target.checked;
-    document.getElementById("cart-recipient-grid").classList.toggle("hidden", isChecked);
-  });
+  document
+    .getElementById("cart-recipient-checkbox")
+    ?.addEventListener("sl-change", (e) => {
+      const isChecked = e.target.checked;
+      document
+        .getElementById("cart-recipient-grid")
+        .classList.toggle("hidden", isChecked);
+    });
 };
 async function updateCartDisplay(cartData) {
   const cartTotal = cartData || [];
   if (!cartData) {
-    document.querySelectorAll("#cart-modal-items-list .cart-item").forEach((item) => {
-      const productId = item.dataset.id;
-      const quantity = item.querySelector("quantity-counter").value;
-      if (quantity > 0) {
-        cartTotal.push({
-          [productId]: quantity
-        });
-      }
-    });
+    document
+      .querySelectorAll("#cart-modal-items-list .cart-item")
+      .forEach((item) => {
+        const productId = item.dataset.id;
+        const quantity = item.querySelector("quantity-counter").value;
+        if (quantity > 0) {
+          cartTotal.push({
+            [productId]: quantity,
+          });
+        }
+      });
   }
   const data = await fetchEditCart(cartTotal);
   const list = document.getElementById("cart-modal-items-list");
   if (list && data.basket_items) {
-    list.innerHTML = data.basket_items.map((item) => {
-      const price = Number(item.price).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-      return `
+    list.innerHTML = data.basket_items
+      .map((item) => {
+        const price = Number(item.price)
+          .toFixed(2)
+          .replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        return `
         <li class="cart-item" data-id="${item.formID}">
           <div class="cart-item__image">
             <a href="${item.product_path}">
@@ -49,12 +62,22 @@ async function updateCartDisplay(cartData) {
             </h3>
             <div class="cart-item__details_options">${item.formName}</div>
             <div class="cart-item__details_controls">
-              <quantity-counter value="${item.cnt}" min="1"></quantity-counter>                    
-              <div class="cart-item__details_price">${price} ₴</div>
+              <div class="cart-item__details_controls-grid">
+                <quantity-counter value="${
+                  item.cnt
+                }" min="1"></quantity-counter>                    
+                <span>${price} ₴</span>
+              </div>              
+              <div class="cart-item__details_price">${Number(
+                item.cnt * Number(item.price)
+              )
+                .toFixed(2)
+                .replace(/\B(?=(\d{3})+(?!\d))/g, " ")} ₴</div>
             </div>
           </div>
         </li>`;
-    }).join("");
+      })
+      .join("");
     const badgeEl = document.getElementById("cart-modal-button-badge");
     if (badgeEl) {
       if (data.basket_items.length > 0) {
@@ -63,13 +86,20 @@ async function updateCartDisplay(cartData) {
         badgeEl.remove();
       }
     } else {
-      document.querySelector('a[data-modal-id="cart-modal"]').insertAdjacentHTML("beforeend", `<span id="cart-modal-button-badge" class="badge success">${data.basket_items.length}</span>`);
+      document
+        .querySelector('a[data-modal-id="cart-modal"]')
+        .insertAdjacentHTML(
+          "beforeend",
+          `<span id="cart-modal-button-badge" class="badge success">${data.basket_items.length}</span>`
+        );
     }
     initCart();
   }
   const totalEl = document.getElementById("cart-modal-total-ammount");
   if (totalEl && data.basket_sum !== void 0) {
-    const total = Number(data.basket_sum).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    const total = Number(data.basket_sum)
+      .toFixed(2)
+      .replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     totalEl.textContent = `${total} ₴`;
   }
   return data;
@@ -80,21 +110,24 @@ const addToCart = async (event) => {
   const href = event.currentTarget.dataset.href;
   console.log("addToCart", productId, name, href);
   const cartList = [];
-  document.querySelectorAll("#cart-modal-items-list .cart-item").forEach((item) => {
-    const id = item.dataset.id;
-    const quantity = item.querySelector("quantity-counter").value;
-    if (quantity > 0) {
-      cartList.push({
-        [id]: quantity
-      });
-    }
-  });
+  document
+    .querySelectorAll("#cart-modal-items-list .cart-item")
+    .forEach((item) => {
+      const id = item.dataset.id;
+      const quantity = item.querySelector("quantity-counter").value;
+      if (quantity > 0) {
+        cartList.push({
+          [id]: quantity,
+        });
+      }
+    });
   const existingItemIndex = cartList.findIndex((item) => item[productId]);
   if (existingItemIndex !== -1) {
-    cartList[existingItemIndex][productId] = Number(cartList[existingItemIndex][productId]) + 1;
+    cartList[existingItemIndex][productId] =
+      Number(cartList[existingItemIndex][productId]) + 1;
   } else {
     cartList.push({
-      [productId]: 1
+      [productId]: 1,
     });
   }
   const data = await updateCartDisplay(cartList);
@@ -107,7 +140,4 @@ const addToCart = async (event) => {
   }
   console.log("addToCart", data);
 };
-export {
-  addToCart as a,
-  initCart as i
-};
+export { addToCart as a, initCart as i };
