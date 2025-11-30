@@ -125,7 +125,9 @@ h2 {
   --color-violet: #9f2178;
   --color-violet-hover: color-mix(in srgb, var(--color-violet), transparent 25%);
   --color-yellow: #f6bb05;
+  --color-yealow-dark: #d97706;
   --color-red: #ff0000;
+  --color-red-light: color-mix(in srgb, var(--color-red), transparent 80%);
   --color-yellow-light: color-mix(in srgb, var(--color-yellow), transparent 80%);
   /* Gray scale */
   --color-gray-100: #757575;
@@ -765,6 +767,36 @@ sl-tag::part(base) {
 sl-tag::part(remove-button) {
   color: var(--color-black);
 }
+sl-tag.cart-tag {
+  padding: 0rem 0.5rem 0rem 2rem;
+  border-radius: 1.25rem;
+  min-width: 163px;
+}
+sl-tag.cart-tag::part(base) {
+  border-radius: 0;
+  min-height: 26px;
+  height: auto;
+  padding: 0.25rem 0;
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  font-size: 0.875rem;
+  font-weight: 300;
+  white-space: wrap;
+  line-height: 1.2;
+}
+sl-tag.cart-tag[variant=success] {
+  color: var(--color-green-100);
+  background: var(--color-green-20) url("/img/icons/icon-check-circle.svg") no-repeat 0.5625rem center/1rem 1rem;
+}
+sl-tag.cart-tag[variant=danger] {
+  color: var(--color-yealow-dark);
+  background: var(--color-yellow-light) url("/img/icons/icon-minus-circle-warning.svg") no-repeat 0.5625rem center/1rem 1rem;
+}
+sl-tag.cart-tag[variant=order] {
+  color: var(--color-gray-100);
+  background: var(--color-gray-20) url("/img/icons/icon-warning-circle.svg") no-repeat 0.5625rem center/1rem 1rem;
+}
 sl-radio::part(control) {
   --toggle-size: 20px;
   border-color: var(--color-gray-50);
@@ -1023,6 +1055,9 @@ sl-dialog::part(panel) {
 }
 .cart-items-list .cart-item__details_controls-grid span {
   font-weight: 300;
+}
+.cart-items-list .cart-item__details .cart-tag {
+  margin-top: 0.5rem;
 }
 sl-alert[variant=warning]::part(base) {
   border-top-color: var(--color-yellow);
@@ -4485,6 +4520,7 @@ body.secondary-hovered .catalog-overlay {
 .cart-page__order-list_summary .summary__item.total .summary__item_value {
   font-size: 1.75rem;
   font-weight: 600;
+  white-space: nowrap;
 }
 .cart-page__order-list_actions {
   margin-top: 24px;

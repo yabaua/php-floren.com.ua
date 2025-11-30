@@ -1,39 +1,30 @@
-import { a as fetchEditCart } from './fetchApi.js';
+import { a as fetchEditCart } from "./fetchApi.js";
 const initCart = async () => {
-  // Cart item quantity change handlers
-  document.querySelectorAll('#cart-modal-items-list .cart-item').forEach((item) => {
-    item.querySelector('quantity-counter').addEventListener('change', () => updateCartDisplay());
-    item.querySelector('.cart-item__remove').addEventListener('click', () => {
-      item.querySelector('quantity-counter').value = 0;
+  document.querySelectorAll("#cart-modal-items-list .cart-item").forEach((item) => {
+    item.querySelector("quantity-counter").addEventListener("change", () => updateCartDisplay());
+    item.querySelector(".cart-item__remove").addEventListener("click", () => {
+      item.querySelector("quantity-counter").value = 0;
       updateCartDisplay();
     });
   });
-
-  // Cart modal hide handler
-  document.getElementById('cart-modal').addEventListener('sl-hide', (e) => {
-    e.target.querySelector('.cart-modal__message').style.display = 'none';
+  document.getElementById("cart-modal").addEventListener("sl-hide", (e) => {
+    e.target.querySelector(".cart-modal__message").style.display = "none";
   });
-
-  // Recipient checkbox change handler
-  document.getElementById('cart-recipient-checkbox')?.addEventListener('sl-change', (e) => {
+  document.getElementById("cart-recipient-checkbox")?.addEventListener("sl-change", (e) => {
     const isChecked = e.target.checked;
-    document.getElementById('cart-recipient-grid').classList.toggle('hidden', isChecked);
+    document.getElementById("cart-recipient-grid").classList.toggle("hidden", isChecked);
   });
-
-  // Delivery method change handler
-  document.getElementById('delivery-methods')?.addEventListener('sl-change', (e) => changeDeliveryOptions(e));
-
-  // Another city checkbox change handler
-  document.getElementById('another-city-checkbox')?.addEventListener('sl-change', (e) => {
+  document.getElementById("delivery-methods")?.addEventListener("sl-change", (e) => changeDeliveryOptions(e));
+  document.getElementById("another-city-checkbox")?.addEventListener("sl-change", (e) => {
     const cityInput = document.querySelector('#courier-form sl-input[name="city"]');
     if (e.target.checked) {
-      cityInput.value = '';
-      cityInput.removeAttribute('readonly');
+      cityInput.value = "";
+      cityInput.removeAttribute("readonly");
       cityInput.focus();
       document.querySelector('sl-alert[data-name="city-delivery"]').show();
     } else {
       cityInput.value = defaultOptions.cityKiev;
-      cityInput.setAttribute('readonly', 'true');
+      cityInput.setAttribute("readonly", "true");
       document.querySelector('sl-alert[data-name="city-delivery"]').hide();
     }
   });
@@ -42,14 +33,13 @@ const addToCart = async (event) => {
   const productId = event.currentTarget.dataset.id;
   const name = event.currentTarget.dataset.name;
   const href = event.currentTarget.dataset.href;
-  console.log('addToCart', productId, name, href);
   const cartList = [];
-  document.querySelectorAll('#cart-modal-items-list .cart-item').forEach((item) => {
+  document.querySelectorAll("#cart-modal-items-list .cart-item").forEach((item) => {
     const id = item.dataset.id;
-    const quantity = item.querySelector('quantity-counter').value;
+    const quantity = item.querySelector("quantity-counter").value;
     if (quantity > 0) {
       cartList.push({
-        [id]: quantity,
+        [id]: quantity
       });
     }
   });
@@ -58,42 +48,38 @@ const addToCart = async (event) => {
     cartList[existingItemIndex][productId] = Number(cartList[existingItemIndex][productId]) + 1;
   } else {
     cartList.push({
-      [productId]: 1,
+      [productId]: 1
     });
   }
   const data = await updateCartDisplay(cartList);
-  const modal = document.getElementById('cart-modal');
-  document.getElementById('cart-modal-product-name').textContent = name;
-  document.getElementById('cart-modal-product-name').href = href;
-  document.querySelector('.cart-modal__message').style.display = 'block';
+  const modal = document.getElementById("cart-modal");
+  document.getElementById("cart-modal-product-name").textContent = name;
+  document.getElementById("cart-modal-product-name").href = href;
+  document.querySelector(".cart-modal__message").style.display = "block";
   if (modal) {
     modal.show();
   }
-  console.log('addToCart', data);
+  console.log("addToCart", data);
 };
-
 async function updateCartDisplay(cartData) {
   const cartTotal = cartData || [];
   if (!cartData) {
-    document.querySelectorAll('#cart-modal-items-list .cart-item').forEach((item) => {
+    document.querySelectorAll("#cart-modal-items-list .cart-item").forEach((item) => {
       const productId = item.dataset.id;
-      const quantity = item.querySelector('quantity-counter').value;
+      const quantity = item.querySelector("quantity-counter").value;
       if (quantity > 0) {
         cartTotal.push({
-          [productId]: quantity,
+          [productId]: quantity
         });
       }
     });
   }
   const data = await fetchEditCart(cartTotal);
-  const list = document.getElementById('cart-modal-items-list');
+  const list = document.getElementById("cart-modal-items-list");
   if (list && data.basket_items) {
-    list.innerHTML = data.basket_items
-      .map((item) => {
-        const price = Number(item.price)
-          .toFixed(2)
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-        return `
+    list.innerHTML = data.basket_items.map((item) => {
+      const price = Number(item.price).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+      return `
         <li class="cart-item" data-id="${item.formID}">
           <div class="cart-item__image">
             <a href="${item.product_path}">
@@ -113,15 +99,12 @@ async function updateCartDisplay(cartData) {
                 <quantity-counter value="${item.cnt}" min="1"></quantity-counter>                    
                 <span>${price} ₴</span>
               </div>              
-              <div class="cart-item__details_price">${Number(item.cnt * Number(item.price))
-                .toFixed(2)
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} ₴</div>
+              <div class="cart-item__details_price">${Number(item.cnt * Number(item.price)).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")} ₴</div>
             </div>
           </div>
         </li>`;
-      })
-      .join('');
-    const badgeEl = document.getElementById('cart-modal-button-badge');
+    }).join("");
+    const badgeEl = document.getElementById("cart-modal-button-badge");
     if (badgeEl) {
       if (data.basket_items.length > 0) {
         badgeEl.textContent = data.basket_items.length;
@@ -129,72 +112,81 @@ async function updateCartDisplay(cartData) {
         badgeEl.remove();
       }
     } else {
-      document
-        .querySelector('a[data-modal-id="cart-modal"]')
-        .insertAdjacentHTML(
-          'beforeend',
-          `<span id="cart-modal-button-badge" class="badge success">${data.basket_items.length}</span>`
-        );
+      document.querySelector('a[data-modal-id="cart-modal"]').insertAdjacentHTML("beforeend", `<span id="cart-modal-button-badge" class="badge success">${data.basket_items.length}</span>`);
     }
     initCart();
   }
-  const totalEl = document.getElementById('cart-modal-total-ammount');
+  const totalEl = document.getElementById("cart-modal-total-ammount");
   if (totalEl && data.basket_sum !== void 0) {
-    const total = Number(data.basket_sum)
-      .toFixed(2)
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    const total = Number(data.basket_sum).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     totalEl.textContent = `${total} ₴`;
   }
   return data;
 }
-
 function changeDeliveryOptions(e) {
   {
-    const { smallOrder, smallOrderDeliveryPrice, courierDeliveryPrice } = defaultOptions;
-
-    // Hide all alerts
-    document.querySelectorAll('sl-alert[data-name]').forEach((alert) => alert.hide());
-
-    // Hide all forms
-    document.getElementById('magazin-form').classList.add('hidden');
-    document.getElementById('courier-form').classList.add('hidden');
-    document.getElementById('nova-poshta-form').classList.add('hidden');
-
+    const { smallOrder, smallOrderDeliveryPrice, courierDeliveryPrice, novaPostaCost } = defaultOptions;
+    refreshCart();
     const totalToPay = {
       deliveryCost: courierDeliveryPrice,
-      total: 0,
+      productPrice: Number(cartState.productPrice) || 0,
+      total: 0
     };
-
     switch (e.target.value) {
-      case 'courier':
-        document.getElementById('courier-form').classList.remove('hidden');
+      case "courier":
+        document.getElementById("courier-form").classList.remove("hidden");
+        if (!!cartState.bigGoodCourier) {
+          document.querySelector('sl-alert[data-name="delivery-biggoods"]').show();
+        }
         const productPrice = Number(e.target.dataset.productPrice || 0);
-        const isPlant = !!e.target.dataset.isPlant;
+        !!e.target.dataset.isPlant;
         if (productPrice < smallOrder) {
           totalToPay.deliveryCost += smallOrderDeliveryPrice;
           document.querySelector('sl-alert[data-name="small-order"]').show();
         }
-        console.log('cartState', cartState, productPrice, isPlant, smallOrder);
-
+        refreshTotal(totalToPay);
         break;
-
-      case 'nova-poshta':
-        document.getElementById('nova-poshta-form').classList.remove('hidden');
+      case "nova-poshta":
+        document.getElementById("nova-poshta-form").classList.remove("hidden");
+        if (!!cartState.bigGoodCourier) {
+          document.querySelector('sl-alert[data-name="delivery-biggoods"]').show();
+        }
+        document.querySelector('.summary__item_label[data-text="np-cost"]').classList.remove("hidden");
+        document.querySelector('.summary__item_label[data-text="delivery-cost"]').classList.add("hidden");
+        document.querySelector('#payment-cash-option [data-text="cash"]').classList.add("hidden");
+        document.querySelector('#payment-cash-option [data-text="nova-poshta-money"]').classList.remove("hidden");
         if (cartState.isPlant) {
           document.querySelector('sl-alert[data-name="not-nova-poshta"]').show();
         }
+        totalToPay.deliveryCost = novaPostaCost;
+        refreshTotal(totalToPay);
         break;
-
       default:
-        document.getElementById('magazin-form').classList.remove('hidden');
+        document.getElementById("magazin-form").classList.remove("hidden");
+        totalToPay.deliveryCost = 0;
+        refreshTotal(totalToPay);
         break;
     }
-
-    console.log('smallOrder', smallOrder);
-    console.log('smallOrderDeliveryPrice', smallOrderDeliveryPrice);
-
-    console.log('Delivery method changed to:', e.target.value, totalToPay);
+    console.log("smallOrder", smallOrder);
+    console.log("smallOrderDeliveryPrice", smallOrderDeliveryPrice);
+    console.log("Delivery method changed to:", e.target.value, totalToPay);
   }
 }
-
-export { addToCart as a, initCart as i };
+function refreshCart() {
+  document.querySelectorAll("sl-alert[data-name]").forEach((alert) => alert.hide());
+  document.getElementById("magazin-form").classList.add("hidden");
+  document.getElementById("courier-form").classList.add("hidden");
+  document.getElementById("nova-poshta-form").classList.add("hidden");
+  document.querySelector('.summary__item_label[data-text="np-cost"]').classList.add("hidden");
+  document.querySelector('.summary__item_label[data-text="delivery-cost"]').classList.remove("hidden");
+  document.querySelector('#payment-cash-option [data-text="cash"]').classList.remove("hidden");
+  document.querySelector('#payment-cash-option [data-text="nova-poshta-money"]').classList.add("hidden");
+}
+function refreshTotal(totalToPay) {
+  document.querySelector("#delivery-cost").textContent = `${Number(totalToPay.deliveryCost).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")} ₴`;
+  document.querySelector("#total-to-pay").textContent = `${Number(totalToPay.productPrice + totalToPay.deliveryCost).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ")} ₴`;
+}
+export {
+  addToCart as a,
+  initCart as i
+};
