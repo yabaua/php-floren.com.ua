@@ -1,4 +1,5 @@
 <main class="cart-page">
+<form name="bsk_form" method="POST" id="bsk_form" action="{$LANGURL}/order/" class="basket__form">
   <div class="container">
     <h1 class="cart-page__title">{$PAGE_TITLE}</h1>
     <div class="cart-page__grid">
@@ -6,34 +7,34 @@
       <div class="cart-page__order-information">
         <section class="information__contact">
           <div class="information__grid">
-            <form class="information__contact_form">
+            <div class="information__contact_form" method="post" action="{$LANGURL}/order/">
               <h2>1. {$LINGVO.contact_data}</h2>
               <div class="form-grid">
                 <div class="form-control">
-                  <sl-input label="{$LINGVO.fb_name}" required placeholder="{$LINGVO.fb_name}"></sl-input>
+                  <sl-input name="fio" label="{$LINGVO.fb_name}" required placeholder="{$LINGVO.fb_name}"></sl-input>
                 </div>
                 <div class="form-control">
                   <label for="phone" required>Ваш телефон</label>
-                  <input id="phone" required data-tel-input type="tel">
+                  <input name="phone" id="phone" required data-tel-input type="tel">
                 </div>
               </div>
               <div class="form-control">
-                <sl-input label="E-mail" type="email" placeholder="E-mail"></sl-input>
+                <sl-input name="email" label="E-mail" type="email" placeholder="E-mail"></sl-input>
               </div>
               <div class="form-control form-control--checkbox">
                 <h3>{$LINGVO.rec_data}</h3>
-                <sl-checkbox id="cart-recipient-checkbox">{$LINGVO.iam_rec}</sl-checkbox>
+                <sl-checkbox name="recipient" id="cart-recipient-checkbox">{$LINGVO.iam_rec}</sl-checkbox>
               </div>
               <div class="form-grid" id="cart-recipient-grid">
                 <div class="form-control">
-                  <sl-input label="{$LINGVO.fb_name}" placeholder="{$LINGVO.fb_name}"></sl-input>
+                  <sl-input name="r_fio" label="{$LINGVO.fb_name}" placeholder="{$LINGVO.fb_name}"></sl-input>
                 </div>
                 <div class="form-control">
                   <label for="phone">{$LINGVO.rec_phone}</label>
-                  <input id="phone" data-tel-input type="tel">
+                  <input name="r_phone" id="phone" data-tel-input type="tel">
                 </div>
               </div>
-            </form>
+            </div>
 {** **}
               <div class="information__contact_login">
               <svg class="icon icon-user"/>
@@ -48,14 +49,14 @@
         <section class="information__shipping">
           <h2>2. {$LINGVO.way_to_deliver}</h2>
           <sl-radio-group name="shipping" value="magazin" id="delivery-methods" data-product-price="{$BSK_TTL}" data-is-plant="{$IS_BSK_PLANT}">
-            <sl-radio value="magazin">
+            <sl-radio name="delivery_way" value="magazin">
               <div class="radio-option">
                 <img src="/img/icons/icon-post.svg" alt="">
                 <span>{$LINGVO.kiev_addr}</span>
                 <b>{$LINGVO.free}</b>
               </div>
             </sl-radio>
-            <sl-radio value="courier" {if $BSK_TTL < $DELIVERY_OPTIONS.minimum_order}disabled{/if}>
+            <sl-radio name="delivery_way" value="courier" {if $BSK_TTL < $DELIVERY_OPTIONS.minimum_order}disabled{/if}>
               <div class="radio-option">
                 <img src="/img/icons/icon-track.svg" alt="">
                 <span>{$LINGVO.courier}</span>
@@ -63,7 +64,7 @@
               </b>
             </div>
           </sl-radio>
-          <sl-radio value="nova-poshta" {if $BSK_STOP_POST_DELIVERY || $BSK_TTL < $DELIVERY_OPTIONS.minimum_order}disabled{/if}>
+          <sl-radio name="delivery_way" value="nova-poshta" {if $BSK_STOP_POST_DELIVERY || $BSK_TTL < $DELIVERY_OPTIONS.minimum_order}disabled{/if}>
               <div class="radio-option">
                 <img src="/img/icons/icon-nova-poshta.svg" alt="">
                 <span>{$LINGVO.pickup_from_np}</span>
@@ -74,13 +75,13 @@
       </sl-radio-group>
 
           {* Форма для самовивозу *}
-          <form id="magazin-form">
+          <div id="magazin-form">
         <div class="form-grid">
           <div class="form-control">
-            <sl-input label="{$LINGVO.pickup_date}" type="date" placeholder="Date" value="{$smarty.now|date_format:"%Y.%m.%d"}"></sl-input>
+            <sl-input name="picup_date" label="{$LINGVO.pickup_date}" type="date" placeholder="Date" value="{$smarty.now|date_format:"%Y.%m.%d"}"></sl-input>
           </div>
           <div class="form-control">
-            <sl-select placeholder="{$LINGVO.pickup_time}" label="{$LINGVO.pickup_time}">
+            <sl-select name="picup_time" placeholder="{$LINGVO.pickup_time}" label="{$LINGVO.pickup_time}">
               <sl-option value="09:00 - 11:00">09:00 - 11:00</sl-option>
               <sl-option value="11:00 - 14:00">11:00 - 14:00</sl-option>
               <sl-option value="14:00 - 17:00">14:00 - 17:00</sl-option>
@@ -89,18 +90,18 @@
           </div>
         </div>
         <div class="form-control">
-          <sl-select placeholder="{$LINGVO.store_address}" label="{$LINGVO.store_address}" value="1">
+          <sl-select name="picup_addr" placeholder="{$LINGVO.store_address}" label="{$LINGVO.store_address}" value="1">
             <sl-option value="1">{$LINGVO.kiev_addr}</sl-option>
               {**  <sl-option value="{$LINGVO.kiev_addr}">{$LINGVO.bsk_address_akhmatova}</sl-option>	**}
               </sl-select>
         </div>
-      </form>          
+      </div>          
 
           {* Форма для кур'єрської доставки *}
-          <form id="courier-form" class="hidden">
+      <div id="courier-form" class="hidden">
         <div class="form-grid">
           <div class="form-control">
-            <sl-input label="{$LINGVO.city}" type="text" name="city" value="{$LINGVO.city_kiev}" placeholder="{$LINGVO.city}" readonly></sl-input>
+            <sl-input name="courier_city" label="{$LINGVO.city}" type="text" name="city" value="{$LINGVO.city_kiev}" placeholder="{$LINGVO.city}" readonly></sl-input>
           </div>
           <div class="form-control">
             <sl-checkbox id="another-city-checkbox">{$LINGVO.another_city}</sl-checkbox>
@@ -108,21 +109,26 @@
         </div>
         <div class="form-grid">
           <div class="form-control">
-            <sl-input label="{$LINGVO.bsk_address}" type="text" name="address" placeholder="{$LINGVO.bsk_address}"></sl-input>
+            <sl-input name="courier_address" label="{$LINGVO.bsk_address}" type="text" placeholder="{$LINGVO.bsk_address}"></sl-input>
           </div>
           <div class="form-grid">
             <div class="form-control">
-              <sl-input label="{$LINGVO.dom}" type="text" name="dom" placeholder="{$LINGVO.dom}"></sl-input>
+              <sl-input name="courier_dom" label="{$LINGVO.dom}" type="text" placeholder="{$LINGVO.dom}"></sl-input>
             </div>
             <div class="form-control">
-              <sl-input label="{$LINGVO.flat}" type="text" name="flat" placeholder="{$LINGVO.flat}"></sl-input>
+              <sl-input name="courier_flat" label="{$LINGVO.flat}" type="text" placeholder="{$LINGVO.flat}"></sl-input>
             </div>
           </div>
         </div>
-      </form>
+        <div class="form-grid">
+          <div class="form-control">
+            <sl-checkbox id="another-city-checkbox">Лифт</sl-checkbox>
+          </div>
+        </div>
+      </div>
 
           {* Форма для Нова пошта *}
-          <form id="nova-poshta-form" class="hidden">
+      <div id="nova-poshta-form" class="hidden">
         <div class="form-grid">
           <div class="form-control">
             <sl-input label="{$LINGVO.city}" type="text" name="np_city" placeholder="{$LINGVO.city}"></sl-input>
@@ -131,7 +137,7 @@
             <sl-input label="{$LINGVO.np_number}" type="text" name="np_number" placeholder="{$LINGVO.np_number}"></sl-input>
           </div>
         </div>
-      </form>
+      </div>
 
       <sl-alert variant="warning" data-name="small-order">
         <span slot="icon" class="icon icon-phone"></span>
@@ -165,21 +171,21 @@
 
     <section class="information__payment">
       <h2>3. {$LINGVO.bsk_way_to_pay}</h2>
-      <sl-radio-group name="payment" value="1">
-        <sl-radio value="1">
+      <sl-radio-group name="payment_way" value="1">
+        <sl-radio value="{$LINGVO.bsk_cash}">
           <div class="radio-option" id="payment-cash-option">
             <img src="/img/icons/icon-cash.svg" alt="">
             <span data-text="cash">{$LINGVO.bsk_cash}</span>
             <span class="hidden" data-text="nova-poshta-money">{$LINGVO.nova_poshta_money}</span>
           </div>
         </sl-radio>
-        <sl-radio value="2" {if $BSK_STOP_PRIVAT}disabled{/if}>
+        <sl-radio value="{$LINGVO.bsk_pay_now}" {if $BSK_STOP_PRIVAT}disabled{/if}>
           <div class="radio-option">
             <img src="/img/icons/icon-card.svg" alt="">
             <span>{$LINGVO.bsk_pay_now}</span>
           </div>
         </sl-radio>
-        <sl-radio value="3">
+        <sl-radio value="{$LINGVO.bsk_beznal}">
           <div class="radio-option">
             <img src="/img/icons/icon-order.svg" alt="">
             <span>{$LINGVO.bsk_beznal}</span>
@@ -197,10 +203,10 @@
     <section class="information__comment">
       <h2>4. {$LINGVO.bsk_comment}</h2>
       <div class="form-control">
-        <sl-textarea placeholder="{$LINGVO.comment_txt}"></sl-textarea>
+        <sl-textarea name="comment" placeholder="{$LINGVO.comment_txt}"></sl-textarea>
       </div>
       <div class="form-control">
-        <sl-checkbox>{$LINGVO.additional_consulting}</sl-checkbox>
+        <sl-checkbox name="additional_consulting">{$LINGVO.additional_consulting}</sl-checkbox>
       </div>
     </section>
   </div>
@@ -225,7 +231,7 @@
 
                 {if $B.not_available}
                   <sl-tag class="cart-tag" variant="danger">Товар під замовлення</sl-tag>
-            <sl-tag class="cart-tag" variant="order">Очікуване надходження 7-14 днів.Ціна та дата орієнтовні!</sl-tag>
+            <sl-tag class="cart-tag" variant="order">Очікуване надходження 7-14 днів. Ціна та дата орієнтовні!</sl-tag>
                 {/if  }
                 
                 <div class="cart-item__details_options">{$B.goodLegend}</div>
@@ -239,7 +245,7 @@
             </ul>
             {if $IS_BSK_PLANT || $IS_BSK_POT}
               <div class="form-control">
-        <sl-checkbox>{$LINGVO.i_need_peresadka}</sl-checkbox>
+        <sl-checkbox name="peresadka">{$LINGVO.i_need_peresadka}</sl-checkbox>
       </div>
             {/if}
             <div class="cart-page__order-list_summary">
@@ -262,21 +268,23 @@
         </div>
       </div>
       <div class="cart-page__order-list_actions">
-        <button class="button button--primary">{$LINGVO.confirm_order}</button>
+        <button class="button button--primary" name="send_bsk">{$LINGVO.confirm_order}</button>
         <!-- <sl-checkbox>Не передзвонюйте мені</sl-checkbox> -->
       </div>
     </section>
   </div>
 </div>
 </div>
+</form>
 </main>
 
+{*
 <ul>
   {foreach $LINGVO as $key => $val}
     <li>{$key} - {$val}</li>
   {/foreach}
 </ul>
-
+*}
 <script>
 const messages = {
 smallOrderText: "{$LINGVO.small_order}",

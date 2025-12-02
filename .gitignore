@@ -28,3 +28,5 @@ logs
 /smarty5/templates_c/*
 .DS_Store
 /images
+templates/.DS_Store
+templates/.DS_Store

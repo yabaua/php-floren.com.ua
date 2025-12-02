@@ -237,7 +237,7 @@ $POST=$_POST;
       $POST[$n]=stripslashes($v);
 	}
   }
-//$telegram = new Telegram(file_get_contents("config.json"));
+$telegram = new Telegram(file_get_contents("config.json"));
 
 
 require_once __DIR__ . '/smarty5/libs/Smarty.class.php';

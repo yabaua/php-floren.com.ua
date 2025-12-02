@@ -102,5 +102,11 @@ class DB2 {
 
         return $error;
     }
+    public function insert_id() {
+        if ($this->link_id instanceof mysqli) {
+            return $this->link_id->insert_id;
+        }
+        return 0;
+    }
 }
 ?>

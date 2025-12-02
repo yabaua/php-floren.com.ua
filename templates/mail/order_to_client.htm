@@ -1,0 +1,346 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+{literal}
+<style type="text/css">
+<!--
+body, td, div, p {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+a  {
+	text-decoration: underline;
+	color: #248252;
+}
+a:hover {
+	color: #248252; text-decoration: none;
+}
+
+table{
+	border-top: 1px solid #CCCCCC;
+	border-left: 1px solid #CCCCCC;
+}
+table td, table th
+{
+	padding:3px;
+	border-bottom: 1px solid #CCCCCC;
+	border-right: 1px solid #CCCCCC;
+}
+-->
+</style>
+{/literal}
+</head>
+<body bgcolor="#FFFFFF" text="#434342" leftmargin="20" topmargin="20" marginwidth="20" marginheight="20">
+<br><br>
+<p>Добрий день!</p>
+<p>Дякуємо за довіру до нашої компанії.</p>
+<p>Ваше замовлення <b>№{$ID}</b> знаходится в обробці.
+<br />Ми зв&#700;яжемось з вами найближчим часом. Зазвичай це відбувається від 5 до 30 хвилин в залежності від навантаження.
+<br />Якщо у вас виникнуть питання, вы можете зв&#700;язатися з нами за телефоном: <a href="tel:+380992382644">+380 (99) 238-26-44</a>. Також є Viber/Telegram за цим номером. Довідкова працює з 9.00 до 18.00</p>
+
+
+{if $POST.payment_way == 'beznal'}
+<p>&nbsp;</p>
+<p>Для виставлення рахунку просимо надати наступні документи на email: <a href="mailto:doc@floren.com.ua?subject=Документи для замовлення №{$ID}">doc@floren.com.ua</a></p>
+<ol>
+	<li>Виписка з єдиного державного реєстру</li>
+	<li>Свідоцтво платника ПДВ (якщо ви платник ПДВ)
+	<li>Реквізити компанії платника</li>
+</ol>
+{/if}
+<br />
+
+<h4>Деталі вашого замовлення</h4>
+
+<table align="center" width="600" cellspacing="0" border="0">
+	<tr>
+		<th>Назва</th>
+		<th>Деталі</th>
+		<th>Ціна</th>
+		<th style="text-align:center">Кіл<br />ть</th>
+		<th>Всього</th>
+	</tr>
+{foreach item=B from=$BASKET}
+
+	<tr bgcolor="{cycle values="#FFFFFF,#f0f8f2"}">
+		<td><a href="https://floren.com.ua/ua/{$B.href}" target="_blank">{$B.name} {$B.name_alter}</a></td>
+		<td class="producer">
+
+			{if $B.color}Колір: {$B.color_name_ru}, {$B.color}, <br/>{/if}
+			{if $B.dia}Диаметр: {$B.dia}, <br/>{/if}
+			{if $B.wdt}Ширина: {$B.wdt}, <br/>{/if}
+			{if $B.depth}Глибина: {$B.depth}, <br/>{/if}
+			{if $B.hgt}Висота: {$B.hgt}{/if}
+			{if $B.measure_qt}{$B.mg_name_ru}: {$B.measure_qt} {$B.unit}{/if}
+		
+		</td>
+		<td align="center" nowrap>{$B.price}</td>
+		<td align="center">х{$B.cnt}</td>
+		<td><b>{$B.sttl} грн</b></td>
+	</tr>
+{/foreach}
+
+{if $POST.peresadka}
+
+	<tr>
+		<td colspan="4" align="right"><b>Послуга пересадки:</b></td>
+		<td><b>{$POST.peresadka}</b></td>
+	</tr>
+
+{/if}
+
+	<tr>
+		<td colspan="4" align="right"><b>Сума замовлення:</b></td>
+		<td><b>{$POST.basket_totalprice}</b></td>
+	</tr>
+	<tr>
+		<td colspan="4" align="right"><b>Сума доставки:</b></td>
+		<td><b>{$POST.cost_delivery}</b></td>
+	</tr>
+	<tr>
+		<td colspan="4" align="right"><b>До сплати:</b></td>
+		<td><b>{$POST.to_pay}</b></td>
+	</tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p align="center"><b>Контактні дані</b></p>
+
+<table align="center" cellspacing="0" class="chuvak_details">
+	<tr valign="top">
+		<td width="150">Контактна особа:</td>
+		<td>{$POST.fio}</td>
+	</tr>
+	<tr valign="top">
+		<td>Телефон:</td>
+		<td>{$POST.phone}</td>
+	</tr>
+	<tr valign="top">
+		<td>Email:</td>
+		<td>{$POST.email}</td>
+	</tr>
+
+	
+
+</table>
+
+
+<p align="center"><b>Дані отримувача</b></p>
+
+<table align="center" cellspacing="0" class="chuvak_details">
+
+	{if $POST.recipient}
+		<tr valign="top">
+			<td>Отримувач замовлення:</td>
+			<td>Я отримувач</td>
+		</tr>
+	{else}
+		<tr valign="top">
+			<td>ПІБ отримувача</td>
+			<td>{$POST.r_fio}</td>
+		</tr>
+
+		<tr valign="top">
+			<td>Телефон отримувача</td>
+			<td>{$POST.r_phone}</td>
+		</tr>
+	{/if}
+	
+</table>
+
+
+<p align="center"><b>Спосіб доставки</b></p>
+
+<table align="center" cellspacing="0" class="chuvak_details">
+
+	{if $POST.delivery_way == "Самовивіз з магазину"}
+
+		<tr valign="top">
+			<td>Спосіб доставки:</td>
+			<td>{$POST.delivery_way}</td>
+		</tr>
+
+		<tr valign="top">
+			<td>Дата самовивозу:</td>
+			<td>{$POST.picup_date}</td>
+		</tr>
+
+		<tr valign="top">
+			<td>Час самовивозу:</td>
+			<td>{$POST.picup_time}</td>
+		</tr>
+
+		<tr valign="top">
+			<td>Адреса самовивозу:</td>
+			{if $POST.picup_addr == "m1"}
+				<td>пр. Перемоги, 70</td>
+			{else}
+				<td>вул. Анни Ахматової, 30</td>
+			{/if}
+		</tr>
+
+	{/if}
+
+	{if $POST.delivery_way == "Доставка Новою Поштою"}
+
+		<tr valign="top">
+			<td>Спосіб доставки:</td>
+			<td>{$POST.delivery_way}</td>
+		</tr>
+
+		<tr valign="top">
+			<td>Місто:</td>
+			<td>{$POST.np_city}</td>
+		</tr>
+
+		<tr valign="top">
+			<td>Номер відділення:</td>
+			<td>{$POST.np_number}</td>
+		</tr>
+
+	{/if}
+
+	{if $POST.delivery_way == "Доставка кур&#700;єром"}
+
+		<tr valign="top">
+			<td>Спосіб доставки:</td>
+			<td>{$POST.delivery_way}</td>
+		</tr>
+
+		<tr valign="top">
+			<td>Місто:</td>
+			<td>{$POST.courier_city}</td>
+		</tr>
+
+		{if $POST.courier_anonym}
+
+		<tr valign="top">
+			<td>Додаткова опція доставки:</td>
+			<td>{$POST.courier_anonym}</td>
+		</tr>
+
+		{/if}
+
+
+		{if !$POST.courier_date}
+
+		<tr valign="top">
+			<td>Дата доставки:</td>
+			<td>не вказано</td>
+		</tr>
+
+		{else}
+
+		<tr valign="top">
+			<td>Дата доставки:</td>
+			<td>{$POST.courier_date}</td>
+		</tr>
+
+		{/if}
+
+		{if $POST.courier_time}
+			<tr valign="top">
+				<td>Час доставки:</td>
+				<td>
+					{if $POST.courier_time == 'late'}
+						Пізня доставка (сплачується додатково)
+					{elseif $POST.courier_time == 'early'}
+						Рання доставка (сплачується додатково)
+					{else}
+						{$POST.courier_time}
+					{/if}
+					
+				</td>
+			</tr>
+		{/if}
+
+		{if $POST.courier_fast}
+			<tr valign="top">
+				<td>Тип доставки:</td>
+				<td>{$POST.courier_fast}</td>
+			</tr>
+		{/if}
+
+		{if $POST.courier_exact}
+
+			<tr valign="top">
+				<td>Тип доставки:</td>
+				<td>{$POST.courier_exact}</td>
+			</tr>
+
+			<tr valign="top">
+				<td>Час доставки: години</td>
+				<td>{$POST.courier_hour}</td>
+			</tr>
+
+			<tr valign="top">
+				<td>Час доставки: хвилини</td>
+				<td>{$POST.courier_min}</td>
+			</tr>
+
+		{/if}
+
+		<tr valign="top">
+			<td>Адреса доставки:</td>
+			<td>{$POST.courier_address}</td>
+		</tr>
+
+		<tr valign="top">
+			<td>Номер дома:</td>
+			<td>{$POST.courier_dom}</td>
+		</tr>
+
+		<tr valign="top">
+			<td>Номер квартири:</td>
+			<td>{$POST.courier_flat}</td>
+		</tr>
+		
+		
+		<tr valign="top">
+			<td>Наявність ліфту:</td>
+			<td>{if $POST.courier_elevator}{$POST.courier_elevator}{else} — {/if}</td>
+		</tr>
+
+	{/if}
+
+	{if !$POST.delivery_way}
+			<tr valign="top">
+				<td>Тип доставки:</td>
+				<td>не обрано</td>
+			</tr>
+	{/if}
+</table>
+
+<p align="center"><b>Спосіб оплати</b></p>
+
+<table align="center" cellspacing="0" class="chuvak_details">
+	<tr valign="top">
+		<td>Тип оплати:</td>
+		<td>{if $POST.payment_way == 'visa'}Картою на сайті VISA / Mastercard{elseif $POST.payment_way == 'beznal'}Безготівковий розрахунок для юридичних осіб{else}{$POST.payment_way}{/if}</td>
+	</tr>
+</table>
+
+<p align="center"><b>Додатково</b></p>
+
+<table align="center" cellspacing="0" class="chuvak_details">
+		<tr valign="top">
+			<td>Додаткова консультація:</td>
+			<td>{if $POST.additional_consulting}{$POST.additional_consulting}{else}не заповнено{/if}</td>
+		</tr>
+
+		<tr valign="top">
+			<td>Коментар до замовлення:</td>
+			<td>{if $POST.comment}{$POST.comment}{else}не заполнено{/if}</td>
+		</tr>
+</table>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Ще раз дякуємо за ваш запит.</p>
+<p>СЛАВА УКРАЇНІ !</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>
