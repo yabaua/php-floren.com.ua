@@ -1,9 +1,32 @@
 <main class="cart-page">
-<form name="bsk_form" method="POST" id="bsk_form" action="{$LANGURL}/order/" class="basket__form">
+
   <div class="container">
     <h1 class="cart-page__title">{$PAGE_TITLE}</h1>
-    <div class="cart-page__grid">
+    
+    <script>
+{$GA4_SCRIPT}
+</script>
 
+{if $ERROR}
+<sl-alert variant="warning" data-name="small-order">
+        <span slot="icon" class="icon icon-phone"></span>
+            {$LINGVO.oups_error}
+          </sl-alert>
+{/if}
+{if $ERROR}
+	{foreach item=E from=$ERROR}
+		<sl-alert variant="warning" data-name="small-order">
+        <span slot="icon" class="icon icon-phone"></span>
+            {$E}
+          </sl-alert>
+	{/foreach}
+{/if}
+
+{if $BASKET}
+
+    
+    <form name="bsk_form" method="POST" id="bsk_form" action="{$LANGURL}/order/" class="basket__form">
+    <div class="cart-page__grid">
       <div class="cart-page__order-information">
         <section class="information__contact">
           <div class="information__grid">
@@ -232,7 +255,7 @@
                 {if $B.not_available}
                   <sl-tag class="cart-tag" variant="danger">Товар під замовлення</sl-tag>
             <sl-tag class="cart-tag" variant="order">Очікуване надходження 7-14 днів. Ціна та дата орієнтовні!</sl-tag>
-                {/if  }
+                {/if}
                 
                 <div class="cart-item__details_options">{$B.goodLegend}</div>
             <div class="cart-item__details_controls"> {** Dimon if you need - you can use this id="{$B.formID}"  **}
@@ -274,8 +297,29 @@
     </section>
   </div>
 </div>
-</div>
 </form>
+
+
+{elseif $ORDERED}
+
+<p>&nbsp;</p>
+
+		<p>{$LINGVO.bsk_your_order_placed}.</p>
+		<p>&nbsp;</p>
+		<p>{$LINGVO.bsk_thank_your_for}.</p>
+		<p>&nbsp;</p>
+		<p>{$LINGVO.bsk_overloaded}</p>
+
+{else}
+<p>&nbsp;</p>
+
+	{$LINGVO.your_basket_empty}
+
+{/if}
+
+
+
+</div>
 </main>
 
 {*

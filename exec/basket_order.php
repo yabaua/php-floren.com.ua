@@ -151,7 +151,7 @@ if(isset($_POST['send_bsk']) && count($_SESSION['basket'])){
 
 	$letter=$sm->fetch('mail/order.htm');		
 	$floren->send_email('info@floren.com.ua','Новый заказ №'.$order_id,$letter);
-	$floren->send_email('sales@floren.com.ua','Новый заказ №'.$order_id,$letter);
+//	$floren->send_email('sales@floren.com.ua','Новый заказ №'.$order_id,$letter);
 //	$floren->send_email('goncharova@floren.com.ua','Новый заказ №'.$order_id,$letter);
 
 //===============GOOGLE GA4
@@ -214,13 +214,15 @@ if(isset($_POST['send_bsk']) && count($_SESSION['basket'])){
 	$smarty->assign('goods', $all_products);
 	$smarty->assign('payment', $_POST['payment_way']);
 	$smarty->assign('delivery', $_POST['delivery_way']);
-	
+//	REMOVE COMMENT	
 //	$telegram->send($group_name, $smarty->fetch('telegram/order.tpl'));
 
 //END TELEGRAM
-		
+
+//===== e-mail to client =============		
 	if ($_POST['email']!=''){
 		$letter_to_client=$sm->fetch('mail/order_to_client.htm');
+//		REMOVE COMMENT
 //		$floren->send_email(trim($_POST['email']),'Флорен – ваше замовлення №'.$order_id,$letter_to_client);
 	}
 
@@ -391,8 +393,6 @@ elseif (isset($_POST['data']) && isset($_POST['signature'])){
 		include( $_SERVER['DOCUMENT_ROOT'].'/exec/basket_order_liqpay.php');
 	}
 }else{//if send but
- 	echo "UUU";
-	exit();
 	header("location:".$lang_url."/basket/");
 }
 
