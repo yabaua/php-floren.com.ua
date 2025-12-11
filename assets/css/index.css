@@ -150,6 +150,9 @@ h2 {
 .flex {
   display: flex;
 }
+.flex-column {
+  flex-direction: column;
+}
 .grow {
   flex: 1 0 0;
 }
@@ -864,7 +867,7 @@ sl-radio[disabled] {
 sl-checkbox {
   --sl-toggle-size-medium: 20px;
   --sl-input-font-family: "Geologica", sans-serif;
-  --sl-input-font-size-medium: getRem(14);
+  --sl-input-font-size-medium: 0.875rem;
   --sl-input-font-weight: 300;
 }
 sl-checkbox::part(control) {
