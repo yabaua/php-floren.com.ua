@@ -378,101 +378,99 @@
           <!-- Додаткові категорії: фітодизайн, вертикальне озеленення, флораріуми -->
           <ul class="header__catalog--secondary">
             <li class="secondary-item">
-              <button class="secondary-item--button" aria-label="Фітодизайн">
+              <button class="secondary-item--button" aria-label="{$LINGVO.phytodesign}">
                 <svg class="icon icon-fitodesign"/>
                 <div class="secondary-item--button-text">
-                  <b>Фітодизайн</b>
-                  <span>Озеленення простору</span>
+                  <b>{$LINGVO.phytodesign}</b>
+                  <span>{$LINGVO.ozelenenie_prostoru}</span>
                 </div>
               </button>
               <section class="secondary-item--content">
                 <ul class="secondary-item--content-list">
                   <li>
-                    <img src="/img/sevices/apartment-phytodesign.png" alt="Фітодизайн квартири"/>
-                    <a class="underline" href="">Фітодизайн квартири</a>
+                    <img src="/img/sevices/apartment-phytodesign.png" alt="{$LINGVO.phytodesign_kvartiri}"/>
+                    <a class="underline" href="{$LANGURL}/services/phytodesign-kvartiri/">{$LINGVO.phytodesign_kvartiri}</a>
                   </li>
                   <li>
-                    <img src="/img/sevices/office-phytodesign.png" alt="Фітодизайн офісу"/>
-                    <a class="underline" href="">Фітодизайн офісу</a>
+                    <img src="/img/sevices/office-phytodesign.png" alt="{$LINGVO.phytodesign_ofisa}"/>
+                    <a class="underline" href="{$LANGURL}/services/phytodesign-ofisa/">{$LINGVO.phytodesign_ofisa}</a>
                   </li>
                   <li>
-                    <img src="/img/sevices/landscaping-of-summer-terraces.png" alt="Фітодизайн квартири"/>
-                    <a class="underline" href="">Озеленення літніх терас</a>
+                    <img src="/img/sevices/landscaping-of-summer-terraces.png" alt="{$LINGVO.ozelenenie_terras}"/>
+                    <a class="underline" href="{$LANGURL}/services/ozelenenie_letney_ploschadki/">{$LINGVO.ozelenenie_terras}</a>
                   </li>
                   <li>
                     <img src="/img/sevices/zoning-space-with-indoor-plants.png"
-                    alt="Зонування простору кімнатними рослинами"/>
-                    <a class="underline" href="">Зонування простору кімнатними рослинами</a>
+                    alt="{$LINGVO.zonirovanie}"/>
+                    <a class="underline" href="{$LANGURL}/services/peregorodki-iz-rasteniy/">{$LINGVO.zonirovanie}</a>
                   </li>
                   <li>
                     <img src="/img/sevices/plant-rental.png" alt="Зелені рішення для HoReCa"/>
-                    <a class="underline" href="">Зелені рішення для HoReCa</a>
+                    <a class="underline" href="#">Зелені рішення для HoReCa</a>
                   </li>
                   <li>
-                    <img src="/img/sevices/landscaping-artificial-plants.png" alt="Озеленення штучними рослинами"/>
-                    <a class="underline" href="">Озеленення штучними рослинами</a>
+                    <img src="/img/sevices/landscaping-artificial-plants.png" alt="{$LINGVO.ozelenenie_iskusstvennimi_rasteniyami}"/>
+                    <a class="underline" href="{$LANGURL}/services/ozelenenie-iskusstvennimi-rasteniyami/">{$LINGVO.ozelenenie_iskusstvennimi_rasteniyami}</a>
                   </li>
                 </ul>
               </section>
             </li>
             <li class="secondary-item">
-              <button class="secondary-item--button" aria-label="Вертикальне озеленення">
+              <button class="secondary-item--button" aria-label="{$LINGVO.vertikalnoe_ozelenenie}">
                 <svg class="icon icon-vertical"/>
                 <div class="secondary-item--button-text">
-                  <b>Вертикальне озеленення</b>
-                  <span>Зелені стіни</span>
+                  <b>{$LINGVO.vertikalnoe_ozelenenie}</b>
+                  <span>{$LINGVO.green_wall_short}</span>
                 </div>
               </button>
               <section class="secondary-item--content">
                 <ul class="secondary-item--content-list">
                   <li>
-                    <img src="/img/sevices/green-walls.png" alt="Зелені стіни з рослинами"/>
-                    <a class="underline" href="">Зелені стіни з рослинами</a>
+                    <img src="/img/sevices/green-walls.png" alt="{$LINGVO.green_wall}"/>
+                    <a class="underline" href="{$LANGURL}/services/green-wall/">{$LINGVO.green_wall}</a>
                   </li>
                   <li>
-                    <img src="/img/sevices/landscaping-using-vertical-structures.png" alt="Озеленення за допомогою
-вертикальних конструкцій"/>
-                    <a class="underline" href="">Озеленення за допомогою
-                    вертикальних конструкцій</a>
+                    <img src="/img/sevices/landscaping-using-vertical-structures.png" alt="{$LINGVO.metall_ozel}"/>
+                    <a class="underline" href="{$LANGURL}/services/vertikalnoe-ozelenenie-metallicheskimi-konstruktsiyami/">{$LINGVO.metall_ozel}</a>
                   </li>
                   <li>
-                    <img src="/img/sevices/green-moss-walls.png" alt="Зелені стіни з моху"/>
-                    <a class="underline" href="">Зелені стіни з моху</a>
+                    <img src="/img/sevices/green-moss-walls.png" alt="{$LINGVO.ozelenenie_moss}"/>
+                    <a class="underline" href="{$LANGURL}/services/ozelenenie-stabilizirovannim-mhom/">{$LINGVO.ozelenenie_moss}</a>
                   </li>
                 </ul>
               </section>
             </li>
             <li class="secondary-item">
-              <button class="secondary-item--button" aria-label="Догляд за рослинами">
+              <button class="secondary-item--button" aria-label="{$LINGVO.care} {$LINGVO.za_rasteniyami}">
                 <svg class="icon icon-care"/>
                 <div class="secondary-item--button-text">
-                  <b>Догляд</b>
-                  <span>За рослинами</span>
+                  <b>{$LINGVO.care}</b>
+                  <span>{$LINGVO.za_rasteniyami}</span>
                 </div>
               </button>
               <section class="secondary-item--content">
                 <ul class="secondary-item--content-list">
                   <li>
-                    <img src="/img/sevices/plant-transplantation.png" alt="Пересадка рослин"/>
-                    <a class="underline" href="">Пересадка рослин</a>
+                    <img src="/img/sevices/plant-transplantation.png" alt="{$LINGVO.peresadka_rasteniy}"/>
+                    <a class="underline" href="{$LANGURL}/services/peresadka/">{$LINGVO.peresadka_rasteniy}</a>
                   </li>
                   <li>
-                    <img src="/img/sevices/plant-transportation.png" alt="Перевезення рослин"/>
-                    <a class="underline" href="">Перевезення рослин</a>
+                    <img src="/img/sevices/plant-transportation.png" alt="{$LINGVO.perevozka_rasteniy}"/>
+                    <a class="underline" href="{$LANGURL}/services/shipping/">{$LINGVO.perevozka_rasteniy}</a>
                   </li>
                   <li>
-                    <img src="/img/sevices/plant-rental.png" alt="Оренда рослин"/>
-                    <a class="underline" href="">Оренда рослин</a>
+                    <img src="/img/sevices/plant-rental.png" alt="{$LINGVO.arenda_rasteniy}"/>
+                    <a class="underline" href="{$LANGURL}/services/arenda_rasteniy/">{$LINGVO.arenda_rasteniy}</a>
                   </li>
                 </ul>
               </section>
             </li>
             <li class="secondary-item">
-              <button class="secondary-item--button" aria-label="Галерея фотографій">
+              <button class="secondary-item--button" aria-label="{$LINGVO.photo_gallery}">
                 <svg class="icon icon-photogallery"/>
                 <div class="secondary-item--button-text">
-                  <b>Портфоліо</b>
-                  <span>Галерея фотографій</span>
+                  <b>{$LINGVO.portfolio}</b>
+                  <span>{$LINGVO.photo_gallery}</span>
                 </div>
               </button>
             </li>
@@ -482,15 +480,17 @@
     </div>
 
     <!-- Основний контент сторінки -->
-  {if $URL[0]=='' || $URL[0]=='basket'}
+  {if $URL[0]=='' || $URL[0]=='basket'} <!-- Якщо сторінка без лівого меню -->
     {include file="$CONTENT_TPL"}
   {else}
+                                        <!-- Якщо сторінка двоколоночна -->
     <main class="catalog-page">
       <div class="container">
         <!-- Sidebar navigation - категорії каталогу -->
         <div class="catalog-page__grid">
-
+          <aside class="catalog-page__nav">
           {include file="$LEFT_TPL"}
+          </aside>
           <div class="catalog-page__content">
             {if $URL[0]!=''}
               <!-- Breadcrumbs -->

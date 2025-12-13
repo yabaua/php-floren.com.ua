@@ -1,0 +1,2 @@
+<h1>{$PAGE_TITLE}</h1>
+{$CONTENT}

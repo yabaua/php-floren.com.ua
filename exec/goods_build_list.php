@@ -129,7 +129,7 @@
 						if ($fc['color'] != '0') {
 							$colors[$f['ID']][] = array(
 								'name' => $fc['name_'.$lang],
-								'image' => $fc['preview'],
+								'image' => 'https://floren.com.ua/images/ins/preview/' . $fc['preview'],
 							);
 						}					
 					}

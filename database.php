@@ -1,11 +1,11 @@
 <?php
 //if ($_SERVER["SERVER_NAME"]=="n.floren.com.ua"){
 	$DB_HOST='floren.mysql.tools';
-	$DB_CHARSET='utf8mb4';
+	$DB_CHARSET='utf8';
 	// main base
-	$DB_USER='floren_db2025';
-	$DB_PASS='m9286DRfUv';
-	$DB_NAME='floren_db2025';
+	$DB_USER='floren_utf2025';
+	$DB_PASS='i4d4XB48bV';
+	$DB_NAME='floren_utf2025';
 /*
 }else{
 	$DB_HOST="localhost";

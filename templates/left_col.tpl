@@ -1,0 +1,85 @@
+<div class="filters">
+
+	<div class="filters__wrapper">
+	<button class="close-btn"></button>
+
+{if $CUR_CAT=='publications'}
+	<div class="filters__info">
+		<p class="filters__name">{$LINGVO.nav}</p>
+		<ul class="filters__list">
+
+			<li class="filters__item"><a class="filters__link" href="{$LANGURL}/publications/">Все</a></li>
+
+			{foreach item=PC name=PC from=$PUB_CATEGORIES}
+				<li class="filters__item"><a href="{$LANGURL}/publications/?cat={$PC.alias}" class="filters__link {if $PC.act=='1'}filters__link_active{/if}">{$PC.name}</a></li>
+			{/foreach}
+
+		</ul>
+	</div>
+
+{elseif $CUR_CAT=='777' || $CUR_CAT=='phytodesign' || $URL[0]=='phytodesign'}
+<!-- Sidebar navigation - категорії каталогу -->
+
+          <section class="double-column-page__nav_section">
+            <h3{if $URL[0]=='phytodesign'} class="active"{/if}>
+              <a href="{$LANGURL}/phytodesign/">{$LINGVO.phytodesign}</a>
+            </h3>
+            <ul>
+              <li{if $URL[1]=='phytodesign-kvartiri'} class="active"{/if}>
+                <a class="underline" href="{$LANGURL}/services/phytodesign-kvartiri/">{$LINGVO.phytodesign_kvartiri}</a>
+              </li>
+              <li{if $URL[1]=='phytodesign-ofisa'} class="active"{/if}>
+                <a class="underline" href="{$LANGURL}/services/phytodesign-ofisa/">{$LINGVO.phytodesign_ofisa}</a>
+              </li>
+            </ul>
+          </section>
+          <section class="double-column-page__nav_section">
+            <h3{if $URL[1]=='vertikalnoe-ozelenenie' || $URL[1]=='green-wall' ||  $URL[1]=='vertikalnoe-ozelenenie-metallicheskimi-konstruktsiyami' || $URL[1]=='ozelenenie-stabilizirovannim-mhom'} class="active"{/if}>
+              <a href="{$LANGURL}/services/vertikalnoe-ozelenenie/">{$LINGVO.vertikalnoe_ozelenenie}</a>
+            </h3>
+            <ul>
+              <li{if $URL[1]=='green-wall'} class="active"{/if}>
+                <a class="underline" href="{$LANGURL}/services/green-wall/">{$LINGVO.green_wall}</a>
+              </li>
+              <li{if $URL[1]=='vertikalnoe-ozelenenie-metallicheskimi-konstruktsiyami'} class="active"{/if}>
+                <a class="underline" href="{$LANGURL}/services/vertikalnoe-ozelenenie-metallicheskimi-konstruktsiyami/">{$LINGVO.metall_ozel}</a>
+              </li>
+              <li{if $URL[1]=='ozelenenie-stabilizirovannim-mhom'} class="active"{/if}>
+                <a class="underline" href="{$LANGURL}/services/ozelenenie-stabilizirovannim-mhom/">{$LINGVO.ozelenenie_moss}</a>
+              </li>
+            </ul>
+          </section>
+          <section class="double-column-page__nav_section">
+            <h3{if $URL[1]=='ozelenenie_letney_ploschadki'} class="active"{/if}>
+              <a href="{$LANGURL}/services/ozelenenie_letney_ploschadki/">{$LINGVO.ozelenenie_terras}</a>
+            </h3>
+          </section>
+          <section class="double-column-page__nav_section">
+            <h3{if $URL[1]=='peregorodki-iz-rasteniy'} class="active"{/if}>
+              <a href="{$LANGURL}/services/peregorodki-iz-rasteniy/">{$LINGVO.zonirovanie}</a>
+            </h3>
+          </section>
+          <section class="double-column-page__nav_section">
+            <h3{if $URL[1]=='ozelenenie-iskusstvennimi-rasteniyami'} class="active"{/if}>
+              <a href="{$LANGURL}/services/ozelenenie-iskusstvennimi-rasteniyami/">{$LINGVO.ozelenenie_iskusstvennimi_rasteniyami}</a>
+            </h3>
+          </section>
+
+
+<!--  ====  -->
+{/if}
+
+
+	<!-- links_block -->
+
+
+	</div>
+</div>
+
+
+
+{if $SEO_TEXT!=''}
+	<div class="left_text">
+		{$SEO_TEXT|nl2br}
+	</div>
+{/if}

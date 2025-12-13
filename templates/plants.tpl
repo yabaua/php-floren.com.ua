@@ -106,10 +106,9 @@
         </section>
         {if $P.colors}
         <section>
-          <h5>{$LINGVO.colors}:</h5>
+          <h5>{$LINGVO.colors}</h5>
           <div class="colors-list">
-            {foreach from=$P.colors item=FC} {**
-            <span style="background-color: #c33494"></span> **}
+            {foreach from=$P.colors item=FC}
             <span
               style="background: url('{$FC.image}')"
               title="Фото {$FC.name}"

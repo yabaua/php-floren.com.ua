@@ -1,4 +1,4 @@
-<aside class="catalog-page__nav">
+
     {foreach item=C name=C key=I from=$CATEGORY_LEFT}
 
 		{if $C.ID==25}
@@ -17,4 +17,3 @@
 			</section>
 		
 	{/foreach}
-</aside>
