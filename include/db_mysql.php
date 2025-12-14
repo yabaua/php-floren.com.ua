@@ -14,7 +14,7 @@ class DB2 {
     /**
      * Подключение к базе данных
      */
-    public function connect($host = 'floren.mysql.tools', $user ='floren_utf2025', $pass='i4d4XB48bV', $dbname='floren_utf2025', $charset = 'utf8mb4') {
+    public function connect($host = 'floren.mysql.tools', $user ='floren_db2025', $pass='m9286DRfUv', $dbname='floren_db2025', $charset = 'utf8mb4') {
         $this->link_id = new mysqli($host, $user, $pass, $dbname);
 
         if ($this->link_id->connect_errno) {
