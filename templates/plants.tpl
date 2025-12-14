@@ -75,7 +75,7 @@
     <div class="product-card__wrapper">
       <div class="product-card__image">
         <a href="{$P.product_path}">
-          <img src="{$P.img_path}" alt="Фото {$P.name}" />
+          <img src="{$P.img_path}" alt="Фото {$P.name}"/>
         </a>
       </div>
       <div class="product-card__name">
@@ -84,8 +84,7 @@
       {if $P.good_status == 'in_stock'}
       <div class="product-card__price">
         {$P.price} {** <del>200,99 ₴</del> **}
-        <!-- If in cart add this block -->
-        <button
+        <!-- If in cart add this block --><!--  <button
           class="product-card__in-cart"
           data-event="click"
           data-callback="addToCart"
@@ -93,7 +92,7 @@
         >
           <span class="icon icon-basket"></span>
         </button>
-      </div>
+         --></div>
 
       <div class="product-card__options">
         <section>
@@ -148,7 +147,7 @@
     <img
       src="/img/icons/icon-arrow-left-long.svg.svg"
       alt="Попередня сторінка"
-    />
+/>
   </a>
   {foreach item=P from=$PAGES} {if $P.page>5} {continue} {else} {if $FROM_GOODS}
 
@@ -170,7 +169,7 @@
   {/if} {/if} {** if more than 5 pages **} {/foreach}
   <a href="" class="pagination__link"
     ><img src="/img/icons/icon-arrow-right-long.svg" alt="Наступна сторінка"
-  /></a>
+/></a>
 </div>
 {/if} {** if pagination **}
 

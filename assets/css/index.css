@@ -3553,6 +3553,9 @@ body.secondary-hovered .catalog-overlay {
 .catalog-page__nav_section > ul li.active::before {
   display: none;
 }
+.catalog-page__content {
+  min-width: 0;
+}
 .catalog-page__content_filters {
   display: flex;
   gap: 1rem;
