@@ -3,7 +3,6 @@ include("good_comment.php");
 $TITLE=array();
 
 if($URL[0]=='phytodesign'){
-
 	if(isset($URL[1])){
 		include($_SERVER['DOCUMENT_ROOT'].'/include/send_404_email.php');
 			//=============404===================
@@ -121,11 +120,7 @@ else
 	//======IF 1 SERVICE
 	else{//SERVICES LIST
 
-		$serv_list=array();
-		$db->query("SELECT * FROM services25".$db_sufix." ORDER BY ID DESC");
-		while($f=$db->fetch()) $serv_list[]=$f;
-		$smarty->assign("SERV_LIST",$serv_list);
-		
+
 		$hleb=array();
 		$hleb[0]['link']='/';
 		$hleb[0]['name']=$lingvo['main_page'];
@@ -133,8 +128,9 @@ else
 		$hleb[1]['name']=$lingvo['services'];
 		
 
-		$db->query("SELECT * FROM tree".$db_sufix." WHERE alias='services'");
+		$db->query("SELECT * FROM tree".$db_sufix." WHERE alias='services25'");
 		$ff=$db->fetch();
+		
 		
 		$TITLE[1]=$ff['meta_title'];
 		$smarty->assign("META_DESCRIPTION",$ff['meta_description']);

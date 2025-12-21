@@ -28,8 +28,17 @@
               <li{if $URL[1]=='phytodesign-kvartiri'} class="active"{/if}>
                 <a class="underline" href="{$LANGURL}/services/phytodesign-kvartiri/">{$LINGVO.phytodesign_kvartiri}</a>
               </li>
-              <li{if $URL[1]=='phytodesign-ofisa'} class="active"{/if}>
+              <!-- li{if $URL[1]=='phytodesign-ofisa'} class="active"{/if}>
                 <a class="underline" href="{$LANGURL}/services/phytodesign-ofisa/">{$LINGVO.phytodesign_ofisa}</a>
+              </li -->
+              <li{if $URL[1]=='peregorodki-iz-rasteniy'} class="active"{/if}>
+                <a class="underline" href="{$LANGURL}/services/peregorodki-iz-rasteniy/">{$LINGVO.zonirovanie}</a>
+              </li>
+              <li{if $URL[1]=='ozelenenie-iskusstvennimi-rasteniyami'} class="active"{/if}>
+                <a class="underline" href="{$LANGURL}/services/ozelenenie-iskusstvennimi-rasteniyami/">{$LINGVO.ozelenenie_iskusstvennimi_rasteniyami}</a>
+              </li>
+              <li{if $URL[1]=='ozelenenie_letney_ploschadki'} class="active"{/if}>
+                <a class="underline" href="{$LANGURL}/services/ozelenenie_letney_ploschadki/">{$LINGVO.ozelenenie_terras}</a>
               </li>
             </ul>
           </section>
@@ -51,19 +60,22 @@
           </section>
           <section class="double-column-page__nav_section">
             <h3{if $URL[1]=='ozelenenie_letney_ploschadki'} class="active"{/if}>
-              <a href="{$LANGURL}/services/ozelenenie_letney_ploschadki/">{$LINGVO.ozelenenie_terras}</a>
+              <a href="{$LANGURL}/services/vertikalnoe-ozelenenie/">{$LINGVO.care} {$LINGVO.za_rasteniyami}</a>
             </h3>
+            <ul>
+              <li{if $URL[1]=='peresadka'} class="active"{/if}>
+                <a class="underline" href="{$LANGURL}/services/peresadka/">{$LINGVO.peresadka_rasteniy}</a>
+              </li>
+              <li{if $URL[1]=='shipping'} class="active"{/if}>
+                <a class="underline" href="{$LANGURL}/services/shipping/">{$LINGVO.perevozka_rasteniy}</a>
+              </li>
+              <li{if $URL[1]=='arenda_rasteniy'} class="active"{/if}>
+                <a class="underline" href="{$LANGURL}/services/arenda_rasteniy/">{$LINGVO.arenda_rasteniy}</a>
+              </li>
+            </ul>
           </section>
-          <section class="double-column-page__nav_section">
-            <h3{if $URL[1]=='peregorodki-iz-rasteniy'} class="active"{/if}>
-              <a href="{$LANGURL}/services/peregorodki-iz-rasteniy/">{$LINGVO.zonirovanie}</a>
-            </h3>
-          </section>
-          <section class="double-column-page__nav_section">
-            <h3{if $URL[1]=='ozelenenie-iskusstvennimi-rasteniyami'} class="active"{/if}>
-              <a href="{$LANGURL}/services/ozelenenie-iskusstvennimi-rasteniyami/">{$LINGVO.ozelenenie_iskusstvennimi_rasteniyami}</a>
-            </h3>
-          </section>
+
+
 
 
 <!--  ====  -->
