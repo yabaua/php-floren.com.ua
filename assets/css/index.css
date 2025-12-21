@@ -4894,6 +4894,12 @@ body.secondary-hovered .catalog-overlay {
   font-style: normal;
   line-height: 1.5;
 }
+.services-page__description p {
+  margin-bottom: 1em;
+}
+.services-page__description p:last-child {
+  margin-bottom: 0;
+}
 .services-page__service {
   margin-top: 48px;
 }
@@ -4975,6 +4981,7 @@ body.secondary-hovered .catalog-overlay {
   padding: 24px 24px 36px;
   border-radius: 16px;
   background-color: var(--color-gray-10);
+  align-self: flex-start;
 }
 .services-page__calc h3 {
   margin-bottom: 1rem;
@@ -5016,6 +5023,19 @@ body.secondary-hovered .catalog-overlay {
   display: grid;
   grid-template-columns: 240px 1fr;
   gap: 2rem;
+}
+.services-page__left-title a {
+  text-decoration: underline;
+  text-decoration-color: var(--color-gray-40);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25rem;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+.services-page__left-title a:hover {
+  text-decoration-color: transparent;
+}
+.services-page__left-title a {
+  color: var(--color-green-100);
 }
 .services-page__grid-with-button {
   margin-top: 80px;
@@ -5228,6 +5248,88 @@ body.secondary-hovered .catalog-overlay {
 .services-page__comments_wrapper .catalog-page__content_comments h2 {
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
+}
+.services-page__map {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.25rem;
+}
+.services-page__map > * {
+  min-width: 0;
+  min-height: 0;
+}
+.services-page__map_list {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+.services-page__map_list .map-list__item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  font-weight: 300;
+}
+.services-page__map_list .map-list__item_icon {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-green-20);
+}
+.services-page__map_list .map-list__item_icon img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+.services-page__map_list .map-list__item_info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.services-page__map_list .map-list__item_info a:not([href^="tel:"]) {
+  text-decoration: underline;
+  text-decoration-color: var(--color-gray-40);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25rem;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+.services-page__map_list .map-list__item_info a:not([href^="tel:"]):hover {
+  text-decoration-color: transparent;
+}
+.services-page__map_list .map-list__item_info a:not([href^="tel:"]) {
+  color: var(--color-green-100);
+}
+.services-page__map_list .map-list__item_info .ico {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--color-gray-40);
+  border-radius: 6px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+}
+.services-page__map_list .map-list__item_info .ico img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+.services-page__map_list .map-list__item_info .grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem;
+}
+.services-page__map_list .map-list__item_info .grid > * {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+.services-page__map_list .map-list__item_info .grid > * > * {
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
 }
 .last-works {
   padding-top: 80px;
