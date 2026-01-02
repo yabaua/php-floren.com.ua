@@ -60,7 +60,7 @@
           </section>
           <section class="double-column-page__nav_section">
             <h3{if $URL[1]=='ozelenenie_letney_ploschadki'} class="active"{/if}>
-              <a href="{$LANGURL}/services/vertikalnoe-ozelenenie/">{$LINGVO.care} {$LINGVO.za_rasteniyami}</a>
+              <a href="{$LANGURL}/services/house_plant_care/">{$LINGVO.care} {$LINGVO.za_rasteniyami}</a>
             </h3>
             <ul>
               <li{if $URL[1]=='peresadka'} class="active"{/if}>

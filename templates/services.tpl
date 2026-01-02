@@ -20,5 +20,5 @@
 {/if}
 
 <!--seoshield_formulas--uslugi-->
-	<h1>{$SERVICE.title}</h1>
+<h1>{$SERVICE.title}</h1>
 {$SERVICE.body}
