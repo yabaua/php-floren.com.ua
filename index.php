@@ -543,7 +543,8 @@ elseif (count($URL)==1 && ($URL[0]=='' || $URL[0]=='indexphp')) {
 					$hleb[1]['name']=$r['name'];
 				}
 			
-			$smarty->assign("HLEB",$hleb);	
+			$smarty->assign("HLEB",$hleb);
+			$smarty->assign("LEFT_TPL",'left_col.tpl');
 			$smarty->assign("CONTENT_TPL",'content.tpl');
 			$smarty->assign("CONTENT",$r['content']);
 			if(isset($PARAM[0])){
