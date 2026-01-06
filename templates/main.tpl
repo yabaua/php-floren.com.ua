@@ -469,8 +469,10 @@
               <button class="secondary-item--button" aria-label="{$LINGVO.photo_gallery}">
                 <svg class="icon icon-photogallery"/>
                 <div class="secondary-item--button-text">
-                  <b>{$LINGVO.portfolio}</b>
-                  <span>{$LINGVO.photo_gallery}</span>
+                  <a href="/gallery/">
+                    <b>{$LINGVO.portfolio}</b>
+                    <span>{$LINGVO.photo_gallery}</span>
+                  </a>
                 </div>
               </button>
             </li>

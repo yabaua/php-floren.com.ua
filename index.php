@@ -395,7 +395,7 @@ if (isset($_COOKIE['no_counter']) || isset($_SESSION['no_counter']) || $_SERVER[
 	$smarty->assign("NO_COUNTER",true);
 
 
-if ($URL[0] =='florist') {
+if ($URL[0] =='florist' ) {
 	$smarty->assign("LEFT_TPL",'left_col.tpl');
 }
 
