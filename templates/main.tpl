@@ -1,12 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{if $LANG=='ua'}uk-UA{else}ru-UA{/if}">
 
   <head>
     <meta charset="UTF-8"/>
+    <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
     <meta name="viewport"
     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Головна сторінка</title>
+    <title>{$META_TITLE}</title>
+    <meta name="description" content="{$META_DESCRIPTION|escape}" />
+  	<meta name="Keywords" content="{$META_KEYWORDS|escape}" />
+  	<meta name="google-site-verification" content="bTCfDHCphQx6TBpRPW2kD8KCFii5CginoCuvlA30iRc" />
+  	<meta name="google-site-verification" content="TbgodL-oY8WU0EzwGUsQRVHFaW0AlhMfphGCTKVUlUA" />
+  	<meta name="yandex-verification" content="52b1e8e95027dfaa" />
+  	<meta name="yandex-verification" content="676d8ae0b94ec83e" />
+  	<meta name="msvalidate.01" content="608804491F64BA8EB3473B4D82A00BC6" />
+  	<meta name="facebook-domain-verification" content="ad6un76hvxt2d8w7umcychuees0qus" />
+	
+  	<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  	<link rel="apple-touch-icon" sizes="152x152" href="/images/apple-touch-icon-ipad.png">
+  	<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-iphone-retina.png">
+  	<link rel="apple-touch-icon" sizes="167x167" href="/images/apple-touch-icon-ipad-retina.png">
+  	
+  	{$META_REL_ALTERNATE}
+  	{$META_REL_CANONICAL}
+  	{$META_NOFOLLOW}
+  	
+{if $URL[0]=='product'}
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="{$OG_TITLE}" />
+		<meta property="og:url" content="{$OG_LINK}" />
+		<meta property="og:description" content="Шукаєш {$OG_TITLE}? Заходь та обирай прямо зараз!" />
+		<meta property="article:author" content="https://www.facebook.com/floren.com.ua/" />
+		<meta property="og:image" content="{$OG_IMAGE}" />
+		<meta property="og:publisher" content="https://www.facebook.com/floren.com.ua/" />
+		<meta property="og:site_name" content="Флорен – Студія Фітодизайну" />
+{/if}
+{if $URL[0]=='wedding_bouquet'}
+		<meta property="og:type" content="product" />
+		<meta property="og:site_name" content="floren.com.ua" />
+		<meta property="og:title" content="{$GOOD_ONE.name}" />
+		<meta property="og:url" content="https://floren.com.ua{$LANGURL}/wedding_bouquet/{$GOOD_ONE.ID}/" />
+		<meta property="og:image" content="https://floren.com.ua/images/ins/b/{$GOOD_ONE.image}" />
+		<meta property="og:description" content="Отличный свадебный букет. Ну очень красивый." />
+{/if}
+{if $URL[0]=='bouquet'}
+		<meta property="og:type" content="product" />
+		<meta property="og:site_name" content="floren.com.ua" />
+		<meta property="og:title" content="{$GOOD_ONE.name}" />
+		<meta property="og:url" content="https://floren.com.ua{$LANGURL}/bouquet/{$GOOD_ONE.ID}/" />
+		<meta property="og:image" content="https://floren.com.ua/images/ins/b/{$GOOD_ONE.image}" />
+		<meta property="og:description" content="Отличный букет. Ну очень красивый. Подарите мне такой!" />
+{/if}
+{if ($URL[0]=='planters') or ($URL[0]=='komnatnie-rasteniya')}
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="<!--page_title-->" />
+	<meta property="og:url" content="https://floren.com.ua{$LANGURL}/{$URL[0]}/{$URL[1]}/" />
+	<meta property="og:description" content="Шукаєш <!--page_title--> ? Заходь та обирай прямо зараз!" />
+	<meta property="article:author" content="https://www.facebook.com/floren.com.ua/" />
+	<meta property="og:image" content="https://floren.com.ua/images/lechuza/big_{$URL[1]}_{$G_FIRST_COLOR_INPUT}.jpg" />
+	<meta property="og:publisher" content="https://www.facebook.com/floren.com.ua/" />
+	<meta property="og:site_name" content="Флорен – Студія Фітодизайну" />
+{/if}
+{if ($URL[0]=='publications') && $URL[1]!=''}
+	<meta property="og:locale" content="ru_UA" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="{$ARTICLE.meta_title|truncate:100}" />
+	<meta property="og:description" content="{$ARTICLE.meta_description}" />
+	<meta property="og:url" content="https://floren.com.ua{$LANGURL}/publications/{$URL[1]}/" />
+	<meta property="og:site_name" content="Флорен – Студія Фітодизайну" />
+	<meta property="og:image" content="{$ARTICLE.images}" />
+	<meta property="og:image:width" content="{$ARTICLE_IMAGE[0]}" />
+	<meta property="og:image:height" content="{$ARTICLE_IMAGE[1]}" />
+	<meta property="og:image:alt" content="{$ARTICLE.title} фото 1" />
+{/if}
+{if ($URL[0]=='services') && $URL[1]!=''}
+	<meta property="og:locale" content="ru_UA" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="{$SERVICE.meta_title|truncate:100}" />
+	<meta property="og:description" content="{$SERVICE.meta_description}" />
+	<meta property="og:url" content="https://floren.com.ua{$LANGURL}/services/{$URL[1]}/" />
+	<meta property="og:site_name" content="Флорен – Студія Фітодизайну" />
+	<meta property="og:image" content="{$SERVICE.schema_image}" />
+	<meta property="og:image:width" content="{$SERVICE_IMAGE[0]}" />
+	<meta property="og:image:height" content="{$SERVICE_IMAGE[1]}" />
+	<meta property="og:image:alt" content="{$SERVICE.title} фото 1" />
+{/if}
+{if $URL[0]=='phytodesign'}
+	<meta property="og:locale" content="ru_UA" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="{$META_TITLE|truncate:100}" />
+	<meta property="og:description" content="{$META_DESCRIPTION|escape}" />
+	<meta property="og:url" content="https://floren.com.ua{$LANGURL}/phytodesign/" />
+	<meta property="og:site_name" content="Флорен – Студія Фітодизайну" />
+	<meta property="og:image" content="https://floren.com.ua/images/content/phyto-design-office-1-s.jpg" />
+	<meta property="og:image:width" content="350" />
+	<meta property="og:image:height" content="150" />
+	<meta property="og:image:alt" content="Фітодизайн інте&#700;єра приміщення фото 1" />
+{/if}
+
+
+{if isset($DEPT) && $DEPT=='landscape'}
+	<meta property="og:locale" content="ru_UA" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="{$META_TITLE|truncate:100}" />
+	<meta property="og:description" content="{$META_DESCRIPTION|escape}" />
+	<meta property="og:url" content="https://floren.com.ua{$LANGURL}/{$URL[0]}/{if $URL[1]!=''}{$URL[1]}/{/if}" />
+	<meta property="og:site_name" content="Флорен – Студія Фітодизайну" />
+	<meta property="og:image" content="{$SCHEMA_IMAGE_URL}" />
+	<meta property="og:image:width" content="{$SCHEMA_IMAGE_SIZE[0]}" />
+	<meta property="og:image:height" content="{$SCHEMA_IMAGE_SIZE[1]}" />
+	<meta property="og:image:alt" content="{$TITLE} фото 1" />
+{/if}
+  	
     <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -26,9 +132,193 @@
 
     <link rel="stylesheet" href="/assets/css/_swipers.css?2"/>
     <link rel="stylesheet" href="/assets/css/index.css?2"/>
+    
+    
+    <script type="text/javascript">
+    {literal}
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "t92qk5thlj");
+    {/literal}
+    </script>
+    	
+    	{if $URL[0]==''}
+    	{literal}
+    	<script type="application/ld+json">
+    		{
+    			"@context": "http://schema.org",
+    			"@type": "BreadcrumbList",
+     			"itemListElement":
+     				[
+      					{
+      						"@type": "ListItem",
+    						"position": 1,
+    						"item":
+    								{
+    									"@id": "https://floren.com.ua/",
+    									"name": "Флорен"
+        							}
+      					},
+      					{
+    						"@type": "ListItem",
+    						"position": 2,
+    						"item":
+    							{
+    								"@id": "https://floren.com.ua/#cityPhones",
+    								"name": "Озеление помещений &#127795; — Флорен"
+    							}
+    					}
+    			]
+    		}
+    </script>
+    {/literal}
+    {/if}
+    {literal}
+    	<script type="application/ld+json">
+    		{
+    			"@context": "http://schema.org",
+    			"@type": "WebSite",
+    			"url": "https://floren.com.ua/",
+    			"potentialAction": {
+    				"@type": "SearchAction",
+    				"target": "https://floren.com.ua{/literal}{$LANGURL}{literal}/search/?srch={search_term_string}",
+    				"query-input": "required name=search_term_string" }
+    		}
+    </script>
+    <script type="application/ld+json">
+    		{ 
+    			"@context": "http://schema.org",
+    			"@type": "LocalBusiness",
+    			"url": "https://floren.com.ua{/literal}{if $LANGURL=='/ua'}/{else}/ru/{/if}{literal}",
+    			"priceRange": "$$",
+    			"name": "{/literal}{$LINGVO.logo_alt}{literal}",
+    			"logo": "https://floren.com.ua/img/logo45.png",
+    			"image": [
+    				"https://floren.com.ua/images/content/c-ea30e396-8f84-47bf-bcef-758ef0610025-1528372794.jpg",
+    				"https://floren.com.ua/images/gallery/b/vertikalnoe-ozelenenie-3.jpg",
+    				"https://floren.com.ua/images/moss/b/moh-montazh-1.jpg"
+    			],
+    			"sameAs": [
+    				"https://www.facebook.com/floren.com.ua/", 
+    				"https://www.youtube.com/channel/UClfLL4epyim3T5GX0nj2zKQ",
+    				"https://www.instagram.com/studio_floren/"
+    			],
+    			"currenciesAccepted": "UAH",
+    			"paymentAccepted": "cash, credit card",
+    			"hasMap": "https://goo.gl/maps/UPpaCBkrMd2TWfXq7",
+    			"address": {
+    				"@type": "PostalAddress",
+    				"@id": "https://floren.com.ua{/literal}{$LANGURL}{literal}/contacts/",
+    				"name": "{/literal}{$LINGVO.studiya_fitodizayna}{literal}", 
+    				"addressRegion": "{/literal}{$LINGVO.kiev_region}{literal}",
+    				"addressLocality": "{/literal}{$LINGVO.city_kiev}{literal}",     
+    				"postalCode": "03113",
+    				"streetAddress": "{/literal}{$LINGVO.address_street}{literal}",
+    				"telephone": "+38 (044) 333-77-55",
+    				"email": "info@floren.com.ua",
+    				"addressCountry": "UA"
+    			},
+    			"contactPoint": [
+    			{
+    				"@type": "ContactPoint",
+    				"telephone": "+38 (099) 238-26-44",
+    				"contactType": "customer support"
+    			}],
+    			"openingHoursSpecification": [
+    			{
+    				"@type": "OpeningHoursSpecification",
+    				"dayOfWeek": [
+    				"Monday",
+    				"Tuesday",
+    				"Wednesday",
+    				"Thursday",
+    				"Friday",
+    				"Saturday"
+    				],
+    				"opens": "09:00",
+    				"closes": "19:30"
+    			},
+    			{
+    				"@type": "OpeningHoursSpecification",
+    				"dayOfWeek": "Sunday",
+    				"opens": "10:00",
+    				"closes": "18:00"
+    			}
+    		]
+    	}
+    
+    </script>
+    {/literal}
+    
+    {literal}
+		 <!--[if IE]>
+    <script>document.createElement('header');document.createElement('nav');document.createElement('section');document.createElement('article');document.createElement('aside');document.createElement('footer');</script>
+     		<![endif]-->
+    
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-W7VHLVP');</script>
+    <!-- End Google Tag Manager -->
+    
+    
+    
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-20410887-2');
+    ga('send', 'pageview');
+    </script>
+    
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-736148489"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-736148489');
+      gtag('get', 'G-KKVRZ8YBC3', 'client_id', (clientID) => {
+           $.post('/bsk/save_to_session.php?r=3',{gaClientId:clientID}, function(data) {});
+         });
+    </script>
+    
+    <!-- Facebook Pixel Code -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '139311730173475');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=139311730173475&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Facebook Pixel Code -->
+    
+    
+    
+    {/literal}
+    <script>
+    
+    	{$GTAG}
+    
+    </script>
+
   </head>
 
   <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W7VHLVP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
     <!-- Шапка сайту -->
     <!-- prettier-ignore -->
     <!-- Overlay для каталогу -->
@@ -627,55 +917,7 @@
       <!-- Топ категорії і теги -->
       <div class="footer__catalog">
         <div class="container">
-          <div class="footer__catalog-top">
-            <span>ТОП Категорії</span>
-            <a href="">ТОП Тегі</a>
-            <a href="">Міста</a>
-            <a href="">FAQ</a>
-            <a href="">Пропозиції</a>
-          </div>
-          <ul class="footer__catalog-list">
-            <li>
-              <a href="">Лавровое дерево в горшке</a>
-              <a href="">Комнатное растение мирт</a>
-              <a href="">Пальма комнатная хамедорея</a>
-              <a href="">Горшок керамический</a>
-              <a href="">Драцена golden</a>
-              <a href="">Пальма цветы</a>
-              <a href="">Маранта вазон</a>
-              <a href="">Кактусы маленькие</a>
-            </li>
-            <li>
-              <a href="">Растение денежное дерево</a>
-              <a href="">Домашний вьющийся цветок</a>
-              <a href="">Кипарис декоративный</a>
-              <a href="">Горшок с автополивом лечуза</a>
-              <a href="">Горшки для цветов из бетона</a>
-              <a href="">Орхидеи в стеклянной вазе</a>
-              <a href="">Лимон декоративный</a>
-              <a href="">Пальмы домашние</a>
-            </li>
-            <li>
-              <a href="">Сансевиерия голден ханни</a>
-              <a href="">Комнатные растения фикус</a>
-              <a href="">Замиокулькас цветок</a>
-              <a href="">Фикус наташа</a>
-              <a href="">Перегородки из живых растений</a>
-              <a href="">Купить аглаонемы</a>
-              <a href="">Аглаонема цена</a>
-              <a href="">Алоказия цена</a>
-            </li>
-            <li>
-              <a href="">Цветущие растения</a>
-              <a href="">Бокарнея нолина</a>
-              <a href="">Комнатная азалия</a>
-              <a href="">Горшки с автополивом</a>
-              <a href="">Хвойные деревья</a>
-              <a href="">Lechuza вазоны</a>
-              <a href="">Банан домашний</a>
-              <a href="">Лавровый лист</a>
-            </li>
-          </ul>
+          <!--footers_block-->
         </div>
       </div>
 
@@ -795,6 +1037,29 @@
   {if $URL[0]=='product'}
     <script src="https://www.youtube.com/iframe_api"></script>
   {/if}
-  <!-- Головний JS файл --></body>
+
+  {literal}
+  <!-- BEGIN BINOCHAT CODE  -->
+  <script type="text/javascript">
+  (function(d, w, s) {
+      var widgetHash = 'MhQxJRjy5lGULYi5ZRqW', bch = d.createElement(s); bch.type = 'text/javascript'; bch.async = true;
+      bch.src = '//widgets.binotel.com/chat/widgets/' + widgetHash + '.js';
+      var sn = d.getElementsByTagName(s)[0]; sn.parentNode.insertBefore(bch, sn);
+  })(document, window, 'script');
+  </script>
+  <!--  END BINOCHAT CODE -->
+  
+  <!--  BEGIN BINO CALLTRACKING CODE -->
+  <script type="text/javascript">
+    (function(d, w, s) {
+  	var widgetHash = 'p4ip41nnd32lknoy3wb1', ctw = d.createElement(s); ctw.type = 'text/javascript'; ctw.async = true;
+  	ctw.src = '//widgets.binotel.com/calltracking/widgets/'+ widgetHash +'.js';
+  	var sn = d.getElementsByTagName(s)[0]; sn.parentNode.insertBefore(ctw, sn);
+    })(document, window, 'script');
+  </script> 
+  <!--  END BINO CALLTRACKING CODE -->
+  {/literal}
+  <!-- Головний JS файл -->
+  </body>
 
 </html>
