@@ -1,62 +1,46 @@
-<?php
+<?
 
 error_reporting(E_ALL);
 
 /***********************************************************************************
-Ôóíêöèÿ img_resize(): ãåíåðàöèÿ thumbnails
-Ïàðàìåòðû:
-  $src             - èìÿ èñõîäíîãî ôàéëà
-  $dest            - èìÿ ãåíåðèðóåìîãî ôàéëà
-  $width, $height  - øèðèíà è âûñîòà ãåíåðèðóåìîãî èçîáðàæåíèÿ, â ïèêñåëÿõ
-Íåîáÿçàòåëüíûå ïàðàìåòðû:
-  $rgb             - öâåò ôîíà, ïî óìîë÷àíèþ - áåëûé
-  $quality         - êà÷åñòâî ãåíåðèðóåìîãî JPEG, ïî óìîë÷àíèþ - ìàêñèìàëüíîå (100)
+Ð¤ÑƒÐ½ÐºÑ†Ð¸Ñ img_resize(): Ð³ÐµÐ½ÐµÑ€Ð°Ñ†Ð¸Ñ thumbnails
+ÐŸÐ°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ñ‹:
+  $src             - Ð¸Ð¼Ñ Ð¸ÑÑ…Ð¾Ð´Ð½Ð¾Ð³Ð¾ Ñ„Ð°Ð¹Ð»Ð°
+  $dest            - Ð¸Ð¼Ñ Ð³ÐµÐ½ÐµÑ€Ð¸Ñ€ÑƒÐµÐ¼Ð¾Ð³Ð¾ Ñ„Ð°Ð¹Ð»Ð°
+  $width, $height  - ÑˆÐ¸Ñ€Ð¸Ð½Ð° Ð¸ Ð²Ñ‹ÑÐ¾Ñ‚Ð° Ð³ÐµÐ½ÐµÑ€Ð¸Ñ€ÑƒÐµÐ¼Ð¾Ð³Ð¾ Ð¸Ð·Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ñ, Ð² Ð¿Ð¸ÐºÑÐµÐ»ÑÑ…
+ÐÐµÐ¾Ð±ÑÐ·Ð°Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ðµ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ñ‹:
+  $rgb             - Ñ†Ð²ÐµÑ‚ Ñ„Ð¾Ð½Ð°, Ð¿Ð¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ - Ð±ÐµÐ»Ñ‹Ð¹
+  $quality         - ÐºÐ°Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð³ÐµÐ½ÐµÑ€Ð¸Ñ€ÑƒÐµÐ¼Ð¾Ð³Ð¾ JPEG, Ð¿Ð¾ ÑƒÐ¼Ð¾Ð»Ñ‡Ð°Ð½Ð¸ÑŽ - Ð¼Ð°ÐºÑÐ¸Ð¼Ð°Ð»ÑŒÐ½Ð¾Ðµ (100)
 ***********************************************************************************/
-function img_resize($src, $dest, $width, $height, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=false) {
+function img_resize($src, $dest, $width, $height, $rgb=0xFFFFFF, $quality=100, $trim=false, $resize_max=false, $apply_mask=false) {
+  if (!file_exists($src)) return false;
 
-/*==== LETS PASS this part
-  if (!file_exists($src)) die("Missing file");
-*/
   $size = getimagesize($src);
-  
-//  echo $size[0] . 'x' . $size[1] . '<br />';
 
-  if ($size === false) die("Missing size");
+  if ($size === false) return false;
 
-  // Îïðåäåëÿåì èñõîäíûé ôîðìàò ïî MIME-èíôîðìàöèè, ïðåäîñòàâëåííîé
-  // ôóíêöèåé getimagesize, è âûáèðàåì ñîîòâåòñòâóþùóþ ôîðìàòó
-  // imagecreatefrom-ôóíêöèþ.
+  // ÐžÐ¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÐ¼ Ð¸ÑÑ…Ð¾Ð´Ð½Ñ‹Ð¹ Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚ Ð¿Ð¾ MIME-Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸, Ð¿Ñ€ÐµÐ´Ð¾ÑÑ‚Ð°Ð²Ð»ÐµÐ½Ð½Ð¾Ð¹
+  // Ñ„ÑƒÐ½ÐºÑ†Ð¸ÐµÐ¹ getimagesize, Ð¸ Ð²Ñ‹Ð±Ð¸Ñ€Ð°ÐµÐ¼ ÑÐ¾Ð¾Ñ‚Ð²ÐµÑ‚ÑÑ‚Ð²ÑƒÑŽÑ‰ÑƒÑŽ Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ñƒ
+  // imagecreatefrom-Ñ„ÑƒÐ½ÐºÑ†Ð¸ÑŽ.
   $format = strtolower(substr($size['mime'], strpos($size['mime'], '/')+1));
   $icfunc = "imagecreatefrom" . $format;
-  if (empty($icfunc) || !function_exists($icfunc)) {
-    die("Missing or invalid function: $icfunc");
-  }
+  if (!function_exists($icfunc)) return false;
 
 //print_r($size);
 //print_r( exif_read_data($src));
 
-    $ort='';
-    $exif = exif_read_data($src);
-    if(isset($exif['Orientation']))
-      $ort = $exif['Orientation'];
-
+    $ort=1;
+    $exif = @exif_read_data($src);
+    if (!empty($exif['Orientation'])) {
+        $ort = (int)$exif['Orientation'];
+    }
+//    echo $ort;
             
     
   $x_ratio = $width / $size[0];
   $y_ratio = $height / $size[1];
-  if ($keep_origin_size){
-    $src_x      = 0;
-    $src_y      = 0;
-    $dst_x      = 0;
-    $dst_y      = 0;
-    $src_width  = $size[0];
-    $src_height = $size[1];
-    $dst_width  = $size[0];
-    $dst_height = $size[1];
-    $width  = $size[0];
-    $height = $size[1];
-    
-  }elseif ($resize_max) {
+
+  if ($resize_max) {
 
     $src_x      = 0;
     $src_y      = 0;
@@ -64,7 +48,6 @@ function img_resize($src, $dest, $width, $height, $rgb=0xFFFFFF, $quality=100, $
     $dst_y      = 0;
     $src_width  = $size[0];
     $src_height = $size[1];
-    
 
     if ($height >= $size[1]*$x_ratio) {
 
@@ -79,8 +62,7 @@ function img_resize($src, $dest, $width, $height, $rgb=0xFFFFFF, $quality=100, $
       $dst_height = $height;
 
     }
-  
-  
+
   } elseif ($trim) {
   
     $k_src   = $size[1] / $size[0];
@@ -131,7 +113,7 @@ function img_resize($src, $dest, $width, $height, $rgb=0xFFFFFF, $quality=100, $
     $dst_y       = !$use_x_ratio ? 0 : floor(($height - $dst_height) / 2);
 
   }
-//echo $size[0] . 'x' . $size[1] . ' => ' . $width . 'x' . $height .'<br />';
+
   $isrc = $icfunc($src);
   $idest = imagecreatetruecolor($width, $height);
 
@@ -141,15 +123,14 @@ function img_resize($src, $dest, $width, $height, $rgb=0xFFFFFF, $quality=100, $
   
   if ($apply_mask && $dst_width>100){
     
-    //mask size 400 x 400
-     $mask_src_x=($dst_width*0.25)>400?400:(int)($dst_width*0.25);
-     $mask_src_y=($dst_width*0.25)>400?400:(int)($dst_width*0.25);
+    //mask size 200 x 200
+     $mask_src_x=($dst_width*0.3)>400?400:$dst_width*0.3;
+     $mask_src_y=($dst_width*0.3)>400?400:$dst_width*0.3;
        
         
-  	$imLens=imagecreatefrompng($_SERVER['DOCUMENT_ROOT']."/img/floren_mask_big_25.png");
-	imagecopyresampled($idest, $imLens, (int)(($dst_width/2+100)-($mask_src_x)), (int)($dst_height-($mask_src_y+30)), 0, 0, $mask_src_x, $mask_src_y, 400, 400);
+  	$imLens=imagecreatefrompng($_SERVER['DOCUMENT_ROOT']."/img/floren_mask_big.png");
+	imagecopyresampled($idest, $imLens, $dst_width-($mask_src_x+30), $dst_height-($mask_src_y+10), 0, 0, $mask_src_x, $mask_src_y, 400, 400);
   }
-  if($ort>0){
     switch($ort)
     {
     
@@ -166,9 +147,10 @@ function img_resize($src, $dest, $width, $height, $rgb=0xFFFFFF, $quality=100, $
             $idest=imagerotate($idest, 90, -1);
             break;
     }
-  }//if ort
-//  imagejpeg($idest, $dest, $quality);
-  imagewebp($idest, $dest, $quality);
+    imagejpeg($idest, $dest, $quality);
+  
+  //$webpdest=str_replace(".jpg", ".webp", $dest);
+  //imagewebp($im, 'php.webp');
 
   imagedestroy($isrc);
   imagedestroy($idest);

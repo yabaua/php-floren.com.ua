@@ -43,7 +43,7 @@
             </ul>
           </section>
           <section class="double-column-page__nav_section">
-            <h3{if $URL[1]=='vertikalnoe-ozelenenie' || $URL[1]=='green-wall' ||  $URL[1]=='vertikalnoe-ozelenenie-metallicheskimi-konstruktsiyami' || $URL[1]=='ozelenenie-stabilizirovannim-mhom'} class="active"{/if}>
+            <h3{if $URL[1]=='vertikalnoe-ozelenenie'} class="active"{/if}>
               <a href="{$LANGURL}/services/vertikalnoe-ozelenenie/">{$LINGVO.vertikalnoe_ozelenenie}</a>
             </h3>
             <ul>

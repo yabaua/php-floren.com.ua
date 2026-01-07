@@ -92,13 +92,13 @@
               </sl-button>
               <sl-menu>
                 <sl-menu-item {if $LANG=='ua' }data-checked{/if} value="ua">
-                {if $LANG!='ua' }<a href="">{/if}
+                {if $LANG!='ua' }<a href="{$LANG_SELECTOR_UA}">{/if}
                 {$LINGVO.lang_sign_ua}
                 {if $LANG!='ua' }</a>{/if}
               </sl-menu-item>
                 <sl-divider></sl-divider>
                 <sl-menu-item {if $LANG=='ru' }data-checked{/if} value="ru">
-                {if $LANG!='ru' }<a href="">{/if}
+                {if $LANG!='ru' }<a href="{$LANG_SELECTOR_RU}">{/if}
                 {$LINGVO.lang_sign_ru}
                 {if $LANG!='ru' }</a>{/if}
               </sl-menu-item>
@@ -111,7 +111,7 @@
         <!-- Основна частина header з лого, телефонами, пошуком, кошиком -->
         <div class="header__main">
           <div class="header__main--left">
-            <a href="/" class="header__main--logo">
+            <a href="{if $LANGURL=='/ua'}/{else}/ru/{/if}" class="header__main--logo">
               <img src="/img/main-logo.svg" alt="Logo"/>
             </a>
             <sl-tooltip id="phones-tooltip" class="tooltip header__main--phones-tooltip" trigger="manual"
@@ -381,8 +381,10 @@
               <button class="secondary-item--button" aria-label="{$LINGVO.phytodesign}">
                 <svg class="icon icon-fitodesign"/>
                 <div class="secondary-item--button-text">
-                  <b>{$LINGVO.phytodesign}</b>
-                  <span>{$LINGVO.ozelenenie_prostoru}</span>
+                  <a href="{$LANGURL}/phytodesign/">
+                    <b>{$LINGVO.phytodesign}</b>
+                    <span>{$LINGVO.ozelenenie_prostoru}</span>
+                  </a>
                 </div>
               </button>
               <section class="secondary-item--content">
@@ -419,8 +421,10 @@
               <button class="secondary-item--button" aria-label="{$LINGVO.vertikalnoe_ozelenenie}">
                 <svg class="icon icon-vertical"/>
                 <div class="secondary-item--button-text">
-                  <b>{$LINGVO.vertikalnoe_ozelenenie}</b>
-                  <span>{$LINGVO.green_wall_short}</span>
+                  <a href="{$LANGURL}/services/vertikalnoe-ozelenenie/">
+                    <b>{$LINGVO.vertikalnoe_ozelenenie}</b>
+                    <span>{$LINGVO.green_wall_short}</span>
+                  </a>
                 </div>
               </button>
               <section class="secondary-item--content">
@@ -444,8 +448,10 @@
               <button class="secondary-item--button" aria-label="{$LINGVO.care} {$LINGVO.za_rasteniyami}">
                 <svg class="icon icon-care"/>
                 <div class="secondary-item--button-text">
-                  <b>{$LINGVO.care}</b>
-                  <span>{$LINGVO.za_rasteniyami}</span>
+                  <a href="{$LANGURL}/services/house_plant_care/">
+                    <b>{$LINGVO.care}</b>
+                    <span>{$LINGVO.za_rasteniyami}</span>
+                  </a>
                 </div>
               </button>
               <section class="secondary-item--content">
@@ -469,7 +475,7 @@
               <button class="secondary-item--button" aria-label="{$LINGVO.photo_gallery}">
                 <svg class="icon icon-photogallery"/>
                 <div class="secondary-item--button-text">
-                  <a href="/gallery/">
+                  <a href="{$LANGURL}/gallery/">
                     <b>{$LINGVO.portfolio}</b>
                     <span>{$LINGVO.photo_gallery}</span>
                   </a>
