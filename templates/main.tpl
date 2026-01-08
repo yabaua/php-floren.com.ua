@@ -417,10 +417,10 @@
                     <p class="item-phone">(044) 344-28-95, (050) 660-52-75</p>
                     <p class="item-hours">По буднях 09:00 - 19:30</p>
                     <p class="item-messengers">
-                      <a href="">
+                      <a href="viber://chat?number=%2B380992382644" target="_blank" onclick="trackConv('vb','{$LANGURL}/{'/'|implode:$URL}')">
                         <svg class="icon icon-whatsapp"/>
                       </a>
-                      <a href="">
+                      <a href="https://t.me/studio_floren" target="_blank" onclick="trackConv('tg','{$LANGURL}/{'/'|implode:$URL}')">
                         <svg class="icon icon-telegram"/>
                       </a>
                     </p>
@@ -933,47 +933,47 @@
 
           <div class="footer__body-grid">
             <section>
-              <a href="/" class="footer__body-logo" aria-label="Флорен - студія фітодизайну">
-                <img src="/img/footer-logo.png" alt="Флорен - студія фітодизайну"/>
+              <a href="/" class="footer__body-logo" aria-label="{$LINGVO.logo_alt}">
+                <img src="/img/footer-logo.png" alt="{$LINGVO.logo_alt}"/>
               </a>
             </section>
             <section>
-              <h3>Інформація</h3>
+              <h3>{$LINGVO.poleznaya_info}</h3>
               <ul class="footer__body-list">
                 <li>
-                  <a href="">Про компанію</a>
+                  <a href="{$LANGURL}/about/">{$LINGVO.menu_about}</a>
                 </li>
                 <li>
-                  <a href="">Повернення товарів</a>
+                  <a href="{$LANGURL}/purchase_returns/">{$LINGVO.menu_purchaise_return}</a>
                 </li>
                 <li>
-                  <a href="">Співпраця</a>
+                  <a href="{$LANGURL}/partnership/">{$LINGVO.menu_partnership}</a>
                 </li>
                 <li>
-                  <a href="">Контакти </a>
+                  <a href="{$LANGURL}/contacts/">{$LINGVO.menu_contacts}</a>
                 </li>
                 <li>
-                  <a href="">Мапа сайту</a>
+                  <a href="{$LANGURL}/sitemap/">{$LINGVO.sitemap}</a>
                 </li>
               </ul>
             </section>
             <section>
-              <h3>Товари та сервіси</h3>
+              <h3>{$LINGVO.goods_and_services}</h3>
               <ul class="footer__body-list">
                 <li>
-                  <a href="">Фітодизайн</a>
+                  <a href="{$LANGURL}/phytodesign/">{$LINGVO.phytodesign}</a>
                 </li>
                 <li>
-                  <a href="">Вертикальне озеленення</a>
+                  <a href="{$LANGURL}/services/vertikalnoe-ozelenenie/">{$LINGVO.vertikalnoe_ozelenenie}</a>
                 </li>
                 <li>
-                  <a href="">Ландшафтний дизайн</a>
+                  <a href="{$LANGURL}/services/house_plant_care/">{$LINGVO.care} {$LINGVO.za_rasteniyami}</a>
                 </li>
                 <li>
-                  <a href="">Кімнатні рослини</a>
+                  <a href="{$LANGURL}/komnatnie-rasteniya/">{$LINGVO.plants}</a>
                 </li>
                 <li>
-                  <a href="">Горщики та Кашпо</a>
+                  <a href="{$LANGURL}/planters/">{$LINGVO.planters_kashpo}</a>
                 </li>
               </ul>
             </section>
@@ -983,9 +983,9 @@
                 <li>
                   <p class="contacts-street">
                     <svg class="icon icon-location"/>
-                    <a href="https://goo.gl/maps/UPpaCBkrMd2TWfXq7" target="_blank">пр. Берестейський, 70</a>
+                    <a href="https://goo.gl/maps/UPpaCBkrMd2TWfXq7" target="_blank">{$LINGVO.address_street}</a>
                   </p>
-                  <p>03113, Київ, Україна</p>
+                  <p>03113, {$LINGVO.city_kiev}, {$LINGVO.ukraine}</p>
                 </li>
                 <li class="contacts-phone">
                   <div class="contacts-phone--hidden">
@@ -1003,13 +1003,13 @@
                   </div>
                 </li>
                 <li class="contacts-socials">
-                  <a href="">
+                  <a href="https://www.facebook.com/floren.com.ua/" target="_blank">
                     <svg class="icon icon-facebook"/>
                   </a>
-                  <a href="">
+                  <a href="https://www.youtube.com/channel/UClfLL4epyim3T5GX0nj2zKQ" target="_blank">
                     <svg class="icon icon-youtube"/>
                   </a>
-                  <a href="">
+                  <a href="https://www.instagram.com/studio_floren/" target="_blank">
                     <svg class="icon icon-instagram"/>
                   </a>
                 </li>
@@ -1021,8 +1021,8 @@
           <!-- Copyright і платіжні системи -->
           <div class="footer__body-bottom">
             <section class="footer__body-bottom--copyright">
-              <span>© 2025 “Флорен”</span>
-              <a class="not-underline" href="">Договір оферта</a>
+              <span>&copy; 2011–{$smarty.now|date_format:"%Y"} Флорен&trade;</span>
+              <a class="not-underline" href="{$LANGURL}/dogovir-oferta/">{$LINGVO.dogovir}</a>
             </section>
             <section class="footer__body-bottom--cards">
               <img src="/img/payment-visa.svg" alt="Visa"/>

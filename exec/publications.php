@@ -151,7 +151,7 @@ else{//ARTICLE LIST
 	
 	
 	//===META===
-	$db->query("SELECT * FROM tree".$db_sufix." WHERE alias='publications'");
+	$db->query("SELECT * FROM tree25".$db_sufix." WHERE alias='publications'");
 	$f=$db->fetch();
 	$TITLE[0]=$f['meta_title'];
 	$smarty->assign("META_DESCRIPTION", $f['meta_description']);

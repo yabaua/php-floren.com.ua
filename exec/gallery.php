@@ -44,7 +44,7 @@ if(isset($PARAM[0])){
 	$smarty->assign("CONTENT_TPL",'gallery_item.tpl');
 }else{
 
-	$db->query("SELECT * FROM tree".$db_sufix." WHERE alias='gallery'");
+	$db->query("SELECT * FROM tree25".$db_sufix." WHERE alias='gallery'");
 	$f=$db->fetch();
 	$TITLE[0]=$f['meta_title'];
 	$smarty->assign("META_DESCRIPTION", $f['meta_description']);

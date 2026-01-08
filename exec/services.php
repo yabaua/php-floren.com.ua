@@ -16,7 +16,7 @@ if($URL[0]=='phytodesign'){
 	}
 
 	//phytodesign page
-	$db->query("SELECT *, content AS body, name AS title FROM tree".$db_sufix." WHERE alias='phytodesign'");
+	$db->query("SELECT *, content AS body, name AS title FROM tree25".$db_sufix." WHERE alias='phytodesign'");
 	$service=$db->fetch();
 	$smarty->assign("SERVICE",$service);
 	
@@ -128,7 +128,7 @@ else
 		$hleb[1]['name']=$lingvo['services'];
 		
 
-		$db->query("SELECT * FROM tree".$db_sufix." WHERE alias='services25'");
+		$db->query("SELECT * FROM tree25".$db_sufix." WHERE alias='services25'");
 		$ff=$db->fetch();
 		
 		

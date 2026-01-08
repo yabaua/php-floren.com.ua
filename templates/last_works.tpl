@@ -34,7 +34,7 @@
       </button>
     </div>
     <div class="last-works_more">
-      <button class="button button--primary button--pill">Подивитись ще</button>
+      <button class="button button--primary button--pill">{$LINGVO.show_more}</button>
     </div>
   </div>
 </div>

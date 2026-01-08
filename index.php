@@ -395,7 +395,7 @@ if (isset($_COOKIE['no_counter']) || isset($_SESSION['no_counter']) || $_SERVER[
 	$smarty->assign("NO_COUNTER",true);
 
 
-if ($URL[0] =='florist' ) {
+if ($URL[0] =='florist') {
 	$smarty->assign("LEFT_TPL",'left_col.tpl');
 }
 
@@ -410,7 +410,7 @@ function gen_tree($ID,$level) {
 	global $db,$URL,$PATH,$TITLE,$param_trim,$script,$COLUMN3,$db_sufix;
 	
 	if (!($alias=@$URL[$level])) return;
-	$db->query("SELECT ID,motherID,alias,name,meta_title,meta_description,meta_keywords,script,content FROM tree".$db_sufix." WHERE motherID=$ID AND alias='$alias' AND act='Y' ORDER BY order_p");
+	$db->query("SELECT ID,motherID,alias,name,meta_title,meta_description,meta_keywords,script,content FROM tree25".$db_sufix." WHERE motherID=$ID AND alias='$alias' AND act='Y' ORDER BY order_p");
 	if (!($row=$db->fetch())) return;
 	//$PATH[$row['alias']]=$row;
 	$PATH[]=$row;

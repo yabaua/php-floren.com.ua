@@ -18,7 +18,7 @@ if	(
 	//=============301===================
 } else
 
-$db->query("SELECT * FROM tree".$db_sufix." WHERE alias='index'");
+$db->query("SELECT * FROM tree25".$db_sufix." WHERE alias='index'");
 $f=$db->fetch();
 $smarty->assign("META_TITLE",$f['meta_title']);
 $smarty->assign("META_DESCRIPTION",$f['meta_description']);
