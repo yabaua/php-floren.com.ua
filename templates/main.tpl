@@ -529,14 +529,16 @@
 
             <!-- Start Sign in modal -->
             <sl-dialog id="sign-in-modal" label="Вхід" class="login-modal">
-              <form class="login-modal__form">
+              <form class="login-modal__form" action="{$LANGURL}/login/" method="post">
                 <div class="form-control">
-
+                {**
                   <label for="phone">Ваш телефон</label>
                   <input id="phone" data-tel-input type="tel">
+                **}
+                  <sl-input label="e-mail" id="phone" name="email" type="text" placeholder="name@gmail.com">></sl-input>
                 </div>
                 <div class="form-control">
-                  <sl-input label="Пароль" type="password" placeholder="********"></sl-input>
+                  <sl-input label="Пароль" name="pass" type="password" placeholder="********"></sl-input>
                 </div>
                 <div class="form-control form-control--double">
                   <sl-checkbox>

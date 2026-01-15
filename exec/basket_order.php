@@ -156,9 +156,13 @@ if(isset($_POST['send_bsk']) && count($_SESSION['basket'])){
 
 //===============GOOGLE GA4
 
-	$google_ga4_script='dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+		$google_ga4_script='dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
 				dataLayer.push({
 				  event: "purchase",
+				  user_data: {
+				    email: "'.str_replace("'", "", $_POST['email']).'",
+				    phone_number: "'.str_replace("'", "", $_POST['phone']).'"
+				  },
 				  ecommerce: {
 				      transaction_id: "'.$order_id.'",
 				      affiliation: "Online Store",

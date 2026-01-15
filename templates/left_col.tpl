@@ -1,7 +1,3 @@
-<div class="filters">
-
-	<div class="filters__wrapper">
-	<button class="close-btn"></button>
 
 {if $CUR_CAT=='publications'}
 	<div class="filters__info">
@@ -118,9 +114,6 @@
 
 	<!-- links_block -->
 
-
-	</div>
-</div>
 
 
 
