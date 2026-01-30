@@ -11,21 +11,14 @@
 			$price='';
 			$zero_price = 0;
 
+			$img_path='';
 			if ($is_plant || $is_aksessuary || $is_pot) {
 				$product_path = $lang_url . '/product/' . $f['ID'] . '_' . $f['link'] . '/';
-				//	$img_path = 'https://floren.com.ua/images/ins/b/gmcxml-' . $f['image'];
+				$img_path = 'https://floren.com.ua/images/ins/s/' . $f['image'];
+				/*
 				if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/images/goods/s/' . str_replace('jpg', 'webp', $f['image']))){
 						$img_path = '/images/goods/s/' . str_replace('jpg', 'webp', $f['image']);
 				}else{
-						/*
-						$input 	= 'https://floren.com.ua/images/ins/b/gmcxml-' . $f['image'];
-						$output = $_SERVER['DOCUMENT_ROOT'] . '/images/goods/b/' .str_replace('jpg', 'webp', $f['image']);
-						$image = imagecreatefromjpeg($input);
-						$quality = 85;
-						imagewebp($image, $output, $quality);
-						imagedestroy($image);
-						$img_path = '/images/goods/b/' . str_replace('jpg', 'webp', $f['image']);
-						*/
 						
 						$src= 'https://floren.com.ua/images/ins/b/gmcxml-' . $f['image'];
 					
@@ -41,7 +34,7 @@
 					//	img_resize($src, $dest_gmcxml, 1600, 1200, $rgb=0xFFFFFF, $quality=90, $keep_origin_size=true, $trim=false, $resize_max=true, $apply_mask=false);
 						
 				}
-				
+				*/
 			} elseif ($is_bouquet) {
 				$product_path = $lang_url . '/buket/' . $f['ID'] . '/';
 				$img_path = 'https://floren.com.ua/images/ins/s/'. $f['image'];

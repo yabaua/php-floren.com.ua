@@ -320,7 +320,7 @@ $smarty->assign("META_REL_ALTERNATE",'<link rel="alternate" href="https://floren
 
 //LEFT menu
 
-$group_sql = '';
+$not_to_show = '';
 
 /* this was earlier
 if ($URL[0]=='planters') {
@@ -329,7 +329,7 @@ if ($URL[0]=='planters') {
 */
 
 $category_left=array();
-$db->query("SELECT * FROM goods".$db_sufix."_class WHERE motherID=0 AND act='1'".$group_sql." ORDER BY sort DESC,name");
+$db->query("SELECT * FROM goods".$db_sufix."_class WHERE motherID=0 AND act='1'".$not_to_show." ORDER BY sort DESC,name");
 
 
 while ($f=$db->fetch()) {

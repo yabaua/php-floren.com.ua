@@ -417,10 +417,10 @@
                     <p class="item-phone">(044) 344-28-95, (050) 660-52-75</p>
                     <p class="item-hours">По буднях 09:00 - 19:30</p>
                     <p class="item-messengers">
-                      <a href="viber://chat?number=%2B380992382644" target="_blank" onclick="trackConv('vb','{$LANGURL}/{'/'|implode:$URL}')">
+                      <a href="viber://chat?number=%2B380992382644" target="_blank" onclick="trackConv('vb','{$LANGURL}/{$URL|@join:"/"}')">
                         <svg class="icon icon-whatsapp"/>
                       </a>
-                      <a href="https://t.me/studio_floren" target="_blank" onclick="trackConv('tg','{$LANGURL}/{'/'|implode:$URL}')">
+                      <a href="https://t.me/studio_floren" target="_blank" onclick="trackConv('tg','{$LANGURL}/{$URL|@join:"/"}')">
                         <svg class="icon icon-telegram"/>
                       </a>
                     </p>
@@ -436,7 +436,7 @@
               <div class="header__main--phones">
                 <img src="/img/icons/icon-phone.svg" alt="Phone"/>
                 <div class="header__main--phones-wrapper">
-                  <div class="header__main--phones-hidden">
+                  <div class="header__main--phones-hidden binct-phone-number-2">
                   (044) 344..
                   <button data-event="click" data-callback="togglePhones">
                     показати
@@ -645,7 +645,7 @@
                       {foreach item=CC name=CC from=$C.category}
                         <li>
                         <a href="{$LANGURL}/{$C.alias}/{$CC.cur_alias}/">
-                          <img src="/img/category/{$CC.cur_alias}.png" alt="{$CC.name}"/>
+                          <img src="/img/category/{$CC.cur_alias}.png?v=1" alt="{$CC.name}"/>
                           <span>{$CC.name}</span>
                         </a>
                       </li>
@@ -817,6 +817,8 @@
             {/if}
 
             {include file="$CONTENT_TPL"}
+            
+            ТЕСТ <span class="binct-phone-number-2">+380 99 238-26-44</span>
           </div>
         </div>
       </div>

@@ -13,11 +13,11 @@ error_reporting(E_ALL);
   $quality         - качество генерируемого JPEG, по умолчанию - максимальное (100)
 ***********************************************************************************/
 function img_resize($src, $dest, $width, $height, $rgb=0xFFFFFF, $quality=100, $trim=false, $resize_max=false, $apply_mask=false) {
-  if (!file_exists($src)) return false;
+  //if (!file_exists($src)) {echo "yyy - ".$src;return false;}
 
   $size = getimagesize($src);
 
-  if ($size === false) return false;
+  if ($size === false)  {echo "zzz";return false;}
 
   // Определяем исходный формат по MIME-информации, предоставленной
   // функцией getimagesize, и выбираем соответствующую формату
@@ -34,7 +34,7 @@ function img_resize($src, $dest, $width, $height, $rgb=0xFFFFFF, $quality=100, $
     if (!empty($exif['Orientation'])) {
         $ort = (int)$exif['Orientation'];
     }
-//    echo $ort;
+
             
     
   $x_ratio = $width / $size[0];
@@ -147,16 +147,17 @@ function img_resize($src, $dest, $width, $height, $rgb=0xFFFFFF, $quality=100, $
             $idest=imagerotate($idest, 90, -1);
             break;
     }
-    imagejpeg($idest, $dest, $quality);
+  imagejpeg($idest, $dest, $quality);
   
-  //$webpdest=str_replace(".jpg", ".webp", $dest);
-  //imagewebp($im, 'php.webp');
+  $webpdest=str_replace(".jpg", ".webp", $dest);
+  imagewebp($im, 'php.webp');
 
   imagedestroy($isrc);
   imagedestroy($idest);
 
   return true;
-
+     echo "111" . $ort;
+     exit();
 }
 
 ?>

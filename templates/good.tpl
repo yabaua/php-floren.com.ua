@@ -30,8 +30,10 @@
       </ul>
     {/if}
     </div>
+    {*
     <a href="" class="product-page__gallery_link">
-      <span class="icon icon-photogallery"></span> {$GOOD_H1} – {$LINGVO.interior_photo}</a>
+      <span class="icon icon-photogallery"></span> {$GOOD_ONE.name} – {$LINGVO.interior_photo}</a>
+    *}
   </div>
 
   <!-- Деталі продукту: артикул, назва, опції, ціна, кнопки -->
@@ -272,7 +274,7 @@
             {foreach item=GB name=GB from=$GOODS_BOARD_ACCESSORIES}
             <div class="accessories__list_item">
               <a href="{$LANGURL}/product/{$GB.ID}_{$GB.link}/" class="accessories__list_item-image" title="{$GB.name|replace:'"':''}">
-                <img src="/images/goods/s/{$GB.image|replace:'.jpg':'.webp'}" alt="{$GB.name|replace:'"':''}"/>
+                <img src="https://floren.com.ua/images/ins/s/{$GB.image}" alt="{$GB.name|replace:'"':''}"/>
             </a>
             <div class="accessories__list_item-info">
               <a href="{$LANGURL}/product/{$GB.ID}_{$GB.link}/">
@@ -287,13 +289,13 @@
       </section>
       {/if}  
 
-        <section>
+      <section>
         <h3>{$LINGVO.other_in_cat}: {$GOOD_ONE.className}</h3>
         <div class="accessories__list">
           {foreach item=GB name=GB from=$GOODS_BOARD}
             <div class="accessories__list_item">
             <a href="{$GB.new_link}" class="accessories__list_item-image" title="{$GB.name|replace:'"':''}">
-                <img src="/images/goods/s/{$GB.image|replace:'.jpg':'.webp'}" alt="{$GB.name|replace:'"':''}"/>
+                <img src="https://floren.com.ua/images/ins/s/{$GB.image}" alt="{$GB.name|replace:'"':''}"/>
           </a>
           <div class="accessories__list_item-info">
             <a href="{$GB.new_link}" title="{$LINGVO.button_buy} {$GB.name|replace:'"':''}">
@@ -305,73 +307,9 @@
         </div>
           {/foreach}  
           </div>
-    </section>
+      </section>
 
-    <section>
-      <h3>Дивіться також</h3>
-      <div class="accessories__list">
-        <div class="accessories__list_item">
-          <a href="" class="accessories__list_item-image">
-            <img src="/img/homepage/product-1.png" alt=""/>
-          </a>
-          <div class="accessories__list_item-info">
-            <a href="">
-              <b>Заміокулькас</b>
-            </a>
-            <span>129,99 ₴</span>
-            <sl-rating value="5" readonly></sl-rating>
-          </div>
-        </div>
-        <div class="accessories__list_item">
-          <a href="" class="accessories__list_item-image">
-            <img src="/img/homepage/product-2.png" alt=""/>
-          </a>
-          <div class="accessories__list_item-info">
-            <a href="">
-              <b>Антуріум</b>
-            </a>
-            <span>114,99 ₴</span>
-            <sl-rating value="5" readonly></sl-rating>
-          </div>
-        </div>
-        <div class="accessories__list_item">
-          <a href="" class="accessories__list_item-image">
-            <img src="/img/homepage/product-3.png" alt=""/>
-          </a>
-          <div class="accessories__list_item-info">
-            <a href="">
-              <b>Розумний вазон Lechuza Delta</b>
-            </a>
-            <span>114,99 ₴</span>
-            <sl-rating value="5" readonly></sl-rating>
-          </div>
-        </div>
-        <div class="accessories__list_item">
-          <a href="" class="accessories__list_item-image">
-            <img src="/img/homepage/product-4.png" alt=""/>
-          </a>
-          <div class="accessories__list_item-info">
-            <a href="">
-              <b>Антуріум</b>
-            </a>
-            <span>114,99 ₴</span>
-            <sl-rating value="5" readonly></sl-rating>
-          </div>
-        </div>
-        <div class="accessories__list_item">
-          <a href="" class="accessories__list_item-image">
-            <img src="/img/homepage/product-5.png" alt=""/>
-          </a>
-          <div class="accessories__list_item-info">
-            <a href="">
-              <b>Антуріум</b>
-            </a>
-            <span>114,99 ₴</span>
-            <sl-rating value="5" readonly></sl-rating>
-          </div>
-        </div>
-      </div>
-    </section>
+
   </div>
 </sl-tab-panel>
     {if $GOOD_TECH}

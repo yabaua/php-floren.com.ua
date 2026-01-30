@@ -1,5 +1,6 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'] . "/exec/good_comment.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . "/include/resize.php");
 
 if(!isset($PARAM[0]) || $PARAM[0]=='' || isset($PARAM[2])){
 	header('HTTP/1.0 404 Not Found', true, '404');

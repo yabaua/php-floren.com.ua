@@ -78,6 +78,17 @@ if($URL[0]=='iskusstvennie-cvety') {
 	$hleb[1]['name']=$lingvo['iskusstvennie_cvety'];
 														
 }
+if($URL[0]=='compositions') {
+	$dept = "compositions";
+	$smarty->assign("DEPT", $dept);
+	$categoryID = '49';
+	$curAlias = "compositions";
+	$is_plant = 1;
+	$smarty->assign("ALIAS", $curAlias);
+	$hleb[1]['link']='/compositions/';
+	$hleb[1]['name']=$lingvo['compositions'];
+														
+}
 $error_404 = false;
 
 $sort_array = array('cheap' => 'gf.price ASC', 'expensive' => 'gf.price DESC');

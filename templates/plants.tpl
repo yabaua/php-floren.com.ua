@@ -84,15 +84,19 @@
       {if $P.good_status == 'in_stock'}
       <div class="product-card__price">
         {$P.price} {** <del>200,99 ₴</del> **}
-        <!-- If in cart add this block --><!--  <button
-          class="product-card__in-cart"
+        <!-- If in cart add this block -->
+        <a href="{$P.product_path}">
+        <button
+          class="product-card__in-cart" title="{$LINGVO.buy}"
+          {*
           data-event="click"
           data-callback="addToCart"
           data-id="{$P.formID}"
+          *}
         >
-          <span class="icon icon-basket"></span>
-        </button>
-         --></div>
+          <span class="icon icon-basket">1</span>
+        </button></a>
+         </div>
 
       <div class="product-card__options">
         <section>
@@ -153,7 +157,7 @@
 
   <a
     title="{$LINGVO.pages_goto} {$P.page}"
-    href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if $URL[2]}{$URL[2]}/{/if}{if $P.page!=1}?p={$P.page}{/if}"
+    href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}{if $P.page!=1}?p={$P.page}{/if}"
     class="pagination__link{if $P.active} active{/if}"
     >{$P.page}</a
   >
