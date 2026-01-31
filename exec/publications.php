@@ -1,6 +1,6 @@
 <?php
 $TITLE=array();
-$pub_lim_num=3-count($pub_links);
+// $pub_lim_num=3-count($pub_links);
 if(isset($PARAM[0])){
 	$db->query("SELECT * FROM publications".$db_sufix." WHERE alias='".$PARAM[0]."'");
 	if(!$db->num_rows() || isset($PARAM[1])){

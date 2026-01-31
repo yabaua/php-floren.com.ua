@@ -93,7 +93,9 @@ $smarty->assign("GOOGLE_RATING", $indx_google_reviews);
 
 $db->query("SELECT * FROM options_delivery WHERE option_alias='google_stars'");
 $f=$db->fetch();
-$smarty->assign("GOOGLESTARS", $f['option_value']);
+if($f){
+	$smarty->assign("GOOGLESTARS", $f['option_value']);
+}
 
 //========END OF GOOGLE REVIEWS
 

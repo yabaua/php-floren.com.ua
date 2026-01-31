@@ -1,19 +1,28 @@
 <div>
-<h1>{$PUBLICATIONS_TTL}</h1>
-<button class="filters__mobile-btn" data-modal-trg="5">{$LINGVO.show_filters}</button>
+  <h1>{$PUBLICATIONS_TTL}</h1>
+  <!-- <button class="filters__mobile-btn" data-modal-trg="5">{$LINGVO.show_filters}</button> -->
+  <section class="blogs_list">
 {foreach item=AL from=$ART_LIST}
-<article>
-<div class="artlist-h">
-	<h2 class="art_ttl" style="font-size:1.4em"><a href="{$LANGURL}/publications/{$AL.alias}/">{$AL.title}</a></h2>
-	<div class="art_dsc">{$AL.body|strip_tags|truncate:300:"..."}</div>
-	<div class="holder">
-	{foreach item=ALCAT from=$ART_LIST2CAT[$AL.ID]}
-		<a href="/publications/?cat={$ALCAT.cat_alias}" style="font-size:11px;background:#ECF3E2;padding:1px 5px;display:block;float:left;text-decoration:none;margin:4px 10px 4px 0px;color:#588829;">{$ALCAT.cat_name}</a>
-	{/foreach}
-		<span style="font-size:11px;color:#555555;">{$LINGVO.views_cnt}: {$AL.pub_views}</span>
-	</div>
-</div>
-</article>
+  <article class="blogs_list__card">
+      <div class="blogs_list__card--image">
+        <img src="/img/no-image.jpg" alt="">
+      </div>
+      <div class="blogs_list__card--content">
+        <h3>
+          <a href="{$LANGURL}/publications/{$AL.alias}/" class="underline">{$AL.title}</a>
+        </h3>
+        <p>{$AL.body|strip_tags|truncate:300:"..."}</p>
+      </div>
+      <div class="blogs_list__card--views">
+        <img src="/img/icons/icon-eye.svg" alt="">
+        <span>{$LINGVO.views_cnt}: {$AL.pub_views}</span>
+      </div>
+      <div class="blogs_list__card--tags">
+      {foreach item=ALCAT from=$ART_LIST2CAT[$AL.ID]}
+		<a href="/publications/?cat={$ALCAT.cat_alias}" class="tag">{$ALCAT.cat_name}</a>
+	  {/foreach}      
+    </div>
+    </article>  
 {/foreach}
-
+</section>
 </div>

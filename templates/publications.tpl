@@ -1,52 +1,53 @@
 {literal}
 <script type="application/ld+json">
-{
-	"@context": "http://schema.org",
-	"@type": "Article",
-	"headline": "{/literal}{$ARTICLE.meta_title|truncate:100}{literal}",
-	"image": "{/literal}{$ARTICLE.images}{literal}",
-	"alternativeHeadline": "{/literal}{$ARTICLE.title|truncate:100}{literal}",
-	"description": "{/literal}{$ARTICLE.meta_description}{literal}",
-	"datePublished": "{/literal}{$ARTICLE.date_add|date_format:"%Y-%m-%d"}{literal}",
-	"dateCreated": "{/literal}{$ARTICLE.date_add|date_format:"%Y-%m-%d"}{literal}",
-	"dateModified": "{/literal}{$ARTICLE.date_add|date_format:"%Y-%m-%d"}{literal}",
-	"articleBody": "{/literal}{$ARTICLE.body_top|strip_tags:false} {$ARTICLE.body|strip_tags:false}{literal}",
-	"wordcount": "{/literal}{$ARTICLE.body|count_words}{literal}",
-	"mainEntityOfPage":{
-			"@type": "WebPage",
-			"@id": "https://floren.com.ua{/literal}{$LANGURL}{literal}/publications/{/literal}{$URL[1]}/{literal}"
-	 	},
-	"publisher": {
-		"@type": "Organization",
-		"name": "Студия фитодизайна Флорен",
-		"logo":
-		{
-			"@type": "ImageObject",
-			"url": "https://floren.com.ua/img/logo4.png"                          
-		}
-	},
-	"author":{
-		"@type": "Person",
-		"name": "admin"
-	}
-}
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "{/literal}{$ARTICLE.meta_title|truncate:100}{literal}",
+    "image": "{/literal}{$ARTICLE.images}{literal}",
+    "alternativeHeadline": "{/literal}{$ARTICLE.title|truncate:100}{literal}",
+    "description": "{/literal}{$ARTICLE.meta_description}{literal}",
+    "datePublished": "{/literal}{$ARTICLE.date_add|date_format:" % Y - %m - %d "}{literal}",
+    "dateCreated": "{/literal}{$ARTICLE.date_add|date_format:" % Y - %m - %d "}{literal}",
+    "dateModified": "{/literal}{$ARTICLE.date_add|date_format:" % Y - %m - %d "}{literal}",
+    "articleBody": "{/literal}{$ARTICLE.body_top|strip_tags:false} {$ARTICLE.body|strip_tags:false}{literal}",
+    "wordcount": "{/literal}{$ARTICLE.body|count_words}{literal}",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://floren.com.ua{/literal}{$LANGURL}{literal}/publications/{/literal}{$URL[1]}/{literal}"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Студия фитодизайна Флорен",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://floren.com.ua/img/logo4.png"
+      }
+    },
+    "author": {
+      "@type": "Person",
+      "name": "admin"
+    }
+  }
 </script>
 {/literal}
 <div>
-<article>
-	<h1>{$ARTICLE.title}</h1>
-	<div class="article_body">{$ARTICLE.body_top}</div>
+  <article class="blog-article">
+    <h1>{$ARTICLE.title}</h1>
+    <div class="article_body">{$ARTICLE.body_top}</div>
+
+
 
 {** =========== catalog =================== **}
 {if $PROMO_PLANTS}
 <div style="margin:1.5em 0;">
-		<div class="h2">Товары из магазина</div>
-		<div class="promo-h row">
+      <div class="h2">Товары из магазина</div>
+      <div class="promo-h row">
 			{foreach item=P name=P from=$PROMO_PLANTS}
 			<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-				<div class="one-promo indx-promo">
-					<a href="{$LANGURL}/product/{$P.ID}_{$P.link}/" class="imglink" title="Купить {$P.name|replace:'"':''}"><img src="/images/ins/s/{$P.image}" alt="{$P.name|replace:'"':''}" /></a>
-					<a href="{$LANGURL}/product/{$P.ID}_{$P.link}/" class="imgname" title="Купить {$P.name|replace:'"':''}">{$P.name}</a>
+          <div class="one-promo indx-promo">
+            <a href="{$LANGURL}/product/{$P.ID}_{$P.link}/" class="imglink" title="Купить {$P.name|replace:'"':''}"><img src="/images/ins/s/{$P.image}" alt="{$P.name|replace:'"':''}"/></a>
+          <a href="{$LANGURL}/product/{$P.ID}_{$P.link}/" class="imgname" title="Купить {$P.name|replace:'"':''}">{$P.name}</a>
 					<div class="promo-price">{if $P.min_price==$P.max_price}{$P.min_price}{else}{$P.min_price}&nbsp;&ndash;&nbsp;{$P.max_price}{/if}&nbsp;<em>грн.</em></div>
 				</div>
 			</div>
