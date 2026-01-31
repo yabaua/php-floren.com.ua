@@ -5,7 +5,9 @@
 {foreach item=AL from=$ART_LIST}
   <article class="blogs_list__card">
       <div class="blogs_list__card--image">
-        <img src="/img/no-image.jpg" alt="">
+        <a href="{$LANGURL}/publications/{$AL.alias}/">
+          <img src="/img/no-image.jpg" alt="">
+        </a>
       </div>
       <div class="blogs_list__card--content">
         <h3>

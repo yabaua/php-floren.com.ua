@@ -67,6 +67,7 @@
 </article>
 
 
+
 	<div class="online-consult">
 		<div class="online-consult__photo">
 			<div style="position:absolute;top:250px;left:20px;background:#FFFFFF;padding:5px 10px;">
@@ -109,13 +110,21 @@
 
 
 
-	<div class="h2" style="margin-top:40px;">Ещё материалы</div>
-	<div class="holder">
+<div class="blog-more services-page__left-title">
+  <h2>Ещё материалы</h2>
+  <div>
+    <div class="holder">
 		{foreach item=PL from=$PUB_LINKS}
 			<div class="col-md-4">
 			{**	<img src="{$PL.images|replace:'content/b-':'content/s-'}" height="150" /> **}
 				<p><a href="{$LANGURL}/publications/{$PL.alias}/">{$PL.title}</a></p>
 			</div>
 		{/foreach}
-	</div>
+	</div>    
+  </div>
 </div>
+	
+	
+
+
+
