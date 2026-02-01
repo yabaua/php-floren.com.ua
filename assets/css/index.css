@@ -110,6 +110,21 @@ h2 {
   font-weight: 600;
   line-height: 1.2;
 }
+.text-sm {
+  font-size: 0.75rem;
+}
+.text-xs {
+  font-size: 0.875rem;
+}
+.text-light {
+  font-weight: 300;
+}
+.text-semibold {
+  font-weight: 600;
+}
+.text-bold {
+  font-weight: 700;
+}
 :root {
   /* Core */
   --color-black: #1a1a1a;
@@ -144,6 +159,12 @@ h2 {
   --color-button-hover: color-mix(in srgb, var(--color-gray-40), transparent 75%);
 }
 /* Використання: color: var(--color-green-100); background: var(--color-gray-10); */
+.color-gray {
+  color: var(--color-gray-100);
+}
+.color-violet {
+  color: var(--color-violet);
+}
 .text-center {
   text-align: center;
 }
@@ -5458,6 +5479,7 @@ body.secondary-hovered .catalog-overlay {
   background-color: #fff;
   display: flex;
   gap: 4rem;
+  align-items: center;
 }
 .services-page__contact-form_image {
   height: auto;

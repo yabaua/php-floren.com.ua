@@ -68,63 +68,84 @@
 
 
 
-	<div class="online-consult">
-		<div class="online-consult__photo">
-			<div style="position:absolute;top:250px;left:20px;background:#FFFFFF;padding:5px 10px;">
-				<span style="font-size:13px;"><b>{$LINGVO.fb_name_manager}</b></span>
-				<br />
-				<span style="font-size:11px;">{$LINGVO.plants_specialist}</span>
-			</div>
-		</div>
-		<div class="online-consult__content">
-			<span class="headline">{$LINGVO.do_you_need_help}</span>
-			<p class="online-consult__text">{$LINGVO.consult_text}</p>
-			<p class="online-consult__info">{$LINGVO.consult_info}</p>
-			<span>{$LINGVO.consult_call}</span>
-			<span class="online-consult__price">{$LINGVO.consult_price}</span>
-			<div class="online-consult__form" id="send_cb_ok">
-				<form action="/thankyou/" method="post" name="cb" onsubmit="return check_call_back_ajax(this)">
-					<input id="cb_topic" name="cb_topic" type="Hidden" value="Статья: {$ARTICLE.title}">
-					<input id="cb_topic" name="cb_ga_event_category" type="Hidden" value="Статья">
-					<input id="cb_topic" name="cb_ga_event_action" type="Hidden" value="{$ARTICLE.title}">
-					<input id="cb_topic" name="cb_ga_event_label" type="Hidden" value="Александра">
-					<div class="online-consult__container">
-						<div class="online-consult__field">
-							<span class="error_block" id="error_cb_name"><strong>&nbsp;!!!&nbsp;</strong></span>{$LINGVO.fb_name} <b class="redstar">*</b>:<br>
-							<input class="call_back_inText" id="cb_name" name="cb_name" type="text">
-						</div>
-						<div>
-							<span class="error_block" id="error_cb_phone"><strong>&nbsp;!!!&nbsp;</strong></span>Телефон <b class="redstar">*</b>:<br>
-							<input class="call_back_inText" id="cb_phone" name="cb_phone" type="text">
-						</div>
-					</div>
-					<div>
-						<input class="pop-up-order-button" name="xxx" type="submit" value="{$LINGVO.send}">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+
+        <section class="services-page__contact-form online-consult">
+            <img class="services-page__contact-form_image" src="/img/homepage/hero-swiper-slide-1-1.png" alt="">
+            <div class="services-page__contact-form_content">
+              <h2>{$LINGVO.do_you_need_help}</h2>
+              <p>{$LINGVO.consult_text}</p>
+              <p class="text-xs color-gray">{$LINGVO.consult_info}</p>
+              <form action="">
+                <div class="form">
+                  <div class="form-control">
+                    <sl-input type="text" placeholder="Ваше імʼя" size="medium" form="" data-optional="" data-valid=""></sl-input></div>
+          <div class="form-control">
+            <sl-input type="text" placeholder="Ваш телефон" size="medium" form="" data-optional="" data-valid=""></sl-input>
+          </div>
+          <div class="form-control">
+            <button class="button button--primary button--pill">Надіслати</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </section>
+
+  {*
+    <div class="online-consult">
+      <div class="online-consult__photo">
+        <div style="position:absolute;top:250px;left:20px;background:#FFFFFF;padding:5px 10px;">
+          <span style="font-size:13px;">
+            <b>{$LINGVO.fb_name_manager}</b>
+          </span>
+          <br/>
+          <span style="font-size:11px;">{$LINGVO.plants_specialist}</span>
+        </div>
+      </div>
+      <div class="online-consult__content">
+        <span class="headline">{$LINGVO.do_you_need_help}</span>
+        <p class="online-consult__text">{$LINGVO.consult_text}</p>
+        <p class="online-consult__info">{$LINGVO.consult_info}</p>
+        <span>{$LINGVO.consult_call}</span>
+        <span class="online-consult__price">{$LINGVO.consult_price}</span>
+        <div class="online-consult__form" id="send_cb_ok">
+          <form action="/thankyou/" method="post" name="cb" onsubmit="return check_call_back_ajax(this)">
+            <input id="cb_topic" name="cb_topic" type="Hidden" value="Статья: {$ARTICLE.title}">
+            <input id="cb_topic" name="cb_ga_event_category" type="Hidden" value="Статья">
+            <input id="cb_topic" name="cb_ga_event_action" type="Hidden" value="{$ARTICLE.title}">
+            <input id="cb_topic" name="cb_ga_event_label" type="Hidden" value="Александра">
+            <div class="online-consult__container">
+              <div class="online-consult__field">
+                <span class="error_block" id="error_cb_name">
+                  <strong>&nbsp;!!!&nbsp;</strong>
+                </span>{$LINGVO.fb_name} <b class="redstar">*</b>:<br>
+                <input class="call_back_inText" id="cb_name" name="cb_name" type="text">
+              </div>
+              <div>
+                <span class="error_block" id="error_cb_phone">
+                  <strong>&nbsp;!!!&nbsp;</strong>
+                </span>Телефон <b class="redstar">*</b>:<br>
+                <input class="call_back_inText" id="cb_phone" name="cb_phone" type="text">
+              </div>
+            </div>
+            <div>
+              <input class="pop-up-order-button" name="xxx" type="submit" value="{$LINGVO.send}">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  *}
 
 
-
-
-
-<div class="blog-more services-page__left-title">
-  <h2>Ещё материалы</h2>
-  <div>
-    <div class="holder">
-		{foreach item=PL from=$PUB_LINKS}
-			<div class="col-md-4">
-			{**	<img src="{$PL.images|replace:'content/b-':'content/s-'}" height="150" /> **}
-				<p><a href="{$LANGURL}/publications/{$PL.alias}/">{$PL.title}</a></p>
-			</div>
-		{/foreach}
-	</div>    
-  </div>
-</div>
-	
-	
-
-
-
+<section class="services-page__grid-with-button">
+            <h2>Ещё материалы</h2>
+            <div class="services-page__grid three-columns">
+            {foreach item=PL from=$PUB_LINKS}
+              <div class="services-page__grid_item">
+                <a href="{$LANGURL}/publications/{$PL.alias}/" class="underline color-violet"><span>{$PL.title}</span></a>
+              </div>              
+            {/foreach}        
+      </div>
+    </section>
+    
