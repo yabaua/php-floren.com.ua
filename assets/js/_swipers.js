@@ -7,6 +7,7 @@ import { i as initClickOutsideHandlers } from "./_clickOutside.js";
 import { i as initExpandableText } from "./_expandableText.js";
 import { Q as QuantityCounter } from "./_quantityCounter.js";
 import { i as initCart } from "./_cart.js";
+import { s as submitForm } from "./_forms.js";
 import "./fetchApi.js";
 function isObject$1(obj) {
   return obj !== null && typeof obj === "object" && "constructor" in obj && obj.constructor === Object;
@@ -5650,6 +5651,7 @@ const initPortfolioViewers = () => {
   });
 };
 window.youtubePlayers = [];
+window.submitForm = submitForm;
 function startApp() {
   initEvents();
   initScroll();

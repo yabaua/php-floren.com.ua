@@ -8,6 +8,7 @@ import "./_clickOutside.js";
 import "./_expandableText.js";
 import "./_quantityCounter.js";
 import "./_cart.js";
+import "./_forms.js";
 import "./fetchApi.js";
 export {
   A as Autoplay,

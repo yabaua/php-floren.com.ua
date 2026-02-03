@@ -2570,6 +2570,49 @@ body.secondary-hovered .catalog-overlay {
 .login-modal__greeting .button {
   width: 100%;
 }
+.calculate-modal {
+  --width: 576px;
+}
+.calculate-modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.calculate-modal__form .form-control {
+  width: 100%;
+}
+.calculate-modal__form .form-control--double {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.calculate-modal__form .form-control label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+}
+.calculate-modal__form .form-control a {
+  color: var(--color-green-100);
+  font-size: 0.875rem;
+}
+.calculate-modal__form .form-control .button--primary {
+  width: 100%;
+}
+.calculate-modal__greeting {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: center;
+  font-weight: 300;
+}
+.calculate-modal__greeting img {
+  width: 200px;
+  height: auto;
+}
+.calculate-modal__greeting .button {
+  width: 100%;
+}
 .double-column-page__grid {
   display: grid;
   grid-template-columns: 240px 1fr;
