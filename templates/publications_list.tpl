@@ -6,7 +6,7 @@
   <article class="blogs_list__card">
       <div class="blogs_list__card--image">
         <a href="{$LANGURL}/publications/{$AL.alias}/">
-          <img src="/img/no-image.jpg" alt="">
+          <img src="{$AL.main_image}" alt="{$AL.title}">
         </a>
       </div>
       <div class="blogs_list__card--content">
@@ -21,9 +21,9 @@
       </div>
       <div class="blogs_list__card--tags">
       {foreach item=ALCAT from=$ART_LIST2CAT[$AL.ID]}
-		<a href="/publications/?cat={$ALCAT.cat_alias}" class="tag">{$ALCAT.cat_name}</a>
-	  {/foreach}      
-    </div>
+		    <a href="{$LANGURL}/publications/?cat={$ALCAT.cat_alias}" class="tag">{$ALCAT.cat_name}</a>
+	    {/foreach}      
+      </div>
     </article>  
 {/foreach}
 </section>

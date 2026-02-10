@@ -1,0 +1,289 @@
+/* *{padding:0;margin:0;} */
+body{
+	font-family: arial, tahoma;
+	margin:0;
+	padding:0;
+	color: #333333;
+	background-color: #FFFFFF;
+}
+body, td, th, div{
+	font-size: 12px;
+}
+img{border:0;}
+a{
+	color:#5F1C13;
+	text-decoration:underline;
+}
+H3 {
+	color: #5F1C13;
+	margin:3px;
+}
+.holder{
+	overflow:hidden;
+	zoom:1;
+}
+.float-l{float:left;}
+.float-r{float:right;}
+.tbl{
+	border-top:1px solid #CEC2B3;
+	border-left:1px solid #CEC2B3;
+}
+	.tbl td, .tbl th{
+		border-bottom:1px solid #CEC2B3;
+		border-right:1px solid #CEC2B3;
+		padding:2px;
+	}
+	.tbl th{
+		background:#EEE7DF;
+	}
+.tbl_no_border td, .tbl_no_border th{
+	padding:2px;
+}
+.button {
+	text-align:center;
+	color: #4D4D4D;
+	border:1px solid #CABCAA;
+	background: #EEE7DF;
+	font-size:19px;
+	padding:2px 15px;
+	cursor:pointer;
+	cursor:hand;
+}
+.input_type, .inp{
+	font-family: arial, tahoma;
+	height:26px;
+	font-size: 15px;
+	padding:0 5px;
+	color: #4D4D4D;
+	border:1px solid #CABCAA;
+}
+
+
+textarea{
+	font-family: arial, tahoma;
+	font-size: 12px;
+	color: #4D4D4D;
+	border:1px solid #CABCAA;
+}
+
+.input_file {
+  BackGround-color: #00FF80;
+}
+
+.input_text {
+	Font-Family: san-serif;
+	BackGround-color: White;
+}
+
+CAPTION {
+ Font-weight: bold; Font-size: px;
+ Letter-spacing: 3px;
+ color: RED;
+ Border-width: 1px;
+}
+
+HR {
+ Height: 2pt;
+}
+OPTION {
+	BackGround-color: White;
+}
+td_c {
+ Text-align: center;
+}
+TEXTAREA {
+	Font-Family: Arial;
+	Font-size: 12px;
+	BackGround-color: #F0F8FF;
+}
+
+.td {
+BackGround-color: #cccccc;
+}
+.table {
+ Border-style: solid;
+ Border-width: 1px;
+}
+.g_forms span{
+	width:25px;float:left;background:#EEE7DF;padding:0 2px;display:block;
+}
+.man_ttl{color:#2C7486;padding-bottom:5px;font-weight:bold;}
+fieldset{
+	padding:10px;
+	margin:10px;
+	border:1px solid #5F1C13;
+	width:450px;
+}
+.input_text{
+	width:300px;
+}
+.menu_buttons{
+	padding:10px 0;
+}
+.menu_buttons a {
+	display:block;
+	float:left;
+	margin-right:10px;
+	padding:4px 10px;
+	color:#FFFFFF;
+	background:#5F1C13;
+	text-decoration:none;
+}
+.statline{
+	background:#ECE9D8;
+	margin:-2px;
+	margin-bottom:5px;
+	padding:2px;
+}
+	.statline-o{margin:5px 0 0 160px;}
+.float-l{
+	float:left;
+}
+.delete_but{
+	width:16px;
+	height:16px;
+	border:none;
+	background:url('/img/basketdelbig.gif') no-repeat 0 0;
+	cursor:pointer;
+	cursor:hand;
+}
+.gallery-h{margin-bottom:20px;margin-left:-30px;}
+.gallery-item{float:left;width:160px;position:relative;margin-left:30px;}
+.gallery-ttl{font-size:11px;text-align:center;}
+
+.admin_btn {
+	display: block;
+    float: left;
+    margin: 2px 5px;
+    padding: 3px 10px;
+    color: #FFFFFF;
+    background: #5F1C13;
+    text-decoration: none;
+}
+
+/* New */
+
+.section {
+	margin-top: 60px;
+	padding-top: 20px;
+	border-top: 1px solid #e6e1da;
+}
+
+.headline {
+	color: #5F1C13;
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.headline_color {
+	font-size: 18px; 
+	font-weight: 700; 
+	margin-bottom: 15px;
+}
+
+.adm-table {
+	border-collapse: collapse;
+}
+
+.adm-table__head {
+	background-color: #EEE7DF;
+	height: 32px;
+	color: #4D4D4D;
+	font-size: 16px;
+	border: 1px solid #CABCAA;
+}
+
+.adm-table__head th {
+	padding: 0 10px;
+	border-right: 1px solid #CABCAA;
+	width: 60px;
+}
+
+.adm-table__body tr {
+	border: 1px solid #CABCAA;
+}
+
+.adm-table__body td {
+	border-right: 1px solid #CABCAA;
+	padding: 5px;
+}
+
+.input {
+	border: none;
+	width: 100%;
+	text-align: center;
+	padding: 5px;
+	margin: 0;
+	background-color: transparent;
+}
+
+.select {
+	border: none;
+	background-color: transparent;
+}
+
+.select_color {
+	width: 240px;
+	background-color: transparent;
+}
+
+
+
+
+.image {
+	position: relative;
+	text-align: center;
+}
+
+.adm-btn {
+	border: none;
+	color: #fff;
+	border-radius: 2px;
+	cursor: pointer;
+	padding: 4px 7px;
+}
+
+.adm-btn_max {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding: 8px 14px;
+	background-color: #CABCAA;
+}
+
+.adm-btn_mini {
+	padding: 8px 14px;
+	background-color: #6d4f4b;
+}
+.btn_active {
+	background: #5F1C13;
+}
+.adm-btn_del {
+	position: absolute;
+	right: 4px;
+	top: 4px;
+	border: none;
+	border-radius: 50%;
+	background-color: #6d4f4b;
+	color: #fff;
+	width: 18px;
+	height: 18px;
+    padding-bottom: 5px;
+    padding-right: 13px;
+	cursor: pointer;
+}
+.btn {
+			width: 60px;
+			margin-top: 20px;
+			margin-bottom: 20px;
+			border: 1px solid black;
+			padding: 5px;
+			cursor: pointer;
+		}
+
+		.btn_ru.lang_ru {
+			background: red;
+		}
+		
+		.btn_ua.lang_ua {
+			background: red;
+		}

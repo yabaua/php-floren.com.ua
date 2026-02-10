@@ -14,6 +14,7 @@ RewriteRule (.*)/page1/ /$1 [L]
 #RewriteRule ^(.*[^/])$ https://%{HTTP_HOST}/$1/ [L,R=301]
 
 SetEnvIf Request_URI ^/planters/(lamela-old/|elho-old/|ceramic-old/|beton-old/|wood-planters-old/) require_auth=true
+#SetEnv site_locked true
 AuthUserFile /home/floren/floren.com.ua/n/.htpasswd
 AuthName "Password Protected"
 AuthType Basic
@@ -23,6 +24,7 @@ Deny from all
 Satisfy any
 Require valid-user
 Allow from env=!require_auth
+#Allow from env=!site_locked
 
 
 RewriteRule ^plants/?([^/].*)?$ komnatnie-rasteniya/$1 [L,R=301]

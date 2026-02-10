@@ -251,8 +251,8 @@
     
     </script>
     {/literal}
-    
-    {literal}
+{*    
+    { literal }
 		 <!--[if IE]>
     <script>document.createElement('header');document.createElement('nav');document.createElement('section');document.createElement('article');document.createElement('aside');document.createElement('footer');</script>
      		<![endif]-->
@@ -306,13 +306,13 @@
     
     
     
-    {/literal}
+    { /literal }
     <script>
     
-    	{$GTAG}
+    	{ $GTAG }
     
     </script>
-
+*}
   </head>
 
   <body>
@@ -456,10 +456,10 @@
           <!-- Права частина: пошук, профіль, улюблені, кошик -->
           <div class="header__main--right">
             <!-- Search form start -->
-            <form action="" class="header__main--search">
+            <form action="{$LANGURL}/search/" method="get" class="header__main--search">
               <div class="search-wrapper">
                 <img class="search-icon" src="/img/icons/icon-search.svg" alt="Search"/>
-                <input class="search-input" type="search" placeholder="{$LINGVO.search_default_txt}"/>
+                <input class="search-input" type="search" name="srch" placeholder="{$LINGVO.search_default_txt}"{if $SRCH_ROW} value="{$SRCH_ROW}"{/if}/>
                 <button class="search-button">{$LINGVO.search_button}</button>
               </div>
             </form>
@@ -1041,8 +1041,8 @@
   {if $URL[0]=='product'}
     <script src="https://www.youtube.com/iframe_api"></script>
   {/if}
-
-  {literal}
+{*
+  { literal }
   <!-- BEGIN BINOCHAT CODE  -->
   <script type="text/javascript">
   (function(d, w, s) {
@@ -1062,7 +1062,8 @@
     })(document, window, 'script');
   </script> 
   <!--  END BINO CALLTRACKING CODE -->
-  {/literal}
+  { /literal }
+*}
   <!-- Головний JS файл -->
   </body>
 

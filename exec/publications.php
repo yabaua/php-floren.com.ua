@@ -123,9 +123,12 @@ else{//ARTICLE LIST
 	}
 	$art_list=array();
 	$db->query("SELECT p.* FROM publications".$db_sufix." p ".$publications_category_SQL." ORDER BY date_add DESC");
-//	echo "SELECT p.* FROM publications".$db_sufix." p ".$publications_category_SQL." ORDER BY date_add DESC<br />";
-	while($f=$db->fetch())
+
+	while($f=$db->fetch()){
 		$art_list[]=$f;
+		if(!empty($f['images']))	$art_list[count($art_list)-1]['main_image'] = $f['images'];
+		else 											$art_list[count($art_list)-1]['main_image'] = '/img/no-image.jpg';
+	}
 	$smarty->assign("ART_LIST",$art_list);
 	$smarty->assign("PUBLICATIONS_TTL",$publications_ttl);
 	

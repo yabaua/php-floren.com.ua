@@ -45,6 +45,8 @@ $smarty->assign("META_REL_CANONICAL",'<link rel="canonical" href="https://floren
 			while($rs_goods=$db->fetch()){
 				$goods[$rs_goods['ID']]=$rs_goods;
 				$goods[$rs_goods['ID']]['product_path']=$lang_url . '/product/' . $rs_goods['ID'] . '_' . $rs_goods['link'] . '/';
+				$goods[$rs_goods['ID']]['img_path']		 = '/images/ins/s/' . $rs_goods['image'];
+				/*
 				if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/images/goods/s/' . str_replace('jpg', 'webp', $rs_goods['image']))){
 						$goods[$rs_goods['ID']]['img_path']		 = '/images/goods/s/' . str_replace('jpg', 'webp', $rs_goods['image']);
 				}else{
@@ -53,6 +55,7 @@ $smarty->assign("META_REL_CANONICAL",'<link rel="canonical" href="https://floren
 						img_resize($src, $dest_s, 200, 200, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=false);
 						$goods[$rs_goods['ID']]['img_path']		 = '/images/goods/s/' . str_replace('jpg', 'webp', $rs_goods['image']);
 				}
+				*/
 				//== price
 				$price='';
 				$price .= $rs_goods['min_price'];

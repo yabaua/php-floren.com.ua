@@ -28,45 +28,45 @@
     <!-- li{if $URL[1]=='phytodesign-ofisa'} class="active"{/if}>
                 <a class="underline" href="{$LANGURL}/services/phytodesign-ofisa/">{$LINGVO.phytodesign_ofisa}</a>
               </li -->
-    <li{if $URL[1]=='peregorodki-iz-rasteniy'} class="active"{/if}>
+    <li{if isset($URL[1]) && $URL[1]=='peregorodki-iz-rasteniy'} class="active"{/if}>
       <a class="underline" href="{$LANGURL}/services/peregorodki-iz-rasteniy/">{$LINGVO.zonirovanie}</a>
     </li>
-    <li{if $URL[1]=='ozelenenie-iskusstvennimi-rasteniyami'} class="active"{/if}>
+    <li{if isset($URL[1]) && $URL[1]=='ozelenenie-iskusstvennimi-rasteniyami'} class="active"{/if}>
       <a class="underline" href="{$LANGURL}/services/ozelenenie-iskusstvennimi-rasteniyami/">{$LINGVO.ozelenenie_iskusstvennimi_rasteniyami}</a>
     </li>
-    <li{if $URL[1]=='ozelenenie_letney_ploschadki'} class="active"{/if}>
+    <li{if isset($URL[1]) && $URL[1]=='ozelenenie_letney_ploschadki'} class="active"{/if}>
       <a class="underline" href="{$LANGURL}/services/ozelenenie_letney_ploschadki/">{$LINGVO.ozelenenie_terras}</a>
     </li>
   </ul>
 </section>
 <section class="double-column-page__nav_section">
-  <h3{if $URL[1]=='vertikalnoe-ozelenenie'} class="active"{/if}>
+  <h3{if isset($URL[1]) && $URL[1]=='vertikalnoe-ozelenenie'} class="active"{/if}>
     <a href="{$LANGURL}/services/vertikalnoe-ozelenenie/">{$LINGVO.vertikalnoe_ozelenenie}</a>
   </h3>
   <ul>
-    <li{if $URL[1]=='green-wall'} class="active"{/if}>
+    <li{if isset($URL[1]) && $URL[1]=='green-wall'} class="active"{/if}>
       <a class="underline" href="{$LANGURL}/services/green-wall/">{$LINGVO.green_wall}</a>
     </li>
-    <li{if $URL[1]=='vertikalnoe-ozelenenie-metallicheskimi-konstruktsiyami'} class="active"{/if}>
+    <li{if isset($URL[1]) && $URL[1]=='vertikalnoe-ozelenenie-metallicheskimi-konstruktsiyami'} class="active"{/if}>
       <a class="underline" href="{$LANGURL}/services/vertikalnoe-ozelenenie-metallicheskimi-konstruktsiyami/">{$LINGVO.metall_ozel}</a>
     </li>
-    <li{if $URL[1]=='ozelenenie-stabilizirovannim-mhom'} class="active"{/if}>
+    <li{if isset($URL[1]) && $URL[1]=='ozelenenie-stabilizirovannim-mhom'} class="active"{/if}>
       <a class="underline" href="{$LANGURL}/services/ozelenenie-stabilizirovannim-mhom/">{$LINGVO.ozelenenie_moss}</a>
     </li>
   </ul>
 </section>
 <section class="double-column-page__nav_section">
-  <h3{if $URL[1]=='ozelenenie_letney_ploschadki'} class="active"{/if}>
+  <h3{if isset($URL[1]) && $URL[1]=='ozelenenie_letney_ploschadki'} class="active"{/if}>
     <a href="{$LANGURL}/services/house_plant_care/">{$LINGVO.care} {$LINGVO.za_rasteniyami}</a>
   </h3>
   <ul>
-    <li{if $URL[1]=='peresadka'} class="active"{/if}>
+    <li{if isset($URL[1]) && $URL[1]=='peresadka'} class="active"{/if}>
       <a class="underline" href="{$LANGURL}/services/peresadka/">{$LINGVO.peresadka_rasteniy}</a>
     </li>
-    <li{if $URL[1]=='shipping'} class="active"{/if}>
+    <li{if isset($URL[1]) && $URL[1]=='shipping'} class="active"{/if}>
       <a class="underline" href="{$LANGURL}/services/shipping/">{$LINGVO.perevozka_rasteniy}</a>
     </li>
-    <li{if $URL[1]=='arenda_rasteniy'} class="active"{/if}>
+    <li{if isset($URL[1]) && $URL[1]=='arenda_rasteniy'} class="active"{/if}>
       <a class="underline" href="{$LANGURL}/services/arenda_rasteniy/">{$LINGVO.arenda_rasteniy}</a>
     </li>
   </ul>

@@ -1,4 +1,4 @@
-<?
+<?php
 
 function strup($text) {
   $text=strtr($text, "ґєіїабвгдеёжзийклмнопрстуфхцчшщьыъэюяabcdefghijklmnopqrstuvwxyz", "ҐЄІЇАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯABCDEFGHIJKLMNOPQRSTUVWXYZ");
