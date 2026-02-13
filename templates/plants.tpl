@@ -55,7 +55,7 @@
 {/if}{** IF FILTERS **}
 <!-- Info показано скільки товарів -->
 <div class="catalog-page__content_showed">
-  Показано <span>1 - 25</span> з <span>{$GOODS_CNT}</span>
+  Показано <span>{$SHOW_GOODS_FROM} - {$SHOW_GOODS_TO}</span> з <span>{$GOODS_CNT}</span>
 </div>
 
 <!-- Заголовок і опис категорії -->

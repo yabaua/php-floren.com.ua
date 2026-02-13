@@ -1,4 +1,4 @@
-<?
+<?php 
 //set_magic_quotes_runtime(0);
 require("auth.php");
 include("../include/strlib.php");
@@ -18,7 +18,7 @@ else header("location:service_list.php");
 
 if(isset($_REQUEST['edit_article'])){
 
-	mysql_query("UPDATE services25".$db_sufix." SET
+	$db->query("UPDATE services25".$db_sufix." SET
 	title='".$_REQUEST['ptitle']."',
 	menuttl='".$_REQUEST['menuttl']."',
 	meta_title='".$_REQUEST['meta_title']."',
@@ -29,10 +29,11 @@ if(isset($_REQUEST['edit_article'])){
 	header("location:service_edit.php?ID=".$ID."&lang=".$lang);
 }
 ?>
-<html><head>
-<link rel="stylesheet" type="text/css" href="style_back.css">
-<script src="/admin/ckeditor/ckeditor.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style_back.css">
+	<script src="/admin/ckeditor/ckeditor.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body style="margin-left:20px;">
 <?php
@@ -45,34 +46,34 @@ if(isset($_REQUEST['edit_article'])){
 </div>
 <form name="f1" method="post" action="service_edit.php?lang=<?=$lang?><?=$urlID?>">
 <h3>Изменить услугу</h3>
-<?
-$qr=mysql_query("SELECT * FROM services25".$db_sufix." WHERE ID='".$ID."'");
-$rs=mysql_fetch_array($qr);
+<?php 
+$db->query("SELECT * FROM services25".$db_sufix." WHERE ID='".$ID."'");
+$rs=$db->fetch();
 ?>
 <div>
-Название пункта меню<br>
-<input type="Text" name="menuttl" class="input_type" style="width:300px;" value="<?=$rs['menuttl']?>">
+	Название пункта меню<br>
+	<input type="Text" name="menuttl" class="input_type" style="width:300px;" value="<?=$rs['menuttl']?>">
 </div>
 <div>
-Название<br>
-<input type="Text" name="ptitle" class="input_type" style="width:300px;" value="<?=$rs['title']?>">
+	Название<br>
+	<input type="Text" name="ptitle" class="input_type" style="width:300px;" value="<?=$rs['title']?>">
 </div>
 <div>
-meta title<br>
-<textarea name="meta_title" class="input_type" style="width:300px;height:70px;"><?=$rs['meta_title']?></textarea>
+	meta title<br>
+	<textarea name="meta_title" class="input_type" style="width:300px;height:70px;"><?=$rs['meta_title']?></textarea>
 </div>
 <div>
-meta keywords<br>
-<textarea name="meta_keywords" class="input_type" style="width:300px;height:70px;"><?=$rs['meta_keywords']?></textarea>
+	meta keywords<br>
+	<textarea name="meta_keywords" class="input_type" style="width:300px;height:70px;"><?=$rs['meta_keywords']?></textarea>
 </div>
 <div>
-meta description<br>
-<textarea name="meta_description" class="input_type" style="width:300px;height:70px;"><?=$rs['meta_description']?></textarea>
+	meta description<br>
+	<textarea name="meta_description" class="input_type" style="width:300px;height:70px;"><?=$rs['meta_description']?></textarea>
 </div>
 <div>
-Тело статьи<br>
-<textarea id="content" name="pbody" style="width:600px;height:400px;" rows="20" cols="50">
-                <?echo $rs['body']?>
+	Тело статьи<br>
+	<textarea id="content" name="pbody" style="width:600px;height:400px;" rows="20" cols="50">
+                <?=$rs['body']?>
             </textarea>
             <script>
                 CKEDITOR.replace( 'pbody', {

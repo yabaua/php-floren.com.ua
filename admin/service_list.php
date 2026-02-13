@@ -1,4 +1,4 @@
-<?
+<?php 
 //set_magic_quotes_runtime(0);
 require("auth.php");
 include("../include/strlib.php");
@@ -15,13 +15,13 @@ if (!isset($_REQUEST['lang'])){
 
 if(isset($_REQUEST['add_article'])){
 
-	mysql_query("INSERT INTO services25 SET
+	$db->query("INSERT INTO services25 SET
 							title='".$_REQUEST['ptitle']."',
 							menuttl='".$_REQUEST['menuttl']."',
 							alias='".transliterate($_REQUEST['menuttl'])."',
 							meta_description='".$_REQUEST['pdescription']."',
 							body='".$_REQUEST['pbody']."'");
-	mysql_query("INSERT INTO services25_ua SET
+	$db->query("INSERT INTO services25_ua SET
 							title='".$_REQUEST['ptitle']."',
 							menuttl='".$_REQUEST['menuttl']."',
 							alias='".transliterate($_REQUEST['menuttl'])."',
@@ -31,8 +31,8 @@ if(isset($_REQUEST['add_article'])){
 }
 if(isset($_REQUEST['delart'])){
 	foreach($_REQUEST['delart'] AS $k=>$v){
-		mysql_query("DELETE FROM services25 WHERE ID='".$k."'");
-		mysql_query("DELETE FROM services25_ua WHERE ID='".$k."'");
+		$db->query("DELETE FROM services25 WHERE ID='".$k."'");
+		$db->query("DELETE FROM services25_ua WHERE ID='".$k."'");
 	}
 	header("location:service_list.php?lang=".$lang);
 }
@@ -41,7 +41,7 @@ if(isset($_REQUEST['delart'])){
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<script src="/admin/ckeditor/ckeditor.js"></script>
-	<link rel="stylesheet" type="text/css" href="style_back.css">
+	<link rel="stylesheet" type="text/css" href="style_back.css?v=1">
 </head>
 <body style="margin-left:20px;">
 <div class="holder" style="margin:10px 0;padding:10px 0;">
@@ -51,15 +51,15 @@ if(isset($_REQUEST['delart'])){
 <h3>Список Услуг</h3>
 <form name="f1" method="post" action="service_list.php">
 <table class="tbl" cellpadding="4" cellspacing="0" border=0>
-<?
-$qr=mysql_query("SELECT * FROM services".$db_sufix." ORDER BY title");
-for($i=0;$rs=mysql_fetch_array($qr);$i++){
+<?php 
+$db->query("SELECT * FROM services25".$db_sufix." ORDER BY title");
+for($i=0;$rs=$db->fetch();$i++){
 ?>
-<tr<?if($i%2==1) echo ' bgcolor="#EEE7DF"'?>>
+<tr<?php if ($i%2==1) echo ' bgcolor="#EEE7DF"'?>>
 	<td style="font-size:14px;"><a href="service_edit.php?ID=<?=$rs['ID']?>&lang=<?=$lang?>"><?=$rs['title']?></a></td>
 	<td><input type="Submit" name="delart[<?=$rs['ID']?>]" class="delete_but" value=""></td>
 </tr>
-<?}?>
+<?php }?>
 </table>
 <p>&nbsp;</p>
 <h3>Добавить статью</h3>

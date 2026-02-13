@@ -244,6 +244,8 @@ if (!isset($PARAM[0]) || (isset($PARAM[2]) && $PARAM[2]!='')) {
 			if ($rs_g['images']) {
 				$good[$rs_g['ID']]['images']=array();
 				foreach(explode(",",$rs_g['images']) AS $v) {
+					$addon_img_src = $img_preview_path . $v;
+					/*
 					if(file_exists($_SERVER['DOCUMENT_ROOT'] . $img_preview_path . str_replace('jpg', 'webp', $v))){
 						$addon_img_src	=	$img_preview_path . str_replace('jpg', 'webp', $v);
 					}else{
@@ -252,6 +254,7 @@ if (!isset($PARAM[0]) || (isset($PARAM[2]) && $PARAM[2]!='')) {
 						img_resize($src, $dest_b, 1600, 1200, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=true, $trim=false, $resize_max=true, $apply_mask=false);
 						$addon_img_src	=	$img_preview_path . str_replace('jpg', 'webp', $v);
 					}
+					*/
 					$good_images[]=$good[$rs_g['ID']]['images'][]=$addon_img_src;
 				}
 			}
@@ -628,7 +631,13 @@ $smarty->assign("CUR_GFSID", $curFID);
 
 					$goods_color[$gc['ID']]['alias'] = $color['alias'];
 					$goods_color[$gc['ID']]['colorTitle'] = $color['name_'.$lang];
-					$goods_color[$gc['ID']]['hrefID'] = $uniqueSizes[$curSize][$gc['color']]['hrefID'];
+					
+					if (!empty($uniqueSizes[$curSize][$gc['color']]['hrefID'])) {
+    					$goods_color[$gc['ID']]['hrefID'] = $uniqueSizes[$curSize][$gc['color']]['hrefID'];
+					} else {
+							$goods_color[$gc['ID']]['hrefID'] = '#';
+					}
+
 					
 		            $previewImg = " style=\"\"";
 		    
@@ -663,7 +672,7 @@ $smarty->assign("CUR_GFSID", $curFID);
 					}else{
 						$goods_color[$gc['ID']]['colorClass']= "plant__color";
 					}
-					if ($uniqueSizes[$curSize][$gc['color']]['price']==0){
+					if (in_array($gc['color'], $uniqueSizes[$curSize]) && $uniqueSizes[$curSize][$gc['color']]['price']==0){
 		            	$goods_color[$gc['ID']]['colorClass'] = $goods_color[$gc['ID']]['colorClass'] . " plant__color_notavailable";
 		            }
 				};

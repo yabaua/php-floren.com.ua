@@ -400,6 +400,7 @@ $smarty->assign("META_KEYWORDS",		$meta_keywords);
 				LEFT JOIN goods_forms gf ON g.ID=gf.goodID
 				WHERE ".$goods_WHERE."
 				".$filter_selected_goods_SQL."
+				AND act='Y'
 				GROUP BY g.ID");
 			$rs_cnt_goods=$db->num_rows();	
 			$total_goods=$rs_cnt_goods;
@@ -415,6 +416,12 @@ $smarty->assign("META_KEYWORDS",		$meta_keywords);
 			$pages=array();
 			$lastPage=ceil($total_goods/$max_pages_links);
 			
+			$show_goods_from = $ofset+1;
+			$smarty->assign("SHOW_GOODS_FROM",$show_goods_from);
+			
+			$show_goods_to = $ofset + $max_pages_links;
+			if ($show_goods_to > $total_goods) $show_goods_to = $total_goods;
+			$smarty->assign("SHOW_GOODS_TO",$show_goods_to);
 			
 			
 			

@@ -1,11 +1,12 @@
-<?php
+<?php 
 header("content-type: text/html;charset=utf-8 \r\n");
-require($_SERVER['DOCUMENT_ROOT'] . '/database.php');
-
+//require("auth.php");
+require('con_mysql.php');
 
 $orderID=$_REQUEST['id'];
-$db->query("SELECT * FROM orders WHERE hash='".$orderID."'");
-$rs = $db->fetch();
+
+$qr = mysql_query("SELECT * FROM orders WHERE hash='".$orderID."'");
+$rs = mysql_fetch_array($qr);
 // echo base64_decode($rs['post']);
 $order = unserialize(base64_decode($rs['basket']));
 $post = unserialize(base64_decode($rs['post']));
@@ -27,7 +28,8 @@ if(isset($_REQUEST['add_comment']) && $_REQUEST['new_comment']!=''){
 					comment='".$comment."'
 				");
 	header("location:order_info.php?id=".$orderID);
-}?>
+}
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -229,6 +231,26 @@ select
 	<script src="/admin/js/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
 	<link rel="STYLESHEET" type="text/css" href="css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
 	<link rel="STYLESHEET" type="text/css" href="css/ui-lightness/jquery-ui-1.10.4.custom.css">
+	<style>
+	.ui-autocomplete-loading {
+		background: white url('images/ui-anim_basic_16x16.gif') right center no-repeat;
+	}
+	#city { width: 25em; }
+	</style>
+	<script>
+	$(function() {
+		$( "#birds" ).autocomplete({
+			source: "_json_add_good.php",
+			minLength: 2,
+			select: function( event, ui ) {
+				
+					
+				$("#goodID").val(ui.item.id);
+				$("#goodPrice").val(ui.item.price);
+			}
+		});
+	});
+	</script>
 </head>
 
 <body topmargin="50" leftmargin="0" marginheight="0" marginwidth="0" rightmargin="0" bottommargin="0" bgcolor="#FFFFFF">
@@ -237,47 +259,37 @@ select
 	<div class="order__container">
 
 	<h1 class="order__header">Заказ № <?=$rs['id']?></h1>
-	<?php  if($post['payment_way'] == 'visa') { ?> 
-		<p style="color: #498C09; font-weight: bold;">Статус: <?php  if ($rs['payment_status']=="success") {?> Заказ оплачен <?php } elseif ($rs['payment_status']=="hold_wait") {?>Заказ оплачен. Требуется списание после доставки<?php } else {?>Оплата не прошла<?php }?></p>
-	<?php }?>
+	<? if($post['payment_way'] == 'visa') { ?> 
+		<p style="color: #498C09; font-weight: bold;">Статус: <? if ($rs['payment_status']=="success") {?> Заказ оплачен <?} elseif ($rs['payment_status']=="hold_wait") {?>Заказ оплачен. Требуется списание после доставки<?} else {?>Оплата не прошла<?}?></p>
+	<?}?>
 
 	
 	<div class="order__wrapper">
 
 	<ul class="order__list products">
-		<?php 
+		<?
 			foreach($order AS $k=>$v) {
 		?>
 			<li class="products__item">
-				<?php 
-					$img_url='';
-					if(isset($v['img']) && $v['img'] != 0){
-						$img_url="/images/ins/s/". $v['img'];
-					}elseif (isset($v['color']) && $v['color'] != 0) {
-						$img_url="/images/ins/s/" . $v['link'] . "_" . $v['color'] .".jpg";
-					}elseif($v['classID']==49){
-						$img_url="/images/compositions/s/" . $v['image'];
-					} else {
-						$img_url="/images/ins/s/" . $v['image'];
-					}
-				?>
+
 				<a class="order__img" href="https://floren.com.ua<?=$v['href']?>">
-					<img src="https://floren.com.ua<?=$img_url?>">
+
+				<img src="https://floren.com.ua<? if(isset($v['img']) && $v['img'] != 0){ ?>/images/ins/s/<?=$v['img']?><?} elseif (isset($v['color']) && $v['color'] != 0) { ?>/images/ins/s/<?=$v['link']?>_<?=$v['color']?>.jpg<?} else {?>/images/ins/s/<?=$v['image']?><?}?><? if($v['classID']==49){ ?>/images/compositions/s/<?=$v['image']?><?}?>">
+				
 				</a>
 
 				<div class="products__details">
 
-					<a class="products__headline" href="https://floren.com.ua<?=$v['href']?>" target="_blank"><?=$v['name']?>
-						<?php if(isset($post['name_alter'])){ ?> <?=$v['name_alter']?><?php }?></a><span class="qnt">(<?=$v['cnt']?> шт)</span>
+					<a class="products__headline" href="https://floren.com.ua<?=$v['href']?>" target="_blank"><?=$v['name']?> <? if(isset($post['name_alter'])){ ?> <?=$v['name_alter']?><?}?></a><span class="qnt">(<?=$v['cnt']?> шт)</span>
 
 					<p class="products__info">
-						<?php if(isset($v['barcode']) && $v['barcode']){ ?>Штрихкод: <?=$v['barcode']?><br><?php }?>
-						<?php if(isset($v['color']) && $v['color']){ ?><?=$v['color_name_ru']?>, <?=$v['color']?><br><?php }?>
-						<?php if(isset($v['dia']) && $v['dia']){ ?>Диаметр: <?=$v['dia']?> см<br><?php }?>
-						<?php if(isset($v['wdt']) && $v['wdt']){ ?>Ширина: <?=$v['wdt']?> см<br><?php }?>
-						<?php if(isset($v['depth']) && $v['depth']){ ?>Глубина: <?=$v['depth']?> см<br><?php }?>
-						<?php if(isset($v['hgt']) && $v['hgt']){ ?>Высота: <?=$v['hgt']?> см<br><?php }?>
-						<?php if(isset($v['measure_qt']) && $v['measure_qt']){ ?><?=$v['mg_name_ru']?>: <?=$v['measure_qt']?> <?=$v['unit']?><br><?php }?>
+						<? if(isset($v['barcode']) && $v['barcode']){ ?>Штрихкод: <?=$v['barcode']?><br><?}?>
+						<? if(isset($v['color']) && $v['color']){ ?><?=$v['color_name_ru']?>, <?=$v['color']?><br><?}?>
+						<? if(isset($v['dia']) && $v['dia']){ ?>Диаметр: <?=$v['dia']?> см<br><?}?>
+						<? if(isset($v['wdt']) && $v['wdt']){ ?>Ширина: <?=$v['wdt']?> см<br><?}?>
+						<? if(isset($v['depth']) && $v['depth']){ ?>Глубина: <?=$v['depth']?> см<br><?}?>
+						<? if(isset($v['hgt']) && $v['hgt']){ ?>Высота: <?=$v['hgt']?> см<br><?}?>
+						<? if(isset($v['measure_qt']) && $v['measure_qt']){ ?><?=$v['mg_name_ru']?>: <?=$v['measure_qt']?> <?=$v['unit']?><br><?}?>
 						<span>Цена товара: <?=$v['price']?>&nbsp;грн</span>
 					</p>
 
@@ -286,7 +298,7 @@ select
 
 				</div>
 			</li>
-		<?php }?>
+		<?}?>
 
 	</ul>
 
@@ -294,11 +306,11 @@ select
 		
 		<ul class="order__summary">
 				
-			<?php  if(isset($post['peresadka'])){ ?>
+			<? if(isset($post['peresadka'])){ ?>
 	
 				<li><b>Услуга пересадки:</b> <?=$post['peresadka']?></li>
 	
-			<?php }?>	
+			<?}?>	
 	
 			<li><b>Сумма заказа:</b> <?=$post['basket_totalprice']?></li>
 			<li><b>Стоимость доставки:</b> <?=$post['cost_delivery']?></li>
@@ -312,100 +324,100 @@ select
 			<ul class="order__text">
 				<li><b>Контактное лицо:</b> <?=$post['fio']?></li>
 				<li><b>Телефон:</b> <?=$post['phone']?></li>
-				<li><b>Email:</b> <?php  if($post['email']) { ?> <?=$post['email']?> <?php } else {?> не заполнено<?php }?></li>
+				<li><b>Email:</b> <? if($post['email']) { ?> <?=$post['email']?> <?} else {?> не заполнено<?}?></li>
 			</ul>
 
 			<h3>Данные получателя</h3>
 			
 			<ul class="order__text">
-				<?php  if(isset($post['recipient']) && $post['recipient']){ ?>
+				<? if(isset($post['recipient']) && $post['recipient']){ ?>
 
 					<li><b>Получатель заказа:</b> Я получатель</li>
 
-				<?php } else {?>
+				<?} else {?>
 
-					<li><b>ФИО получателя:</b> <?php  if($post['r_fio']) { ?> <?=$post['r_fio']?> <?php } else {?> не заполнено<?php }?></li>
-					<li><b>Телефон получателя:</b> <?php  if($post['r_phone']) { ?> <?=$post['r_phone']?> <?php } else {?> не заполнено<?php }?></li>
+					<li><b>ФИО получателя:</b> <? if($post['r_fio']) { ?> <?=$post['r_fio']?> <?} else {?> не заполнено<?}?></li>
+					<li><b>Телефон получателя:</b> <? if($post['r_phone']) { ?> <?=$post['r_phone']?> <?} else {?> не заполнено<?}?></li>
 
-				<?php }?>
+				<?}?>
 			</ul>	
 
 			<h3>Способ доставки</h3>
 
 			<ul class="order__text">
 
-				<li><b>Способ доставки:</b> <?php  if(isset($post['delivery_way'])) {?><?=$post['delivery_way']?><?php } else {?>не заполнено<?php }?></li>
+				<li><b>Способ доставки:</b> <? if(isset($post['delivery_way'])) {?><?=$post['delivery_way']?><?} else {?>не заполнено<?}?></li>
 
-				<?php if(isset($post['delivery_way']) && $post['delivery_way'] == "Самовывоз из магазина") { ?>
+				<? if(isset($post['delivery_way']) && $post['delivery_way'] == "Самовывоз из магазина") { ?>
 					
 					<li><b>Дата самовывоза:</b> <?=$post['picup_date']?></li>
 					<li><b>Время самовывоза:</b> <?=$post['picup_time']?></li>
-					<?php  if(isset($post['picup_addr']) && $post['picup_addr'] == 'm1') { ?>
+					<? if(isset($post['picup_addr']) && $post['picup_addr'] == 'm1') { ?>
 						<li><b>Адрес самовывоза:</b> пр. Победы, 70</li>
-					<?php }?>
+					<?}?>
 
-					<?php  if(isset($post['picup_addr']) && $post['picup_addr'] == 'm2') { ?>
+					<? if(isset($post['picup_addr']) && $post['picup_addr'] == 'm2') { ?>
 						<li><b>Адрес самовывоза:</b> ул. Анны Ахматовой, 30</li>
-					<?php }?>
+					<?}?>
 
-				<?php }?>
+				<?}?>
 
-				<?php  if(isset($post['delivery_way']) && $post['delivery_way'] == "Доставка Новой Почтой") { ?>
+				<? if(isset($post['delivery_way']) && $post['delivery_way'] == "Доставка Новой Почтой") { ?>
 
 					<li><b>Город:</b> <?=$post['np_city']?></li>
 					<li><b>Номер отделения:</b> <?=$post['np_number']?></li>
 
-				<?php }?>
+				<?}?>
 
-				<?php  if(isset($post['delivery_way']) && $post['delivery_way'] == "Доставка курьером") { ?>
+				<? if(isset($post['delivery_way']) && $post['delivery_way'] == "Доставка курьером") { ?>
 
 					<li><b>Город:</b> <?=$post['courier_city']?></li>
 					
-					<?php  if(isset($post['courier_anonym']) && $post['courier_anonym']) { ?>
+					<? if(isset($post['courier_anonym']) && $post['courier_anonym']) { ?>
 						<li><b>Дополнительная опция доставки:</b> <?=$post['courier_anonym']?></li>
-					<?php }?>
+					<?}?>
 
 
-					<li><b>Дата доставки:</b><?php  if(isset($post['courier_date']) && $post['courier_date']) { ?> <?=$post['courier_date']?> <?php } else {?> не указано <?php }?></li>
+					<li><b>Дата доставки:</b><? if(isset($post['courier_date']) && $post['courier_date']) { ?> <?=$post['courier_date']?> <?} else {?> не указано <?}?></li>
 
-					<?php  if(isset($post['courier_fast']) && $post['courier_fast']) { ?>
+					<? if(isset($post['courier_fast']) && $post['courier_fast']) { ?>
 						<li><b>Тип доставки:</b> <?=$post['courier_fast']?></li>
-					<?php }?>
+					<?}?>
 
-					<?php  if(isset($post['courier_exact']) && $post['courier_exact']) { ?>
+					<? if(isset($post['courier_exact']) && $post['courier_exact']) { ?>
 
 						<li><b>Тип доставки:</b> <?=$post['courier_exact']?></li>
 						<li><b>Время доставки: часы:</b> <?=$post['courier_hour']?></li>
 						<li><b>Время доставки: минуты:</b> <?=$post['courier_min']?></li>
 
-					<?php }?>
+					<?}?>
 
-					<?php  if(isset($post['courier_time']) && $post['courier_time']) { ?>
+					<? if(isset($post['courier_time']) && $post['courier_time']) { ?>
 
 					<li><b>Тип доставки:</b> плановая доставка</li>
 
-					<?php  if($post['courier_time'] == 'early') { ?>
+					<? if($post['courier_time'] == 'early') { ?>
 					
 						<li><b>Время доставки: </b> ранняя доставка, до 10:00</li>
 
-					<?php } elseif ($post['courier_time'] == 'late') {?>
+					<?} elseif ($post['courier_time'] == 'late') {?>
 						<li><b>Время доставки: </b> поздняя доставка, с 18:00 до 20:00</li>
 
-					<?php } else {?>
+					<?} else {?>
 
 						<li><b>Время доставки: </b>  <?=$post['courier_time']?></li>
 
-					<?php }?>
-					<?php }?>
+					<?}?>
+					<?}?>
 
 					
 
 					<li><b>Адрес доставки:</b> <?=$post['courier_address']?></li>
 					<li><b>Номер дома:</b> <?=$post['courier_dom']?></li>
 					<li><b>Номер квартиры:</b> <?=$post['courier_flat']?></li>
-					<li><b>Наличие лифта:</b> <?php  if(isset($post['courier_elevator']) && $post['courier_elevator']) { ?> <?=$post['courier_elevator']?> <?php } else {?> — <?php }?> </li>
+					<li><b>Наличие лифта:</b> <? if(isset($post['courier_elevator']) && $post['courier_elevator']) { ?> <?=$post['courier_elevator']?> <?} else {?> — <?}?> </li>
 
-				<?php }?>
+				<?}?>
 
 			</ul>
 
@@ -414,7 +426,7 @@ select
 			<ul class="order__text">
 				<li><b>Тип оплаты:</b>
 
-					<?php  if($post['payment_way'] == 'visa') { ?> Картой на сайте VISA / Mastercard <?php } elseif ($post['payment_way'] == 'beznal') {?> Безналичный расчет для юридических лиц <?php } else {?> <?=$post['payment_way']?><?php }?></td>
+					<? if($post['payment_way'] == 'visa') { ?> Картой на сайте VISA / Mastercard <?} elseif ($post['payment_way'] == 'beznal') {?> Безналичный расчет для юридических лиц <?} else {?> <?=$post['payment_way']?><?}?></td>
 
 				</li>
 			</ul>
@@ -423,8 +435,8 @@ select
 
 			<ul class="order__text">
 
-				<li><b>Дополнительная консультация:</b> <?php if (isset($post['additional_consulting'])) { ?> <?=$post['additional_consulting']?> <?php } else {?> не заполнено <?php }?></li>
-				<li><b>Комментарий к заказу:</b> <?php  if($post['comment']) { ?> <?=$post['comment']?> <?php } else {?> не заполнено <?php }?></li>
+				<li><b>Дополнительная консультация:</b> <? if (isset($post['additional_consulting'])) { ?> <?=$post['additional_consulting']?> <?} else {?> не заполнено <?}?></li>
+				<li><b>Комментарий к заказу:</b> <? if($post['comment']) { ?> <?=$post['comment']?> <?} else {?> не заполнено <?}?></li>
 			</ul>
 
 		</div>

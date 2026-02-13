@@ -16,25 +16,21 @@
 />
             </div>
             <div class="slide-1__text">
-              <h2>Озеленення офісу від студії фітодизайну Флорен</h2>
-              <p>
-            Студія фітодизайну "Флорен" представляє повний комплекс послуг із
-            озеленення офісів у Києві. У своїй роботі з озеленення інтер'єру
-            житлових та комерційних приміщень ми використовуємо різні
-            <a class="underline" href="#">кімнатні рослини</a>
-            та елементи декору. Робимо безкоштовний виїзд дизайнера, готуємо
-            проект озеленення під ключ у найкоротші терміни.
+              <h2>Озеленення простору від студії фітодизайну Флорен</h2>
+              <p>Студія «Флорен» здійснює озеленення простору в Києві та по всій Україні — від безкоштовного виїзду дизайнера, розробки індивідуальної концепції до реалізації та сервісного догляду за рослинами.</p>
+              <p class="mt-16">Ми створюємо сучасні живі інтер’єри, де озеленення приміщення підсилює статус простору, формує комфорт і працює на враження, підбираючи рослини так, щоб вони бездоганно виглядали та не потребували зайвої уваги.</p>
+              <p class="mt-16">Давайте разом розпочнемо трансформацію вашого простору вже сьогодні.</>
           </p>
               <div class="slide-1__actions">
                 <section class="slide-1__action">
                   <div class="slide-1__action_link">
-                    <a href="">
+                    <a href="/ua/komnatnie-rasteniya/">
                       <img
                     src="/img/homepage/hero-swiper-slide-1-2.png"
                     alt="Каталог рослин та горщиків"
 />
                     </a>
-                    <a class="underline" href="">Каталог рослин та горщиків</a>
+                    <a class="underline" href="/ua/komnatnie-rasteniya/">Каталог рослин та <a href="/ua/planters/">горщиків</a>
                   </div>
                   <div class="slide-1__action_description">
                 Підберіть рослини та кашпо для озеленення приміщення, а
@@ -43,13 +39,13 @@
                 </section>
                 <section class="slide-1__action">
                   <div class="slide-1__action_link">
-                    <a href="">
+                    <a href="/ua/hiuse_plant_care/">
                       <img
                     src="/img/homepage/hero-swiper-slide-1-3.png"
                     alt="Догляд за рослинами"
 />
                     </a>
-                    <a class="underline" href="">Догляд за рослинами</a>
+                    <a class="underline" href="/ua/hiuse_plant_care/">Догляд за рослинами</a>
                   </div>
                   <div class="slide-1__action_description">
                 Складно доглядати за рослинами, – ми візьмемо квіти у вашому
@@ -87,11 +83,10 @@
           Виною усьому:
         </p>
             <ul>
-              <li>
-            неправильний догляд, який не враховує індивідуальних особливостей;
-          </li>
-              <li>невчасна діагностика захворювань рослин та лікування;</li>
+              <li>неправильне розташування та догляд, який не враховує особливостей;</li>
               <li>недостатній полив чи перелив.</li>
+              <li>невчасна діагностика захворювань рослин та лікування;</li>
+              
             </ul>
             <p>
           Не варто перекладати відповідальність за догляд за вазонами на
@@ -101,7 +96,7 @@
         </p>
             <a
           class="slide-2__action button button--secondary button--arrow"
-          href=""
+          href="/ua/house_plant_care/"
           >Розрахувати вартість догляду за рослинами</a
         >
           </div>
@@ -188,7 +183,7 @@
 
             <div class="services-slide__content">
               <h3>
-                <a class="underline" href="">Вертикальне озеленення</a>
+                <a class="underline" href="/ua/services/vertikalnoe-ozelenenie/">Вертикальне озеленення</a>
               </h3>
               <p>
               Вертикальне озеленення за допомогою зелених стін із рослин або
@@ -196,6 +191,7 @@
             </p>
             </div>
           </div>
+          {* ********************** *}
           <div class="swiper-slide services-slide">
             <div class="services-slide__image">
               <img src="/img/homepage/interior-landscaping-2.png" alt=""/>
@@ -203,7 +199,7 @@
 
             <div class="services-slide__content">
               <h3>
-                <a class="underline" href="">Озеленення літньої тераси</a>
+                <a class="underline" href="/ua/services/ozelenenie_letney_ploschadki/">Озеленення літньої тераси</a>
               </h3>
               <p>
               Озеленення літніх майданчиків кафе та відкритих терас сезонними
@@ -211,6 +207,7 @@
             </p>
             </div>
           </div>
+          {* ********************** *}
           <div class="swiper-slide services-slide">
             <div class="services-slide__image">
               <img src="/img/homepage/interior-landscaping-3.png" alt=""/>
@@ -218,14 +215,29 @@
 
             <div class="services-slide__content">
               <h3>
-                <a class="underline" href="">Оренда рослин</a>
+                <a class="underline" href="/ua/services/ozelenenie-iskusstvennimi-rasteniyami/">Озеленення штучними рослинами</a>
               </h3>
               <p>
-              Оренда рослин та декорування виставкових стендів та знімальних
-              майданчиків
+              Озеленення штучними рослинами, коли умови не дозволяють або немає кому доглядати
             </p>
             </div>
           </div>
+          {* ********************** *}
+          <div class="swiper-slide services-slide">
+            <div class="services-slide__image">
+              <img src="/img/homepage/interior-landscaping-3.png" alt=""/>
+            </div>
+
+            <div class="services-slide__content">
+              <h3>
+                <a class="underline" href="/ua/services/ozelenenie-iskusstvennimi-rasteniyami/">Озеленення квартири</a>
+              </h3>
+              <p>
+              Правильно підібрані кімнатні рослини та горщики – максимальне задоволення від рослин вдома
+            </p>
+            </div>
+          </div>
+          {* ********************** *}
         </div>
       </div>
       <!-- If we need navigation buttons -->

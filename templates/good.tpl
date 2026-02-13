@@ -78,7 +78,7 @@
       <div class="product-page__options_color">
         <sl-radio-group label="{$LINGVO.choose_color}" name="color" value="{$CUR_COLOR_TTL}">
         {foreach from=$G_COLOR item=C key=k}
-          <sl-radio-button value="{$C.colorTitle}">
+          <sl-radio-button value="{$C.colorTitle}"{if $C.hrefID=='#'} disabled="true"{/if}>
             <a href="{$C.hrefID}"><img src="{$C.previewImg}" alt="{$C.colorTitle}"/></a>
           </sl-radio-button>
         {/foreach}
@@ -99,12 +99,32 @@
         <button href="#" class="button button--outline button--icon button--small" aria-label="{$LINGVO.add_to_fav}">
           <span class="icon icon-heart"/>
         </button>
-        <button href="#" class="button button--outline button--small consult" aria-label="{$LINGVO.advice_prof}">
-          <img src="/img/icons/icon-question.svg" alt=""/>
+        <button class="button button--outline button--small consult" aria-label="{$LINGVO.advice_prof}" data-event="click" data-callback="openModal" data-modal-id="calculate-modal">
+          <img src="/img/icons/icon-question.svg" alt="{$LINGVO.advice_prof}"/>
           <b>{$LINGVO.advice}</b>
         </button>
       </div>
     </section>
+    <sl-dialog id="calculate-modal" label="{$LINGVO.advice_prof} – {$GOOD_ONE.name}" class="calculate-modal">
+    {*  <form class="login-modal__form" action="/thankyou/" method="post" onsubmit="submitForm(event)"> *}
+      <form class="login-modal__form" action="/thankyou/" method="post">
+        <input type="hidden" name="cb_topic" value="{$LINGVO.advice_prof} – {$GOOD_ONE.name}"></input>
+        <div class="form-control">
+          <sl-input name="cb_name" id="name" label="Ваше ім'я" type="text" placeholder="Ім'я"></sl-input>
+        </div>
+        <div class="form-control">
+          <label for="phone">Ваш контактний номер телефону*</label>
+          <input id="phone" name="cb_phone" data-tel-input type="tel">
+        </div>
+        <div class="form-control">
+          <sl-textarea id="message" name="cb_txt" label="Ваше повідомлення" type="text" placeholder="Повідомлення"></sl-textarea>
+        </div>
+    
+        <div class="form-control">
+          <button class="button button--primary" type="submit">Відправити</button>
+        </div>
+      </form>
+    </sl-dialog>
 
     <!-- Табси: інформація, доставка, оплата -->
     <section class="product-page__delivery">

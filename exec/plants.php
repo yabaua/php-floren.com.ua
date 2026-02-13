@@ -357,13 +357,20 @@ if ((isset($URL[1]) && in_array($URL[1], $category_aliases))) {
 			$smarty->assign("GOODS_CNT",$total_goods);
 			$ofset  = 0;
 
-			//==================== PAGING
+						//==================== PAGING
 
 			$page = max(1,(int)@$cur_page);
 			$ofset = $page > 1 ? (($page - 1) * $max_pages_links) : 0;
 
 			$pages=array();
 			$lastPage=ceil($total_goods/$max_pages_links);
+			
+			$show_goods_from = $ofset+1;
+			$smarty->assign("SHOW_GOODS_FROM",$show_goods_from);
+			
+			$show_goods_to = $ofset + $max_pages_links;
+			if ($show_goods_to > $total_goods) $show_goods_to = $total_goods;
+			$smarty->assign("SHOW_GOODS_TO",$show_goods_to);
 			
 
 			if($cur_page>$lastPage){

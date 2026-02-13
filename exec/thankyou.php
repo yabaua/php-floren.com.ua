@@ -116,15 +116,15 @@ if(isset($_POST) && count($_POST)){
 				"custom_fields"	=>	 array(
 						    [
 								"name"	=>	"gaa_utm_source_4449395",
-								"value"	=>	$_SESSION['utm_source']
+								"value"	=>	$_SESSION['utm_source'] ?? ''
 						    ],
 						    [
 								"name"	=>	"gaa_utm_medium_4449399",
-								"value"	=>	$_SESSION['utm_medium']
+								"value"	=>	$_SESSION['utm_medium'] ?? ''
 						    ],
 						    [
 								"name"	=>	"gaa_utm_campaign_4449398",
-								"value"	=>	$_SESSION['utm_campaign']
+								"value"	=>	$_SESSION['utm_campaign'] ?? ''
 						    ],
 						    /*
 						    [
@@ -138,13 +138,13 @@ if(isset($_POST) && count($_POST)){
 						    */
 			    			[
 								"name"	=>	"gaclientid_291",
-								"value"	=>	$_SESSION['gaClientId']
+								"value"	=>	$_SESSION['gaClientId'] ?? ''
 							]
 							
 				  	),
 				"client_attributes"	=>	array(
 									"person"	=>	base64_decode($name),
-									"email"		=>	$order_data['email'],
+									"email"		=>	$order_data['email'] ?? '',
 									"status_id"	=>	1,
 									"lead"		=>	false,
 									"phones"	=>	[$cb_phone]

@@ -653,11 +653,11 @@
                     </ul>
                     <ul class="category-content__item-related">
                       <li>
-                        <a class="underline" href="{$LANG_URL}/gift-card/">{$LINGVO.gift_card}</a>
+                        <a class="underline" href="{$LANGURL}/gift-card/">{$LINGVO.gift_card}</a>
                       </li>
                       <li>
                         <a class="underline"
-                          href="{$LANG_URL}/services/peregorodki-iz-rasteniy/">{$LINGVO.peregorodki_iz_rasteniy}</a>
+                          href="{$LANGURL}/services/peregorodki-iz-rasteniy/">{$LINGVO.peregorodki_iz_rasteniy}</a>
                       </li>
                     </ul>
                   </section>
@@ -779,11 +779,12 @@
       </div>
     </div>
 
-    <!-- Основний контент сторінки -->
-  {if $URL[0]=='' || $URL[0]=='basket' || ($URL[0]=='services' && !$URL[1])} <!-- Якщо сторінка без лівого меню -->
+  {* ***************************** Основний контент сторінки ***************************** *}
+  {* ***************************** Якщо сторінка без лівого меню ***************************** *}
+  {if $URL[0]=='' || $URL[0]=='basket' || ($URL[0]=='services' && !$URL[1])} 
     {include file="$CONTENT_TPL"}
   {else}
-                                        <!-- Якщо сторінка двоколоночна -->
+  {* ***************************** Якщо сторінка двоколоночна ***************************** *}
     <main class="catalog-page">
       <div class="container">
         <!-- Sidebar navigation - категорії каталогу -->
@@ -948,7 +949,7 @@
                   <a href="{$LANGURL}/about/">{$LINGVO.menu_about}</a>
                 </li>
                 <li>
-                  <a href="{$LANGURL}/purchase_returns/">{$LINGVO.menu_purchaise_return}</a>
+                  <a href="{$LANGURL}/purchase-returns/">{$LINGVO.menu_purchaise_return}</a>
                 </li>
                 <li>
                   <a href="{$LANGURL}/partnership/">{$LINGVO.menu_partnership}</a>

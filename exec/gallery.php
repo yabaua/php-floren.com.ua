@@ -16,6 +16,8 @@ if(isset($PARAM[0])){
 		//=============404===================
 	}
 	$gallery=$db->fetch();
+	
+	$galleryIMG = array();
 	$db->query("SELECT * FROM gallery_item WHERE galleryID='".$gallery['ID']."' ORDER BY gItemOrder DESC");
 	while($ff=$db->fetch()){
 		$galleryIMG[]=$ff;

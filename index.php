@@ -327,10 +327,20 @@ if ($URL[0]=='planters') {
 	$group_sql = ' AND alias !="planters"';
 }
 */
-
+$category_left_main_cat_arr=array();
 $category_left=array();
-$db->query("SELECT * FROM goods".$db_sufix."_class WHERE motherID=0 AND act='1'".$not_to_show." ORDER BY sort DESC,name");
+$sort_active_category = '';
 
+//=======  ACTIVE CATEGORY GOES UPPER in LEFT MENU
+$db->query("SELECT alias FROM goods".$db_sufix."_class WHERE motherID=0 AND act='1'".$not_to_show);
+while ($f=$db->fetch()) {
+	$category_left_main_cat_arr[] = $f['alias'];
+}
+if(in_array($URL[0], $category_left_main_cat_arr))
+	$sort_active_category = "alias='" .$URL[0]. "' DESC, "; 
+//========
+
+$db->query("SELECT * FROM goods".$db_sufix."_class WHERE motherID=0 AND act='1'".$not_to_show." ORDER BY ".$sort_active_category."sort DESC,name");
 
 while ($f=$db->fetch()) {
 	$category_left[$f['ID']]['ID']=$f['ID'];

@@ -597,7 +597,7 @@ function generate_cls_select($name, $id = '', $selected = '') {
 
 	$select_id = $id ? '['.$id.']' : '';
 
-	$db->query("SELECT * FROM goods_colors ORDER BY name_ru");
+	$db->query("SELECT * FROM goods_colors ORDER BY name_ru", 51);
 
 	$cls_markup = '<select class="select select_color" name='.$name.$select_id.'>';
 
@@ -609,7 +609,7 @@ function generate_cls_select($name, $id = '', $selected = '') {
 		$cls_markup = $cls_markup . '<option value="0">Цвет не выбран</option>';
 	}
 
-	while ($cls_res=$db->fetch()) {
+	while ($cls_res=$db->fetch(51)) {
 
 		if ($selected) {
 			$is_selected = $cls_res['alias'] === $selected ? 'selected' : '';
@@ -627,10 +627,10 @@ function get_forms_colors($id) {
 
 	global $lang, $db;
 
-	$db->query("SELECT * FROM goods_forms g JOIN goods_colors gc ON g.color=gc.alias WHERE goodID=".$id." ORDER BY color");
+	$db->query("SELECT * FROM goods_forms g JOIN goods_colors gc ON g.color=gc.alias WHERE goodID=".$id." ORDER BY color",48);
 	$colors = array();
 
-	while ($all_cls_res = $db->fetch()) {
+	while ($all_cls_res = $db->fetch(48)) {
 
 		if (!in_array($all_cls_res['alias'], $colors)) {
 			$colors[$all_cls_res['name_'.$lang]] = $all_cls_res['alias'];
@@ -658,25 +658,26 @@ function get_group_photo($id, $color) {
 }
 
 function checkForms($id) {
+	global $db;
 	$qnt = 0;
 
-	$db->query("SELECT * FROM goods_forms WHERE goodID=".$id);
+	$db->query("SELECT count(ID) AS cnt FROM goods_forms WHERE goodID='".$id."'", 49);
 
-	while ($q_res = $db->fetch()) {
-		$qnt = ++$qnt; 
-	}
+	$q_res = $db->fetch(49);
+	$qnt = $q_res['cnt']; 
 
 	return $qnt;
 }
 
 function checkFormsWithColor($id) {
+	global $db;
 	$qnt = 0;
 
-	$db->query("SELECT * FROM goods_forms WHERE color<>'0' AND color<>'' AND goodID=".$id);
+	$db->query("SELECT count(ID) AS cnt FROM goods_forms WHERE color<>'0' AND color<>'' AND goodID='".$id."'", 50);
 
-	while ($q_res = $db->fetch()) {
-		$qnt = ++$qnt; 
-	}
+	$q_res = $db->fetch(50);
+	$qnt = $q_res['cnt']; 
+	
 
 	return $qnt;
 }
@@ -910,8 +911,8 @@ function checkFormsWithColor($id) {
 					<td>
 						<select name="new_measure" class="select">
 							<?php 
-								$db->query("SELECT * FROM goods_measures");
-								while ($m = $db->fetch()) {
+								$db->query("SELECT * FROM goods_measures", 2);
+								while ($m = $db->fetch(2)) {
 							?>
 								<option value="<?=$m['ID']?>"><?=$m['name_ru']?>: <?=$m['unit']?></option>
 							<?php }?>
@@ -919,7 +920,7 @@ function checkFormsWithColor($id) {
 					</td>
 					<td><input class="input" type="text" name="new_price" placeholder="0"></td>
 					<td><input class="input" type="text" name="new_oldprice" placeholder="0"></td>
-					<td><?=generate_cls_select('new_goodcolor');?></td>
+					<td><?php echo generate_cls_select('new_goodcolor');?></td>
 					<td><input type="file" name="new_img"></td>
 				</tr>
 			</tbody>
@@ -1063,7 +1064,7 @@ function checkFormsWithColor($id) {
 							<td>
 								<input type="file" name="image_color[]">
 								<hr style="background-color:#cabcaa;border:0;height:2px;" noshade="true">
-								<input type="text" placeholder="—" <? if ($cf_res['video']) { ?>readonly<?}?> name="edit_video[<?=$cf_res['ID']?>]" class="input" value="<?=$cf_res['video']?>">
+								<input type="text" placeholder="—" <?php if ($cf_res['video']) { ?>readonly<?php }?> name="edit_video[<?=$cf_res['ID']?>]" class="input" value="<?=$cf_res['video']?>">
 								<?php if ($cf_res['video']) { ?>
 									<input value="Удалить видео" class="del_video" type="submit" name="video_del[<?=$cf_res['ID']?>]">
 								<?php }?>
@@ -1238,7 +1239,7 @@ function checkFormsWithColor($id) {
 				<?php }//if group_name?>
 			
 				<div style="width:120px;float:left;">
-					<input type="checkbox" name="filter[<?=$ID?>][<?=$rs2['gfgID']?>][]" value="<?=$ID?>_<?=$rs2['gfID']?>"<?if($rs2['selectedID']==$rs2['gfID']) echo ' checked="true"';?> />	
+					<input type="checkbox" name="filter[<?=$ID?>][<?=$rs2['gfgID']?>][]" value="<?=$ID?>_<?=$rs2['gfID']?>"<?php if($rs2['selectedID']==$rs2['gfID']) echo ' checked="true"';?> />	
 					<?=$rs2['fname'.($lang=='ru'?'':'_'.$lang)]?>&nbsp;&nbsp;
 				</div>
 			<?php 
