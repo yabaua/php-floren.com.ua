@@ -12,7 +12,7 @@
         {foreach item=GI name=GI from=$GOOD_IMAGES}
         {if $GI@iteration>5}{continue}{/if}
         <li{if $GI@iteration==1} class="active"{/if}>
-          <img src="{$GI}" alt="{$GOOD_ONE.name} фото {$smarty.foreach.GI.iteration}"/>
+          <img src="https://floren.com.ua{$GI}" alt="{$GOOD_ONE.name} фото {$smarty.foreach.GI.iteration}"/>
         </li>
         {/foreach}
         {if $G_SIZES|@count > 0}
