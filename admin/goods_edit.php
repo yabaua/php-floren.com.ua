@@ -71,6 +71,8 @@ if (isset($_REQUEST['del'])) {
 
 	foreach($_REQUEST['del'] as $k=>$v){
 		$db->query("DELETE FROM goods_forms WHERE ID=".$k);
+		$db->query("DELETE FROM goods_forms2_1c WHERE fID=".$k);
+		$db->query("DELETE FROM goods_videos WHERE formID=".$k);
 	}
 
 	check_availability('goods');

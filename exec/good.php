@@ -569,7 +569,7 @@ $smarty->assign("CUR_GFSID", $curFID);
 		}
 
 		$smarty->assign("G_FIRST_HGT", $goods_sizes[0]['hgt']);
-		$smarty->assign("MAIN_IMAGE", $main_image);
+		$smarty->assign("MAIN_IMAGE", "https://floren.com.ua".$main_image);
 
 		// All forms with barcodes
 
