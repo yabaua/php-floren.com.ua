@@ -922,7 +922,14 @@
         <div class="homepage__rating_title">
           <h2>{$LINGVO.title_care_feedback}</h2>
           <div class="google-logo">
-            <img src="/img/google-rating.png" alt="Google"/>
+            <img class="google-logo__img" src="/img/google-logo.svg" alt="Google"/>
+            <div class="google-logo__info">
+              <h5>Рейтинг Google</h5>
+              <div class="google-logo__rating">
+                <span>4.5</span>
+                <sl-rating size="small" value="4.5" readonly></sl-rating>
+              </div>              
+            </div>
           </div>
         </div>
         <ul class="homepage__rating_list">

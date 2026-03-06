@@ -3878,7 +3878,36 @@ body.secondary-hovered .catalog-overlay {
 }
 .homepage__rating_title .google-logo {
   margin-top: 32px;
-  width: 170px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #343a40;
+  & .google-logo__img {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+  }
+  & .google-logo__info {
+    h5 {
+      font-family: Geologica;
+      font-size: 14px;
+      font-weight: 600;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.2;
+      letter-spacing: normal;
+      text-align: left;      
+    }
+    .google-logo__rating {
+      font-size: 15px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+    sl-rating {
+      --symbol-size: 1rem;
+    }
+  }
 }
 .homepage__rating_title .google-logo img {
   width: 100%;
