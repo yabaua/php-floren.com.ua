@@ -5167,7 +5167,7 @@ body.secondary-hovered .catalog-overlay {
   gap: 8px;
 }
 .cart-page__order-list_summary .summary__item {
-  width: 55%;
+  width: 100%;
   margin-left: auto;
   display: flex;
   align-items: center;
