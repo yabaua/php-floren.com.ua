@@ -5549,7 +5549,7 @@ const initHoverPhotoViewers = () => {
         mainimage.src = img.src;
       });
     });
-    thumbsBox.addEventListener("click", (e) => {
+    thumbsBox?.addEventListener("click", (e) => {
       const li = e.target.closest("li");
       let activeIndex = 0;
       let prev = li;
@@ -5619,7 +5619,7 @@ const initLastworkViewers = () => {
   document.querySelectorAll("[data-lastwork-viewer]").forEach((viewer) => {
     const thumbsBox = viewer.querySelector(".swiper-wrapper");
     const thumbs = viewer.querySelectorAll(".swiper-wrapper .swiper-slide");
-    thumbsBox.addEventListener("click", (e) => {
+    thumbsBox?.addEventListener("click", (e) => {
       const li = e.target.closest(".swiper-slide");
       let activeIndex = 0;
       let prev = li;
