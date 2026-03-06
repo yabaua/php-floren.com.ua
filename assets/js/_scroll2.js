@@ -1,5 +1,8 @@
 var lastScrollTop = 0;
 const initHeaderScroll = () => {
+  console.log('initHeaderScroll');
+  return;
+  
   const catalogRef = document.getElementById("catalog-menu");
   window.addEventListener(
     "scroll",

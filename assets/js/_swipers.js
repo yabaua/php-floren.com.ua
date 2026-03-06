@@ -1,7 +1,7 @@
 /* empty css      */
 import { i as initIntlTelInput } from "./_shoelace.js";
 import { i as initEvents } from "./_events.js";
-import { i as initScroll } from "./_scroll2.js";
+// import { i as initScroll } from "./_scroll2.js";
 import { i as initCatalog } from "./_catalog.js";
 import { i as initClickOutsideHandlers } from "./_clickOutside.js";
 import { i as initExpandableText } from "./_expandableText.js";
@@ -5654,7 +5654,7 @@ window.youtubePlayers = [];
 window.submitForm = submitForm;
 function startApp() {
   initEvents();
-  initScroll();
+  // initScroll();
   initCatalog();
   initClickOutsideHandlers();
   initSwipers();
@@ -5670,7 +5670,9 @@ const generateRandomId = (length = 10) => {
   return Math.random().toString(36).substring(2, 2 + length);
 };
 document.addEventListener("DOMContentLoaded", () => {
+  console.log('DOMContentLoaded');  
   startApp();
+  document.body.classList.add('loaded');
 });
 export {
   Autoplay as A,

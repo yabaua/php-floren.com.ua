@@ -1,5 +1,20 @@
 @charset "UTF-8";@import url("https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;600;900&display=swap");
 
+/* Prevent FOUC for Shoelace web components */
+sl-button:not(:defined),
+sl-tooltip:not(:defined),
+sl-dropdown:not(:defined),
+sl-menu:not(:defined),
+sl-menu-item:not(:defined),
+sl-divider:not(:defined),
+sl-icon:not(:defined) {
+  visibility: hidden;  
+}
+*:defined sl-button {
+  visibility: visible;
+}
+
+
 /* Font faces, typography rules, etc. */
 /* === Global Reset / Base Styles === */
 /* Box sizing and basic reset */
@@ -5538,7 +5553,7 @@ body.secondary-hovered .catalog-overlay {
   grid-template-columns: 240px 1fr;
   gap: 2rem;
 }
-.services-page__left-title a {
+.services-page__left-title a:not(.button) {
   text-decoration: underline;
   text-decoration-color: var(--color-gray-40);
   text-decoration-thickness: 1px;
@@ -5548,7 +5563,7 @@ body.secondary-hovered .catalog-overlay {
 .services-page__left-title a:hover {
   text-decoration-color: transparent;
 }
-.services-page__left-title a {
+.services-page__left-title a:not(.button) {
   color: var(--color-green-100);
 }
 .services-page__grid-with-button {

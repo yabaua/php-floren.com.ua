@@ -120,18 +120,29 @@
       rel="stylesheet"
     /> -->
     <!-- <link rel="stylesheet" href="../styles/style.css" /> -->
-    <script type="module" crossorigin src="/assets/js/modulepreload.js"></script>
-    <script type="module" crossorigin src="/assets/js/_swipers.js"></script>
-    <script type="module" crossorigin src="/assets/js/_shoelace.js"></script>
-    <script type="module" crossorigin src="/assets/js/_events.js"></script>
-    <script type="module" crossorigin src="/assets/js/_scroll.js"></script>
-    <script type="module" crossorigin src="/assets/js/_catalog.js"></script>
-    <script type="module" crossorigin src="/assets/js/_clickOutside.js"></script>
-    <script type="module" crossorigin src="/assets/js/_expandableText.js"></script>
+    {* <script type="module" crossorigin src="/assets/js/modulepreload.js"></script> *}
+    {* <script type="module" crossorigin src="/assets/js/_swipers.js"></script> *}
+    {* <script type="module" crossorigin src="/assets/js/_shoelace.js"></script> *}
+    {* <script type="module" crossorigin src="/assets/js/_events.js"></script> *}
+    {* <script type="module" crossorigin src="/assets/js/_scroll.js"></script> *}
+    {* <script type="module" crossorigin src="/assets/js/_catalog.js"></script> *}
+    {* <script type="module" crossorigin src="/assets/js/_clickOutside.js"></script> *}
+    {* <script type="module" crossorigin src="/assets/js/_expandableText.js"></script> *}
     <script type="module" crossorigin src="/assets/js/main.js"></script>
 
-    <link rel="stylesheet" href="/assets/css/_swipers.css?2"/>
-    <link rel="stylesheet" href="/assets/css/index.css?2"/>
+    <link rel="stylesheet" href="/assets/css/_swipers.css" />
+    <link rel="stylesheet" href="/assets/css/index.css" />
+    <style>
+      body {
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease-in-out;
+      }
+      body.loaded {
+        opacity: 1;
+        visibility: visible;
+      }
+    </style>
     
     
     <script type="text/javascript">
@@ -819,7 +830,7 @@
 
             {include file="$CONTENT_TPL"}
             
-            ТЕСТ <span class="binct-phone-number-2">+380 99 238-26-44</span>
+            ТЕСТ!!! <span class="binct-phone-number-2">+380 99 999-99-99</span>
           </div>
         </div>
       </div>
@@ -1053,7 +1064,7 @@
   })(document, window, 'script');
   </script>
   <!--  END BINOCHAT CODE -->
-  
+*}  
   <!--  BEGIN BINO CALLTRACKING CODE -->
   <script type="text/javascript">
     (function(d, w, s) {
@@ -1064,7 +1075,7 @@
   </script> 
   <!--  END BINO CALLTRACKING CODE -->
   { /literal }
-*}
+
   <!-- Головний JS файл -->
   </body>
 
