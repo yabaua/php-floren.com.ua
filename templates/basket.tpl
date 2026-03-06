@@ -247,7 +247,7 @@
               </a>
             </div>
             <div class="cart-item__details">
-              <button class="cart-item__remove">
+              <button type="button" class="cart-item__remove">
                 <svg class="icon icon-trash"/>
               </button>
               <h3>

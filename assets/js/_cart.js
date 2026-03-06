@@ -37,6 +37,10 @@ const initCart = async () => {
   });
   document.querySelectorAll("#basket-items-list .cart-item").forEach((item) => {
     item.querySelector("quantity-counter").addEventListener("change", () => changeBasketTotal(), { once: true });
+    item.querySelector(".cart-item__remove").addEventListener("click", () => {
+      item.remove();
+      changeBasketTotal();
+    });
   });
 };
 const addToCart = async (event) => {
