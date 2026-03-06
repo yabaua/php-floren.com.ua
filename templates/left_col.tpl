@@ -22,7 +22,7 @@
     <a href="{$LANGURL}/phytodesign/">{$LINGVO.phytodesign}</a>
   </h3>
   <ul>
-    <li{if $URL[1]=='phytodesign-kvartiri'} class="active"{/if}>
+    <li{if isset($URL[1]) && $URL[1]=='phytodesign-kvartiri'} class="active"{/if}>
       <a class="underline" href="{$LANGURL}/services/phytodesign-kvartiri/">{$LINGVO.phytodesign_kvartiri}</a>
     </li>
     <!-- li{if $URL[1]=='phytodesign-ofisa'} class="active"{/if}>

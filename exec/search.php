@@ -8,10 +8,8 @@ $goods=array();
 if($_REQUEST['srch']=='') $_REQUEST['srch']='Шефлера';
 
 if(strlen($_REQUEST['srch'])>= 2){
-	if(!get_magic_quotes_gpc())
-		$srch=addslashes(trim($_REQUEST['srch']));
-	else
-		$srch=trim($_REQUEST['srch']);
+	$srch=addslashes(trim($_REQUEST['srch']));
+
 	
 
 	$first_table = strlen($db_sufix) > 0 ? 'goods_ua' : 'goods';
@@ -36,7 +34,7 @@ if(strlen($_REQUEST['srch'])>= 2){
 				WHERE gf.ID LIKE '".$srch."' AND g.act='Y' AND g.classID NOT IN (78, 79)
 				ORDER BY g.sort, g.availability DESC");
 				
-				
+	$articul_search = array();		
 	while($rs_goods_articul=$db->fetch()){
 		
 		$new_link_articul	= $lang_url . '/product/'.$rs_goods_articul['gID'].'_'.$rs_goods_articul['gLink'].'/';
