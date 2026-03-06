@@ -4921,7 +4921,8 @@ body.secondary-hovered .catalog-overlay {
   border-bottom: 1px solid var(--color-gray-30);
 }
 .search-results__item_image {
-  width: 232px;
+  max-width: 200px;
+  width: 100%;
   aspect-ratio: 1;
   border-radius: 0.5rem;
   overflow: hidden;
