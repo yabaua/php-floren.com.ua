@@ -32,7 +32,7 @@
 			{foreach item=G name=G key=I from=$GOODS}
       <li class="search-results__item">
         <div class="search-results__item_image">
-          <img width="150" src="/images/{$G.new_image}" alt="{$G.name}" />
+          <img width="150" src="https://floren.com.ua/images/{$G.new_image}" alt="{$G.name}" />
         </div>
         <div class="search-results__item_info">
           <h3 class="search-results__item_title">
