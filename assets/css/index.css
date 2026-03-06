@@ -4681,6 +4681,10 @@ body.secondary-hovered .catalog-overlay {
   flex-shrink: 0;
   --sl-spacing-medium: 0;
 }
+.product-page__options_color sl-radio-group sl-radio-button[disabled] {
+  opacity: 0.5;
+  filter: grayscale(1);
+}
 .product-page__options_color sl-radio-group sl-radio-button::part(button--checked) {
   box-shadow: 0 0 2px 2px var(--color-green-50);
 }
@@ -4688,7 +4692,7 @@ body.secondary-hovered .catalog-overlay {
   border: none;
   border-radius: 0.25rem;
   background-color: transparent;
-  transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease;  
 }
 .product-page__options_color sl-radio-group sl-radio-button::part(button):hover {
   box-shadow: 0 0 2px 2px var(--color-green-50);
