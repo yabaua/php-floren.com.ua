@@ -145,35 +145,130 @@
 {** /if **}
 
 <!-- Pagination -->
-<h1>{$LASTPAGE}</h1>
-<div class="pagination">
-  <a href="" class="pagination__link disabled">
-    <img
-      src="/img/icons/icon-arrow-left-long.svg.svg"
-      alt="Попередня сторінка"
-/>
-  </a>
-  {foreach item=P from=$PAGES} {if $P.page>5} {continue} {else} {if $FROM_GOODS}
+{** MUI algorithm: siblingCount=1, boundaryCount=1 → max 7 visible page items **}
+{assign var="N" value=$LASTPAGE}
+{assign var="C" value=$CUR_PAGE}
+{math assign="Nm2" equation="N - 2" N=$N}
+{math assign="Nm1" equation="N - 1" N=$N}
 
-  <a
-    title="{$LINGVO.pages_goto} {$P.page}"
-    href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}{if $P.page!=1}?p={$P.page}{/if}"
-    class="pagination__link{if $P.active} active{/if}"
-    >{$P.page}</a
-  >
+{** siblingsStart = max(min(C-1, N-4), 3) **}
+{math assign="Cm1" equation="C - 1" C=$C}
+{math assign="Nm4" equation="N - 4" N=$N}
+{if $Cm1 < $Nm4}
+  {assign var="ss" value=$Cm1}
+{else}
+  {assign var="ss" value=$Nm4}
+{/if}
+{if $ss < 3}{assign var="ss" value=3}{/if}
+
+{** siblingsEnd = min(max(C+1, 5), N-2) **}
+{math assign="Cp1" equation="C + 1" C=$C}
+{if $Cp1 > 5}
+  {assign var="se" value=$Cp1}
+{else}
+  {assign var="se" value=5}
+{/if}
+{if $se > $Nm2}{assign var="se" value=$Nm2}{/if}
+
+<div class="pagination">
+
+  {** Prev button: disabled on first page **}
+  {if $C <= 1}
+  <a class="pagination__link disabled" aria-disabled="true">
+    <img src="/img/icons/icon-arrow-left-long.svg" alt="Попередня сторінка" />
+  </a>
   {else}
-  <a
-    title="{$LINGVO.pages_goto} {$P.page}"
-    id="p{$P.page}"
-    rel="{if $P.prev}prev{/if}{if $P.next}next{/if}"
-    href="{$LANGURL}/{$ALIAS}{$FILTERS_URL}{if $P.page==1}/{else}/page{$P.page}/{/if}"
-    class="pagination__link{if $P.active} active{/if}"
-    >{$P.page}</a
-  >
-  {/if} {/if} {** if more than 5 pages **} {/foreach}
-  <a href="" class="pagination__link"
-    ><img src="/img/icons/icon-arrow-right-long.svg" alt="Наступна сторінка"
-/></a>
+  <a class="pagination__link" title="{$LINGVO.pages_goto} {$Cm1}"
+    href="{if $FROM_GOODS}{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}{if $Cm1!=1}?p={$Cm1}{/if}{else}{$LANGURL}/{$ALIAS}{$FILTERS_URL}{if $Cm1==1}/{else}/page{$Cm1}/{/if}{/if}">
+    <img src="/img/icons/icon-arrow-left-long.svg" alt="Попередня сторінка" />
+  </a>
+  {/if}
+
+  {** Page 1 (always visible) **}
+  {if $FROM_GOODS}
+  <a title="{$LINGVO.pages_goto} 1"
+    href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}"
+    class="pagination__link{if $C==1} active{/if}">1</a>
+  {else}
+  <a title="{$LINGVO.pages_goto} 1" id="p1"
+    {if $C==2}rel="prev"{/if}
+    href="{$LANGURL}/{$ALIAS}{$FILTERS_URL}/"
+    class="pagination__link{if $C==1} active{/if}">1</a>
+  {/if}
+
+  {** Left section: ellipsis or page 2 when gap is exactly 1 **}
+  {if $ss > 3}
+    <span class="pagination__ellipsis">...</span>
+  {elseif $ss == 3 && $N > 2}
+    {if $FROM_GOODS}
+    <a title="{$LINGVO.pages_goto} 2"
+      href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}?p=2"
+      class="pagination__link{if $C==2} active{/if}">2</a>
+    {else}
+    <a title="{$LINGVO.pages_goto} 2" id="p2"
+      {if $C==3}rel="prev"{elseif $C==1}rel="next"{/if}
+      href="{$LANGURL}/{$ALIAS}{$FILTERS_URL}/page2/"
+      class="pagination__link{if $C==2} active{/if}">2</a>
+    {/if}
+  {/if}
+
+  {** Sibling pages ss..se (never overlaps with pages 1, 2, N-1, N) **}
+  {foreach item=P from=$PAGES}
+    {assign var="pn" value=$P.page}
+    {if $pn >= $ss && $pn <= $se}
+      {if $FROM_GOODS}
+      <a title="{$LINGVO.pages_goto} {$pn}"
+        href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}?p={$pn}"
+        class="pagination__link{if $P.active} active{/if}">{$pn}</a>
+      {else}
+      <a title="{$LINGVO.pages_goto} {$pn}" id="p{$pn}"
+        rel="{if $P.prev}prev{/if}{if $P.next}next{/if}"
+        href="{$LANGURL}/{$ALIAS}{$FILTERS_URL}/page{$pn}/"
+        class="pagination__link{if $P.active} active{/if}">{$pn}</a>
+      {/if}
+    {/if}
+  {/foreach}
+
+  {** Right section: ellipsis or page N-1 when gap is exactly 1 **}
+  {if $se < $Nm2}
+    <span class="pagination__ellipsis">...</span>
+  {elseif $se == $Nm2 && $N > 3}
+    {if $FROM_GOODS}
+    <a title="{$LINGVO.pages_goto} {$Nm1}"
+      href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}?p={$Nm1}"
+      class="pagination__link{if $C==$Nm1} active{/if}">{$Nm1}</a>
+    {else}
+    <a title="{$LINGVO.pages_goto} {$Nm1}" id="p{$Nm1}"
+      {if $C==$N}rel="prev"{elseif $C==$Nm2}rel="next"{/if}
+      href="{$LANGURL}/{$ALIAS}{$FILTERS_URL}/page{$Nm1}/"
+      class="pagination__link{if $C==$Nm1} active{/if}">{$Nm1}</a>
+    {/if}
+  {/if}
+  {** Last page (always visible) **}
+  {if $FROM_GOODS}
+  <a title="{$LINGVO.pages_goto} {$N}"
+    href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}?p={$N}"
+    class="pagination__link{if $C==$N} active{/if}">{$N}</a>
+  {else}
+  <a title="{$LINGVO.pages_goto} {$N}" id="p{$N}"
+    {if $C==$Nm1}rel="next"{/if}
+    href="{$LANGURL}/{$ALIAS}{$FILTERS_URL}/page{$N}/"
+    class="pagination__link{if $C==$N} active{/if}">{$N}</a>
+  {/if}
+
+  {** Next button: disabled on last page **}
+  {if $C >= $N}
+  <a class="pagination__link disabled" aria-disabled="true">
+    <img src="/img/icons/icon-arrow-right-long.svg" alt="Наступна сторінка" />
+  </a>
+  {else}
+  <a class="pagination__link" title="{$LINGVO.pages_goto} {$Cp1}"
+    href="{if $FROM_GOODS}{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}?p={$Cp1}{else}{$LANGURL}/{$ALIAS}{$FILTERS_URL}/page{$Cp1}/{/if}">
+    <img src="/img/icons/icon-arrow-right-long.svg" alt="Наступна сторінка" />
+  </a>
+  {/if}
+
+
 </div>
 {/if} {** if pagination **}
 
