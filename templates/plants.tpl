@@ -170,7 +170,7 @@
 {/if}
 {if $se > $Nm2}{assign var="se" value=$Nm2}{/if}
 
-<div class="pagination">
+<div class="pagination" id="goods-pagination">
 
   {** Prev button: disabled on first page **}
   {if $C <= 1}
@@ -179,7 +179,7 @@
   </a>
   {else}
   <a class="pagination__link" title="{$LINGVO.pages_goto} {$Cm1}"
-    href="{if $FROM_GOODS}{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}{if $Cm1!=1}?p={$Cm1}{/if}{else}{$LANGURL}/{$ALIAS}{$FILTERS_URL}{if $Cm1==1}/{else}/page{$Cm1}/{/if}{/if}">
+    href="{if $FROM_GOODS}{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}{if $Cm1!=1}page{$Cm1}{/if}{else}{$LANGURL}/{$ALIAS}{$FILTERS_URL}{if $Cm1==1}/{else}/page{$Cm1}/{/if}{/if}">
     <img src="/img/icons/icon-arrow-left-long.svg" alt="Попередня сторінка" />
   </a>
   {/if}
@@ -202,7 +202,7 @@
   {elseif $ss == 3 && $N > 2}
     {if $FROM_GOODS}
     <a title="{$LINGVO.pages_goto} 2"
-      href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}?p=2"
+      href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}page2"
       class="pagination__link{if $C==2} active{/if}">2</a>
     {else}
     <a title="{$LINGVO.pages_goto} 2" id="p2"
@@ -218,7 +218,7 @@
     {if $pn >= $ss && $pn <= $se}
       {if $FROM_GOODS}
       <a title="{$LINGVO.pages_goto} {$pn}"
-        href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}?p={$pn}"
+        href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}page{$pn}/"
         class="pagination__link{if $P.active} active{/if}">{$pn}</a>
       {else}
       <a title="{$LINGVO.pages_goto} {$pn}" id="p{$pn}"
@@ -235,7 +235,7 @@
   {elseif $se == $Nm2 && $N > 3}
     {if $FROM_GOODS}
     <a title="{$LINGVO.pages_goto} {$Nm1}"
-      href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}?p={$Nm1}"
+      href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}?page{$Nm1}"
       class="pagination__link{if $C==$Nm1} active{/if}">{$Nm1}</a>
     {else}
     <a title="{$LINGVO.pages_goto} {$Nm1}" id="p{$Nm1}"
@@ -247,7 +247,7 @@
   {** Last page (always visible) **}
   {if $FROM_GOODS}
   <a title="{$LINGVO.pages_goto} {$N}"
-    href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}?p={$N}"
+    href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}page{$N}"
     class="pagination__link{if $C==$N} active{/if}">{$N}</a>
   {else}
   <a title="{$LINGVO.pages_goto} {$N}" id="p{$N}"
@@ -263,7 +263,7 @@
   </a>
   {else}
   <a class="pagination__link" title="{$LINGVO.pages_goto} {$Cp1}"
-    href="{if $FROM_GOODS}{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}?p={$Cp1}{else}{$LANGURL}/{$ALIAS}{$FILTERS_URL}/page{$Cp1}/{/if}">
+    href="{if $FROM_GOODS}{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}page{$Cp1}{else}{$LANGURL}/{$ALIAS}{$FILTERS_URL}/page{$Cp1}/{/if}">
     <img src="/img/icons/icon-arrow-right-long.svg" alt="Наступна сторінка" />
   </a>
   {/if}
