@@ -412,6 +412,11 @@
         <!-- Основна частина header з лого, телефонами, пошуком, кошиком -->
         <div class="header__main">
           <div class="header__main--left">
+            <div class="header__mobile-buttons">
+              <button class="header__mobile-button">
+                <svg class="icon icon-menu"></svg>
+              </button>
+            </div>            
             <a href="{if $LANGURL=='/ua'}/{else}/ru/{/if}" class="header__main--logo">
               <img src="/img/main-logo.svg" alt="Logo"/>
             </a>
@@ -467,24 +472,34 @@
           <!-- Права частина: пошук, профіль, улюблені, кошик -->
           <div class="header__main--right">
             <!-- Search form start -->
-            <form action="{$LANGURL}/search/" method="get" class="header__main--search">
+            <form id="main-search-form" action="{$LANGURL}/search/" method="get" class="header__main--search">
               <div class="search-wrapper">
                 <img class="search-icon" src="/img/icons/icon-search.svg" alt="Search"/>
                 <input class="search-input" type="search" name="srch" placeholder="{$LINGVO.search_default_txt}"{if $SRCH_ROW} value="{$SRCH_ROW}"{/if}/>
                 <button class="search-button">{$LINGVO.search_button}</button>
               </div>
+              <button class="search-mobile-close" type="button" data-event="click" data-callback="toggleMobileSearch">
+                <svg class="icon icon-close" />
+              </button>
             </form>
             <!-- Search form end -->
 
             <div class="header__main--profile">
+              <button class="header__main--profile-mobile icon-button">
+                <svg class="icon icon-phone" />
+              </button>
+              <button class="header__main--profile-mobile icon-button" type="button" data-event="click" data-callback="toggleMobileSearch">
+                <svg class="icon icon-search" />
+              </button>
+
               <a href="#" class="icon-button" aria-label="{$LINGVO.cabinet}" data-event="click" data-callback="openModal"
               data-modal-id="sign-in-modal">
                 <svg class="icon icon-user"/>
               </a>
-              <a href="#" class="icon-button" aria-label="{$LINGVO.cabinet_favorites}">
+              <!-- <a href="#" class="icon-button" aria-label="{$LINGVO.cabinet_favorites}">
                 <span class="badge warning">10</span>
                 <svg class="icon icon-heart"/>
-              </a>
+              </a> -->
               <a href="#" class="icon-button" aria-label="{$LINGVO.basket}" data-event="click" data-callback="openModal"
               data-modal-id="cart-modal">
               {if $BASKET|@count > 0}
@@ -617,7 +632,7 @@
     </header>
     <!-- Меню каталогу -->
     <!-- Меню каталогу в header -->
-    <div class="header__catalog" id="catalog-menu">
+    <div class="header__catalog deep-active" id="catalog-menu">
       <div class="container">
         <div class="header__catalog_wrapper">
           <!-- Основна кнопка каталогу і випадаючий список -->
@@ -626,16 +641,20 @@
               <svg class="icon icon-menu"/>
             {$LINGVO.catalog}
           </button>
-            <!-- Список категорій каталогу -->
+          <!-- Список категорій каталогу -->
 
-            <!-- prettier-ignore -->
+          <!-- prettier-ignore -->
 
-            <!-- Dropdown список категорій -->
-            <div class="header__catalog_list">
-              <div class="header__catalog_list-wrapper">
-
-                <!-- Список категорій - ліва частина -->
-                <ul class="category-list">
+          <!-- Dropdown список категорій -->
+          <div class="header__catalog_list">
+            <a href="{$LANGURL}" class="header__catalog_mobile-profile">
+              <svg class="icon icon-user"></svg>
+              Особистий кабінет
+            </a>
+            <div class="header__catalog_list-wrapper">
+              <h3 class="header__catalog_list-mobile-title">Каталог товарів</h3>
+              <!-- Список категорій - ліва частина -->
+              <ul class="category-list">
                 {foreach item=C name=C key=I from=$CATEGORY_LEFT}
                   <li class="active" data-category="{$C.alias}">
                     <a href="{$LANGURL}/{$C.alias}/">
@@ -646,17 +665,50 @@
                 {/foreach}
               </ul>
 
-                <!-- Контент категорій - права частина -->
-                <div class="category-content">
+              <h3 class="header__catalog_list-mobile-title" style="margin-top: 1rem;">Каталог послуг</h3>
+              <ul class="category-list category-list--secondary-mobile">
+                <li>
+                  <a href="{$LANGURL}/phytodesign/">
+                    <b>{$LINGVO.phytodesign}</b>
+                    <span>{$LINGVO.ozelenenie_prostoru}</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="{$LANGURL}/services/vertikalnoe-ozelenenie/">
+                    <b>{$LINGVO.vertikalnoe_ozelenenie}</b>
+                    <span>{$LINGVO.green_wall_short}</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="{$LANGURL}/services/house_plant_care/">
+                    <b>{$LINGVO.care}</b>
+                    <span>{$LINGVO.za_rasteniyami}</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="{$LANGURL}/gallery/">
+                    <b>{$LINGVO.portfolio}</b>
+                    <span>{$LINGVO.photo_gallery}</span>
+                  </a>
+                </li>
+              </ul>
+              <!-- Контент категорій - права частина -->
+              <div class="category-content">
                   <!-- prettier-ignore -->
                   <!-- Контент категорії "Кімнатні рослини" для меню каталогу -->
                 {foreach item=C name=C key=I from=$CATEGORY_LEFT}
                   <section class="category-content__item" data-category="{$C.alias}">
+                    <button class="category-content__back-button">
+                      <svg class="icon icon-arrow-angle-left"/>
+                      {$C.name}
+                    </button>
                     <ul class="category-content__item-list">
                       {foreach item=CC name=CC from=$C.category}
                         <li>
                         <a href="{$LANGURL}/{$C.alias}/{$CC.cur_alias}/">
-                          <img src="/img/category/{$CC.cur_alias}.png?v=1" alt="{$CC.name}"/>
+                          <div class="category-content__item-list-image">
+                            <img src="/img/category/{$CC.cur_alias}.png?v=1" alt="{$CC.name}" />
+                          </div>                          
                           <span>{$CC.name}</span>
                         </a>
                       </li>
@@ -674,10 +726,34 @@
                   </section>
                 {/foreach}
               </div>
+            </div>
+            <div class="header__catalog_list-wrapper">
+              <h3 class="header__catalog_list-mobile-title">Інформація</h3>
+              <ul class="category-list category-list--information-mobile">
+                <li>
+                  <a href="{$LANGURL}/about/">{$LINGVO.menu_about}</a>
+                </li>
+                <li>
+                  <a href="{$LANGURL}/delivery/">{$LINGVO.menu_delivery}</a>
+                </li>
+                <li>
+                  <a href="{$LANGURL}/publications/">{$LINGVO.menu_publications}</a>
+                </li>
+                <li>
+                  <a href="{$LANGURL}/contacts/">{$LINGVO.menu_contacts}</a>
+                </li>
+              </ul>
+              <div class="category-list--item-messengers">
+                <a href="viber://chat?number=%2B380992382644" target="_blank" onclick="trackConv('vb','{$LANGURL}/{$URL|@join:"/"}')">
+                  <svg class="icon icon-whatsapp" />
+                </a>
+                <a href="https://t.me/studio_floren" target="_blank" onclick="trackConv('tg','{$LANGURL}/{$URL|@join:"/"}')">
+                  <svg class="icon icon-telegram" />
+                </a>
               </div>
             </div>
-          </div>
-
+          </div>          
+        </div>
           <!-- Додаткові категорії: фітодизайн, вертикальне озеленення, флораріуми -->
           <ul class="header__catalog--secondary">
             <li class="secondary-item">

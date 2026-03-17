@@ -41,7 +41,13 @@ const clickHandlers = {
       console.error("Error fetching more goods:", error);
     }
   },
-  addToCart
+  addToCart,
+  toggleMobileSearch: (event) => {    
+    const search = document.querySelector("#main-search-form");
+    console.log('toggleMobileSearch', search);
+    
+    search.classList.toggle("active");
+  }
 };
 const initEvents = () => {
   const targets = document.querySelectorAll("[data-event]");

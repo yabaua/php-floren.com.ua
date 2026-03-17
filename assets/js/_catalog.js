@@ -1,3 +1,5 @@
+const isTouchDevice = () => window.matchMedia("(hover: none)").matches;
+
 const initCatalog = () => {
   window.currentPage = 1;
   const catalogButton = document.getElementById("catalog-button");
@@ -7,24 +9,26 @@ const initCatalog = () => {
   if (!catalogButton || !catalogOverlay || !mainCategoryNavItems.length) {
     return;
   }
-  const onHoverCategory = (item) => {
-    const category = item.dataset.category;
+
+  const setActiveCategory = (category) => {
     const catalogItems = document.querySelectorAll(".category-content__item");
     mainCategoryNavItems.forEach((navItem) => {
-      if (navItem.dataset.category === category) {
-        navItem.classList.add("active");
-      } else {
-        navItem.classList.remove("active");
-      }
+      navItem.classList.toggle("active", navItem.dataset.category === category);
     });
     catalogItems.forEach((el) => {
-      if (el.dataset.category === category) {
-        el.classList.add("active");
-      } else {
-        el.classList.remove("active");
-      }
+      el.classList.toggle("active", el.dataset.category === category);
     });
   };
+
+  const onHoverCategory = (item) => {
+    setActiveCategory(item.dataset.category);
+  };
+
+  const onTouchCategory = (item) => {
+    console.log('onTouchCategory!!!!!');
+    // setActiveCategory(item.dataset.category);
+  };
+
   catalogButton.addEventListener("click", () => {
     const firstCategoryItem = document.querySelector(".header__catalog_list .category-list > li:first-child");
     onHoverCategory(firstCategoryItem);
@@ -45,7 +49,11 @@ const initCatalog = () => {
     document.body.classList.remove("catalog-opened");
   });
   mainCategoryNavItems.forEach((item) => {
-    item.addEventListener("mouseenter", () => onHoverCategory(item));
+    if (isTouchDevice()) {
+      item.addEventListener("click", () => onTouchCategory(item));
+    } else {
+      item.addEventListener("mouseenter", () => onHoverCategory(item));
+    }
   });
 };
 
