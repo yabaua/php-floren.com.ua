@@ -6,11 +6,15 @@ const initCatalog = () => {
   const catalogSecondary = document.querySelectorAll(".header__catalog--secondary .secondary-item");
   const catalogOverlay = document.getElementById("catalog-overlay");
   const mainCategoryNavItems = document.querySelectorAll(".header__catalog_list .category-list > li");
+  const backCategoryButtons = document.querySelectorAll(".category-content__back-button");
   if (!catalogButton || !catalogOverlay || !mainCategoryNavItems.length) {
     return;
   }
 
   const setActiveCategory = (category) => {
+    const categoryContent = document.querySelector(".category-content");
+    categoryContent.classList.add("active");
+
     const catalogItems = document.querySelectorAll(".category-content__item");
     mainCategoryNavItems.forEach((navItem) => {
       navItem.classList.toggle("active", navItem.dataset.category === category);
@@ -24,10 +28,47 @@ const initCatalog = () => {
     setActiveCategory(item.dataset.category);
   };
 
-  const onTouchCategory = (item) => {
-    console.log('onTouchCategory!!!!!');
-    // setActiveCategory(item.dataset.category);
+  const onTouchCategory = (item, event) => {        
+    const category = item.dataset.category;
+    if(category) {
+      event.preventDefault();
+      setActiveCategory(category);
+    }
   };
+  
+  const onBackCategory = () => {
+    const categoryContent = document.querySelector(".category-content");
+    const mainCategoryNavItems = document.querySelectorAll(".header__catalog_list .category-list > li");
+    mainCategoryNavItems.forEach((navItem) => {
+      navItem.classList.remove("active");
+    });
+    categoryContent.classList.remove("active");
+  };
+
+  backCategoryButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      onBackCategory();
+    });
+  });
+
+  const catalogButtonMobile = document.getElementById("catalog-button-mobile");
+  const catalogCloseMobile = document.getElementById("catalog-close-mobile");
+  catalogButtonMobile.addEventListener("click", (e) => {
+    e.currentTarget.closest(".header__mobile-buttons").classList.remove("catalog");
+    e.currentTarget.closest(".header__mobile-buttons").classList.add("close");
+    document.getElementById("catalog-menu").classList.add("active");    
+  });
+  catalogCloseMobile.addEventListener("click", (e) => {
+    e.currentTarget.closest(".header__mobile-buttons").classList.remove("close");
+    e.currentTarget.closest(".header__mobile-buttons").classList.add("catalog");
+    document.getElementById("catalog-menu").classList.remove("active");
+    document.querySelector(".category-content").classList.remove("active");
+    document.querySelectorAll('.category-content__item').forEach((item) => {
+      item.classList.remove("active");
+    });
+  });
+
+
 
   catalogButton.addEventListener("click", () => {
     const firstCategoryItem = document.querySelector(".header__catalog_list .category-list > li:first-child");
@@ -50,7 +91,7 @@ const initCatalog = () => {
   });
   mainCategoryNavItems.forEach((item) => {
     if (isTouchDevice()) {
-      item.addEventListener("click", () => onTouchCategory(item));
+      item.addEventListener("click", (event) => onTouchCategory(item, event));
     } else {
       item.addEventListener("mouseenter", () => onHoverCategory(item));
     }

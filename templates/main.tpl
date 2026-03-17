@@ -412,9 +412,12 @@
         <!-- Основна частина header з лого, телефонами, пошуком, кошиком -->
         <div class="header__main">
           <div class="header__main--left">
-            <div class="header__mobile-buttons">
-              <button class="header__mobile-button">
+            <div class="header__mobile-buttons catalog">
+              <button id="catalog-button-mobile" class="header__mobile-button catalog">
                 <svg class="icon icon-menu"></svg>
+              </button>
+              <button id="catalog-close-mobile" class="header__mobile-button close">
+                <svg class="icon icon-close"></svg>
               </button>
             </div>            
             <a href="{if $LANGURL=='/ua'}/{else}/ru/{/if}" class="header__main--logo">
@@ -632,7 +635,7 @@
     </header>
     <!-- Меню каталогу -->
     <!-- Меню каталогу в header -->
-    <div class="header__catalog deep-active" id="catalog-menu">
+    <div class="header__catalog" id="catalog-menu">
       <div class="container">
         <div class="header__catalog_wrapper">
           <!-- Основна кнопка каталогу і випадаючий список -->
