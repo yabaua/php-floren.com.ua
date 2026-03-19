@@ -5406,8 +5406,16 @@ const config = {
   "services-swiper": {
     modules: [Navigation],
     spaceBetween: 24,
-    slidesPerView: 3,
+    slidesPerView: 1,
     loop: true,
+    breakpoints: {
+      992: {
+        slidesPerView: 2
+      },
+      1200: {
+        slidesPerView: 3
+      }
+    },
     navigation: {
       nextEl: ".services-swiper .swiper-button--next",
       prevEl: ".services-swiper .swiper-button--prev"

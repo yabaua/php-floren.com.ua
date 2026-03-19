@@ -297,6 +297,9 @@
             <!-- Slides -->
             <!-- Slide 1 -->
             <div class="swiper-slide projects-slide">
+              <h3 class="projects-slide__info_title-mobile">
+                Озеленення інтер'єру офіса Типографії
+              </h3>
               <div
               class="hover-photo-viewer"
               data-photo-viewer="project-photo-viewer"
@@ -342,8 +345,8 @@
               </div>
               <div class="projects-slide__info">
                 <h3 class="projects-slide__info_title">
-                Озеленення інтер'єру офіса Типографії
-              </h3>
+                  Озеленення інтер'єру офіса Типографії
+                </h3>
                 <div class="projects-slide__info_text">
                   <p>
                   Спільно з архітектурним бюро ми розробили і реалізували проект

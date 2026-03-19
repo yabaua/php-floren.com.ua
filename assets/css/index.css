@@ -3567,6 +3567,9 @@ body.secondary-hovered .catalog-overlay {
   top: 24px;
   bottom: 24px;
   transition: background-color 0.3s ease;
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
 }
 .services-swiper .swiper-button--prev {
   left: 24px;
@@ -3796,6 +3799,10 @@ body.secondary-hovered .catalog-overlay {
 }
 .projects-swiper h2 {
   margin-bottom: 24px;
+  @media screen and (max-width: 992px) {
+    font-size: 1.5rem;
+    padding-right: 102px;
+  }
 }
 .projects-swiper .swiper {
   background-color: var(--color-white);
@@ -3806,12 +3813,32 @@ body.secondary-hovered .catalog-overlay {
   grid-template-columns: 1fr 1fr;
   gap: 64px;
   padding: 3rem;
+  @media screen and (max-width: 992px) {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 36px 24px 48px 24px;
+  }
 }
 .projects-swiper .swiper .projects-slide__info_title {
   font-size: 2.5rem;
   font-weight: 600;
   line-height: 1.2;
   margin-bottom: 32px;
+  @media screen and (max-width: 992px) {
+    display: none;
+  }
+}
+.projects-swiper .swiper .projects-slide__info_title-mobile {
+  display: none;
+  font-size: 32px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: normal;  
+  @media screen and (max-width: 992px) {
+    display: block;
+  }
 }
 .projects-swiper .swiper .projects-slide__info_text {
   line-height: 1.5;
@@ -4151,6 +4178,10 @@ body.secondary-hovered .catalog-overlay {
   display: flex;
   gap: 5rem;
   background: url("/img/leaf.png") no-repeat left 3.75rem bottom/172px auto;
+  @media screen and (max-width: 768px) {
+    gap: 2rem;
+    background-position: left 1rem top 15%;
+  }  
 }
 .homepage__landscaping__content > h2 {
   font-size: 2.5rem;
@@ -4158,11 +4189,20 @@ body.secondary-hovered .catalog-overlay {
   line-height: 1.2;
   width: 260px;
   flex-shrink: 0;
+  @media screen and (max-width: 768px) {
+    font-size: 2rem;
+    width: auto;
+    flex-shrink: initial;
+  }
 }
 .homepage__landscaping__content-text {
   font-size: 1.125rem;
   line-height: 1.5;
   font-weight: 300;
+  @media screen and (max-width: 768px) {
+    font-size: 1rem;
+    flex-grow: 1;
+  }
 }
 .homepage__landscaping__content-text p {
   margin-bottom: 1rem;
@@ -4172,6 +4212,16 @@ body.secondary-hovered .catalog-overlay {
 }
 .homepage__landscaping .services-swiper {
   margin-top: 48px;
+  @media screen and (max-width: 600px) {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    padding: 24px 48px 24px 16px;
+  }
+}
+.homepage__landscaping .services-swiper .swiper {
+  @media screen and (max-width: 600px) {
+    overflow: visible;
+  }
 }
 .homepage__numbers {
   padding: 80px 0;
