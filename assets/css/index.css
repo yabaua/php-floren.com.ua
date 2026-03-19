@@ -297,7 +297,9 @@ a.button--secondary {
   color: var(--color-white);
   padding-left: 2.5rem;
   padding-right: 2.5rem;
-  height: 48px;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  min-height: 48px;
 }
 button.button--secondary:hover,
 a.button--secondary:hover {
@@ -3920,21 +3922,34 @@ body.secondary-hovered .catalog-overlay {
 }
 
 .homepage {
-  visibility: hidden;
+  
 }
 .homepage__hero-swiper.swiper {
   padding-bottom: 2.25rem;
+  @media screen and (max-width: 992px) {
+    overflow: visible;
+  }
 }
 .homepage__hero-swiper.swiper h2 {
   font-size: 3rem;
   font-weight: 600;
   line-height: 1.2;
+  @media screen and (max-width: 992px) {
+    font-size: 2rem;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 1.5rem;
+  }
 }
 .homepage__hero-slide-1 .slide-1__content {
   display: flex;
   gap: 48px;
   padding: 48px 48px 0 48px;
   position: relative;
+  @media screen and (max-width: 992px) {
+    padding: 32px;
+    gap: 32px;
+  }
 }
 .homepage__hero-slide-1 .slide-1__content::before {
   content: "";
@@ -3943,20 +3958,36 @@ body.secondary-hovered .catalog-overlay {
   border-radius: 1rem;
   background: var(--color-green-20) url("/img/bg-leaves-back.svg") no-repeat center/auto 165%;
   z-index: -1;
+  @media screen and (max-width: 992px) {
+    inset: 0;
+  }
 }
 .homepage__hero-slide-1 .slide-1__image {
   flex-shrink: 0;
   width: 16.66%;
+  @media screen and (max-width: 992px) {
+    width: 33.33%;
+  }
 }
 .homepage__hero-slide-1 .slide-1__text h2 {
   padding-left: 2.25rem;
   margin-bottom: 1.5rem;
+  @media screen and (max-width: 992px) {
+    padding-left: 0;
+  }
 }
 .homepage__hero-slide-1 .slide-1__text p {
   padding-left: 2.25rem;
   font-size: 1.125rem;
   line-height: 1.5;
   font-weight: 300;
+  @media screen and (max-width: 992px) {
+    padding-left: 0;
+    font-size: 1rem;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 0.875rem;
+  }
 }
 .homepage__hero-slide-1 .slide-1__text p a {
   color: var(--color-green-100);
@@ -3968,7 +3999,63 @@ body.secondary-hovered .catalog-overlay {
   padding: 24px 36px 18px 24px;
   border-radius: 1rem;
   box-shadow: 0 8px 40px 0 rgba(0, 38, 3, 0.08);
+  background-color: var(--color-white);  
+  @media screen and (max-width: 992px) {
+    display: none;
+  }  
+}
+.slide-1__actions-mobile {
+  display: none;
+  flex-direction: column;
+  gap: 0;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 8px 40px 0 rgba(0, 38, 3, 0.08);
   background-color: var(--color-white);
+  margin-top: -1rem;
+  @media screen and (max-width: 992px) {
+    display: flex;
+  }
+  & .slide-1__action {
+    display: flex;
+    gap: 1.5rem;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--color-gray-30);
+    &:first-child {
+      padding-top: 0;
+    }
+    &:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    & .slide-1__action_link {
+      width: 78px;
+      flex-shrink: 0;
+      a {
+        width: 100%;
+        img {
+          width: 100%;
+          border-radius: 8px;
+          object-fit: cover;
+        }        
+      }
+    }
+    & .slide-1__action_description {
+      & > a {
+        font-size: 1.25rem;
+        font-weight: 600;
+        line-height: 1.2;
+        color: var(--color-violet);
+        margin-bottom: 0.5rem;
+        display: inline-block;
+      }
+      & > p {
+        font-size: 0.875rem;
+        font-weight: 300;
+        color: var(--color-gray-100);
+      }
+    }
+  }
 }
 .homepage__hero-slide-1 .slide-1__actions .slide-1__action {
   position: relative;
@@ -4001,14 +4088,27 @@ body.secondary-hovered .catalog-overlay {
   background: url("/img/homepage/hero-swiper-slide-2-1.png") no-repeat left top/23% auto, url("/img/homepage/hero-swiper-slide-2-2.png") no-repeat right bottom/25% auto, #eee5df;
   border-radius: 1rem;
   padding: 48px 18% 48px 24%;
+  @media screen and (max-width: 992px) {
+    padding: 32px 32px 32px 40%;
+    background-size: 33% auto;
+  }
 }
 .homepage__hero-slide-2 .slide-2__content h2, .homepage__hero-slide-3 .slide-2__content h2 {
   margin-bottom: 1.5rem;
+  @media screen and (max-width: 992px) {
+    /* font-size: 2rem; */
+  }
 }
 .homepage__hero-slide-2 .slide-2__content p, .homepage__hero-slide-3 .slide-2__content p {
   font-size: 1.125rem;
   line-height: 1.5;
   font-weight: 300;
+  @media screen and (max-width: 992px) {
+    font-size: 1rem;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 0.875rem;
+  }
 }
 .homepage__hero-slide-2 .slide-2__content ul, .homepage__hero-slide-3 .slide-2__content ul {
   list-style: disc;
@@ -4018,10 +4118,21 @@ body.secondary-hovered .catalog-overlay {
   font-size: 1.125rem;
   line-height: 1.5;
   font-weight: 300;
+  @media screen and (max-width: 992px) {
+    padding-left: 0;
+    font-size: 1rem;
+  }
+  @media screen and (max-width: 480px) {
+    font-size: 0.875rem;
+  }
 }
 .homepage__hero-slide-3 {
   padding: 48px 20% 48px 26%;
   background: url("/img/homepage/hero-swiper-slide-3-1.png") no-repeat left top/auto 100%, url("/img/homepage/hero-swiper-slide-3-2.png") no-repeat right bottom/auto 100%, #f7f7e7;
+  @media screen and (max-width: 992px) {
+    padding: 32px 32px 32px 40%;
+    background: url("/img/homepage/hero-swiper-slide-3-1.png") no-repeat left top/33% auto, #f7f7e7;    
+  }
 }
 .homepage__landscaping {
   margin-top: 60px;

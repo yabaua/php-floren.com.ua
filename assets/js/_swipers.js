@@ -5389,6 +5389,7 @@ const config = {
     modules: [Pagination, Navigation, Autoplay],
     spaceBetween: 24,
     loop: true,
+    autoHeight: true,
     autoplay: {
       delay: 5e3,
       pauseOnMouseEnter: true

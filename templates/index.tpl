@@ -33,9 +33,9 @@
                     <a class="underline" href="/ua/komnatnie-rasteniya/">Каталог рослин та <a href="/ua/planters/">горщиків</a>
                   </div>
                   <div class="slide-1__action_description">
-                Підберіть рослини та кашпо для озеленення приміщення, а
-                фіто-дизайнер проконсультує з питань догляду.
-              </div>
+                    Підберіть рослини та кашпо для озеленення приміщення, а
+                    фіто-дизайнер проконсультує з питань догляду.
+                  </div>
                 </section>
                 <section class="slide-1__action">
                   <div class="slide-1__action_link">
@@ -48,9 +48,9 @@
                     <a class="underline" href="/ua/hiuse_plant_care/">Догляд за рослинами</a>
                   </div>
                   <div class="slide-1__action_description">
-                Складно доглядати за рослинами, – ми візьмемо квіти у вашому
-                офісі на обслуговування, і вони знову оживуть.
-              </div>
+                    Складно доглядати за рослинами, – ми візьмемо квіти у вашому
+                    офісі на обслуговування, і вони знову оживуть.
+                  </div>
                 </section>
                 <section class="slide-1__action">
                   <div class="slide-1__action_link">
@@ -63,12 +63,47 @@
                     <a class="underline" href="">Доставка букетів</a>
                   </div>
                   <div class="slide-1__action_description">
-                Авторські букети та композиції, створені професійними
-                флористами, з доставкою по Києву.
-              </div>
+                    Авторські букети та композиції, створені професійними
+                    флористами, з доставкою по Києву.
+                  </div>
                 </section>
               </div>
             </div>
+          </div>
+          <div class="slide-1__actions-mobile">
+            <section class="slide-1__action">
+              <div class="slide-1__action_link">
+                <a href="/ua/komnatnie-rasteniya/">
+                  <img src="/img/homepage/hero-swiper-slide-1-2.png" alt="Каталог рослин та горщиків" />
+                </a>                
+              </div>
+              <div class="slide-1__action_description">
+                <a class="underline" href="/ua/komnatnie-rasteniya/">Каталог рослин та горщиків</a>
+                <p>Підберіть рослини та кашпо для озеленення приміщення, а фіто-дизайнер проконсультує з питань догляду.</p>
+              </div>
+            </section>
+            <section class="slide-1__action">
+              <div class="slide-1__action_link">
+                <a href="/ua/hiuse_plant_care/">
+                  <img src="/img/homepage/hero-swiper-slide-1-3.png" alt="Догляд за рослинами" />
+                </a>                
+              </div>
+              <div class="slide-1__action_description">
+                <a class="underline" href="/ua/hiuse_plant_care/">Догляд за рослинами</a>
+                <p>Складно доглядати за рослинами, – ми візьмемо квіти у вашому офісі на обслуговування, і вони знову оживуть.</p>
+              </div>
+            </section>
+            <section class="slide-1__action">
+              <div class="slide-1__action_link">
+                <a href="">
+                  <img src="/img/homepage/hero-swiper-slide-1-4.png" alt="Доставка букетів" />
+                </a>                
+              </div>
+              <div class="slide-1__action_description">
+                <a class="underline" href="">Доставка букетів</a>
+                <p>Авторські букети та композиції, створені професійними флористами, з доставкою по Києву.</p>
+              </div>
+            </section>
           </div>
         </div>
 
