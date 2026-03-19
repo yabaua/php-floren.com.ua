@@ -29,6 +29,8 @@ if($URL[0]=='phytodesign'){
 	if($service['meta_title']!='') $TITLE[1]=$service['meta_title'];
 	else $TITLE[0]=$service['title'];
 	
+	
+	
 	$smarty->assign("META_REL_CANONICAL",'<link rel="canonical" href="https://floren.com.ua'.$_SERVER['REQUEST_URI'].'" />');
 	$smarty->assign("META_DESCRIPTION",$service['meta_description']);
 	$smarty->assign("META_KEYWORDS",$service['meta_keywords']);
@@ -69,6 +71,8 @@ else
 					$servImgSize=@getimagesize($service['schema_image']);
 					$smarty->assign("SERVICE_IMAGE",$servImgSize);
 				}
+				
+				
 	
 				$hleb=array();
 				$hleb[0]['link']='/';
@@ -106,12 +110,16 @@ else
 					$SCHEMA_GOOD_VOTE_AVG='5';
 				}
 		
-		
+				$body_file = 'services/' . $lang .'_'.$service['alias'] . '.tpl';
+			//	echo $body_file;
+				$smarty->assign("BODY_FILE",$body_file);
+				
 				$smarty->assign("META_REL_CANONICAL",'<link rel="canonical" href="https://floren.com.ua'.$_SERVER['REQUEST_URI'].'" />');
 				$smarty->assign("META_DESCRIPTION",$service['meta_description']);
 				$smarty->assign("META_KEYWORDS",$service['meta_keywords']);
 				$smarty->assign("PAGETYPE_SESSNAME",'service'.$service['ID']);
 				$smarty->assign("PHOTOS", "xxxx");
+				
 				
 				$smarty->assign("LEFT_TPL",'left_col.tpl');
 				$smarty->assign("CONTENT_TPL",'services.tpl');
