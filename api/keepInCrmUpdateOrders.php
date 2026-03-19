@@ -18,8 +18,8 @@ header('Accept: application/json');
 
 require("../include/db_mysql.php");
 
-$db=new DB2();
-$db->connect();
+$db=new DB();
+$db->connect($DB_HOST,$DB_NAME,$DB_USER,$DB_PASS,$DB_CHARSET);
 
 
 
@@ -29,7 +29,7 @@ $income_data = json_decode($postData, true);
 //	print_r($income_data);
 // =============GET DATA FROM CRM============
 		$url = 'https://api.keepincrm.com/v1/agreements/'.$income_data['id'];
-	$url = 'https://api.keepincrm.com/v1/agreements/30679502';
+//	$url = 'https://api.keepincrm.com/v1/agreements/30785019';
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, [
 	    'accept: application/json',
@@ -40,20 +40,20 @@ $income_data = json_decode($postData, true);
 	$response = curl_exec($ch);
 	curl_close($ch);
 	$data=json_decode($response);
-	print_r($data);	
+//	print_r($data);	
 //====CUSTOM-FIELDS======
 foreach($data->custom_fields_detailed AS $cf=>$det){
 	if($det->name == 'tip_oplati_6124995'){
 		$custom_fields_tip_oplaty = $det->value;
 	}
 	if($det->name == 'adriesa_4658058'){
-		$custom_fields_address = $det->value;
+		$custom_fields_address = str_replace("'", "", $det->value);
 	}
 	if($det->name == 'gaa_utm_source_4449395'){
 		$custom_fields_utm_source = $det->value;
 	}
 	if($det->name == 'gaa_utm_campaign_4449398'){
-		$custom_fields_utm_campaign = str_replace("'", "", $det->value);
+		$custom_fields_utm_campaign = str_replace("'", "", str_replace("%20", " ", $det->value));
 	}
 	if($det->name == 'gaa_utm_medium_4449399'){
 		$custom_fields_utm_medium = $det->value;
@@ -69,7 +69,6 @@ foreach($data->custom_fields_detailed AS $cf=>$det){
 foreach($data->deliveries AS $dID=>$dVal){
 	$last_ttn = $dVal->ttn;
 }
-
 
 $crmID=$data->id;
 $crmOrderTitle=$data->title;
@@ -118,9 +117,9 @@ if($db->num_rows()){
 				deliveryWay='".$deliveryWay."',
 				deliveryDate='".$deliveryDate."',
 				address='".$address."',
-				ttn='".$ttn."'
+				ttn='".$ttn."'		
 			WHERE keepInCrmID='".$crmID."'";
-			
+		//	echo $query;
 			$db->query($query);
 			//mail('info@floren.com.ua','order'.$order_id,$query);
 }
