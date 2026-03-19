@@ -5424,8 +5424,16 @@ const config = {
   "works-swiper": {
     modules: [Navigation],
     spaceBetween: 24,
-    slidesPerView: 5,
+    slidesPerView: 'auto',    
     loop: true,
+    breakpoints: {
+      768: {
+        slidesPerView: 3
+      },
+      1200: {
+        slidesPerView: 5
+      }
+    },
     navigation: {
       nextEl: ".works-swiper .swiper-button--next",
       prevEl: ".works-swiper .swiper-button--prev"
