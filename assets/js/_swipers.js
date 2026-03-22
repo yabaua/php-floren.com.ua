@@ -5442,8 +5442,16 @@ const config = {
   "clients-swiper": {
     modules: [Navigation],
     spaceBetween: 0,
-    slidesPerView: 5,
+    slidesPerView: 'auto',
     loop: true,
+    breakpoints: {
+      768: {
+        slidesPerView: 3
+      },
+      992: {
+        slidesPerView: 5
+      }
+    },
     navigation: {
       nextEl: ".clients-swiper .swiper-button--next",
       prevEl: ".clients-swiper .swiper-button--prev"
@@ -5462,8 +5470,16 @@ const config = {
   "popular-swiper": {
     modules: [Navigation],
     spaceBetween: 0,
-    slidesPerView: 5,
+    slidesPerView: 2,
     loop: true,
+    breakpoints: {
+      768: {
+        slidesPerView: 3
+      },
+      992: {
+        slidesPerView: 5
+      }
+    },
     navigation: {
       nextEl: ".popular-swiper .swiper-button--next",
       prevEl: ".popular-swiper .swiper-button--prev"

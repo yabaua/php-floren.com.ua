@@ -737,10 +737,7 @@
         <div class="swiper-slide popular-slide">
             <div class="popular-slide__image">
               <a href="{$PP.product_path}">
-                <img
-                src="{$PP.img_path}"
-                alt="{$LINGVO.buy} {$PP.name}"
-/>
+                <img src="{$PP.img_path}" alt="{$LINGVO.buy} {$PP.name}" />
               </a>
             </div>
             <div class="popular-slide__title">

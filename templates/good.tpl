@@ -3,6 +3,10 @@
   <!-- Галерея фото продукту -->
   <!-- Product gallery -->
   <div class="product-page__gallery">
+    <div class="product-page__title-mobile">
+      <div class="product-page__details_artikul">{$LINGVO.artikul}: {$CUR_GFSID}</div>
+      <h1>{$GOOD_H1}</h1>
+    </div>
     <div class="hover-photo-viewer" data-photo-viewer="project-photo-viewer">
       <div class="hover-photo-viewer__main">
         <img src="{$MAIN_IMAGE}?v=2" alt="{$GOOD_ONE.name_alter} {$GOOD_ONE.name}" title="{$GOOD_ONE.name_alter} {$GOOD_ONE.name}"/>
@@ -334,23 +338,17 @@
 </sl-tab-panel>
     {if $GOOD_TECH}
     <sl-tab-panel name="care">
-  <div class="product-page__description_care">
-    <table>
-      <tbody>
-        <tr>
-              {foreach $GOOD_TECH as $GT}
-              <td>
-            <b>{$GT.name}</b>
-          </td>
-          <td>{$GT.val} {$GT.measure}</td>
-              {if $GT@iteration % 3 == 2}</tr>
-        <tr>{/if}
-              {/foreach}
-            </tr>
-      </tbody>
-    </table>
-  </div>
-</sl-tab-panel>
+      <div class="product-page__description_care">
+        {foreach $GOOD_TECH as $GT}
+          <ul>
+            <li>
+              <b>{$GT.name}</b>
+            </li>
+            <li>{$GT.val} {$GT.measure}</li>
+          </ul>
+        {/foreach}
+      </div>
+    </sl-tab-panel>
     {/if}
     <sl-tab-panel name="reviews">
   <!-- Секція відгуків: форма і список -->
