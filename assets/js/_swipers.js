@@ -5460,8 +5460,16 @@ const config = {
   "recomends-swiper": {
     modules: [Navigation],
     spaceBetween: 0,
-    slidesPerView: 5,
+    slidesPerView: 2,
     loop: true,
+    breakpoints: {
+      768: {
+        slidesPerView: 3
+      },
+      992: {
+        slidesPerView: 5
+      }
+    },
     navigation: {
       nextEl: ".recomends-swiper .swiper-button--next",
       prevEl: ".recomends-swiper .swiper-button--prev"

@@ -6077,6 +6077,13 @@ body.secondary-hovered .catalog-overlay {
   list-style: none;
   padding: 0;
   margin: 0;
+  @media screen and (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media screen and (max-width: 576px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
 .portfolio-page__list.gallery {
   grid-template-columns: repeat(4, 1fr);
@@ -6306,6 +6313,9 @@ body.secondary-hovered .catalog-overlay {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   box-shadow: 0 8px 40px 0 rgba(0, 38, 3, 0.08);
+  @media screen and (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);        
+  }
 }
 .services-page__grid.four-columns .services-page__grid_item:nth-child(1), .services-page__grid.four-columns .services-page__grid_item:nth-child(2), .services-page__grid.four-columns .services-page__grid_item:nth-child(3), .services-page__grid.four-columns .services-page__grid_item:nth-child(4) {
   border-top-color: transparent;
@@ -6331,6 +6341,16 @@ body.secondary-hovered .catalog-overlay {
   padding: 1.5rem;
   border-right: 1px solid var(--color-gray-30);
   border-top: 1px solid var(--color-gray-30);
+  @media screen and (max-width: 992px) {
+    padding: 1.5rem;
+    border-right: none;
+    &:nth-child(1), &:nth-child(2) {
+      border-bottom: 1px solid var(--color-gray-30);
+    }
+    &:nth-child(odd) {
+      border-right: 1px solid var(--color-gray-30);
+    }
+  }
 }
 .services-page__grid_item:last-child {
   border-right: none;
@@ -6394,6 +6414,28 @@ body.secondary-hovered .catalog-overlay {
 }
 .services-page__numbers .services-page__grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  @media screen and (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+
+    /* 2-column row borders and padding (overrides .three-columns 3n rules) */
+    &.three-columns .services-page__grid_item {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      border-top-color: var(--color-gray-30);
+      border-right: 1px solid var(--color-gray-30);
+    }
+    &.three-columns .services-page__grid_item:nth-child(1),
+    &.three-columns .services-page__grid_item:nth-child(2) {
+      border-top-color: transparent;
+    }
+    &.three-columns .services-page__grid_item:nth-child(2n+1) {
+      padding-left: 0;
+    }
+    &.three-columns .services-page__grid_item:nth-child(2n) {
+      border-right: none;
+      padding-right: 0;
+    }
+  }
 }
 .services-page__numbers .services-page__grid .services-page__grid_item b {
   font-size: 3rem;
@@ -6419,6 +6461,24 @@ body.secondary-hovered .catalog-overlay {
   display: grid;
   grid-template-columns: 240px 1fr;
   gap: 2rem;
+  @media screen and (max-width: 992px) {
+    grid-template-columns: 1fr;
+  }
+}
+.services-page__left-title h2 {
+  @media screen and (max-width: 992px) {
+    font-size: 1.25rem;
+  }
+}
+.services-page__left-title iframe {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.8;
+}
+.services-page__left-title .flex {
+  @media screen and (max-width: 992px) {
+    flex-direction: column-reverse;
+  }
 }
 .services-page__left-title a:not(.button) {
   text-decoration: underline;
@@ -6438,9 +6498,48 @@ body.secondary-hovered .catalog-overlay {
 }
 .services-page__grid-with-button h2 {
   margin-bottom: 1.5rem;
+  @media screen and (max-width: 992px) {
+    font-size: 1.25rem;
+  }
 }
 .services-page__grid-with-button .services-page__grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  @media screen and (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 1.5rem;
+    & .services-page__grid_item {
+      border-bottom: 1px solid var(--color-gray-30);  
+      &:nth-child(2) {
+        border-right: none;
+        padding-right: 0;
+      }
+  
+      &:nth-child(3) {
+        padding-left: 0;
+        border-bottom: none;
+        grid-column: span 2;
+  
+        a {
+          display: flex;
+          gap: 1.5rem;
+  
+          img {
+            width: calc(50% - 1.5rem);
+          }
+  
+          span {
+            margin-top: 0;
+          }
+        }
+      }
+  
+      img {
+        width: 100%;
+        aspect-ratio: 1;
+        height: auto;
+      }
+    }
+  }  
 }
 .services-page__grid-with-button .services-page__grid .services-page__grid_item span {
   display: block;
@@ -6451,6 +6550,19 @@ body.secondary-hovered .catalog-overlay {
   grid-column: 1/-1;
   text-align: center;
   border: none;
+  @media screen and (max-width: 992px) {
+    padding: 0;    
+    margin-top: 1.5rem;
+  }
+}
+.services-page__trends {
+  margin-top: 3rem;
+}
+.services-page__trends h2 {
+  margin-bottom: 1.5rem;
+  @media screen and (max-width: 992px) {
+    font-size: 1.25rem;
+  }
 }
 .services-page__portfolio {
   margin-top: 80px;
@@ -6462,12 +6574,25 @@ body.secondary-hovered .catalog-overlay {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
+  @media screen and (max-width: 992px) {
+    display: block;
+  }
 }
 .services-page__portfolio_column {
   display: grid;
   gap: 1rem;
   aspect-ratio: 0.4;
   overflow: hidden;
+  @media screen and (max-width: 992px) {
+    margin-bottom: 1rem;
+    display: flex;
+    &:nth-child(odd) {
+      aspect-ratio: 1.7;
+    }
+    &:nth-child(even) {
+      aspect-ratio: 1.3;
+    }
+  }
 }
 .services-page__portfolio_column img {
   width: 100%;
@@ -6476,6 +6601,9 @@ body.secondary-hovered .catalog-overlay {
   border-radius: 0.5rem;
   min-height: 0;
   cursor: pointer;
+  @media screen and (max-width: 992px) {
+    width: 50%;
+  }
 }
 .services-page__portfolio_column:nth-child(n+1) {
   grid-template-rows: 4.2fr 5.8fr;
@@ -6517,6 +6645,11 @@ body.secondary-hovered .catalog-overlay {
   display: flex;
   gap: 4rem;
   align-items: center;
+  @media screen and (max-width: 576px) {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
 }
 .services-page__contact-form_image {
   height: auto;
@@ -6538,6 +6671,9 @@ body.secondary-hovered .catalog-overlay {
 }
 .services-page__contact-form_content .form-control {
   width: 50%;
+  @media screen and (max-width: 992px) {
+    width: 100%;
+  }
 }
 .services-page__faq {
   margin-top: 80px;
@@ -6611,6 +6747,14 @@ body.secondary-hovered .catalog-overlay {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1.5rem;
+  @media screen and (max-width: 992px) {
+    gap: 1.25rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  @media screen and (max-width: 576px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.rem;
+  }
 }
 .services-page__imiages_image {
   aspect-ratio: 1;
