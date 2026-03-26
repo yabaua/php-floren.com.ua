@@ -1,3 +1,5 @@
+import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/drawer/drawer.js';
+
 const scriptRel = "modulepreload";
 const assetsURL = function(dep) {
   return "/" + dep;

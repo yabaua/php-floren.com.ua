@@ -1,6 +1,46 @@
 {if $FILTERS}
 <!-- Фільтри товарів -->
-<div class="catalog-page__content_filters">
+<sl-drawer id="filters-drawer" label="Всі фільтри" placement="end" class="drawer filters-drawer">
+  <div class="drawer__content">
+    {if $ACTIVE_FILTERS_FLAG}
+    <div class="filters-drawer__reset">
+      {if $CATEGORY_ID == '80' || $FROM_GOODS == 1}
+      <button class="button button--outline fullwidth">
+        <a href="{$LANGURL}/{$URL[0]}/{$URL[1]}/">{$LINGVO.deactivate_filters}</a>
+      </button>
+      {else}
+      <button class="button button--text">
+        <a href="{$LANGURL}/{$URL[0]}/">{$LINGVO.deactivate_filters}</a>
+      </button>
+      {/if}
+    </div>
+    {/if}
+
+    {foreach from=$FILTERS item=F}
+    <section placeholder="{$F.groupName}" value="{$F.active_alias}">
+      <h3>{$F.groupName}</h3>
+      <ul>
+        {foreach from=$F.sub_filters key=K item=SUBF} {if $SUBF.cnt==0 ||
+        $SUBF.disable==1 && $SUBF.act!=1}
+        <li value="{$K}" class="disabled" disabled>{$SUBF.gfName} ({$SUBF.cnt})</li>
+        {else} {if $CATEGORY_ID == '80' || $FROM_GOODS == 1}
+        <li value="{$K}" {if $SUBF.act} class="active" {/if}>
+          <a class="underline" href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{$SUBF.link}{$SUBF.need_slash}">{$SUBF.gfName}{if
+            $SUBF.act}
+            ({$SUBF.cnt}){/if}</a>
+        </li>
+        {else}
+        <li value="{$K}" {if $SUBF.act} class="active" {/if}>
+          <a href="{$LANGURL}/{$URL[0]}/{$SUBF.link}{$SUBF.need_slash}">{$SUBF.gfName}{if !$SUBF.act}
+            ({$SUBF.cnt}){/if}</a>
+        </li>
+        {/if} {/if} {/foreach}
+      </ul>
+    </section>
+    {/foreach}
+  </div>
+</sl-drawer>
+<div class="catalog-page__content_filters">  
   {foreach from=$FILTERS item=F}
   <sl-select placeholder="{$F.groupName}" value="{$F.active_alias}">
     {foreach from=$F.sub_filters key=K item=SUBF} {if $SUBF.cnt==0 ||
@@ -54,9 +94,15 @@
 <!-- Кінець Фільтри товарів -->
 {/if}{** IF FILTERS **}
 <!-- Info показано скільки товарів -->
-<div class="catalog-page__content_showed">
-  Показано <span>{$SHOW_GOODS_FROM} - {$SHOW_GOODS_TO}</span> з <span>{$GOODS_CNT}</span>
-</div>
+ <div class="catalog-page__content_info">
+  <div class="catalog-page__content_showed">
+    Показано <span>{$SHOW_GOODS_FROM} - {$SHOW_GOODS_TO}</span> з <span>{$GOODS_CNT}</span>
+  </div>
+  <button class="button catalog-page__show-filters" data-event="click" data-callback="openModal" data-modal-id="filters-drawer">
+    <span class="icon icon-filters"></span>
+    {$LINGVO.show_filters}
+  </button>
+ </div>
 
 <!-- Заголовок і опис категорії -->
 <h1>{$PAGE_TITLE}</h1>
