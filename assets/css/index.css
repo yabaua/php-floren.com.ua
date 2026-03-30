@@ -1927,6 +1927,7 @@ main {
     left: 0;
     right: 0;
     justify-content: space-between;
+    z-index: 1;
   }
 }
 .header__nav-location::part(body) {
