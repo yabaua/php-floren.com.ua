@@ -650,10 +650,10 @@
 
           <!-- Dropdown список категорій -->
           <div class="header__catalog_list">
-            <a href="{$LANGURL}" class="header__catalog_mobile-profile">
+            <!-- <a href="{$LANGURL}" class="header__catalog_mobile-profile">
               <svg class="icon icon-user"></svg>
               Особистий кабінет
-            </a>
+            </a> -->
             <div class="header__catalog_list-wrapper">
               <h3 class="header__catalog_list-mobile-title">Каталог товарів</h3>
               <!-- Список категорій - ліва частина -->
@@ -1138,8 +1138,9 @@
     <script src="https://www.youtube.com/iframe_api"></script>
   {/if}
 {*
-  { literal }
+  
   <!-- BEGIN BINOCHAT CODE  -->
+   
   <script type="text/javascript">
   (function(d, w, s) {
       var widgetHash = 'MhQxJRjy5lGULYi5ZRqW', bch = d.createElement(s); bch.type = 'text/javascript'; bch.async = true;
@@ -1148,7 +1149,8 @@
   })(document, window, 'script');
   </script>
   <!--  END BINOCHAT CODE -->
-*}  
+*} 
+  {literal}
   <!--  BEGIN BINO CALLTRACKING CODE -->
   <script type="text/javascript">
     (function(d, w, s) {
@@ -1158,7 +1160,8 @@
     })(document, window, 'script');
   </script> 
   <!--  END BINO CALLTRACKING CODE -->
-  { /literal }
+  
+  {/literal}
 
   <!-- Головний JS файл -->
   </body>

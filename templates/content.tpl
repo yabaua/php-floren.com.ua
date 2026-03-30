@@ -1,5 +1,4 @@
 {$SCHEMA_VIDEODATA_1}
-
-
-		{$CONTENT}
-
+<div class="services-page__content">
+  {$CONTENT}
+</div>

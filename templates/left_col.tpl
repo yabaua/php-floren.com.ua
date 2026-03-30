@@ -111,9 +111,7 @@
       <h3{if $URL[0]=='partnership' } class="active" {/if}>
         <a href="{$LANGURL}/partnership/">{$LINGVO.menu_partnership}</a>
         </h3>
-    </section>
-    
-    
+    </section>    
     {/if}
   </div>
 </sl-drawer>

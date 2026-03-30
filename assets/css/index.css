@@ -6404,6 +6404,11 @@ button.catalog-page__show-filters {
   margin-top: 2rem;
   margin-bottom: 1.5rem;
 }
+.services-page__content .flex {
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+}
 .services-page__content iframe {
   width: 100%;
   height: auto;
@@ -6576,12 +6581,26 @@ button.catalog-page__show-filters {
 }
 .services-page__calc {
   width: 35%;
+  min-width: 360px;
   flex-shrink: 0;
   margin-left: 48px;
   padding: 24px 24px 36px;
   border-radius: 16px;
   background-color: var(--color-gray-10);
   align-self: flex-start;
+  @media screen and (max-width: 992px) {
+    margin-left: 32px;
+  }
+  @media screen and (max-width: 768px) {
+    margin-left: 0px;
+    margin-top: 24px;
+    width: 100%;
+  }
+  @media screen and (max-width: 576px) {
+    & .button.button--primary.button--pill {
+      width: 100%;
+    }
+  }
 }
 .services-page__calc h3 {
   margin-bottom: 1rem;

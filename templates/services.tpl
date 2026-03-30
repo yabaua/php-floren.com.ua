@@ -21,8 +21,10 @@
 
 <!--seoshield_formulas--uslugi-->
 <h1>{$SERVICE.title}</h1>
-{* $SERVICE.body *}
-{include $BODY_FILE}
+<div class="services-page__content">
+  {* $SERVICE.body *}
+  {include $BODY_FILE}
+</div>
 
 <sl-dialog id="calculate-modal" label="{$SERVICE.title}" class="calculate-modal">
 {*  <form class="login-modal__form" action="/thankyou/" method="post" onsubmit="submitForm(event)"> *}
