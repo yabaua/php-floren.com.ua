@@ -521,10 +521,13 @@ sl-rating {
   flex-direction: column;
   gap: 3.5rem;
   overflow: hidden;
-  padding-top: 160px;
+  padding-top: 92px;
   padding-bottom: 8px;
   position: relative;
   z-index: 1;
+  @media screen and (max-width: 992px) {
+    gap: 1.5rem;
+  }
 }
 .photo-viewer__main-swiper {
   flex-grow: 1;
@@ -535,9 +538,12 @@ sl-rating {
   justify-content: center;
 }
 .photo-viewer__main-swiper .swiper-slide > img {
-  max-width: 70%;
+  max-width: calc(100% - 72px - 72px);
   height: 100%;
   object-fit: contain;
+  @media screen and (max-width: 992px) {
+    max-width: 100%;
+  }
 }
 .photo-viewer__main-swiper .swiper-slide > iframe {
   width: 70%;
@@ -618,15 +624,22 @@ sl-rating {
   transform: translateY(-50%);
   transition: background-color 0.3s ease;
   z-index: 10;
-  cursor: pointer;
+  cursor: pointer;  
 }
 .photo-viewer__button-next .icon, .photo-viewer__button-prev .icon {
   width: 36px;
   height: 36px;
   color: var(--color-white);
+  @media screen and (max-width: 992px) {
+    width: 48px;
+    height: 48px;
+  }
 }
-.photo-viewer__button-next:hover, .photo-viewer__button-prev:hover {
-  background-color: color-mix(in srgb, var(--color-gray-40), transparent 75%);
+@media (hover: hover) and (pointer: fine) {
+  .photo-viewer__button-next:hover,
+  .photo-viewer__button-prev:hover {
+    background-color: color-mix(in srgb, var(--color-gray-40), transparent 75%);
+  }
 }
 .photo-viewer__button-next {
   right: 16px;
