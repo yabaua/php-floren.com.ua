@@ -767,12 +767,17 @@ sl-breadcrumb {
   @media screen and (max-width: 992px) {
     padding: 0.25rem 1rem;
   }
+  &::part(base) {
+    @media screen and (max-width: 992px) {
+      flex-wrap: nowrap;
+    }
+  }
 }
 sl-breadcrumb sl-breadcrumb-item::part(base) {
   padding: 0.5rem 0;
-  @media screen and (max-width: 992px) {
-    white-space: wrap;
-  }
+  /* @media screen and (max-width: 992px) {
+    flex-wrap: nowrap;
+  } */
 }
 sl-breadcrumb sl-breadcrumb-item::part(label) {
   font-size: 0.875rem;
@@ -4891,7 +4896,7 @@ body.secondary-hovered .catalog-overlay {
   min-width: 0;
 }
 .catalog-page__breadcrumbs {
-  display: none;
+  position: relative;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
@@ -4901,6 +4906,25 @@ body.secondary-hovered .catalog-overlay {
     background-color: var(--color-green-100);    
     margin-left: -1rem;
     margin-right: -1rem;
+    sl-breadcrumb {
+      width: fit-content;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 100px;
+      height: 49px;
+      background: linear-gradient(90deg, transparent 0%, var(--color-green-100) 50%);      
+    }
+  }
+}
+.catalog-page__breadcrumbs-scroll {
+  overflow: auto;
+  @media screen and (max-width: 992px) {
+    padding-right: 56px;
   }
 }
 button.catalog-page__breadcrumbs-button {
@@ -4911,8 +4935,15 @@ button.catalog-page__breadcrumbs-button {
   background-color: var(--color-black);
   color: var(--color-white);
   border-radius: 0.5rem;
-  padding: 0;
-  margin-right: 1rem;
+  padding: 0;  
+  display: none;
+  position: absolute;
+  right: 1rem;
+  top: 0.5rem;
+  z-index: 2;
+  @media screen and (max-width: 992px) {
+    display: flex;
+  }
   & .icon {
     width: 24px;
     height: 24px;
