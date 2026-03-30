@@ -89,11 +89,18 @@
         </sl-radio-group>
       </div>
       {/if}
-    </section>
-    
+    </section>   
 
     <!-- Ціна і кнопки дій -->
     <section class="product-page__actions">
+
+      <!-- Доступність -->
+      <div class="product-page__actions_availability success">Є в наявності</div>
+      <div class="product-page__actions_availability order">Під замовлення</div>
+      <div class="product-page__actions_availability danger">Немає в наявності</div>
+      <!-- /Доступність -->
+
+
       <div class="product-page__price">
         {$CUR_PRICE}
         <sup>грн</sup>

@@ -5757,6 +5757,18 @@ button.catalog-page__show-filters {
   top: -0.1rem;
   right: 0;
 }
+.product-page__actions_availability {
+  font-size: 0.875rem;
+  &.success {
+    color: var(--color-green-100);
+  }
+  &.order {
+    color: var(--color-gray-100);
+  }
+  &.danger {
+    color: var(--color-yealow-dark);
+  }
+}
 .product-page__actions_buttons {
   display: flex;
   align-items: center;
