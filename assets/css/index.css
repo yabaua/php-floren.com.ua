@@ -3013,6 +3013,13 @@ body.secondary-hovered .catalog-overlay {
     background-color: transparent;
   }
 }
+.header__catalog_list .category-content__item-list-all {
+  display: none;
+  @media screen and (max-width: 992px) {
+    display: block;
+    font-weight: 600;
+  }
+}
 .header__catalog_list .category-content__item-list > li {
   padding-left: 1rem;
   padding-right: 0.5rem;

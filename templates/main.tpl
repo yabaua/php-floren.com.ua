@@ -706,6 +706,14 @@
                       {$C.name}
                     </button>
                     <ul class="category-content__item-list">
+                      <li class="category-content__item-list-all">
+                        <a href="{$LANGURL}/{$C.alias}/">
+                          <div class="category-content__item-list-image">
+                            <img src="/img/icons/icon-mmenu-{$C.alias}.svg" alt="{$C.name}" />
+                          </div>                          
+                          <span>Всі</span>
+                        </a>
+                      </li>
                       {foreach item=CC name=CC from=$C.category}
                         <li>
                         <a href="{$LANGURL}/{$C.alias}/{$CC.cur_alias}/">
