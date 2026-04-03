@@ -4179,7 +4179,7 @@ body.secondary-hovered .catalog-overlay {
   flex-shrink: 0;
   width: 16.66%;
   @media screen and (max-width: 992px) {
-    width: 33.33%;
+    display: none;
   }
 }
 .homepage__hero-slide-1 .slide-1__text h2 {
@@ -4302,8 +4302,9 @@ body.secondary-hovered .catalog-overlay {
   border-radius: 1rem;
   padding: 48px 18% 48px 24%;
   @media screen and (max-width: 992px) {
-    padding: 32px 32px 32px 40%;
-    background-size: 33% auto;
+    padding: 32px;
+    /* background-size: 33% auto; */
+    background: url("/img/homepage/hero-swiper-slide-2-2.png") no-repeat right bottom/25% auto, #eee5df;
   }
 }
 .homepage__hero-slide-2 .slide-2__content h2, .homepage__hero-slide-3 .slide-2__content h2 {
@@ -4343,8 +4344,8 @@ body.secondary-hovered .catalog-overlay {
   padding: 48px 20% 48px 26%;
   background: url("/img/homepage/hero-swiper-slide-3-1.png") no-repeat left top/auto 100%, url("/img/homepage/hero-swiper-slide-3-2.png") no-repeat right bottom/auto 100%, #f7f7e7;
   @media screen and (max-width: 992px) {
-    padding: 32px 32px 32px 40%;
-    background: url("/img/homepage/hero-swiper-slide-3-1.png") no-repeat left top/33% auto, #f7f7e7;    
+    padding: 32px;
+    background: #f7f7e7;
   }
 }
 .homepage__landscaping {
@@ -4824,6 +4825,13 @@ body.secondary-hovered .catalog-overlay {
   margin-top: 80px;
   padding: 80px 0;
   background: var(--color-green-20) url("/img/bg-leaves-back.svg") no-repeat center/cover;
+}
+.homepage__projects .projects-swiper .hover-photo-viewer {
+  & .hover-photo-viewer__thumbs {
+    @media screen and (max-width: 992px) {
+      flex-wrap: wrap;
+    }
+  }
 }
 .homepage .last-works {
   padding-top: 80px;
