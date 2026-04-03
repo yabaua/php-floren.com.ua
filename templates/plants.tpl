@@ -106,7 +106,7 @@
 
 <!-- Заголовок і опис категорії -->
 <h1>{$PAGE_TITLE}</h1>
-{if TOP_SEO_TEXT}
+{if $TOP_SEO_TEXT}
 <div class="catalog-page__content_description">{$TOP_SEO_TEXT}</div>
 {/if}
 <!-- Сітка товарів -->
@@ -281,7 +281,7 @@
   {elseif $se == $Nm2 && $N > 3}
     {if $FROM_GOODS}
     <a title="{$LINGVO.pages_goto} {$Nm1}"
-      href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}?page{$Nm1}"
+      href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}page{$Nm1}/"
       class="pagination__link{if $C==$Nm1} active{/if}">{$Nm1}</a>
     {else}
     <a title="{$LINGVO.pages_goto} {$Nm1}" id="p{$Nm1}"

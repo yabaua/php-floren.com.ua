@@ -4924,9 +4924,10 @@ body.secondary-hovered .catalog-overlay {
   gap: 1rem;
   @media screen and (max-width: 992px) {
     display: flex;
-    background-color: var(--color-green-100);    
+    background-color: var(--color-green-100);
     margin-left: -1rem;
     margin-right: -1rem;
+    min-height: 49px;
     sl-breadcrumb {
       width: fit-content;
     }
@@ -5366,7 +5367,7 @@ button.catalog-page__show-filters {
 .catalog-page__content_article .article-section__table table tbody {
   position: relative;
 }
-.catalog-page__content_article .article-section__table table tbody::before {
+/* .catalog-page__content_article .article-section__table table tbody::before {
   content: "";
   display: block;
   width: 1rem;
@@ -5385,7 +5386,7 @@ button.catalog-page__show-filters {
   right: 1px;
   top: 0;
   bottom: 0;
-}
+} */
 .catalog-page__content_article .article-section__table table th {
   padding: 1.25rem 1rem;
   text-align: left;
@@ -7000,14 +7001,8 @@ button.catalog-page__show-filters {
   transition: color 0.3s ease;
   position: relative;
 }
-.services-page__faq_list {
-  /* Прибираємо стандартний маркер у Safari/Chrome */
-}
 .services-page__faq_list summary::-webkit-details-marker {
   display: none;
-}
-.services-page__faq_list {
-  /* Іконка (плюс/мінус) */
 }
 .services-page__faq_list summary::before {
   content: "";
@@ -7017,9 +7012,6 @@ button.catalog-page__show-filters {
   display: block;
   background: url("/img/icons/icon-plus.svg") no-repeat center center;
 }
-.services-page__faq_list {
-  /* Стан ВІДКРИТО */
-}
 .services-page__faq_list details[open] summary {
   /* Колір відкритого заголовку - чорний */
   color: #000;
@@ -7027,9 +7019,6 @@ button.catalog-page__show-filters {
 .services-page__faq_list details[open] summary::before {
   content: "";
   background: url("/img/icons/icon-minus.svg") no-repeat center center;
-}
-.services-page__faq_list {
-  /* Контент відповіді */
 }
 .services-page__faq_list .content {
   color: #333;
@@ -7383,7 +7372,7 @@ button.catalog-page__show-filters {
 }
 .blogs_list__card--views img {
   width: 1rem;
-  height: 1årem;
+  height: 1rem;
 }
 .blogs_list__card--tags {
   display: flex;

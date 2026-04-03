@@ -559,23 +559,57 @@ $schema_prices_min=array();
 		$smarty->assign("LIST_OR_TBL",$f_cat['list_or_tbl']);
 		
 		$body_text=$centerSEOtext;
-		preg_match_all('/<h2\b[^>]*>(.*?)<\/h2>(.*?)(?=(<h2\b[^>]*>|$))/is', $body_text, $matches, PREG_SET_ORDER);
-		$new_body_text = '';
-
-		foreach ($matches as $m) {
-		    $body_title = trim($m[1]);
-		    $body_content = trim($m[2]);
 		
-		    // Оборачиваем все <p>... в div.article-section__content
-		    $block = '<section class="article-section">' . "\n";
-		    $block .= '<h2 class="article-section__title">' . $body_title . '</h2>' . "\n";
-		    $block .= '<div class="article-section__content">' . "\n" . $body_content . "\n" . '</div>' . "\n";
-		    $block .= '</section>';
+		// 1. Створюємо об'єкт DOM
+		$dom = new DOMDocument();
+		libxml_use_internal_errors(true);
 		
-		    $new_body_text .= $block . "\n";
+		// 2. Завантажуємо HTML
+		$dom->loadHTML('<?xml encoding="UTF-8"><div id="dom-wrapper">' . $body_text . '</div>', LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+		libxml_clear_errors();
+		
+		$xpath = new DOMXPath($dom);
+		
+		// 3. Збираємо всі теги <h2>
+		$h2s = $xpath->query('//h2');
+		$h2Nodes = [];
+		foreach ($h2s as $h2) {
+		    $h2Nodes[] = $h2;
 		}
-		$new_body_text=preg_replace('/(<table\b[^>]*>.*?<\/table>)/is', '<div class="article-section__table">$1</div>', $new_body_text);
-		$smarty->assign("CENTER_SEO_TEXT", $new_body_text);
+		
+		// 4. Проходимося по кожному <h2> і створюємо правильну структуру
+		foreach ($h2Nodes as $h2) {
+		    $section = $dom->createElement('section');
+		    $section->setAttribute('class', 'article-section');
+		    
+		    $contentDiv = $dom->createElement('div');
+		    $contentDiv->setAttribute('class', 'article-section__content');
+		    
+		    $h2->parentNode->insertBefore($section, $h2);
+		    $h2->setAttribute('class', 'article-section__title');
+		    
+		    $section->appendChild($h2);
+		    $section->appendChild($contentDiv);
+		    
+		    while ($section->nextSibling && strtolower($section->nextSibling->nodeName) !== 'h2') {
+		        $contentDiv->appendChild($section->nextSibling);
+		    }
+		}
+		
+		// ВИДАЛЕНО ПРОБЛЕМНИЙ КРОК З DOM-ОБГОРТАННЯМ ТАБЛИЦЬ
+		
+		// 5. Витягуємо готовий HTML з нашої тимчасової обгортки
+		$wrapper = $dom->getElementById('dom-wrapper');
+		$new_body_text = '';
+		foreach ($wrapper->childNodes as $child) {
+		    $new_body_text .= $dom->saveHTML($child);
+		}
+		
+		// 6. Використовуємо твою перевірену регулярку для таблиць!
+		// Тепер вона на 100% безпечна, бо загальна структура секцій вже сформована правильно
+		$new_body_text = preg_replace('/(<table\b[^>]*>.*?<\/table>)/is', '<div class="article-section__table">$1</div>', $new_body_text);
+		
+		$smarty->assign("CENTER_SEO_TEXT", trim($new_body_text));
 		
 		
 		$smarty->assign("CATEGORY_M_ID",$f_cat['ID']);
