@@ -11,7 +11,7 @@ if(isset($PARAM[0])){
 		//=============404===================
 	}
 	
-	
+	$publications_category = '';
 	
 	
 	$article=$db->fetch();
@@ -21,6 +21,12 @@ if(isset($PARAM[0])){
 	$smarty->assign("ARTICLE_IMAGE",$pubImgSize);
 	
 	$db->query("UPDATE publications".$db_sufix." SET pub_views=pub_views+1 WHERE ID='".$article['ID']."'");
+	
+	$publications_category = '';
+	$db->query("SELECT pc.alias FROM publications_category pc JOIN publications_pub2cat p2c ON pc.ID=p2c.catID WHERE p2c.pubID='".$article['ID']."' LIMIT 1");
+	$f=$db->fetch();
+	$publications_category_alias = $f['alias'];
+	
 	
 	$hleb=array();
 	$hleb[0]['link']='/';
@@ -71,6 +77,7 @@ $category_list_sql=implode("','", $category_list);
 	
 //=======COMMON–GOODS==============================	
 	if($article['goodsID']!=''){
+		$goods = array();
 		$db->query("SELECT g.*, min(gf.price) AS min_price, max(gf.price) AS max_price FROM goods g
 					LEFT JOIN goods_forms gf
 					ON g.ID=gf.goodID
@@ -103,11 +110,11 @@ $category_list_sql=implode("','", $category_list);
 else{//ARTICLE LIST
 	
 	$publications_ttl="Блог";
-	$publications_category="";
+	$publications_category_alias="";
 	$publications_category_SQL='';
 	if(isset($_REQUEST['cat'])){
-		$publications_category=$_REQUEST['cat'];
-		$db->query("SELECT * FROM publications_category WHERE alias='".$publications_category."'");
+		$publications_category_alias=$_REQUEST['cat'];
+		$db->query("SELECT * FROM publications_category WHERE alias='".$publications_category_alias."'");
 		if(!$db->num_rows()){
 			//=============404===================
 			header('HTTP/1.0 404 Not Found', true, '404');
@@ -118,7 +125,7 @@ else{//ARTICLE LIST
 		$f=$db->fetch();
 		$smarty->assign("META_NOFOLLOW", '<meta name="robots" content="noindex, nofollow" />');
 		$publications_ttl=$f['name'.$db_sufix];
-		$publications_category_SQL="JOIN publications_pub2cat p2c ON p.ID=p2c.pubID JOIN publications_category pc ON p2c.catID=pc.ID AND pc.alias='".$publications_category."'";
+		$publications_category_SQL="JOIN publications_pub2cat p2c ON p.ID=p2c.pubID JOIN publications_category pc ON p2c.catID=pc.ID AND pc.alias='".$publications_category_alias."'";
 	//	$_SESSION
 	}
 	$art_list=array();
@@ -170,7 +177,7 @@ else{//ARTICLE LIST
 		$db->query("SELECT alias, name".$db_sufix." AS name FROM publications_category ORDER BY p_order DESC");
 		while($pcl=$db->fetch()){
 			$publications_category_left[]=$pcl;
-			if($pcl['alias']==$publications_category)
+			if($pcl['alias']==$publications_category_alias)
 				$publications_category_left[count($publications_category_left)-1]['act']='1';
 		}
 		$smarty->assign("PUB_CATEGORIES", $publications_category_left);

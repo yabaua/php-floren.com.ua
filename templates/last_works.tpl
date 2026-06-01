@@ -27,10 +27,10 @@
       </div>
       <!-- If we need navigation buttons -->
       <button class="swiper-button swiper-button--prev">
-        <img src="/img/icons/icon-arrow-angle-left.svg" alt=""/>
+        <img src="/img/icons/icon-arrow-angle-left.svg" alt="<"/>
       </button>
       <button class="swiper-button swiper-button--next">
-        <img src="/img/icons/icon-arrow-angle-right.svg" alt=""/>
+        <img src="/img/icons/icon-arrow-angle-right.svg" alt=">"/>
       </button>
     </div>
     <div class="last-works_more">

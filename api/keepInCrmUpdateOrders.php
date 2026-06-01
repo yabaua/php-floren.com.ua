@@ -18,8 +18,8 @@ header('Accept: application/json');
 
 require("../include/db_mysql.php");
 
-$db=new DB();
-$db->connect($DB_HOST,$DB_NAME,$DB_USER,$DB_PASS,$DB_CHARSET);
+$db=new DB2();
+$db->connect();
 
 
 
@@ -29,7 +29,7 @@ $income_data = json_decode($postData, true);
 //	print_r($income_data);
 // =============GET DATA FROM CRM============
 		$url = 'https://api.keepincrm.com/v1/agreements/'.$income_data['id'];
-//	$url = 'https://api.keepincrm.com/v1/agreements/30785019';
+//	$url = 'https://api.keepincrm.com/v1/agreements/31039726';
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, [
 	    'accept: application/json',
@@ -69,6 +69,10 @@ foreach($data->custom_fields_detailed AS $cf=>$det){
 foreach($data->deliveries AS $dID=>$dVal){
 	$last_ttn = $dVal->ttn;
 }
+
+
+
+
 
 $crmID=$data->id;
 $crmOrderTitle=$data->title;
@@ -123,15 +127,33 @@ if($db->num_rows()){
 			$db->query($query);
 			//mail('info@floren.com.ua','order'.$order_id,$query);
 }
-//mysql_query("INSERT INTO orders_crm (keepInCrmID, hash) VALUES ('".$crmID."', '".$hash."')");
-//echo $response="Updated agreements: ".mysql_affected_rows();
 
 
-//$json_string=array("link"=>"https://floren.com.ua/crm/?hash=".$hash);
-//$dataString = json_encode($json_string, JSON_UNESCAPED_UNICODE);
-//echo $dataString;
-//echo $hash;
-//mysql_query("INSERT INTO orders_testjson (jsondata) VALUES ('".$SQLstr."')");
-//mail('info@floren.com.ua','order'.$order_id,$json_string); // test for generated query
+//========================= INSERT INTO pid zamovlennya =======================
+if($data->stage->name == 'Під замовлення'){
+	$db->query("SELECT * FROM crm_goods4order WHERE keepInCrmAgreementID='".$crmID."'");
+	if($db->num_rows()){
+		$db->query("DELETE FROM crm_goods4order WHERE keepInCrmAgreementID='".$crmID."'");
+	}
+	foreach($data->jobs AS $j=>$jj){
+		$title		=	$jj->title;
+		$amount		=	$jj->amount;
+		$barcode	=	$jj->sku;
+		$price		=	$jj->price;
+		
+		$query = "INSERT INTO crm_goods4order SET
+					keepInCrmAgreementID	=	'".$crmID."',
+					keepInCrmAgreementTitle	=	'".$crmOrderTitle."',
+					orderDate				=	'".$crmOrderDate."',
+					who_ordered				=	'".$crmMainResponsibleID."',
+					barcode					=	'".$barcode."',
+					title					=	'".$title."',
+					amount					=	'".$amount."',
+					price					=	'".$price."'
+				";
+		$db->query($query);
+		
+	}
+}
 
 ?>

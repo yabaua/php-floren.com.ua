@@ -117,7 +117,7 @@ if (!$spiders) {
 	*/
 	ksort($_SESSION['basket']); // THIS SHIT BECAUSE AFTER RENDERING CART ITEMS ARE JUMPING
 // стартует индификатор сессии
-/*
+/* */
 if(isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/admin') === false && $_SERVER['REQUEST_METHOD'] === 'GET'){
     if(empty($_SERVER['HTTP_X_REQUESTED_WITH']) || (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest')){
         if(file_exists('seoshield-client/main.php'))
@@ -134,7 +134,7 @@ if(isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/admin') =
         
     }
 }
-*/
+/* */
 /*
 if (!$spiders && (!isset($_COOKIE['qms']) || !($_COOKIE['qms']=eregi_replace('[^a-fA-F0-9]','',$_COOKIE['qms'])) || strlen($_COOKIE['qms'])!=32)) {
 	mt_srand((double)microtime()*1000000);
@@ -224,7 +224,7 @@ elseif($URL[0]=='ua' || $URL[0]=='ru'){
 }
 $_SESSION['lang']=$lang;
 
-//include('include/redirect.php');
+include('include/redirect.php');
 
 $POST=array();
 $POST=$_POST;
@@ -494,9 +494,11 @@ elseif (count($URL)==2 && $URL[0]=='services' && $URL[1]=='ustroystvo_gazona') {
 elseif (count($URL)==1 && ($URL[0]=='404' || $URL[0]=='404.php')) {
 	include_once("404.php");
 }
+/*
 elseif (count($URL)==1 && $URL[0]=='gxml.xml') {
 	include_once("exec/gxml.php");
 }
+*/
 elseif (count($URL)==1 && $URL[0]=='gmcxml.xml') {
 	include_once("exec/gmcxml.php");
 }
@@ -882,10 +884,9 @@ if ($URL[0]=="product") {
 $goods_board=array();
 if($URL[0]=="product" || $URL[0]=="buket"){
 	
-	if(in_array($classID, array('78', '79', '80', '81'))) $cur_gID=intval($PARAM[0]);
-	else $cur_gID=intval(substr($PARAM[0], 0, strpos($PARAM[0], '_')));
+	$cur_gID=intval(substr($PARAM[0], 0, strpos($PARAM[0], '_')));
 
-	$classID_sql=" AND classID='".$classID."' AND g.availability=1";
+	$classID_sql=" AND classID='".$classID."' AND g.availability=1 AND act='Y'";
 	$board_cnt=5;
 
 	$db->query("SELECT DISTINCT ID FROM goods".$db_sufix." g WHERE ID>".$cur_gID.$classID_sql." ORDER BY ID LIMIT ".$board_cnt);

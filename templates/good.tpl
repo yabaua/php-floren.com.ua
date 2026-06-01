@@ -94,11 +94,19 @@
     <!-- Ціна і кнопки дій -->
     <section class="product-page__actions">
 
-      <!-- Доступність -->
-      <div class="product-page__actions_availability success">Є в наявності</div>
-      <div class="product-page__actions_availability order">Під замовлення</div>
-      <div class="product-page__actions_availability danger">Немає в наявності</div>
-      <!-- /Доступність -->
+     {* Доступність *}
+      {if $PLANT_GOOD}
+        {if $CUR_AVAILABILITY>0}
+            <div class="product-page__actions_availability success">Є в наявності</div>
+        {elseif $CUR_VISIBILITY==0}
+            <div class="product-page__actions_availability danger">Немає в наявності</div>
+        {elseif $GOOD_ONE.preorder==1}
+            <div class="product-page__actions_availability order">Під замовлення</div>
+        {else}
+            <div class="product-page__actions_availability danger">Немає в наявності</div>
+        {/if}
+      {/if}
+      {* Доступність *}
 
 
       <div class="product-page__price">

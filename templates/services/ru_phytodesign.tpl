@@ -82,7 +82,7 @@
           </section>
 
           <section class="services-page__grid-with-button">
-            <h2>Какие проэкты мы делаем</h2>
+            <h2>Какие проекты мы делаем</h2>
             <div class="services-page__grid three-columns">
               <div class="services-page__grid_item">
                 <a href="{$LANGURL}/services/phytodesign-kvartiri/">
@@ -338,20 +338,20 @@
             <div class="services-page__contact-form_content">
               <h2>Обсудим озеленение вашего помещения?</h2> 
 							<p>Оставьте контактные данные и менеджер свяжется с вами в течение дня для уточнения деталей</p>
-              <form action="">
+              <form method="POST" name="cb" action="/thankyou/">
+                <input type="hidden" value="Фитодизайн" />
                 <div class="form">
                   <div class="form-control">
-                    <sl-input type="text" placeholder="Ваше имя"></sl-input>
+                    <sl-input name="cb_name" type="text" placeholder="Имя"></sl-input>
                   </div>
                   <div class="form-control">
-                    <sl-input type="text" placeholder="Ваш телефон"></sl-input>
+                    <sl-input name="cb_phone" type="text" placeholder="Телефон"></sl-input>
                   </div>
                   <div class="form-control">
                     <button class="button button--primary button--pill">Отправить</button>
                   </div>
                 </div>
               </form>
-
             </div>
           </section>
 

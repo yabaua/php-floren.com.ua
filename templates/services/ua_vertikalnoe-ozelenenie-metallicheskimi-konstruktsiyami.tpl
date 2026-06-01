@@ -1,162 +1,163 @@
 <section class="flex">
-<div class="grow">
-<h2>Вертикальне озеленення металевими конструкціями у Києві</h2>
+  <div class="grow">
+    <p>Студія Флорен створює сучасні рішення озеленення інтер’єру за допомогою металевих вертикальних конструкцій, підставок, поличок і декоративних елементів.</p>
+    <p>&nbsp;</p>
+    <p>Це ідеальний варіант, якщо ви хочете додати рослини в простір без ремонту і складних систем.</p>
 
-<p>Вертикальне озеленення &mdash; це ефектний і практичний спосіб інтегрувати живі рослини в інтер&rsquo;єр без втрати корисної площі.<br />
-Студія фітодизайну Флорен реалізує проєкти вертикального озеленення у Києві з використанням міцних металевих конструкцій, які підходять для офісів і бізнес-центрів, ресторанів і приватних інтер&rsquo;єрів.</p>
 
-<p>Ми створюємо зелені стіни, які не просто &laquo;гарно виглядають&raquo;, а працюють на простір: зонують, знижують візуальний шум і додають відчуття живого середовища.</p>
-
-<h3>Що таке вертикальне озеленення на металевих конструкціях</h3>
-
-<p>Вертикальне озеленення на металевій основі &mdash; це система, де рослини розміщуються на спеціально спроєктованому каркасі з металу.<br />
-На відміну від класичних <a href="https://floren.com.ua/ua/services/green-wall/">фітостін</a> з <a href="https://floren.com.ua/ua/planters/">кашпо</a>, або <a href="https://floren.com.ua/ua/services/peregorodki-iz-rasteniy/">перегородок з рослин</a> така конструкція:</p>
-
-<ul>
-	<li>витримує значну вагу рослин;</li>
-	<li>підходить для озеленення великих площ;</li>
-	<li>архітектурна та сучасна;</li>
-	<li>легко адаптується під конкретний інтер&rsquo;єр.</li>
-</ul>
-
-<p>Фітодизайн вертикальне озеленення &ndash; це оптимальне рішення для сучасних офісів у Києві, де важливі надійність, довговічність і контрольований вигляд.</p>
-
-<h2>Вертикальне озеленення офісу й фітодизайн інтер&rsquo;єру &ndash; статусний декор</h2>
-
-<p>Вертикальне озеленення в офісі &mdash; практичний інструмент сучасного фітодизайну, а не декоративна примха. Вертикальні зелені стіни для офісу давно перейшли з категорії розкоші в категорію необхідних рішень. Зелена стіна з рослин розв&rsquo;язує одразу кілька практичних завдань.</p>
-
-<p>Металеві конструкції для рослин &ndash; переваги застосування в офісі:</p>
-
-<ul>
-	<li><strong>Економія простору</strong> &mdash; рослини ростуть вгору, а не &laquo;з&rsquo;їдають&raquo; площу</li>
-	<li><strong>Візуальне зонування</strong> &mdash; без важких перегородок і бетонних стін</li>
-	<li><strong>Зниження рівня стресу</strong> &mdash; доведений ефект живої зелені і наповнення простору повітрям</li>
-	<li><strong>Покращення іміджу бізнесу</strong> &mdash; офіс компанії має сучасний та доглянутий вигляд</li>
-	<li><strong>Універсальність</strong> &mdash; підходить для озеленення бізнес-центрів, салонів, кафе, для будинків і квартир</li>
-</ul>
-
-<h3>Які рослини підходять для вертикального озеленення</h3>
-
-<p>Для вертикальних металевих конструкцій ми підбираємо горщикові рослини, які добре почуваються в інтер&rsquo;єрі та не потребують надмірного догляду. Найчастіше вертикальні зелені стіни Київ наповнюємо кімнатними рослинами:</p>
-
-<ul>
-	<li>сциндапсус</li>
-	<li>філодендрон</li>
-	<li>епіпремнум</li>
-	<li>папороті</li>
-	<li>хойя</li>
-	<li>декоративні ампельні рослини</li>
-</ul>
-
-<p>Підбір кімнатних рослин здійснюється індивідуально, з урахуванням освітлення, температури та режиму експлуатації простору. Ми у студії фітодизайну &laquo;Флорен&raquo; напрацьовували досвід <a href="https://floren.com.ua/ua/services/vertikalnoe-ozelenenie/">озеленення офісів</a> та <a href="https://floren.com.ua/ua/phytodesign/">дизайну</a> інтер&rsquo;єрів упродовж десятиліть. Тому ми:</p>
-
-<ul>
-	<li>підберемо рослини для коридорів з протягами, прохолодних просторів, кімнат зі штучним освітленням, залитих сонцем терас, вологих площ, інших складних випадків.</li>
-	<li>надаємо послуги з обслуговування ваших рослин в офісі, онлайн консультації, а також, за потреби, швидку &laquo;зелену допомогу&raquo; рослинам.</li>
-</ul>
-</div>
-
-<div class="services-page__calc">
-<h3>Розрахувати вартість фітодизайну</h3>
-<button class="button button--primary button--pill">Отримати розрахунок</button>
-
-<p>Або телефонуйте нам:</p>
-
-<div class="homepage__advices_content--phones">
-<div class="phones--hidden">
-<p>(044) 344-28-95</p>
-
-<p>(050) 660-52-75</p>
-</div>
-
-<div class="phones--hours">У будні з 9:00 до 19:30</div>
-</div>
-</div>
+  </div>
+  <div class="services-page__calc">
+    <h3>Замовити озеленення приміщення</h3>
+    <button class="button button--primary button--pill">Підібрати</button>
+    <p>Також звертайтеся за телефоном:</p>
+    <div class="homepage__advices_content--phones">
+      <div class="phones--hidden">
+        (044) 344..<button data-event="click" data-callback="toggleAdvicesPhones">
+          показати номери
+        </button>
+      </div>
+      <div class="phones--visible">
+        <p>(099) 238-26-44</p>
+      </div>
+      <div class="phones--hours">По буднях з 9:00 до 19:30</div>
+    </div>
+  </div>
 </section>
 
 <section class="services-page__left-title-list">
-<div class="services-page__left-title">
-<h2>Як ми працюємо: етапи реалізації проєкту</h2>
+  <div class="services-page__left-title">
+    <h2>Що таке озеленення за допомогою конструкцій</h2>
+    <div class="flex gap-32">
+      <div class="grow">
+      <p>Це формат фітодизайну, при якому рослини розміщуються не в класичних “вазонах по кутах”, а у спеціальних конструкціях:</p>
+      <p>&nbsp;</p>
+        <ul>
+          <li>металеві стійки</li>
+          <li>декоративні підставки</li>
+          <li>настінні полички</li>
+          <li>підвісні кашпо</li>
+          <li>дизайнерські мудборди</li>
+        </ul>
+        <p>&nbsp;</p>
+        <p>В результаті ви отримуєте структурований, стильний і сучасний вигляд простору</p>
+      </div>
+      <div class="grow">
+        <img src="https://floren.com.ua/images/content/services/vertical-construction-5-min.jpg" alt="Підвісна конструкція під стелю для озеленення">
+      </div>
+    </div>
+  </div>
+  
+    <div class="services-page__left-title">
+    <h2>Коли це рішення підходить найкраще</h2>
+    <div class="flex gap-32">
+      <div class="grow">
+      <p><b>Для бізнесу:</b></p>
+      <p>&nbsp;</p>
+        <ul>
+          <li>потрібно швидко &laquo;оживити&raquo; інтер’єр</li>
+          <li>немає можливості робити ремонт</li>
+          <li>важливий сучасний вигляд і стиль</li>
+          <li>підвісні кашпо</li>
+          <li>дизайнерські мудборди</li>
+        </ul>
+        <p>&nbsp;</p>
+        
+        <p><b>Для дому:</b></p>
+      	<p>&nbsp;</p>
+        <ul>
+          <li>обмежений простір</li>
+          <li>бажання зробити &laquo;зелений куточок&raquo;</li>
+          <li>потрібно щось легке і мобільне</li>
+        </ul>
+      </div>
+      <div class="grow">
+        <img src="https://floren.com.ua/images/content/services/vertical-construction-3-min.jpg" alt="Форма вертикального озеленення">
+      </div>
+    </div>
+  </div>
+  
+ </section>
 
-<p>Ми беремо проєкти вертикального озеленення під ключ. Це означає, що ділимося ідеями, створюємо проєкт, його реалізуємо (з монтажем і з доглядом).</p>
 
-<p>Фітодизайн вертикальних стін має такі етапи:</p>
-
-<ol>
-	<li><strong>Консультація та виїзд у Києві</strong><br />
-	Аналіз простору, окреслення завдань і побажань клієнта.</li>
-	<li><strong>Проєктування металевої конструкції</strong><br />
-	Під конкретні розміри та навантаження.</li>
-	<li><strong>Підбір рослин</strong><br />
-	З урахуванням умов і стилю інтер&rsquo;єру.</li>
-	<li><strong>Монтаж вертикального озеленення</strong><br />
-	Акуратно, без порушення роботи простору.</li>
-	<li><strong>Догляд та супровід</strong><br />
-	За потреби &mdash; регулярне обслуговування.</li>
-</ol>
-
-<h3>Вертикальне озеленення під ключ у Києві</h3>
-
-<p>Замовляючи вертикальне озеленення інтер&rsquo;єру у студії фітодизайну Флорен, ви отримуєте не просто рослини, а готове рішення:</p>
-
-<ul>
-	<li>індивідуальний дизайн;</li>
-	<li>надійну металеву конструкцію;</li>
-	<li>професійний монтаж;</li>
-	<li>здорові, адаптовані рослини;</li>
-	<li>можливість подальшого догляду.</li>
-</ul>
-
-<p>Ми працюємо з комерційними та приватними об&rsquo;єктами по Києву, обговорюємо пропозиції по всій Україні.</p>
-
-<h3>Реалізовані проєкти вертикального озеленення</h3>
-
-<p>За нашими плечима &mdash; проєкти для:</p>
-
-<ul>
-	<li>офісів і бізнес-центрів у Києві;</li>
-	<li>ресторанів і шоурумів;</li>
-	<li>приватних квартир і будинків.</li>
-</ul>
-</div>
+<section class="services-page__portfolio">
+  <h2>Приклади робіт із озеленення</h2>
+  <div class="services-page__portfolio_grid" data-portfolio-viewer="product-portfolio-viewer">
+    <div class="services-page__portfolio_column">
+      <img alt="Підставка для квітів. Фото 1" src="https://floren.com.ua/images/content/services/vertical-construction-2.jpg">
+      <img alt="Мудборд для звисаючих рослин. Фото 2" src="https://floren.com.ua/images/content/services/vertical-construction-6.jpg">
+    </div>
+    <div class="services-page__portfolio_column">
+      <img alt="Кутова металева підставка для квітів. Фото 3" src="https://floren.com.ua/images/content/services/vertical-construction-7.jpg">
+      <img alt="Металева конструкція для квітів на стелю. Фото 4" src="https://floren.com.ua/images/content/services/vertical-construction-1.jpg">
+    </div>
+    <div class="services-page__portfolio_column">
+      <img alt="Металева конструкція на стіну для квітів. Фото 5" src="https://floren.com.ua/images/content/services/vertical-construction-8.jpg">
+      <img alt="Форми вертикального озеленення. Фото 6" src="https://floren.com.ua/images/content/services/vertical-construction-9.jpg">
+    </div>
+  </div>
 </section>
+<div class="mb-24"></div>
+
 
 <section class="services-page__left-title-list">
-<div class="services-page__left-title">
-<div class="flex gap-32">
-<div class="grow">
-<ul>
-	<li>Кожен проєкт &mdash; це баланс між дизайном, функціональністю та реальними умовами простору.</li>
-</ul>
-</div>
-
-<div class="grow"><img alt="Підвісне кашпо для озеленення" src="https://floren.com.ua/images/content/services/vertical-construction-5.jpg" /></div>
-</div>
-</div>
+  <div class="services-page__left-title">
+    <h2>Різномаїття конструкцій</h2>
+    <div class="flex gap-32">
+      <div class="grow">
+      <p><b>Металеві підставки і кашпо</b> – це один з найпоширеніших видів квіткових кашпо з металу. Їх перевага в тому, що це абсолютно самостійні елементи, які не потребують спеціального кріпленні.</p>
+      <p>&nbsp;</p>
+      <p><b>Підвісні кашпо</b> – це настінні квіткові підставки з металу. Вони мають підвісні механізми і кріпляться до стіни. Завдяки даним конструкціям ви зможете розмістити у себе вдома велику кількість рослин, не займаючи для цього багато місця в кімнаті.</p>
+      <p>&nbsp;</p>
+      <p><b>Мудборди</b> – це сучасний декор стін з металу, який дозволяє розмістити улюблені рослини таким чином, щоб це стильно виглядало і не вимагало багато простору.</p>
+      </div>
+      <div class="grow">
+        <img src="https://floren.com.ua/images/content/services/vertical-construction-4-min.jpg" alt="Металеві підставки і кашпо">
+      </div>
+    </div>
+  </div>
 </section>
+
+
+
+
+<section class="services-page__portfolio">
+  <h2>Приклади робіт із озеленення</h2>
+  <div class="services-page__portfolio_grid" data-portfolio-viewer="product-portfolio-viewer">
+    <div class="services-page__portfolio_column">
+      <img alt="Металеві підставки для квітів. Фото 7" src="https://floren.com.ua/images/content/services/vertical-construction-image-3.jpg">
+      <img alt="Мудборд для вертикального озеленення. Фото 8" src="https://floren.com.ua/images/content/services/vertical-construction-11.jpg">
+    </div>
+    <div class="services-page__portfolio_column">
+      <img alt="Форми вертикального озеленення. Фото 9" src="https://floren.com.ua/images/content/services/vertical-construction-image.jpg">
+      <img alt="Форми вертикального озеленення. Фото 10" src="https://floren.com.ua/images/content/services/vertical-construction-13.jpg">
+    </div>
+    <div class="services-page__portfolio_column">
+      <img alt="Вертикальна поличка з квітами для озеленення простору. Фото 11" src="https://floren.com.ua/images/content/services/vertical-construction-image-2.jpg">
+      <img alt="Вертикальна підставка під квіти. Фото 12" src="https://floren.com.ua/images/content/services/vertical-construction-12.jpg">
+    </div>
+  </div>
+</section>
+<div class="mb-24"></div>
 
 <section class="services-page__contact-form">
-<h2><img alt="" class="services-page__contact-form_image" src="/img/homepage/hero-swiper-slide-1-1.png" />Часті запитання про вертикальне озеленення</h2>
+  <img class="services-page__contact-form_image" src="/img/homepage/hero-swiper-slide-1-1.png" alt="">
+  <div class="services-page__contact-form_content">
+    <h2>Допомогти підібрати конструкцію для квітів саме для вас?</h2>
+    <p>Залиште контактні дані і фітодизвйнер зв'яжеться з вами протягом дня для уточнення деталей</p>
+    <form method="POST" name="cb" action="/ua/thankyou/">
+              <input type="hidden" name="cb_topic" value="Озеленення конструкціями" />
+                <div class="form">
+                  <div class="form-control">
+                    <sl-input name="cb_name" type="text" placeholder="Ваше ім’я"></sl-input>
+                  </div>
+                  <div class="form-control">
+                    <sl-input name="cb_phone" type="text" placeholder="Ваш телефон"></sl-input>
+                  </div>
+                  <div class="form-control">
+                    <button class="button button--primary button--pill">Надіслати</button>
+                  </div>
+                </div>
+              </form>
 
-<p><strong>Скільки коштує вертикальне озеленення у Києві?</strong><br />
-Вартість залежить від розміру конструкції, типу рослин і складності монтажу. Остаточну ціну визначаємо після консультації.</p>
-
-<p><strong>Чи потрібен постійний догляд?</strong><br />
-Так, як і будь-яким живим рослинам. Ми пропонуємо професійний догляд за рослинами в офісі або вдома.</p>
-
-<p><strong>Чи підходить вертикальне озеленення для офісів без вікон?</strong><br />
-Так, за умови правильного підбору рослин та освітлення.</p>
-
-<p><strong>Скільки часу займає реалізація проєкту?</strong><br />
-Проєкт &laquo;Вертикальне озеленення Київ&raquo; у середньому реалізуємо від кількох днів до 2&ndash;3 тижнів, залежно від масштабу.</p>
-
-<p><strong>Чи працюєте ви лише в Києві?</strong><br />
-Основний фокус &mdash; Київ, але можливі проєкти й в інших містах України.</p>
-
-<h3>Замовити вертикальне озеленення у Києві</h3>
-
-<p>Хочете додати живу зелень у свій простір без хаосу та експериментів?&nbsp;Зв&rsquo;яжіться з нами &mdash; консультація безкоштовна.<br />
-Студія фітодизайну Флорен, Київ, допоможе реалізувати вертикальне озеленення, яке працює на результат.</p>
-
-<p>&nbsp;</p>
+  </div>
 </section>

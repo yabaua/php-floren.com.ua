@@ -326,18 +326,19 @@
   <div class="services-page__contact-form_content">
     <h2>Хочете, щоб хтось доглядав за вашими рослинами?</h2>
     <p>Залиште контакти — ми зв’яжемося з вами, проконсультуємо та підготуємо пропозицію з догляду за рослинами.</p>
-    <form action="">
-      <div class="form">
-        <div class="form-control">
-          <sl-input type="text" placeholder="Ваше ім’я"></sl-input>
-        </div>
-        <div class="form-control">
-          <sl-input type="text" placeholder="Ваш телефон"></sl-input>
-        </div>
-        <div class="form-control">
-          <button class="button button--primary button--pill">Отримати консультацію</button>
-        </div>
-      </div>
-    </form>
+    <form method="POST" name="cb" action="/thankyou/">
+              <input type="hidden" name="cb_topic" value="Догляд за рослинами" />
+                <div class="form">
+                  <div class="form-control">
+                    <sl-input name="cb_name" type="text" placeholder="Ваше ім’я"></sl-input>
+                  </div>
+                  <div class="form-control">
+                    <sl-input name="cb_phone" type="text" placeholder="Ваш телефон"></sl-input>
+                  </div>
+                  <div class="form-control">
+                    <button class="button button--primary button--pill">Надіслати</button>
+                  </div>
+                </div>
+              </form>
   </div>
 </section>

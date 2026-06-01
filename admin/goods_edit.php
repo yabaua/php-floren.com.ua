@@ -351,6 +351,13 @@ if (isset($_REQUEST['edit-form']) && isset($_REQUEST['change'])) {
 
 		$qv_edit = $qv_edit . " WHERE ID=".$val."";
 		$db->query($qv_edit);
+		
+		//=============	UPDATE 1C price for goods that is no in stock for the moment
+		$db->query("SELECT * FROM goods_forms gf JOIN goods_forms2_1c gf21c ON gf.ID=gf21c.fID WHERE gf.ID='".$val."'", 1);
+		while($rrs=$db->fetch(1)){
+			$db->query("UPDATE goods_1c SET price='".$price."' WHERE barcode='".$rrs['barcode']."'", 2);
+		}
+		//=============	UPDATE 1C price for goods that is no in stock for the moment
 
 /* 		header("location:goods_edit.php?ID=".$ID."&category=".$category.$lang_param);
 		echo mysql_error(); */

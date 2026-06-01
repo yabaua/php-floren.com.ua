@@ -1,5 +1,5 @@
 <section class="flex">
-            <div class="grow">              
+            <div class="grow">
               <p>Фітодизайн — це не декор.</p>
               <p>Це інструмент створення атмосфери, в якій хочеться жити, працювати і повертатись.</p>
               <p>Він для тих, хто:</p>
@@ -227,7 +227,7 @@
                 </a>
               </div>
               <div class="services-page__grid_item">
-                <a href="{LINGURL}/services/house_plant_care/">
+                <a href="/ua/services/house_plant_care/">
                   <div class="services-page__grid_item-image">
                     <img src="/img/sevices/plant-care.png" alt="Догляд за рослинами">
                   </div>
@@ -338,7 +338,8 @@
             <div class="services-page__contact-form_content">
               <h2>Обговоримо озеленення вашого приміщення?</h2>
               <p>Залиште контактні дані і менеджер зв'яжеться з вами протягом дня для уточнення деталей</p>
-              <form action="">
+              <form method="POST" name="cb" action="/ua/thankyou/">
+              <input type="hidden" value="Фітодизайн" />
                 <div class="form">
                   <div class="form-control">
                     <sl-input type="text" placeholder="Ваше імʼя"></sl-input>

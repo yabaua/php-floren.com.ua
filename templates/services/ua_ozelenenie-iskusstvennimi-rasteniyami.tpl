@@ -188,15 +188,20 @@
 
 <p>Залиште контакти &mdash; менеджер зв&rsquo;яжеться з вами протягом дня та підготує попереднє рішення.</p>
 
-<form action="">
-<div class="form">
-<div class="form-control"><sl-input placeholder="Ваше ім’я" type="text"></sl-input></div>
-
-<div class="form-control"><sl-input placeholder="Ваш телефон" type="text"></sl-input></div>
-
-<div class="form-control"><button class="button button--primary button--pill">Надіслати</button></div>
-</div>
-</form>
+<form method="POST" name="cb" action="/ua/thankyou/">
+              <input type="hidden" name="cb_topic" value="Озеленення штучними рослинами" />
+                <div class="form">
+                  <div class="form-control">
+                    <sl-input name="cb_name" type="text" placeholder="Ваше ім’я"></sl-input>
+                  </div>
+                  <div class="form-control">
+                    <sl-input name="cb_phone" type="text" placeholder="Ваш телефон"></sl-input>
+                  </div>
+                  <div class="form-control">
+                    <button class="button button--primary button--pill">Надіслати</button>
+                  </div>
+                </div>
+              </form>
 </div>
 </section>
 

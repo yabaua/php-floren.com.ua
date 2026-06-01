@@ -16,10 +16,12 @@
     <p>Також звертайтеся за телефоном:</p>
     <div class="homepage__advices_content--phones">
       <div class="phones--hidden">
-        <p>(044) 344-28-95</p>
-        <p>(050) 660-52-75</p>
+        <p>
+          (099) 238-26-44<br />
+          (067) 464-33-06
+        </p>
       </div>
-      <div class="phones--hours">У будні з 9:00 до 19:30</div>
+      <div class="phones--hours">У будні з 9:00 до 18:00</div>
     </div>
   </div>
 </section>
@@ -118,19 +120,20 @@
   <div class="services-page__contact-form_content">
     <h2>Обговоримо вертикальне озеленення?</h2>
     <p>Залиште контакти — наш менеджер зв’яжеться з вами протягом дня, відповість на запитання та підготує попереднє рішення.</p>
-    <form action="">
-      <div class="form">
-        <div class="form-control">
-          <sl-input type="text" placeholder="Ваше ім’я"></sl-input>
-        </div>
-        <div class="form-control">
-          <sl-input type="text" placeholder="Ваш телефон"></sl-input>
-        </div>
-        <div class="form-control">
-          <button class="button button--primary button--pill">Надіслати</button>
-        </div>
-      </div>
-    </form>
+    <form method="POST" name="cb" action="/ua/thankyou/">
+              <input type="hidden" name="cb_topic" value="Вертикальне озеленення" />
+                <div class="form">
+                  <div class="form-control">
+                    <sl-input name="cb_name" type="text" placeholder="Ваше ім’я"></sl-input>
+                  </div>
+                  <div class="form-control">
+                    <sl-input name="cb_phone" type="text" placeholder="Ваш телефон"></sl-input>
+                  </div>
+                  <div class="form-control">
+                    <button class="button button--primary button--pill">Надіслати</button>
+                  </div>
+                </div>
+              </form>
   </div>
 </section>
 

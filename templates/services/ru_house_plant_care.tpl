@@ -298,18 +298,19 @@
   <div class="services-page__contact-form_content">
     <h2>Хотите, чтобы кто-то ухаживал за вашими растениями?</h2>
     <p>Оставьте контакты — мы свяжемся с вами, проконсультируем и подготовим предложение по уходу за растениями.</p>
-    <form action="">
-      <div class="form">
-        <div class="form-control">
-          <sl-input type="text" placeholder="Ваше имя"></sl-input>
-        </div>
-        <div class="form-control">
-          <sl-input type="text" placeholder="Ваш телефон"></sl-input>
-        </div>
-        <div class="form-control">
-          <button class="button button--primary button--pill">Получить консультацию</button>
-        </div>
-      </div>
-    </form>
+    <form method="POST" name="cb" action="/thankyou/">
+              <input type="hidden" name="cb_topic" value="Уход за растениями" />
+                <div class="form">
+                  <div class="form-control">
+                    <sl-input name="cb_name" type="text" placeholder="Ваше имя"></sl-input>
+                  </div>
+                  <div class="form-control">
+                    <sl-input name="cb_phone" type="text" placeholder="Ваш телефон"></sl-input>
+                  </div>
+                  <div class="form-control">
+                    <button class="button button--primary button--pill">Отправить</button>
+                  </div>
+                </div>
+              </form>
   </div>
 </section>

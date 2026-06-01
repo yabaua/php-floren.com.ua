@@ -199,13 +199,14 @@
             <div class="services-page__contact-form_content">
               <h2>Обсудим озеленение вашего помещения?</h2> 
 							<p>Оставьте контактные данные и менеджер свяжется с вами в течение дня для уточнения деталей</p>
-              <form action="">
+              <form method="POST" name="cb" action="/thankyou/">
+              <input type="hidden" name="cb_topic" value="Озеленение искусственными растениями" />
                 <div class="form">
                   <div class="form-control">
-                    <sl-input type="text" placeholder="Ваше имя"></sl-input>
+                    <sl-input name="cb_name" type="text" placeholder="Ваше имя"></sl-input>
                   </div>
                   <div class="form-control">
-                    <sl-input type="text" placeholder="Ваш телефон"></sl-input>
+                    <sl-input name="cb_phone" type="text" placeholder="Ваш телефон"></sl-input>
                   </div>
                   <div class="form-control">
                     <button class="button button--primary button--pill">Отправить</button>

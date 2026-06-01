@@ -144,20 +144,20 @@
   <img class="services-page__contact-form_image" src="/img/homepage/hero-swiper-slide-1-1.png" alt="">
   <div class="services-page__contact-form_content">
     <h2>Хочете, щоб рослини у вашій квартирі справді прижилися?</h2>
-    <p>Залиште контактні дані і фітодизвйнер зв'яжеться з вами протягом дня для уточнення деталей</p>
-    <form action="">
+    <p>Залиште контактні дані і фітодизайнер зв'яжеться з вами протягом дня для уточнення деталей</p>
+    <form method="POST" name="cb" action="/ua/thankyou/">
+      <input type="hidden" name="cb_topic" value="Фітодизайн квартири" />
       <div class="form">
         <div class="form-control">
-          <sl-input type="text" placeholder="Ваше імʼя"></sl-input>
+          <sl-input name="cb_name" type="text" placeholder="Ваше імʼя"></sl-input>
         </div>
         <div class="form-control">
-          <sl-input type="text" placeholder="Ваш телефон"></sl-input>
+          <sl-input name="cb_phone" type="text" placeholder="Ваш телефон"></sl-input>
         </div>
         <div class="form-control">
           <button class="button button--primary button--pill">Надіслати</button>
         </div>
       </div>
     </form>
-
   </div>
 </section>

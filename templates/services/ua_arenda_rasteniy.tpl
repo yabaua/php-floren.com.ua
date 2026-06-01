@@ -94,18 +94,21 @@
   <div class="services-page__contact-form_content">
     <h2>Потрібні рослини в оренду для заходу?</h2>
     <p>Залиште свої контакти — ми зв’яжемося з вами, проконсультуємо та підготуємо пропозицію щодо оренди рослин.</p>
-    <form action="">
-      <div class="form">
-        <div class="form-control">
-          <sl-input type="text" placeholder="Ваше ім’я"></sl-input>
-        </div>
-        <div class="form-control">
-          <sl-input type="text" placeholder="Ваш телефон"></sl-input>
-        </div>
-        <div class="form-control">
-          <button class="button button--primary button--pill">Надіслати</button>
-        </div>
-      </div>
-    </form>
+    
+    <form method="POST" name="cb" action="/ua/thankyou/">
+              <input type="hidden" name="cb_topic" value="Оренда рослин" />
+                <div class="form">
+                  <div class="form-control">
+                    <sl-input name="cb_name" type="text" placeholder="Ваше ім’я"></sl-input>
+                  </div>
+                  <div class="form-control">
+                    <sl-input name="cb_phone" type="text" placeholder="Ваш телефон"></sl-input>
+                  </div>
+                  <div class="form-control">
+                    <button class="button button--primary button--pill">Надіслати</button>
+                  </div>
+                </div>
+              </form>
+
   </div>
 </section>

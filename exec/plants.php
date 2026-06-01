@@ -559,7 +559,7 @@ $schema_prices_min=array();
 		$smarty->assign("LIST_OR_TBL",$f_cat['list_or_tbl']);
 		
 		$body_text=$centerSEOtext;
-		
+		// ======ScooterOk AI code =====
 		// 1. Створюємо об'єкт DOM
 		$dom = new DOMDocument();
 		libxml_use_internal_errors(true);
@@ -608,6 +608,7 @@ $schema_prices_min=array();
 		// 6. Використовуємо твою перевірену регулярку для таблиць!
 		// Тепер вона на 100% безпечна, бо загальна структура секцій вже сформована правильно
 		$new_body_text = preg_replace('/(<table\b[^>]*>.*?<\/table>)/is', '<div class="article-section__table">$1</div>', $new_body_text);
+		// ======End ScooterOk AI code =====
 		
 		$smarty->assign("CENTER_SEO_TEXT", trim($new_body_text));
 		

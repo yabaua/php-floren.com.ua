@@ -16,12 +16,12 @@ if(isset($_POST) && count($_POST)){
 	}
 
 	
-            $topic		=	str_replace("'", "`", $_REQUEST['cb_topic']);
-            $subject	=	$_REQUEST['cb_topic'];
-            $name		= base64_encode($_REQUEST['cb_name']);
-            $cb_phone		=	strtolower($_REQUEST['cb_phone']);
-            $cb_txt		=	base64_encode($_REQUEST['cb_txt']);
-            $cb_page		=	str_replace('https://floren.com.ua','',$_SERVER['HTTP_REFERER']);
+            $cb_topic		=	str_replace("'", "`", $_REQUEST['cb_topic'] ?? '');
+            $subject	=	str_replace("'", "`", $_REQUEST['cb_topic'] ?? '');
+            $name			= $_REQUEST['cb_name'] ?? '';
+            $cb_phone	=	strtolower($_REQUEST['cb_phone'] ?? '');
+            $cb_txt		=	$_REQUEST['cb_txt'] ?? '';
+            $cb_page	=	str_replace('https://floren.com.ua','',($_SERVER['HTTP_REFERER'] ?? ''));
 
             /* SPAM Filter */
     
@@ -31,33 +31,33 @@ if(isset($_POST) && count($_POST)){
 			$spam_worlds_topic = array('unable');
             
       foreach ($spam_worlds as $sw) {
-                if (strpos($_REQUEST['cb_txt'], $sw) !== false) {
+                if (strpos($cb_txt, $sw) !== false) {
                     $is_spam = true;
                 }
       }
 			foreach($spam_worlds_name as $sn) {
-                if (strpos($_REQUEST['cb_phone'], $sn) !== false) {
+                if (strpos($cb_phone, $sn) !== false) {
                     $is_spam = true;
                 }
 			}
 			foreach($spam_worlds_topic as $st) {
-                if (strpos($_REQUEST['cb_topic'], $st) !== false) {
+                if (strpos($cb_topic, $st) !== false) {
                     $is_spam = true;
                 }
       }
             
-            if ($_REQUEST['cb_topic']=='') $is_spam = true;
+            if ($cb_topic=='') $is_spam = true;
 
       if (!$is_spam) {
 
-	        $db->query("INSERT INTO callback (cb_topic,cb_name,cb_phone,cb_txt,cb_page,cb_date) VALUES ('".$topic."', '".$name."', '".$cb_phone."', '".$cb_txt."', '".$cb_page."', '".time()."')" );
+	        $db->query("INSERT INTO callback (cb_topic,cb_name,cb_phone,cb_txt,cb_page,cb_date) VALUES ('".base64_encode($cb_topic)."', '".base64_encode($name)."', '".base64_encode($cb_phone)."', '".base64_encode($cb_txt)."', '".$cb_page."', '".time()."')" );
 	    }
 			
-			$body='<p>'.$topic.' (thankyoupage)'.mb_detect_encoding($topic).'</p>';
+			$body='<p>'.$cb_topic.' (thankyoupage)'.mb_detect_encoding($cb_topic).'</p>';
 			$body.='<table>';
-			$body.='<tr><td>ФИО:</td>		<td>'.base64_decode($name).'</td></tr>';
+			$body.='<tr><td>ФИО:</td>		<td>'.$name.'</td></tr>';
 			$body.='<tr><td>Телефон / e-mail:</td>	<td>'.$cb_phone.'</td></tr>';
-			$body.='<tr><td>Текст:</td>		<td>'.base64_decode($cb_txt).'</td></tr>';
+			$body.='<tr><td>Текст:</td>		<td>'.$cb_txt.'</td></tr>';
 			$body.='<tr><td>Страница:</td>		<td><a href="https://floren.com.ua'.$cb_page.'">'.$cb_page.'</td></tr>';
 			$body.='</table>';
 
@@ -72,11 +72,11 @@ if(isset($_POST) && count($_POST)){
             }
 			
 			//TELEGRAM
-			$smarty->assign('topic', $topic);
-			$smarty->assign('name', base64_decode($name));
+			$smarty->assign('topic', $cb_topic);
+			$smarty->assign('name', $name);
 			$smarty->assign('phone', $cb_phone);
 			$smarty->assign('link', "https://floren.com.ua".$cb_page);
-			$smarty->assign('text', base64_decode($cb_txt));
+			$smarty->assign('text', $cb_txt);
 
 			$group_name = 'plants';
 
@@ -143,13 +143,13 @@ if(isset($_POST) && count($_POST)){
 							
 				  	),
 				"client_attributes"	=>	array(
-									"person"	=>	base64_decode($name),
+									"person"	=>	$name,
 									"email"		=>	$order_data['email'] ?? '',
 									"status_id"	=>	1,
 									"lead"		=>	false,
 									"phones"	=>	[$cb_phone]
 									),		
-				"comment"	=>	"Лід з сайту:\r\n".$topic."\r\nПІБ: ".base64_decode($name)."\r\nКонтакт: ".$cb_phone."\r\n".base64_decode($cb_txt)."\r\nСторінка: https://floren.com.ua".$cb_page
+				"comment"	=>	"Лід з сайту:\r\n".$cb_topic."\r\nПІБ: ".$name."\r\nКонтакт: ".$cb_phone."\r\n".$cb_txt."\r\nСторінка: https://floren.com.ua".$cb_page
 			);
 			$dataString = json_encode($json_string, JSON_UNESCAPED_UNICODE);
 			

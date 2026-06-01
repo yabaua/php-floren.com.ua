@@ -46,7 +46,9 @@ class DB2 {
             $this->link_id->close();
         }
     }
-
+    public function escape($str){
+        return mysqli_real_escape_string($this->link_id, $str);
+    }
     public function query($sql, $result = 0) {
 
         if (!($this->link_id instanceof mysqli)) {
@@ -119,7 +121,7 @@ class DB2 {
             $this->result[$result]->free();
         }
     }
-
+  
     public function num_rows($result = 0) {
         if (!isset($this->result[$result])) {
             return 0;

@@ -1,4 +1,7 @@
 
+
+{* ================ MOBILE ====================== *}
+
 <sl-drawer id="category-drawer" label="Всі категорії" placement="end" class="drawer category-drawer">
   <div class="drawer__content">
     {if $CUR_CAT=='publications'}
@@ -24,18 +27,17 @@
         <a href="{$LANGURL}/phytodesign/">{$LINGVO.phytodesign}</a>
         </h3>
         <ul>
-          <li{if isset($URL[1]) && $URL[1]=='phytodesign-kvartiri' } class="active" {/if}>
-            <a class="underline" href="{$LANGURL}/services/phytodesign-kvartiri/">{$LINGVO.phytodesign_kvartiri}</a>
+            <li{if isset($URL[1]) && $URL[1]=='phytodesign-kvartiri' } class="active" {/if}>
+                <a class="underline" href="{$LANGURL}/services/phytodesign-kvartiri/">{$LINGVO.phytodesign_kvartiri}</a>
             </li>
-            <!-- li{if $URL[1]=='phytodesign-ofisa'} class="active"{/if}>
-                    <a class="underline" href="{$LANGURL}/services/phytodesign-ofisa/">{$LINGVO.phytodesign_ofisa}</a>
-                  </li -->
+            <li{if $URL[1]=='phytodesign-ofisa'} class="active"{/if}>
+                <a class="underline" href="{$LANGURL}/services/phytodesign-ofisa/">{$LINGVO.phytodesign_ofisa}</a>
+            </li>
             <li{if isset($URL[1]) && $URL[1]=='peregorodki-iz-rasteniy' } class="active" {/if}>
-              <a class="underline" href="{$LANGURL}/services/peregorodki-iz-rasteniy/">{$LINGVO.zonirovanie}</a>
-              </li>
-              <li{if isset($URL[1]) && $URL[1]=='ozelenenie-iskusstvennimi-rasteniyami' } class="active" {/if}>
-                <a class="underline"
-                  href="{$LANGURL}/services/ozelenenie-iskusstvennimi-rasteniyami/">{$LINGVO.ozelenenie_iskusstvennimi_rasteniyami}</a>
+                <a class="underline" href="{$LANGURL}/services/peregorodki-iz-rasteniy/">{$LINGVO.zonirovanie}</a>
+            </li>
+            <li{if isset($URL[1]) && $URL[1]=='ozelenenie-iskusstvennimi-rasteniyami' } class="active" {/if}>
+                <a class="underline" href="{$LANGURL}/services/ozelenenie-iskusstvennimi-rasteniyami/">{$LINGVO.ozelenenie_iskusstvennimi_rasteniyami}</a>
                 </li>
                 <li{if isset($URL[1]) && $URL[1]=='ozelenenie_letney_ploschadki' } class="active" {/if}>
                   <a class="underline"
@@ -116,6 +118,7 @@
   </div>
 </sl-drawer>
 
+{* =============== END MOBILE ================*}
 
 {if $CUR_CAT=='publications'}
 <section class="double-column-page__nav_section">
@@ -143,9 +146,9 @@
     <li{if isset($URL[1]) && $URL[1]=='phytodesign-kvartiri'} class="active"{/if}>
       <a class="underline" href="{$LANGURL}/services/phytodesign-kvartiri/">{$LINGVO.phytodesign_kvartiri}</a>
     </li>
-    <!-- li{if $URL[1]=='phytodesign-ofisa'} class="active"{/if}>
-                <a class="underline" href="{$LANGURL}/services/phytodesign-ofisa/">{$LINGVO.phytodesign_ofisa}</a>
-              </li -->
+    <li{if isset($URL[1]) && $URL[1]=='phytodesign-ofisa'} class="active"{/if}>
+        <a class="underline" href="{$LANGURL}/services/phytodesign-ofisa/">{$LINGVO.phytodesign_ofisa}</a>
+    </li>
     <li{if isset($URL[1]) && $URL[1]=='peregorodki-iz-rasteniy'} class="active"{/if}>
       <a class="underline" href="{$LANGURL}/services/peregorodki-iz-rasteniy/">{$LINGVO.zonirovanie}</a>
     </li>

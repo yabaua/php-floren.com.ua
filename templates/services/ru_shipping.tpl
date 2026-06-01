@@ -109,14 +109,19 @@
 
 <p>Оставьте контакты &mdash; мы свяжемся с вами, проконсультируем и подготовим смету по перевозке растений.</p>
 
-<form action="">
-<div class="form">
-<div class="form-control"><sl-input placeholder="Ваше имя" type="text"></sl-input></div>
-
-<div class="form-control"><sl-input placeholder="Ваш телефон" type="text"></sl-input></div>
-
-<div class="form-control"><button class="button button--primary button--pill">Отправить</button></div>
-</div>
-</form>
+<form method="POST" name="cb" action="/thankyou/">
+              <input type="hidden" name="cb_topic" value="Перевозка растений" />
+                <div class="form">
+                  <div class="form-control">
+                    <sl-input name="cb_name" type="text" placeholder="Ваше имя"></sl-input>
+                  </div>
+                  <div class="form-control">
+                    <sl-input name="cb_phone" type="text" placeholder="Ваш телефон"></sl-input>
+                  </div>
+                  <div class="form-control">
+                    <button class="button button--primary button--pill">Отправить</button>
+                  </div>
+                </div>
+              </form>
 </div>
 </section>

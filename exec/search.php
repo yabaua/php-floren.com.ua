@@ -25,13 +25,14 @@ if(strlen($_REQUEST['srch'])>= 2){
 	}
 
 	$db->query("SELECT 
-				g.ID AS gID, g.link AS gLink, g.classID AS classID, g.name AS goodName, gf.*, gf.ID AS formID, gf.price AS goodPrice, g1c.*, gc.motherID AS mID
+				g.ID AS gID, g.link AS gLink, g.classID AS classID, g.name AS goodName, gf.*, gf.ID AS formID, gf.price AS goodPrice, g1c.*, gc.motherID AS mID, gm.unit AS unit
 				FROM goods".$db_sufix." g
 				JOIN goods".$db_sufix."_class gc ON g.classID=gc.ID
 				JOIN goods_forms gf ON g.ID=gf.goodID
 				LEFT JOIN goods_forms2_1c g21c ON gf.ID=g21c.fID
 				LEFT JOIN goods_1c g1c ON g1c.barcode=g21c.barcode
-				WHERE gf.ID LIKE '".$srch."' AND g.act='Y' AND g.classID NOT IN (78, 79)
+				LEFT JOIN goods_measures gm ON gf.measure_id=gm.ID
+				WHERE gf.ID = '".$srch."' AND g.act='Y' AND g.classID NOT IN (78, 79)
 				ORDER BY g.sort, g.availability DESC");
 				
 	$articul_search = array();		
@@ -40,7 +41,7 @@ if(strlen($_REQUEST['srch'])>= 2){
 		$new_link_articul	= $lang_url . '/product/'.$rs_goods_articul['gID'].'_'.$rs_goods_articul['gLink'].'/';
 		
 		
-		if($rs_goods['classID']=='49') {
+		if($rs_goods_articul['classID']=='49') {
 			$new_link_articul= $lang_url . '/compositions/'.$rs_goods_articul['gLink'].'/';
 		}
 		elseif($rs_goods_articul['classID']=='78' || $rs_goods_articul['classID']=='79' || $rs_goods_articul['classID']=='80') {
@@ -83,7 +84,6 @@ if(strlen($_REQUEST['srch'])>= 2){
 	}
 	$smarty->assign("ARTICUL_SEARCH", $articul_search);
 	
-
 	$db->query("SELECT 
 				g.*, gc.motherID AS mID
 				FROM $first_table g
@@ -111,7 +111,7 @@ if(strlen($_REQUEST['srch'])>= 2){
 		$goods[$rs_goods['ID']]['new_image']= $new_image;
 		
 		// $db->query("SELECT * FROM goods_forms WHERE goodID='".$rs_goods['ID']."' AND visibility='1' ORDER BY price=0, price DESC", 1);
-		$db->query("SELECT *, gf.ID AS fid FROM goods_forms gf LEFT JOIN goods_measures gm ON gf.measure_id=gm.ID WHERE goodID='".$rs_goods['ID']."' AND visibility=1 GROUP BY dia, wdt, hgt, depth, measure_qt ORDER BY price DESC, dia DESC, wdt DESC, measure_qt DESC", 1);
+		$db->query("SELECT *, gf.ID AS fid, gm.unit AS unit FROM goods_forms gf LEFT JOIN goods_measures gm ON gf.measure_id=gm.ID WHERE goodID='".$rs_goods['ID']."' AND visibility=1 GROUP BY dia, wdt, hgt, depth, measure_qt ORDER BY price DESC, dia DESC, wdt DESC, measure_qt DESC", 1);
 		$is_action=0;
 		while ($rs_goods_forms=$db->fetch(1)){
 

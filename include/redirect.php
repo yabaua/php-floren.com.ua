@@ -31,6 +31,12 @@ if ($URL[0]=='chrysanthemum'){
 	header("Location: /product/118_hrizantema_green_valley/");
 	exit();
 }
+if ($URL[0]=='pricelist'){
+	include($_SERVER['DOCUMENT_ROOT'].'/include/send_404_email.php');
+	header("HTTP/1.0 301 Moved Permanently"); 
+	header("Location: /sitemap/");
+	exit();
+}
 if ($URL[0]=='phyto-lamp'){
 	include($_SERVER['DOCUMENT_ROOT'].'/include/send_404_email.php');
 	header("HTTP/1.0 301 Moved Permanently"); 
@@ -57,7 +63,7 @@ if($URL[0]=='landscape' && (isset($URL[1]) && $URL[1]=='drenazhnie-sistemi')){
 	exit();
 }
 
-if($URL[0]=='planters' && $URL[1]=='keramogranit'){
+if($URL[0]=='planters' && isset($URL[1]) && $URL[1]=='keramogranit'){
 	include($_SERVER['DOCUMENT_ROOT'].'/include/send_404_email.php');
 	header("HTTP/1.0 301 Moved Permanently"); 
 	header("Location: /planters/");
@@ -71,7 +77,7 @@ if($URL[0]=='planters' && $URL[1]=='fiberstone'){
 	exit();
 }
 */
-if($URL[0]=='planters' && $URL[1]=='vase'){
+if($URL[0]=='planters' && isset($URL[1]) && $URL[1]=='vase'){
 	include($_SERVER['DOCUMENT_ROOT'].'/include/send_404_email.php');
 	header("HTTP/1.0 301 Moved Permanently"); 
 	header("Location: /planters/");
@@ -930,6 +936,64 @@ $redirect_pages_2=array(
 //		include($_SERVER['DOCUMENT_ROOT'].'/include/send_404_email.php');
 		header("HTTP/1.0 301 Moved Permanently"); 
 		header("Location: ".$redirect_pages_2[('https://floren.com.ua'.$_SERVER['REQUEST_URI'])]);
+		exit();
+	}
+	
+	
+$redirect_pages_3=array(	
+	'https://floren.com.ua/ua/florist/'					=>		'https://floren.com.ua/ua/komnatnie-rasteniya/',
+	'https://floren.com.ua/florist/'					=>		'https://floren.com.ua/komnatnie-rasteniya/',
+	'https://floren.com.ua/ua/florist/tyulpani/'		=>		'https://floren.com.ua/komnatnie-rasteniya/bloom/',
+	'https://floren.com.ua/florist/dlya_lyubimoy/'		=>		'https://floren.com.ua/ua/komnatnie-rasteniya/',
+	'https://floren.com.ua/ua/florist/750_1000/'		=>		'https://floren.com.ua/ua/komnatnie-rasteniya/',
+	'https://floren.com.ua/ua/florist/krasniy/'			=>		'https://floren.com.ua/ua/komnatnie-rasteniya/',
+	'https://floren.com.ua/florist/750_1000/'			=>		'https://floren.com.ua/ua/komnatnie-rasteniya/',
+	'https://floren.com.ua/florist/rozi/'				=>		'https://floren.com.ua/product/112_roza/',
+	'https://floren.com.ua/ua/florist/beliy/'			=>		'https://floren.com.ua/ua/komnatnie-rasteniya/',
+	'https://floren.com.ua/florist/fioletoviy-rozi/'	=>		'https://floren.com.ua/product/113_roza_kordana_rood_/',
+	'https://floren.com.ua/florist/1000_1500/'			=>		'https://floren.com.ua/ua/komnatnie-rasteniya/',
+	'https://floren.com.ua/florist/v_korzine/'			=>		'https://floren.com.ua/ua/komnatnie-rasteniya/',
+	'https://floren.com.ua/ua/florist/1000_1500/'		=>		'https://floren.com.ua/ua/komnatnie-rasteniya/',
+	'https://floren.com.ua/florist/na_den_rozhdeniya/'	=>		'https://floren.com.ua/ua/komnatnie-rasteniya/',
+	'https://floren.com.ua/ua/florist/1500_2000/'		=>		'https://floren.com.ua/ua/komnatnie-rasteniya/',
+	'https://floren.com.ua/ua/florist/2500_/'			=>		'https://floren.com.ua/ua/komnatnie-rasteniya/',
+	'https://floren.com.ua/ua/buket/2210/'				=>		'https://floren.com.ua/ua/komnatnie-rasteniya/bulbs/',
+	'https://floren.com.ua/ua/buket/2323/'				=>		'https://floren.com.ua/ua/komnatnie-rasteniya/bulbs/',
+	'https://floren.com.ua/ua/buket/2255/'				=>		'https://floren.com.ua/ua/komnatnie-rasteniya/bulbs/',
+	'https://floren.com.ua/buket/2210/'					=>		'https://floren.com.ua/komnatnie-rasteniya/bloom/',
+	'https://floren.com.ua/buket/2212/'					=>		'https://floren.com.ua/komnatnie-rasteniya/bloom/',
+	
+	
+	'https://floren.com.ua/pricelist/'					=>		'https://floren.com.ua/sitemap/',
+	'https://floren.com.ua/landscape/'					=>		'https://floren.com.ua/ua/komnatnie-rasteniya/',
+	'https://floren.com.ua/blagoustroistvo/'		=>		'https://floren.com.ua/ua/komnatnie-rasteniya/',
+	'https://floren.com.ua/uhod/'								=>		'https://floren.com.ua/ua/komnatnie-rasteniya/',
+	'https://floren.com.ua/gazon/'							=>		'https://floren.com.ua/ua/komnatnie-rasteniya/'
+);
+	if(in_array('https://floren.com.ua'.$_SERVER['REQUEST_URI'], array_keys($redirect_pages_3))){
+//		include($_SERVER['DOCUMENT_ROOT'].'/include/send_404_email.php');
+		header("HTTP/1.0 301 Moved Permanently"); 
+		header("Location: ".$redirect_pages_3[('https://floren.com.ua'.$_SERVER['REQUEST_URI'])]);
+		exit();
+	}
+	
+	if( 	
+		(
+			strpos($_SERVER['REQUEST_URI'], 'florist') !== false
+			&&
+			!in_array('https://floren.com.ua'.$_SERVER['REQUEST_URI'], array_keys($redirect_pages_3))
+		)
+			||
+			
+		(
+			strpos($_SERVER['REQUEST_URI'], 'buket') !== false
+			&&
+			!in_array('https://floren.com.ua'.$_SERVER['REQUEST_URI'], array_keys($redirect_pages_3))
+		)
+		
+	){
+		header('HTTP/1.0 410 Gone', true, '410');
+		include($_SERVER['DOCUMENT_ROOT']."/410.php");
 		exit();
 	}
 ?>

@@ -55,14 +55,14 @@
 {if ($URL[0]=='planters') or ($URL[0]=='komnatnie-rasteniya')}
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="<!--page_title-->" />
-	<meta property="og:url" content="https://floren.com.ua{$LANGURL}/{$URL[0]}/{$URL[1]}/" />
+	<meta property="og:url" content="https://floren.com.ua{$LANGURL}/{$URL[0]}{if !empty($URL[1])}/{$URL[1]}{/if}/" />
 	<meta property="og:description" content="Шукаєш <!--page_title--> ? Заходь та обирай прямо зараз!" />
 	<meta property="article:author" content="https://www.facebook.com/floren.com.ua/" />
-	<meta property="og:image" content="https://floren.com.ua/images/lechuza/big_{$URL[1]}_{$G_FIRST_COLOR_INPUT}.jpg" />
+	<meta property="og:image" content="https://floren.com.ua/img/category/{if !empty($URL[1])}{$URL[1]}.png{else}_default.png{/if}" />
 	<meta property="og:publisher" content="https://www.facebook.com/floren.com.ua/" />
 	<meta property="og:site_name" content="Флорен – Студія Фітодизайну" />
 {/if}
-{if ($URL[0]=='publications') && $URL[1]!=''}
+{if $URL[0] == 'publications' && !empty($URL[1])}
 	<meta property="og:locale" content="ru_UA" />
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content="{$ARTICLE.meta_title|truncate:100}" />
@@ -74,7 +74,7 @@
 	<meta property="og:image:height" content="{$ARTICLE_IMAGE[1]}" />
 	<meta property="og:image:alt" content="{$ARTICLE.title} фото 1" />
 {/if}
-{if ($URL[0]=='services') && $URL[1]!=''}
+{if $URL[0]=='services' && !empty($URL[1])}
 	<meta property="og:locale" content="ru_UA" />
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content="{$SERVICE.meta_title|truncate:100}" />
@@ -262,12 +262,17 @@
     
     </script>
     {/literal}
-{*    
-    { literal }
+{* ============ START COMMENT ================= *}
+    {literal}
 		 <!--[if IE]>
     <script>document.createElement('header');document.createElement('nav');document.createElement('section');document.createElement('article');document.createElement('aside');document.createElement('footer');</script>
      		<![endif]-->
     
+    <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-20410887-2');
+    ga('send', 'pageview');
+    </script>
     
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -276,15 +281,6 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-W7VHLVP');</script>
     <!-- End Google Tag Manager -->
-    
-    
-    
-    <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-20410887-2');
-    ga('send', 'pageview');
-    </script>
-    
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-736148489"></script>
     <script>
@@ -317,13 +313,13 @@
     
     
     
-    { /literal }
+    {/literal}
     <script>
     
-    	{ $GTAG }
+    	{$GTAG}
     
     </script>
-*}
+{*   =========== END COMMENT ========= *}
   </head>
 
   <body>
@@ -433,7 +429,7 @@
                 <div class="phones-tooltip--item">
                   <img src="/img/icons/icon-phone.svg" alt="Phone"/>
                   <div class="phones-tooltip--item-wrapper">
-                    <p class="item-phone">(044) 344-28-95, (050) 660-52-75</p>
+                    <p class="item-phone">(044) 344-28-95, (099) 238-26-44</p>
                     <p class="item-hours">По буднях 09:00 - 19:30</p>
                     <p class="item-messengers">
                       <a href="viber://chat?number=%2B380992382644" target="_blank" onclick="trackConv('vb','{$LANGURL}/{$URL|@join:"/"}')">
@@ -494,16 +490,17 @@
               <button class="header__main--profile-mobile icon-button" type="button" data-event="click" data-callback="toggleMobileSearch">
                 <svg class="icon icon-search" />
               </button>
-
+<!-- 
               <a href="#" class="icon-button" aria-label="{$LINGVO.cabinet}" data-event="click" data-callback="openModal"
               data-modal-id="sign-in-modal">
                 <svg class="icon icon-user"/>
               </a>
-              <!-- <a href="#" class="icon-button" aria-label="{$LINGVO.cabinet_favorites}">
+              <a href="#" class="icon-button" aria-label="{$LINGVO.cabinet_favorites}">
                 <span class="badge warning">10</span>
                 <svg class="icon icon-heart"/>
-              </a> -->
-              <a href="#" class="icon-button" aria-label="{$LINGVO.basket}" data-event="click" data-callback="openModal"
+              </a>
+-->
+              <a href="{$LANG_URL}/basket/" class="icon-button" aria-label="{$LINGVO.basket}" data-event="click" data-callback="openModal"
               data-modal-id="cart-modal">
               {if $BASKET|@count > 0}
               <span class="badge success" id="cart-modal-button-badge">{$BASKET|@count}</span>
@@ -515,7 +512,7 @@
             <!-- Start Cart modal -->
             <sl-dialog id="cart-modal" label="{$LINGVO.basket}" class="cart-modal">
               <div class="alert alert-success cart-modal__message" role="alert">
-              Товар <a href="#" class="underline" id="cart-modal-product-name"></a> доданий у ваш <a href="/basket" class="underline">кошик</a>
+              Товар <u id="cart-modal-product-name"></u> доданий у ваш <a href="/basket/" class="underline">кошик</a>
               </div>
               <ul class="cart-items-list" id="cart-modal-items-list">
               {if $BASKET|@count>0}
@@ -796,10 +793,12 @@
                     alt="{$LINGVO.zonirovanie}"/>
                     <a class="underline" href="{$LANGURL}/services/peregorodki-iz-rasteniy/">{$LINGVO.zonirovanie}</a>
                   </li>
+                  <!--
                   <li>
                     <img src="/img/sevices/plant-rental.png" alt="Зелені рішення для HoReCa"/>
                     <a class="underline" href="#">Зелені рішення для HoReCa</a>
                   </li>
+                  -->
                   <li>
                     <img src="/img/sevices/landscaping-artificial-plants.png" alt="{$LINGVO.ozelenenie_iskusstvennimi_rasteniyami}"/>
                     <a class="underline" href="{$LANGURL}/services/ozelenenie-iskusstvennimi-rasteniyami/">{$LINGVO.ozelenenie_iskusstvennimi_rasteniyami}</a>
@@ -879,7 +878,7 @@
 
   {* ***************************** Основний контент сторінки ***************************** *}
   {* ***************************** Якщо сторінка без лівого меню ***************************** *}
-  {if $URL[0]=='' || $URL[0]=='basket' || ($URL[0]=='services' && !$URL[1])} 
+  {if $URL[0]=='' || $URL[0]=='basket' || ($URL[0]=='services' && empty($URL[1]))} 
     {include file="$CONTENT_TPL"}
   {else}
   {* ***************************** Якщо сторінка двоколоночна ***************************** *}
@@ -1148,10 +1147,9 @@
   {if $URL[0]=='product'}
     <script src="https://www.youtube.com/iframe_api"></script>
   {/if}
-{*
   
   <!-- BEGIN BINOCHAT CODE  -->
-   
+  {literal}   
   <script type="text/javascript">
   (function(d, w, s) {
       var widgetHash = 'MhQxJRjy5lGULYi5ZRqW', bch = d.createElement(s); bch.type = 'text/javascript'; bch.async = true;
@@ -1160,8 +1158,8 @@
   })(document, window, 'script');
   </script>
   <!--  END BINOCHAT CODE -->
-*} 
-  {literal}
+
+
   <!--  BEGIN BINO CALLTRACKING CODE -->
   <script type="text/javascript">
     (function(d, w, s) {

@@ -14,7 +14,7 @@
       <li class="search-results__item">
         <div class="search-results__item_info">
           <h3 class="search-results__item_title">
-            {$G.formID} – <a href="{$G.new_link_articul}" class="underline" title="{$G.goodName}">{$G.goodName} {$G.measure}</a> – <b>{if !$G.goodPrice || $G.goodPrice==0}{$LINGVO.not_available}{else}{$G.goodPrice}{/if}</b>&nbsp;грн.{if $G.barcode} <font color="#666666">Штрихкод: {$G.barcode}</font>{/if}
+            {$G.formID} – <a href="{$G.new_link_articul}" class="underline" title="{$G.goodName}">{$G.goodName} {$G.measure}</a> – <b>{if !$G.goodPrice || $G.goodPrice==0}{$LINGVO.not_available}{else}{$G.goodPrice|number_format:2:".":" "}{/if}</b>&nbsp;грн.{if $G.barcode} <font color="#666666">Штрихкод: {$G.barcode}</font>{/if}
           </h3>
         </div>
       </li>
@@ -42,7 +42,7 @@
             {if $G.forms}	
             	<ul>
 							{foreach item=GF from=$G.forms}
-								<li>{$GF.measure} – {if !$GF.price || $GF.price==0}{$LINGVO.not_available}{else}{$GF.price}&nbsp;грн.{/if}</li>
+								<li>{$GF.measure} – {if !$GF.price || $GF.price==0}{$LINGVO.not_available}{else}{$GF.price|number_format:2:".":" "}&nbsp;грн.{/if}</li>
 							{/foreach}
 							</ul>
 						{/if}
