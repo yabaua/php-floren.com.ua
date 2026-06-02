@@ -1,4 +1,5 @@
 const fetchShowMoreGoods = async (curPage) => {
+  console.log('curPage', curPage);
   try {
     const response = await fetch("/api/showMoreGoods.php", {
       method: "POST",

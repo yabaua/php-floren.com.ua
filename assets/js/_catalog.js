@@ -1,7 +1,6 @@
 const isTouchDevice = () => window.matchMedia("(hover: none)").matches;
 
-const initCatalog = () => {
-  window.currentPage = 1;
+const initCatalog = () => {  
   const catalogButton = document.getElementById("catalog-button");
   const catalogSecondary = document.querySelectorAll(".header__catalog--secondary .secondary-item");
   const catalogOverlay = document.getElementById("catalog-overlay");
@@ -108,8 +107,8 @@ const updateGoodsList = (data) => {
   productsContainer.insertAdjacentHTML("beforeend", productsHTML);
 
   // Try to find current active page and total pages from DOM before update
-  let currentPage = 1;
-  let totalPages = 1;
+  let currentPage = window.currentPage;
+  let totalPages = window.lastPage;
   
   const paginationContainer = document.getElementById("goods-pagination");
   if (paginationContainer) {
@@ -117,7 +116,7 @@ const updateGoodsList = (data) => {
       if (activeLink) {
         currentPage = parseInt(activeLink.textContent.trim());
       }
-      
+        
       // Try to find total pages from the last numbered link (before the "Next" arrow)
       // The structure is: ... [Page N] [Next Arrow]
       // We need to be careful not to pick "..." or arrows
@@ -134,6 +133,8 @@ const updateGoodsList = (data) => {
   // Update pagination if data contains pagination info
   if (data.pagination) {
     updatePagination(data.pagination);
+    currentPage = parseInt(data.pagination.current_page);
+    totalPages = parseInt(data.pagination.total_pages);
   } else {
     // Fallback: simple increment if no pagination data provided
     // We assume we just loaded the next page successfully
@@ -145,9 +146,19 @@ const updateGoodsList = (data) => {
     }
 
     updatePagination({
-      current_page: newPage,
-      total_pages: totalPages
+      current_page: newPage,    
+      total_pages: window.lastPage
     });
+    currentPage = newPage;
+  }
+
+  const moreButtonContainer = document.querySelector(".catalog-page__content_more");
+  if (moreButtonContainer) {
+    if (currentPage >= totalPages) {
+      moreButtonContainer.style.display = "none";
+    } else {
+      moreButtonContainer.style.display = "";
+    }
   }
 };
 
@@ -173,10 +184,13 @@ const updatePagination = (paginationData) => {
     if (!pathname.endsWith('/')) {
       pathname += '/';
     }
-    if (page > 1) {
-      pathname += `page${page}/`;
-    }
     url.pathname = pathname;
+
+    if (page > 1) {
+      url.searchParams.set('p', page);
+    } else {
+      url.searchParams.delete('p');
+    }
     return url.toString();
   };
 

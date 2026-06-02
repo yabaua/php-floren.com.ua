@@ -35,9 +35,9 @@ const clickHandlers = {
     const modals = document.querySelectorAll("sl-dialog");
     modals.forEach((modal) => modal.hide());
   },
-  showMoreGoods: async () => {
+  showMoreGoods: async () => {    
     try {
-      const data = await fetchShowMoreGoods(window.currentPage);
+      const data = await fetchShowMoreGoods(window.currentPage + 1);
       updateGoodsList(data);
     } catch (error) {
       console.error("Error fetching more goods:", error);

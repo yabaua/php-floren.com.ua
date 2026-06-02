@@ -179,15 +179,17 @@
 </div>
 {if $PAGE_MAX>1} {** if !$FROM_GOODS **}{** if from goods.php **}
 <!-- Кнопка "Показати ще" -->
-<div class="catalog-page__content_more">
-  <button
-    class="button button--primary button--pill"
-    data-event="click"
-    data-callback="showMoreGoods"
-  >
-    {$LINGVO.show_more}
-  </button>
-</div>
+  {if $CUR_PAGE < $LASTPAGE}
+  <div class="catalog-page__content_more">  
+    <button
+      class="button button--primary button--pill"
+      data-event="click"
+      data-callback="showMoreGoods"
+    >
+      {$LINGVO.show_more}
+    </button>
+  </div>
+  {/if}
 {** /if **}
 
 <!-- Pagination -->
@@ -225,7 +227,7 @@
   </a>
   {else}
   <a class="pagination__link" title="{$LINGVO.pages_goto} {$Cm1}"
-    href="{if $FROM_GOODS}{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}{if $Cm1!=1}page{$Cm1}{/if}{else}{$LANGURL}/{$ALIAS}{$FILTERS_URL}{if $Cm1==1}/{else}/page{$Cm1}/{/if}{/if}">
+    href="{if $FROM_GOODS}{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}{if $Cm1!=1}?p={$Cm1}{/if}{else}{$LANGURL}/{$ALIAS}{$FILTERS_URL}{if $Cm1==1}/{else}/page{$Cm1}/{/if}{/if}">
     <img src="/img/icons/icon-arrow-left-long.svg" alt="Попередня сторінка" />
   </a>
   {/if}
@@ -248,12 +250,12 @@
   {elseif $ss == 3 && $N > 2}
     {if $FROM_GOODS}
     <a title="{$LINGVO.pages_goto} 2"
-      href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}page2"
+      href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}?p=2"
       class="pagination__link{if $C==2} active{/if}">2</a>
     {else}
     <a title="{$LINGVO.pages_goto} 2" id="p2"
       {if $C==3}rel="prev"{elseif $C==1}rel="next"{/if}
-      href="{$LANGURL}/{$ALIAS}{$FILTERS_URL}/page2/"
+      href="{$LANGURL}/{$ALIAS}{$FILTERS_URL}?p=2"
       class="pagination__link{if $C==2} active{/if}">2</a>
     {/if}
   {/if}
@@ -264,12 +266,12 @@
     {if $pn >= $ss && $pn <= $se}
       {if $FROM_GOODS}
       <a title="{$LINGVO.pages_goto} {$pn}"
-        href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}page{$pn}/"
+        href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}?p={$pn}"
         class="pagination__link{if $P.active} active{/if}">{$pn}</a>
       {else}
       <a title="{$LINGVO.pages_goto} {$pn}" id="p{$pn}"
         rel="{if $P.prev}prev{/if}{if $P.next}next{/if}"
-        href="{$LANGURL}/{$ALIAS}{$FILTERS_URL}/page{$pn}/"
+        href="{$LANGURL}/{$ALIAS}{$FILTERS_URL}?p={$pn}"
         class="pagination__link{if $P.active} active{/if}">{$pn}</a>
       {/if}
     {/if}
@@ -281,24 +283,24 @@
   {elseif $se == $Nm2 && $N > 3}
     {if $FROM_GOODS}
     <a title="{$LINGVO.pages_goto} {$Nm1}"
-      href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}page{$Nm1}/"
+      href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}?p={$Nm1}"
       class="pagination__link{if $C==$Nm1} active{/if}">{$Nm1}</a>
     {else}
     <a title="{$LINGVO.pages_goto} {$Nm1}" id="p{$Nm1}"
       {if $C==$N}rel="prev"{elseif $C==$Nm2}rel="next"{/if}
-      href="{$LANGURL}/{$ALIAS}{$FILTERS_URL}/page{$Nm1}/"
+      href="{$LANGURL}/{$ALIAS}{$FILTERS_URL}?p={$Nm1}"
       class="pagination__link{if $C==$Nm1} active{/if}">{$Nm1}</a>
     {/if}
   {/if}
   {** Last page (always visible) **}
   {if $FROM_GOODS}
   <a title="{$LINGVO.pages_goto} {$N}"
-    href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}page{$N}"
+    href="{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}?p={$N}"
     class="pagination__link{if $C==$N} active{/if}">{$N}</a>
   {else}
   <a title="{$LINGVO.pages_goto} {$N}" id="p{$N}"
     {if $C==$Nm1}rel="next"{/if}
-    href="{$LANGURL}/{$ALIAS}{$FILTERS_URL}/page{$N}/"
+    href="{$LANGURL}/{$ALIAS}{$FILTERS_URL}?p={$N}"
     class="pagination__link{if $C==$N} active{/if}">{$N}</a>
   {/if}
 
@@ -309,11 +311,10 @@
   </a>
   {else}
   <a class="pagination__link" title="{$LINGVO.pages_goto} {$Cp1}"
-    href="{if $FROM_GOODS}{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}page{$Cp1}{else}{$LANGURL}/{$ALIAS}{$FILTERS_URL}/page{$Cp1}/{/if}">
+    href="{if $FROM_GOODS}{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}?p={$Cp1}{else}{$LANGURL}/{$ALIAS}{$FILTERS_URL}?p={$Cp1}{/if}">
     <img src="/img/icons/icon-arrow-right-long.svg" alt="Наступна сторінка" />
   </a>
   {/if}
-
 
 </div>
 {/if} {** if pagination **}
@@ -322,3 +323,9 @@
 {if $CUR_PAGE==1}
 <article class="catalog-page__content_article">{$CENTER_SEO_TEXT}</article>
 {/if}
+
+
+<script>
+  window.currentPage = {$CUR_PAGE};
+  window.lastPage = {$LASTPAGE};
+</script>
