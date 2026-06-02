@@ -36,7 +36,7 @@
       <h3 class="prices__headline">Разовий виїзд спеціаліста</h3>
       <div class="prices__period">одноразово</div>
       <div class="prices__details">
-        <div class="prices__text">персональна консультація <nobr>профільного спеціаліста 1–1,5 години</nobr></div>
+        <div class="prices__text">персональна консультація профільного спеціаліста 1-1,5 години</div>
         <div class="prices__text">професійне лікування рослин від шкідників</div>
         <div class="prices__text">чіткі рекомендації щодо поливу та підживлення</div>
         <div class="prices__text">перелік перевірених спеціалізованих засобів</div>

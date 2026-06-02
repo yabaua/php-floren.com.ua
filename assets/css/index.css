@@ -7195,6 +7195,12 @@ button.catalog-page__show-filters {
   list-style: none;
   padding: 0;
   margin: 0;
+  @media screen and (max-width: 992px) {
+    gap: 1rem;
+  }
+  @media screen and (max-width: 676px) {
+    grid-template-columns: 1fr;
+  }
 }
 .services-page__prices_note {
   margin-top: 1rem;
@@ -7214,6 +7220,9 @@ button.catalog-page__show-filters {
   min-width: 0;
   min-height: 0;
   margin-bottom: 0;
+  @media screen and (max-width: 992px) {
+    padding: 1rem;
+  }
 }
 .prices__headline {
   font-size: 1.25rem;
@@ -7251,6 +7260,9 @@ button.catalog-page__show-filters {
   color: var(--color-gray-100);
   padding-left: 1.75rem;
   position: relative;
+  @media screen and (max-width: 1200px) {
+    font-size: 0.875rem;
+  }
 }
 .prices__text::before {
   content: "";
