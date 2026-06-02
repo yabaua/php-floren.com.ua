@@ -76,9 +76,10 @@ const initCatalog = () => {
   });
   catalogSecondary.forEach((item) => {
     item.addEventListener("mouseenter", () => {
+      const itemContent =  item.querySelector('.secondary-item--content')
       document.body.classList.remove("catalog-opened");
       item.classList.add("active");
-      document.body.classList.add("secondary-hovered");
+      if(itemContent)document.body.classList.add("secondary-hovered");      
     });
     item.addEventListener("mouseleave", () => {
       item.classList.remove("active");
