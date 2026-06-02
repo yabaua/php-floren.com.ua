@@ -6604,7 +6604,10 @@ button.catalog-page__show-filters {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   box-shadow: 0 8px 40px 0 rgba(0, 38, 3, 0.08);
   @media screen and (max-width: 992px) {
-    grid-template-columns: repeat(2, 1fr);        
+    grid-template-columns: repeat(2, 1fr);    
+  }
+  @media screen and (max-width: 576px) {
+    padding: 1rem;
   }
 }
 .services-page__grid.four-columns .services-page__grid_item:nth-child(1), .services-page__grid.four-columns .services-page__grid_item:nth-child(2), .services-page__grid.four-columns .services-page__grid_item:nth-child(3), .services-page__grid.four-columns .services-page__grid_item:nth-child(4) {
@@ -6641,6 +6644,12 @@ button.catalog-page__show-filters {
       border-right: 1px solid var(--color-gray-30);
     }
   }
+  @media screen and (max-width: 576px) {
+    padding: 0.5rem;
+    &:nth-child(even) {
+      padding-right: 0;
+    }
+  }
 }
 .services-page__grid_item:last-child {
   border-right: none;
@@ -6652,12 +6661,18 @@ button.catalog-page__show-filters {
   width: 148px;
   aspect-ratio: 1;
   overflow: hidden;
-  border-radius: 1rem;
+  border-radius: 1rem;  
+  @media screen and (max-width: 576px) {
+    width: 100%;
+  }
 }
 .services-page__grid_item img {
   width: 148px;
   height: auto;
   transition: scale 0.5s ease;
+  @media screen and (max-width: 576px) {
+    width: 100%;
+  }
 }
 .services-page__grid h3 {
   font-size: 20px;
