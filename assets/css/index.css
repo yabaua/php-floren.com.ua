@@ -3996,7 +3996,7 @@ body.secondary-hovered .catalog-overlay {
 }
 .projects-swiper .swiper .projects-slide {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 0.75fr 1fr;
   gap: 64px;
   padding: 3rem;
   @media screen and (max-width: 992px) {
