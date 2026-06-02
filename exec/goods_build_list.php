@@ -52,7 +52,7 @@
 			}	
 
 						
-			$price = number_format($f['min_price'], 0, ',', ' ');
+			$price = number_format($f['min_price'] ?? 0, 0, ',', ' ');
 			if ($f['min_price'] != $f['max_price'])
 				$price .= ' – ' . number_format($f['max_price'], 0, ',', ' ');
 			$price .= ' ₴';
