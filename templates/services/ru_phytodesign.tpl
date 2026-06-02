@@ -17,18 +17,9 @@
               <button class="button button--primary button--pill">Рассчитать</button>
               <p>Также обращайтесь по телефону:</p>
               <div class="homepage__advices_content--phones">
-                <div class="phones--hidden">
-            (044) 344..<button
-              data-event="click"
-              data-callback="toggleAdvicesPhones"
-            >
-              показати номери
-            </button>
-                </div>
-                <div class="phones--visible">
-                  <p>(044) 344-28-95</p>
-                  <p>(050) 660-52-75</p>
-                </div>
+                <div class="phones--hidden binct-phone-number-2">
+                  (044) 344..<button data-event="click" data-callback="toggleAdvicesPhones">показати номери</button>
+                </div>                
                 <div class="phones--hours">По будням з 9:00 до 19:30</div>
               </div>
             </div>

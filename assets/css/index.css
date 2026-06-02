@@ -4581,6 +4581,9 @@ body.secondary-hovered .catalog-overlay {
 .homepage__advices_content--phones {
   padding-left: 3rem;
   background: url("/img/icons/icon-phone.svg") no-repeat left top 6px/32px 32px;
+  display: flex;
+  align-items: center;
+  min-height: 40px;
 }
 .homepage__advices_content--phones.active .phones--hidden {
   display: none;
