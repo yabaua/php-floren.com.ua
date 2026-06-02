@@ -500,8 +500,9 @@
                 <svg class="icon icon-heart"/>
               </a>
 -->
-              <a href="{$LANG_URL}/basket/" class="icon-button" aria-label="{$LINGVO.basket}" data-event="click" data-callback="openModal"
-              data-modal-id="cart-modal">
+              <!-- <a href="{$LANG_URL}/basket/" class="icon-button" aria-label="{$LINGVO.basket}" data-event="click" data-callback="openModal"
+              data-modal-id="cart-modal"> -->
+              <a href="{$LANG_URL}/basket/" class="icon-button" aria-label="{$LINGVO.basket}">
               {if $BASKET|@count > 0}
               <span class="badge success" id="cart-modal-button-badge">{$BASKET|@count}</span>
               {/if}
