@@ -18,7 +18,7 @@ class DB2 {
         $user = 'floren_utf2025',
         $pass = 'i4d4XB48bV',
         $dbname = 'floren_utf2025',
-        $charset = 'utf8mb4'
+        $charset = 'utf8'
     ) {
         $this->link_id = new mysqli($host, $user, $pass, $dbname);
 

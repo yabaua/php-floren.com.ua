@@ -21,25 +21,12 @@ class florenClass {
 	function send_email($e_mail,$subject,$body, $megaplan_cc='', $megaplan_from='') {
 		global $_SERVER;
 		
-	//	if($_SERVER["SERVER_NAME"]=="www.floren.com.ua"){
-			//$e_mail='Dmitriy.Zhinzhikov@gmail.com';
-			
-			
-			
 			$nn="\n";
 
-			if($megaplan_from!=''){
-				$from=$megaplan_from;
-			}else{
 				$from=$this->from_e_mail;
-			}
-			if($megaplan_cc!=''){
-				$cc='Cc: '.$megaplan_cc.$nn;
-			}else{
 				$cc='';
-			}
 
-		    $subject='=?windows-1251?B?'.base64_encode($subject).'?=';
+		    $subject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
 		    $result=mail($e_mail,$subject,$body,
 		        'Date: '.date('r').$nn.
 		        'From: '.$from.$nn.
@@ -48,8 +35,8 @@ class florenClass {
 		        'X-Priority: 3 (Normal)'.$nn.
 		        //'To: '.$e_mail.$nn.
 		        'MIME-Version: 1.0'.$nn.
-		        'Content-Type: text/html; charset="windows-1251"'.$nn.
-		        'Content-Transfer-Encoding: 8bit'
+		        'Content-Type: text/html; charset=UTF-8' . $nn .
+        		'Content-Transfer-Encoding: 8bit'
 		     );
 		     return $result;
 	//	}

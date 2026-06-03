@@ -150,7 +150,7 @@ if(isset($_POST['send_bsk']) && count($_SESSION['basket'])){
 	$sm->assign('HTTP_REFERER', @$_SESSION['HTTP_REFERER']);
 
 	$letter=$sm->fetch('mail/order.htm');		
-	$floren->send_email('info@floren.com.ua','Новый заказ №'.$order_id,$letter);
+	$floren->send_email('info@floren.com.ua','Нове замовлення №'.$order_id,$letter);
 //	$floren->send_email('sales@floren.com.ua','Новый заказ №'.$order_id,$letter);
 //	$floren->send_email('goncharova@floren.com.ua','Новый заказ №'.$order_id,$letter);
 
@@ -217,7 +217,7 @@ if(isset($_POST['send_bsk']) && count($_SESSION['basket'])){
 	$smarty->assign('count', $_POST['to_pay']);
 	$smarty->assign('goods', $all_products);
 	$smarty->assign('payment', $_POST['payment_way']);
-	$smarty->assign('delivery', $_POST['delivery_way']);
+	$smarty->assign('delivery', $_POST['delivery_way'] ?? '');
 //	REMOVE COMMENT	
 //	$telegram->send($group_name, $smarty->fetch('telegram/order.tpl'));
 

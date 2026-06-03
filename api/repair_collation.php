@@ -15,9 +15,7 @@ $db->query("ALTER TABLE floren_utf2025.gallery_item CONVERT TO CHARACTER SET utf
 $db->query("ALTER TABLE floren_utf2025.gallery_list CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;");
 $db->query("ALTER TABLE floren_utf2025.gallery_list_ua CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;");
 $db->query("ALTER TABLE floren_utf2025.goods CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;");
-$db->query("ALTER TABLE floren_utf2025.goods_1_utf8mb4 CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;");
 $db->query("ALTER TABLE floren_utf2025.goods_1c CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;");
-$db->query("ALTER TABLE floren_utf2025.goods_1c2 CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;");
 $db->query("ALTER TABLE floren_utf2025.goods_1c_class CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;");
 $db->query("ALTER TABLE floren_utf2025.goods_class CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;");
 $db->query("ALTER TABLE floren_utf2025.goods_colors CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;");

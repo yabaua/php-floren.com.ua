@@ -37,16 +37,16 @@ table td, table th
 
 <table align="center" width="600" cellspacing="0" border="0">
 	<tr>
-		<th>Название</th>
+		<th>Назва</th>
 		<th>Характеристики</th>
-		<th>Цена товара</th>
-		<th style="text-align:center">Кол<br />во</th>
-		<th>Итого</th>
+		<th>Ціна товару</th>
+		<th style="text-align:center">Кіл<br />ть</th>
+		<th>Загалом</th>
 	</tr>
 {foreach item=B from=$BASKET}
 
 	<tr bgcolor="{cycle values="#FFFFFF,#f0f8f2"}">
-		<td><a href="https://floren.com.ua{$B.href}" target="_blank">{$B.name} {$B.name_alter}</a></td>
+		<td><a href="https://floren.com.ua{$B.href}" target="_blank">{$B.name} {if isset($B.name_alter)}{$B.name_alter}{/if}</a></td>
 		<td class="producer">
 
 			{if $B.color}Цвет: {$B.color_name_ru}, {$B.color}, <br/>{/if}
@@ -63,7 +63,7 @@ table td, table th
 	</tr>
 {/foreach}
 
-{if $POST.peresadka}
+{if isset($POST.peresadka)}
 
 	<tr>
 		<td colspan="4" align="right"><b>Услуга пересадки:</b></td>

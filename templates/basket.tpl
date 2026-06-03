@@ -60,14 +60,14 @@
                   </div>
                 </div>
               </div>
-{** **}
+{** 
               <div class="information__contact_login">
                 <svg class="icon icon-user"/>
                 <p>{$LINGVO.if_not_registered}</p>
                 <a href="#" class="button button--outline">{$LINGVO.button_enter}</a>
                 <a href="#" class="underline">{$LINGVO.user_register}</a>
               </div>
-{** **}
+ **}
             </div>
           </section>
 

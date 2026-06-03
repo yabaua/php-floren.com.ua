@@ -1,7 +1,7 @@
 <?php
 //if ($_SERVER["SERVER_NAME"]=="n.floren.com.ua"){
 	$DB_HOST='floren.mysql.tools';
-	$DB_CHARSET='utf8';
+	$DB_CHARSET='utf8mb4';
 	// main base
 	$DB_USER='floren_utf2025';
 	$DB_PASS='i4d4XB48bV';
@@ -21,7 +21,7 @@ require($_SERVER['DOCUMENT_ROOT']."/include/db_mysql.php");
 try {
     $db = new DB2();
     $db->connect();
-
+		
     $sql = "SELECT alias, txt_ua FROM lingvo WHERE page='general'";
     $db->query($sql);
 } catch (mysqli_sql_exception $e) {
