@@ -128,10 +128,10 @@
     {* <script type="module" crossorigin src="/assets/js/_catalog.js"></script> *}
     {* <script type="module" crossorigin src="/assets/js/_clickOutside.js"></script> *}
     {* <script type="module" crossorigin src="/assets/js/_expandableText.js"></script> *}
-    <script type="module" crossorigin src="/assets/js/main.js"></script>
+    <script type="module" crossorigin src="/assets/js/main.js?v={$smarty.now}"></script>
 
     <link rel="stylesheet" href="/assets/css/_swipers.css" />
-    <link rel="stylesheet" href="/assets/css/index.css" />
+    <link rel="stylesheet" href="/assets/css/index.css?v={$smarty.now}" />
     <style>
       body {
         opacity: 0;
@@ -289,7 +289,7 @@
       gtag('js', new Date());
       gtag('config', 'AW-736148489');
       gtag('get', 'G-KKVRZ8YBC3', 'client_id', (clientID) => {
-           $.post('/bsk/save_to_session.php?r=3',{gaClientId:clientID}, function(data) {});
+           fetch('/api/save_to_session.php?r=3',{gaClientId:clientID}, function(data) {});
          });
     </script>
     
@@ -429,7 +429,7 @@
                 <div class="phones-tooltip--item">
                   <img src="/img/icons/icon-phone.svg" alt="Phone"/>
                   <div class="phones-tooltip--item-wrapper">
-                    <p class="item-phone">(044) 344-28-95, (099) 238-26-44</p>
+                    <p class="item-phone">(044) 333-77-55, (099) 238-26-44</p>
                     <p class="item-hours">По буднях 09:00 - 19:30</p>
                     <p class="item-messengers">
                       <a href="viber://chat?number=%2B380992382644" target="_blank" onclick="trackConv('vb','{$LANGURL}/{$URL|@join:"/"}')">
@@ -458,7 +458,7 @@
                   </button>
                   </div>
                   <div class="header__main--phones-showed">
-                  (044) 344-28-95, (050) 660-52-75
+                  (044) 333-77-55, (099) 238-26-44
                 </div>
                   <div class="header__main--phones-hours">
                   По буднях 9:00 - 19:30
@@ -925,7 +925,6 @@
 
             {include file="$CONTENT_TPL"}
             
-            ТЕСТ!!! <span class="binct-phone-number-2">+380 99 999-99-99</span>
           </div>
         </div>
       </div>
@@ -1109,8 +1108,8 @@
                     <p>(050) 660..</p>
                   </div>
                   <div class="contacts-phone--shown">
-                    <p>(044) 344-28-95</p>
-                    <p>(050) 660-52-75</p>
+                    <p>(044) 333-77-55</p>
+                    <p>(099) 238-26-44</p>
                   </div>
                 </li>
                 <li class="contacts-socials">

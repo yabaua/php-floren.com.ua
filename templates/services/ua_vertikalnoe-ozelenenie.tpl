@@ -11,15 +11,12 @@
   </div>
 
   <div class="services-page__calc">
-    <h3>Розрахувати вартість фітодизайну</h3>
+    <h3>Розрахувати вартість озеленення</h3>
     <button class="button button--primary button--pill">Розрахувати</button>
     <p>Також звертайтеся за телефоном:</p>
     <div class="homepage__advices_content--phones binct-phone-number-2">
       <div class="phones--hidden">
-        <p>
-          (099) 238-26-44<br />
-          (067) 464-33-06
-        </p>
+        <p>(099) 238-26-44</p>
       </div>
       <div class="phones--hours">У будні з 9:00 до 18:00</div>
     </div>

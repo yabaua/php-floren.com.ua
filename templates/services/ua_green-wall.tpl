@@ -10,13 +10,12 @@
   </div>
 
   <div class="services-page__calc">
-    <h3>Розрахувати вартість фітодизайну</h3>
+    <h3>Розрахувати вартість фітостіни</h3>
     <button class="button button--primary button--pill">Розрахувати</button>
     <p>Або звертайтеся за телефоном:</p>
     <div class="homepage__advices_content--phones binct-phone-number-2">
       <div class="phones--hidden">
-        <p>(044) 344-28-95</p>
-        <p>(050) 660-52-75</p>
+        <p>(099) 238-26-44</p>
       </div>
       <div class="phones--hours">У будні з 9:00 до 19:30</div>
     </div>

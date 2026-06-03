@@ -23,8 +23,7 @@
         </button>
       </div>
       <div class="phones--visible">
-        <p>(044) 344-28-95</p>
-        <p>(050) 660-52-75</p>
+        <p>(099) 238-26-44</p>
       </div>
       <div class="phones--hours">По буднях з 9:00 до 19:30</div>
     </div>

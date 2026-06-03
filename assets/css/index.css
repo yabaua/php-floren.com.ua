@@ -3795,6 +3795,8 @@ body.secondary-hovered .catalog-overlay {
 .works-swiper .swiper .works-slide__content time {
   font-weight: 300;
   color: var(--color-gray-60);
+  display: block;
+  white-space: nowrap;
 }
 .works-swiper .swiper-button {
   width: 40px;

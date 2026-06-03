@@ -8,7 +8,7 @@
 	<p>&nbsp;</p>
   </div>
   <div class="services-page__calc">
-    <h3>Підібрати кімнатні рослини в квартиру</h3>
+    <h3>Підібрати кімнатні рослини на терасу</h3>
     <button class="button button--primary button--pill">Підібрати</button>
     <p>Також звертайтеся за телефоном:</p>
     <div class="homepage__advices_content--phones binct-phone-number-2">
@@ -18,8 +18,7 @@
         </button>
       </div>
       <div class="phones--visible">
-        <p>(044) 344-28-95</p>
-        <p>(050) 660-52-75</p>
+        <p>(099) 238-26-44</p>
       </div>
       <div class="phones--hours">По буднях з 9:00 до 19:30</div>
     </div>

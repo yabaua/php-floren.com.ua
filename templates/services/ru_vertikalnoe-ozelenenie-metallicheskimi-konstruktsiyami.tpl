@@ -17,7 +17,7 @@
         </button>
       </div>
       <div class="phones--visible">
-        (099) 238-26-44
+        <p>(099) 238-26-44</p>
       </div>
       <div class="phones--hours">По будням с 9:00 до 19:30</div>
     </div>

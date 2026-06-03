@@ -14,13 +14,12 @@
   </div>
 
   <div class="services-page__calc">
-    <h3>Рассчитать стоимость фитодизайна</h3>
-    <button class="button button--primary button--pill">Получить расчет</button>
+    <h3>Рассчитать стоимость обслуживания</h3>
+    <button class="button button--primary button--pill">Получить предложение</button>
     <p>Или звоните нам:</p>
     <div class="homepage__advices_content--phones binct-phone-number-2">
       <div class="phones--hidden">
-        <p>(044) 344-28-95</p>
-        <p>(050) 660-52-75</p>
+        <p>(099) 238-26-44</p>
       </div>
       <div class="phones--hours">В будни с 9:00 до 19:30</div>
     </div>

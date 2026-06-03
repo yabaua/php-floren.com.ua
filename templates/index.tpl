@@ -134,10 +134,11 @@
           Озеленення інтер'єру у Києві довірте професіоналам. Залишіть заявку на
           безкоштовний виїзд фітодизайнера або консультацію щодо підбору рослин.
         </div>
-          <form>
+          <form name="cb" method="POST" action="{$LANG_URL}/thankyou/">
+            <input type="hidden" name="cb_topic" value="Головна сторінка">
             <div class="homepage__advices_content--form">
-              <sl-input placeholder="Ваше імʼя"></sl-input>
-              <sl-input placeholder="Ваш телефон"></sl-input>
+              <sl-input type="phone" placeholder="{$LINGVO.fb_name}" name="cb_name"></sl-input>
+              <sl-input type="phone" placeholder="{$LINGVO.fb_phone}" name="cb_phone"></sl-input>
               <button class="button button--primary button--pill">Надіслати</button>
             </div>
           </form>
