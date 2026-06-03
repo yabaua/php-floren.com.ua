@@ -189,7 +189,7 @@ async function changeBasketTotal(cartData) {
       } else {
         badgeEl.remove();
       }
-    } else {
+    } else {      
       document.querySelector('a[data-modal-id="cart-modal"]').insertAdjacentHTML("beforeend", `<span id="cart-modal-button-badge" class="badge success">${data.basket_items.length}</span>`);
     }
     initCart();
