@@ -1,0 +1,163 @@
+<?php
+
+error_reporting(E_ALL);
+
+/***********************************************************************************
+Функция img_resize(): генерация thumbnails
+Параметры:
+  $src             - имя исходного файла
+  $dest            - имя генерируемого файла
+  $width, $height  - ширина и высота генерируемого изображения, в пикселях
+Необязательные параметры:
+  $rgb             - цвет фона, по умолчанию - белый
+  $quality         - качество генерируемого JPEG, по умолчанию - максимальное (100)
+***********************************************************************************/
+function img_resize($src, $dest, $width, $height, $rgb=0xFFFFFF, $quality=100, $trim=false, $resize_max=false, $apply_mask=false) {
+  //if (!file_exists($src)) {echo "yyy - ".$src;return false;}
+
+  $size = getimagesize($src);
+
+  if ($size === false)  {echo "zzz";return false;}
+
+  // Определяем исходный формат по MIME-информации, предоставленной
+  // функцией getimagesize, и выбираем соответствующую формату
+  // imagecreatefrom-функцию.
+  $format = strtolower(substr($size['mime'], strpos($size['mime'], '/')+1));
+  $icfunc = "imagecreatefrom" . $format;
+  if (!function_exists($icfunc)) return false;
+
+//print_r($size);
+//print_r( exif_read_data($src));
+
+    $ort=1;
+    $exif = @exif_read_data($src);
+    if (!empty($exif['Orientation'])) {
+        $ort = (int)$exif['Orientation'];
+    }
+
+            
+    
+  $x_ratio = $width / $size[0];
+  $y_ratio = $height / $size[1];
+
+  if ($resize_max) {
+
+    $src_x      = 0;
+    $src_y      = 0;
+    $dst_x      = 0;
+    $dst_y      = 0;
+    $src_width  = $size[0];
+    $src_height = $size[1];
+
+    if ($height >= $size[1]*$x_ratio) {
+
+      $dst_width  = $width;
+      $dst_height = $size[1]*$x_ratio;
+      $height     = $dst_height;
+
+    } else {
+
+      $dst_width  = $size[0]*$y_ratio;
+      $width      = $dst_width;
+      $dst_height = $height;
+
+    }
+
+  } elseif ($trim) {
+  
+    $k_src   = $size[1] / $size[0];
+    $k_dst   = $height / $width;
+
+    if ($k_src==$k_dst) {
+      $src_x      = 0;
+      $src_y      = 0;
+      $dst_x      = 0;
+      $dst_y      = 0;
+      $src_width  = $size[0];
+      $src_height = $size[1];
+      $dst_width  = $width;
+      $dst_height = $height;
+    } elseif ($k_src>$k_dst) {
+      $src_x      = 0;
+      $src_y      = floor(($size[1]-$height/$x_ratio)/2);
+      $dst_x      = 0;
+      $dst_y      = 0;
+      $src_width  = $size[0];
+      $src_height = $height/$x_ratio;
+      $dst_width  = $width;
+      $dst_height = $height;
+    } else {
+      $src_x      = floor(($size[0]-$width/$y_ratio)/2);
+      $src_y      = 0;
+      $dst_x      = 0;
+      $dst_y      = 0;
+      $src_width  = $width/$y_ratio;
+      $src_height = $size[1];
+      $dst_width  = $width;
+      $dst_height = $height;
+    }
+
+  } else {
+  
+    $ratio       = min($x_ratio, $y_ratio);
+    $use_x_ratio = ($x_ratio == $ratio);
+    $src_x       = 0;
+    $src_y       = 0;
+    
+    $src_width   = $size[0];
+    $src_height  = $size[1];
+    $dst_width   = $use_x_ratio  ? $width  : floor($size[0] * $ratio);
+    $dst_height  = !$use_x_ratio ? $height : floor($size[1] * $ratio);
+
+    $dst_x       = $use_x_ratio  ? 0 : floor(($width - $dst_width) / 2);
+    $dst_y       = !$use_x_ratio ? 0 : floor(($height - $dst_height) / 2);
+
+  }
+
+  $isrc = $icfunc($src);
+  $idest = imagecreatetruecolor($width, $height);
+
+  imagefill($idest, 0, 0, $rgb);
+  imagecopyresampled($idest, $isrc, $dst_x, $dst_y, $src_x, $src_y, $dst_width, $dst_height, $src_width, $src_height);
+  
+  
+  if ($apply_mask && $dst_width>100){
+    
+    //mask size 200 x 200
+     $mask_src_x=($dst_width*0.3)>400?400:$dst_width*0.3;
+     $mask_src_y=($dst_width*0.3)>400?400:$dst_width*0.3;
+       
+        
+  	$imLens=imagecreatefrompng($_SERVER['DOCUMENT_ROOT']."/img/floren_mask_big.png");
+	imagecopyresampled($idest, $imLens, $dst_width-($mask_src_x+30), $dst_height-($mask_src_y+10), 0, 0, $mask_src_x, $mask_src_y, 400, 400);
+  }
+    switch($ort)
+    {
+    
+        case 3: // 180 rotate left
+            $idest=imagerotate($idest, 180, -1);
+            break;
+    
+    
+        case 6: // 90 rotate right
+            $idest=imagerotate($idest, -90, -1);
+            break;
+    
+        case 8:    // 90 rotate left
+            $idest=imagerotate($idest, 90, -1);
+            break;
+    }
+  imagejpeg($idest, $dest, $quality);
+  
+  $webpdest=str_replace(".jpg", ".webp", $dest);
+  imagewebp($im, 'php.webp');
+
+  imagedestroy($isrc);
+  imagedestroy($idest);
+
+  return true;
+     echo "111" . $ort;
+     exit();
+}
+
+?>

@@ -1,5 +1,6 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'] . "/exec/good_comment.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . "/include/resize.php");
 
 if(!isset($PARAM[0]) || $PARAM[0]=='' || isset($PARAM[2])){
 	header('HTTP/1.0 404 Not Found', true, '404');
@@ -16,7 +17,7 @@ $sql_sort_order = "g.act='0', g.availability > 0 DESC, g.preorder=0, sort DESC, 
 
 if($URL[0] == 'planters') {
 	$is_pot = 1;
-	$sql_pot_group = "GROUP BY hgt";
+	$sql_pot_group = "GROUP BY dia, hgt, wdt, depth";
 }
 
 $smarty->assign("FROM_GOODS", $from_goods);
@@ -89,6 +90,7 @@ if ($URL[1] == 'sezon') {
 	$filter_selected_groups=array();
 	$filter_selected_goods_SQL='';
 	$show_more_IDDs='';
+	$active_filters_flag=0;
 
 	//check if filters in rubric
 	$db->query("SELECT count(ID) AS cnt FROM goods_filters WHERE classID='".$f_cat['ID']."'");
@@ -159,8 +161,10 @@ if ($URL[1] == 'sezon') {
 
 		}//if isset filters
 		
+		
 		//BUILD FILTERS
 		$db->query("SELECT gfg.ID AS gfgID, gfg.name".$db_sufix." AS gfgName FROM goods_filter_groups gfg WHERE gfg.classID IN ('".$f_cat['ID']."')  ORDER BY gfg.sort DESC");
+		
 		while($ff=$db->fetch()){
 
 			$filters[$ff['gfgID']]['groupName']	=	$ff['gfgName'];
@@ -173,18 +177,22 @@ if ($URL[1] == 'sezon') {
 								AND gf.groupID='".$ff['gfgID']."'
 								GROUP BY gf.ID	
 								ORDER BY gf.sort DESC", 1);
-
 			while($fff=$db->fetch(1)){
 			
+				if(isset($URL[2]) && $URL[2]!=''){
+					$active_filter_show_in_group_arr=explode("-",$URL[2]);
+					if(in_array( $fff['alias'], $active_filter_show_in_group_arr)){
+						$filters[$ff['gfgID']]['active_alias']=$fff['alias'];	
+					}	
+				}
 				$db->query("SELECT COUNT(g.ID) AS cnt2, gf.alias
 								FROM goods g
 								JOIN goods_f2g f2g ON f2g.gID=g.ID
 								JOIN goods_filters gf ON gf.ID=f2g.fID
 								WHERE gf.ID='".$fff['gfID']."' AND g.classID IN ('".$f_cat['ID']."')
 								".$filter_selected_goods_SQL, 2);	
-			
-
 				$cnt2=$db->fetch(2);
+				
 				$tmp_filters_url=$filters_url;
 				array_push($tmp_filters_url, $fff['alias']);
 
@@ -222,7 +230,7 @@ if ($URL[1] == 'sezon') {
 				/** =========== **/
 				
 				if(in_array($fff['groupID'], $filter_selected_groups)){
-					$filters[$ff['gfgID']]['sub_filters'][$fff['alias']]['cnt']=($fff['cnt']==0?'':'+').$fff['cnt'];
+					$filters[$ff['gfgID']]['sub_filters'][$fff['alias']]['cnt']=$fff['cnt'];
 					$filters[$ff['gfgID']]['sub_filters'][$fff['alias']]['disable']='1'; 	// vybrat mozhno tolko 1 filtr iz grupi
 				}else{
 					$filters[$ff['gfgID']]['sub_filters'][$fff['alias']]['cnt']=$cnt2['cnt2'];
@@ -233,6 +241,17 @@ if ($URL[1] == 'sezon') {
 				$tmp_filters[]=$fff['alias'];
 			}//filters in 1 group
 		}//filters_group	
+		
+		foreach($filters AS $k=>$v){
+			foreach($v AS $kk=>$vv){
+				if (is_array($vv)){
+					foreach($vv AS $vvv){
+						if(isset($vvv['act']) && $vvv['act']=='1') $active_filters_flag=1;
+					}
+				}
+			}
+		}
+		$smarty->assign("ACTIVE_FILTERS_FLAG", $active_filters_flag);
 		$smarty->assign("FILTERS", $filters);
 		
 		//================		/	FILTERS		=================
@@ -307,8 +326,26 @@ if(count($filters_url)){
 $smarty->assign("PAGE_TITLE", $page_title);
 $smarty->assign("PAGE_SUB",	$page_sub);
 $smarty->assign("SEO_TEXT",	$leftSEOtext);
-$smarty->assign("CENTER_SEO_TEXT",	$centerSEOtext);
 $smarty->assign("TOP_SEO_TEXT",	$topSEOtext);
+
+		$body_text=$centerSEOtext;
+		preg_match_all('/<h2\b[^>]*>(.*?)<\/h2>(.*?)(?=(<h2\b[^>]*>|$))/is', $body_text, $matches, PREG_SET_ORDER);
+		$new_body_text = '';
+
+		foreach ($matches as $m) {
+		    $body_title = trim($m[1]);
+		    $body_content = trim($m[2]);
+		
+		    // Оборачиваем все <p>... в div.article-section__content
+		    $block = '<section class="article-section">' . "\n";
+		    $block .= '<h2 class="article-section__title">' . $body_title . '</h2>' . "\n";
+		    $block .= '<div class="article-section__content">' . "\n" . $body_content . "\n" . '</div>' . "\n";
+		    $block .= '</section>';
+		
+		    $new_body_text .= $block . "\n";
+		}
+	$new_body_text=preg_replace('/(<table\b[^>]*>.*?<\/table>)/is', '<div class="article-section__table">$1</div>', $new_body_text);
+	$smarty->assign("CENTER_SEO_TEXT",$new_body_text);
 
 $TITLE[1]=$meta_title;
 $smarty->assign("META_DESCRIPTION",		$meta_description);
@@ -363,6 +400,7 @@ $smarty->assign("META_KEYWORDS",		$meta_keywords);
 				LEFT JOIN goods_forms gf ON g.ID=gf.goodID
 				WHERE ".$goods_WHERE."
 				".$filter_selected_goods_SQL."
+				AND act='Y'
 				GROUP BY g.ID");
 			$rs_cnt_goods=$db->num_rows();	
 			$total_goods=$rs_cnt_goods;
@@ -371,13 +409,19 @@ $smarty->assign("META_KEYWORDS",		$meta_keywords);
 			$smarty->assign("GOODS_CNT",$total_goods);
 			$ofset=0;
 
-			$max_pages_links=20;
+			$max_pages_links=25;
 			$page=max(1,(int)@$_REQUEST['p']);
 
 			$ofset=($page-1)*$max_pages_links;
 			$pages=array();
 			$lastPage=ceil($total_goods/$max_pages_links);
-			$smarty->assign("LASTPAGE",$lastPage);
+			
+			$show_goods_from = $ofset+1;
+			$smarty->assign("SHOW_GOODS_FROM",$show_goods_from);
+			
+			$show_goods_to = $ofset + $max_pages_links;
+			if ($show_goods_to > $total_goods) $show_goods_to = $total_goods;
+			$smarty->assign("SHOW_GOODS_TO",$show_goods_to);
 			
 			
 			
@@ -392,107 +436,27 @@ $smarty->assign("META_KEYWORDS",		$meta_keywords);
 				exit();
 			}		
 			
+			$smarty->assign("LASTPAGE",$lastPage);
 			$smarty->assign("PAGES",$pages);
 			$smarty->assign("CUR_PAGE",$page);
 			$smarty->assign("PAGE_MAX",$total_goods>$max_pages_links?100:1);//Выводить пагинацию или нет
 			//===/Страницы
 			
-			$db->query("SELECT g.*, gf.ID AS gfID, min(gf.price) AS min_price, max(gf.price) AS max_price FROM goods".$db_sufix." g
+			
+			
+	// =========== LETS BUILD GOODS LIST============
+	$main_query = "SELECT g.*, gf.ID AS gfID, min(gf.price) AS min_price, max(gf.price) AS max_price, min(NULLIF(gf.old_price, 0)) AS min_old_price, max(gf.old_price) AS max_old_price
+			FROM goods".$db_sufix." g
 			LEFT JOIN goods_forms gf
 			ON g.ID=gf.goodID
-			WHERE ".$goods_WHERE."
+			WHERE gf.visibility=1 AND ".$goods_WHERE."
 			".$filter_selected_goods_SQL."
 			GROUP BY g.ID
 			ORDER BY ".$sql_sort_order."
-			LIMIT ".$ofset.",".$max_pages_links);
-
-			while($rs_goods = $db->fetch()) {
-
-				$product_path = $lang_url . '/product/' . $rs_goods['ID'] . '_' . $rs_goods['link'] . '/';
-				$img_path = 'https://floren.com.ua/images/ins/s/' . $rs_goods['image'];
-
-				if ($rs_goods['availability'] == 0) {
-					$not_available = 1;
-				} else {
-					$not_available = 0;
-				}
-
-				$colors[$rs_goods['ID']] = array();
-
-				$promo[] = array(
-					'ID' => $rs_goods['ID'],
-					'name' => $rs_goods['name'],
-					'link' => $rs_goods['link'],
-					'product_path' => $product_path,
-					'img_path' => $img_path,
-					'image' => $rs_goods['image'],
-					'act' => $rs_goods['act'],
-					'not_available' => $not_available,
-					'preorder' => $rs_goods['preorder'],
-					'colors' => $colors[$rs_goods['ID']]
-				);
-
-				
-
-				$order_type = 'DESC';
-
-				if ($f_cat['motherID'] == 5) $order_type=''; //Горшки отсортированы по цене от 0 до 100
-
-				// $db->query("SELECT ID, dia, hgt, wdt, depth, price, color, visibility FROM goods_forms WHERE goodID='".$rs_goods['ID']."' AND visibility=1 AND price > 0 ".$sql_pot_group, 1);
-
-				$db->query("SELECT gfs.ID, gfs.dia, gfs.hgt, gfs.wdt, gfs.depth, gfs.price, gfs.old_price, gfs.color, gfs.visibility, gfs.measure_qt, gmg.unit, gmg.name_ru AS mg_name_ru, gmg.name_ua AS mg_name_ua FROM goods_forms gfs LEFT JOIN goods_measures gmg ON gmg.ID=gfs.measure_id
-				WHERE gfs.goodID='".$rs_goods['ID']."' AND gfs.visibility=1 AND gfs.price > 0 ".$sql_pot_group, 1);
-
-				$is_action=0;
-				$prices[$rs_goods['ID']]=array();
-				
-				while($rs_goods_forms = $db->fetch(1)) {
-				
-					if ($rs_goods['availability'] == 1 && intval($rs_goods_forms['price']) > 0) {
-						$prices[$rs_goods['ID']][] = intval($rs_goods_forms['price']);
-					}
-
-					$promo[count($promo)-1]['forms'][] = array(
-						'form_id' => $rs_goods_forms['ID'],
-						'dia' => $rs_goods_forms['dia'],
-						'hgt' => $rs_goods_forms['hgt'],
-						'wdt' => $rs_goods_forms['wdt'],
-						'depth' => $rs_goods_forms['depth'],
-						'price' => $rs_goods_forms['price'],
-						'measure_qt' => $rs_goods_forms['measure_qt'],
-						'unit' => $rs_goods_forms['unit'],
-						'mg_name_ru' => $rs_goods_forms['mg_name_ru'],
-						'mg_name_ua' => $rs_goods_forms['mg_name_ua']
-					);
-					
-					if ($rs_goods_forms['color'] != '0') {
-
-						$db->query("SELECT gf.color, gc.name_ru, gc.name_ua, gc.preview FROM goods_forms gf LEFT JOIN goods_colors gc ON gf.color=gc.alias WHERE goodID='".$rs_goods['ID']."' AND visibility=1 AND price > 0 ", 2);
-
-						while ($rs_goods_colors = $db->fetch(2)) {
-							if ($rs_goods_colors['color'] != '0') {
-								$colors[$rs_goods['ID']][] = array(
-									'name_ru' => $rs_goods_colors['name_ru'],
-									'name_ua' => $rs_goods_colors['name_ua'],
-									'image' => $rs_goods_colors['preview'],
-								);
-							}
-						}
-					}
-					
-				if($rs_goods_forms['old_price']>0) $is_action=1;
-				$promo[count($promo)-1]['is_action']=$is_action;
-				}
-				
-				
-				if (count($prices[$rs_goods['ID']]) > 0) {
-					$promo[count($promo)-1]['min_price'] = min(array_filter($prices[$rs_goods['ID']]));
-					$promo[count($promo)-1]['max_price'] = max(array_filter($prices[$rs_goods['ID']]));
-				}
-
-				$promo[count($promo)-1]['colors'] = array_unique($colors[$rs_goods['ID']], SORT_REGULAR);
-				
-			}
+			LIMIT ".$ofset.",".$max_pages_links;
+			
+	include("goods_build_list.php");
+	// =========== LETS BUILD GOODS LIST============
 			$schema_prices_min=array();
 			foreach ($promo AS $k=>$v){
 					if(!isset($v['min_price']) || !$v['min_price']) continue;
@@ -503,8 +467,8 @@ $smarty->assign("META_KEYWORDS",		$meta_keywords);
 			}
 			
 			$schema_offers_count=$total_goods;
-			$schema_min_price=@min($schema_prices_min);
-			$schema_max_price=@max($schema_prices_max);
+			$schema_min_price=!empty($schema_prices_min) ? min($schema_prices_min) : 0;
+			$schema_max_price=!empty($schema_prices_max) ? max($schema_prices_max) : 0;
 			
 			$schema_offers_txt='';
 			$schema_offers_txt.='<script type="application/ld+json">
@@ -534,6 +498,9 @@ $smarty->assign("META_KEYWORDS",		$meta_keywords);
 				
 				
 			$smarty->assign("SCHEMA_OFFERS", $schema_offers_txt);
+			
+			
+			
 			$smarty->assign("PROMO", $promo);
 
 			if($PARAM[0]=='metal-pots'){
@@ -548,12 +515,3 @@ $smarty->assign("META_KEYWORDS",		$meta_keywords);
 	$smarty->assign("META_REL_CANONICAL",$meta_rel_canonical);
 
 ?>
-
-
-
-
-
-
-
-
-

@@ -1,3 +1,6 @@
+import { a as addToCart } from "./_cart.js";
+import { u as updateGoodsList } from "./_catalog.js";
+import { f as fetchShowMoreGoods } from "./fetchApi.js";
 const clickHandlers = {
   toggleLocation: (event) => {
     const element = event.currentTarget;
@@ -19,10 +22,11 @@ const clickHandlers = {
   toggleAdvicesPhones: (event) => {
     event.currentTarget.closest(".homepage__advices_content--phones").classList.toggle("active");
   },
-  openModal: (e) => {
+  openModal: (e) => {    
     const modalId = e.currentTarget.dataset.modalId;
     const modal = document.getElementById(modalId);
-    console.log("modal", modal);
+    console.log('modalId', modalId);
+    console.log('modal', modal);
     if (modal) {
       modal.show();
     }
@@ -30,6 +34,21 @@ const clickHandlers = {
   closeModal: () => {
     const modals = document.querySelectorAll("sl-dialog");
     modals.forEach((modal) => modal.hide());
+  },
+  showMoreGoods: async () => {    
+    try {
+      const data = await fetchShowMoreGoods(window.currentPage + 1);
+      updateGoodsList(data);
+    } catch (error) {
+      console.error("Error fetching more goods:", error);
+    }
+  },
+  addToCart,
+  toggleMobileSearch: (event) => {    
+    const search = document.querySelector("#main-search-form");
+    console.log('toggleMobileSearch', search);
+    
+    search.classList.toggle("active");
   }
 };
 const initEvents = () => {
@@ -38,10 +57,7 @@ const initEvents = () => {
     const event = el.dataset.event;
     const callback = clickHandlers[el.dataset.callback];
     if (!callback) {
-      console.warn(
-        `Callback function "${el.dataset.callback}" not found for element:`,
-        el
-      );
+      console.warn(`Callback function "${el.dataset.callback}" not found for element:`, el);
       return;
     }
     el.addEventListener(event, callback);

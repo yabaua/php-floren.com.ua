@@ -1,5 +1,5 @@
 <?php
-
+include($_SERVER['DOCUMENT_ROOT'] ."/include/resize.php");
 if	(
 		$_SERVER["REQUEST_URI"]!='/' && $_SERVER["REQUEST_URI"]!='/ru/' && !(
 			substr_count($_SERVER['QUERY_STRING'], 'gclid') || 
@@ -10,14 +10,15 @@ if	(
 		)
 	)
 {
-	//=============404===================
-	header('HTTP/1.1 404 Not Found', true, '404');
-	include($_SERVER['DOCUMENT_ROOT']."/404.php");
+	//=============301===================
+	include($_SERVER['DOCUMENT_ROOT'].'/include/send_404_email.php');
+	header("HTTP/1.0 301 Moved Permanently"); 
+	header("Location: /");
 	exit();
-	//=============404===================
+	//=============301===================
 } else
 
-$db->query("SELECT * FROM tree".$db_sufix." WHERE alias='index'");
+$db->query("SELECT * FROM tree25".$db_sufix." WHERE alias='index'");
 $f=$db->fetch();
 $smarty->assign("META_TITLE",$f['meta_title']);
 $smarty->assign("META_DESCRIPTION",$f['meta_description']);
@@ -26,34 +27,47 @@ $smarty->assign("CONTENT",$f['content']);
 $smarty->assign("CONTENT2",$f['content_2']);
 $smarty->assign("CONTENT3",$f['content_3']);
 
-$smarty->assign("LEFT_TPL",'left_col.tpl');
 $smarty->assign("CONTENT_TPL",'index.tpl');
 $smarty->assign("META_REL_CANONICAL",'<link rel="canonical" href="https://floren.com.ua'.($_SERVER['REQUEST_URI']==='/' ? '/':'/ru/').'" />');
 
 
 //3 promo
 			$promo_g_list=array(21,71,80,43,468,144,336,56,546,115,17,101,324,560,145,94,442,559,11,322,442,426,135,76,328);
-			$db->query("SELECT g.*, min(gf.price) AS min_price, max(gf.price) AS max_price FROM goods g
-						LEFT JOIN goods_forms gf
-						ON g.ID=gf.goodID
+			$db->query("SELECT g.name, g.ID, g.link, g.image, min(gf.price) AS min_price, max(gf.price) AS max_price, min(gf.old_price) AS min_old_price, max(gf.old_price) AS max_old_price, AVG(gv.vote) AS stars
+						FROM goods".$db_sufix." g
+						JOIN goods_forms gf ON g.ID=gf.goodID
+						JOIN goods_voting gv ON g.ID=gv.pageID
 						WHERE g.ID IN ('".implode("','", $promo_g_list)."')
+							AND g.availability>0
+							AND gf.price!=0
 						GROUP BY g.ID
 						ORDER BY g.sort DESC LIMIT 18");
-			
 			while($rs_goods=$db->fetch()){
 				$goods[$rs_goods['ID']]=$rs_goods;
-				
-				$db->query("SELECT * FROM goods_forms WHERE goodID='".$rs_goods['ID']."' ORDER BY price=0, price DESC", 1);
-				$goods[$rs_goods['ID']]['forms']=array();
-				while ($rs_goods_forms=$db->fetch(1)){
-					$goods[$rs_goods['ID']]['forms'][]=$rs_goods_forms;
-					if($rs_goods_forms['old_price']>0){
-						$goods[$rs_goods['ID']]['is_action']=1;
-					}
+				$goods[$rs_goods['ID']]['product_path']=$lang_url . '/product/' . $rs_goods['ID'] . '_' . $rs_goods['link'] . '/';
+				$goods[$rs_goods['ID']]['img_path']		 = '/images/ins/s/' . $rs_goods['image'];
+				/*
+				if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/images/goods/s/' . str_replace('jpg', 'webp', $rs_goods['image']))){
+						$goods[$rs_goods['ID']]['img_path']		 = '/images/goods/s/' . str_replace('jpg', 'webp', $rs_goods['image']);
+				}else{
+						$src= 'https://floren.com.ua/images/ins/b/gmcxml-' . $rs_goods['image'];
+						$dest_s		=	$_SERVER['DOCUMENT_ROOT'] . '/images/goods/s/' .str_replace('jpg', 'webp', $rs_goods['image']);
+						img_resize($src, $dest_s, 200, 200, $rgb=0xFFFFFF, $quality=100, $keep_origin_size=false, $trim=false, $resize_max=false, $apply_mask=false);
+						$goods[$rs_goods['ID']]['img_path']		 = '/images/goods/s/' . str_replace('jpg', 'webp', $rs_goods['image']);
 				}
-				if(count($goods[$rs_goods['ID']]['forms'])>1) $goods[$rs_goods['ID']]['show_qt']=1;
+				*/
+				//== price
+				$price='';
+				$price .= $rs_goods['min_price'];
+				if ($rs_goods['min_price'] != $rs_goods['max_price'])
+					$price .= ' – ' . $rs_goods['max_price'];
+				$goods[$rs_goods['ID']]['price']=$price;
+				//== / price
+				if($rs_goods['min_old_price']>0 || $rs_goods['max_old_price']>0){
+					$goods[$rs_goods['ID']]['is_action']=1;
+				}
 			}
-			$smarty->assign("PROMO_PLANTS",$goods);
+$smarty->assign("PROMO_PLANTS",$goods);
 
 //Articles
 $pub_ind=array();
@@ -74,6 +88,20 @@ while($f=$db->fetch()){
 //	$indx_lastPhotos[count($indx_lastPhotos)-1]['photo_dsc']=$f['photo_dsc'.$db_sufix];
 }
 $smarty->assign("LASTPHOTOS", $indx_lastPhotos);
+//======== GOOGLE REVIEWS
+$indx_google_reviews=array();
+$db->query("SELECT * FROM google_reviews ORDER BY ID DESC LIMIT 3");
+while($f=$db->fetch()) $indx_google_reviews[]=$f;
+$smarty->assign("GOOGLE_RATING", $indx_google_reviews);
+
+$db->query("SELECT * FROM options_delivery WHERE option_alias='google_stars'");
+$f=$db->fetch();
+if($f){
+	$smarty->assign("GOOGLESTARS", $f['option_value']);
+}
+
+//========END OF GOOGLE REVIEWS
+
 
 $smarty->assign("SERVER_NAME",$_SERVER['SERVER_NAME']);
 ?>

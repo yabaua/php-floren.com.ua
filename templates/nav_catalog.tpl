@@ -1,5 +1,27 @@
-<aside class="catalog-page__nav">
+<sl-drawer id="category-drawer" label="Всі категорії" placement="end" class="drawer category-drawer">
+  <div class="drawer__content">
     {foreach item=C name=C key=I from=$CATEGORY_LEFT}
+    
+    {if $C.ID==25}
+    {continue}
+    {/if}
+    
+    <section>
+      <h3>{$C.name}</h3>
+      <ul>
+        {foreach item=CC name=CC from=$C.category}
+        <li{if $CUR_CAT==$CC.cur_alias} class="active" {/if}>
+          <a href="{$LANGURL}/{$C.alias}/{$CC.cur_alias}/" class="underline">{$CC.name}</a>
+          </li>
+          {/foreach}
+      </ul>
+    </section>
+    
+    {/foreach}
+  </div>
+</sl-drawer>
+    
+   {foreach item=C name=C key=I from=$CATEGORY_LEFT}
 
 		{if $C.ID==25}
 			{continue}
@@ -17,4 +39,3 @@
 			</section>
 		
 	{/foreach}
-</aside>

@@ -34,7 +34,7 @@ function symbols($text) {
 
 function totranslit($text) {
   $text=trim(ereg_replace('[^a-zA-Zа-яА-Я0-9іІїЇєЄ]',' ',$text));
-  $text=ereg_replace('[[:space:]]{1,}',' ',strtolower($text));
+  $text=ereg_replace('[[:space:]]{1,}',' ',mb_strtolower($text, 'utf-8'));
   $text=str_replace(' ','-',$text);
 
   $search=array('/а/','/А/','/б/','/Б/','/в/','/В/','/г/','/Г/','/д/','/Д/','/е/','/Е/','/ё/','/Ё/','/ж/','/Ж/','/з/','/З/','/и/','/И/','/й/','/Й/','/к/','/К/','/л/','/Л/','/м/','/М/','/н/','/Н/','/о/','/О/','/п/','/П/','/р/','/Р/','/с/','/С/','/т/','/Т/','/у/','/У/','/ф/','/Ф/','/х/','/Х/','/ц/','/Ц/','/ч/','/Ч/','/ш/','/Ш/','/щ/','/Щ/','/ъ/','/Ъ/','/ы/','/Ы/','/ь/','/Ь/','/э/','/Э/','/ю/','/Ю/','/я/','/Я/','/і/','/І/','/ї/','/Ї/','/є/','/Є/');
@@ -59,22 +59,27 @@ function translit($text) {
 }
 
 function transliterate($st) {
-	$st_=strtolower($st);
-	$st_=str_replace('ь', '', str_replace('ъ', '', $st_));
-	$st_ = strtr($st_, array( 
-		"ё"=>'yo',	  "ж"=>'zh',  "ц"=>'c',  "ч"=>'ch', "ш"=>'sh',
-		"щ"=>'sch',  "ю"=>'yu', "я"=>'ya',
-		
-		"Ё"=>'yo',	  "Ж"=>'zh',  "Ц"=>'c',  "Ч"=>'ch', "Ш"=>'sh',
-		"Щ"=>'sch',  "Ю"=>'yu', "Я"=>'ya',
-	)); 
-	$st_ = strtr($st_,  
-		"абвгдезийклмнопрстуфхыэАБВГДЕЗИЙКЛМНОПРСТУФХЫЭ",
-		"abvgdeziyklmnoprstufhieabvgdeziyklmnoprstufhie"
-	);
-	$st_=preg_replace("/[^0-9a-z _ - ]/","",$st_);
-	$st_=str_replace("quot", "", $st_);
-	return substr(str_replace(' ', '-',$st_), 0, 50); 
+    $st = mb_strtolower($st, 'utf-8');
+
+    $map = [
+        // ru
+        'а'=>'a','б'=>'b','в'=>'v','г'=>'g','д'=>'d','е'=>'e','ё'=>'yo',
+        'ж'=>'zh','з'=>'z','и'=>'i','й'=>'y','к'=>'k','л'=>'l','м'=>'m',
+        'н'=>'n','о'=>'o','п'=>'p','р'=>'r','с'=>'s','т'=>'t','у'=>'u',
+        'ф'=>'f','х'=>'h','ц'=>'c','ч'=>'ch','ш'=>'sh','щ'=>'sch',
+        'ы'=>'y','э'=>'e','ю'=>'yu','я'=>'ya','ь'=>'','ъ'=>'',
+
+        // ua
+        'і'=>'i','ї'=>'yi','є'=>'ye','ґ'=>'g'
+    ];
+
+    $st = strtr($st, $map);
+
+    // заменить всё лишнее
+    $st = preg_replace('/[^0-9a-z]+/u', '-', $st);
+    $st = trim($st, '-');
+
+    return mb_substr($st, 0, 50);
 }
 
 function parse_tag_name($name) {
@@ -91,7 +96,7 @@ function parse_img_name($name) {
 
 function parse_img_name_md5($name,$id='') {
   mt_srand((double)microtime()*100000000);
-  $name=($id!=''?$id:substr(md5(mt_rand(0,1000000)/1000000),0,15)).strtolower(substr($name,strrpos($name,'.')));
+  $name=($id!=''?$id:substr(md5(mt_rand(0,1000000)/1000000),0,15)).strtolower(pathinfo($name, PATHINFO_EXTENSION));
   return $name;
 }
 
@@ -99,7 +104,7 @@ $months_list=array('', "январь", "февраль", "март", "апрел
 $months2_list=array('', "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря");
 
 function correct_CAPS($text){
-    $text = strtolower($text);
+    $text = mb_strtolower($text, 'utf-8');
 	//$text=strtr($text, "ҐЄІЇАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЫЪЭЮЯABCDEFGHIJKLMNOPQRSTUVWXYZ", "ґєіїабвгдеёжзийклмнопрстуфхцчшщьыъэюяabcdefghijklmnopqrstuvwxyz");
     //находим урлы сайтов
     preg_match_all('/www\..{3,40}.(com|ru|su|net|info|biz|рф|)/',$text,$site);

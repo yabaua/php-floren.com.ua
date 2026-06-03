@@ -1,6 +1,7 @@
 <?php
 error_reporting(E_ALL);
 register_shutdown_function('sql_stat');
+setlocale(LC_TIME, 'uk_UA.UTF-8');
 //setlocale(LC_ALL, 'ru_RU');
 // SQL+page stat
 $microtime=microtime();
@@ -95,12 +96,28 @@ if (!$spiders) {
 	} // if NOT SESSION['ID']
 }// if NOT spyder
 
-	
+//unset($_SESSION);	
 	if (!isset($_SESSION['basket'])) $_SESSION['basket']=array();
 	//if (!isset($_SESSION['user'])) $_SESSION['basket']=array();
-
+	
+	//TEST BSK
+	/*
+	//========IT WILL BE DELETETD
+	if(count($_SESSION['basket'])<1){
+		$db->query("SELECT gf.ID AS formID FROM goods g JOIN goods_forms gf ON g.ID=gf.goodID WHERE gf.price>0 AND g.availability>0 ORDER BY RAND() LIMIT 10");
+		$cnt_goods=rand(1, 3);
+		$iterator=0;
+		while ($f=$db->fetch()){
+			if($iterator==$cnt_goods) break;
+			$_SESSION['basket'][$f['formID']]=rand(1,3);
+			$iterator++;
+		}
+	}
+	//=========IT WILL BE DELETETD
+	*/
+	ksort($_SESSION['basket']); // THIS SHIT BECAUSE AFTER RENDERING CART ITEMS ARE JUMPING
 // стартует индификатор сессии
-/*
+/* */
 if(isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/admin') === false && $_SERVER['REQUEST_METHOD'] === 'GET'){
     if(empty($_SERVER['HTTP_X_REQUESTED_WITH']) || (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest')){
         if(file_exists('seoshield-client/main.php'))
@@ -117,7 +134,7 @@ if(isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/admin') =
         
     }
 }
-*/
+/* */
 /*
 if (!$spiders && (!isset($_COOKIE['qms']) || !($_COOKIE['qms']=eregi_replace('[^a-fA-F0-9]','',$_COOKIE['qms'])) || strlen($_COOKIE['qms'])!=32)) {
 	mt_srand((double)microtime()*1000000);
@@ -207,7 +224,7 @@ elseif($URL[0]=='ua' || $URL[0]=='ru'){
 }
 $_SESSION['lang']=$lang;
 
-//include('include/redirect.php');
+include('include/redirect.php');
 
 $POST=array();
 $POST=$_POST;
@@ -220,7 +237,7 @@ $POST=$_POST;
       $POST[$n]=stripslashes($v);
 	}
   }
-//$telegram = new Telegram(file_get_contents("config.json"));
+$telegram = new Telegram(file_get_contents("config.json"));
 
 
 require_once __DIR__ . '/smarty5/libs/Smarty.class.php';
@@ -230,6 +247,7 @@ $smarty->setCompileDir(__DIR__ . '/smarty5/templates_c/');
 $smarty->setCacheDir(__DIR__ . '/smarty5/cache/');
 $smarty->setConfigDir(__DIR__ . '/smarty5/src/');
 $smarty->muteUndefinedOrNullWarnings(true);
+
 // $smarty->debugging=true;
 
 $smarty->assign('CLIENT_COUNTRY', $_SESSION['clientCountry']);
@@ -302,22 +320,32 @@ $smarty->assign("META_REL_ALTERNATE",'<link rel="alternate" href="https://floren
 
 //LEFT menu
 
-$group_sql = '';
+$not_to_show = '';
 
+/* this was earlier
 if ($URL[0]=='planters') {
 	$group_sql = ' AND alias !="planters"';
 }
-
-
+*/
+$category_left_main_cat_arr=array();
 $category_left=array();
-$db->query("SELECT * FROM goods".$db_sufix."_class WHERE motherID=0 AND act='1'".$group_sql." ORDER BY sort DESC,name");
+$sort_active_category = '';
 
+//=======  ACTIVE CATEGORY GOES UPPER in LEFT MENU
+$db->query("SELECT alias FROM goods".$db_sufix."_class WHERE motherID=0 AND act='1'".$not_to_show);
+while ($f=$db->fetch()) {
+	$category_left_main_cat_arr[] = $f['alias'];
+}
+if(in_array($URL[0], $category_left_main_cat_arr))
+	$sort_active_category = "alias='" .$URL[0]. "' DESC, "; 
+//========
+
+$db->query("SELECT * FROM goods".$db_sufix."_class WHERE motherID=0 AND act='1'".$not_to_show." ORDER BY ".$sort_active_category."sort DESC,name");
 
 while ($f=$db->fetch()) {
+	$category_left[$f['ID']]['ID']=$f['ID'];
 	$category_left[$f['ID']]['name']=$f['name'];
 	$category_left[$f['ID']]['alias']=$f['alias'];
-
-	$category_left[$f['ID']]['ID']=$f['ID'];
 	$category_left[$f['ID']]['img']=$f['img'];
 
 	$db->query("SELECT gc.* FROM goods".$db_sufix."_class gc WHERE motherID=".$f['ID']." AND act='1' ORDER BY sort DESC",1);
@@ -330,7 +358,7 @@ while ($f=$db->fetch()) {
 
 	$category_left[$f['ID']]['category'][] = $ff;
 
-	$old_aliases = array('lamela-old', 'elho-old', 'ceramic-old', 'beton-old');
+	$old_aliases = array('lamela-old', 'elho-old', 'ceramic-old', 'beton-old', 'lechuza-old');
 	
 	if (in_array($ff['alias'], $old_aliases)) {
 		$tmp_arr = explode('-', $ff['alias']);
@@ -392,7 +420,7 @@ function gen_tree($ID,$level) {
 	global $db,$URL,$PATH,$TITLE,$param_trim,$script,$COLUMN3,$db_sufix;
 	
 	if (!($alias=@$URL[$level])) return;
-	$db->query("SELECT ID,motherID,alias,name,meta_title,meta_description,meta_keywords,script,content FROM tree".$db_sufix." WHERE motherID=$ID AND alias='$alias' AND act='Y' ORDER BY order_p");
+	$db->query("SELECT ID,motherID,alias,name,meta_title,meta_description,meta_keywords,script,content FROM tree25".$db_sufix." WHERE motherID=$ID AND alias='$alias' AND act='Y' ORDER BY order_p");
 	if (!($row=$db->fetch())) return;
 	//$PATH[$row['alias']]=$row;
 	$PATH[]=$row;
@@ -466,9 +494,11 @@ elseif (count($URL)==2 && $URL[0]=='services' && $URL[1]=='ustroystvo_gazona') {
 elseif (count($URL)==1 && ($URL[0]=='404' || $URL[0]=='404.php')) {
 	include_once("404.php");
 }
+/*
 elseif (count($URL)==1 && $URL[0]=='gxml.xml') {
 	include_once("exec/gxml.php");
 }
+*/
 elseif (count($URL)==1 && $URL[0]=='gmcxml.xml') {
 	include_once("exec/gmcxml.php");
 }
@@ -525,7 +555,8 @@ elseif (count($URL)==1 && ($URL[0]=='' || $URL[0]=='indexphp')) {
 					$hleb[1]['name']=$r['name'];
 				}
 			
-			$smarty->assign("HLEB",$hleb);	
+			$smarty->assign("HLEB",$hleb);
+			$smarty->assign("LEFT_TPL",'left_col.tpl');
 			$smarty->assign("CONTENT_TPL",'content.tpl');
 			$smarty->assign("CONTENT",$r['content']);
 			if(isset($PARAM[0])){
@@ -605,18 +636,6 @@ $smarty->assign("SLIDERS_OPTIONS_JSON", $sliders_options_json);
 
 //==================COMMON_FUNC============
 
-function MakePrice($p) {
-	$p=str_replace(",", ".", $p);
-	$p=str_replace("-", "0", $p);
-	if ($p=="") return "0.00";
-	if ($p*1==0) return "0.00";
-	if ($p==round($p)) return ($p*1).".00";
-	$p=round($p*100); $last=substr($p, strlen($p)-1, 1); $res=$p;
-	$p=$res/100;
-	if ($p==round($p)) return $p.".00";
-	if (substr($p, strlen($p)-2, 1)==".") return $p."0";
-	return $p;
-}
 if(isset($_POST['add2cart'])){
 	foreach($_POST['add2cart'] AS $k=>$v){
 		$db->query("SELECT g.ID, g.name, gfs.hgt,gfs.dia, gfs.price
@@ -644,10 +663,16 @@ if (isset($_POST['delete_item']) && $_POST['delete_item']!=''){
 	unset($_SESSION['basket'][$_POST['delete_item']]);
 	header('location:'.$_SERVER["REQUEST_URI"]);
 }
+
+$delivery_options = array();
+$db->query("SELECT * FROM options_delivery");
+while($q = $db->fetch()){
+	$delivery_options[$q['option_alias']] = $q['option_value'];
+};
+$smarty->assign("DELIVERY_OPTIONS", $delivery_options);
+
 //BUILD BASKET
-
 $bsk=array();
-
 if(count($_SESSION['basket'])>0){
 
 	$bsk_stop_post_delivery=0;
@@ -662,15 +687,7 @@ if(count($_SESSION['basket'])>0){
 
 	/* START: delivery options from DB */
 
-	$delivery_options = array();
-
-	$db->query("SELECT * FROM options_delivery");
-
-	while($q = $db->fetch()){
-		$delivery_options[$q['option_alias']] = $q['option_value'];
-	};
-
-	$smarty->assign("DELIVERY_OPTIONS", $delivery_options);
+	
 
 	/* END: delivery options from DB */
 
@@ -702,7 +719,7 @@ if(count($_SESSION['basket'])>0){
 	}
 
 	$IDs=implode("','", array_keys($_SESSION['basket']));
-	$db->query("SELECT g.ID, g.makerID, g.classID, g.link, g.image, g.name, g.name_alter, gfs.ID AS formID, makerID, gcl.motherID, gfs.hgt, gfs.img, gfs.dia, gfs.wdt, gfs.depth, gfs.ttl, gfs.price,gfs.color, gfs.measure_qt, gmg.unit, gmg.name_ru AS mg_name_ru, gmg.name_ua AS mg_name_ua, gc.name_ru AS color_name_ru, gc.name_ua AS color_name_ua, (g1c.f1_stock+g1c.f2_stock-g1c.rezerv) AS db_1c_availability
+	$db->query("SELECT g.ID, g.makerID, g.classID, g.link, g.image, g.name, g.name_alter, gfs.ID AS formID, makerID, gcl.motherID, gfs.hgt, gfs.img, gfs.dia, gfs.wdt, gfs.depth, gfs.ttl, gfs.price,gfs.color, gfs.measure_qt, gmg.unit AS mg_unit, gmg.name_ru AS mg_name_ru, gmg.name_ua AS mg_name_ua, gc.name_ru AS color_name_ru, gc.name_ua AS color_name_ua, (g1c.f1_stock+g1c.f2_stock-g1c.rezerv) AS db_1c_availability
 		FROM goods".$db_sufix." g
 		LEFT JOIN goods_forms gfs ON g.ID=gfs.goodID
 		LEFT JOIN goods_class gcl ON g.classID=gcl.ID
@@ -728,27 +745,38 @@ if(count($_SESSION['basket'])>0){
 		$bsk[$f['formID']]['classID']=$f['classID'];
 		$bsk[$f['formID']]['image']=$f['image'];
 		$bsk[$f['formID']]['link']=$f['link'];
-		$bsk[$f['formID']]['color']=$f['color'];
 		$bsk[$f['formID']]['formID']=$f['formID'];
-		$bsk[$f['formID']]['hgt']=$f['hgt'];
-		$bsk[$f['formID']]['dia']=$f['dia'];
-		
-		$bsk[$f['formID']]['wdt']=$f['wdt'];
-		$bsk[$f['formID']]['depth']=$f['depth'];
-		$bsk[$f['formID']]['measure_qt']=$f['measure_qt'];
-		$bsk[$f['formID']]['unit']=$f['unit'];
-		$bsk[$f['formID']]['mg_name_ua']=$f['mg_name_ua'];
-		$bsk[$f['formID']]['mg_name_ru']=$f['mg_name_ru'];
-		$bsk[$f['formID']]['color_name_ru']=$f['color_name_ru'];
-		$bsk[$f['formID']]['color_name_ua']=$f['color_name_ua'];
+
 		$bsk[$f['formID']]['ttl']=$f['ttl'];
 		$bsk[$f['formID']]['name']=$f['name'];
 		$bsk[$f['formID']]['name_alter']=$f['name_alter'];
 		$bsk[$f['formID']]['price']=$f['price'];
 		$bsk[$f['formID']]['not_available']=0;
 		
+				$goodLegend_arr= array();
+				if(!empty($f['dia'])){
+					$goodLegend_arr[] = '&#216;' . $f['dia'] . 'см';
+				}
+				if(!empty($f['wdt'])){
+					$goodLegend_arr[] = $lingvo['wdt'] . ': ' . $f['wdt'] . 'см';
+				}
+				if(!empty($f['hgt'])){
+					$goodLegend_arr[] = $lingvo['hgt'] . ': ' . $f['hgt'] . 'см';
+				}
+				if(!empty($f['depth'])){
+					$goodLegend_arr[] = $lingvo['depth'] . ': ' . $f['depth'] . 'см';
+				}
+				if(!empty($f['measure_qt'])){
+					$goodLegend_arr[] = $f['mg_name_'.$lang] . ': ' . $f['measure_qt'] . $f['mg_unit'];
+				}
+				if(!empty($f['color'])){
+					$goodLegend_arr[] = $f['color_name_'.$lang];
+				}
+				$goodLegend=implode(", ", $goodLegend_arr);
+		$bsk[$f['formID']]['goodLegend'] = $goodLegend;
+		
 		$cnt=$bsk[$f['formID']]['cnt']=$_SESSION['basket'][$f['formID']];
-		$bsk[$f['formID']]['sttl']=MakePrice($f['price']*$cnt);
+		$bsk[$f['formID']]['sttl']=$floren->MakePrice($f['price']*$cnt);
 
 		$bsk_img = "/images/ins/s/";
 
@@ -793,11 +821,11 @@ if(count($_SESSION['basket'])>0){
 			$bsk_buket_delivery=1;
 		}
 	
-		$ttl+=MakePrice($f['price']*$cnt);
+		$ttl+=$floren->MakePrice($f['price']*$cnt);
 	}
 
 	$smarty->assign("NO_COMMON_INFO", array(25,12,14,26,27,28,29,64));
-	$smarty->assign("BSK_TTL", MakePrice($ttl));
+	$smarty->assign("BSK_TTL", $floren->MakePrice($ttl));
 	$smarty->assign("BASKET", $bsk);
 	$smarty->assign("BSK_STOP_POST_DELIVERY", $bsk_stop_post_delivery);
 	$smarty->assign("BSK_STOP_PRIVAT", $bsk_stop_privat);
@@ -832,38 +860,34 @@ $gTag.='
 }
 
 if ($URL[0]=="product") {
-		$goods_accessories = array();
-		$board_cnt = 4;
-		$db->query("SELECT *, g.ID AS goodID FROM goods".$db_sufix." g JOIN goods_class gc ON g.classID=gc.ID WHERE gc.motherID=82 ORDER BY RAND() LIMIT ".$board_cnt);
-		
-		while($gb=$db->fetch()){
-			$goods_accessories[]=$gb['goodID'];
-		}
+		$accessories_final = array();
+		$board_cnt = 5;
 	
-		$goods_board_comma = implode(",", $goods_accessories);
-	
-		$db->query("SELECT g.ID, g.classID, g.link, g.name, g.image, min(gf.price) AS min_price, max(gf.price) AS max_price FROM goods".$db_sufix." g
-					LEFT JOIN goods_forms gf ON g.ID=gf.goodID
-					WHERE g.ID IN (".$goods_board_comma.") AND g.availability=1 AND gf.price > 0
-					GROUP BY g.ID");
+		$db->query("SELECT g.ID, g.classID, g.link, g.name, g.image, min(gf.price) AS min_price, max(gf.price) AS max_price, AVG(gv.vote) AS vote
+					FROM goods".$db_sufix." g
+					JOIN goods_forms gf ON g.ID=gf.goodID
+					JOIN goods_class gc ON g.classID=gc.ID
+					LEFT JOIN goods_voting gv ON g.ID=gv.pageID AND pageType='good'
+					WHERE gc.motherID=82 AND g.availability=1 AND gf.price > 0
+					GROUP BY g.ID
+					ORDER BY RAND()
+					LIMIT ".$board_cnt);
 	
 			while($f=$db->fetch()){
 				$accessories_final[]=$f;
 			}
-			
 		$smarty->assign("GOODS_BOARD_ACCESSORIES", $accessories_final);
 }
 
 
-// Перелинковка
+// Перелинковка – товари з тієї ж категорії
 $goods_board=array();
 if($URL[0]=="product" || $URL[0]=="buket"){
 	
-	if(in_array($classID, array('78', '79', '80', '81'))) $cur_gID=intval($PARAM[0]);
-	else $cur_gID=intval(substr($PARAM[0], 0, strpos($PARAM[0], '_')));
+	$cur_gID=intval(substr($PARAM[0], 0, strpos($PARAM[0], '_')));
 
-	$classID_sql=" AND classID='".$classID."' AND g.availability=1";
-	$board_cnt=4;
+	$classID_sql=" AND classID='".$classID."' AND g.availability=1 AND act='Y'";
+	$board_cnt=5;
 
 	$db->query("SELECT DISTINCT ID FROM goods".$db_sufix." g WHERE ID>".$cur_gID.$classID_sql." ORDER BY ID LIMIT ".$board_cnt);
 
@@ -895,8 +919,10 @@ if($URL[0]=="product" || $URL[0]=="buket"){
 
 		$goods_board_comma=implode(",", $goods_board);
         
-		$db->query("SELECT g.ID, g.classID, g.link, g.name, g.image, min(gf.price) AS min_price, max(gf.price) AS max_price FROM goods".$db_sufix." g
-				LEFT JOIN goods_forms gf ON g.ID=gf.goodID
+		$db->query("SELECT g.ID, g.classID, g.link, g.name, g.image, min(gf.price) AS min_price, max(gf.price) AS max_price, ROUND(AVG(gv.vote), 1) AS vote
+				FROM goods".$db_sufix." g
+				JOIN goods_forms gf ON g.ID=gf.goodID
+				LEFT JOIN goods_voting gv ON g.ID=gv.pageID AND pageType='good'
 				WHERE g.ID IN (".$goods_board_comma.") AND g.availability=1 AND gf.price > 0
 				GROUP BY g.ID");
 
@@ -918,52 +944,6 @@ if($URL[0]=="product" || $URL[0]=="buket"){
 
 	$smarty->assign("GOODS_BOARD", $goods_board_final);
 
-	if($URL[0]!='wedding_bouquet' && $URL[0]!='buket'){
-
-		$db->query("SELECT g.ID, g.classID, g.link, g.name, g.image, min(gf.price) AS min_price, max(gf.price) AS max_price, gf.color FROM goods".$db_sufix." g
-					JOIN goods_forms gf	ON g.ID=gf.goodID
-					WHERE g.classID=51 AND g.availability=1 AND gf.price > 0 GROUP BY g.ID ORDER BY RAND() LIMIT 2");
-
-		while($f=$db->fetch()){
-			$goods_board_lechuza[]=$f;
-			$goods_board_lechuza[count($goods_board_lechuza)-1]['image']="/images/ins/s/".$f['image'];
-		}
-
-		if($motherClassID==3){
-			$goods_board_classID="AND g.classID='31'";
-			$goods_board_title_2=array('link'=>$lang_url.'/planters/ceramic/', 'name'=>$lingvo['goods_ceramic']);
-		}elseif ($motherClassID==5){
-			$goods_board_classID="AND g.classID IN (41, 16, 20)";
-			$goods_board_title_2=array('link'=>$lang_url.'/komnatnie-rasteniya/', 'name'=>$lingvo['plants']);
-		}else{}
-			
-		
-		$db->query("SELECT g.ID, g.classID,g.makerID, g.link, g.name, g.image, min(gf.price) AS min_price, max(gf.price) AS max_price, gf.color FROM goods".$db_sufix." g
-						JOIN goods_forms gf	ON g.ID=gf.goodID
-						WHERE 1=1 AND g.availability=1 ".$goods_board_classID." AND gf.price > 0
-						GROUP BY g.ID ORDER BY RAND() LIMIT 2");
-
-		while($f=$db->fetch()){
-			$goods_board_lechuza[]=$f;
-
-			$goods_board_lechuza[count($goods_board_lechuza)-1]['image']="/images/ins/s/".$f['image'];
-		}
-
-
-		foreach ($goods_board_lechuza AS $k=>$v){
-
-			if (in_array($v['classID'], array('78', '79', '80'))) {
-				$goods_board_lechuza[$k]['new_link']=$lang_url.'/buket/'.$v['ID'].'/';
-			} else {
-				$goods_board_lechuza[$k]['new_link']=$lang_url.'/product/'.$v['ID'].'_'.$v['link'].'/';
-			}
-		
-		}
-
-
-		$smarty->assign("GOODS_BOARD_LECHUZA", $goods_board_lechuza);
-		$smarty->assign("GOODS_BOARD_TITLE_2",$goods_board_title_2);
-	}
 }
 
 if (isset($dept) && $dept=='landscape'){
@@ -1008,7 +988,15 @@ if(isset($_REQUEST['cb_send'])){
 */
 
 
-
+$lastPhotos=array();
+$db->query("SELECT photo_name".$db_sufix." AS photo_name, photo_dsc".$db_sufix." AS photo_dsc, date_add, photo_url  FROM last_photos ORDER BY date_add DESC LIMIT 16");
+while($f=$db->fetch()){
+	$lastPhotos[]=$f;
+//	$indx_lastPhotos[count($indx_lastPhotos)-1]['photo_name']=$f['photo_name'.$db_sufix];
+//	$indx_lastPhotos[count($indx_lastPhotos)-1]['photo_dsc']=$f['photo_dsc'.$db_sufix];
+}
+$smarty->assign("LASTPHOTOS", $lastPhotos);
+$smarty->assign("LAST_WORKS",'last_works.tpl');
 
 //clients
 $clients=array();

@@ -2,10 +2,18 @@ import { A, N, P, S, T, g, s } from "./_swipers.js";
 /* empty css      */
 import "./_shoelace.js";
 import "./_events.js";
-import "./_scroll2.js";
+// import "./_scroll2.js";
 import "./_catalog.js";
 import "./_clickOutside.js";
 import "./_expandableText.js";
+import "./_quantityCounter.js";
+import "./_cart.js";
+import "./_forms.js";
+import "./fetchApi.js";
+
+
+
+
 export {
   A as Autoplay,
   N as Navigation,

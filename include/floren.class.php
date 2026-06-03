@@ -54,6 +54,18 @@ class florenClass {
 		     return $result;
 	//	}
 	}
+	function MakePrice($p) {
+		$p=str_replace(",", ".", $p);
+		$p=str_replace("-", "0", $p);
+		if ($p=="") return "0.00";
+		if ($p*1==0) return "0.00";
+		if ($p==round($p)) return ($p*1).".00";
+		$p=round($p*100); $last=substr($p, strlen($p)-1, 1); $res=$p;
+		$p=$res/100;
+		if ($p==round($p)) return $p.".00";
+		if (substr($p, strlen($p)-2, 1)==".") return $p."0";
+		return $p;
+	}
 	function send_format_email($e_mails,$subject,$template,$params=array()) {
 	
 		foreach ($params AS $var=>$val) $this->tpl->assign($var, $val);

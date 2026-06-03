@@ -1,12 +1,22 @@
 <?php
 include_once($_SERVER['DOCUMENT_ROOT'] . "/exec/good_comment.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . "/include/resize.php");
 $TITLE=array();
+//=========hleb
+
+$hleb=array();
+$hleb[0]['link'] = '/';
+$hleb[0]['name'] = $lingvo['main_page'];
+
+//=========hleb
+
 $product_path = '';
 $img_path = '';
 
 $is_plant = 0;
 $is_pot = 0;
 $is_bouquet = 0;
+$is_aksessuary = 0;
 $max_pages_links = 25;
 
 if($URL[0]=='komnatnie-rasteniya') {
@@ -14,8 +24,17 @@ if($URL[0]=='komnatnie-rasteniya') {
 	$curAlias = "komnatnie-rasteniya";
 	$is_plant = 1;
 	$smarty->assign("ALIAS",$curAlias);
+	$hleb[1]['link']='/komnatnie-rasteniya/';
+	$hleb[1]['name']=$lingvo['plants'];
 }
-
+if($URL[0]=='planters') {
+	$categoryID = '5';
+	$curAlias = "planters";
+	$is_pot = 1;
+	$smarty->assign("ALIAS",$curAlias);
+	$hleb[1]['link']='/planters/';
+	$hleb[1]['name']=$lingvo['planters_kashpo'];
+}
 if($URL[0]=='florist') {
 
 	$categoryID = '77';
@@ -24,6 +43,8 @@ if($URL[0]=='florist') {
 	$curAlias = "florist";
 	$is_bouquet = 1;
 	$smarty->assign("ALIAS",$curAlias);
+	$hleb[1]['link']='/florist/';
+	$hleb[1]['name']=$lingvo['dostavka_cvetov'];
 }
 
 if(isset($URL[1]) && $URL[1]=='sezon') {
@@ -43,6 +64,8 @@ if($URL[0]=='aksessuary') {
 	$curAlias = "aksessuary";
 	$is_aksessuary = 1;
 	$smarty->assign("ALIAS", "aksessuary");
+	$hleb[1]['link']='/aksessuary/';
+	$hleb[1]['name']=$lingvo['accessory'];
 }
 if($URL[0]=='iskusstvennie-cvety') {
 	$dept = "iskusstvennie-cvety";
@@ -51,6 +74,20 @@ if($URL[0]=='iskusstvennie-cvety') {
 	$curAlias = "iskusstvennie-cvety";
 	$is_plant = 1;
 	$smarty->assign("ALIAS", $curAlias);
+	$hleb[1]['link']='/iskusstvennie-cvety/';
+	$hleb[1]['name']=$lingvo['iskusstvennie_cvety'];
+														
+}
+if($URL[0]=='compositions') {
+	$dept = "compositions";
+	$smarty->assign("DEPT", $dept);
+	$categoryID = '49';
+	$curAlias = "compositions";
+	$is_plant = 1;
+	$smarty->assign("ALIAS", $curAlias);
+	$hleb[1]['link']='/compositions/';
+	$hleb[1]['name']=$lingvo['compositions'];
+														
 }
 $error_404 = false;
 
@@ -78,14 +115,6 @@ if(isset($_REQUEST['sort'])){
 	$sql_sort_order=$sort_array[$_REQUEST['sort']];
 	$smarty->assign("META_NOFOLLOW",'<meta name="robots" content="noindex, nofollow">');
 }
-
-//=========hleb
-
-$hleb=array();
-$hleb[0]['link'] = '/';
-$hleb[0]['name'] = $lingvo['main_page'];
-
-//=========hleb
 
 $category_aliases = array();
 
@@ -213,13 +242,13 @@ if ((isset($URL[1]) && in_array($URL[1], $category_aliases))) {
 		}
 		
 		//BUILD FILTERS
-
+		$active_filters_flag=0;
 		$db->query("SELECT gfg.ID AS gfgID, gfg.name".$db_sufix." AS gfgName FROM goods_filter_groups gfg WHERE gfg.classID='".$categoryID."' ORDER BY gfg.sort DESC");
 	
 		while($ff = $db->fetch()) {
 
 			$filters[$ff['gfgID']]['groupName']	= $ff['gfgName'];
-
+			$filters[$ff['gfgID']]['sub_filters'] = array();
 			$db->query("SELECT gf.ID AS gfID, gf.alias AS alias, gf.name".$db_sufix." AS gfName,  count(DISTINCT g.ID) AS cnt, gf.groupID
 								FROM goods_filters gf
 								LEFT JOIN goods_f2g f2g ON gf.ID=f2g.fID
@@ -229,8 +258,15 @@ if ((isset($URL[1]) && in_array($URL[1], $category_aliases))) {
 								GROUP BY gf.ID	
 								ORDER BY gf.sort DESC", 1);
 
-
 			while ($fff=$db->fetch(1)){
+				if(isset($URL[1]) && $URL[1]!=''){
+					$active_filter_show_in_group_arr=explode("-",$URL[1]);
+					if(in_array( $fff['alias'], $active_filter_show_in_group_arr)){
+						$filters[$ff['gfgID']]['active_alias']=$fff['alias'];	
+					}	
+				}
+			
+			
 			
 				$db->query("SELECT COUNT(DISTINCT g.ID) AS cnt2
 								FROM goods g
@@ -238,16 +274,14 @@ if ((isset($URL[1]) && in_array($URL[1], $category_aliases))) {
 								JOIN goods_filters gf ON gf.ID=f2g.fID
 								WHERE gf.ID='".$fff['gfID']."'
 								".$filter_selected_goods_SQL." GROUP BY gf.ID", 2);
-
-
-
 				$cnt2=$db->fetch(2);
 
 				$tmp_filters_url=$filters_url;
 				array_push($tmp_filters_url, $fff['alias']);
 				$new_filters_url=array_unique($tmp_filters_url);
 		//		$new_filters_url=array($fff['alias']);		// danger code :)
-
+				
+				$filters[$ff['gfgID']]['sub_filters'][$fff['alias']] = array();
 			
 				if(in_array($fff['alias'], $filters_url)){
 					$filters[$ff['gfgID']]['sub_filters'][$fff['alias']]['act']="1";
@@ -275,14 +309,14 @@ if ((isset($URL[1]) && in_array($URL[1], $category_aliases))) {
 				
 				/** =========== **/
 				if(!$filter_selected_groups){
-					$filters[$ff['gfgID']]['sub_filters'][$fff['alias']]['cnt']=$fff['cnt'];
+					$filters[$ff['gfgID']]['sub_filters'][$fff['alias']]['cnt']=$fff['cnt'] ?? '0';
 					$filters[$ff['gfgID']]['sub_filters'][$fff['alias']]['disable']='0';
 				}
 				elseif(in_array($fff['groupID'], $filter_selected_groups)){
-					$filters[$ff['gfgID']]['sub_filters'][$fff['alias']]['cnt']=($fff['cnt']==0?'':'+').$fff['cnt'];
+					$filters[$ff['gfgID']]['sub_filters'][$fff['alias']]['cnt']=$fff['cnt'] ?? '0';
 					$filters[$ff['gfgID']]['sub_filters'][$fff['alias']]['disable']='1'; 	// vybrat mozhno tolko 1 filtr iz grupi
 				}else{
-					$filters[$ff['gfgID']]['sub_filters'][$fff['alias']]['cnt']=$cnt2['cnt2'];
+					$filters[$ff['gfgID']]['sub_filters'][$fff['alias']]['cnt']=	$cnt2['cnt2'] ?? '0';
 					$filters[$ff['gfgID']]['sub_filters'][$fff['alias']]['disable']='0';
 				}
 			
@@ -290,12 +324,19 @@ if ((isset($URL[1]) && in_array($URL[1], $category_aliases))) {
 				$tmp_filters[]=$fff['alias'];
 			}//filters in 1 group
 		}//filters_group	
-
-
+		foreach($filters AS $k=>$v){
+			foreach($v AS $kk=>$vv){
+				if (is_array($vv)){
+					foreach($vv AS $vvv){
+						if(isset($vvv['act']) && $vvv['act']=='1') $active_filters_flag=1;
+					}
+				}
+			}
+		}
 
 
 		$smarty->assign("FILTERS", $filters);
-		
+		$smarty->assign("ACTIVE_FILTERS_FLAG", $active_filters_flag);
 		
 		
 			//================		/	FILTERS		=================
@@ -304,8 +345,8 @@ if ((isset($URL[1]) && in_array($URL[1], $category_aliases))) {
 			$db->query("SELECT 
 				g.ID AS c
 				FROM goods".$db_sufix." g
-				LEFT JOIN goods_forms gf ON g.ID=gf.goodID
-				WHERE g.classID IN ('".implode("','", $category_ids)."')
+				JOIN goods_forms gf ON g.ID=gf.goodID
+				WHERE gf.visibility=1 AND g.classID IN ('".implode("','", $category_ids)."')
 				".$filter_selected_goods_SQL."
 				GROUP BY g.ID
 				");
@@ -316,14 +357,21 @@ if ((isset($URL[1]) && in_array($URL[1], $category_aliases))) {
 			$smarty->assign("GOODS_CNT",$total_goods);
 			$ofset  = 0;
 
-			//==================== PAGING
+						//==================== PAGING
 
 			$page = max(1,(int)@$cur_page);
 			$ofset = $page > 1 ? (($page - 1) * $max_pages_links) : 0;
 
 			$pages=array();
 			$lastPage=ceil($total_goods/$max_pages_links);
-			$smarty->assign("LASTPAGE",$lastPage);
+			
+			$show_goods_from = $ofset+1;
+			$smarty->assign("SHOW_GOODS_FROM",$show_goods_from);
+			
+			$show_goods_to = $ofset + $max_pages_links;
+			if ($show_goods_to > $total_goods) $show_goods_to = $total_goods;
+			$smarty->assign("SHOW_GOODS_TO",$show_goods_to);
+			
 
 			if($cur_page>$lastPage){
                 // --- [dg] redirects form overlimited pagitation to last one --- //
@@ -344,6 +392,7 @@ if ((isset($URL[1]) && in_array($URL[1], $category_aliases))) {
 				$pages[]=array('active'=>($i==$page), 'page'=>$i, 'prev'=>$i+1==$page, 'next'=>$i-1==$page);
 			}
 
+			$smarty->assign("LASTPAGE",$lastPage);
 			$smarty->assign("PAGES",$pages);
 			$smarty->assign("CUR_PAGE",$page);
 			$smarty->assign("PAGE_MAX",$total_goods>$max_pages_links?100:1);
@@ -367,18 +416,6 @@ if ((isset($URL[1]) && in_array($URL[1], $category_aliases))) {
 		$topSEOtext			=	$f_cat['topSEOtext'];
 		$leftSEOtext		=	$f_cat['seotext'];
 		$centerSEOtext		=	$f_cat['centerSEOtext'];
-		
-		$hleb[1]['link']='';
-
-		if(isset($dept) && $dept=="florist"){
-			$hleb[1]['name']=$lingvo['dostavka_cvetov'].$add_ttl_txt;
-		} elseif(isset($dept) && $dept=="aksessuary") {
-			$hleb[1]['name']=$lingvo['accessory'].$add_ttl_txt;
-		} elseif(isset($dept) && $dept=="iskusstvennie-cvety") {
-			$hleb[1]['name']=$lingvo['iskusstvennie_cvety'].$add_ttl_txt;
-		} else{
-			$hleb[1]['name']=$lingvo['plants'].$add_ttl_txt;
-		}
 		
 		$meta_rel_canonical		=		'<link rel="canonical" href="https://floren.com.ua'.$lang_url.'/'.$curAlias.'/" />';
 
@@ -407,16 +444,6 @@ if ((isset($URL[1]) && in_array($URL[1], $category_aliases))) {
 					$leftSEOtext		=		'';
 					$centerSEOtext		=		'';
 			
-				if(isset($dept) && $dept=="florist"){
-					$hleb[1]['link']='/florist/';
-					$hleb[1]['name']=$lingvo['dostavka_cvetov'].$add_ttl_txt;
-				}elseif(isset($dept) && $dept=="iskusstvennie-cvety"){
-					$hleb[1]['link']='/iskusstvennie-cvety/';
-					$hleb[1]['name']=$lingvo['iskusstvennie-cvety'].$add_ttl_txt;
-				}else{
-					$hleb[1]['link']='/komnatnie-rasteniya/';
-					$hleb[1]['name']=$lingvo['plants'].$add_ttl_txt;
-				}
 				$hleb[2]['link']='';
 				$hleb[2]['name']=$lingvo['filter'].": ".implode(", ", array_unique($filter_selected_names)).$add_ttl_txt;
 			}else{
@@ -431,16 +458,7 @@ if ((isset($URL[1]) && in_array($URL[1], $category_aliases))) {
 				$leftSEOtext		=		$f_meta['leftSEOtext'.$db_sufix];
 				$centerSEOtext		=		$f_meta['centerSEOtext'.$db_sufix];
 				
-				if(isset($dept) && $dept=="florist"){
-					$hleb[1]['link']='/florist/';
-					$hleb[1]['name']=$lingvo['dostavka_cvetov'].$add_ttl_txt;
-				}elseif(isset($dept) && $dept=="iskusstvennie-cvety"){
-					$hleb[1]['link']='/iskusstvennie-cvety/';
-					$hleb[1]['name']=$lingvo['iskusstvennie-cvety'].$add_ttl_txt;
-				}else{
-					$hleb[1]['link']='/komnatnie-rasteniya/';
-					$hleb[1]['name']=$lingvo['plants'].$add_ttl_txt;
-				}
+				
 				$hleb[2]['link']='';
 				$hleb[2]['name']=$lingvo['filter'].": ".$page_title;
 			}
@@ -472,131 +490,20 @@ if ((isset($URL[1]) && in_array($URL[1], $category_aliases))) {
 		
 	//==========		/ META			===============
 		
-		
-		//	====================  LET'S BUILD GOODS LIST===============
-
-		$promo=array();	
-		$not_available = 0;	
-		$prices = array();
-
-		$db->query("SELECT g.*, min(NULLIF(gf.price, 0)) AS min_price, max(gf.price) AS max_price FROM goods".$db_sufix." g
+	// =========== LETS BUILD GOODS LIST============
+	$main_query = "SELECT g.*, min(NULLIF(gf.price, 0)) AS min_price, max(gf.price) AS max_price, min(NULLIF(gf.old_price, 0)) AS min_old_price, max(gf.old_price) AS max_old_price
+					FROM goods".$db_sufix." g
 					LEFT JOIN goods_forms gf
 					ON g.ID=gf.goodID
-					WHERE g.classID IN ('".implode("','", $category_ids)."')
+					WHERE gf.visibility=1 AND g.classID IN ('".implode("','", $category_ids)."')
 					".$filter_selected_goods_SQL."
 					GROUP BY g.ID
 					ORDER BY ".$sql_sort_order.", gf.price > 0 DESC, g.classID DESC, g.name
-					LIMIT ".$ofset.",".$max_pages_links);
+					LIMIT ".$ofset.",".$max_pages_links;
 
-		for ($i=0; $f=$db->fetch(); $i++){
-
-			if ($is_plant || $is_aksessuary) {
-				$product_path = $lang_url . '/product/' . $f['ID'] . '_' . $f['link'] . '/';
-			//	$img_path = 'https://floren.com.ua/images/ins/b/gmcxml-' . $f['image'];
-			if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/images/goods/b/' . str_replace('jpg', 'webp', $f['image']))){
-					$img_path = '/images/goods/b/' . str_replace('jpg', 'webp', $f['image']);
-			}else{
-				// Исходный JPG-файл
-$input = 'https://floren.com.ua/images/ins/b/gmcxml-' . $f['image'];
-
-// Имя выходного WEBP-файла
-$output = $_SERVER['DOCUMENT_ROOT'] . '/images/goods/b/' .str_replace('jpg', 'webp', $f['image']);
-
-
-
-// Загружаем изображение из JPG
-$image = imagecreatefromjpeg($input);
-
-if (!$image) {
-    die("Не удалось открыть изображение $input");
-}
-
-$quality = 85;
-
-imagewebp($image, $output, $quality);
-imagedestroy($image);
-$img_path = '/images/goods/b/' . str_replace('jpg', 'webp', $f['image']);
-			}
-				
-			} elseif ($is_bouquet) {
-				$product_path = $lang_url . '/buket/' . $f['ID'] . '/';
-				$img_path = 'https://floren.com.ua/images/ins/s/'. $f['image'];
-			}
-
-			$db->query("SELECT gf.*, gf.old_price, gf.visibility, gf.measure_qt, gf.color, gmg.unit, gmg.name_ru AS mg_name_ru, gmg.name_ua AS mg_name_ua FROM goods_forms gf LEFT JOIN goods_measures gmg ON gf.measure_id=gmg.ID WHERE goodID='".$f['ID']."' AND gf.visibility=1 AND gf.price > 0", 1);
-
-			$colors[$f['ID']] = array();
-
-			if ($f['availability'] == 0) {
-				$not_available = 1;
-			} else {
-				$not_available = 0;
-			}
-			
-			$promo[] = array(
-				'ID' => $f['ID'],
-				'name' => $f['name'],
-				'link' => $f['link'],
-				'product_path' => $product_path,
-				'img_path' => $img_path,
-				'image' => $f['image'],
-				'act' => $f['act'],
-				'not_available' => $not_available,
-				'preorder' => $f['preorder'],
-				'colors' => $colors[$f['ID']]
-			);
-			$is_action=0;
-			$prices[$f['ID']]=array();
-			while ($ff=$db->fetch(1)) {
-					if ($f['availability'] == 1 && intval($ff['price']) > 0) {
-						$prices[$f['ID']][] = intval($ff['price']);
-						$old_prices[$f['ID']][] = intval($ff['old_price']);
-					}
-										
-					$promo[count($promo)-1]['forms'][] = array(
-						'form_id' => $ff['ID'],
-						'dia' => $ff['dia'],
-						'hgt' => $ff['hgt'],
-						'wdt' => $ff['wdt'],
-						'depth' => $ff['depth'],
-						'price' => $ff['price'],
-						'measure_qt' => $ff['measure_qt'],
-						'unit' => $ff['unit'],
-						'mg_name_ru' => $ff['mg_name_ru'],
-						'mg_name_ua' => $ff['mg_name_ua']
-					);
-
-					
-					if ($ff['color'] != '0') {
-						$db->query("SELECT gf.color, gc.name_ru, gc.name_ua, gc.preview FROM goods_forms gf LEFT JOIN goods_colors gc ON gf.color=gc.alias WHERE gf.goodID='".$f['ID']."' AND visibility=1 AND price > 0 ", 2);
-
-						while ($fc = $db->fetch(2)) {	
-							if ($fc['color'] != '0') {
-								$colors[$f['ID']][] = array(
-									'name_ru' => $fc['name_ru'],
-									'name_ua' => $fc['name_ua'],
-									'image' => $fc['preview'],
-								);
-							}					
-						}
-					}
-					if($ff['old_price']>0) $is_action=1;
-					$promo[count($promo)-1]['is_action']=$is_action;
-			};
-
-			if (count($prices[$f['ID']]) > 0) {
-
-				$promo[count($promo)-1]['min_price'] = min(array_filter($prices[$f['ID']]));
-				$promo[count($promo)-1]['max_price'] = max(array_filter($prices[$f['ID']]));
-				
-				$filtered_old_prices = array_filter($old_prices[$f['ID']]);
-				$promo[count($promo)-1]['min_old_price'] = !empty($filtered) ? min($filtered) : 0;
-				
-			}
-			
-			
-			$promo[count($promo)-1]['colors'] = array_unique($colors[$f['ID']], SORT_REGULAR);
-		}
+	include("goods_build_list.php");
+	// =========== LETS BUILD GOODS LIST============
+		
 $schema_prices_min=array();
 	foreach ($promo AS $k=>$v){
 			if(!isset($v['min_price']) || !$v['min_price']) continue;
@@ -607,8 +514,8 @@ $schema_prices_min=array();
 	}
 	
 	$schema_offers_count=$total_goods;
-	$schema_min_price=@min($schema_prices_min);
-	$schema_max_price=@max($schema_prices_max);
+	$schema_min_price = min($schema_prices_min ?: [0]);
+	$schema_max_price = max($schema_prices_min ?: [0]);
 	
 	$schema_offers_txt='';
 	$schema_offers_txt.='<script type="application/ld+json">
@@ -638,7 +545,6 @@ $schema_prices_min=array();
 		
 		$smarty->assign("SCHEMA_OFFERS", $schema_offers_txt);
 
-
 		$smarty->assign("PROMO", $promo);
 		$smarty->assign("IS_BOUQUET", $is_bouquet);
 
@@ -650,8 +556,62 @@ $schema_prices_min=array();
 		$smarty->assign("PAGE_TITLE",$page_title);
 		$smarty->assign("TOP_SEO_TEXT",$topSEOtext);
 		$smarty->assign("SEO_TEXT",$leftSEOtext);
-		$smarty->assign("CENTER_SEO_TEXT",$centerSEOtext);
 		$smarty->assign("LIST_OR_TBL",$f_cat['list_or_tbl']);
+		
+		$body_text=$centerSEOtext;
+		// ======ScooterOk AI code =====
+		// 1. Створюємо об'єкт DOM
+		$dom = new DOMDocument();
+		libxml_use_internal_errors(true);
+		
+		// 2. Завантажуємо HTML
+		$dom->loadHTML('<?xml encoding="UTF-8"><div id="dom-wrapper">' . $body_text . '</div>', LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+		libxml_clear_errors();
+		
+		$xpath = new DOMXPath($dom);
+		
+		// 3. Збираємо всі теги <h2>
+		$h2s = $xpath->query('//h2');
+		$h2Nodes = [];
+		foreach ($h2s as $h2) {
+		    $h2Nodes[] = $h2;
+		}
+		
+		// 4. Проходимося по кожному <h2> і створюємо правильну структуру
+		foreach ($h2Nodes as $h2) {
+		    $section = $dom->createElement('section');
+		    $section->setAttribute('class', 'article-section');
+		    
+		    $contentDiv = $dom->createElement('div');
+		    $contentDiv->setAttribute('class', 'article-section__content');
+		    
+		    $h2->parentNode->insertBefore($section, $h2);
+		    $h2->setAttribute('class', 'article-section__title');
+		    
+		    $section->appendChild($h2);
+		    $section->appendChild($contentDiv);
+		    
+		    while ($section->nextSibling && strtolower($section->nextSibling->nodeName) !== 'h2') {
+		        $contentDiv->appendChild($section->nextSibling);
+		    }
+		}
+		
+		// ВИДАЛЕНО ПРОБЛЕМНИЙ КРОК З DOM-ОБГОРТАННЯМ ТАБЛИЦЬ
+		
+		// 5. Витягуємо готовий HTML з нашої тимчасової обгортки
+		$wrapper = $dom->getElementById('dom-wrapper');
+		$new_body_text = '';
+		foreach ($wrapper->childNodes as $child) {
+		    $new_body_text .= $dom->saveHTML($child);
+		}
+		
+		// 6. Використовуємо твою перевірену регулярку для таблиць!
+		// Тепер вона на 100% безпечна, бо загальна структура секцій вже сформована правильно
+		$new_body_text = preg_replace('/(<table\b[^>]*>.*?<\/table>)/is', '<div class="article-section__table">$1</div>', $new_body_text);
+		// ======End ScooterOk AI code =====
+		
+		$smarty->assign("CENTER_SEO_TEXT", trim($new_body_text));
+		
 		
 		$smarty->assign("CATEGORY_M_ID",$f_cat['ID']);
 
@@ -669,8 +629,6 @@ if ($error_404){
 	include($_SERVER['DOCUMENT_ROOT']."/404.php");
 	exit();
 }
-
 $smarty->assign("HLEB",$hleb);
 
 ?>
-

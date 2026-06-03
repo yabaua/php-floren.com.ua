@@ -1,0 +1,167 @@
+# Floren
+
+> Флорен — студія фітодизайну в Києві, що спеціалізується на кімнатних рослинах та професійному озелененні офісів та приміщень. Ми створюємо живий затишок у комерційних та житлових просторах.
+
+## Main Pages / Головні сторінки
+
+- [Головна](https://floren.com.ua/): Дізнайтесь, як Floren створює затишок та зелень у вашому просторі. Послуги з озеленення офісу в Києві та підбір кімнатних рослин. Оформлення офісних приміщень кімнатними квітами.
+- [Главная(RU)](https://floren.com.ua/ru/): Узнайте, как Floren создает уют и зелень в вашем пространстве. Услуги по озеленению офиса и подбор комнатных растений. Оформление офисных помещений комнатными цветами.
+- [Про нас](https://floren.com.ua/about/): Хто ми, що ми робимо і чому любимо рослини.
+- [Оплата і доставка](https://floren.com.ua/delivery/): Умови доставки по Києву та Україні.
+- [Контакти](https://floren.com.ua/contacts/): Як з нами зв’язатися.
+
+## Product Categories / Категорії товарів
+
+- [Кімнатні рослини (UA)](https://floren.com.ua/ua/komnatnie-rasteniya/): Купити кімнатні рослини для дому чи офісу.
+- [Комнатные растения (RU)](https://floren.com.ua/komnatnie-rasteniya/): Купить комнатные растения для дома или офиса.
+- [Орхідеї (UA)](https://floren.com.ua/ua/komnatnie-rasteniya/orchids/): Купити орхідеї — фаленопсиси, дендробіуми.
+- [Орхидеи (RU)](https://floren.com.ua/komnatnie-rasteniya/orchids/): Купить орхидеи: фаленопсис, дендробиум.
+- [Декоративно-листяні (UA)](https://floren.com.ua/ua/komnatnie-rasteniya/decorative/): Купити декоративно-листяні рослини.
+- [Декоративно-лиственные (RU)](https://floren.com.ua/komnatnie-rasteniya/decorative/): Купить декоративно-лиственные растения.
+- [Пальми (UA)](https://floren.com.ua/ua/komnatnie-rasteniya/palms/): Купити пальми для озеленення інтер’єру.
+- [Пальмы (RU)](https://floren.com.ua/komnatnie-rasteniya/palms/): Купить пальмы для декора помещения.
+- [Цитрусові (UA)](https://floren.com.ua/ua/komnatnie-rasteniya/citrus/): Купити лимони, мандарини, цитрусові дерева.
+- [Цитрусовые (RU)](https://floren.com.ua/komnatnie-rasteniya/citrus/): Купить лимоны, мандарины, цитрусовые деревья.
+- [Квітучі (UA)](https://floren.com.ua/ua/komnatnie-rasteniya/bloom/): Купити квітучі кімнатні рослини.
+- [Цветущие (RU)](https://floren.com.ua/komnatnie-rasteniya/bloom/): Купить цветущие комнатные растения.
+- [Сансевієрія (UA)](https://floren.com.ua/ua/komnatnie-rasteniya/sansevieriya/): Купити сансевієрію — невибаглива рослина.
+- [Сансевиерия (RU)](https://floren.com.ua/komnatnie-rasteniya/sansevieriya/): Купить сансевиерию — неприхотливое растение.
+- [Фікус (UA)](https://floren.com.ua/ua/komnatnie-rasteniya/ficus/): Купити фікуси Бенджаміна, еластика, лірата.
+- [Фикус (RU)](https://floren.com.ua/komnatnie-rasteniya/ficus/): Купить фикусы Бенджамина, эластика, лирата.
+- [Драцена (UA)](https://floren.com.ua/ua/komnatnie-rasteniya/dracaena/): Купити драцену — ефектна інтер’єрна рослина.
+- [Драцена (RU)](https://floren.com.ua/komnatnie-rasteniya/dracaena/): Купить драцену — эффектное интерьерное растение.
+- [Кактуси (UA)](https://floren.com.ua/ua/komnatnie-rasteniya/cactus/): Купити кактуси — компактні та невибагливі.
+- [Кактусы (RU)](https://floren.com.ua/komnatnie-rasteniya/cactus/): Купить кактусы — компактные и неприхотливые.
+- [Ліани (UA)](https://floren.com.ua/ua/komnatnie-rasteniya/liana/): Купити ліани для підвісних кашпо.
+- [Лианы (RU)](https://floren.com.ua/komnatnie-rasteniya/liana/): Купить лианы для подвесных кашпо.
+- [Сукуленти (UA)](https://floren.com.ua/ua/komnatnie-rasteniya/sukkulenty/): Купити сукуленти — стильно та невибагливо.
+- [Суккуленты (RU)](https://floren.com.ua/komnatnie-rasteniya/sukkulenty/): Купить суккуленты — модное и простое решение для декора.
+- [Юкка (UA)](https://floren.com.ua/ua/komnatnie-rasteniya/yucca/): Купити юкку — декоративна вертикаль у просторі.
+- [Юкка (RU)](https://floren.com.ua/komnatnie-rasteniya/yucca/): Купить юкку — вертикальное акцентное растение.
+- [Цибулинні (UA)](https://floren.com.ua/ua/komnatnie-rasteniya/bulbs/): Купити цибулинні квіти для дому.
+- [Луковичные (RU)](https://floren.com.ua/komnatnie-rasteniya/bulbs/): Купить луковичные цветы для интерьера.
+- [Хвойні (UA)](https://floren.com.ua/ua/komnatnie-rasteniya/khvoynyye/): Купити мініатюрні хвойні кімнатні рослини.
+- [Хвойные (RU)](https://floren.com.ua/komnatnie-rasteniya/khvoynyye/): Купить миниатюрные хвойные растения.
+- [Click & Grow (UA)](https://floren.com.ua/ua/compositions/click-grow/): Купити smart-горщик Click & Grow.
+- [Click & Grow (RU)](https://floren.com.ua/compositions/click-grow/): Купить умный горшок Click & Grow.
+- [Штучні квіти (UA)](https://floren.com.ua/ua/iskusstvennie-cvety/): Купити штучні квіти для декору.
+- [Искусственные цветы (RU)](https://floren.com.ua/iskusstvennie-cvety/): Купить искусственные цветы для оформления.
+- [Кашпо (UA)](https://floren.com.ua/ua/planters/): Купити кашпо для кімнатних рослин.
+- [Горшки (RU)](https://floren.com.ua/planters/): Купить горшки для комнатных растений.
+- [Кашпо Lechuza (UA)](https://floren.com.ua/ua/planters/lechuza/): Купити горщики з автополивом Lechuza.
+- [Горшки Lechuza (RU)](https://floren.com.ua/planters/lechuza/): Купить кашпо Lechuza с автополивом.
+
+## Services / Послуги 
+
+- [Фітодизайн (UA)](https://floren.com.ua/ua/phytodesign/): Озеленення інтер’єрів та фітодизайн. Створення комфортного мікроклімату в робочому просторі.
+- [Фитодизайн (RU)](https://floren.com.ua/phytodesign/): Озеленение интерьеров и фитодизайн.
+- [Пересадка рослин (UA)](https://floren.com.ua/ua/services/peresadka/): Професійна пересадка кімнатних квітів у Києві.
+- [Пересадка растений (RU)](https://floren.com.ua/services/peresadka/): Профессиональная пересадка комнатных растений в Киеве.
+- [Доставка рослин (UA)](https://floren.com.ua/ua/services/shipping/): Швидка доставка кімнатних рослин по Києву.
+- [Доставка растений (RU)](https://floren.com.ua/services/shipping/): Быстрая доставка комнатных растений по Киеву.
+- [Оренда рослин (UA)](https://floren.com.ua/ua/services/arenda_rasteniy/): Оренда кімнатних рослин для подій та офісів.
+- [Аренда растений (RU)](https://floren.com.ua/services/arenda_rasteniy/): Аренда растений для мероприятий и офисов.
+- [Озеленення літніх майданчиків (UA)](https://floren.com.ua/ua/services/ozelenenie_letney_ploschadki/): Комплексне озеленення терас, двориків, кафе.
+- [Озеленение летних площадок (RU)](https://floren.com.ua/services/ozelenenie_letney_ploschadki/): Комплексное озеленение террас, двориков, кафе.
+- [Фітоперегородки (UA)](https://floren.com.ua/ua/services/peregorodki-iz-rasteniy/): Живі перегородки для зонування простору.
+- [Перегородки из растений (RU)](https://floren.com.ua/services/peregorodki-iz-rasteniy/): Живые перегородки для зонирования пространства.
+- [Зелені стіни (UA)](https://floren.com.ua/ua/services/green-wall/): Вертикальні конструкції з живих рослин.
+- [Зеленые стены (RU)](https://floren.com.ua/services/green-wall/): Вертикальные конструкции из живых растений.
+- [Вертикальне озеленення (UA)](https://floren.com.ua/ua/services/vertikalnoe-ozelenenie/): Проєктування і встановлення зелених вертикалей.
+- [Вертикальное озеленение (RU)](https://floren.com.ua/services/vertikalnoe-ozelenenie/): Проектирование и установка вертикальных зеленых стен.
+- [Стабілізований мох (UA)](https://floren.com.ua/ua/services/ozelenenie-stabilizirovannim-mhom/): Оформлення стін стабілізованим мохом.
+- [Стабилизированный мох (RU)](https://floren.com.ua/services/ozelenenie-stabilizirovannim-mhom/): Оформление стен стабилизированным мхом.
+- [Металеві конструкції для озеленення (UA)](https://floren.com.ua/ua/services/vertikalnoe-ozelenenie-metallicheskimi-konstruktsiyami/): Рами та конструкції для вертикального озеленення.
+- [Металлические конструкции для озеленения (RU)](https://floren.com.ua/services/vertikalnoe-ozelenenie-metallicheskimi-konstruktsiyami/): Каркасы и конструкции для вертикального озеленения.
+- [Догляд за кімнатними рослинами (UA)](https://floren.com.ua/ua/services/house_plant_care/): Регулярний догляд за рослинами вдома або в офісі.
+- [Уход за комнатными растениями (RU)](https://floren.com.ua/services/house_plant_care/): Регулярный уход за растениями дома или в офисе.
+
+## Top Products / ТОП товари
+
+### Декоративно-листяні рослини
+
+- [Заміокулькас (UA)](https://floren.com.ua/ua/product/43_zamiokulkas/): Невибаглива рослина з декоративним блискучим листям.
+- [Замиокулькас (RU)](https://floren.com.ua/product/43_zamiokulkas/): Неприхотливое растение с блестящими декоративными листьями.
+- [Грошове дерево (толстянка) (UA)](https://floren.com.ua/ua/product/101_denezhnoe_derevo_tolstyanka/): Символ добробуту з м’ясистим листям.
+- [Денежное дерево (толстянка) (RU)](https://floren.com.ua/product/101_denezhnoe_derevo_tolstyanka/): Символ благополучия с мясистыми листьями.
+- [Аспідістра (UA)](https://floren.com.ua/ua/product/1735_aspidistra/): Тіньолюбива класика для затишного куточка.
+- [Аспидистра (RU)](https://floren.com.ua/product/1735_aspidistra/): Тенелюбивая классика для уютного уголка.
+- [Ховея (UA)](https://floren.com.ua/ua/product/82_hoveya_forstera_howea_forsteriana/): Аристократична пальма для віталень.
+- [Ховея (RU)](https://floren.com.ua/product/82_hoveya_forstera_howea_forsteriana/): Аристократическая пальма для гостиной.
+- [Бамбук (UA)](https://floren.com.ua/ua/product/11_bambuk/): Символ гармонії та сили.
+- [Бамбук (RU)](https://floren.com.ua/product/11_bambuk/): Символ гармонии и силы.
+- [Кавове дерево (UA)](https://floren.com.ua/ua/product/2703_kofeynoe-derevo-kofe/): Компактна рослина, що може квітнути і плодоносити.
+- [Кофейное дерево (RU)](https://floren.com.ua/product/2703_kofeynoe-derevo-kofe/): Компактное растение, которое может цвести и плодоносить.
+- [Мирт (UA)](https://floren.com.ua/ua/product/328_mirt/): Ароматна рослина з легендарною історією.
+- [Мирт (RU)](https://floren.com.ua/product/328_mirt/): Ароматное растение с легендарной историей.
+
+### Фікуси
+- [Фікус Ginseng (UA)](https://floren.com.ua/ua/product/559_fikus_ginseng/): Мініатюрне деревце-бонсай для офісу.
+- [Фикус Ginseng (RU)](https://floren.com.ua/product/559_fikus_ginseng/): Миниатюрное бонсай-деревце для офиса.
+- [Фікус Мікрокарпа Моклама (UA)](https://floren.com.ua/ua/product/1749_fikus-moklame/): Компактне деревце з густим листям.
+- [Фикус Микрокарпа Моклама (RU)](https://floren.com.ua/product/1749_fikus-moklame/): Компактное деревце с густой листвой.
+- [Фікус Ліровидний (UA)](https://floren.com.ua/ua/product/1639_fikus-lirovidniy/): Стильна велика рослина з листям у формі ліри.
+- [Фикус Лировидный (RU)](https://floren.com.ua/product/1639_fikus-lirovidniy/): Стильное крупное растение с листьями в форме лиры.
+- [Фікус Лірата Бамбіно (UA)](https://floren.com.ua/ua/product/1741_fikus-lirata-bambino/): Компактна версія популярного фікуса з великим листям.
+- [Фикус Лирата Бамбино (RU)](https://floren.com.ua/product/1741_fikus-lirata-bambino/): Компактная версия популярного фикуса с крупными листьями.
+- [Фікус Кінкі (UA)](https://floren.com.ua/ua/product/66_fikus_kinky/): Яскрава рослина з хвилястими листками.
+- [Фикус Кинки (RU)](https://floren.com.ua/product/66_fikus_kinky/): Яркое растение с волнистыми листьями.
+
+### Квітучі рослини
+
+- [Спатифілум (UA)](https://floren.com.ua/ua/product/115_spatifillum/): «Жіноче щастя» з білими квітами.
+- [Спатифиллум (RU)](https://floren.com.ua/product/115_spatifillum/): «Женское счастье» с белыми цветами.
+- [Антуріум (UA)](https://floren.com.ua/ua/product/17_anturium_anthurium/): Екзотика з яскравими глянцевими квітами.
+- [Антуриум (RU)](https://floren.com.ua/product/17_anturium_anthurium/): Экзотика с яркими глянцевыми цветами.
+- [Глоксинія (UA)](https://floren.com.ua/ua/product/2009_gloksiniya/): Бархатні квіти в пишному букеті.
+- [Глоксиния (RU)](https://floren.com.ua/product/2009_gloksiniya/): Бархатные цветы в пышном букете.
+- [Олеандр (UA)](https://floren.com.ua/ua/product/2789_oleandr/): Квітучий кущ із середземноморським шармом.
+- [Олеандр (RU)](https://floren.com.ua/product/2789_oleandr/): Цветущий куст со средиземноморским шармом.
+- [Пуансетія (UA)](https://floren.com.ua/ua/product/83_puansettiya/): Різдвяна зірка з яскравим листям.
+- [Пуансеттия (RU)](https://floren.com.ua/product/83_puansettiya/): Рождественская звезда с яркими листьями.
+- [Калла (UA)](https://floren.com.ua/ua/product/2008_kalla/): Витончена квітка для інтер’єру та подарунків.
+- [Калла (RU)](https://floren.com.ua/product/2008_kalla/): Элегантный цветок для интерьера и подарка.
+- [Бегонія квітуча (UA)](https://floren.com.ua/ua/product/8_begoniya_cvetuschaya_begonia/): Ніжні квіти для будь-якого підвіконня.
+- [Бегония цветущая (RU)](https://floren.com.ua/product/8_begoniya_cvetuschaya_begonia/): Нежные цветы для любого подоконника.
+
+### Екзотичні та тропічні рослини
+
+- [Кумкват (UA)](https://floren.com.ua/ua/product/444_kumkvat__kinkan/): Міні-цитрус у горщику — плодоносить навіть вдома.
+- [Кумкват (RU)](https://floren.com.ua/product/444_kumkvat__kinkan/): Мини-цитрус в горшке — плодоносит даже дома.
+- [Цикас (UA)](https://floren.com.ua/ua/product/71_cikas/): Елегантна пальма, що нагадує папороть.
+- [Цикас (RU)](https://floren.com.ua/product/71_cikas/): Элегантная пальма, напоминающая папоротник.
+- [Тіландсія (UA)](https://floren.com.ua/ua/product/2405_tillandsiya/): Рослина без ґрунту — прикраса сучасного простору.
+- [Тилландсия (RU)](https://floren.com.ua/product/2405_tillandsiya/): Растение без грунта — украшение современного пространства.
+
+## Blog / Блог
+
+- [Догляд за каланхое (UA)](https://floren.com.ua/ua/publications/kalanhoe-v-domashnih-usloviyah/): Як вирощувати каланхое в домашніх умовах.
+- [Уход за каланхоэ (RU)](https://floren.com.ua/publications/kalanhoe-v-domashnih-usloviyah/): Как ухаживать за каланхоэ дома.
+- [Особливості догляду за спатіфіллумом (UA)](https://floren.com.ua/ua/publications/spatifillum__osobennosti_uhoda/): Полив, пересадка, освітлення для квітки «жіноче щастя».
+- [Особенности ухода за спатифиллумом (RU)](https://floren.com.ua/publications/spatifillum__osobennosti_uhoda/): Полив, пересадка, освещение для цветка «женское счастье».
+- [Азалія у вашому домі (UA)](https://floren.com.ua/ua/publications/azaliya-v-vashem-dome/): Як доглядати за азалією, щоб вона цвіла щороку.
+- [Азалия в вашем доме (RU)](https://floren.com.ua/publications/azaliya-v-vashem-dome/): Как ухаживать за азалией, чтобы она цвела ежегодно.
+- [Орхідеї: особливості догляду (UA)](https://floren.com.ua/ua/publications/orhidei-osobennosti-uhoda/): Практичні поради для початківців.
+- [Орхидеи: особенности ухода (RU)](https://floren.com.ua/publications/orhidei-osobennosti-uhoda/): Практические советы для новичков.
+- [Догляд за заміокулькасом (UA)](https://floren.com.ua/ua/publications/zamiokulkas/): Вибір місця, полив і пересадка «доларового дерева».
+- [Уход за замиокулькасом (RU)](https://floren.com.ua/publications/zamiokulkas/): Выбор места, полив и пересадка «долларового дерева».
+- [Догляд за фікусом Бенджаміна (UA)](https://floren.com.ua/ua/publications/uhod-za-fikusom-bendzhamina-v-domashnih-usloviyah/): Як поливати, підстригати та пересаджувати.
+- [Уход за фикусом Бенджамина (RU)](https://floren.com.ua/publications/uhod-za-fikusom-bendzhamina-v-domashnih-usloviyah/): Как поливать, подстригать и пересаживать.
+- [Юкка: посадка, догляд і розміщення (UA)](https://floren.com.ua/ua/publications/yukka-uhod-posadka-razmeschenie/): Умови вирощування юкки в квартирі.
+- [Юкка: посадка, уход и размещение (RU)](https://floren.com.ua/publications/yukka-uhod-posadka-razmeschenie/): Условия выращивания юкки в квартире.
+- [Гібіскус: догляд у домашніх умовах (UA)](https://floren.com.ua/ua/publications/gibiskus--uhod-v-domashnih-usloviyah/): Полив, пересадка, температурний режим.
+- [Гибискус: уход в домашних условиях (RU)](https://floren.com.ua/publications/gibiskus--uhod-v-domashnih-usloviyah/): Полив, пересадка, температурный режим.
+- [Дифенбахія: як доглядати за рослиною (UA)](https://floren.com.ua/ua/publications/diffenbahiya--kak-uhazhivat-za-rasteniem/): Все про освітлення, полив і пересадку.
+- [Диффенбахия: как ухаживать за растением (RU)](https://floren.com.ua/publications/diffenbahiya--kak-uhazhivat-za-rasteniem/): Всё об освещении, поливе и пересадке.
+- [10 кімнатних рослин для спальні (UA)](https://floren.com.ua/ua/publications/10-komnatnih-rasteniy-dlya-spalni/): Найкращі рослини для вашого місця відпочинку.
+- [10 комнатных растений для спальни (RU)](https://floren.com.ua/publications/10-komnatnih-rasteniy-dlya-spalni/): Лучшие растения для зоны отдыха и сна.
+- [Грошове дерево (крассула): особливості і догляд (UA)](https://floren.com.ua/ua/publications/denezhnoe-derevo-krassula-osobennosti-i-uhod/): Як ростити крассулу вдома.
+- [Денежное дерево (крассула): особенности и уход (RU)](https://floren.com.ua/publications/denezhnoe-derevo-krassula-osobennosti-i-uhod/): Как выращивать крассулу в домашних условиях.
+- [Заміокулькас хворіє: що робити? (UA)](https://floren.com.ua/ua/publications/zamiokulkas-boleet-chto-delat/): Найпоширеніші проблеми і як їх уникнути.
+- [Замиокулькас болеет: что делать? (RU)](https://floren.com.ua/publications/zamiokulkas-boleet-chto-delat/): Наиболее частые проблемы и как их избежать.
+- [Арека: догляд за пальмою (UA)](https://floren.com.ua/ua/publications/areka/): Світло, вологість і особливості вирощування.
+- [Арека: уход за пальмой (RU)](https://floren.com.ua/publications/areka/): Свет, влажность и особенности выращивания.
+- [Як обрізати і розмножити драцену (UA)](https://floren.com.ua/ua/publications/kak-obrezat-i-razmnozhit-dracenu/): Покрокова інструкція з фото.
+- [Как обрезать и размножить драцену (RU)](https://floren.com.ua/publications/kak-obrezat-i-razmnozhit-dracenu/): Пошаговая инструкция с фото.
+- [ТОП кімнатних рослин для сонячної сторони (UA)](https://floren.com.ua/ua/publications/top-komnatnih-rasteniy-dlya-solnechnoy-storoni/): Які рослини найкраще витримують пряме сонце.
+- [ТОП комнатных растений для солнечной стороны (RU)](https://floren.com.ua/publications/top-komnatnih-rasteniy-dlya-solnechnoy-storoni/): Какие растения лучше всего переносят прямое солнце.

@@ -14,6 +14,7 @@ RewriteRule (.*)/page1/ /$1 [L]
 #RewriteRule ^(.*[^/])$ https://%{HTTP_HOST}/$1/ [L,R=301]
 
 SetEnvIf Request_URI ^/planters/(lamela-old/|elho-old/|ceramic-old/|beton-old/|wood-planters-old/) require_auth=true
+#SetEnv site_locked true
 AuthUserFile /home/floren/floren.com.ua/n/.htpasswd
 AuthName "Password Protected"
 AuthType Basic
@@ -23,12 +24,13 @@ Deny from all
 Satisfy any
 Require valid-user
 Allow from env=!require_auth
+#Allow from env=!site_locked
 
 
 RewriteRule ^plants/?([^/].*)?$ komnatnie-rasteniya/$1 [L,R=301]
 
 
-RewriteCond %{REQUEST_URI} !^/(del_img\.php|404\.php|exec/|stock/|report/|templates/|admin/|images/|bsk/|assets/|img/|files/|css/|.json|js/|robots\.txt|database\.php|favicon_\.ico|index\.php|seoshield-client)(.*)
+RewriteCond %{REQUEST_URI} !^/(del_img\.php|404\.php|exec/|stock/|report/|crm/|templates/|admin/|images/|api/|assets/|img/|files/|css/|.json|js/|robots\.txt|database\.php|favicon_\.ico|index\.php|seoshield-client)(.*)
 RewriteRule ^(.+)$ /index.php [NC]
 
 DirectoryIndex index.php

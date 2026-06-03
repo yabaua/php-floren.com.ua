@@ -1,10 +1,14 @@
 /* empty css      */
 import { i as initIntlTelInput } from "./_shoelace.js";
 import { i as initEvents } from "./_events.js";
-import { i as initScroll } from "./_scroll2.js";
+// import { i as initScroll } from "./_scroll2.js";
 import { i as initCatalog } from "./_catalog.js";
 import { i as initClickOutsideHandlers } from "./_clickOutside.js";
 import { i as initExpandableText } from "./_expandableText.js";
+import { Q as QuantityCounter } from "./_quantityCounter.js";
+import { i as initCart } from "./_cart.js";
+import { s as submitForm } from "./_forms.js";
+import "./fetchApi.js";
 function isObject$1(obj) {
   return obj !== null && typeof obj === "object" && "constructor" in obj && obj.constructor === Object;
 }
@@ -5385,6 +5389,7 @@ const config = {
     modules: [Pagination, Navigation, Autoplay],
     spaceBetween: 24,
     loop: true,
+    autoHeight: true,
     autoplay: {
       delay: 5e3,
       pauseOnMouseEnter: true
@@ -5401,8 +5406,16 @@ const config = {
   "services-swiper": {
     modules: [Navigation],
     spaceBetween: 24,
-    slidesPerView: 3,
+    slidesPerView: 1,
     loop: true,
+    breakpoints: {
+      992: {
+        slidesPerView: 2
+      },
+      1200: {
+        slidesPerView: 3
+      }
+    },
     navigation: {
       nextEl: ".services-swiper .swiper-button--next",
       prevEl: ".services-swiper .swiper-button--prev"
@@ -5411,8 +5424,16 @@ const config = {
   "works-swiper": {
     modules: [Navigation],
     spaceBetween: 24,
-    slidesPerView: 5,
+    slidesPerView: 'auto',    
     loop: true,
+    breakpoints: {
+      768: {
+        slidesPerView: 3
+      },
+      1200: {
+        slidesPerView: 5
+      }
+    },
     navigation: {
       nextEl: ".works-swiper .swiper-button--next",
       prevEl: ".works-swiper .swiper-button--prev"
@@ -5421,18 +5442,52 @@ const config = {
   "clients-swiper": {
     modules: [Navigation],
     spaceBetween: 0,
-    slidesPerView: 5,
+    slidesPerView: 'auto',
     loop: true,
+    breakpoints: {
+      768: {
+        slidesPerView: 3
+      },
+      992: {
+        slidesPerView: 5
+      }
+    },
     navigation: {
       nextEl: ".clients-swiper .swiper-button--next",
       prevEl: ".clients-swiper .swiper-button--prev"
     }
   },
+  "recomends-swiper": {
+    modules: [Navigation],
+    spaceBetween: 0,
+    slidesPerView: 2,
+    loop: true,
+    breakpoints: {
+      768: {
+        slidesPerView: 3
+      },
+      992: {
+        slidesPerView: 5
+      }
+    },
+    navigation: {
+      nextEl: ".recomends-swiper .swiper-button--next",
+      prevEl: ".recomends-swiper .swiper-button--prev"
+    }
+  },
   "popular-swiper": {
     modules: [Navigation],
     spaceBetween: 0,
-    slidesPerView: 5,
+    slidesPerView: 2,
     loop: true,
+    breakpoints: {
+      768: {
+        slidesPerView: 3
+      },
+      992: {
+        slidesPerView: 5
+      }
+    },
     navigation: {
       nextEl: ".popular-swiper .swiper-button--next",
       prevEl: ".popular-swiper .swiper-button--prev"
@@ -5472,40 +5527,34 @@ const initSwipers = () => {
     new Swiper(el, swiperConfig);
   });
   if (document.getElementById("main-photo-viewer")) {
-    window.swipers.thumbsSwiper = new Swiper(
-      ".swiper.photo-viewer__thumbs-swiper",
-      {
-        modules: [Manipulation],
-        loop: true,
-        spaceBetween: 16,
-        slidesPerView: "auto",
-        freeMode: true,
-        watchSlidesProgress: true
-      }
-    );
-    window.swipers.mainSwiper = new Swiper(
-      ".swiper.photo-viewer__main-swiper",
-      {
-        modules: [Navigation, Thumb, Pagination, Manipulation],
-        loop: true,
-        spaceBetween: 10,
-        navigation: {
-          nextEl: ".photo-viewer__button-next",
-          prevEl: ".photo-viewer__button-prev"
-        },
-        pagination: {
-          el: ".photo-viewer__pagination",
-          type: "custom",
-          // formatFractionCurrent: (number) => `aaa0${number}`,
-          renderCustom: function(swiper, current, total) {
-            return `Фото ${current} з ${total}`;
-          }
-        },
-        thumbs: {
-          swiper: window.swipers.thumbsSwiper
+    window.swipers.thumbsSwiper = new Swiper(".swiper.photo-viewer__thumbs-swiper", {
+      modules: [Manipulation],
+      loop: true,
+      spaceBetween: 16,
+      slidesPerView: "auto",
+      freeMode: true,
+      watchSlidesProgress: true
+    });
+    window.swipers.mainSwiper = new Swiper(".swiper.photo-viewer__main-swiper", {
+      modules: [Navigation, Thumb, Pagination, Manipulation],
+      loop: true,
+      spaceBetween: 10,
+      navigation: {
+        nextEl: ".photo-viewer__button-next",
+        prevEl: ".photo-viewer__button-prev"
+      },
+      pagination: {
+        el: ".photo-viewer__pagination",
+        type: "custom",
+        // formatFractionCurrent: (number) => `aaa0${number}`,
+        renderCustom: function(swiper, current, total) {
+          return `Фото ${current} з ${total}`;
         }
+      },
+      thumbs: {
+        swiper: window.swipers.thumbsSwiper
       }
-    );
+    });
     window.swipers.mainSwiper.on("slideChange", () => {
       window.youtubePlayers.forEach((player) => {
         if (player.stopVideo) {
@@ -5541,7 +5590,7 @@ const initHoverPhotoViewers = () => {
         mainimage.src = img.src;
       });
     });
-    thumbsBox.addEventListener("click", (e) => {
+    thumbsBox?.addEventListener("click", (e) => {
       const li = e.target.closest("li");
       let activeIndex = 0;
       let prev = li;
@@ -5559,9 +5608,7 @@ const initHoverPhotoViewers = () => {
         src: thumb.querySelector("img")?.src || thumb.querySelector("[data-video-src]")?.dataset.videoSrc,
         type: thumb.querySelector("img") ? "image" : "video"
       }));
-      const activeIndex = Array.from(thumbs).findIndex(
-        (thumb) => thumb.classList.contains("active")
-      );
+      const activeIndex = Array.from(thumbs).findIndex((thumb) => thumb.classList.contains("active"));
       activatePhotoViewer(images, activeIndex);
     });
   });
@@ -5609,22 +5656,64 @@ function activatePhotoViewer(images, index = 0) {
     window.youtubePlayers.push(player);
   });
 }
+const initLastworkViewers = () => {
+  document.querySelectorAll("[data-lastwork-viewer]").forEach((viewer) => {
+    const thumbsBox = viewer.querySelector(".swiper-wrapper");
+    const thumbs = viewer.querySelectorAll(".swiper-wrapper .swiper-slide");
+    thumbsBox?.addEventListener("click", (e) => {
+      const li = e.target.closest(".swiper-slide");
+      let activeIndex = 0;
+      let prev = li;
+      while (prev = prev.previousElementSibling) {
+        activeIndex++;
+      }
+      const images = Array.from(thumbs).map((thumb) => ({
+        src: thumb.querySelector("img")?.src || thumb.querySelector("[data-video-src]")?.dataset.videoSrc,
+        type: thumb.querySelector("img") ? "image" : "video"
+      }));
+      activatePhotoViewer(images, activeIndex);
+    });
+  });
+};
+const initPortfolioViewers = () => {
+  document.querySelectorAll("[data-portfolio-viewer]").forEach((viewer) => {
+    const thumbs = viewer.querySelectorAll("img");
+    thumbs.forEach((thumb) => {
+      thumb.addEventListener("click", (e) => {
+        const activeIndex = Array.from(thumbs).indexOf(thumb);
+        console.log("thumb", thumb);
+        const images = Array.from(thumbs).map((thumb2) => ({
+          src: thumb2?.src,
+          type: "image"
+        }));
+        activatePhotoViewer(images, activeIndex);
+      });
+    });
+  });
+};
 window.youtubePlayers = [];
+window.submitForm = submitForm;
 function startApp() {
   initEvents();
-  initScroll();
+  // initScroll();
   initCatalog();
   initClickOutsideHandlers();
   initSwipers();
   initExpandableText();
   initHoverPhotoViewers();
+  initLastworkViewers();
+  initPortfolioViewers();
   initIntlTelInput();
+  initCart();
+  customElements.define("quantity-counter", QuantityCounter);
 }
 const generateRandomId = (length = 10) => {
   return Math.random().toString(36).substring(2, 2 + length);
 };
 document.addEventListener("DOMContentLoaded", () => {
+  console.log('DOMContentLoaded');  
   startApp();
+  document.body.classList.add('loaded');
 });
 export {
   Autoplay as A,

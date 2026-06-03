@@ -1,3 +1,7 @@
+.vscode
+.idea
+.fleet
+.DS_Store
 # Nuxt dev/build outputs
 .output
 .data
@@ -26,3 +30,19 @@ logs
 # Docs
 /docs
 /smarty5/templates_c/*
+.DS_Store
+/images
+templates/.DS_Store
+templates/.DS_Store
+smarty5/.DS_Store
+smarty5/.DS_Store
+smarty5/.DS_Store
+templates/.DS_Store
+templates/.DS_Store
+/seoshield-client
+/images
+/images
+/images
+/images/goods
+/images/goods/s
+/crm

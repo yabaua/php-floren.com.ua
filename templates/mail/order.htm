@@ -1,0 +1,335 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+{literal}
+<style type="text/css">
+<!--
+body, td, div, p {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+a  {
+	text-decoration: underline;
+	color: #248252;
+}
+a:hover {
+	color: #248252; text-decoration: none;
+}
+
+table{
+	border-top: 1px solid #CCCCCC;
+	border-left: 1px solid #CCCCCC;
+}
+table td, table th
+{
+	padding:2px;
+	border-bottom: 1px solid #CCCCCC;
+	border-right: 1px solid #CCCCCC;
+}
+-->
+</style>
+{/literal}
+</head>
+<body bgcolor="#FFFFFF" text="#434342" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<br><br>
+<h4>Новый заказ</h4>
+
+<table align="center" width="600" cellspacing="0" border="0">
+	<tr>
+		<th>Название</th>
+		<th>Характеристики</th>
+		<th>Цена товара</th>
+		<th style="text-align:center">Кол<br />во</th>
+		<th>Итого</th>
+	</tr>
+{foreach item=B from=$BASKET}
+
+	<tr bgcolor="{cycle values="#FFFFFF,#f0f8f2"}">
+		<td><a href="https://floren.com.ua{$B.href}" target="_blank">{$B.name} {$B.name_alter}</a></td>
+		<td class="producer">
+
+			{if $B.color}Цвет: {$B.color_name_ru}, {$B.color}, <br/>{/if}
+			{if $B.dia}Диаметр: {$B.dia}, <br/>{/if}
+			{if $B.wdt}Ширина: {$B.wdt}, <br/>{/if}
+			{if $B.depth}Глубина: {$B.depth}, <br/>{/if}
+			{if $B.hgt}Высота: {$B.hgt}{/if}
+			{if $B.measure_qt}{$B.mg_name_ru}: {$B.measure_qt} {$B.unit}{/if}
+		
+		</td>
+		<td align="center" nowrap>{$B.price}</td>
+		<td align="center">х{$B.cnt}</td>
+		<td><b>{$B.sttl} грн</b></td>
+	</tr>
+{/foreach}
+
+{if $POST.peresadka}
+
+	<tr>
+		<td colspan="4" align="right"><b>Услуга пересадки:</b></td>
+		<td><b>{$POST.peresadka}</b></td>
+	</tr>
+
+{/if}
+
+	<tr>
+		<td colspan="4" align="right"><b>Сумма заказа:</b></td>
+		<td><b>{$POST.basket_totalprice}</b></td>
+	</tr>
+	<tr>
+		<td colspan="4" align="right"><b>Сумма доставки:</b></td>
+		<td><b>{$POST.cost_delivery}</b></td>
+	</tr>
+	<tr>
+		<td colspan="4" align="right"><b>К оплате:</b></td>
+		<td><b>{$POST.to_pay}</b></td>
+	</tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p align="center"><b>Контактные данные</b></p>
+
+<table align="center" cellspacing="0" class="chuvak_details">
+	<tr valign="top">
+		<td width="150">Контактное лицо:</td>
+		<td>{$POST.fio}</td>
+	</tr>
+	<tr valign="top">
+		<td>Телефон:</td>
+		<td>{$POST.phone}</td>
+	</tr>
+	<tr valign="top">
+		<td>Email:</td>
+		<td>{$POST.email}</td>
+	</tr>
+
+	
+
+</table>
+
+
+<p align="center"><b>Данные получателя</b></p>
+
+<table align="center" cellspacing="0" class="chuvak_details">
+
+	{if $POST.recipient}
+		<tr valign="top">
+			<td>Получатель заказа:</td>
+			<td>Я получатель</td>
+		</tr>
+	{else}
+		<tr valign="top">
+			<td>ФИО получателя</td>
+			<td>{$POST.r_fio}</td>
+		</tr>
+
+		<tr valign="top">
+			<td>Телефон получателя</td>
+			<td>{$POST.r_phone}</td>
+		</tr>
+	{/if}
+	
+</table>
+
+
+<p align="center"><b>Способ доставки</b></p>
+
+<table align="center" cellspacing="0" class="chuvak_details">
+
+	{if $POST.delivery_way == "Самовывоз из магазина"}
+
+		<tr valign="top">
+			<td>Способ доставки:</td>
+			<td>{$POST.delivery_way}</td>
+		</tr>
+
+		<tr valign="top">
+			<td>Дата самовывоза:</td>
+			<td>{$POST.picup_date}</td>
+		</tr>
+
+		<tr valign="top">
+			<td>Время самовывоза:</td>
+			<td>{$POST.picup_time}</td>
+		</tr>
+
+		<tr valign="top">
+			<td>Адрес самовывоза:</td>
+			{if $POST.picup_addr == "m1"}
+				<td>пр. Победы, 70</td>
+			{else}
+				<td>ул. Анны Ахматовой, 30</td>
+			{/if}
+		</tr>
+
+	{/if}
+
+	{if $POST.delivery_way == "Доставка Новой Почтой"}
+
+		<tr valign="top">
+			<td>Способ доставки:</td>
+			<td>{$POST.delivery_way}</td>
+		</tr>
+
+		<tr valign="top">
+			<td>Город:</td>
+			<td>{$POST.np_city}</td>
+		</tr>
+
+		<tr valign="top">
+			<td>Номер отделения:</td>
+			<td>{$POST.np_number}</td>
+		</tr>
+		
+	{/if}
+
+	{if $POST.delivery_way == "Доставка курьером"}
+
+		<tr valign="top">
+			<td>Способ доставки:</td>
+			<td>{$POST.delivery_way}</td>
+		</tr>
+
+		<tr valign="top">
+			<td>Город:</td>
+			<td>{$POST.courier_city}</td>
+		</tr>
+
+		{if $POST.courier_anonym}
+
+		<tr valign="top">
+			<td>Дополнительная опция доставки:</td>
+			<td>{$POST.courier_anonym}</td>
+		</tr>
+
+		{/if}
+
+
+		{if !$POST.courier_date}
+
+		<tr valign="top">
+			<td>Дата доставки:</td>
+			<td>не указано</td>
+		</tr>
+
+		{else}
+
+		<tr valign="top">
+			<td>Дата доставки:</td>
+			<td>{$POST.courier_date}</td>
+		</tr>
+
+		{/if}
+
+		{if $POST.courier_time}
+			<tr valign="top">
+				<td>Время доставки:</td>
+				<td>
+					{if $POST.courier_time == 'late'}
+						Поздняя доставка (оплачивается дополнительно)
+					{elseif $POST.courier_time == 'early'}
+						Ранняя доставка (оплачивается дополнительно)
+					{else}
+						{$POST.courier_time}
+					{/if}
+					
+				</td>
+			</tr>
+		{/if}
+
+		{if $POST.courier_fast}
+			<tr valign="top">
+				<td>Тип доставки:</td>
+				<td>{$POST.courier_fast}</td>
+			</tr>
+		{/if}
+
+		{if $POST.courier_exact}
+
+			<tr valign="top">
+				<td>Тип доставки:</td>
+				<td>{$POST.courier_exact}</td>
+			</tr>
+
+			<tr valign="top">
+				<td>Время доставки: часы</td>
+				<td>{$POST.courier_hour}</td>
+			</tr>
+
+			<tr valign="top">
+				<td>Время доставки: минуты</td>
+				<td>{$POST.courier_min}</td>
+			</tr>
+
+		{/if}
+
+		<tr valign="top">
+			<td>Адрес доставки:</td>
+			<td>{$POST.courier_address}</td>
+		</tr>
+
+		<tr valign="top">
+			<td>Номер дома:</td>
+			<td>{$POST.courier_dom}</td>
+		</tr>
+
+		<tr valign="top">
+			<td>Номер квартиры:</td>
+			<td>{$POST.courier_flat}</td>
+		</tr>
+		
+		
+		<tr valign="top">
+			<td>Наличие лифта:</td>
+			<td>{if $POST.courier_elevator}{$POST.courier_elevator}{else} — {/if}</td>
+		</tr>
+
+	{/if}
+
+	{if !$POST.delivery_way}
+			<tr valign="top">
+				<td>Тип доставки:</td>
+				<td>не выбрано</td>
+			</tr>
+	{/if}
+</table>
+
+<p align="center"><b>Способ оплаты</b></p>
+
+<table align="center" cellspacing="0" class="chuvak_details">
+	<tr valign="top">
+		<td>Тип оплаты:</td>
+		<td>{if $POST.payment_way == 'bank'}Картой на сайте VISA / Mastercard{elseif $POST.payment_way == 'beznal'}Безналичный расчет для юридических лиц{else}{$POST.payment_way}{/if}</td>
+	</tr>
+</table>
+
+<p align="center"><b>Дополнительно</b></p>
+
+<table align="center" cellspacing="0" class="chuvak_details">
+		<tr valign="top">
+			<td>Дополнительная консультация:</td>
+			<td>{if $POST.additional_consulting}{$POST.additional_consulting}{else}не заполнено{/if}</td>
+		</tr>
+
+		<tr valign="top">
+			<td>Комментарий к заказу:</td>
+			<td>{if $POST.comment}{$POST.comment}{else}не заполнено{/if}</td>
+		</tr>
+</table>
+
+
+
+<hr>
+Откуда пришел: {$HTTP_REFERER}
+<hr>
+
+IP: <a href="http://www.db.ripe.net/whois?form_type=simple&full_query_string=&searchtext={$SERVER.REMOTE_ADDR}&submit.x=10&submit.y=8&submit=Search">{$SERVER.REMOTE_ADDR}</a><br>
+{if $IP2}IP2: <a href="http://www.db.ripe.net/whois?form_type=simple&full_query_string=&searchtext={$IP2}&submit.x=10&submit.y=8&submit=Search">{$IP2}</a>{/if}
+
+<br><hr>
+
+
+<div align="right"><a href="http://www.floren.com.ua/admin/mod_users.php?action=delete&ID={$ID}&md5={$MD5_DEL}" target="_blank">Удалить пользователя</a></div>
+</body>
+</html>
