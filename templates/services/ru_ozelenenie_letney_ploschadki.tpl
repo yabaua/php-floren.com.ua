@@ -11,7 +11,7 @@
     <h3>Подобрать комнатные растения в квартиру</h3>
     <button class="button button--primary button--pill">Подобрать</button>
     <p>Также обращайтесь по телефону:</p>
-    <div class="homepage__advices_content--phones">
+    <div class="homepage__advices_content--phones binct-phone-number-2">
       <div class="phones--hidden">
         (044) 344..<button data-event="click" data-callback="toggleAdvicesPhones">
           показать номера

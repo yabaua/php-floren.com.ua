@@ -17,7 +17,7 @@
 
 <p>Или звоните нам:</p>
 
-<div class="homepage__advices_content--phones">
+<div class="homepage__advices_content--phones binct-phone-number-2">
 <div class="phones--hidden">
 <p>(044) 344-28-95</p>
 

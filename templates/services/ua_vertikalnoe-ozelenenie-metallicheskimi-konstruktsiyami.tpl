@@ -10,7 +10,7 @@
     <h3>Замовити озеленення приміщення</h3>
     <button class="button button--primary button--pill">Підібрати</button>
     <p>Також звертайтеся за телефоном:</p>
-    <div class="homepage__advices_content--phones">
+    <div class="homepage__advices_content--phones binct-phone-number-2">
       <div class="phones--hidden">
         (044) 344..<button data-event="click" data-callback="toggleAdvicesPhones">
           показати номери

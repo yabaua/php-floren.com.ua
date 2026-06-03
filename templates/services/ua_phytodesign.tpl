@@ -16,7 +16,7 @@
               <h3>Розрахувати вартість фітодизайну</h3>
               <button class="button button--primary button--pill">Розрахувати</button>
               <p>Також звертайтеся за телефоном:</p>
-              <div class="homepage__advices_content--phones">
+              <div class="homepage__advices_content--phones binct-phone-number-2">
                 <div class="phones--hidden binct-phone-number-2">
                   (044) 344..<button data-event="click" data-callback="toggleAdvicesPhones">показати номери</button>
                 </div>
