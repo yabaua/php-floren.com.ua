@@ -1379,7 +1379,7 @@ if(!strstr(@$_SERVER['HTTP_FROM'], 'bingbot')){
                           <!-- Breadcrumbs -->
                <div class="catalog-page__breadcrumbs">
                 <div class="catalog-page__breadcrumbs-scroll">
-                  <sl-breadcrumb itemscope itemtype="http://schema.org/BreadcrumbList">
+                  <sl-breadcrumb itemscope itemtype="https://schema.org/BreadcrumbList">
                                       </sl-breadcrumb>                  
                 </div>
                 <button class="button catalog-page__breadcrumbs-button" data-event="click" data-callback="openModal"

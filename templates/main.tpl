@@ -895,26 +895,32 @@
               <!-- Breadcrumbs -->
                <div class="catalog-page__breadcrumbs">
                 <div class="catalog-page__breadcrumbs-scroll">
-                  <sl-breadcrumb itemscope itemtype="http://schema.org/BreadcrumbList">
+                  <sl-breadcrumb itemscope itemtype="https://schema.org/BreadcrumbList">
                     {foreach item=H name=H from=$HLEB}
 	                    {if $smarty.foreach.H.iteration==1}
 	                    
-	                    <sl-breadcrumb-item href="{if $LANGURL=='/ua'}/{else}/ru/{/if}" itemprop="item" itemscope itemprop="itemListElement"
-	                      itemtype="http://schema.org/ListItem">
+	                    <sl-breadcrumb-item href="{if $LANGURL=='/ua'}/{else}/ru/{/if}" itemprop="itemListElement" itemscope
+	                      itemtype="https://schema.org/ListItem">
+	                      <link itemprop="item" href="{if $LANGURL=='/ua'}/{else}/ru/{/if}">
 	                      <span itemprop="name">{$LINGVO.main_page}</span>
+	                      <meta itemprop="position" content="1">
 	                    </sl-breadcrumb-item>
 	                    
 	                    {elseif $H.link!=''}{** not last item **}
-	                    <sl-breadcrumb-item href="{$LANGURL}{$H.link}" itemprop="item">
+	                    <sl-breadcrumb-item href="{$LANGURL}{$H.link}" itemprop="itemListElement" itemscope
+	                      itemtype="https://schema.org/ListItem">
+	                      <link itemprop="item" href="{$LANGURL}{$H.link}">
 	                      <span itemprop="name">{$H.name}</span>
+	                      <meta itemprop="position" content="{$smarty.foreach.H.iteration}">
 	                    </sl-breadcrumb-item>
-	                    <meta itemprop="position" content="{$smarty.foreach.H.iteration}">
 	                    
 	                    {else}{** last item without arrows **}
-	                    <sl-breadcrumb-item href="{$smarty.server.REQUEST_URI}" itemprop="item">
+	                    <sl-breadcrumb-item href="{$smarty.server.REQUEST_URI}" itemprop="itemListElement" itemscope
+	                      itemtype="https://schema.org/ListItem">
+	                      <link itemprop="item" href="{$smarty.server.REQUEST_URI}">
 	                      <span itemprop="name">{$H.name}</span>
+	                      <meta itemprop="position" content="{$smarty.foreach.H.iteration}">
 	                    </sl-breadcrumb-item>
-	                    <meta itemprop="position" content="{$smarty.foreach.H.iteration}">
 	                    {/if}
                     {/foreach}
                   </sl-breadcrumb>                  
