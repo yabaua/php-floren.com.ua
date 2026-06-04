@@ -1,4 +1,5 @@
-<?
+<?php
+error_reporting(E_ALL);
 //================
 //================
 
@@ -9,19 +10,7 @@
 header('Content-Type: application/json;charset=utf-8');
 header('Accept: application/json');
 
-	$DB_HOST="floren.mysql.ukraine.com.ua";
-	$DB_CHARSET='UTF8';
-	// main base
-	$DB_USER='floren_utf2025';
-	$DB_PASS='i4d4XB48bV';
-	$DB_NAME='floren_utf2025';
-
-require("../include/db_mysql.php");
-
-$db=new DB2();
-$db->connect();
-
-
+require("../database.php");
 
 $postData = file_get_contents('php://input');
 $income_data = json_decode($postData, true);
@@ -29,7 +18,7 @@ $income_data = json_decode($postData, true);
 //	print_r($income_data);
 // =============GET DATA FROM CRM============
 		$url = 'https://api.keepincrm.com/v1/agreements/'.$income_data['id'];
-//	$url = 'https://api.keepincrm.com/v1/agreements/31039726';
+//	$url = 'https://api.keepincrm.com/v1/agreements/33122661';
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, [
 	    'accept: application/json',
@@ -79,21 +68,21 @@ $crmOrderTitle=$data->title;
 $crmOrderFunnel=$data->funnel->id;
 $crmOrderResult=$data->result;
 $crmOrderStage=$data->stage->name;
-$crmResultStatus=$data->archive_status->name;
-$crmOrderTotal=$data->total;
-$crmOrderPaid=$data->paid;
-$crmOrderToPay=$data->credit;
-$crmOrderPayWay=$custom_fields_tip_oplaty;
+$crmResultStatus=$data->archive_status->name	 ?? '';
+$crmOrderTotal=$data->total	 ?? '';
+$crmOrderPaid=$data->paid	 ?? '';
+$crmOrderToPay=$data->credit	 ?? '';
+$crmOrderPayWay=$custom_fields_tip_oplaty	 ?? '';
 $crmOrderDate=date("U",strtotime($data->created_at));
-$crmMainResponsibleID=$data->main_responsible->id;
-$crmOrderSource=$data->source->name;
-$utm_source=$custom_fields_utm_source;
-$utm_medium=$custom_fields_utm_medium;
-$utm_campaign=mb_strtolower($custom_fields_utm_campaign, 'UTF-8');
-$deliveryWay=$custom_fields_deliveryWay;
-$deliveryDate=$custom_fields_deliveryDate;
-$address = $custom_fields_address;
-$ttn=$last_ttn;
+$crmMainResponsibleID=$data->main_responsible->id	 ?? '';
+$crmOrderSource=$data->source->name	 ?? '';
+$utm_source=$custom_fields_utm_source	 ?? '';
+$utm_medium=$custom_fields_utm_medium	 ?? '';
+$utm_campaign=mb_strtolower($custom_fields_utm_campaign	 ?? '', 'UTF-8');
+$deliveryWay=$custom_fields_deliveryWay	 ?? '';
+$deliveryDate=$custom_fields_deliveryDate	 ?? '';
+$address = $custom_fields_address	 ?? '';
+$ttn=$last_ttn	 ?? '';
 
 //$SQLstr=$crmID."=>".$total."=>".$result."=>".$stage_name."=>".$stage_id."=>".$status_name."=>".$status_id."<=";
 //$jsondata=var_dump($data);
@@ -125,6 +114,7 @@ if($db->num_rows()){
 			WHERE keepInCrmID='".$crmID."'";
 		//	echo $query;
 			$db->query($query);
+			echo "Floren Updated Agreements:". $db->affected_rows(); ;
 			//mail('info@floren.com.ua','order'.$order_id,$query);
 }
 

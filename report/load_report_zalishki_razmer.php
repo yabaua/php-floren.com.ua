@@ -1,32 +1,7 @@
 <?
 
 //header("content-type: text/html;charset=utf-8 \r\n");
-
-
-
-
-	$DB_HOST="floren.mysql.ukraine.com.ua";
-	$DB_CHARSET='utf8';
-	// main base
-	$DB_USER='floren_utf2025';
-	$DB_PASS='i4d4XB48bV';
-	$DB_NAME='floren_utf2025';
-
-$link = mysql_connect($DB_HOST,$DB_USER,$DB_PASS);
-if (!$link) {
-    die('Не удалось соединиться : ' . mysql_error());
-}
-
-// выбираем foo в качестве текущей базы данных
-$db_selected = mysql_select_db($DB_NAME, $link);
-if (!$db_selected) {
-    die ('Не удалось выбрать базу foo: ' . mysql_error());
-}
-mysql_set_charset($DB_CHARSET, $link);
-echo mysql_error();
-
-
-
+require('../database.php');
 
     libxml_use_internal_errors(true);
 
@@ -102,14 +77,14 @@ echo mysql_error();
                     $sql_depth=0;
                 }
                 $query1="UPDATE goods_1c SET _dia='".$sql_dia."', _wdt='".$sql_wdt."', _hgt='".$sql_hgt."', _depth='".$sql_depth."' WHERE barcode='".$v['barcode']."'";
-                mysql_query($query1);
+                $db->query($query1);
                 
                 $sql_insert_data='';
-                $qr=mysql_query("SELECT * FROM goods_forms2_1c WHERE barcode='".$v['barcode']."'");
-                while($rs=mysql_fetch_array($qr)){
+                $db->query("SELECT * FROM goods_forms2_1c WHERE barcode='".$v['barcode']."'");
+                while($rs=$db->fetch()){
                     $query2="UPDATE goods_forms SET dia='".$sql_dia."', wdt='".$sql_wdt."', hgt='".$sql_hgt."', depth='".$sql_depth."' WHERE ID='".$rs['fID']."'";
                     //echo $query2."<br />";
-                    mysql_query($query2);
+                    $db->query($query2 ,1);
                 }
                 
            //     
@@ -122,5 +97,5 @@ echo mysql_error();
         echo '<p class="err">Файл з товарами не знайдено. Дані не оновлено.</p>';
     }
 
-mysql_close($link);
+
 ?>

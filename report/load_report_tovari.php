@@ -2,31 +2,7 @@
 
 //header("content-type: text/html;charset=utf-8 \r\n");
 
-
-
-
-	$DB_HOST="floren.mysql.ukraine.com.ua";
-	$DB_CHARSET='utf8';
-	// main base
-	$DB_USER='floren_utf2025';
-	$DB_PASS='i4d4XB48bV';
-	$DB_NAME='floren_utf2025';
-
-$link = mysql_connect($DB_HOST,$DB_USER,$DB_PASS);
-if (!$link) {
-    die('Не удалось соединиться : ' . mysql_error());
-}
-
-// выбираем foo в качестве текущей базы данных
-$db_selected = mysql_select_db($DB_NAME, $link);
-if (!$db_selected) {
-    die ('Не удалось выбрать базу foo: ' . mysql_error());
-}
-mysql_set_charset($DB_CHARSET, $link);
-echo mysql_error();
-
-
-
+require('../database.php');
 
     libxml_use_internal_errors(true);
 
@@ -79,7 +55,7 @@ echo mysql_error();
 
     if (count($data_from_1c) > 0) {
         $cnt_goods=0;
-        mysql_query("TRUNCATE goods_1c_class");
+        $db->query("TRUNCATE goods_1c_class");
 
         foreach($data_from_1c AS $k=>$v){
           //  if (strlen($v['barcode']) != 13) continue;
@@ -87,11 +63,11 @@ echo mysql_error();
                 $query="INSERT INTO goods_1c_class (barcode,name,className) VALUES
                                        ('".$v['barcode']."','".$v['name']."','".$v['className']."')";
           //  echo "<br />";
-                mysql_query($query);
+                $db->query($query);
                 
                 $query1="UPDATE report_goods SET className='".$v['className']."' WHERE barcode='".$v['barcode']."'";
                 //echo $query1."<br />";
-                mysql_query($query1);
+                $db->query($query1, 1);
                 
                 $cnt_goods++;
           //  }
@@ -101,5 +77,4 @@ echo mysql_error();
         echo '<p class="err">Файл з товарами не знайдено. Дані не оновлено.</p>';
     }
 
-mysql_close($link);
 ?>

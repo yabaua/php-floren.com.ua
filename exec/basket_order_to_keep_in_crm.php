@@ -112,7 +112,7 @@
 	// PUT keepInCrmId to DB
 	$response_data=json_decode($response, true);
 	$keepInCrmID=$response_data['id'];
-	mysql_query("UPDATE orders SET keepInCrmID='".$keepInCrmID."' WHERE id='".$order_id."'");
+	$db->query("UPDATE orders SET keepInCrmID='".$keepInCrmID."' WHERE id='".$order_id."'");
 	
 	//mail('info@floren.com.ua','Новый заказ №'.$order_id,$response);
 	curl_close($ch);

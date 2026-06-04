@@ -1,29 +1,7 @@
 <?
 
 //header("content-type: text/html;charset=utf-8 \r\n");
-
-
-
-
-	$DB_HOST="floren.mysql.ukraine.com.ua";
-	$DB_CHARSET='utf8';
-	// main base
-	$DB_USER='floren_utf2025';
-	$DB_PASS='i4d4XB48bV';
-	$DB_NAME='floren_utf2025';
-
-$link = mysql_connect($DB_HOST,$DB_USER,$DB_PASS);
-if (!$link) {
-    die('Не удалось соединиться : ' . mysql_error());
-}
-
-// выбираем foo в качестве текущей базы данных
-$db_selected = mysql_select_db($DB_NAME, $link);
-if (!$db_selected) {
-    die ('Не удалось выбрать базу foo: ' . mysql_error());
-}
-mysql_set_charset($DB_CHARSET, $link);
-echo mysql_error();
+require('../database.php');
 
 
     $fname2load="/images/1c/_ValoviyPributokZaNomenklaturoyuHTML2 (HTML4).html";
@@ -125,7 +103,7 @@ echo mysql_error();
 
     if (count($data_from_1c) > 0) {
         $cnt_goods=0;
-        mysql_query("DELETE FROM report_goods WHERE report_year='".$report_year."' AND report_month='".$report_month."'");
+        $db->query("DELETE FROM report_goods WHERE report_year='".$report_year."' AND report_month='".$report_month."'");
     //    echo "DELETE FROM report_goods WHERE report_year='".$report_year.". AND report_month='".$report_month."'";
         foreach($data_from_1c AS $k=>$v){
           //  if (strlen($v['barcode']) != 13) continue;
@@ -133,7 +111,7 @@ echo mysql_error();
                 $query="INSERT INTO report_goods (barcode,name,className, uniqueBarYearMonth,report_year,report_month,qt,gross,foodcost,margin,rentability) VALUES
                                        ('".$v['barcode']."','".$v['name']."','".$v['className']."','".$v['uniqueBarYearMonth']."','".$v['report_year']."','".$v['report_month']."', '".$v['qt']."', '".$v['gross']."', '".$v['foodcost']."', '".$v['margin']."', '".$v['rentability']."')";
          //   echo "<br />".$query;
-                mysql_query($query);
+                $db->query($query, 1);
                 $cnt_goods++;
           //  }
         }
@@ -142,5 +120,4 @@ echo mysql_error();
         echo '<p class="err">Файл з продажами товарів не знайдено. Дані не оновлено.</p>';
     }
 
-mysql_close($link);
 ?>

@@ -9,20 +9,7 @@
 header('Content-Type: application/json;charset=utf-8');
 header('Accept: application/json');
 
-	$DB_HOST="floren.mysql.ukraine.com.ua";
-	$DB_CHARSET='UTF8';
-	// main base
-	$DB_USER='floren_utf2025';
-	$DB_PASS='i4d4XB48bV';
-	$DB_NAME='floren_utf2025';
-
-require("../include/db_mysql.php");
-
-$db=new DB2();
-$db->connect();
-
-
-
+require("../database.php");
 
 $postData = file_get_contents('php://input');
 $data = json_decode($postData, true);

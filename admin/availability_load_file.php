@@ -1,29 +1,10 @@
 <?
 header("content-type: text/html;charset=utf-8 \r\n");
-
-
-	$DB_HOST="floren.mysql.ukraine.com.ua";
-	$DB_CHARSET='utf8';
-	// main base
-	$DB_USER='floren_utf2025';
-	$DB_PASS='i4d4XB48bV';
-	$DB_NAME='floren_utf2025';
-
-$link = mysql_connect($DB_HOST,$DB_USER,$DB_PASS);
-if (!$link) {
-    die('Не удалось соединиться : ' . mysql_error());
-}
-
-// выбираем foo в качестве текущей базы данных
-$db_selected = mysql_select_db($DB_NAME, $link);
-if (!$db_selected) {
-    die ('Не удалось выбрать базу foo: ' . mysql_error());
-}
-mysql_set_charset($DB_CHARSET, $link);
-echo mysql_error();
+require('../database.php');
 
 
 function get_data_from_1c($filetype) {
+  global $db;
 
     libxml_use_internal_errors(true);
 
@@ -48,8 +29,8 @@ function get_data_from_1c($filetype) {
     
     // =======WHEN STOCK UPDATED
     $_1c_file_updated_at    = filectime($_SERVER['DOCUMENT_ROOT']."/images/1c/Zalishki tovariv v rozdribnikh tsinakh (HTML4).html");
-    mysql_query("UPDATE admins SET 1c_file_updated_at='".$_1c_file_updated_at."' WHERE login='adm'");
-    mysql_query("UPDATE admins SET www_stock_updated_at='".time()."' WHERE login='adm'");
+    $db->query("UPDATE admins SET 1c_file_updated_at='".$_1c_file_updated_at."' WHERE login='adm'");
+    $db->query("UPDATE admins SET www_stock_updated_at='".time()."' WHERE login='adm'");
     // =======END WHEN STOCK UPDATED
     
     $xpath = new DomXPath($dom);
@@ -121,7 +102,7 @@ $start_time=substr($microtime,11).'.'.substr($microtime,2,8);
     if (count($data_1c) > 0) {
         $cnt_ostatki=0;
 //echo "1";
-        mysql_query("TRUNCATE goods_1c");
+        $db->query("TRUNCATE goods_1c");
         foreach ($data_1c as $key => $value) {
             $temp_arr[]="('".$key."', '".str_replace("'","&#700;",$value['name'])."', '".$value['f1_stock']."','".$value['f2_stock']."','".round($value['price'])."')";
             
@@ -129,11 +110,11 @@ $start_time=substr($microtime,11).'.'.substr($microtime,2,8);
         }
         $temp_arr2=array_chunk($temp_arr, 200);
         foreach($temp_arr2 AS $v){
-            mysql_query("INSERT INTO goods_1c (barcode,name,f1_stock,f2_stock,price)
+            $db->query("INSERT INTO goods_1c (barcode,name,f1_stock,f2_stock,price)
                                         VALUES ".implode(",", $v));
         }
         /*
-                mysql_query("INSERT INTO goods_1c (barcode,name,f1_stock,f2_stock,price)
+                $db->query("INSERT INTO goods_1c (barcode,name,f1_stock,f2_stock,price)
                                         VALUES('".$key."', '".str_replace("'","&#700;",$value['name'])."', '".$value['f1_stock']."','".$value['f2_stock']."','".round($value['price'])."')");
          */  
             
@@ -159,7 +140,7 @@ echo " сек.<br />";
         //    print_r($value);
         //   echo "<br />";
             if($value['price']>0){
-                $qr=mysql_query("UPDATE goods_1c SET price='".round($value['price'])."' WHERE barcode='".$key."'");
+                $db->query("UPDATE goods_1c SET price='".round($value['price'])."' WHERE barcode='".$key."'");
             //    echo "UPDATE goods_1c SET price='".$value['price']."' WHERE barcode='".$key."'<br />";
                 $cnt_price++;
             }
@@ -182,11 +163,11 @@ echo " сек.<br />";
     if (count($data_1c_rezerv) > 0) {
         $cnt_rezerv=0;
 //echo "3";
-        mysql_query("UPDATE goods_1c SET rezerv='0'");
+        $db->query("UPDATE goods_1c SET rezerv='0'");
         foreach ($data_1c_rezerv as $key => $value) {
             
             if($value['rezerv']>0){
-                $qr=mysql_query("UPDATE goods_1c SET rezerv='".$value['rezerv']."' WHERE barcode='".$key."'");
+                $qr=$db->query("UPDATE goods_1c SET rezerv='".$value['rezerv']."' WHERE barcode='".$key."'", 1);
             }
             $cnt_rezerv++;      						
         }
@@ -206,24 +187,24 @@ echo " сек.<br />";
 //================SYNCHRONIZE PRICES from 1C to site ====================
 
 $rs_isPlant=array();
-$qr_isPlant=mysql_query("SELECT gf.ID AS IDD FROM goods g
+$qr_isPlant=$db->query("SELECT gf.ID AS IDD FROM goods g
                     JOIN goods_forms gf ON gf.goodID=g.ID
                     JOIN goods_class gc ON g.classID=gc.ID
                     WHERE gc.motherID=3");
-while($rsp=mysql_fetch_array($qr_isPlant)){
+while($rsp=$db->fetch()){
     $rs_isPlant[]=$rsp['IDD'];
 }
 
 //print_r($rs_isPlant);
-$qr_price=mysql_query("SELECT fID, g1c.price AS newprice FROM goods_forms2_1c g21c
+$db->query("SELECT fID, g1c.price AS newprice FROM goods_forms2_1c g21c
 JOIN goods_1c g1c ON g1c.barcode=g21c.barcode
 WHERE g1c.price>0");
 
 
-while($rs_price=mysql_fetch_array($qr_price)){
+while($rs_price=$db->fetch()){
     //if(in_array($rs_price['fID'], $rs_isPlant)){
     //    echo "UPDATE goods_forms SET price='".$rs_price['newprice']."' WHERE ID='".$rs_price['fID']."'<br />";
-        mysql_query("UPDATE goods_forms SET price='".$rs_price['newprice']."' WHERE ID='".$rs_price['fID']."'"); 
+        $db->query("UPDATE goods_forms SET price='".$rs_price['newprice']."' WHERE ID='".$rs_price['fID']."'", 1); 
     //}else{
        
     //}
@@ -241,7 +222,7 @@ echo " сек.<br />";
 
 //It updates good availability not good forms
 
-$qr_avail=mysql_query("SELECT g.ID, max(g1c.f1_stock+g1c.f2_stock-g1c.rezerv) AS db_1c_availability
+$db->query("SELECT g.ID, max(g1c.f1_stock+g1c.f2_stock-g1c.rezerv) AS db_1c_availability
 								FROM goods_forms gf
 								JOIN goods g ON g.ID=gf.goodID
 								JOIN goods_class gc ON gc.ID=g.classID
@@ -249,25 +230,25 @@ $qr_avail=mysql_query("SELECT g.ID, max(g1c.f1_stock+g1c.f2_stock-g1c.rezerv) AS
 								JOIN goods_1c g1c ON g1c.barcode=g21c.barcode
 								WHERE gc.motherID=3
 								GROUP BY g.ID");
-while($rs_avail=mysql_fetch_array($qr_avail)){
+while($rs_avail=$db->fetch()){
     $xx=(max(0, $rs_avail['db_1c_availability'])>0)?1:0;
-    mysql_query("UPDATE goods SET availability='".$xx."' WHERE ID='".$rs_avail['ID']."'");
-    mysql_query("UPDATE goods_ua SET availability='".$xx."' WHERE ID='".$rs_avail['ID']."'");
+    $db->query("UPDATE goods SET availability='".$xx."' WHERE ID='".$rs_avail['ID']."'", 1);
+    $db->query("UPDATE goods_ua SET availability='".$xx."' WHERE ID='".$rs_avail['ID']."'", 2);
 }
 
 
 
-$qr_black_friday=mysql_query("SELECT gf.ID, price, old_price FROM goods_forms gf
+$db->query("SELECT gf.ID, price, old_price FROM goods_forms gf
                                 JOIN goods g ON g.ID=gf.goodID
                                 JOIN goods_class gc ON g.classID=gc.ID
                                 WHERE gf.old_price>0 AND g.classID=51");
 $cnd_bf=0;
-while($rs_black_friday=mysql_fetch_array($qr_black_friday)){
+while($rs_black_friday=$db->fetch()){
     
     //$new_price=floor($rs_black_friday['price']*0.9);
     //mysql_query("UPDATE goods_forms SET old_price='".$rs_black_friday['price']."', price='".$new_price."' WHERE ID='".$rs_black_friday['ID']."'");
     
-    mysql_query("UPDATE goods_forms SET old_price='0', price='".$rs_black_friday['old_price']."' WHERE ID='".$rs_black_friday['ID']."'");
+    $db->query("UPDATE goods_forms SET old_price='0', price='".$rs_black_friday['old_price']."' WHERE ID='".$rs_black_friday['ID']."'", 1);
     
     $cnd_bf++;
 }
@@ -284,10 +265,10 @@ echo " сек.<br />";
 
 // ================== UPDATE VENDORS STOCK
 $cnd_vendor=0;
-$qr=mysql_query("SELECT v21c.our_barcode, v.stock1, v.stock2, v.stock3 FROM vendors_lechuza v
+$db->query("SELECT v21c.our_barcode, v.stock1, v.stock2, v.stock3 FROM vendors_lechuza v
   JOIN vendors_2_1c v21c ON v.articul=v21c.vendor_articul");
-  while($rs=mysql_fetch_array($qr)){
-    mysql_query("UPDATE goods_1c SET vendor_1day_stock='".$rs['stock1']."', vendor_3day_stock='".($rs['stock2']+$rs['stock3'])."' WHERE barcode='".$rs['our_barcode']."'");
+  while($rs=$db->fetch()){
+    mysql_query("UPDATE goods_1c SET vendor_1day_stock='".$rs['stock1']."', vendor_3day_stock='".($rs['stock2']+$rs['stock3'])."' WHERE barcode='".$rs['our_barcode']."'", 1);
     $cnd_vendor++;
   }
 //=============
@@ -300,5 +281,4 @@ echo " сек.<br />";
 		
 echo "<br />Усього завантеження зайняло <b>".round(($end_vendor_time-$start_time), 3)."</b> сек.<br />";					
 //}
-mysql_close($link);
 ?>

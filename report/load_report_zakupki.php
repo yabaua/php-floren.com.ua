@@ -2,29 +2,7 @@
 
 //header("content-type: text/html;charset=utf-8 \r\n");
 
-
-
-
-	$DB_HOST="floren.mysql.ukraine.com.ua";
-	$DB_CHARSET='utf8';
-	// main base
-	$DB_USER='floren_utf2025';
-	$DB_PASS='i4d4XB48bV';
-	$DB_NAME='floren_utf2025';
-
-$link = mysql_connect($DB_HOST,$DB_USER,$DB_PASS);
-if (!$link) {
-    die('Не удалось соединиться : ' . mysql_error());
-}
-
-// выбираем foo в качестве текущей базы данных
-$db_selected = mysql_select_db($DB_NAME, $link);
-if (!$db_selected) {
-    die ('Не удалось выбрать базу foo: ' . mysql_error());
-}
-mysql_set_charset($DB_CHARSET, $link);
-echo mysql_error();
-
+require('../database.php');
 
 
 
@@ -106,14 +84,14 @@ echo mysql_error();
         $cnt_goods=0;
         $query="DELETE FROM report_goods_zakupki WHERE report_year='".$report_year."' AND report_month='".$report_month."'";
         //echo "<br><br>";
-    	      mysql_query($query);
+    	      $db->query($query);
         foreach($data_from_1c AS $k=>$v){
             if (strlen($v['barcode']) != 13) continue;
             else {
           $query="INSERT INTO report_goods_zakupki (barcode,uniqueBarYearMonth,report_year,report_month,qt,gross,price) VALUES
                                        ('".$v['barcode']."','".$v['uniqueBarYearMonth']."','".$v['report_year']."','".$v['report_month']."', '".$v['qt']."', '".$v['gross']."', '".$v['price']."')";
           //	echo $query."<br />";
-              mysql_query($query);
+              $db->query($query, 1);
                 $cnt_goods++;
             }
         }
@@ -122,5 +100,5 @@ echo mysql_error();
         echo '<p class="err">Файл з закупівлями не не знайдено. Дані не оновлено.</p>';
     }
 
-mysql_close($link);
+
 ?>

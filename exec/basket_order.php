@@ -219,7 +219,7 @@ if(isset($_POST['send_bsk']) && count($_SESSION['basket'])){
 	$smarty->assign('payment', $_POST['payment_way']);
 	$smarty->assign('delivery', $_POST['delivery_way'] ?? '');
 //	REMOVE COMMENT	
-//	$telegram->send($group_name, $smarty->fetch('telegram/order.tpl'));
+	$telegram->send($group_name, $smarty->fetch('telegram/order.tpl'));
 
 //END TELEGRAM
 
@@ -235,7 +235,7 @@ if(isset($_POST['send_bsk']) && count($_SESSION['basket'])){
 //		header("location:/bsk/basket_to_megaplan.php");
 //============================================================KEEP_IN_CRM=================
 				
-//	include($_SERVER['DOCUMENT_ROOT'] . "/exec/basket_order_to_keep_in_crm.php");
+	include($_SERVER['DOCUMENT_ROOT'] . "/exec/basket_order_to_keep_in_crm.php");
 	
 //============================================================END_KEEP_IN_CRM=============
 

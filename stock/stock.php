@@ -133,7 +133,7 @@ if(!strlen($query_string)<3 /*&& !strpos($query_string, "%")>0*/) {
 
 		$query = "SELECT g.*
 	        FROM goods_1c g
-	        WHERE g.name LIKE '%".mysql_real_escape_string($query_string)."%' OR g.barcode LIKE '%".mysql_real_escape_string($query_string)."%'
+	        WHERE g.name LIKE '%".$db->escape($query_string)."%' OR g.barcode LIKE '%".$db->escape($query_string)."%'
 	        GROUP BY g.barcode
 	        ORDER BY g.f2_stock DESC,g.f1_stock DESC, g.price DESC";
 		
