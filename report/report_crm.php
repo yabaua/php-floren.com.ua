@@ -17,46 +17,7 @@ $month_start_day	=	strtotime("first day of ".date("M", (time())));
 $minus_one_week_midnight	=	$ddd=date("U",strtotime('-1 week midnight'));
 $minus_two_weeks_midnight	=	$ddd=date("U",strtotime('-2 week midnight'));
 $minus_one_month_midnight	=	$ddd=date("U",strtotime('-1 month midnight'));
-/*
-function get_data($start_time, $end_time){
-	$orders_summ=0;
-	$orders_cnt=0;
-	$person_array=array();
-	$funnel_array=array();
-	$qr=mysql_query("SELECT * FROM orders_crm WHERE orderDate BETWEEN '".$start_time."' AND '".$end_time."'");
-	while ($rs=mysql_fetch_array($qr)){
-		$orders_summ+=$rs['orderTotal'];
-		$orders_cnt++;
-		if(array_key_exists($rs['mainResponsibleID'], $person_array)){
-			$person_array[$rs['mainResponsibleID']]['ttl']+=$rs['orderTotal'];
-			$person_array[$rs['mainResponsibleID']]['cnt']++;
-		}else{
-			$person_array[$rs['mainResponsibleID']]['ttl']=$rs['orderTotal'];
-			$person_array[$rs['mainResponsibleID']]['cnt']=1;
-		}
-		if(array_key_exists($rs['orderFunnel'], $funnel_array)){
-			$funnel_array[$rs['orderFunnel']]['ttl']+=$rs['orderTotal'];
-			$funnel_array[$rs['orderFunnel']]['cnt']++;
-		}else{
-			$funnel_array[$rs['orderFunnel']]['ttl']=$rs['orderTotal'];
-			$funnel_array[$rs['orderFunnel']]['cnt']=1;
-		}
-	}
-//	return 
-}
 
-*/
-
-
-
-/*
-$person_array=array(
-				'46556'=>array('name'=>'Анна Гарькава', 'ttl'=>0, 'cnt'=>0),
-				'46557'=>array('name'=>'Інна Коваленко', 'ttl'=>0, 'cnt'=>0),
-				'59142'=>array('name'=>'Елла Шамсієва', 'ttl'=>0, 'cnt'=>0),
-				'134757'=>array('name'=>'Анна Ткаченко', 'ttl'=>0, 'cnt'=>0)
-);
-*/
 $mainResponsible_array=array(
 				
 				'2'=>'Анна Гарькава',
@@ -121,9 +82,9 @@ $person_array=array();
 $funnel_array=array();
 
 //======TODAY=======
-$qr=mysql_query("SELECT * FROM orders_crm WHERE orderDate BETWEEN '".$today_date_from_plus_yesterday_evening."' AND '".$today_date_to."' AND orderResult!='failed'");
- echo "SELECT * FROM orders_crm WHERE orderDate BETWEEN '".$today_date_from_plus_yesterday_evening."' AND '".$today_date_to."' AND orderResult!='failed'";
-while ($rs=mysql_fetch_array($qr)){
+$db->query("SELECT * FROM orders_crm WHERE orderDate BETWEEN '".$today_date_from_plus_yesterday_evening."' AND '".$today_date_to."' AND orderResult!='failed'");
+//	echo "SELECT * FROM orders_crm WHERE orderDate BETWEEN '".$today_date_from_plus_yesterday_evening."' AND '".$today_date_to."' AND orderResult!='failed'";
+while ($rs=$db->fetch()){
 	$orders_summ_today+=$rs['orderTotal'];
 	$orders_cnt_today++;
 	if(array_key_exists($rs['mainResponsibleID'], $person_array)){
@@ -143,8 +104,8 @@ while ($rs=mysql_fetch_array($qr)){
 	
 }
 //=======MONTH
-$qr=mysql_query("SELECT * FROM orders_crm WHERE orderDate BETWEEN '".$month_start_day."' AND '".$today_date_to."' AND orderResult!='failed'");
-while ($rs=mysql_fetch_array($qr)){
+$db->query("SELECT * FROM orders_crm WHERE orderDate BETWEEN '".$month_start_day."' AND '".$today_date_to."' AND orderResult!='failed'");
+while ($rs=$db->fetch()){
 	$orders_summ_month+=$rs['orderTotal'];
 	$orders_cnt_month++;
 	if(array_key_exists($rs['mainResponsibleID'], $person_array) && array_key_exists('month', $person_array[$rs['mainResponsibleID']]['ttl'])){
@@ -218,10 +179,10 @@ for ($i = $minus_one_month_midnight; $i <= $yesterday_date_from; $i = strtotime(
 //print_r($month_array);
 
 $sql_month_data=array();
-$qr=mysql_query("SELECT FROM_UNIXTIME(orderDate, '%Y-%m-%d') AS oDate,  COUNT(*) AS cnt, SUM(orderTotal) AS ttl FROM orders_crm WHERE orderDate BETWEEN '".$minus_one_month_midnight."' AND '".$today_date_from."' AND orderResult!='failed' GROUP BY FROM_UNIXTIME(orderDate, '%D') ORDER BY orderDate DESC;");
+$db->query("SELECT FROM_UNIXTIME(orderDate, '%Y-%m-%d') AS oDate,  COUNT(*) AS cnt, SUM(orderTotal) AS ttl FROM orders_crm WHERE orderDate BETWEEN '".$minus_one_month_midnight."' AND '".$today_date_from."' AND orderResult!='failed' GROUP BY FROM_UNIXTIME(orderDate, '%D') ORDER BY orderDate DESC;");
 
 
-while($rs=mysql_fetch_array($qr)){
+while($rs=$db->fetch()){
 	$sql_month_data[$rs['oDate']]=$rs; 
 }
 //print_r($sql_month_data);
@@ -260,16 +221,16 @@ $ukr_day_offs=array('Сб', 'Нд');
 <?
 $utm_array=array();
 //=======MONTH
-$qr=mysql_query("SELECT * FROM orders_crm WHERE orderDate BETWEEN '".$month_start_day."' AND '".$today_date_from."' AND orderResult!='failed' ORDER BY utm_source DESC, utm_medium DESC, utm_campaign DESC");
+$db->query("SELECT * FROM orders_crm WHERE orderDate BETWEEN '".$month_start_day."' AND '".$today_date_from."' AND orderResult!='failed' ORDER BY utm_source DESC, utm_medium DESC, utm_campaign DESC");
 //echo "SELECT * FROM orders_crm WHERE orderDate BETWEEN '".$month_start_day."' AND '".$today_date_to."' ORDER BY utm_source DESC, utm_medium DESC, utm_campaign DESC";
-while($rs=mysql_fetch_array($qr)){
+while($rs=$db->fetch()){
 		$utm_array[$rs['utm_source']][$rs['utm_medium']][mb_strtolower($rs['utm_campaign'], 'UTF-8')]['month'][]=$rs['orderTotal'];
 		$utm_array[$rs['utm_source']][$rs['utm_medium']][mb_strtolower($rs['utm_campaign'], 'UTF-8')]['week']=array();
 }
 //========WEEEK
-$qr=mysql_query("SELECT * FROM orders_crm WHERE orderDate BETWEEN '".$minus_one_week_midnight."' AND '".$today_date_from."' AND orderResult!='failed' ORDER BY utm_source DESC, utm_medium DESC, utm_campaign DESC");
+$db->query("SELECT * FROM orders_crm WHERE orderDate BETWEEN '".$minus_one_week_midnight."' AND '".$today_date_from."' AND orderResult!='failed' ORDER BY utm_source DESC, utm_medium DESC, utm_campaign DESC");
 //echo "SELECT COUNT(*), SUM(orderTotal) FROM orders_crm WHERE orderDate BETWEEN '1752699600' AND '1753304400'";
-while($rs=mysql_fetch_array($qr)){
+while($rs=$db->fetch()){
 		$utm_array[$rs['utm_source']][$rs['utm_medium']][mb_strtolower($rs['utm_campaign'], 'UTF-8')]['week'][]=$rs['orderTotal'];
 		if(!isset($utm_array[$rs['utm_source']][$rs['utm_medium']][mb_strtolower($rs['utm_campaign'], 'UTF-8')]['month'])){
 			$utm_array[$rs['utm_source']][$rs['utm_medium']][mb_strtolower($rs['utm_campaign'], 'UTF-8')]['month']=array();
@@ -367,12 +328,12 @@ foreach($new_utm_arr AS $k=>$v){
 
 <?
 $source_array=array();
-$qr=mysql_query("SELECT * FROM orders_crm 
+$db->query("SELECT * FROM orders_crm 
 				WHERE orderDate BETWEEN '".$month_start_day."' AND '".$today_date_from."'
 				AND orderResult!='failed'
 				AND utm_source=''");
 //echo "SELECT COUNT(*), SUM(orderTotal) FROM orders_crm WHERE orderDate BETWEEN '1752699600' AND '1753304400'";
-while($rs=mysql_fetch_array($qr)){
+while($rs=$db->fetch()){
 		$source_array[$rs['orderSource']][]=$rs['orderTotal'];
 }
 $source_cnt_month=0;

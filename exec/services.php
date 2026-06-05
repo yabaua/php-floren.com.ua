@@ -48,7 +48,7 @@ else
 	if(isset($PARAM[0])){
 				
 				
-				$db->query("SELECT * FROM services25".$db_sufix." WHERE alias='".$PARAM[0]."'");
+				$db->query("SELECT * FROM services".$db_sufix." WHERE alias='".$PARAM[0]."'");
 				if(!$db->num_rows() || isset($PARAM[1])){
 					
 					
@@ -136,7 +136,7 @@ else
 		$hleb[1]['name']=$lingvo['services'];
 		
 
-		$db->query("SELECT * FROM tree25".$db_sufix." WHERE alias='services25'");
+		$db->query("SELECT * FROM tree25".$db_sufix." WHERE alias='services'");
 		$ff=$db->fetch();
 		
 		

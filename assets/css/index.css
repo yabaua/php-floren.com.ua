@@ -4145,7 +4145,7 @@ body.secondary-hovered .catalog-overlay {
     overflow: visible;
   }
 }
-.homepage__hero-swiper.swiper h2 {
+.homepage__hero-swiper.swiper h2, .homepage__hero-swiper.swiper h1 {
   font-size: 3rem;
   font-weight: 600;
   line-height: 1.2;
@@ -4184,7 +4184,7 @@ body.secondary-hovered .catalog-overlay {
     display: none;
   }
 }
-.homepage__hero-slide-1 .slide-1__text h2 {
+.homepage__hero-slide-1 .slide-1__text h2, .homepage__hero-slide-1 .slide-1__text h1 {
   padding-left: 2.25rem;
   margin-bottom: 1.5rem;
   @media screen and (max-width: 992px) {

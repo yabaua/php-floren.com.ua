@@ -74,7 +74,7 @@
           <section class="information__shipping">
             <h2>2. {$LINGVO.way_to_deliver}</h2>
             <sl-radio-group name="shipping" value="magazin" id="delivery-methods" data-product-price="{$BSK_TTL}" data-is-plant="{$IS_BSK_PLANT}">
-              <sl-radio name="delivery_way" value="magazin">
+              <sl-radio name="delivery_way" value="magazin" checked="true">
                 <div class="radio-option">
                   <img src="/img/icons/icon-post.svg" alt="">
                   <span>{$LINGVO.kiev_addr}</span>

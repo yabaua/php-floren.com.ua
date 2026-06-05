@@ -17,28 +17,28 @@ if (isset($_REQUEST['login']) && isset($_REQUEST['pass'])) {
   $login=preg_replace('/[^0-9a-zA-Z_]/','',$_REQUEST['login']);
   $pass=md5($_REQUEST['pass']);
   if ($login) {
-	$r=mysql_query("SELECT * FROM admins WHERE login='$login' AND pass='$pass' AND dept='report'");
-	if (mysql_num_rows($r)) {
-		$rs=mysql_fetch_array($r);
-		$_SESSION['admin_name']=$login;
-		  
-		if($login=='report') {
-			$admin_lvl='top';
-			$redirect_url='report_crm.php';
-		}elseif($login=='cpcoutsource'){
-			$admin_lvl='cpcoutsource';
-			$redirect_url='report_crm_cpc.php';
-		} else {
-			$admin_lvl='middle';
-			$redirect_url='report_source.php';
-		}
-		
-		$_SESSION['admin_lvl']=$admin_lvl;
-		 
-		  mysql_query("INSERT INTO admins_log SET adminID='".$rs['ID']."', visit='".time()."'");
-		  
-//		echo "location:/report/".$redirect_url;
-//		print_r($_SESSION);
+		$db->query("SELECT * FROM admins WHERE login='$login' AND pass='$pass' AND dept='report'");
+		if ($db->num_rows()) {
+			$rs=$db->fetch();
+			$_SESSION['admin_name']=$login;
+			  
+			if($login=='report') {
+				$admin_lvl='top';
+				$redirect_url='report_crm.php';
+			}elseif($login=='cpcoutsource'){
+				$admin_lvl='cpcoutsource';
+				$redirect_url='report_crm_cpc.php';
+			} else {
+				$admin_lvl='middle';
+				$redirect_url='report_source.php';
+			}
+			
+			$_SESSION['admin_lvl']=$admin_lvl;
+			 
+			  $db->query("INSERT INTO admins_log SET adminID='".$rs['ID']."', visit='".time()."'");
+			  
+	//		echo "location:/report/".$redirect_url;
+	//		print_r($_SESSION);
 
         header("location:/report/".$redirect_url);
     }

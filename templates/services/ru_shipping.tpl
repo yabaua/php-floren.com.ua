@@ -13,7 +13,8 @@
 
 <div class="services-page__calc">
 <h3>Рассчитать стоимость перевозки растений</h3>
-<button class="button button--primary button--pill">Получить расчет</button>
+<button class="button button--primary button--pill" data-event="click" data-callback="openModal"
+      data-modal-id="calculate-modal">Получить расчет</button>
 
 <p>Или звоните нам:</p>
 
