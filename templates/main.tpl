@@ -422,7 +422,7 @@
             <sl-tooltip 
               id="phones-tooltip" 
               class="tooltip header__main--phones-tooltip" 
-              trigger="click"
+              trigger="manual"
               placement="bottom-start" 
               style="--sl-tooltip-arrow-size: 0" 
               distance="0"
