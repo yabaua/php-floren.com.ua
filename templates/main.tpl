@@ -423,7 +423,7 @@
             placement="bottom-start" style="--sl-tooltip-arrow-size: 0" distance="0">
               <div slot="content" class="header__main--phones-content">
                 <button class="icon-button" aria-label="{$LINGVO.close_button}" data-event="click"
-                data-callback="togglePhones">
+                data-callback="toggleTooltip">
                   <svg class="icon icon-close"/>
                 </button>
                 <div class="phones-tooltip--item">
@@ -459,10 +459,13 @@
                   </button>
                   </div>
                   <div class="header__main--phones-showed">
-                  (044) 333-77-55, (099) 238-26-44
+                  <a href="tel:(044) 333-77-55">(044) 333-77-55</a>, <a href="tel:(099) 238-26-44">(099) 238-26-44</a>
                 </div>
-                  <div class="header__main--phones-hours">
-                  По буднях 9:00 - 19:30
+                <div class="header__main--phones-hours">
+                  <span>По буднях 9:00 - 19:30</span>
+                  <button class="header__main--phones-hours--button" data-event="click" data-callback="openModal" data-modal-id="calculate-modal">
+                    {$LINGVO.callback_general}
+                  </button>
                 </div>
                 </div>
               </div>

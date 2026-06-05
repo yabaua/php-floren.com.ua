@@ -2180,6 +2180,19 @@ main {
   color: var(--color-gray-100);
   line-height: 1.5;
   margin-top: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header__main--phones-hours--button {  
+  font-weight: 400;
+  color: var(--color-green-100);
+  display: none;
+}
+.header__main--phones.active {
+  & .header__main--phones-hours--button {
+    display: block;
+  }
 }
 .header__main--phones-content {
   display: flex;

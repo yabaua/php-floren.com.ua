@@ -13,8 +13,19 @@ const clickHandlers = {
     const element = event.currentTarget;
     const tooltip = element.closest("#phones-tooltip");
     const wrapper = tooltip.querySelector(".header__main--phones");
-    tooltip.open = !tooltip.open;
+    if (wrapper.classList.contains("active")) {
+      return;
+    }
+    // tooltip.open = !tooltip.open;
     wrapper.classList.toggle("active");
+  },
+  toggleTooltip: (event) => {
+    const element = event.currentTarget;
+    const tooltip = document.getElementById(element.dataset.tooltip);
+    console.log('element', element);
+    if (tooltip) {
+      tooltip.open = !tooltip.open;  
+    }    
   },
   toggleFooterPhones: (event) => {
     event.currentTarget.closest(".contacts-phone").classList.toggle("active");
