@@ -419,57 +419,76 @@
             <a href="{if $LANGURL=='/ua'}/{else}/ru/{/if}" class="header__main--logo">
               <img src="/img/main-logo.svg" alt="Logo"/>
             </a>
-            <sl-tooltip id="phones-tooltip" class="tooltip header__main--phones-tooltip" trigger="manual"
-            placement="bottom-start" style="--sl-tooltip-arrow-size: 0" distance="0">
+            <sl-tooltip 
+              id="phones-tooltip" 
+              class="tooltip header__main--phones-tooltip" 
+              trigger="click"
+              placement="bottom-start" 
+              style="--sl-tooltip-arrow-size: 0" 
+              distance="0"
+            >
               <div slot="content" class="header__main--phones-content">
-                <button class="icon-button" aria-label="{$LINGVO.close_button}" data-event="click"
-                data-callback="toggleTooltip">
-                  <svg class="icon icon-close"/>
+                <button 
+                  class="icon-button" 
+                  aria-label="{$LINGVO.close_button}" 
+                  data-event="click"
+                  data-callback="toggleTooltip"
+                >
+                  <svg class="icon icon-close"></svg>
                 </button>
                 <div class="phones-tooltip--item">
-                  <img src="/img/icons/icon-phone.svg" alt="Phone"/>
+                  <img src="/img/icons/icon-phone.svg" alt="Phone" />
                   <div class="phones-tooltip--item-wrapper">
                     <p class="item-phone">(044) 333-77-55, (099) 238-26-44</p>
                     <p class="item-hours">По буднях 09:00 - 19:30</p>
                     <p class="item-messengers">
-                      <a href="viber://chat?number=%2B380992382644" target="_blank" onclick="trackConv('vb','{$LANGURL}/{$URL|@join:"/"}')">
-                        <svg class="icon icon-whatsapp"/>
+                      <a 
+                        href="viber://chat?number=%2B380992382644" 
+                        target="_blank" 
+                        onclick="trackConv('vb','{$LANGURL}/{$URL|@join:"/"}')"
+                      >
+                        <svg class="icon icon-whatsapp"></svg>
                       </a>
-                      <a href="https://t.me/studio_floren" target="_blank" onclick="trackConv('tg','{$LANGURL}/{$URL|@join:"/"}')">
-                        <svg class="icon icon-telegram"/>
+                      <a 
+                        href="https://t.me/studio_floren" 
+                        target="_blank" 
+                        onclick="trackConv('tg','{$LANGURL}/{$URL|@join:"/"}')"
+                      >
+                        <svg class="icon icon-telegram"></svg>
                       </a>
                     </p>
                   </div>
                 </div>
                 <div class="phones-tooltip--item">
-                  <img src="/img/icons/icon-feedback.svg" alt="Feedback"/>
+                  <img src="/img/icons/icon-feedback.svg" alt="Feedback" />
                   <div class="phones-tooltip--item-wrapper">
                     <a class="item-feedback" href="">{$LINGVO.callback_general}</a>
                   </div>
                 </div>
               </div>
               <div class="header__main--phones">
-                <img src="/img/icons/icon-phone.svg" alt="Phone"/>
+                <img src="/img/icons/icon-phone.svg" alt="Phone" />
                 <div class="header__main--phones-wrapper">
-              {**	<div class="header__main--phones-hidden binct-phone-number-2">	**}
+                  {* <div class="header__main--phones-hidden binct-phone-number-2"></div> *}
                   <div class="header__main--phones-hidden">
-                  (044) 344..
-                  <button data-event="click" data-callback="togglePhones">
-                    показати
-                  </button>
+                    (044) 344..
+                    <button data-event="click" data-callback="togglePhones">
+                      показати
+                    </button>
                   </div>
                   <div class="header__main--phones-showed">
-                  <a href="tel:(044) 333-77-55">(044) 333-77-55</a>, <a href="tel:(099) 238-26-44">(099) 238-26-44</a>
-                </div>
-                <div class="header__main--phones-hours">
-                  <span>По буднях 9:00 - 19:30</span>
-                  <button class="header__main--phones-hours--button" data-event="click" data-callback="openModal" data-modal-id="calculate-modal">
-                    {$LINGVO.callback_general}
-                  </button>
-                </div>
+                    <a href="tel:(044) 333-77-55">(044) 333-77-55</a>, <a href="tel:(099) 238-26-44">(099) 238-26-44</a>
+                  </div>
+                  <div class="header__main--phones-hours">
+                    <span>По буднях 9:00 - 19:30</span>
+                    <button class="header__main--phones-hours--button" data-event="click" data-callback="openModal" data-modal-id="calculate-modal">
+                      {$LINGVO.callback_general}
+                    </button>
+                  </div>
                 </div>
               </div>
             </sl-tooltip>
+       
           </div>
 
           <!-- Права частина: пошук, профіль, улюблені, кошик -->
@@ -488,9 +507,38 @@
             <!-- Search form end -->
 
             <div class="header__main--profile">
-              <button class="header__main--profile-mobile icon-button">
+              <button class="header__main--profile-mobile icon-button" data-event="click" data-callback="openModal" data-modal-id="mobile-header-phones">
                 <svg class="icon icon-phone" />
               </button>
+              <sl-dialog id="mobile-header-phones" label="Звʼязатися з нами" class="dialog-overview">
+                <div class="header__main--phones-content">
+                  <div class="phones-tooltip--item">
+                    <img src="/img/icons/icon-phone.svg" alt="Phone" />
+                    <div class="phones-tooltip--item-wrapper">
+                      <p class="item-phone">
+                        <a href="tel:(044) 333-77-55">(044) 333-77-55</a>,
+                        <a href="tel:(099) 238-26-44">(099) 238-26-44</a>
+                      </p>
+                      <p class="item-hours">По буднях 09:00 - 19:30</p>
+                      <p class="item-messengers">
+                        <a href="viber://chat?number=%2B380992382644" target="_blank" onclick="trackConv('vb','{$LANGURL}/{$URL|@join:"
+                          /"}')">
+                          <svg class="icon icon-whatsapp"></svg>
+                        </a>
+                        <a href="https://t.me/studio_floren" target="_blank" onclick="trackConv('tg','{$LANGURL}/{$URL|@join:" /"}')">
+                          <svg class="icon icon-telegram"></svg>
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                  <!-- <div class="phones-tooltip--item">
+                    <img src="/img/icons/icon-feedback.svg" alt="Feedback" />
+                    <div class="phones-tooltip--item-wrapper">
+                      <a class="item-feedback" href="">{$LINGVO.callback_general}</a>
+                    </div>
+                  </div> -->
+                </div>
+              </sl-dialog>
               <button class="header__main--profile-mobile icon-button" type="button" data-event="click" data-callback="toggleMobileSearch">
                 <svg class="icon icon-search" />
               </button>
