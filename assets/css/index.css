@@ -5589,10 +5589,12 @@ button.catalog-page__show-filters {
   margin-bottom: 0.5rem;
   color: var(--color-gray-100);
 }
-.product-page__details h1 {
+.product-page__details h1,
+.product-page__details_title {
   font-size: 1.75rem;
   font-weight: 600;
   margin-bottom: 2.25rem;
+  display: block;
   @media screen and (max-width: 992px) {
     display: none;
   }

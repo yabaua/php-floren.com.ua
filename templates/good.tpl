@@ -44,7 +44,7 @@
   <!-- Product details -->
   <div class="product-page__details">
     <div class="product-page__details_artikul">{$LINGVO.artikul}: {$CUR_GFSID}</div>
-    <h1>{$GOOD_H1}</h1>
+    <div class="product-page__details_title" role="heading" aria-level="1">{$GOOD_H1}</div>
 
     <!-- Опції: розмір і колір -->
     <section class="product-page__options">
