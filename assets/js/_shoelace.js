@@ -14235,7 +14235,7 @@ function requireIntlTelInput() {
           [
             "ua",
             // Ukraine
-            "380",
+            "38",
             0,
             null,
             "0"
@@ -16140,6 +16140,9 @@ function requireIntlTelInput() {
             const plusIndex = fullNumber.indexOf("+");
             let number = plusIndex ? fullNumber.substring(plusIndex) : fullNumber;
             const selectedIso2 = this.selectedCountryData.iso2;
+            if (selectedIso2 === "ua" && !fullNumber.startsWith("+")) {
+              return null;
+            }
             const selectedDialCode = this.selectedCountryData.dialCode;
             number = this._ensureHasDialCode(number);
             const dialCodeMatch = this._getDialCode(number, true);
@@ -16658,6 +16661,9 @@ const initIntlTelInput = () => {
       separateDialCode: true,
       autoPlaceholder: "aggressive",
       customPlaceholder: function(selectedCountryPlaceholder, selectedCountryData) {
+        if (selectedCountryData.iso2 === "ua") {
+          return "(0XX) XXX-XX-XX";
+        }
         return selectedCountryPlaceholder.replace(/[0-9]/g, "X");
       }
     });
@@ -16666,19 +16672,36 @@ const initIntlTelInput = () => {
         let value = input.value.replace(/\D/g, "");
         if (value.length > 0) {
           let formatted = "";
-          if (value.length > 0) {
-            formatted = "(" + value.substring(0, 2);
-          }
-          if (value.length >= 3) {
-            formatted += ") " + value.substring(2, 5);
-          }
-          if (value.length >= 6) {
-            formatted += "-" + value.substring(5, 7);
-          }
-          if (value.length >= 8) {
-            formatted += "-" + value.substring(7, 9);
+          if (value.startsWith("0")) {
+            if (value.length > 0) {
+              formatted = "(" + value.substring(0, 3);
+            }
+            if (value.length >= 4) {
+              formatted += ") " + value.substring(3, 6);
+            }
+            if (value.length >= 7) {
+              formatted += "-" + value.substring(6, 8);
+            }
+            if (value.length >= 9) {
+              formatted += "-" + value.substring(8, 10);
+            }
+          } else {
+            if (value.length > 0) {
+              formatted = "(" + value.substring(0, 2);
+            }
+            if (value.length >= 3) {
+              formatted += ") " + value.substring(2, 5);
+            }
+            if (value.length >= 6) {
+              formatted += "-" + value.substring(5, 7);
+            }
+            if (value.length >= 8) {
+              formatted += "-" + value.substring(7, 9);
+            }
           }
           input.value = formatted;
+        } else {
+          input.value = "";
         }
       }
     });
