@@ -54,8 +54,8 @@ function selectNone(){
 </div>
 <select name="classNames[]" id="classNames" multiple style="width:300px;height:200px;">
 <?
-	$qr=mysql_query("SELECT className FROM report_goods GROUP BY className;");
-	while($rs=mysql_fetch_array($qr)){
+	$db->query("SELECT className FROM report_goods GROUP BY className;");
+	while($rs=$db->fetch()){
 		//if(!$rs['className']) $rs['className']='Головний екран'
 		$selected='';
 		if(isset($_REQUEST['classNames'])){
@@ -86,9 +86,9 @@ if(isset($_REQUEST['classNames'])){
 				WHERE rg.className IN ('".$sql_className."')
 				GROUP BY rg.report_month, rg.report_year
 				ORDER BY rg.report_year;";
-		$qr=mysql_query($query);
+		$db->query($query);
 		
-		while($rs=mysql_fetch_array($qr)){
+		while($rs=$db->fetch()){
 	
 			$year=$rs['report_year'];
 			$month=$rs['report_month'];

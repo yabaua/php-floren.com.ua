@@ -13,7 +13,8 @@
 
 <div class="services-page__calc">
 <h3>Розрахувати вартість озеленення</h3>
-<button class="button button--primary button--pill">Розрахувати</button>
+<button class="button button--primary button--pill" data-event="click" data-callback="openModal"
+      data-modal-id="calculate-modal">Розрахувати</button>
 
 <p>Також звертайтеся за телефоном:</p>
 
