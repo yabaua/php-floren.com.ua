@@ -270,7 +270,7 @@ $floren=new florenClass();
 
 //TRANSLATOR
 $lingvo_texts=array();
-$db->query("SELECT alias, txt_".$lang." FROM lingvo WHERE page='general'");
+$db->query("SELECT alias, txt_".$lang." FROM lingvo WHERE page = 'general'");
 
 while($rs_lingvo=$db->fetch()){
 	$lingvo[$rs_lingvo['alias']]=$rs_lingvo['txt_'.$lang];
@@ -279,7 +279,7 @@ while($rs_lingvo=$db->fetch()){
 
 ///======================
 
-$db->query("SELECT alias, txt_".$lang." FROM lingvo WHERE page='".$URL[0]."'");
+$db->query("SELECT alias, txt_".$lang." FROM lingvo WHERE page = '".$URL[0]."'");
 while($rs_lingvo_page=$db->fetch()){
 	$lingvo[$rs_lingvo_page['alias']]=$rs_lingvo_page['txt_'.$lang];
 }
@@ -341,7 +341,7 @@ if(in_array($URL[0], $category_left_main_cat_arr))
 	$sort_active_category = "alias='" .$URL[0]. "' DESC, "; 
 //========
 
-$db->query("SELECT * FROM goods".$db_sufix."_class WHERE motherID=0 AND act='1'".$not_to_show." ORDER BY ".$sort_active_category."sort DESC,name");
+$db->query("SELECT * FROM goods".$db_sufix."_class WHERE motherID = 0 AND act = '1'".$not_to_show." ORDER BY ".$sort_active_category."sort DESC, name");
 
 while ($f=$db->fetch()) {
 	$category_left[$f['ID']]['ID']=$f['ID'];
@@ -349,7 +349,7 @@ while ($f=$db->fetch()) {
 	$category_left[$f['ID']]['alias']=$f['alias'];
 	$category_left[$f['ID']]['img']=$f['img'];
 
-	$db->query("SELECT gc.* FROM goods".$db_sufix."_class gc WHERE motherID=".$f['ID']." AND act='1' ORDER BY sort DESC",1);
+	$db->query("SELECT gc.* FROM goods".$db_sufix."_class gc WHERE motherID = ".$f['ID']." AND act = '1' ORDER BY sort DESC",1);
 
 	while ($ff=$db->fetch(1)) {
 

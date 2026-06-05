@@ -38,6 +38,8 @@ class DB2 {
             );
         }
 
+        $this->link_id->query("SET SESSION query_cache_type = OFF");
+
         return $this->link_id;
     }
 

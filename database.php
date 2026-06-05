@@ -22,7 +22,7 @@ try {
     $db = new DB2();
     $db->connect();
 		
-    $sql = "SELECT alias, txt_ua FROM lingvo WHERE page='general'";
+    $sql = "SELECT alias, txt_ua FROM lingvo WHERE page = 'general'";
     $db->query($sql);
 } catch (mysqli_sql_exception $e) {
     echo "❌ Ошибка MySQL: " . $e->getMessage() . "<br>";
@@ -48,7 +48,7 @@ if ($db->connect_errno) {
 $db->set_charset($db_charset);
 
 echo "Підключення успішне з кодуванням $db_charset";
-$sql = "SELECT alias, txt_ua FROM lingvo WHERE page='general'";
+$sql = "SELECT alias, txt_ua FROM lingvo WHERE page = 'general'";
 print_r($db->query($sql)->num_rows);
 
 $db->close();

@@ -23,11 +23,11 @@ if(!isset($lingvo)){
 		$db_sufix='_ua';
 		
 		$lingvo_texts=array();
-		$db->query("SELECT alias, txt_".$lang." FROM lingvo WHERE page='general'");
+		$db->query("SELECT alias, txt_".$lang." FROM lingvo WHERE page = 'general'");
 		while($rs_lingvo=$db->fetch()){
 			$lingvo[$rs_lingvo['alias']]=$rs_lingvo['txt_'.$lang];
 		}
-		$db->query("SELECT alias, txt_".$lang." FROM lingvo WHERE page='".$URL[0]."'");
+		$db->query("SELECT alias, txt_".$lang." FROM lingvo WHERE page = '".$URL[0]."'");
 		while($rs_lingvo_page=$db->fetch()){
 			$lingvo[$rs_lingvo_page['alias']]=$rs_lingvo_page['txt_'.$lang];
 		}
