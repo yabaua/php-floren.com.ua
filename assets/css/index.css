@@ -7640,3 +7640,9 @@ button.catalog-page__show-filters {
     }
   }  
 }
+
+.left-seo-text {
+  @media screen and (max-width: 992px) {
+    display: none;    
+  }
+}

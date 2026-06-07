@@ -234,10 +234,9 @@
 	<!-- links_block -->
 
 
-
-
+  
 {if $SEO_TEXT!=''}
-	<div class="left_text">
+	<div class="left_text left-seo-text">
 		{$SEO_TEXT|nl2br}
 	</div>
 {/if}
