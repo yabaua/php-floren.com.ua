@@ -3274,24 +3274,24 @@ function addClasses() {
   const suffixes = prepareClasses(["initialized", params.direction, {
     "free-mode": swiper.params.freeMode && params.freeMode.enabled
   }, {
-    "autoheight": params.autoHeight
-  }, {
-    "rtl": rtl
-  }, {
-    "grid": params.grid && params.grid.rows > 1
-  }, {
-    "grid-column": params.grid && params.grid.rows > 1 && params.grid.fill === "column"
-  }, {
-    "android": device.android
-  }, {
-    "ios": device.ios
-  }, {
-    "css-mode": params.cssMode
-  }, {
-    "centered": params.cssMode && params.centeredSlides
-  }, {
-    "watch-progress": params.watchSlidesProgress
-  }], params.containerModifierClass);
+      "autoheight": params.autoHeight
+    }, {
+      "rtl": rtl
+    }, {
+      "grid": params.grid && params.grid.rows > 1
+    }, {
+      "grid-column": params.grid && params.grid.rows > 1 && params.grid.fill === "column"
+    }, {
+      "android": device.android
+    }, {
+      "ios": device.ios
+    }, {
+      "css-mode": params.cssMode
+    }, {
+      "centered": params.cssMode && params.centeredSlides
+    }, {
+      "watch-progress": params.watchSlidesProgress
+    }], params.containerModifierClass);
   classNames.push(...suffixes);
   el.classList.add(...classNames);
   swiper.emitContainerClasses();
@@ -5136,7 +5136,7 @@ function Thumb({
           } else {
             newThumbsIndex = newThumbsIndex + Math.floor(slidesPerView / 2) - 1;
           }
-        } else if (newThumbsIndex > currentThumbsIndex && thumbsSwiper.params.slidesPerGroup === 1) ;
+        } else if (newThumbsIndex > currentThumbsIndex && thumbsSwiper.params.slidesPerGroup === 1);
         thumbsSwiper.slideTo(newThumbsIndex, initial ? 0 : void 0);
       }
     }
@@ -5424,7 +5424,7 @@ const config = {
   "works-swiper": {
     modules: [Navigation],
     spaceBetween: 24,
-    slidesPerView: 'auto',    
+    slidesPerView: 'auto',
     loop: true,
     breakpoints: {
       768: {
@@ -5547,7 +5547,7 @@ const initSwipers = () => {
         el: ".photo-viewer__pagination",
         type: "custom",
         // formatFractionCurrent: (number) => `aaa0${number}`,
-        renderCustom: function(swiper, current, total) {
+        renderCustom: function (swiper, current, total) {
           return `Фото ${current} з ${total}`;
         }
       },
@@ -5556,23 +5556,34 @@ const initSwipers = () => {
       }
     });
     window.swipers.mainSwiper.on("slideChange", () => {
-      window.youtubePlayers.forEach((player) => {
-        if (player.stopVideo) {
-          player.stopVideo();
-        }
-      });
+      pauseAllVideos();
+    });
+    window.swipers.mainSwiper.on("slideChangeTransitionEnd", () => {
+      playActiveVideo();
     });
     document.querySelectorAll(".photo-viewer__overlay, .photo-viewer__close-button")?.forEach((el) => {
       el.addEventListener("click", () => {
         document.querySelector(".photo-viewer")?.classList.remove("active");
-        window.youtubePlayers.forEach((player) => {
-          if (player.stopVideo) {
-            player.stopVideo();
-          }
-        });
+        pauseAllVideos();
       });
     });
   }
+};
+const playActiveVideo = () => {
+  const activeSlide = document.querySelector("#main-photo-viewer .swiper-slide-active");
+  const iframe = activeSlide?.querySelector("iframe");
+  if (iframe) {
+    const play = () => {
+      iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+    };
+    play();
+    iframe.addEventListener('load', play, { once: true });
+  }
+};
+const pauseAllVideos = () => {
+  document.querySelectorAll("#main-photo-viewer iframe").forEach((iframe) => {
+    iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+  });
 };
 const initHoverPhotoViewers = () => {
   document.querySelectorAll("[data-photo-viewer]").forEach((viewer) => {
@@ -5587,27 +5598,34 @@ const initHoverPhotoViewers = () => {
         });
         e.target.classList.add("active");
         const img = e.target.querySelector("img");
-        mainimage.src = img.src;
+        if (img?.src) mainimage.src = img?.src;
       });
     });
     thumbsBox?.addEventListener("click", (e) => {
       const li = e.target.closest("li");
+      if (!li) return;
       let activeIndex = 0;
       let prev = li;
       while (prev = prev.previousElementSibling) {
         activeIndex++;
       }
-      const images = Array.from(thumbs).map((thumb) => ({
-        src: thumb.querySelector("img")?.src || thumb.querySelector("[data-video-src]")?.dataset.videoSrc,
-        type: thumb.querySelector("img") ? "image" : "video"
-      }));
+      const images = Array.from(thumbs).map((thumb) => {
+        const videoElem = thumb.querySelector("[data-video-src]");
+        return {
+          src: thumb.querySelector("img")?.src || videoElem?.getAttribute("data-video-src") || "",
+          type: thumb.querySelector("img") ? "image" : "video"
+        };
+      });
       activatePhotoViewer(images, activeIndex);
     });
     main.addEventListener("click", () => {
-      const images = Array.from(thumbs).map((thumb) => ({
-        src: thumb.querySelector("img")?.src || thumb.querySelector("[data-video-src]")?.dataset.videoSrc,
-        type: thumb.querySelector("img") ? "image" : "video"
-      }));
+      const images = Array.from(thumbs).map((thumb) => {
+        const videoElem = thumb.querySelector("[data-video-src]");
+        return {
+          src: thumb.querySelector("img")?.src || videoElem?.getAttribute("data-video-src") || "",
+          type: thumb.querySelector("img") ? "image" : "video"
+        };
+      });
       const activeIndex = Array.from(thumbs).findIndex((thumb) => thumb.classList.contains("active"));
       activatePhotoViewer(images, activeIndex);
     });
@@ -5620,24 +5638,30 @@ function activatePhotoViewer(images, index = 0) {
   if (!mainSwiper || !thumbsSwiper) return;
   mainSwiper.removeAllSlides();
   thumbsSwiper.removeAllSlides();
-  const thumbs = images.map((item) => {
+
+  // Filter out invalid/empty items
+  const validImages = images.filter(item => item.src && item.src.trim() !== "" && item.src !== "https://www.youtube.com/embed/");
+  let adjustedIndex = index;
+  if (adjustedIndex >= validImages.length) {
+    adjustedIndex = 0;
+  }
+
+  const thumbs = validImages.map((item) => {
     if (item.type === "image") {
       return `<div class="swiper-slide"><img src="${item.src}" /></div>`;
     } else {
       return `<div class="swiper-slide"><button><span class="icon icon-video-button"></span><span>Відео</span></button></div>`;
     }
   });
-  const videoIdArray = [];
-  const slides = images.map((item) => {
+
+  const slides = validImages.map((item) => {
     if (item.type === "image") {
       return `<div class="swiper-slide"><img src="${item.src}" /></div>`;
     } else {
-      const videoId = generateRandomId();
-      videoIdArray.push(videoId);
+      const separator = item.src.includes('?') ? '&' : '?';
       return `
       <div class="swiper-slide">
-        <iframe id="${videoId}"       
-          src="${item.src}&enablejsapi=1" 
+        <iframe src="${item.src}${separator}enablejsapi=1" 
           title="YouTube video player" 
           frameborder="0" 
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -5649,12 +5673,13 @@ function activatePhotoViewer(images, index = 0) {
   });
   mainSwiper.appendSlide(slides);
   thumbsSwiper.appendSlide(thumbs);
-  mainSwiper.slideToLoop(index);
+
   photoViewer.classList.add("active");
-  videoIdArray.forEach((videoId) => {
-    const player = new YT.Player(videoId);
-    window.youtubePlayers.push(player);
-  });
+
+  setTimeout(() => {
+    mainSwiper.slideToLoop(adjustedIndex, 0, false);
+    playActiveVideo();
+  }, 50);
 }
 const initLastworkViewers = () => {
   document.querySelectorAll("[data-lastwork-viewer]").forEach((viewer) => {
@@ -5711,7 +5736,7 @@ const generateRandomId = (length = 10) => {
   return Math.random().toString(36).substring(2, 2 + length);
 };
 document.addEventListener("DOMContentLoaded", () => {
-  console.log('DOMContentLoaded');  
+  console.log('DOMContentLoaded');
   startApp();
   document.body.classList.add('loaded');
 });
