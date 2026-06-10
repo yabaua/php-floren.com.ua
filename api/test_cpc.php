@@ -1,4 +1,5 @@
 <?php
+header("content-type: text/html; charset=utf-8");
 require_once($_SERVER['DOCUMENT_ROOT'].'/database.php');
 
 function formatMonth($ym) {
@@ -67,7 +68,7 @@ FROM (
         COUNT(*) AS orders_count,
         SUM(orderTotal) AS orders_sum
     FROM orders_crm
-    WHERE utm_medium = 'cpc'
+    WHERE utm_medium = 'cpc' AND orderResult != 'failed'
     GROUP BY yw, utm_campaign
 ) t
 

@@ -3,17 +3,29 @@
 require("auth.php");
 include("../include/strlib.php");
 
+if (!isset($_REQUEST['lang'])){
+	$lang='ua';
+	$db_sufix='_ua';
+	$btn_lang = 'lang_ua';
+	$lang_param="&lang=ua";
+}else{		
+	$lang=$_REQUEST['lang'];
+	$db_sufix=	$_REQUEST['lang']=='ru'?'':('_'.$_REQUEST['lang']);
+	$btn_lang = 'lang_'.$_REQUEST['lang'];
+	$lang_param="&lang=".$_REQUEST['lang'];
+}
+
 if(isset($_REQUEST['add_article'])){
 	$df=explode(".", $_REQUEST['pdate']);
 	$date=mktime(0, 0, 0, $df[1], $df[0], $df[2]);
 
-	$db->query("INSERT INTO publications SET
+	$db->query("INSERT INTO publications".$db_sufix." SET
 		title='".$_REQUEST['ptitle']."',
 		alias='".transliterate($_REQUEST['ptitle'])."',
 		meta_description='".$_REQUEST['pdescription']."',
 		body='".$_REQUEST['pbody']."',
 		date_add='".$date."'");
-	header("location:publications_list.php");
+	header("location:publications_list.php?lang=".$lang);
 }
 if(isset($_REQUEST['delart'])){
 	echo "cccc";
@@ -38,12 +50,22 @@ if(isset($_REQUEST['update'])){
 	<link rel="stylesheet" type="text/css" href="style_back.css">
 </head>
 <body style="margin-left:20px;">
+<?php 
+//============================
+
+	include("top_menu.php");
+
+//============================
+?>
 <h3>Список статей</h3>
-<form name="f2" method="post" action="publications_list.php">
+
+
+
+<form name="f2" method="post" action="publications_list.php?lang=<?=$lang?>">
 <input type="Submit" name="update" class="button" value="Обновить">
 <table cellspacing="0">
 <?php 
-$qr=$db->query("SELECT * FROM publications ORDER BY date_add DESC");
+$qr=$db->query("SELECT * FROM publications".$db_sufix." ORDER BY date_add DESC");
 for($i=0;$rs=$db->fetch();$i++){
 ?>
 <tr<?php if($i%2==1) echo ' bgcolor="#EEE7DF"'?>>
@@ -52,7 +74,7 @@ for($i=0;$rs=$db->fetch();$i++){
 		<img src="<?=str_replace('content/b-','content/s-', $rs['images'])?>" width="200" />
 		<?php }?>
 	</td>
-	<td><a href="publications_edit.php?ID=<?=$rs['ID']?>"><?=$rs['title']?></a></td>
+	<td><a href="publications_edit.php?lang=<?=$lang?>&ID=<?=$rs['ID']?>"><?=$rs['title']?></a></td>
 	<td><input type="Submit" name="delart[<?=$rs['ID']?>]" class="delete_but" value=""></td>
 	<td>
 		<?php 
@@ -77,7 +99,7 @@ for($i=0;$rs=$db->fetch();$i++){
 </form>
 <p>&nbsp;</p>
 <h3>Добавить статью</h3>
-<form name="f1" method="post" action="publications_list.php">
+<form name="f1" method="post" action="publications_list.php?lang=<?=$lang?>">
 <div>
 	Название<br>
 	<input type="Text" name="ptitle" class="input_type" style="width:300px;">
@@ -93,7 +115,7 @@ for($i=0;$rs=$db->fetch();$i++){
 <div>
 	Тело статьи<br>
 	<textarea id="content" name="pbody" style="width:600px;height:400px;" rows="20" cols="50">
-                <?php echo $f['body']?>
+                
             </textarea>
             <script>
                 CKEDITOR.replace( 'pbody', {

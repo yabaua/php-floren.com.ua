@@ -138,5 +138,11 @@ class DB2 {
     public function affected_rows() {
         return $this->link_id->affected_rows;
     }
+    
+    public function error() {
+        return $this->link_id->error;
+    }
+    
+    
 }
 ?>

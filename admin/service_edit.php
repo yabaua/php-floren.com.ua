@@ -18,7 +18,7 @@ else header("location:service_list.php");
 
 if(isset($_REQUEST['edit_article'])){
 
-	$db->query("UPDATE services25".$db_sufix." SET
+	$db->query("UPDATE services".$db_sufix." SET
 	title='".$_REQUEST['ptitle']."',
 	menuttl='".$_REQUEST['menuttl']."',
 	meta_title='".$_REQUEST['meta_title']."',
@@ -47,7 +47,7 @@ if(isset($_REQUEST['edit_article'])){
 <form name="f1" method="post" action="service_edit.php?lang=<?=$lang?><?=$urlID?>">
 <h3>Изменить услугу</h3>
 <?php 
-$db->query("SELECT * FROM services25".$db_sufix." WHERE ID='".$ID."'");
+$db->query("SELECT * FROM services".$db_sufix." WHERE ID='".$ID."'");
 $rs=$db->fetch();
 ?>
 <div>

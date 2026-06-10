@@ -18,7 +18,7 @@ if (!isset($_REQUEST['lang'])){
 
 $db->query("SELECT motherID FROM goods".$db_sufix."_class WHERE ID='".$category."'");
 $rs=$db->fetch();
-$motherCAT = $rs['motherID'];
+$motherCAT = $rs['motherID'] ?? 0;
 
 if(isset($_REQUEST['action']) && $_REQUEST['action']=='showhide'){
 		$db->query("UPDATE goods SET act='".$_REQUEST['todo']."' WHERE ID='".$_REQUEST['ID']."'");

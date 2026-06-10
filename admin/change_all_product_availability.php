@@ -3,13 +3,13 @@ require('con_mysql.php');
 
 function change_availability($name) {
 
-    $req = mysql_query("SELECT * FROM $name");
+    $req = $db->query("SELECT * FROM $name");
 
-    while($res = mysql_fetch_array($req)) {
+    while($res = $db->fetch()) {
 
-        $prod_req = mysql_query("SELECT g.act, min(NULLIF(gf.price, 0)) AS min_price, max(gf.price) AS max_price FROM $name g LEFT JOIN goods_forms gf ON g.ID=gf.goodID WHERE g.ID=".$res['ID']." AND gf.visibility=1");
+        $db->query("SELECT g.act, min(NULLIF(gf.price, 0)) AS min_price, max(gf.price) AS max_price FROM $name g LEFT JOIN goods_forms gf ON g.ID=gf.goodID WHERE g.ID=".$res['ID']." AND gf.visibility=1", 1);
 
-        $prod_res = mysql_fetch_array($prod_req);
+        $prod_res = $db->fetch(1);
 
         $is_active = $prod_res['act'] === 'Y' ? 1 : 0;
         $zero_price = intval($prod_res['min_price']) === 0 && intval($prod_res['max_price']) === 0 ? 1 : 0;
@@ -20,7 +20,7 @@ function change_availability($name) {
             $available = 1;
         }
 
-         mysql_query("UPDATE $name SET availability=".$available." WHERE ID=".$res['ID']);
+         $db->query("UPDATE $name SET availability=".$available." WHERE ID=".$res['ID'], 3);
 
     }
 

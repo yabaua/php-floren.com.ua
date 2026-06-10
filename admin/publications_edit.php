@@ -5,18 +5,30 @@ require("auth.php");
 include("../include/strlib.php");
 require("../include/resize.php");
 
+if (!isset($_REQUEST['lang'])){
+	$lang='ua';
+	$db_sufix='_ua';
+	$btn_lang = 'lang_ua';
+	$lang_param="&lang=ua";
+}else{		
+	$lang=$_REQUEST['lang'];
+	$db_sufix=	$_REQUEST['lang']=='ru'?'':('_'.$_REQUEST['lang']);
+	$btn_lang = 'lang_'.$_REQUEST['lang'];
+	$lang_param="&lang=".$_REQUEST['lang'];
+}
+
 if(isset($_REQUEST['ID'])){
 	$ID=$_REQUEST['ID'];
-	$qr=mysql_query("SELECT * FROM publications WHERE ID='".$ID."'");
-	$rs=mysql_fetch_array($qr);
+	$db->query("SELECT * FROM publications".$db_sufix." WHERE ID='".$ID."'");
+	$rs=$db->fetch();
 }
-else header("location:publications_list.php");
+else header("location:publications_list.php?lang=".$lang);
 
 if(isset($_REQUEST['edit_article'])){
 	$df=explode(".", $_REQUEST['pdate']);
 	$date=mktime(0, 0, 0, $df[1], $df[0], $df[2]);
 
-	mysql_query("UPDATE publications SET
+	$db->query("UPDATE publications".$db_sufix." SET
 	title='".$_REQUEST['ptitle']."',
 	meta_title='".$_REQUEST['meta_title']."',
 	meta_description='".$_REQUEST['meta_description']."',
@@ -25,8 +37,8 @@ if(isset($_REQUEST['edit_article'])){
 	body='".addslashes($_REQUEST['pbody'])."',
 	date_add='".$date."'
 	WHERE ID='".$ID."'");
-	echo mysql_error();
-	header("location:publications_edit.php?ID=".$ID);
+
+	header("location:publications_edit.php?lang=".$lang."&ID=".$ID);
 }
 	if (isset($_FILES['article_image']) && is_uploaded_file($_FILES['article_image']['tmp_name'])) {
 		
@@ -44,8 +56,8 @@ if(isset($_REQUEST['edit_article'])){
 			chmod($_SERVER['DOCUMENT_ROOT'].'images/content/s-'.$temp_image_name,0777);
 			chmod($_SERVER['DOCUMENT_ROOT'].'images/content/b-'.$temp_image_name,0777);
 			
-			mysql_query("UPDATE publications SET images='https://floren.com.ua/images/content/b-".$temp_image_name."' WHERE ID=".$ID);
-			mysql_query("UPDATE publications_ua SET images='https://floren.com.ua/images/content/b-".$temp_image_name."' WHERE ID=".$ID);
+			$db->query("UPDATE publications SET images='https://floren.com.ua/images/content/b-".$temp_image_name."' WHERE ID=".$ID);
+			$db->query("UPDATE publications_ua SET images='https://floren.com.ua/images/content/b-".$temp_image_name."' WHERE ID=".$ID);
 			header("location:publications_edit.php?ID=".$ID);
 	}
 
@@ -57,7 +69,16 @@ if(isset($_REQUEST['edit_article'])){
 	<script src="/admin/ckeditor/ckeditor.js"></script>
 </head>
 <body style="margin-left:20px;">
-<form name="f1" method="post" action="publications_edit.php?ID=<?=$ID?>" enctype="multipart/form-data">
+<?php 
+//============================
+
+	include("top_menu.php");
+
+//============================
+?>
+<form name="f1" method="post"
+	action="publications_edit.php?lang=<?=$lang?>&ID=<?=$ID?>"
+	enctype="multipart/form-data">
 <h3>Изменить статью</h3>
 
 <div class="holder">

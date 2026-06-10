@@ -120,30 +120,30 @@ if($db->num_rows()){
 
 
 //========================= INSERT INTO pid zamovlennya =======================
-if($data->stage->name == 'Під замовлення'){
+
 	$db->query("SELECT * FROM crm_goods4order WHERE keepInCrmAgreementID='".$crmID."'");
 	if($db->num_rows()){
 		$db->query("DELETE FROM crm_goods4order WHERE keepInCrmAgreementID='".$crmID."'");
 	}
-	foreach($data->jobs AS $j=>$jj){
-		$title		=	$jj->title;
-		$amount		=	$jj->amount;
-		$barcode	=	$jj->sku;
-		$price		=	$jj->price;
-		
-		$query = "INSERT INTO crm_goods4order SET
-					keepInCrmAgreementID	=	'".$crmID."',
-					keepInCrmAgreementTitle	=	'".$crmOrderTitle."',
-					orderDate				=	'".$crmOrderDate."',
-					who_ordered				=	'".$crmMainResponsibleID."',
-					barcode					=	'".$barcode."',
-					title					=	'".$title."',
-					amount					=	'".$amount."',
-					price					=	'".$price."'
-				";
-		$db->query($query);
-		
-	}
-}
-
+	if($data->stage->name == 'Під замовлення' && $data->result != 'failed'){
+		foreach($data->jobs AS $j=>$jj){
+			$title		=	$jj->title;
+			$amount		=	$jj->amount;
+			$barcode	=	$jj->sku;
+			$price		=	$jj->price;
+			
+			$query = "INSERT INTO crm_goods4order SET
+						keepInCrmAgreementID	=	'".$crmID."',
+						keepInCrmAgreementTitle	=	'".$crmOrderTitle."',
+						orderDate				=	'".$crmOrderDate."',
+						who_ordered				=	'".$crmMainResponsibleID."',
+						barcode					=	'".$barcode."',
+						title					=	'".$title."',
+						amount					=	'".$amount."',
+						price					=	'".$price."'
+					";
+			$db->query($query);
+			
+		} // foreach
+	}//if 
 ?>

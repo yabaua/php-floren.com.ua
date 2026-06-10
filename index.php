@@ -1009,7 +1009,8 @@ $smarty->assign("CLIENTSBOT", $clients);
 
 //======================================
 function getVideoData($videoID){
-		$api_key = 'AIzaSyDaGQJMy8v1XwCSuhc_efqx4iBzGIANkYw';
+//		$api_key = 'AIzaSyDaGQJMy8v1XwCSuhc_efqx4iBzGIANkYw';
+		$api_key = 'AIzaSyCv43unDFARFMnSlfi_LNm6TwM00HkTU3Q';
 
 		$json_result = file_get_contents ("https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics,status&id=$videoID&key=$api_key");
 		$video_data=json_decode($json_result, true);

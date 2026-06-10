@@ -55,7 +55,7 @@ if ($_SESSION['admin_name']=='img'){?>
 	<a href="marketing.php" class="menu" target="main">Статистика</a>
 </div>
 <div class="separator" style="padding-top:20px;">
-	Статьи <a href="publications_list.php" class="menu" target="main">РУС</a> / <a href="publications_list_ua.php" class="menu" target="main">УКР</a>
+	<a href="publications_list.php" class="menu" target="main">Статьи</a>
 </div>
 <div style="padding-top:20px;">
 	<a href="lingvo.php" class="menu" target="main">Словарь</a>

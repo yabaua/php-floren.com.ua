@@ -73,7 +73,7 @@
 
           <section class="information__shipping">
             <h2>2. {$LINGVO.way_to_deliver}</h2>
-            <sl-radio-group name="shipping" value="magazin" id="delivery-methods" data-product-price="{$BSK_TTL}" data-is-plant="{$IS_BSK_PLANT}">
+            <sl-radio-group name="delivery_way" value="magazin" id="delivery-methods" data-product-price="{$BSK_TTL}" data-is-plant="{$IS_BSK_PLANT}">
               <sl-radio name="delivery_way" value="magazin" checked="true">
                 <div class="radio-option">
                   <img src="/img/icons/icon-post.svg" alt="">
@@ -115,8 +115,8 @@
             </div>
           </div>
           <div class="form-control">
-            <sl-select name="picup_addr" placeholder="{$LINGVO.store_address}" label="{$LINGVO.store_address}" value="1">
-              <sl-option value="1">{$LINGVO.kiev_addr}</sl-option>
+            <sl-select name="picup_addr" placeholder="{$LINGVO.store_address}" label="{$LINGVO.store_address}" value="m1">
+              <sl-option value="m1">{$LINGVO.kiev_addr}</sl-option>
               {**  <sl-option value="{$LINGVO.kiev_addr}">{$LINGVO.bsk_address_akhmatova}</sl-option>	**}
               </sl-select>
           </div>

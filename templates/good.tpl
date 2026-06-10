@@ -69,9 +69,14 @@
                 <sl-tag variant="danger" disabled>Немає в наявності</sl-tag>
                 {/if}
               {/if}
-              <button href="" class="size__video-link" aria-label="{$LINGVO.show_video} {$GOOD_H1} {$size.measure}">
+              {if $size.video!=''}
+              <button class="size__video-link" aria-label="{$LINGVO.show_video} {$GOOD_H1} {$size.measure}">
                 <img src="/img/icons/icon-video-button.svg" alt="{$LINGVO.show_video}"/>
               </button>
+              {else}
+              <span class="size__video-link"></span>
+              {/if}
+              
             </a>
           </sl-radio>
         {/foreach}

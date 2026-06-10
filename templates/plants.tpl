@@ -255,7 +255,7 @@
     {else}
     <a title="{$LINGVO.pages_goto} 2" id="p2"
       {if $C==3}rel="prev"{elseif $C==1}rel="next"{/if}
-      href="{$LANGURL}/{$ALIAS}{$FILTERS_URL}?p=2"
+      href="{$LANGURL}/{$ALIAS}{$FILTERS_URL}/page2/"
       class="pagination__link{if $C==2} active{/if}">2</a>
     {/if}
   {/if}
@@ -271,7 +271,7 @@
       {else}
       <a title="{$LINGVO.pages_goto} {$pn}" id="p{$pn}"
         rel="{if $P.prev}prev{/if}{if $P.next}next{/if}"
-        href="{$LANGURL}/{$ALIAS}{$FILTERS_URL}?p={$pn}"
+        href="{$LANGURL}/{$ALIAS}{$FILTERS_URL}/page{$pn}/"
         class="pagination__link{if $P.active} active{/if}">{$pn}</a>
       {/if}
     {/if}
@@ -288,7 +288,7 @@
     {else}
     <a title="{$LINGVO.pages_goto} {$Nm1}" id="p{$Nm1}"
       {if $C==$N}rel="prev"{elseif $C==$Nm2}rel="next"{/if}
-      href="{$LANGURL}/{$ALIAS}{$FILTERS_URL}?p={$Nm1}"
+      href="{$LANGURL}/{$ALIAS}{$FILTERS_URL}/page{$Nm1}/"
       class="pagination__link{if $C==$Nm1} active{/if}">{$Nm1}</a>
     {/if}
   {/if}
@@ -300,7 +300,7 @@
   {else}
   <a title="{$LINGVO.pages_goto} {$N}" id="p{$N}"
     {if $C==$Nm1}rel="next"{/if}
-    href="{$LANGURL}/{$ALIAS}{$FILTERS_URL}?p={$N}"
+    href="{$LANGURL}/{$ALIAS}{$FILTERS_URL}/page{$N}/"
     class="pagination__link{if $C==$N} active{/if}">{$N}</a>
   {/if}
 
@@ -311,7 +311,7 @@
   </a>
   {else}
   <a class="pagination__link" title="{$LINGVO.pages_goto} {$Cp1}"
-    href="{if $FROM_GOODS}{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}?p={$Cp1}{else}{$LANGURL}/{$ALIAS}{$FILTERS_URL}?p={$Cp1}{/if}">
+    href="{if $FROM_GOODS}{$LANGURL}/{$URL[0]}/{$URL[1]}/{if isset($URL[2])}{$URL[2]}/{/if}?p={$Cp1}{else}{$LANGURL}/{$ALIAS}{$FILTERS_URL}/page{$Cp1}/{/if}">
     <img src="/img/icons/icon-arrow-right-long.svg" alt="Наступна сторінка" />
   </a>
   {/if}

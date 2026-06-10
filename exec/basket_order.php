@@ -211,12 +211,12 @@ if(isset($_POST['send_bsk']) && count($_SESSION['basket'])){
 	$all_products = implode(', ', $products);
 
 	$smarty->assign('order', $order_id);
-	$smarty->assign('phone', $_POST['phone']);
+	$smarty->assign('phone', $_POST['phone'] ?? '');
 	$smarty->assign('link', 'https://floren.com.ua/admin/order_info.php?id='.md5($order_id));
 	$smarty->assign('text', 'Новый заказ №'.$order_id);
-	$smarty->assign('count', $_POST['to_pay']);
+	$smarty->assign('count', $_POST['to_pay'] ?? '');
 	$smarty->assign('goods', $all_products);
-	$smarty->assign('payment', $_POST['payment_way']);
+	$smarty->assign('payment', $_POST['payment_way'] ?? '');
 	$smarty->assign('delivery', $_POST['delivery_way'] ?? '');
 //	REMOVE COMMENT	
 	$telegram->send($group_name, $smarty->fetch('telegram/order.tpl'));

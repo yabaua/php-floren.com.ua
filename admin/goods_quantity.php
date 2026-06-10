@@ -12,11 +12,11 @@ $forms_without_barcodes = array();
 $forms_with_barcodes = array();
 
 function get_data_with_binding() {
-    global $upd_data_1c;
+    global $upd_data_1c, $db;
 
-    $q = mysql_query("SELECT *, gfc.barcode AS binded_barcode, g1c.barcode AS barcode FROM goods_1c g1c LEFT JOIN goods_forms2_1c gfc ON g1c.barcode=gfc.barcode");
+    $db->query("SELECT *, gfc.barcode AS binded_barcode, g1c.barcode AS barcode FROM goods_1c g1c LEFT JOIN goods_forms2_1c gfc ON g1c.barcode=gfc.barcode", 33);
 
-    while ($res = mysql_fetch_array($q)) {
+    while ($res = $db->fetch(33)) {
         $upd_data_1c[] = array(
             'barcode' => $res['barcode'],
             'name' => $res['name'],
@@ -38,10 +38,11 @@ function validate_barcode($barcode) {
 }
 
 function get_data_from_db() {
-    $req = mysql_query("SELECT * FROM goods_forms2_1c");
+  global $db;
+    $db->query("SELECT * FROM goods_forms2_1c", 44);
     $data_db = array();
 
-    while($res = mysql_fetch_array($req)) {
+    while($res = $db->fetch(44)) {
         $data_db[$res['barcode']] = array(
             'fID' => $res['fID'],
             'barcode' => $res['barcode'],
@@ -52,15 +53,15 @@ function get_data_from_db() {
 }
 
 function get_forms_from_db() {
-
-    $q = mysql_query("SELECT gf.ID, g.name, gf.dia, gf.wdt, gf.hgt, gf.depth, gf.measure_qt, gf.measure_id, gm.unit, gf1c.barcode, g1c.name AS name1c
+  global $db;
+    $db->query("SELECT gf.ID, g.name, gf.dia, gf.wdt, gf.hgt, gf.depth, gf.measure_qt, gf.measure_id, gm.unit, gf1c.barcode, g1c.name AS name1c
                         FROM goods_ua g 
                         JOIN goods_forms gf ON g.ID=gf.goodID 
                         LEFT JOIN goods_forms2_1c gf1c ON gf.ID=gf1c.fID
                         LEFT JOIN goods_measures gm ON gf.measure_id=gm.ID
-                        LEFT JOIN goods_1c g1c ON g1c.barcode=gf1c.barcode");
+                        LEFT JOIN goods_1c g1c ON g1c.barcode=gf1c.barcode", 22);
 
-    while ($res = mysql_fetch_array($q)) {
+    while ($res = $db->fetch(22)) {
         $temp_arr[] = array(
             'fID' => $res['ID'],
             'name' => $res['name'],
@@ -82,9 +83,9 @@ function get_forms_from_db() {
 if (isset($_REQUEST['not_on_site'])) {
 
     $data_db = get_data_from_db();
-    $r = mysql_query("SELECT * from goods_1c");
+    $db->query("SELECT * from goods_1c");
 
-    while ($f = mysql_fetch_array($r)) {
+    while ($f = $db->fetch()) {
 
         if (!isset($data_db[$f['barcode']])) {
             $not_in_db[$f['barcode']] = array(
@@ -145,15 +146,15 @@ if (isset($_REQUEST['add_barcode'])) {
 
     foreach($_REQUEST['barcode'] as $k=>$v){
         if (strlen($v) === 13 && ctype_digit($v)) {
-            mysql_query("INSERT INTO goods_forms2_1c SET fID='".$k."', barcode='".$v."'");
-            if(mysql_error()){
-                echo '<p class="err">Щось пішло не так ('.mysql_error().')</p>';
-                $q_qt=mysql_query("SELECT CONCAT(g.name, ' ', gf.dia, '/', gf.hgt) AS nome, gf.ID, gf1c.fID,gf1c.barcode FROM goods_forms2_1c gf1c
+            $db->query("INSERT INTO goods_forms2_1c SET fID='".$k."', barcode='".$v."'");
+            if($db->error()){
+                echo '<p class="err">Щось пішло не так ('.$db->error().')</p>';
+                $db->query("SELECT CONCAT(g.name, ' ', gf.dia, '/', gf.hgt) AS nome, gf.ID, gf1c.fID,gf1c.barcode FROM goods_forms2_1c gf1c
                                 LEFT JOIN goods_forms gf ON gf.ID=gf1c.fID
                                 LEFT JOIN goods g ON gf.goodID=g.ID
-                                WHERE gf1c.barcode='".$v."'");
+                                WHERE gf1c.barcode='".$v."'", 1);
 
-                $rs_qt=mysql_fetch_array($q_qt);
+                $rs_qt=$db->fetch(1);
                 if(!$rs_qt['nome'])
                     echo '<p class="err">Сокоріш за все штрикод привязаний до неіснуючого товару</p>';
                 else{
@@ -173,7 +174,7 @@ if (isset($_REQUEST['remove_barcode'])) {
 
     if (isset($_REQUEST['barcode'])) {
         foreach($_REQUEST['barcode'] as $k=>$v){
-            mysql_query("DELETE FROM goods_forms2_1c WHERE fID='".$k."'");
+            $db->query("DELETE FROM goods_forms2_1c WHERE fID='".$k."'");
         }
     }
     get_data_with_binding();
@@ -421,9 +422,9 @@ if (isset($_REQUEST['remove_barcode'])) {
 
                 <select name="category" id="classes">
                     <option value="0"></option>
-                    <? $qr = mysql_query("SELECT * FROM goods_class WHERE motherID=0");
+                    <? $db->query("SELECT * FROM goods_class WHERE motherID=0");
                     
-                    while ($rs=mysql_fetch_array($qr)) {
+                    while ($rs=$db->fetch()) {
                         if ($rs['ID']=='25' || $rs['ID']=='49') {
                     ?>
                         <option value="<?=$rs['ID']?>"<?=($category==$rs['ID']?' selected':'')?>>
@@ -431,8 +432,8 @@ if (isset($_REQUEST['remove_barcode'])) {
                         </option>
                         <? } else { ?>
                             <optgroup label="<?=$rs['name']?>">
-                                <? $qr1 = mysql_query("SELECT gc.ID, gc.name, COUNT(DISTINCT g.ID) AS c FROM goods_class gc LEFT JOIN goods g ON g.classID=gc.ID WHERE motherID=".$rs['ID']." GROUP BY gc.ID");
-                                    while($rs1=mysql_fetch_array($qr1)){
+                                <? $db->query("SELECT gc.ID, gc.name, COUNT(DISTINCT g.ID) AS c FROM goods_class gc LEFT JOIN goods g ON g.classID=gc.ID WHERE motherID=".$rs['ID']." GROUP BY gc.ID", 11);
+                                    while($rs1=$db->fetch(11)){
                                 ?>
                                     <option value="<?=$rs1['ID']?>"<?=($category==$rs1['ID']?' selected':'')?>>(<?=$rs1['ID']?>)&nbsp;&nbsp;<?=$rs1['name']?>&nbsp;&nbsp;(<?=$rs1['c']?>)</option>
                                 <?}?>
@@ -467,7 +468,7 @@ if (isset($_REQUEST['remove_barcode'])) {
                 </tr>
                 <?
                 
-                $qr = mysql_query("SELECT g.ID, g.classID, g.name, g.act, gf.ID AS formID, gf.dia, gf.hgt, gf.wdt, gf.wdt, gf.color, gf.depth, gf.measure_qt, gf.measure_id, gf.visibility, gm.unit, gfc.barcode, g1c.name AS name1c, g1c.f1_stock, g1c.f2_stock, g1c.f3_stock
+                $db->query("SELECT g.ID, g.classID, g.name, g.act, gf.ID AS formID, gf.dia, gf.hgt, gf.wdt, gf.wdt, gf.color, gf.depth, gf.measure_qt, gf.measure_id, gf.visibility, gm.unit, gfc.barcode, g1c.name AS name1c, g1c.f1_stock, g1c.f2_stock, g1c.f3_stock
                             FROM goods_ua g
                             LEFT JOIN goods_forms gf ON g.ID=gf.goodID
                             LEFT JOIN goods_forms2_1c gfc ON gf.ID=gfc.fID
@@ -476,7 +477,7 @@ if (isset($_REQUEST['remove_barcode'])) {
                             WHERE classID=".$category."
                             ORDER BY g.name DESC, gf.dia DESC");
 
-                for ($i=0;$rs=mysql_fetch_array($qr);$i++) {
+                for ($i=0;$rs=$db->fetch();$i++) {
                     $green_border='';
 					if(($rs['f1_stock']+$rs['f2_stock']+$rs['f3_stock'])>0 && $rs['visibility']==0)
 						$green_border=' style="border:3px solid green"';

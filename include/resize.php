@@ -128,7 +128,7 @@ function img_resize($src, $dest, $width, $height, $rgb=0xFFFFFF, $quality=100, $
      $mask_src_y=($dst_width*0.3)>400?400:$dst_width*0.3;
        
         
-  	$imLens=imagecreatefrompng($_SERVER['DOCUMENT_ROOT']."/img/floren_mask_big.png");
+  	$imLens=imagecreatefrompng($_SERVER['DOCUMENT_ROOT']."/img/floren_mask_big_ua.png");
 	imagecopyresampled($idest, $imLens, $dst_width-($mask_src_x+30), $dst_height-($mask_src_y+10), 0, 0, $mask_src_x, $mask_src_y, 400, 400);
   }
     switch($ort)
@@ -150,14 +150,12 @@ function img_resize($src, $dest, $width, $height, $rgb=0xFFFFFF, $quality=100, $
   imagejpeg($idest, $dest, $quality);
   
   $webpdest=str_replace(".jpg", ".webp", $dest);
-  imagewebp($im, 'php.webp');
+  imagewebp($idest, $webpdest, $quality);
 
   imagedestroy($isrc);
   imagedestroy($idest);
 
-  return true;
-     echo "111" . $ort;
-     exit();
+
 }
 
 ?>

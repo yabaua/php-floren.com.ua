@@ -12,7 +12,7 @@ $from_goods = 1;
 
 $sql_pot_group = '';
 $is_pot = 0;
-$max_pages_links = 20;
+$max_pages_links = 25;
 $sql_sort_order = "g.act='0', g.availability > 0 DESC, g.preorder=0, sort DESC, gf.price > 0 DESC, g.classID DESC, g.name";
 
 if($URL[0] == 'planters') {

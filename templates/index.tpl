@@ -215,8 +215,8 @@
             <div class="google-logo__info">
               <h5>Рейтинг Google</h5>
               <div class="google-logo__rating">
-                <span>4.8</span>
-                <sl-rating size="small" value="4.8" readonly></sl-rating>
+                <span>4.9</span>
+                <sl-rating size="small" value="4.9" readonly></sl-rating>
               </div>              
             </div>
           </div>

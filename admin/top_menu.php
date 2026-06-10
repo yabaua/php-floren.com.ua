@@ -9,6 +9,12 @@
 	<a href="?lang=ru<?=$urlID?><?=$urlCategoryID?>" class="adm-btn adm-btn_max<?=$lang=='ru'?' btn_active':''?>">RU</a>
 	<a href="?lang=ua<?=$urlID?><?=$urlCategoryID?>" class="adm-btn adm-btn_max<?=$lang=='ua'?' btn_active':''?>">UA</a>
 </div>
+<?php
+if (
+    strpos($_SERVER['REQUEST_URI'], 'goods') === false &&
+    strpos($_SERVER['REQUEST_URI'], 'price') === false
+){
+?>
 <div class="holder menu_buttons">
 	<a href="/admin/goods_class.php?lang=<?=$lang?>" target="main">Структура</a>
 	<a href="/admin/goods_list.php?lang=<?=$lang?>" target="main">Товары</a>
@@ -19,4 +25,5 @@
 	<a href="/admin/price.php" target="main">Цены</a>
 	<a href="/admin/goods_colors_edit.php" target="main">Редактировать цвета</a>
 </div>
+<?php }?>
 <p>&nbsp;</p>

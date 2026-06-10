@@ -152,19 +152,23 @@ include("../include/strlib.php");
 
 <?
 	// ============ Total Goods =============
-	$q1 = mysql_query("SELECT COUNT(g.ID) AS cnt FROM goods g
+	$goods_qt=0;
+	$db->query("SELECT COUNT(g.ID) AS cnt FROM goods g
 		JOIN goods_class gc ON g.classID=gc.ID
 		WHERE gc.motherID=3");
- 	$goods_qt=mysql_fetch_array($q1);
+ 	$rs = $db->fetch();
+ 	$goods_qt = $rs['cnt'];
  	// ============ Total Good Forms =============
-	$q2 = mysql_query("SELECT COUNT(gf.ID) AS cnt FROM goods g
+ 	$goods_forms_qt = 0;
+	$db->query("SELECT COUNT(gf.ID) AS cnt FROM goods g
 				JOIN goods_class gc ON g.classID=gc.ID
 				JOIN goods_forms gf ON g.ID=gf.goodID
 				WHERE gc.motherID=3");
-	$goods_forms_qt=mysql_fetch_array($q2);
+	$rs2 = $db->fetch();		
+	$goods_forms_qt = $rs2['cnt'];
 	
 	// ============ Total Goods IN Stock=============
-	$q3= mysql_query("SELECT gf21c.barcode AS bar, CONCAT(g.name, ' ', gf.dia, '/', gf.hgt), gf.color, (g1c.f1_stock+g1c.f2_stock) AS in_stock
+	$db->query("SELECT gf21c.barcode AS bar, CONCAT(g.name, ' ', gf.dia, '/', gf.hgt), gf.color, (g1c.f1_stock+g1c.f2_stock) AS in_stock
 				FROM goods g
 				JOIN goods_class gc ON g.classID=gc.ID
 				JOIN goods_forms gf ON g.ID=gf.goodID
@@ -174,11 +178,12 @@ include("../include/strlib.php");
 				WHERE gc.motherID=3 AND gf21c.barcode AND (g1c.f1_stock+g1c.f2_stock)
 				GROUP BY g.ID
 				ORDER BY g.name;");
-	$goods_qt_in_stock=mysql_num_rows($q3);
+				
+	$goods_qt_in_stock=$db->num_rows();
 	
 	// ============ Total Good Forms IN Stock =============
 	
-	$q4= mysql_query("SELECT gf21c.barcode AS bar, CONCAT(g.name, ' ', gf.dia, '/', gf.hgt), gf.color, (g1c.f1_stock+g1c.f2_stock) AS in_stock
+	$db->query("SELECT gf21c.barcode AS bar, CONCAT(g.name, ' ', gf.dia, '/', gf.hgt), gf.color, (g1c.f1_stock+g1c.f2_stock) AS in_stock
 				FROM goods g
 				JOIN goods_class gc ON g.classID=gc.ID
 				JOIN goods_forms gf ON g.ID=gf.goodID
@@ -191,18 +196,18 @@ include("../include/strlib.php");
 					AND (g1c.f1_stock+g1c.f2_stock)
 				GROUP BY gf.ID
 				ORDER BY g.name;");
-	$goods_forms_qt_in_stock=mysql_num_rows($q4);
+	$goods_forms_qt_in_stock = $db->num_rows();
 	
 ?>
 
-Всього кімнатних рослин на сайті: <b><?=$goods_qt['cnt']?></b>, в наявності хоч один розмір: <b><?=$goods_qt_in_stock?></b> тобто <b><?echo round(($goods_qt_in_stock/$goods_qt['cnt'])*100, 2)?>%</b> </br>
-Всього кімнатних рослин по розмірах: <b><?=$goods_forms_qt['cnt']?></b>, в наявності: <b><?=$goods_forms_qt_in_stock?></b> тобто <b><?echo round(($goods_forms_qt_in_stock/$goods_forms_qt['cnt'])*100, 2)?>%</b> </br>
+Всього кімнатних рослин на сайті: <b><?=$goods_qt?></b>, в наявності хоч один розмір: <b><?=$goods_qt_in_stock?></b> тобто <b><?echo round(($goods_qt_in_stock/$goods_qt)*100, 2)?>%</b> </br>
+Всього кімнатних рослин по розмірах: <b><?=$goods_forms_qt?></b>, в наявності: <b><?=$goods_forms_qt_in_stock?></b> тобто <b><?echo round(($goods_forms_qt_in_stock/$goods_forms_qt)*100, 2)?>%</b> </br>
 
 
 
 <h2>Кімнатні рослини, яких немає в наявності</h2>
 <?
-	$q1	=	mysql_query("SELECT gf21c.barcode AS bar, gc.name AS className, CONCAT(g.name) AS nome, COUNT(g1c.f1_stock+g1c.f2_stock) AS in_stock, g.availability, gf.visibility
+	$db->query("SELECT gf21c.barcode AS bar, gc.name AS className, CONCAT(g.name) AS nome, COUNT(g1c.f1_stock+g1c.f2_stock) AS in_stock, g.availability, gf.visibility
 				FROM goods g
 				JOIN goods_class gc ON g.classID=gc.ID
 				JOIN goods_forms gf ON g.ID=gf.goodID
@@ -212,9 +217,10 @@ include("../include/strlib.php");
 				WHERE gc.motherID=3 AND gf21c.barcode# AND !(g1c.f1_stock+g1c.f2_stock)
 				GROUP BY g.ID
 				ORDER BY gc.ID, g.name;");
-				echo mysql_error();
-	while($rs=mysql_fetch_array($q1))
+				
+	while($rs=$db->fetch()){
 		$goods_not_in_stock[]=$rs;
+	}
 	
 ?>
 			<table border="1" cellpadding="2" style="border-collapse: collapse;">
@@ -251,7 +257,7 @@ include("../include/strlib.php");
 <h2>Не прив&#740;язані товари</h2>
 
 <?
-	$q	=	mysql_query("SELECT gf21c.barcode AS bar, CONCAT(g.name, ' ', gf.dia, '/', gf.hgt) AS nome, gf.color AS color FROM goods g
+	$db->query("SELECT gf21c.barcode AS bar, CONCAT(g.name, ' ', gf.dia, '/', gf.hgt) AS nome, gf.color AS color FROM goods g
 				JOIN goods_class gc ON g.classID=gc.ID
 				JOIN goods_forms gf ON g.ID=gf.goodID
 				LEFT JOIN goods_forms2_1c gf21c ON gf21c.fID=gf.ID
@@ -259,9 +265,10 @@ include("../include/strlib.php");
 				
 				WHERE gc.motherID=3 AND gf21c.barcode IS NULL
 				ORDER BY g.name");
-				echo mysql_error();
-	while($rs=mysql_fetch_array($q))
+				
+	while($rs=$db->fetch()){
 		$goods_without_barcode[]=$rs;
+	}
 	
 ?>
 			<table border="1" style="border-collapse: collapse;">

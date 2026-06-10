@@ -220,7 +220,7 @@ if (isset($_REQUEST['add_new'])) {
 	
 			$qv_new = $qv_new . ", img='".$image."'";
 	
-			echo $db->error();
+		//	echo $db->error();
 			$db->query($qv_new);
 	
 			check_availability('goods');
@@ -840,7 +840,7 @@ function checkFormsWithColor($id) {
 			<?php foreach($imgs as $v){?>
 			<div style="float:left;margin-left:5px;">
 				<img src="/images/ins/s/<?=$v.'?'.time()?>" border=0 align="left" style="margin-right:2px;">
-				<input type="Submit" name="del_img_s[<?=$v?>]" class="delete_but" value="" onclick="if(!confirm('Уверен?')) return false;">
+				<input type="Submit" name="del_img_s[<?=$v?>]" class="delete_but" value="&#10006;" onclick="if(!confirm('Уверен?')) return false;">
 			</div>
 			<?php }//foreach?>
 		<?php }//if images?>

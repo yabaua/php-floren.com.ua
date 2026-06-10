@@ -67,7 +67,7 @@ add_body('services/',$date,'weekly', '1');
 add_body('publications/',$date,'weekly', '1');
 add_body('sitemap/',$date,'weekly', '1');
 add_body('phytodesign/',$date,'weekly', '1');
-add_body('compositions/',$date,'weekly', '1');
+// add_body('compositions/',$date,'weekly', '1');
 add_body('about/',$date,'weekly', '1');
 add_body('clients/',$date,'weekly', '1');
 add_body('contacts/',$date,'weekly', '1');
@@ -75,7 +75,6 @@ add_body('delivery/',$date,'weekly', '1');
 add_body('gallery/',$date,'weekly', '1');
 add_body('partnership/',$date,'weekly', '1');
 add_body('gift-card/',$date,'weekly', '1');
-add_body('florist/',$date,'weekly', '1');
 
 
 
@@ -152,14 +151,6 @@ while($f=$db->fetch()) {
 	add_body('services/'.$f['alias'].'/',$date,'weekly', '0.6');
 };
 
-$db->query("SELECT * FROM services_landscape WHERE act='1' ORDER BY ID");
-while($f=$db->fetch()) {
-	if($f['category']==$f['alias']){
-		add_body($f['category'].'/',$date,'weekly', '0.6');	
-	}else{
-		add_body($f['category'].'/'.$f['alias'].'/',$date,'weekly', '0.6');
-	}
-};
 $db->query("SELECT * FROM gallery_list");
 while($f=$db->fetch()) {
 	add_body('gallery/'.$f['alias'].'/',$date,'weekly', '0.3');
@@ -178,13 +169,15 @@ $db->query("SELECT g.ID, g.link, g.classID, gc.motherID AS mID
 while ($f=$db->fetch()) {
 	$i++;
 	if(in_array($f['classID'], array(49))){
-		add_body('compositions/'.$f['link'].'/',$date,'weekly', '0.8');
+		continue;
+	//	add_body('compositions/'.$f['link'].'/',$date,'weekly', '0.8');
 	}
 	elseif($f['classID']=='68' || $f['classID']=='74'){ //wood-planters
 		continue;
 	}
-	elseif($f['mID']=='77'){ //buket
-		add_body('buket/'.$f['ID'].'/',$date,'weekly', '0.8');
+	elseif(in_array($f['classID'], array(77,78,79,80))){ //buket
+	//	add_body('buket/'.$f['ID'].'/',$date,'weekly', '0.8');
+		continue;
 	}
 	else{
 		add_body('product/'.$f['ID'].'_'.$f['link'].'/',$date,'weekly', '0.8');

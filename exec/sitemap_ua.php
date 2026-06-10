@@ -74,7 +74,7 @@ add_body('services/',$date,'weekly', '1');
 add_body('publications/',$date,'weekly', '1');
 add_body('sitemap/',$date,'weekly', '1');
 add_body('phytodesign/',$date,'weekly', '1');
-add_body('compositions/',$date,'weekly', '1');
+//add_body('compositions/',$date,'weekly', '1');
 add_body('about/',$date,'weekly', '1');
 add_body('clients/',$date,'weekly', '1');
 add_body('contacts/',$date,'weekly', '1');
@@ -108,10 +108,10 @@ while($f=$db->fetch()) {
 
 //category filters
 $category_left=array();
-$db->query("SELECT ID, alias FROM goods".$db_sufix."_class WHERE motherID=0 AND act='1' ORDER BY sort DESC,name");
+$db->query("SELECT ID, alias FROM goods_ua_class WHERE motherID=0 AND act='1' ORDER BY sort DESC,name");
 while ($f=$db->fetch()) {
 	$category_left[$f['ID']]['alias']=$f['alias'];
-	$db->query("SELECT gc.ID, gc.alias FROM goods".$db_sufix."_class gc WHERE motherID=".$f['ID']." AND act='1' ORDER BY sort DESC",1);
+	$db->query("SELECT gc.ID, gc.alias FROM goods_ua_class gc WHERE motherID=".$f['ID']." AND act='1' ORDER BY sort DESC",1);
 	while ($ff=$db->fetch(1)) {
 		$category_left[$f['ID']]['category'][]	=	$ff;
 	}
@@ -140,7 +140,7 @@ $db->query("SELECT * FROM services WHERE act='1'");
 while($f=$db->fetch()) {
 	add_body('services/'.$f['alias'].'/',$date,'weekly', '0.6');
 };
-
+/*
 $db->query("SELECT * FROM services_landscape WHERE act='1' ORDER BY ID");
 while($f=$db->fetch()) {
 	if($f['category']==$f['alias']){
@@ -149,6 +149,7 @@ while($f=$db->fetch()) {
 		add_body($f['category'].'/'.$f['alias'].'/',$date,'weekly', '0.6');
 	}
 };
+*/
 $db->query("SELECT * FROM gallery_list");
 while($f=$db->fetch()) {
 	add_body('gallery/'.$f['alias'].'/',$date,'weekly', '0.3');
@@ -167,13 +168,15 @@ $db->query("SELECT g.ID, g.link, g.classID, gc.motherID AS mID
 while ($f=$db->fetch()) {
 	$i++;
 	if(in_array($f['classID'], array(49))){
-		add_body('compositions/'.$f['link'].'/',$date,'weekly', '0.8');
+	//	add_body('compositions/'.$f['link'].'/',$date,'weekly', '0.8');
+		continue;
 	}
 	elseif($f['classID']=='68' || $f['classID']=='74'){ //wood-planters
 		continue;
 	}
-	elseif($f['mID']=='77'){ //buket
-		add_body('buket/'.$f['ID'].'/',$date,'weekly', '0.8');
+	elseif(in_array($f['classID'], array(77,78,79,80))){ //buket
+		continue;
+		//add_body('buket/'.$f['ID'].'/',$date,'weekly', '0.8');
 	}
 	else{
 		add_body('product/'.$f['ID'].'_'.$f['link'].'/',$date,'weekly', '0.8');

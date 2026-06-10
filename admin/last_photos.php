@@ -23,12 +23,12 @@ if(isset($_REQUEST['del_img_s'])){
 	
 	foreach($_REQUEST['del_img_s'] as $k=>$v){
 		
-		$qr=mysql_query("SELECT * FROM last_photos WHERE ID='".$k."'");
-		$rs=mysql_fetch_array($qr);
+		$db->query("SELECT * FROM last_photos WHERE ID='".$k."'");
+		$rs=$db->fetch();
 
 		@unlink($_SERVER['DOCUMENT_ROOT']."/images/lastphotos/b/".$rs['photo_url']);
 		@unlink($_SERVER['DOCUMENT_ROOT']."/images/lastphotos/s/".$rs['photo_url']);
-		mysql_query("DELETE FROM last_photos WHERE ID=".$k);
+		$db->query("DELETE FROM last_photos WHERE ID='".$k."'", 1);
 	}
 }
 
@@ -57,9 +57,8 @@ if (isset($_REQUEST['add_photo']) && ($photo_name=trim($_REQUEST['photo_name']))
 			chmod($_SERVER['DOCUMENT_ROOT'].'/images/lastphotos/b/'.$photo_url,0777);
 			chmod($_SERVER['DOCUMENT_ROOT'].'/images/lastphotos/s/'.$photo_url,0777);
 			
-			mysql_query("INSERT INTO last_photos (photo_name, photo_name_ua, photo_url, photo_dsc, photo_dsc_ua, date_add) VALUES ('".$photo_name."', '".$photo_name_ua."', '".$photo_url."', '".$photo_dsc."', '".$photo_dsc_ua."', '".time()."')");
+			$db->query("INSERT INTO last_photos (photo_name, photo_name_ua, photo_url, photo_dsc, photo_dsc_ua, date_add) VALUES ('".$photo_name."', '".$photo_name_ua."', '".$photo_url."', '".$photo_dsc."', '".$photo_dsc_ua."', '".time()."')");
 	
-	echo mysql_error();
 	echo '<FONT COLOR="#FF0000">Фото добавлено</FONT>';
 	
 	
@@ -70,7 +69,7 @@ if (isset($_REQUEST['add_photo']) && ($photo_name=trim($_REQUEST['photo_name']))
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<script src="/admin/ckeditor/ckeditor.js"></script>
-	<link rel="stylesheet" type="text/css" href="style_back.css">
+	<link rel="stylesheet" type="text/css" href="style_back.css?v=<?=time();?>">
 </head>
 <body style="margin-left:20px;">
 <div class="holder" style="margin:10px 0;padding:10px 0;">
@@ -127,15 +126,17 @@ if (isset($_REQUEST['add_photo']) && ($photo_name=trim($_REQUEST['photo_name']))
 </style>
 <div class="instagram-indx">
 	<?
-	$qr=mysql_query("SELECT * FROM last_photos ORDER BY date_add DESC");
-	for($i=0;$rs=mysql_fetch_array($qr);$i++){
+	$db->query("SELECT * FROM last_photos ORDER BY date_add DESC");
+	for($i=0;$rs=$db->fetch();$i++){
 	?>
 					<div style="height:300px;overflow-y: auto;margin:10px 5px;">
 						<p><?=$rs['photo_name'.$db_sufix]?></p>
 						<a href="/images/lastphotos/b/<?=$rs['photo_url']?>" class="image" target="_blank" data-fancybox="indxGallery"><img src="/images/lastphotos/s/<?=$rs['photo_url']?>" width="180" alt="" /></a>
 						<p>Дата: <?=date("d.m.Y", $rs['date_add'])?></p>
 						<p><?=$rs['photo_dsc'.$db_sufix];?></p>
-						<p align="center"><input type="Submit" name="del_img_s[<?=$rs['ID']?>]" class="delete_but" value="" onclick="if(!confirm('Уверен?')) return false;"></p>
+						<p align="center">
+							<input type="Submit" name="del_img_s[<?=$rs['ID']?>]" class="delete_but" value="&#10006;" onclick="if(!confirm('Уверен?')) return false;">
+						</p>
 					</div>
 			<?
 			if($i%5==4){
