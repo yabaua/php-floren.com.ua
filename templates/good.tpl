@@ -53,8 +53,8 @@
       <div class="product-page__options_size">
         <sl-radio-group name="size" label="{$LINGVO.choose_size}" value="{$CUR_GFSID}">
         {foreach from=$G_SIZES item=size key=k}
-          <sl-radio value="{$size.fID}"{if $size.price==0 || $size.visibility==0} disabled{/if}>
-            <a href="{$size.hrefID}">
+        <a href="{$size.hrefID}">
+          <sl-radio value="{$size.fID}"{if $size.price==0 || $size.visibility==0} disabled{/if}>            
               <div class="size__name">{$size.measure}</div>
               <div class="size__price">{$size.price}<sup>грн</sup>
               </div>
@@ -76,9 +76,8 @@
               {else}
               <span class="size__video-link"></span>
               {/if}
-              
-            </a>
           </sl-radio>
+          </a>
         {/foreach}
         </sl-radio-group>
       </div>
