@@ -13,19 +13,22 @@ const clickHandlers = {
     const element = event.currentTarget;
     const tooltip = element.closest("#phones-tooltip");
     const wrapper = tooltip.querySelector(".header__main--phones");
+    window.BinotelCallTracking[503289].buttonShowPhoneNumberPressed();
     if (wrapper.classList.contains("active")) {
       return;
     }
-    // tooltip.open = !tooltip.open;
-    wrapper.classList.toggle("active");
+    setTimeout(() => {
+      // tooltip.open = !tooltip.open;
+      wrapper.classList.toggle("active");
+    }, 100);
   },
   toggleTooltip: (event) => {
     const element = event.currentTarget;
     const tooltip = document.getElementById(element.dataset.tooltip);
     console.log('element', element);
     if (tooltip) {
-      tooltip.open = !tooltip.open;  
-    }    
+      tooltip.open = !tooltip.open;
+    }
   },
   toggleFooterPhones: (event) => {
     event.currentTarget.closest(".contacts-phone").classList.toggle("active");
@@ -33,7 +36,7 @@ const clickHandlers = {
   toggleAdvicesPhones: (event) => {
     event.currentTarget.closest(".homepage__advices_content--phones").classList.toggle("active");
   },
-  openModal: (e) => {    
+  openModal: (e) => {
     const modalId = e.currentTarget.dataset.modalId;
     const modal = document.getElementById(modalId);
     console.log('modalId', modalId);
@@ -46,7 +49,7 @@ const clickHandlers = {
     const modals = document.querySelectorAll("sl-dialog");
     modals.forEach((modal) => modal.hide());
   },
-  showMoreGoods: async () => {    
+  showMoreGoods: async () => {
     try {
       const data = await fetchShowMoreGoods(window.currentPage + 1);
       updateGoodsList(data);
@@ -55,10 +58,10 @@ const clickHandlers = {
     }
   },
   addToCart,
-  toggleMobileSearch: (event) => {    
+  toggleMobileSearch: (event) => {
     const search = document.querySelector("#main-search-form");
     console.log('toggleMobileSearch', search);
-    
+
     search.classList.toggle("active");
   }
 };
