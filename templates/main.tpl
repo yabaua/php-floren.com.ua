@@ -721,25 +721,25 @@
 
               <h3 class="header__catalog_list-mobile-title" style="margin-top: 1rem;">Каталог послуг</h3>
               <ul class="category-list category-list--secondary-mobile">
-                <li>
+                <li data-category="services-phytodesign">
                   <a href="{$LANGURL}/phytodesign/">
                     <b>{$LINGVO.phytodesign}</b>
                     <span>{$LINGVO.ozelenenie_prostoru}</span>
                   </a>
                 </li>
-                <li>
+                <li data-category="services-vertical">
                   <a href="{$LANGURL}/services/vertikalnoe-ozelenenie/">
                     <b>{$LINGVO.vertikalnoe_ozelenenie}</b>
                     <span>{$LINGVO.green_wall_short}</span>
                   </a>
                 </li>
-                <li>
+                <li data-category="services-care">
                   <a href="{$LANGURL}/services/house_plant_care/">
                     <b>{$LINGVO.care}</b>
                     <span>{$LINGVO.za_rasteniyami}</span>
                   </a>
                 </li>
-                <li>
+                <li class="single-item">
                   <a href="{$LANGURL}/gallery/">
                     <b>{$LINGVO.portfolio}</b>
                     <span>{$LINGVO.photo_gallery}</span>
@@ -766,7 +766,7 @@
                         </a>
                       </li>
                       {foreach item=CC name=CC from=$C.category}
-                        <li>
+                      <li>
                         <a href="{$LANGURL}/{$C.alias}/{$CC.cur_alias}/">
                           <div class="category-content__item-list-image">
                             <img src="/img/category/{$CC.cur_alias}.png?v=1" alt="{$CC.name}" />
@@ -786,7 +786,135 @@
                       </li>
                     </ul>
                   </section>
-                {/foreach}
+                {/foreach}  
+                <!-- Services category content -->
+                <section class="category-content__item" data-category="services-phytodesign">
+                  <button class="category-content__back-button">
+                    <svg class="icon icon-arrow-angle-left"/>
+                    {$LINGVO.phytodesign}
+                  </button>
+                  <ul class="category-content__item-list">
+                    <li class="category-content__item-list-all">
+                      <a href="{$LANGURL}/phytodesign/">                        
+                        <span>Всі послуги з фітодизайну</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="underline" href="{$LANGURL}/services/phytodesign-kvartiri/">
+                        <div class="category-content__item-list-image  services-list-image">
+                          <img src="/img/sevices/apartment-phytodesign.png" alt="{$LINGVO.phytodesign_kvartiri}"/>
+                        </div>                          
+                        <span>{$LINGVO.phytodesign_kvartiri}</span>
+                      </a>                      
+                    </li>
+                    <li>
+                      <a class="underline" href="{$LANGURL}/services/phytodesign-ofisa/">
+                        <div class="category-content__item-list-image  services-list-image">
+                          <img src="/img/sevices/office-phytodesign.png" alt="{$LINGVO.phytodesign_ofisa}"/>
+                        </div>                          
+                        <span>{$LINGVO.phytodesign_ofisa}</span>
+                      </a>                      
+                    </li>
+                    <li>
+                      <a class="underline" href="{$LANGURL}/services/ozelenenie_letney_ploschadki/">
+                        <div class="category-content__item-list-image  services-list-image">
+                          <img src="/img/sevices/landscaping-of-summer-terraces.png" alt="{$LINGVO.ozelenenie_terras}"/>
+                        </div>                          
+                        <span>{$LINGVO.ozelenenie_terras}</span>
+                      </a>                      
+                    </li>
+                    <li>
+                      <a class="underline" href="{$LANGURL}/services/peregorodki-iz-rasteniy/">
+                        <div class="category-content__item-list-image  services-list-image">
+                          <img src="/img/sevices/zoning-space-with-indoor-plants.png" alt="{$LINGVO.zonirovanie}"/>
+                        </div>                          
+                        <span>{$LINGVO.zonirovanie}</span>
+                      </a>                      
+                    </li>                    
+                    <li>
+                      <a class="underline" href="{$LANGURL}/services/ozelenenie-iskusstvennimi-rasteniyami/">
+                        <div class="category-content__item-list-image  services-list-image">
+                          <img src="/img/sevices/landscaping-artificial-plants.png" alt="{$LINGVO.ozelenenie_iskusstvennimi_rasteniyami}"/>
+                        </div>                          
+                        <span>{$LINGVO.ozelenenie_iskusstvennimi_rasteniyami}</span>
+                      </a>                      
+                    </li>
+                  </ul>
+                </section>
+                <section class="category-content__item" data-category="services-vertical">
+                  <button class="category-content__back-button">
+                    <svg class="icon icon-arrow-angle-left"/>
+                    {$LINGVO.vertikalnoe_ozelenenie}
+                  </button>
+                  <ul class="category-content__item-list">
+                    <li class="category-content__item-list-all">
+                      <a href="{$LANGURL}/services/vertikalnoe-ozelenenie/">                        
+                        <span>Всі послуги з вертикального озеленення</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="underline" href="{$LANGURL}/services/green-wall/">
+                        <div class="category-content__item-list-image  services-list-image">
+                          <img src="/img/sevices/green-walls.png" alt="{$LINGVO.green_wall}"/>
+                        </div>                          
+                        <span>{$LINGVO.green_wall}</span>
+                      </a>                      
+                    </li>
+                    <li>
+                      <a class="underline" href="{$LANGURL}/services/vertikalnoe-ozelenenie-metallicheskimi-konstruktsiyami/">
+                        <div class="category-content__item-list-image  services-list-image">
+                          <img src="/img/sevices/landscaping-using-vertical-structures.png" alt="{$LINGVO.metall_ozel}"/>
+                        </div>                          
+                        <span>{$LINGVO.metall_ozel}</span>
+                      </a>                      
+                    </li>
+                    <li>
+                      <a class="underline" href="{$LANGURL}/services/ozelenenie-stabilizirovannim-mhom/">
+                        <div class="category-content__item-list-image  services-list-image">
+                          <img src="/img/sevices/green-moss-walls.png" alt="{$LINGVO.ozelenenie_moss}"/>
+                        </div>                          
+                        <span>{$LINGVO.ozelenenie_moss}</span>
+                      </a>                      
+                    </li>
+                  </ul>
+                </section>
+                <section class="category-content__item" data-category="services-care">
+                  <button class="category-content__back-button">
+                    <svg class="icon icon-arrow-angle-left"/>
+                    {$LINGVO.care}
+                  </button>
+                  <ul class="category-content__item-list">
+                    <li class="category-content__item-list-all">
+                      <a href="{$LANGURL}/services/house_plant_care/">                        
+                        <span>Всі послуги по догляду за рослинами</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="underline" href="{$LANGURL}/services/peresadka/">
+                        <div class="category-content__item-list-image  services-list-image">
+                          <img src="/img/sevices/plant-transplantation.png" alt="{$LINGVO.peresadka_rasteniy}"/>
+                        </div>                          
+                        <span>{$LINGVO.peresadka_rasteniy}</span>
+                      </a>                      
+                    </li>
+                    <li>
+                      <a class="underline" href="{$LANGURL}/services/shipping/">
+                        <div class="category-content__item-list-image  services-list-image">
+                          <img src="/img/sevices/plant-transportation.png" alt="{$LINGVO.perevozka_rasteniy}"/>
+                        </div>                          
+                        <span>{$LINGVO.perevozka_rasteniy}</span>
+                      </a>                      
+                    </li>
+                    <li>
+                      <a class="underline" href="{$LANGURL}/services/arenda_rasteniy/">
+                        <div class="category-content__item-list-image  services-list-image">
+                          <img src="/img/sevices/plant-rental.png" alt="{$LINGVO.arenda_rasteniy}"/>
+                        </div>                          
+                        <span>{$LINGVO.arenda_rasteniy}</span>
+                      </a>                      
+                    </li>
+                  </ul>
+                </section>
               </div>
             </div>
             <div class="header__catalog_list-wrapper">
