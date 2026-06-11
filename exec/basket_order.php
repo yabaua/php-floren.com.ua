@@ -151,8 +151,8 @@ if(isset($_POST['send_bsk']) && count($_SESSION['basket'])){
 
 	$letter=$sm->fetch('mail/order.htm');		
 	$floren->send_email('info@floren.com.ua','Нове замовлення №'.$order_id,$letter);
-//	$floren->send_email('sales@floren.com.ua','Новый заказ №'.$order_id,$letter);
-//	$floren->send_email('goncharova@floren.com.ua','Новый заказ №'.$order_id,$letter);
+	$floren->send_email('sales@floren.com.ua','Нове замовлення №'.$order_id,$letter);
+
 
 //===============GOOGLE GA4
 
