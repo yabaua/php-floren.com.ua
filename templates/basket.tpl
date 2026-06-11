@@ -369,7 +369,7 @@ smallOrder: parseFloat("{$DELIVERY_OPTIONS.small_order}"),
 
 smallOrderDeliveryPrice: parseFloat("{$DELIVERY_OPTIONS.small_order_delivery}"),
 
-minimumOrderDelivery: parseFloat("{$DELIVERY_OPTIONS.minimum_order}"),
+minimumOrderDelivery: parseFloat("{$DELIVERY_OPTIONS.minimum_bid}"),
 
 delivery: 'magazin',
 
