@@ -5649,6 +5649,7 @@ button.catalog-page__show-filters {
   padding: 0.5rem 0.75rem;
   border-radius: 0.5rem;
   transition: background-color 0.3s ease;
+  width: 100%;
 }
 .product-page__options_size sl-radio:hover {
   background-color: var(--color-button-hover);
