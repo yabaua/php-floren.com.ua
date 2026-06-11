@@ -73,6 +73,10 @@
 
           <section class="information__shipping">
             <h2>2. {$LINGVO.way_to_deliver}</h2>
+            <sl-alert variant="warning" data-name="small-order-for-delivery">
+              <span slot="icon" class="icon icon-info-circle"></span>
+              Замовлення до 1000 грн доступні лише для самовивозу.<br />Доставка та відправка поштою — від 1000 грн.
+            </sl-alert>
             <sl-radio-group name="delivery_way" value="magazin" id="delivery-methods" data-product-price="{$BSK_TTL}" data-is-plant="{$IS_BSK_PLANT}">
               <sl-radio name="delivery_way" value="magazin" checked="true">
                 <div class="radio-option">
@@ -81,7 +85,7 @@
                   <b>{$LINGVO.free}</b>
                 </div>
               </sl-radio>
-              <sl-radio name="delivery_way" value="courier" {if $BSK_TTL < $DELIVERY_OPTIONS.minimum_order}disabled{/if}>
+              <sl-radio name="delivery_way" value="courier" {if $BSK_TTL < $DELIVERY_OPTIONS.minimum_order || $BSK_TTL < $DELIVERY_OPTIONS.minimum_bid}disabled{/if}>
               <div class="radio-option">
                 <img src="/img/icons/icon-track.svg" alt="">
                 <span>{$LINGVO.courier}</span>
@@ -89,7 +93,7 @@
                 </b>
               </div>
             </sl-radio>
-            <sl-radio name="delivery_way" value="nova-poshta" {if $BSK_STOP_POST_DELIVERY || $BSK_TTL < $DELIVERY_OPTIONS.minimum_order}disabled{/if}>
+            <sl-radio name="delivery_way" value="nova-poshta" {if $BSK_STOP_POST_DELIVERY || $BSK_TTL < $DELIVERY_OPTIONS.minimum_order || $BSK_TTL < $DELIVERY_OPTIONS.minimum_bid}disabled{/if}>
               <div class="radio-option">
                 <img src="/img/icons/icon-nova-poshta.svg" alt="">
                 <span>{$LINGVO.pickup_from_np}</span>

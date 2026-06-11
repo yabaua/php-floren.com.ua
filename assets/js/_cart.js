@@ -42,6 +42,9 @@ const initCart = async () => {
       changeBasketTotal();
     });
   });
+  if (cartState.productPrice < defaultOptions.minimumOrderDelivery) {
+    document.querySelector('sl-alert[data-name="small-order-for-delivery"]').show();
+  }
 };
 const addToCart = async (event) => {
   const productId = event.currentTarget.dataset.id;
@@ -139,7 +142,7 @@ async function updateCartDisplay(cartData) {
   return data;
 }
 async function changeBasketTotal(cartData) {
-  const { smallOrder, smallOrderDeliveryPrice, courierDeliveryPrice, novaPostaCost } = defaultOptions;
+  const { smallOrder, smallOrderDeliveryPrice, courierDeliveryPrice, minimumOrderDelivery } = defaultOptions;
   const cartTotal = [];
   {
     document.querySelectorAll("#basket-items-list .cart-item").forEach((item) => {
@@ -189,7 +192,7 @@ async function changeBasketTotal(cartData) {
       } else {
         badgeEl.remove();
       }
-    } else {      
+    } else {
       document.querySelector('a[data-modal-id="cart-modal"]').insertAdjacentHTML("beforeend", `<span id="cart-modal-button-badge" class="badge success">${data.basket_items.length}</span>`);
     }
     initCart();
@@ -213,6 +216,16 @@ async function changeBasketTotal(cartData) {
         totalToPay.deliveryCost -= smallOrderDeliveryPrice;
         document.querySelector('sl-alert[data-name="small-order"]').hide();
       }
+    }
+    if (data.basket_sum < minimumOrderDelivery) {
+      document.querySelector('sl-alert[data-name="small-order-for-delivery"]').show();
+      document.querySelector('[name="delivery_way"][value="courier"]').disabled = true;
+      document.querySelector('[name="delivery_way"][value="nova-poshta"]').disabled = true;
+
+    } else {
+      document.querySelector('sl-alert[data-name="small-order-for-delivery"]').hide();
+      document.querySelector('[name="delivery_way"][value="courier"]').disabled = false;
+      document.querySelector('[name="delivery_way"][value="nova-poshta"]').disabled = false;
     }
     refreshTotal(totalToPay);
   }
