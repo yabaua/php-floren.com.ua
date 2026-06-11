@@ -31,7 +31,11 @@ const clickHandlers = {
     }
   },
   toggleFooterPhones: (event) => {
-    event.currentTarget.closest(".contacts-phone").classList.toggle("active");
+    window.BinotelCallTracking[503289].buttonShowPhoneNumberPressed();
+    const element = event.currentTarget;
+    setTimeout(() => {
+      element.closest(".contacts-phone").classList.toggle("active");
+    }, 100);
   },
   toggleAdvicesPhones: (event) => {
     event.currentTarget.closest(".homepage__advices_content--phones").classList.toggle("active");

@@ -1298,8 +1298,8 @@
                     <p>(050) 660..</p>
                   </div>
                   <div class="contacts-phone--shown">
-                    <p>(044) 333-77-55</p>
-                    <p>(099) 238-26-44</p>
+                    <p class="binct-phone-number-1">(044) 333-77-55</p>
+                    <p class="binct-phone-number-2">(099) 238-26-44</p>
                   </div>
                 </li>
                 <li class="contacts-socials">
