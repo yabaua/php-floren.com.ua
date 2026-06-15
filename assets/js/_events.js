@@ -22,6 +22,20 @@ const clickHandlers = {
       wrapper.classList.toggle("active");
     }, 100);
   },
+  showPhonesMobile: (event) => {
+    const modalId = event.currentTarget.dataset.modalId;
+    const modal = document.getElementById(modalId);
+    window.BinotelCallTracking[503289].buttonShowPhoneNumberPressed();
+    if (modal) {
+      setTimeout(() => {
+        modal.show();
+      }, 100);
+    }
+    return;
+
+    const element = event.currentTarget;
+
+  },
   toggleTooltip: (event) => {
     const element = event.currentTarget;
     const tooltip = document.getElementById(element.dataset.tooltip);

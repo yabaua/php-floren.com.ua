@@ -508,7 +508,7 @@
             <!-- Search form end -->
 
             <div class="header__main--profile">
-              <button class="header__main--profile-mobile icon-button" data-event="click" data-callback="openModal" data-modal-id="mobile-header-phones">
+              <button class="header__main--profile-mobile icon-button" data-event="click" data-callback="showPhonesMobile" data-modal-id="mobile-header-phones">
                 <svg class="icon icon-phone" />
               </button>
               <sl-dialog id="mobile-header-phones" label="Звʼязатися з нами" class="dialog-overview">
@@ -517,8 +517,8 @@
                     <img src="/img/icons/icon-phone.svg" alt="Phone" />
                     <div class="phones-tooltip--item-wrapper">
                       <p class="item-phone">
-                        <a href="tel:(044) 333-77-55">(044) 333-77-55</a>,
-                        <a href="tel:(099) 238-26-44">(099) 238-26-44</a>
+                        <span class="binct-phone-number-1">(044) 333-77-55</span>,
+                        <span class="binct-phone-number-2">(099) 238-26-44</span>
                       </p>
                       <p class="item-hours">По буднях 09:00 - 19:30</p>
                       <p class="item-messengers">
