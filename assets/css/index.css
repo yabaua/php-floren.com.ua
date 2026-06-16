@@ -4739,12 +4739,17 @@ body.secondary-hovered .catalog-overlay {
   display: flex;
   align-items: center;
   min-height: 40px;
+  flex-wrap: wrap;
 }
 .homepage__advices_content--phones.active .phones--hidden {
   display: none;
 }
 .homepage__advices_content--phones.active .phones--visible {
   display: block;
+  p {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
 }
 .homepage__advices_content--phones .phones--hidden {
   font-weight: 500;

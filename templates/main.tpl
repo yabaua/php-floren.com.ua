@@ -482,13 +482,34 @@
                   </div>
                   <div class="header__main--phones-hours">
                     <span>По буднях 9:00 - 19:30</span>
-                    <button class="header__main--phones-hours--button" data-event="click" data-callback="openModal" data-modal-id="calculate-modal">
+                    <button class="header__main--phones-hours--button" data-event="click" data-callback="openModal" data-modal-id="header-contact-modal">
                       {$LINGVO.callback_general}
                     </button>
                   </div>
                 </div>
               </div>
             </sl-tooltip>
+
+            <!-- TODO: translate this form -->
+            <sl-dialog id="header-contact-modal" label="Напішіть нам" class="calculate-modal">    
+              <form class="login-modal__form" action="/thankyou/" method="post">
+                <input type="hidden" name="cb_topic" value="{$LINGVO.advice_prof} – {$GOOD_ONE.name}"></input>
+                <div class="form-control">
+                  <sl-input name="cb_name" id="name" label="Ваше ім'я" type="text" placeholder="Ім'я"></sl-input>
+                </div>
+                <div class="form-control">
+                  <label for="phone">Ваш контактний номер телефону*</label>
+                  <input id="phone" name="cb_phone" data-tel-input type="tel">
+                </div>
+                <div class="form-control">
+                  <sl-textarea id="message" name="cb_txt" label="Ваше повідомлення" type="text" placeholder="Повідомлення"></sl-textarea>
+                </div>
+            
+                <div class="form-control">
+                  <button class="button button--primary" type="submit">Відправити</button>
+                </div>
+              </form>
+            </sl-dialog>
        
           </div>
 
