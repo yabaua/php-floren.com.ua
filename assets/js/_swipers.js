@@ -5524,8 +5524,24 @@ const initSwipers = () => {
       console.warn(`Swiper config not found for element:`, el);
       return;
     }
-    new Swiper(el, swiperConfig);
+    window.swipers[swiperType] = new Swiper(el, swiperConfig);
   });
+  const heroSwiper = window.swipers["hero-swiper"];
+  if (heroSwiper) {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        if (heroSwiper.autoplay && heroSwiper.autoplay.running) {
+          heroSwiper.autoplay.stop();
+        }
+      } else {
+        if (heroSwiper.autoplay && !heroSwiper.autoplay.running) {
+          heroSwiper.autoplay.start();
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+  }
   if (document.getElementById("main-photo-viewer")) {
     window.swipers.thumbsSwiper = new Swiper(".swiper.photo-viewer__thumbs-swiper", {
       modules: [Manipulation],
