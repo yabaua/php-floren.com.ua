@@ -562,7 +562,7 @@ elseif (count($URL)==1 && ($URL[0]=='' || $URL[0]=='indexphp')) {
 			$smarty->assign("PAGE_ALIAS",$r['alias']);
 			
 			$content_tpl = "templates/content/" . $lang ."_" . $r['alias'] . ".tpl";
-			echo $content_tpl;
+			
 			if(file_exists($content_tpl)){
 				$smarty->assign("CONTENT_TPL",$content_tpl);
 		//		$smarty->assign("CONTENT",$r['content']);
