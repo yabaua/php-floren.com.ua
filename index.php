@@ -1,6 +1,6 @@
 <?php
-//error_reporting(E_ALL);
-error_reporting(0);
+error_reporting(E_ALL);
+//error_reporting(0);
 register_shutdown_function('sql_stat');
 setlocale(LC_TIME, 'uk_UA.UTF-8');
 //setlocale(LC_ALL, 'ru_RU');
@@ -248,6 +248,7 @@ $smarty->setCompileDir(__DIR__ . '/smarty5/templates_c/');
 $smarty->setCacheDir(__DIR__ . '/smarty5/cache/');
 $smarty->setConfigDir(__DIR__ . '/smarty5/src/');
 $smarty->muteUndefinedOrNullWarnings(true);
+$smarty->setDebugging(true);
 
 // $smarty->debugging=true;
 
@@ -558,8 +559,17 @@ elseif (count($URL)==1 && ($URL[0]=='' || $URL[0]=='indexphp')) {
 			
 			$smarty->assign("HLEB",$hleb);
 			$smarty->assign("LEFT_TPL",'left_col.tpl');
-			$smarty->assign("CONTENT_TPL",'content.tpl');
-			$smarty->assign("CONTENT",$r['content']);
+			$smarty->assign("PAGE_ALIAS",$r['alias']);
+			
+			$content_tpl = "templates/content/" . $lang ."_" . $r['alias'] . ".tpl";
+			echo $content_tpl;
+			if(file_exists($content_tpl)){
+				$smarty->assign("CONTENT_TPL",$content_tpl);
+		//		$smarty->assign("CONTENT",$r['content']);
+			}else{
+				$smarty->assign("CONTENT_TPL",'content.tpl');
+				$smarty->assign("CONTENT",$r['content']);
+			}
 			if(isset($PARAM[0])){
 
 				

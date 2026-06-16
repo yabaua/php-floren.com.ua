@@ -82,7 +82,7 @@
     </section>
     
     <!--  ====  -->
-    {elseif in_array($URL[0], ['contacts', 'about', 'delivery', 'dogovir-oferta', 'purchase-returns', 'partnership'])}
+    {elseif in_array($URL[0], ['contacts', 'about', 'delivery', 'dogovir-oferta', 'purchase-returns', 'partnership', 'magazyn'])}
     
     <section>
       <h3{if $URL[0]=='about' } class="active" {/if}>
@@ -97,6 +97,11 @@
     <section>
       <h3{if $URL[0]=='contacts' } class="active" {/if}>
         <a href="{$LANGURL}/contacts/">{$LINGVO.menu_contacts}</a>
+        </h3>
+    </section>
+    <section>
+      <h3{if $URL[0]=='magazyn' } class="active" {/if}>
+        <a href="{$LANGURL}/contacts/">{$LINGVO.menu_magazyn}</a>
         </h3>
     </section>
     <section>
@@ -194,7 +199,7 @@
 </section>
 
 <!--  ====  -->
-{elseif in_array($URL[0], ['contacts', 'about', 'delivery', 'dogovir-oferta', 'purchase-returns', 'partnership'])}
+{elseif in_array($URL[0], ['contacts', 'about', 'delivery', 'dogovir-oferta', 'purchase-returns', 'partnership', 'magazyn'])}
 
 <section class="double-column-page__nav_section">
   <h3{if $URL[0]=='about'} class="active"{/if}>
@@ -209,6 +214,11 @@
 <section class="double-column-page__nav_section">
   <h3{if $URL[0]=='contacts'} class="active"{/if}>
     <a href="{$LANGURL}/contacts/">{$LINGVO.menu_contacts}</a>
+  </h3>
+</section>
+<section class="double-column-page__nav_section">
+  <h3{if $URL[0]=='magazyn'} class="active"{/if}>
+    <a href="{$LANGURL}/magazyn/">{$LINGVO.menu_magazyn}</a>
   </h3>
 </section>
 <section class="double-column-page__nav_section">

@@ -114,9 +114,10 @@
 <div class="catalog-page__content_products">
   <!--isset_listing_page-->
   {foreach from=$PROMO item=P}
+  
   <!-- Product Card Start-->
   <!--product_in_listingEX-->
-  <!--dg_prod_in_lisintg_href:{$LANGURL}/product/{$P.ID}_{$P.link}/;;dg_prod_in_lisintg_anchor:{$P.name}-->
+  <!--dg_prod_in_lisintg_href:{$P.product_path};;dg_prod_in_lisintg_anchor:{$P.name}-->
   <div class="catalog-page__content_product-card">
     <div class="product-card__wrapper">
       <div class="product-card__image">

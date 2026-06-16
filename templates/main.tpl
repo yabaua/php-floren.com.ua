@@ -347,7 +347,7 @@
                 data-callback="toggleLocation">
                   <svg class="icon icon-close"/>
                 </button>
-                <a href="https://goo.gl/maps/UPpaCBkrMd2TWfXq7" target="_blank"
+                <a href="{$LANGURL}/magazyn/" target="_blank"
                 rel="noopener noreferrer">{$LINGVO.kiev_addr}</a>
                 <p>{$LINGVO.opening_hours}:</p>
                 <p>{$LINGVO.opening_hours_mo_st}</p>

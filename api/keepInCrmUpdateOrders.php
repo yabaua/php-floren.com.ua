@@ -145,5 +145,11 @@ if($db->num_rows()){
 			$db->query($query);
 			
 		} // foreach
-	}//if 
+	}//if PID ZAMOVLENNYA
+	
+	//=================== NovaPOshta Alert =======================
+	if($deliveryWay == '' && $orderStage == ''){
+		
+	}
+	echo $deliveryWay, "==", $orderStage;
 ?>

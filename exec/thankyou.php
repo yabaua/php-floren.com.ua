@@ -3,7 +3,7 @@
 if(isset($_POST) && count($_POST)){
 	function send_mail($to,$subject,$body) {
 		$nn="\r\n";
-		$from='noreply@floren.ua';
+		$from='noreply@floren.com.ua';
 		mail($to,$subject,$body,
 			'Date: '.date('r').$nn.
 			'From: '.$from.$nn.
