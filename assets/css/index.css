@@ -2813,10 +2813,136 @@ body.secondary-hovered .catalog-overlay {
     padding-top: 20px;
   }
 }
+.services-list-mobile {
+  display: none;
+  & > li {
+    /* background: url(/img/icons/icon-plus.svg) no-repeat center right 16px / 16px 16px; */    
+    position: relative;
+    border-bottom: 1px solid var(--color-gray-30);
+    transition: border-bottom .2s ease;
+    &:last-child {
+      border-bottom: none;
+    }
+    .summary-icon {
+      position: absolute;
+      display: block;
+      width: 32px;
+      height: 32px;
+      top: 11px;
+      right: 0;
+      z-index: 1;
+      transition: rotate 0.2s ease;
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 16px;
+        height: 2px;
+        top: calc(50% - 1px);
+        right: calc(50% - 8px);
+        background-color: var(--color-black);
+        border-radius: 2px;
+        transition: height 0.2s ease;
+      }    
+      &::after {
+        content: "";
+        position: absolute;
+        width: 2px;
+        height: 16px;
+        top: calc(50% - 8px);
+        right: calc(50% - 1px);
+        background-color: var(--color-black);
+        border-radius: 2px;        
+      }
+    }
+    &.active {
+      border-width: 0;
+      & .summary-icon {
+        rotate: 90deg;
+        &::before {
+          height: 0;
+        }        
+      }
+      & .services-list-mobile-details {
+        &::part(base) {          
+          border-color: var(--color-gray-30);
+          border-width: 1px;
+        }
+      }
+    }
+    & > a {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      align-items: flex-start;
+      justify-content: center;
+      min-height: 56px;
+      font-size: 0.875rem;
+      &>b {
+        font-weight: 500;
+      }
+
+      &>span {
+        font-size: 0.75rem;
+        font-weight: 300;
+        color: var(--color-gray-100);
+      }
+    }
+  }
+  @media screen and (max-width: 992px) {
+    display: block;
+  }
+  & .services-list-mobile-details {
+    &::part(base) {
+      border-left: none;
+      border-right: none;
+      border-radius: 0;
+      border-color: transparent;
+      border-width: 0;
+      background-color: var(--color-gray-10);
+      transition: border-color .2s ease, border-width .2s ease;
+    }
+    &::part(header) {
+      display: none;
+    }
+    &::part(content) {
+    --sl-spacing-medium: 0.25rem 1rem;
+    }
+  }
+  & .services-list-mobile-content {
+    & > li {
+      border-bottom: 1px solid var(--color-gray-30);
+      &:last-child {
+        border-bottom: none;
+      }
+      & > a {
+        display: flex;          
+        align-items: center;          
+        min-height: 48px;
+        gap: 0.75rem;
+        font-size: 0.875rem;      
+      }
+      & .services-list-image {
+        width: 32px;
+        height: 32px;
+        background-color: #fff;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+
 .header__catalog_list .category-list.category-list--secondary-mobile {
   display: none;
   & > li {
-    /* background-image: none; */
+    /* background-image: none; */    
     & > a {
       display: flex;
       flex-direction: column;

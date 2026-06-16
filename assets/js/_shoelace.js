@@ -1,14 +1,15 @@
 import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/drawer/drawer.js';
+import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/components/details/details.js';
 
 const scriptRel = "modulepreload";
-const assetsURL = function(dep) {
+const assetsURL = function (dep) {
   return "/" + dep;
 };
 const seen = {};
 const __vitePreload = function preload(baseModule, deps, importerUrl) {
   let promise = Promise.resolve();
   if (deps && deps.length > 0) {
-    let allSettled = function(promises$2) {
+    let allSettled = function (promises$2) {
       return Promise.all(promises$2.map((p2) => Promise.resolve(p2).then((value$1) => ({
         status: "fulfilled",
         value: value$1
@@ -101,35 +102,37 @@ const r$6 = (t2) => new n$7("string" == typeof t2 ? t2 : t2 + "", void 0, s$3), 
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const { is: i$6, defineProperty: e$9, getOwnPropertyDescriptor: h$3, getOwnPropertyNames: r$5, getOwnPropertySymbols: o$9, getPrototypeOf: n$6 } = Object, a$2 = globalThis, c$2 = a$2.trustedTypes, l$3 = c$2 ? c$2.emptyScript : "", p$1 = a$2.reactiveElementPolyfillSupport, d$1 = (t2, s2) => t2, u$3 = { toAttribute(t2, s2) {
-  switch (s2) {
-    case Boolean:
-      t2 = t2 ? l$3 : null;
-      break;
-    case Object:
-    case Array:
-      t2 = null == t2 ? t2 : JSON.stringify(t2);
+const { is: i$6, defineProperty: e$9, getOwnPropertyDescriptor: h$3, getOwnPropertyNames: r$5, getOwnPropertySymbols: o$9, getPrototypeOf: n$6 } = Object, a$2 = globalThis, c$2 = a$2.trustedTypes, l$3 = c$2 ? c$2.emptyScript : "", p$1 = a$2.reactiveElementPolyfillSupport, d$1 = (t2, s2) => t2, u$3 = {
+  toAttribute(t2, s2) {
+    switch (s2) {
+      case Boolean:
+        t2 = t2 ? l$3 : null;
+        break;
+      case Object:
+      case Array:
+        t2 = null == t2 ? t2 : JSON.stringify(t2);
+    }
+    return t2;
+  }, fromAttribute(t2, s2) {
+    let i4 = t2;
+    switch (s2) {
+      case Boolean:
+        i4 = null !== t2;
+        break;
+      case Number:
+        i4 = null === t2 ? null : Number(t2);
+        break;
+      case Object:
+      case Array:
+        try {
+          i4 = JSON.parse(t2);
+        } catch (t3) {
+          i4 = null;
+        }
+    }
+    return i4;
   }
-  return t2;
-}, fromAttribute(t2, s2) {
-  let i4 = t2;
-  switch (s2) {
-    case Boolean:
-      i4 = null !== t2;
-      break;
-    case Number:
-      i4 = null === t2 ? null : Number(t2);
-      break;
-    case Object:
-    case Array:
-      try {
-        i4 = JSON.parse(t2);
-      } catch (t3) {
-        i4 = null;
-      }
-  }
-  return i4;
-} }, f$3 = (t2, s2) => !i$6(t2, s2), b = { attribute: true, type: String, converter: u$3, reflect: false, useDefault: false, hasChanged: f$3 };
+}, f$3 = (t2, s2) => !i$6(t2, s2), b = { attribute: true, type: String, converter: u$3, reflect: false, useDefault: false, hasChanged: f$3 };
 Symbol.metadata ??= Symbol("metadata"), a$2.litPropertyMetadata ??= /* @__PURE__ */ new WeakMap();
 let y$1 = class y extends HTMLElement {
   static addInitializer(t2) {
@@ -145,15 +148,19 @@ let y$1 = class y extends HTMLElement {
     }
   }
   static getPropertyDescriptor(t2, s2, i4) {
-    const { get: e2, set: r2 } = h$3(this.prototype, t2) ?? { get() {
-      return this[s2];
-    }, set(t3) {
-      this[s2] = t3;
-    } };
-    return { get: e2, set(s3) {
-      const h2 = e2?.call(this);
-      r2?.call(this, s3), this.requestUpdate(t2, h2, i4);
-    }, configurable: true, enumerable: true };
+    const { get: e2, set: r2 } = h$3(this.prototype, t2) ?? {
+      get() {
+        return this[s2];
+      }, set(t3) {
+        this[s2] = t3;
+      }
+    };
+    return {
+      get: e2, set(s3) {
+        const h2 = e2?.call(this);
+        r2?.call(this, s3), this.requestUpdate(t2, h2, i4);
+      }, configurable: true, enumerable: true
+    };
   }
   static getPropertyOptions(t2) {
     return this.elementProperties.get(t2) ?? b;
@@ -330,7 +337,7 @@ const V = (t2, i4) => {
   for (let i5 = 0; i5 < s2; i5++) {
     const s3 = t2[i5];
     let a2, u2, d2 = -1, y3 = 0;
-    for (; y3 < s3.length && (c2.lastIndex = y3, u2 = c2.exec(s3), null !== u2); ) y3 = c2.lastIndex, c2 === f$2 ? "!--" === u2[1] ? c2 = v : void 0 !== u2[1] ? c2 = _ : void 0 !== u2[2] ? ($.test(u2[2]) && (r2 = RegExp("</" + u2[2], "g")), c2 = m$1) : void 0 !== u2[3] && (c2 = m$1) : c2 === m$1 ? ">" === u2[0] ? (c2 = r2 ?? f$2, d2 = -1) : void 0 === u2[1] ? d2 = -2 : (d2 = c2.lastIndex - u2[2].length, a2 = u2[1], c2 = void 0 === u2[3] ? m$1 : '"' === u2[3] ? g : p) : c2 === g || c2 === p ? c2 = m$1 : c2 === v || c2 === _ ? c2 = f$2 : (c2 = m$1, r2 = void 0);
+    for (; y3 < s3.length && (c2.lastIndex = y3, u2 = c2.exec(s3), null !== u2);) y3 = c2.lastIndex, c2 === f$2 ? "!--" === u2[1] ? c2 = v : void 0 !== u2[1] ? c2 = _ : void 0 !== u2[2] ? ($.test(u2[2]) && (r2 = RegExp("</" + u2[2], "g")), c2 = m$1) : void 0 !== u2[3] && (c2 = m$1) : c2 === m$1 ? ">" === u2[0] ? (c2 = r2 ?? f$2, d2 = -1) : void 0 === u2[1] ? d2 = -2 : (d2 = c2.lastIndex - u2[2].length, a2 = u2[1], c2 = void 0 === u2[3] ? m$1 : '"' === u2[3] ? g : p) : c2 === g || c2 === p ? c2 = m$1 : c2 === v || c2 === _ ? c2 = f$2 : (c2 = m$1, r2 = void 0);
     const x2 = c2 === m$1 && t2[i5 + 1].startsWith("/>") ? " " : "";
     l2 += c2 === f$2 ? s3 + n$5 : d2 >= 0 ? (o2.push(a2), s3.slice(0, d2) + e$8 + s3.slice(d2) + h$2 + x2) : s3 + h$2 + (-2 === d2 ? i5 : x2);
   }
@@ -346,7 +353,7 @@ class N {
       const t3 = this.el.content.firstChild;
       t3.replaceWith(...t3.childNodes);
     }
-    for (; null !== (r2 = C.nextNode()) && d2.length < u2; ) {
+    for (; null !== (r2 = C.nextNode()) && d2.length < u2;) {
       if (1 === r2.nodeType) {
         if (r2.hasAttributes()) for (const t3 of r2.getAttributeNames()) if (t3.endsWith(e$8)) {
           const i4 = v2[a2++], s3 = r2.getAttribute(t3).split(h$2), e2 = /([.?@])?(.*)/.exec(i4);
@@ -363,7 +370,7 @@ class N {
       } else if (8 === r2.nodeType) if (r2.data === o$8) d2.push({ type: 2, index: c2 });
       else {
         let t3 = -1;
-        for (; -1 !== (t3 = r2.data.indexOf(h$2, t3 + 1)); ) d2.push({ type: 7, index: c2 }), t3 += h$2.length - 1;
+        for (; -1 !== (t3 = r2.data.indexOf(h$2, t3 + 1));) d2.push({ type: 7, index: c2 }), t3 += h$2.length - 1;
       }
       c2++;
     }
@@ -393,7 +400,7 @@ class M {
     const { el: { content: i4 }, parts: s2 } = this._$AD, e2 = (t2?.creationScope ?? r$4).importNode(i4, true);
     C.currentNode = e2;
     let h2 = C.nextNode(), o2 = 0, n3 = 0, l2 = s2[0];
-    for (; void 0 !== l2; ) {
+    for (; void 0 !== l2;) {
       if (o2 === l2.index) {
         let i5;
         2 === l2.type ? i5 = new R(h2, h2.nextSibling, this, t2) : 1 === l2.type ? i5 = new l2.ctor(h2, l2.name, l2.strings, this, t2) : 6 === l2.type && (i5 = new z(h2, this, t2)), this._$AV.push(i5), l2 = s2[++n3];
@@ -457,7 +464,7 @@ class R {
     e2 < i4.length && (this._$AR(s2 && s2._$AB.nextSibling, e2), i4.length = e2);
   }
   _$AR(t2 = this._$AA.nextSibling, i4) {
-    for (this._$AP?.(false, true, i4); t2 !== this._$AB; ) {
+    for (this._$AP?.(false, true, i4); t2 !== this._$AB;) {
       const i5 = t2.nextSibling;
       t2.remove(), t2 = i5;
     }
@@ -878,7 +885,7 @@ var __accessCheck = (obj, member, msg) => member.has(obj) || __typeError("Cannot
 var __privateGet = (obj, member, getter) => (__accessCheck(obj, member, "read from private field"), member.get(obj));
 var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot add the same private member more than once") : member instanceof WeakSet ? member.add(obj) : member.set(obj, value);
 var __privateSet = (obj, member, value, setter) => (__accessCheck(obj, member, "write to private field"), member.set(obj, value), value);
-var __await = function(promise, isYieldStar) {
+var __await = function (promise, isYieldStar) {
   this[0] = promise;
   this[1] = isYieldStar;
 };
@@ -920,16 +927,18 @@ const o$6 = { attribute: true, type: String, converter: u$3, reflect: false, has
   let s2 = globalThis.litPropertyMetadata.get(i4);
   if (void 0 === s2 && globalThis.litPropertyMetadata.set(i4, s2 = /* @__PURE__ */ new Map()), "setter" === n3 && ((t2 = Object.create(t2)).wrapped = true), s2.set(r2.name, t2), "accessor" === n3) {
     const { name: o2 } = r2;
-    return { set(r3) {
-      const n4 = e2.get.call(this);
-      e2.set.call(this, r3), this.requestUpdate(o2, n4, t2);
-    }, init(e3) {
-      return void 0 !== e3 && this.C(o2, void 0, t2, e3), e3;
-    } };
+    return {
+      set(r3) {
+        const n4 = e2.get.call(this);
+        e2.set.call(this, r3), this.requestUpdate(o2, n4, t2);
+      }, init(e3) {
+        return void 0 !== e3 && this.C(o2, void 0, t2, e3), e3;
+      }
+    };
   }
   if ("setter" === n3) {
     const { name: o2 } = r2;
-    return function(r3) {
+    return function (r3) {
       const n4 = this[o2];
       e2.call(this, r3), this.requestUpdate(o2, n4, t2);
     };
@@ -975,9 +984,11 @@ const e$7 = (e2, t2, c2) => (c2.configurable = true, c2.enumerable = true, Refle
 function e$6(e2, r2) {
   return (n3, s2, i4) => {
     const o2 = (t2) => t2.renderRoot?.querySelector(e2) ?? null;
-    return e$7(n3, s2, { get() {
-      return o2(this);
-    } });
+    return e$7(n3, s2, {
+      get() {
+        return o2(this);
+      }
+    });
   };
 }
 var _hasRecordedInitialProperties;
@@ -1443,7 +1454,7 @@ const arrow$1 = (options) => ({
     };
   }
 });
-const flip$1 = function(options) {
+const flip$1 = function (options) {
   if (options === void 0) {
     options = {};
   }
@@ -1503,8 +1514,8 @@ const flip$1 = function(options) {
         if (nextPlacement) {
           const ignoreCrossAxisOverflow = checkCrossAxis === "alignment" ? initialSideAxis !== getSideAxis(nextPlacement) : false;
           if (!ignoreCrossAxisOverflow || // We leave the current main axis only if every placement on that axis
-          // overflows the main axis.
-          overflowsData.every((d2) => getSideAxis(d2.placement) === initialSideAxis ? d2.overflows[0] > 0 : true)) {
+            // overflows the main axis.
+            overflowsData.every((d2) => getSideAxis(d2.placement) === initialSideAxis ? d2.overflows[0] > 0 : true)) {
             return {
               data: {
                 index: nextIndex,
@@ -1525,8 +1536,8 @@ const flip$1 = function(options) {
                 if (hasFallbackAxisSideDirection) {
                   const currentSideAxis = getSideAxis(d2.placement);
                   return currentSideAxis === initialSideAxis || // Create a bias to the `y` side axis due to horizontal
-                  // reading directions favoring greater width.
-                  currentSideAxis === "y";
+                    // reading directions favoring greater width.
+                    currentSideAxis === "y";
                 }
                 return true;
               }).map((d2) => [d2.placement, d2.overflows.filter((overflow2) => overflow2 > 0).reduce((acc, overflow2) => acc + overflow2, 0)]).sort((a2, b2) => a2[1] - b2[1])[0]) == null ? void 0 : _overflowsData$filter2[0];
@@ -1575,10 +1586,10 @@ async function convertValueToCoords(state, options) {
     crossAxis: 0,
     alignmentAxis: null
   } : {
-    mainAxis: rawValue.mainAxis || 0,
-    crossAxis: rawValue.crossAxis || 0,
-    alignmentAxis: rawValue.alignmentAxis
-  };
+      mainAxis: rawValue.mainAxis || 0,
+      crossAxis: rawValue.crossAxis || 0,
+      alignmentAxis: rawValue.alignmentAxis
+    };
   if (alignment && typeof alignmentAxis === "number") {
     crossAxis = alignment === "end" ? alignmentAxis * -1 : alignmentAxis;
   }
@@ -1590,7 +1601,7 @@ async function convertValueToCoords(state, options) {
     y: crossAxis * crossAxisMulti
   };
 }
-const offset$1 = function(options) {
+const offset$1 = function (options) {
   if (options === void 0) {
     options = 0;
   }
@@ -1620,7 +1631,7 @@ const offset$1 = function(options) {
     }
   };
 };
-const shift$1 = function(options) {
+const shift$1 = function (options) {
   if (options === void 0) {
     options = {};
   }
@@ -1692,7 +1703,7 @@ const shift$1 = function(options) {
     }
   };
 };
-const size$1 = function(options) {
+const size$1 = function (options) {
   if (options === void 0) {
     options = {};
   }
@@ -2334,7 +2345,7 @@ function getOffsetParent(element, polyfill) {
   }
   return offsetParent || getContainingBlock(element) || win;
 }
-const getElementRects = async function(data) {
+const getElementRects = async function (data) {
   const getOffsetParentFn = this.getOffsetParent || getOffsetParent;
   const getDimensionsFn = this.getDimensions;
   const floatingDimensions = await getDimensionsFn(data.floating);
@@ -3069,7 +3080,7 @@ function watch(propertyName, options) {
   return (proto, decoratedFnName) => {
     const { update: update2 } = proto;
     const watchedProperties = Array.isArray(propertyName) ? propertyName : [propertyName];
-    proto.update = function(changedProps) {
+    proto.update = function (changedProps) {
       watchedProperties.forEach((property) => {
         const key = property;
         if (changedProps.has(key)) {
@@ -5796,7 +5807,7 @@ var input_styles_default = i$7`
 var defaultValue = (propertyName = "value") => (proto, key) => {
   const ctor = proto.constructor;
   const attributeChangedCallback = ctor.prototype.attributeChangedCallback;
-  ctor.prototype.attributeChangedCallback = function(name, old, value) {
+  ctor.prototype.attributeChangedCallback = function (name, old, value) {
     var _a;
     const options = ctor.getPropertyOptions(propertyName);
     const attributeName = typeof options.attribute === "string" ? options.attribute : propertyName;
@@ -7170,7 +7181,7 @@ var SlBreadcrumb = class extends ShoelaceElement {
         item.append(this.getSeparator());
       } else if (separator.hasAttribute("data-default")) {
         separator.replaceWith(this.getSeparator());
-      } else ;
+      } else;
       if (index === items.length - 1) {
         item.setAttribute("aria-current", "page");
       } else {
@@ -7553,17 +7564,19 @@ var icon_button_styles_default = i$7`
  */
 const a = Symbol.for(""), o = (t2) => {
   if (t2?.r === a) return t2?._$litStatic$;
-}, i3 = (t2, ...r2) => ({ _$litStatic$: r2.reduce(((r3, e2, a2) => r3 + ((t3) => {
-  if (void 0 !== t3._$litStatic$) return t3._$litStatic$;
-  throw Error(`Value passed to 'literal' function must be a 'literal' result: ${t3}. Use 'unsafeStatic' to pass non-literal values, but
+}, i3 = (t2, ...r2) => ({
+  _$litStatic$: r2.reduce(((r3, e2, a2) => r3 + ((t3) => {
+    if (void 0 !== t3._$litStatic$) return t3._$litStatic$;
+    throw Error(`Value passed to 'literal' function must be a 'literal' result: ${t3}. Use 'unsafeStatic' to pass non-literal values, but
             take care to ensure page security.`);
-})(e2) + t2[a2 + 1]), t2[0]), r: a }), l = /* @__PURE__ */ new Map(), n2 = (t2) => (r2, ...e2) => {
+  })(e2) + t2[a2 + 1]), t2[0]), r: a
+}), l = /* @__PURE__ */ new Map(), n2 = (t2) => (r2, ...e2) => {
   const a2 = e2.length;
   let s2, i4;
   const n3 = [], u2 = [];
   let c2, $2 = 0, f2 = false;
-  for (; $2 < a2; ) {
-    for (c2 = r2[$2]; $2 < a2 && void 0 !== (i4 = e2[$2], s2 = o(i4)); ) c2 += s2 + r2[++$2], f2 = true;
+  for (; $2 < a2;) {
+    for (c2 = r2[$2]; $2 < a2 && void 0 !== (i4 = e2[$2], s2 = o(i4));) c2 += s2 + r2[++$2], f2 = true;
     $2 !== a2 && u2.push(i4), n3.push(c2), $2++;
   }
   if ($2 === a2 && n3.push(r2[a2]), f2) {
@@ -11511,7 +11524,7 @@ __decorateClass([
 SlTabGroup.define("sl-tab-group");
 var debounce = (fn, delay) => {
   let timerId = 0;
-  return function(...args) {
+  return function (...args) {
     window.clearTimeout(timerId);
     timerId = window.setTimeout(() => {
       fn.call(this, ...args);
@@ -11520,7 +11533,7 @@ var debounce = (fn, delay) => {
 };
 var decorate = (proto, method, decorateFn) => {
   const superFn = proto[method];
-  proto[method] = function(...args) {
+  proto[method] = function (...args) {
     superFn.call(this, ...args);
     decorateFn.call(this, superFn, ...args);
   };
@@ -11546,7 +11559,7 @@ var decorate = (proto, method, decorateFn) => {
     document.addEventListener("touchstart", handlePointerDown, true);
     document.addEventListener("touchend", handlePointerUp, true);
     document.addEventListener("touchcancel", handlePointerUp, true);
-    decorate(EventTarget.prototype, "addEventListener", function(addEventListener, type) {
+    decorate(EventTarget.prototype, "addEventListener", function (addEventListener, type) {
       if (type !== "scrollend") return;
       const handleScrollEnd = debounce(() => {
         if (!pointers.size) {
@@ -11558,7 +11571,7 @@ var decorate = (proto, method, decorateFn) => {
       addEventListener.call(this, "scroll", handleScrollEnd, { passive: true });
       scrollHandlers.set(this, handleScrollEnd);
     });
-    decorate(EventTarget.prototype, "removeEventListener", function(removeEventListener, type) {
+    decorate(EventTarget.prototype, "removeEventListener", function (removeEventListener, type) {
       if (type !== "scrollend") return;
       const scrollHandler = scrollHandlers.get(this);
       if (scrollHandler) {
@@ -12636,8 +12649,8 @@ var hasRequiredIntlTelInput;
 function requireIntlTelInput() {
   if (hasRequiredIntlTelInput) return intlTelInput$1.exports;
   hasRequiredIntlTelInput = 1;
-  (function(module) {
-    (function(factory) {
+  (function (module) {
+    (function (factory) {
       if (module.exports) {
         module.exports = factory();
       } else {
@@ -16660,14 +16673,14 @@ const initIntlTelInput = () => {
       strictMode: true,
       separateDialCode: true,
       autoPlaceholder: "aggressive",
-      customPlaceholder: function(selectedCountryPlaceholder, selectedCountryData) {
+      customPlaceholder: function (selectedCountryPlaceholder, selectedCountryData) {
         if (selectedCountryData.iso2 === "ua") {
           return "(0XX) XXX-XX-XX";
         }
         return selectedCountryPlaceholder.replace(/[0-9]/g, "X");
       }
     });
-    input.addEventListener("input", function(e2) {
+    input.addEventListener("input", function (e2) {
       if (iti.getSelectedCountryData().iso2 === "ua") {
         let value = input.value.replace(/\D/g, "");
         if (value.length > 0) {

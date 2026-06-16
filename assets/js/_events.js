@@ -31,10 +31,6 @@ const clickHandlers = {
         modal.show();
       }, 100);
     }
-    return;
-
-    const element = event.currentTarget;
-
   },
   toggleTooltip: (event) => {
     const element = event.currentTarget;
@@ -53,6 +49,14 @@ const clickHandlers = {
   },
   toggleAdvicesPhones: (event) => {
     event.currentTarget.closest(".homepage__advices_content--phones").classList.toggle("active");
+  },
+  toggleDetails: (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const element = event.currentTarget.closest("li");
+    const details = event.currentTarget.parentElement.parentElement.querySelector('sl-details');
+    element.classList.toggle("active");
+    details.open = !details.open;
   },
   openModal: (e) => {
     const modalId = e.currentTarget.dataset.modalId;

@@ -75,6 +75,7 @@
             <h2>2. {$LINGVO.way_to_deliver}</h2>
             <sl-alert variant="warning" data-name="small-order-for-delivery">
               <span slot="icon" class="icon icon-info-circle"></span>
+              <!-- TODO: Translate -->
               Замовлення до 1000 грн доступні лише для самовивозу.<br />Доставка та відправка поштою — від 1000 грн.
             </sl-alert>
             <sl-radio-group name="delivery_way" value="magazin" id="delivery-methods" data-product-price="{$BSK_TTL}" data-is-plant="{$IS_BSK_PLANT}">
