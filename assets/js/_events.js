@@ -62,7 +62,12 @@ const clickHandlers = {
     }, 100);
   },
   toggleAdvicesPhones: (event) => {
-    event.currentTarget.closest(".homepage__advices_content--phones").classList.toggle("active");
+    const target = event.currentTarget.closest(".homepage__advices_content--phones");
+    activeBinotelNumbers();
+    setTimeout(() => {
+      target.classList.toggle("active");
+    }, 100);
+
   },
   toggleDetails: (event) => {
     event.preventDefault();

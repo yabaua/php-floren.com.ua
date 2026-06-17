@@ -10,15 +10,18 @@
   </div>
 
   <div class="services-page__calc">
-    <h3>Розрахувати вартість фітостіни</h3>
-    <button class="button button--primary button--pill" data-event="click" data-callback="openModal"
-      data-modal-id="calculate-modal">Розрахувати</button>
-    <p>Або звертайтеся за телефоном:</p>
-    <div class="homepage__advices_content--phones binct-phone-number-2">
+    <h3>Розрахувати вартість фітодизайну</h3>
+    <button class="button button--primary button--pill" data-event="click" data-callback="openModal" data-modal-id="calculate-modal">Розрахувати</button>
+    <p>Також звертайтеся за телефоном:</p>
+    <div class="homepage__advices_content--phones" data-event="onLoad" data-callback="checkBinotel">
       <div class="phones--hidden">
-        <p>(099) 238-26-44</p>
+        (044) 344..<button data-event="click" data-callback="toggleAdvicesPhones">показати номери</button>
       </div>
-      <div class="phones--hours">У будні з 9:00 до 19:30</div>
+      <div class="phones--visible">
+        <p class="binct-phone-number-1">(044) 344-28-95</p>
+        <p class="binct-phone-number-2">(050) 660-52-75</p>
+      </div>
+      <div class="phones--hours">По буднях з 9:00 до 19:30</div>
     </div>
   </div>
 </section>
@@ -78,7 +81,7 @@
         <p>&nbsp;</p>
         <p><b>Також ми виконуємо відновлення фітостін після повної або часткової загибелі рослин.</b></p>
         <p>&nbsp;</p>
-        <button class="button button--primary button--pill">Розрахувати</button>
+        <button class="button button--primary button--pill" data-event="click" data-callback="openModal" data-modal-id="calculate-modal">Розрахувати</button>
       </div>
       <div class="grow">
         <img src="https://floren.com.ua/images/content/services/stab-mokn-image-min.jpg" alt="Вертикальне озеленення стабілізованим мохом">

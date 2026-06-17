@@ -14,14 +14,17 @@
 						</div>
             <div class="services-page__calc">
               <h3>Рассчитать стоимость фитодизайна</h3>
-              <button class="button button--primary button--pill" data-event="click" data-callback="openModal"
-      data-modal-id="calculate-modal">Рассчитать</button>
+              <button class="button button--primary button--pill" data-event="click" data-callback="openModal" data-modal-id="calculate-modal">Рассчитать</button>
               <p>Также обращайтесь по телефону:</p>
-              <div class="homepage__advices_content--phones binct-phone-number-2">
-                <div class="phones--hidden binct-phone-number-2">
-                  (044) 344..<button data-event="click" data-callback="toggleAdvicesPhones">показати номери</button>
-                </div>                
-                <div class="phones--hours">По будням з 9:00 до 19:30</div>
+              <div class="homepage__advices_content--phones" data-event="onLoad" data-callback="checkBinotel">
+                <div class="phones--hidden">
+                  (044) 344..<button data-event="click" data-callback="toggleAdvicesPhones">показать номера</button>
+                </div>
+                <div class="phones--visible">
+                  <p class="binct-phone-number-1">(044) 344-28-95</p>
+                  <p class="binct-phone-number-2">(050) 660-52-75</p>
+                </div>
+                <div class="phones--hours">По будням с 9:00 до 19:30</div>
               </div>
             </div>
           </section>

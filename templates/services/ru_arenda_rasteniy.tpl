@@ -8,15 +8,18 @@
   </div>
 
   <div class="services-page__calc">
-    <h3>Рассчитать стоимость аренды</h3>
-    <button class="button button--primary button--pill" data-event="click" data-callback="openModal"
-      data-modal-id="calculate-modal">Получить расчет</button>
-    <p>Или звоните нам:</p>
-    <div class="homepage__advices_content--phones binct-phone-number-2">
+    <h3>Рассчитать стоимость фитодизайна</h3>
+    <button class="button button--primary button--pill" data-event="click" data-callback="openModal" data-modal-id="calculate-modal">Рассчитать</button>
+    <p>Также обращайтесь по телефону:</p>
+    <div class="homepage__advices_content--phones" data-event="onLoad" data-callback="checkBinotel">
       <div class="phones--hidden">
-        <p>(099) 238-26-44</p>
+        (044) 344..<button data-event="click" data-callback="toggleAdvicesPhones">показать номера</button>
       </div>
-      <div class="phones--hours">В будние дни с 9:00 до 19:30</div>
+      <div class="phones--visible">
+        <p class="binct-phone-number-1">(044) 344-28-95</p>
+        <p class="binct-phone-number-2">(050) 660-52-75</p>
+      </div>
+      <div class="phones--hours">По будням с 9:00 до 19:30</div>
     </div>
   </div>
 </section>
@@ -26,11 +29,11 @@
     <h2>Стоимость аренды растений</h2>
     <div class="flex gap-32">
       <div class="grow">
-        <p>Вартість оренди рослин у Києві становить у середньому 20% від вартості рослини та залежить від конкретного виду, розміру й кількості рослин.</p>
+        <p>Стоимость аренды растений в Киеве составляет в среднем 20% от стоимости растения и зависит от конкретного вида, размера и количества растений.</p>
         <p>&nbsp;</p>
-        <p>Пакування, розстановка та демонтаж рослин на локації входить у вартість.</p>
+        <p>Упаковка, расстановка и демонтаж растений на локации входит в стоимость.</p>
         <p>&nbsp;</p>
-        <p>Доставка в обидві сторони розраховується окремо в залежності від розташування обʼєкту та таймінгу проведення заходу.</p>
+        <p>Доставка в обе стороны рассчитывается отдельно в зависимости от расположения объекта и тайминга проведения мероприятия.</p>
       </div>
       <div class="grow">
         <img src="https://floren.com.ua/images/content/17498659_1395126903878009_3405576323717119914_n.jpg" alt="Аренда комнатных растений">

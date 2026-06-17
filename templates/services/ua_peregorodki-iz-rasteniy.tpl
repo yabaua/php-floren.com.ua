@@ -7,13 +7,16 @@
 						<p>Компанія «Флорен» займається проєктуванням, виготовленням та встановленням зелених перегородок з рослин з урахуванням архітектури приміщення, освітлення та стилю інтер’єру.</p>
 						</div>
             <div class="services-page__calc">
-              <h3>Розрахувати вартість зонування приміщення</h3>
-              <button class="button button--primary button--pill" data-event="click" data-callback="openModal"
-      data-modal-id="calculate-modal">Викликати дизайнера</button>
-              <p>Також звертайтесь за телефоном:</p>
-              <div class="homepage__advices_content--phones binct-phone-number-2">
+              <h3>Розрахувати вартість фітодизайну</h3>
+              <button class="button button--primary button--pill" data-event="click" data-callback="openModal" data-modal-id="calculate-modal">Розрахувати</button>
+              <p>Також звертайтеся за телефоном:</p>
+              <div class="homepage__advices_content--phones" data-event="onLoad" data-callback="checkBinotel">
                 <div class="phones--hidden">
-        <p>(099) 238-26-44</p>
+                  (044) 344..<button data-event="click" data-callback="toggleAdvicesPhones">показати номери</button>
+                </div>
+                <div class="phones--visible">
+                  <p class="binct-phone-number-1">(044) 344-28-95</p>
+                  <p class="binct-phone-number-2">(050) 660-52-75</p>
                 </div>
                 <div class="phones--hours">По буднях з 9:00 до 19:30</div>
               </div>
