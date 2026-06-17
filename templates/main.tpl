@@ -466,7 +466,7 @@
                   </div>
                 </div>
               </div>
-              <div class="header__main--phones">
+              <div class="header__main--phones" data-event="onLoad" data-callback="checkBinotel">
                 <img src="/img/icons/icon-phone.svg" alt="Phone" />
                 <div class="header__main--phones-wrapper">
                   {* <div class="header__main--phones-hidden binct-phone-number-2"></div> *}
@@ -1412,7 +1412,7 @@
                   </p>
                   <p>03113, {$LINGVO.city_kiev}, {$LINGVO.ukraine}</p>
                 </li>
-                <li class="contacts-phone">
+                <li class="contacts-phone" data-event="onLoad" data-callback="checkBinotel">
                   <div class="contacts-phone--hidden">
                     <p>
                     (044) 344..

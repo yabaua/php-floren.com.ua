@@ -13,7 +13,7 @@ const clickHandlers = {
     const element = event.currentTarget;
     const tooltip = element.closest("#phones-tooltip");
     const wrapper = tooltip.querySelector(".header__main--phones");
-    window.BinotelCallTracking[503289].buttonShowPhoneNumberPressed();
+    activeBinotelNumbers();
     if (wrapper.classList.contains("active")) {
       return;
     }
@@ -25,7 +25,7 @@ const clickHandlers = {
   showPhonesMobile: (event) => {
     const modalId = event.currentTarget.dataset.modalId;
     const modal = document.getElementById(modalId);
-    window.BinotelCallTracking[503289].buttonShowPhoneNumberPressed();
+    activeBinotelNumbers();
     if (modal) {
       setTimeout(() => {
         modal.show();
@@ -42,20 +42,20 @@ const clickHandlers = {
   toggleContactPhones: (event) => {
     const phonesWrapper = event.currentTarget.closest(".map-list__item_phones");
     if (phonesWrapper) {
-      window.BinotelCallTracking[503289].buttonShowPhoneNumberPressed();
+      activeBinotelNumbers();
       setTimeout(() => {
         phonesWrapper.classList.toggle("active");
       }, 100);
 
     }
-    // window.BinotelCallTracking[503289].buttonShowPhoneNumberPressed();
+    // activeBinotelNumbers();
     // const element = event.currentTarget;
     // setTimeout(() => {
     //   element.closest(".contacts-phone").classList.toggle("active");
     // }, 100);
   },
   toggleFooterPhones: (event) => {
-    window.BinotelCallTracking[503289].buttonShowPhoneNumberPressed();
+    activeBinotelNumbers();
     const element = event.currentTarget;
     setTimeout(() => {
       element.closest(".contacts-phone").classList.toggle("active");
@@ -103,6 +103,8 @@ const clickHandlers = {
 };
 const initEvents = () => {
   const targets = document.querySelectorAll("[data-event]");
+  const binotelSections = document.querySelectorAll("[data-event='onLoad'][data-callback='checkBinotel']");
+
   targets.forEach((el) => {
     const event = el.dataset.event;
     const callback = clickHandlers[el.dataset.callback];
@@ -112,7 +114,27 @@ const initEvents = () => {
     }
     el.addEventListener(event, callback);
   });
+
+  const hasBinotelSession = sessionStorage.getItem('C-BIN') === '1';
+  console.log('hasBinotelSession', hasBinotelSession);
+
+  if (hasBinotelSession) {
+    binotelSections.forEach(el => {
+      setTimeout(() => {
+        //console.log('hasBinotelSession2', hasBinotelSession);
+        //window.BinotelCallTracking[503289].buttonShowPhoneNumberPressed();
+        el.classList.add('active');
+      }, 100);
+    });
+  }
+
 };
+
+function activeBinotelNumbers() {
+  window.BinotelCallTracking[503289].buttonShowPhoneNumberPressed();
+  sessionStorage.setItem('C-BIN', '1');
+};
+
 export {
   initEvents as i
 };
