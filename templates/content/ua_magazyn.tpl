@@ -1,5 +1,5 @@
 <h1>Магазин кімнатних рослин</h1>
-<section class="flex">
+<section class="flex magazyn-page">
   <div class="grow">
     <p>Хочете кімнатну рослину, але не знаєте, що саме вам підійде?</p>
     <p class="mt-16">Плануєте озеленити свій простір, та не уявляєте як рослини будуть виглядати?</p>
@@ -25,7 +25,57 @@
   </div>
 </section>
 
-<section class="services-page__left-title-list">
+
+<section class="services-page__map_list mt-48">
+  <div class="map-list__item">
+    <div class="map-list__item_info">
+      <div class="grid">
+        <div>
+          <span>Телефон у Києві</span>
+          <span>
+            Мобільний
+            <span class="map-list__item_messengers">
+              <a class="ico" href="viber://chat?number=%2B380992382644"><img src="/img/icons/icon-whatsapp.svg" alt=""></a>
+              <a class="ico" href="https://t.me/studio_floren"><img src="/img/icons/icon-telegram.svg" alt=""></a>
+            </span>
+          </span>
+          <span>e-mail:</span>
+        </div>
+        <div class="map-list__item_phones">
+          <div class="phones--hidden">
+            (044) 344..
+          </div>
+          <div class="phones--hidden">
+            (050) 660..<button data-event="click" data-callback="toggleContactPhones">
+              показати номери
+            </button>
+          </div>
+          <div class="phones--visible binct-phone-number-1">
+            (044) 344-28-95
+          </div>
+          <div class="phones--visible binct-phone-number-2">
+            (050) 660-52-75
+          </div>
+          <a href="mailto:info@floren.com.ua">info@floren.com.ua</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="map-list__item">      
+    <div class="map-list__item_info">
+      <p>Магазин кімнатних рослин у Києві</p>
+      <p class="contacts-street">
+        <svg class="icon icon-location"></svg>
+        <a href="https://goo.gl/maps/UPpaCBkrMd2TWfXq7" target="_blank">пр. Берестейський, 70</a>
+      </p>
+      <p>Пн-Сб: 09:00-19:30,</p>
+      <p>Нд: 10:00-18:00</p>
+    </div>
+  </div>  
+</section>
+
+
+<!-- <section class="services-page__left-title-list">
   <div class="services-page__left-title">
       <div class="grow">
         <table>
@@ -59,7 +109,7 @@
 				
 			</div>
   </div>
-</section>
+</section> -->
 
 <section class="services-page__left-title-list">
   <div class="services-page__left-title">
