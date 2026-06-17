@@ -7267,6 +7267,9 @@ button.catalog-page__show-filters {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 2.25rem;
+  @media screen and (max-width: 992px) {
+    grid-template-columns: 1fr;
+  }
 }
 .services-page__map > * {
   min-width: 0;
@@ -7282,6 +7285,45 @@ button.catalog-page__show-filters {
   grid-template-columns: auto 1fr;
   gap: 1rem;
   font-weight: 300;
+  @media screen and (max-width: 1300px) {
+    grid-template-columns: 1fr;
+  }
+  @media screen and (max-width: 992px) {
+    grid-template-columns: auto 1fr;
+  }
+  @media screen and (max-width: 576px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.services-page__map_list .map-list__item .map-list__item_info .phones--hidden {
+  white-space: nowrap;
+  button {
+    white-space: nowrap;
+    font-weight: 400;
+    color: var(--color-green-100);
+    @media screen and (max-width: 1400px) {
+      font-size: 0.875rem;
+    }
+  }
+}
+.services-page__map_list .map-list__item .map-list__item_info .map-list__item_messengers {
+  display: inline-flex;
+  gap: 0.25rem;
+  margin-left: 0.5rem;
+}
+.services-page__map_list .map-list__item .map-list__item_info .map-list__item_phones {
+  & .phones--visible {
+    display: none;
+  }
+  &.active {    
+    & .phones--visible {
+      display: inline-flex;
+    }
+    & .phones--hidden {
+      display: none;
+    }
+  }
 }
 .services-page__map_list .map-list__item_icon {
   width: 78px;

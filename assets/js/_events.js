@@ -35,10 +35,24 @@ const clickHandlers = {
   toggleTooltip: (event) => {
     const element = event.currentTarget;
     const tooltip = document.getElementById(element.dataset.tooltip);
-    console.log('element', element);
     if (tooltip) {
       tooltip.open = !tooltip.open;
     }
+  },
+  toggleContactPhones: (event) => {
+    const phonesWrapper = event.currentTarget.closest(".map-list__item_phones");
+    if (phonesWrapper) {
+      window.BinotelCallTracking[503289].buttonShowPhoneNumberPressed();
+      setTimeout(() => {
+        phonesWrapper.classList.toggle("active");
+      }, 100);
+
+    }
+    // window.BinotelCallTracking[503289].buttonShowPhoneNumberPressed();
+    // const element = event.currentTarget;
+    // setTimeout(() => {
+    //   element.closest(".contacts-phone").classList.toggle("active");
+    // }, 100);
   },
   toggleFooterPhones: (event) => {
     window.BinotelCallTracking[503289].buttonShowPhoneNumberPressed();
