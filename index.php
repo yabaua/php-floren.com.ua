@@ -1,6 +1,7 @@
 <?php
+error_reporting(0);
 error_reporting(E_ALL);
-//error_reporting(0);
+
 register_shutdown_function('sql_stat');
 setlocale(LC_TIME, 'uk_UA.UTF-8');
 //setlocale(LC_ALL, 'ru_RU');
@@ -1019,8 +1020,9 @@ $smarty->assign("CLIENTSBOT", $clients);
 
 //======================================
 function getVideoData($videoID){
+//	return;
 //		$api_key = 'AIzaSyDaGQJMy8v1XwCSuhc_efqx4iBzGIANkYw';
-		$api_key = 'AIzaSyCv43unDFARFMnSlfi_LNm6TwM00HkTU3Q';
+		$api_key = 'AIzaSyDDKvCgjuUSOWmCM3-ubisWmmwvKLdpSAk';
 
 		$json_result = file_get_contents ("https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics,status&id=$videoID&key=$api_key");
 		$video_data=json_decode($json_result, true);

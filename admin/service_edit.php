@@ -25,12 +25,12 @@ if(isset($_REQUEST['ID'])){
 if(isset($_REQUEST['edit_article'])){
 
 	$db->query("UPDATE services".$db_sufix." SET
-	title='".$_REQUEST['ptitle']."',
-	menuttl='".$_REQUEST['menuttl']."',
-	meta_title='".$_REQUEST['meta_title']."',
-	meta_description='".$_REQUEST['meta_description']."',
-	meta_keywords='".$_REQUEST['meta_keywords']."',
-	body='".addslashes($_REQUEST['pbody'])."'
+	title='" . $db->escape($_REQUEST['ptitle']) . "',
+	menuttl='" . $db->escape($_REQUEST['menuttl']) . "',
+	meta_title='" . $db->escape($_REQUEST['meta_title']) . "',
+	meta_description='" . $db->escape($_REQUEST['meta_description']) . "',
+	meta_keywords='" . $db->escape($_REQUEST['meta_keywords']) . "',
+	body='" . $db->escape($_REQUEST['pbody']) . "'
 	WHERE ID='".$ID."'");
 
 
