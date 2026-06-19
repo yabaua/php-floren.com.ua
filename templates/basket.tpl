@@ -76,7 +76,7 @@
             <sl-alert variant="warning" data-name="small-order-for-delivery">
               <span slot="icon" class="icon icon-info-circle"></span>
               <!-- TODO: Translate -->
-              Замовлення до 1000 грн доступні лише для самовивозу.<br />Доставка та відправка поштою — від 1000 грн.
+              {$LINGVO.minimum_bid_txt|replace:"XXXX":$DELIVERY_OPTIONS.minimum_bid}
             </sl-alert>
             <sl-radio-group name="delivery_way" value="magazin" id="delivery-methods" data-product-price="{$BSK_TTL}" data-is-plant="{$IS_BSK_PLANT}">
               <sl-radio name="delivery_way" value="magazin" checked="true">
@@ -98,7 +98,7 @@
               <div class="radio-option">
                 <img src="/img/icons/icon-nova-poshta.svg" alt="">
                 <span>{$LINGVO.pickup_from_np}</span>
-              <b>{$LINGVO.pickup_from_np_basket}<sup>грн</sup>
+              <b>{$LINGVO.pickup_from_np_basket}
               </b>
             </div>
           </sl-radio>

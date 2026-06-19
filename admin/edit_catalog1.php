@@ -68,7 +68,7 @@ if (isset($_REQUEST['edit']) && $_REQUEST['new_name'] && $_REQUEST['alias']) {
 
 	
 	
-	$db->query("UPDATE tree".$db_sufix." SET
+	$db->query("UPDATE tree25".$db_sufix." SET
 			alias='".$_REQUEST['alias']."',
 			name='".$_REQUEST['new_name']."',
 			meta_title='".$_REQUEST['new_title']."',
@@ -81,13 +81,13 @@ if (isset($_REQUEST['edit']) && $_REQUEST['new_name'] && $_REQUEST['alias']) {
 		WHERE ID=$ID");
 
 		
-	echo mysql_error();
+	
 
 }
 
 
 
-$db->query("SELECT * FROM tree".$db_sufix." WHERE ID='".$ID."'");
+$db->query("SELECT * FROM tree25".$db_sufix." WHERE ID='".$ID."'");
 $f=$db->fetch();
 ?>
 <div class="holder" style="margin:10px 0;padding:10px 0;">

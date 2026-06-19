@@ -1,6 +1,6 @@
 <?php
 error_reporting(0);
-error_reporting(E_ALL);
+//error_reporting(E_ALL);
 
 register_shutdown_function('sql_stat');
 setlocale(LC_TIME, 'uk_UA.UTF-8');

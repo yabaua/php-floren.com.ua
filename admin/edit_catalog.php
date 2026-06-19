@@ -34,7 +34,7 @@ $PATH=array();
 
 function get_path($id) {
   global $path,$PATH,$ID,$db,$db_sufix;
-  $db->query("SELECT * FROM tree".$db_sufix." WHERE ID=$id");
+  $db->query("SELECT * FROM tree25".$db_sufix." WHERE ID=$id");
   if ($db->num_rows()) {
     $f=$db->fetch();
     $PATH[]=$f['alias'];
@@ -50,18 +50,18 @@ $PATH=array_reverse($PATH);
 
 if (isset($_REQUEST['add']) && ($alias=preg_replace('/[^0-9a-zA-Z_-]/','',$_REQUEST['alias'])) && $_REQUEST['new_name'])  {
   $alias=strtolower($alias);
-  $db->query("SELECT COUNT(*) count FROM tree".$db_sufix." WHERE motherID=$ID AND alias='$alias'");
+  $db->query("SELECT COUNT(*) count FROM tree25".$db_sufix." WHERE motherID=$ID AND alias='$alias'");
   $f=$db->fetch();
 
 	if (!$f['count']) {
 		if ($ID) {
-			$db->query("SELECT levels FROM tree".$db_sufix." WHERE ID=$ID");
+			$db->query("SELECT levels FROM tree25".$db_sufix." WHERE ID=$ID");
 			$f=$db->fetch();
 			$levels=$f['levels']+1;
 		} else {
 			$levels=0;
 		}
-		$db->query("SELECT MAX(order_p) AS max FROM tree".$db_sufix." WHERE motherID=$ID");
+		$db->query("SELECT MAX(order_p) AS max FROM tree25".$db_sufix." WHERE motherID=$ID");
 		$f=$db->fetch();
 		$max=$f['max']+10;
 		$new_name=stripslashes($_REQUEST['new_name']);
@@ -76,7 +76,7 @@ if (isset($_REQUEST['add']) && ($alias=preg_replace('/[^0-9a-zA-Z_-]/','',$_REQU
 		if (!isset($_REQUEST['new_intop'])) $new_intop='';
 		else $new_intop=$_REQUEST['new_intop'];
 
-		$db->query("INSERT INTO tree".$db_sufix." (motherID,alias,name,meta_title,meta_description,meta_keywords,script,order_p,act,top_menu,content)
+		$db->query("INSERT INTO tree25".$db_sufix." (motherID,alias,name,meta_title,meta_description,meta_keywords,script,order_p,act,top_menu,content)
 				VALUES($ID,'$alias','$new_name','$new_title','$new_description','$new_keywords','$script',$max,'$new_show','$new_intop','$content')");
 	}
 }
@@ -86,13 +86,13 @@ if (isset($_REQUEST['edit'])) {
     $o=(int)$o;
     if (isset($_REQUEST['show'][$id])) $s="Y";
       else $s='';
-    $db->query("UPDATE tree".$db_sufix." SET order_p=$o,act='$s' WHERE ID=$id");
+    $db->query("UPDATE tree25".$db_sufix." SET order_p=$o,act='$s' WHERE ID=$id");
   }
 }
 
 if (isset($delet) && isset($del)) {
-  foreach ($del AS $d) $db->query("DELETE FROM tree WHERE ID=$d");
-  foreach ($del AS $d) $db->query("DELETE FROM tree_ua WHERE ID=$d");
+  foreach ($del AS $d) $db->query("DELETE FROM tree25 WHERE ID=$d");
+  foreach ($del AS $d) $db->query("DELETE FROM tree25_ua WHERE ID=$d");
 }
 
 echo $path;
@@ -104,7 +104,7 @@ echo $path;
 <h3>Изменение дерева</h3>
 <form action="edit_catalog.php?ID=<?=$ID?>&lang=<?=$lang?>" method="post">
 <?php 
-$r=$db->query("SELECT * FROM tree".$db_sufix." WHERE motherID=$ID ORDER BY order_p");
+$r=$db->query("SELECT * FROM tree25".$db_sufix." WHERE motherID=$ID ORDER BY order_p");
 $N=$db->num_rows();
 ?>
 Подразделы: <BR>
