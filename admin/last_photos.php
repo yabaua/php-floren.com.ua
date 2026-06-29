@@ -57,7 +57,10 @@ if (isset($_REQUEST['add_photo']) && ($photo_name=trim($_REQUEST['photo_name']))
 			chmod($_SERVER['DOCUMENT_ROOT'].'/images/lastphotos/b/'.$photo_url,0777);
 			chmod($_SERVER['DOCUMENT_ROOT'].'/images/lastphotos/s/'.$photo_url,0777);
 			
-			$db->query("INSERT INTO last_photos (photo_name, photo_name_ua, photo_url, photo_dsc, photo_dsc_ua, date_add) VALUES ('".$photo_name."', '".$photo_name_ua."', '".$photo_url."', '".$photo_dsc."', '".$photo_dsc_ua."', '".time()."')");
+			$db->query("INSERT INTO last_photos
+										(photo_name, photo_name_ua, photo_url, photo_dsc, photo_dsc_ua, date_add)
+										VALUES
+										('".$db->escape($photo_name)."', '".$db->escape($photo_name_ua)."', '".$photo_url."', '".$db->escape($photo_dsc)."', '".$db->escape($photo_dsc_ua)."', '".time()."')");
 	
 	echo '<FONT COLOR="#FF0000">Фото добавлено</FONT>';
 	

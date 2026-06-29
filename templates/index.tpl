@@ -21,7 +21,7 @@
               </div>
               <div class="works-slide__content">
               {if $LPH.photo_dsc!=''}
-              <a class="not-underline" href="{$LPH.photo_dsc}">{$LPH.photo_dsc}</a>
+              <span>{$LPH.photo_dsc}</span>
               {/if}
               <time> {$LPH.date_add|date_format:"%d %B %Y"|capitalize:true} </time>
               </div>

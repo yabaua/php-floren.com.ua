@@ -86,14 +86,14 @@
                 </a>
               </div>
               <div class="services-page__grid_item">
-                <a href="/">
-                  <img src="https://floren.com.ua/images/content/img_phyto_2.jpg" alt="">
+                <a href="/ua/services/phytodesign-ofisa/">
+                  <img src="https://floren.com.ua/images/content/img_phyto_2.jpg" alt="Озеленення офіса Київ">
                   <span>Озеленення офісних приміщень</span>
                 </a>
               </div>
               <div class="services-page__grid_item">
                 <a href="">
-                  <img src="http://floren.com.ua/images/content/img_phyto_3.jpg" alt="">
+                  <img src="https://floren.com.ua/images/content/img_phyto_3.jpg" alt=" Озеленення ресторану кафе ">
                   <span>Озеленення ТРЦ, кафе, ресторанів</span>
                 </a>
               </div>

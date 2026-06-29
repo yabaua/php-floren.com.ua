@@ -100,13 +100,6 @@ if(!strstr(@$_SERVER['HTTP_FROM'], 'bingbot')){
   	<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-iphone-retina.png">
   	<link rel="apple-touch-icon" sizes="167x167" href="/images/apple-touch-icon-ipad-retina.png">
   	
-  	<link rel="alternate" href="https://floren.com.ua/ua/thankyou/" hreflang="uk-UA" />
-	<link rel="alternate" href="https://floren.com.ua/thankyou/" hreflang="ru-UA" />
-  	
-  	
-  	
-
-
   	
     <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -346,7 +339,7 @@ if(!strstr(@$_SERVER['HTTP_FROM'], 'bingbot')){
                               </sl-menu-item>
                 <sl-divider></sl-divider>
                 <sl-menu-item  value="ru">
-                <a href="/thankyou/">                Російською
+                <a href="/ru/">                Російською
                 </a>              </sl-menu-item>
               </sl-menu>
             </sl-dropdown>
@@ -381,10 +374,10 @@ if(!strstr(@$_SERVER['HTTP_FROM'], 'bingbot')){
                     <p class="item-phone">(044) 344-28-95, (050) 660-52-75</p>
                     <p class="item-hours">По буднях 09:00 - 19:30</p>
                     <p class="item-messengers">
-                      <a href="viber://chat?number=%2B380992382644" target="_blank" onclick="trackConv('vb','/ua/thankyou')">
+                      <a href="viber://chat?number=%2B380992382644" target="_blank" onclick="trackConv('vb','/ua/404')">
                         <svg class="icon icon-whatsapp"/>
                       </a>
-                      <a href="https://t.me/studio_floren" target="_blank" onclick="trackConv('tg','/ua/thankyou')">
+                      <a href="https://t.me/studio_floren" target="_blank" onclick="trackConv('tg','/ua/404')">
                         <svg class="icon icon-telegram"/>
                       </a>
                     </p>
@@ -992,10 +985,10 @@ if(!strstr(@$_SERVER['HTTP_FROM'], 'bingbot')){
                 </li>
               </ul>
               <div class="category-list--item-messengers">
-                <a href="viber://chat?number=%2B380992382644" target="_blank" onclick="trackConv('vb','/ua/thankyou')">
+                <a href="viber://chat?number=%2B380992382644" target="_blank" onclick="trackConv('vb','/ua/404')">
                   <svg class="icon icon-whatsapp" />
                 </a>
-                <a href="https://t.me/studio_floren" target="_blank" onclick="trackConv('tg','/ua/thankyou')">
+                <a href="https://t.me/studio_floren" target="_blank" onclick="trackConv('tg','/ua/404')">
                   <svg class="icon icon-telegram" />
                 </a>
               </div>

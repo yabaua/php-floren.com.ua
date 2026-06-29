@@ -159,7 +159,7 @@
     	{literal}
     	<script type="application/ld+json">
     		{
-    			"@context": "http://schema.org",
+    			"@context": "https://schema.org",
     			"@type": "BreadcrumbList",
      			"itemListElement":
      				[
@@ -189,7 +189,7 @@
     {literal}
     	<script type="application/ld+json">
     		{
-    			"@context": "http://schema.org",
+    			"@context": "https://schema.org",
     			"@type": "WebSite",
     			"url": "https://floren.com.ua/",
     			"potentialAction": {
@@ -200,7 +200,7 @@
     </script>
     <script type="application/ld+json">
     		{ 
-    			"@context": "http://schema.org",
+    			"@context": "https://schema.org",
     			"@type": "LocalBusiness",
     			"url": "https://floren.com.ua{/literal}{if $LANGURL=='/ua'}/{else}/ru/{/if}{literal}",
     			"priceRange": "$$",
@@ -722,7 +722,7 @@
 
           <!-- Dropdown список категорій -->
           <div class="header__catalog_list">
-            <!-- <a href="{$LANGURL}" class="header__catalog_mobile-profile">
+            <!-- <a href="/" class="header__catalog_mobile-profile">
               <svg class="icon icon-user"></svg>
               Особистий кабінет
             </a> -->
