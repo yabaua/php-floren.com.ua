@@ -14,7 +14,6 @@ if(isset($_POST) && count($_POST)){
 			'Content-Type: text/html; charset=utf-8'.$nn
 		);
 	}
-
 	
             $cb_topic		=	str_replace("'", "`", $_REQUEST['cb_topic'] ?? '');
             $subject	=	str_replace("'", "`", $_REQUEST['cb_topic'] ?? '');

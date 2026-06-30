@@ -1,6 +1,8 @@
 <?php
-error_reporting(0);
-//error_reporting(E_ALL);
+
+error_reporting(E_ALL);
+ini_set('display_errors', '0');
+
 
 register_shutdown_function('sql_stat');
 setlocale(LC_TIME, 'uk_UA.UTF-8');
@@ -262,6 +264,7 @@ $smarty->assign('PATH',$path);
 		$smarty->assign("LANG_SELECTOR_RU", '/ru/');
 	}else{
 		$lang_selector_link=implode("/",$URL).'/';
+		//print_r($URL);
 		$smarty->assign("LANG_SELECTOR_UA", '/ua/'.$lang_selector_link);
 		$smarty->assign("LANG_SELECTOR_RU", '/'.$lang_selector_link);
 	}

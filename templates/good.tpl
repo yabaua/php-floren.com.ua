@@ -54,19 +54,23 @@
         <sl-radio-group name="size" label="{$LINGVO.choose_size}" value="{$CUR_GFSID}">
         {foreach from=$G_SIZES item=size key=k}
         <a href="{$size.hrefID}">
-          <sl-radio value="{$size.fID}"{if $size.price==0 || $size.visibility==0} disabled{/if}>            
+          <sl-radio value="{$size.formID}"{if $size.price==0 || $size.visibility==0} disabled{/if}>            
               <div class="size__name">{$size.measure}</div>
-              <div class="size__price">{$size.price}<sup>грн</sup>
-              </div>
+              {if $size.price!=0}
+              <div class="size__price">{$size.price}<sup>грн</sup></div>
+              {else}
+              <sl-tag variant="danger" disabled>{$LINGVO.not_available}</sl-tag>
+              {/if}
+
               {if $PLANT_GOOD}
                 {if $size.db_1c_availability>0}
-                <sl-tag variant="success">Є в наявності</sl-tag>
+                <sl-tag variant="success">{$LINGVO.good_available}</sl-tag>
                 {elseif $size.visibility==0}
-                <sl-tag variant="danger" disabled>Немає в наявності</sl-tag>
+                <sl-tag variant="danger" disabled>{$LINGVO.not_available}</sl-tag>
                 {elseif $GOOD_ONE.preorder==1}
-                <sl-tag variant="order">Під замовлення</sl-tag>
+                <sl-tag variant="order">{$LINGVO.good_preorder}</sl-tag>
                 {else}
-                <sl-tag variant="danger" disabled>Немає в наявності</sl-tag>
+                <sl-tag variant="danger" disabled>{$LINGVO.not_available}</sl-tag>
                 {/if}
               {/if}
               {if $size.video!=''}
@@ -101,27 +105,30 @@
      {* Доступність *}
       {if $PLANT_GOOD}
         {if $CUR_AVAILABILITY>0}
-            <div class="product-page__actions_availability success">Є в наявності</div>
+            <div class="product-page__actions_availability success">{$LINGVO.good_available}</div>
         {elseif $CUR_VISIBILITY==0}
-            <div class="product-page__actions_availability danger">Немає в наявності</div>
+            <div class="product-page__actions_availability danger">{$LINGVO.not_available}</div>
         {elseif $GOOD_ONE.preorder==1}
-            <div class="product-page__actions_availability order">Під замовлення</div>
+            <div class="product-page__actions_availability order">{$LINGVO.good_preorder}</div>
         {else}
-            <div class="product-page__actions_availability danger">Немає в наявності</div>
+            <div class="product-page__actions_availability danger">{$LINGVO.not_available}</div>
         {/if}
       {/if}
       {* Доступність *}
 
-
+      {if $CUR_PRICE!=0}
       <div class="product-page__price">
         {$CUR_PRICE}
         <sup>грн</sup>
       </div>
+      {/if}
       <div class="product-page__actions_buttons">
-        <button class="button button--primary" data-id="{$CUR_GFSID}" data-name="{$GOOD_ONE.name}" data-href="{$GOOD_ONE.hrefID}" data-event="click" data-callback="addToCart">{$LINGVO.add_prod}</button>
+        <button class="button button--primary" data-id="{$CUR_GFSID}" data-name="{$GOOD_ONE.name}" data-href="{$GOOD_ONE.hrefID}" data-event="click" data-callback="addToCart"{if $CUR_VISIBILITY==0 || $GOOD_ONE.preorder!=1 || $CUR_PRICE==0} disabled="true"{/if}>{$LINGVO.add_prod}</button>
+        {**
         <button href="#" class="button button--outline button--icon button--small" aria-label="{$LINGVO.add_to_fav}">
           <span class="icon icon-heart"/>
         </button>
+        **}
         <button class="button button--outline button--small consult" aria-label="{$LINGVO.advice_prof}" data-event="click" data-callback="openModal" data-modal-id="calculate-modal">
           <img src="/img/icons/icon-question.svg" alt="{$LINGVO.advice_prof}"/>
           <b>{$LINGVO.advice}</b>
@@ -144,7 +151,7 @@
         </div>
     
         <div class="form-control">
-          <button class="button button--primary" type="submit">Відправити</button>
+          <button class="button button--primary" type="submit">{$LINGVO.send}</button>
         </div>
       </form>
     </sl-dialog>

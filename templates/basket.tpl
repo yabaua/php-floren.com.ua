@@ -260,8 +260,8 @@
               </h3>                
 
                 {if $B.not_available}
-                  <sl-tag class="cart-tag" variant="danger">Товар під замовлення</sl-tag>
-              <sl-tag class="cart-tag" variant="order">Очікуване надходження 7-14 днів. Ціна та дата орієнтовні!</sl-tag>
+                  <sl-tag class="cart-tag" variant="danger">{$LINGVO.bsk_preorder_good_text}</sl-tag>
+                  <sl-tag class="cart-tag" variant="order">{$LINGVO.bsk_preorder_7_14_text}</sl-tag>
                 {/if}
                 
                 <div class="cart-item__details_options">{$B.goodLegend}</div>
@@ -278,7 +278,7 @@
             </ul>
             {if $IS_BSK_PLANT || $IS_BSK_POT}
               <div class="form-control">
-          <sl-checkbox name="peresadka" value="Требуется пересадка">{$LINGVO.i_need_peresadka}</sl-checkbox>
+          <sl-checkbox name="peresadka" value="{$LINGVO.i_need_peresadka}">{$LINGVO.i_need_peresadka}</sl-checkbox>
         </div>
             {/if}
             <div class="cart-page__order-list_summary">

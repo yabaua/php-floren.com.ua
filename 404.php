@@ -1,5 +1,6 @@
 <?
-error_reporting(E_ALL);
+//error_reporting(E_ALL);
+error_reporting(0);
 header('HTTP/1.1 404 Not Found', true, '404');
 header("content-type: text/html;charset=utf-8 \r\n");
 

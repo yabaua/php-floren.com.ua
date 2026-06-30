@@ -220,7 +220,7 @@ if (!isset($PARAM[0]) || (isset($PARAM[2]) && $PARAM[2]!='')) {
 		LEFT JOIN goods_forms2_1c g21c ON gfs.ID=g21c.fID
 		LEFT JOIN goods_1c g1c ON g1c.barcode=g21c.barcode
 		
-		WHERE g.ID='".$gID."' AND visibility=1
+		WHERE g.ID='".$gID."'# AND visibility=1
 		ORDER BY db_1c_availability > 0 DESC, gfs.price DESC, gfs.color DESC, gfs.dia, gfs.wdt
 		");
 
@@ -278,6 +278,7 @@ if (!isset($PARAM[0]) || (isset($PARAM[2]) && $PARAM[2]!='')) {
 				$good[$rs_g['ID']]['forms'][$rs_g['gfsID']]['measure_name']=$rs_g['measure_name'];
 				$good[$rs_g['ID']]['forms'][$rs_g['gfsID']]['db_1c_availability']=$rs_g['db_1c_availability'];
 				
+				$uniqueSizes[$good['ID'].'_'.$rs_g['dia'] ."_". $rs_g['wdt']."_".$rs_g['hgt']."_".$rs_g['depth']."_".$rs_g['measure_qt']][$rs_g['color']]['formID']=$rs_g['gfsID'];
 				$uniqueSizes[$good['ID'].'_'.$rs_g['dia'] ."_". $rs_g['wdt']."_".$rs_g['hgt']."_".$rs_g['depth']."_".$rs_g['measure_qt']][$rs_g['color']]['hrefID']= $increment==0?$hrefURL:$hrefURL.$rs_g['gfsID']."/";
 				$uniqueSizes[$good['ID'].'_'.$rs_g['dia'] ."_". $rs_g['wdt']."_".$rs_g['hgt']."_".$rs_g['depth']."_".$rs_g['measure_qt']][$rs_g['color']]['old_price']=$rs_g['old_price'];
 				$uniqueSizes[$good['ID'].'_'.$rs_g['dia'] ."_". $rs_g['wdt']."_".$rs_g['hgt']."_".$rs_g['depth']."_".$rs_g['measure_qt']][$rs_g['color']]['price']=$rs_g['price'];
@@ -500,7 +501,8 @@ $smarty->assign("CUR_GFSID", $curFID);
 			}
 
 			$form_measure = $form_measure . ' ' .$f['unit'];
-			$goods_sizes[count($goods_sizes)-1][''] = iconv('windows-1251', 'utf-8', $f['name_ru']);
+			$goods_sizes[count($goods_sizes)-1][''] = $f['name_ru'];
+			$goods_sizes[count($goods_sizes)-1]['formID'] = $uniqueSizes[$good['ID'].'_'.$f['dia'] ."_". $f['wdt']."_".$f['hgt']."_".$f['depth']."_".$f['measure_qt']][$curColor]['formID'];
 			$goods_sizes[count($goods_sizes)-1]['price'] = $uniqueSizes[$good['ID'].'_'.$f['dia'] ."_". $f['wdt']."_".$f['hgt']."_".$f['depth']."_".$f['measure_qt']][$curColor]['price'];
 			$goods_sizes[count($goods_sizes)-1]['old_price'] = $uniqueSizes[$good['ID'].'_'.$f['dia'] ."_". $f['wdt']."_".$f['hgt']."_".$f['depth']."_".$f['measure_qt']][$curColor]['old_price'];
 			$goods_sizes[count($goods_sizes)-1]['hrefID'] = $uniqueSizes[$good['ID'].'_'.$f['dia'] ."_". $f['wdt']."_".$f['hgt']."_".$f['depth']."_".$f['measure_qt']][$curColor]['hrefID'];
