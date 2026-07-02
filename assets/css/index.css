@@ -7762,6 +7762,9 @@ button.catalog-page__show-filters {
 
 .thankyou-page {  
   padding: 64px 0;  
+  @media screen and (max-width: 768px) {
+    padding: 24px 0;
+  }
 }
 .thankyou-page .thankyou-page__grid {
   border-radius: 12px;
@@ -7770,11 +7773,20 @@ button.catalog-page__show-filters {
   display: flex;
   gap: 64px;
   align-items: center;
-  padding: 48px;
+  padding: 48px;  
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    gap: 24px;
+  }
 }
 .thankyou-page .thankyou-page__image {
   width: 250px;
   flex-shrink: 0;
+  @media screen and (max-width: 768px) {
+    order: 2;
+    width: 50%;
+    max-width: 160px;
+  }
 }
 .thankyou-page .thankyou-page__image img {
   width: 100%;
@@ -7789,6 +7801,9 @@ button.catalog-page__show-filters {
   line-height: 1.5;
   letter-spacing: normal;
   text-align: left;
+  @media screen and (max-width: 768px) {
+    text-align: center;
+  }
   h1 {
     font-size: 40px;
     font-weight: 600;
@@ -7797,12 +7812,19 @@ button.catalog-page__show-filters {
     line-height: 1.2;
     letter-spacing: normal;
     text-align: left;
+    @media screen and (max-width: 768px) {
+      text-align: center;
+      font-size: 32px;
+    }
   }
 }
 .thankyou-page .thankyou-page__socials {
   margin-top: 24px;
   display: flex;
   gap: 0.5rem;
+  @media screen and (max-width: 768px) {
+    justify-content: center;
+  }
   a {
     display: flex;
     justify-content: center;
