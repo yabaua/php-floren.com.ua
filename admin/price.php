@@ -10,8 +10,16 @@ else $category=0;
 
 if(isset($_REQUEST['update_price2'])){
 	foreach($_REQUEST['new_price'] AS $k=>$v){
+		
+		$db->query("SELECT * FROM goods_forms2_1c WHERE fID='".$k."'");
+		if($db->num_rows()){
+			$rs=$db->fetch();
+			$db->query("UPDATE goods_1c SET price='".$_REQUEST['new_price'][$k]."' WHERE barcode='".$rs['barcode']."'", 1);
+		//	echo "UPDATE goods_1c SET price='".$_REQUEST['new_price'][$k]."' WHERE barcode='".$rs['barcode']."'";
+		}
+		
+		
 		$db->query("UPDATE goods_forms SET price='".$_REQUEST['new_price'][$k]."', old_price='".$_REQUEST['old_price'][$k]."' WHERE ID='".$k."'");
-		$db->query("UPDATE goods_ua_forms SET price='".$_REQUEST['new_price'][$k]."', old_price='".$_REQUEST['old_price'][$k]."' WHERE ID='".$k."'");
 	}
 	//header("location:price.php");
 }

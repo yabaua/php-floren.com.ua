@@ -43,6 +43,12 @@ if ($URL[0]=='phyto-lamp'){
 	header("Location: /publications/phyto-lamp/");
 	exit();
 }
+if ($URL[0]=='phytodesign'){
+	include($_SERVER['DOCUMENT_ROOT'].'/include/send_404_email.php');
+	header("HTTP/1.0 301 Moved Permanently"); 
+	header("Location: ".$lang_url."/services/phytodesign/");
+	exit();
+}
 /*
 if($URL[0]=='category' && $URL[1]!='25'){
 	if (!in_array($URL[1], array_keys($redirect))){

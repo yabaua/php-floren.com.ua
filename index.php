@@ -64,8 +64,10 @@ $clientIP = isset($_SERVER['HTTP_CLIENT_IP'])
 $spiders=preg_match('/(bot|Bot|AdsBot|Googlebot|Slurp|MSNBOT|UdmSearch|InfoSeek|Yandex|StackRambler|Aport|BigmirSpider|MetaSpider|lunabot)/',@$_SERVER["HTTP_USER_AGENT"]);
 session_start();
 
-$_SESSION['spiders']=$spiders;
 $country = '';
+$_SESSION['spiders']=$spiders;
+$_SESSION['clientCountry']=$country;
+
 if (!$spiders) {
 	
 	if (!isset($_SESSION['ID']) || !$_SESSION['ID']) {

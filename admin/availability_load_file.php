@@ -1,7 +1,8 @@
 <?
 header("content-type: text/html;charset=utf-8 \r\n");
 require('../database.php');
-
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 function get_data_from_1c($filetype) {
   global $db;
@@ -98,26 +99,38 @@ $microtime=microtime();
 $start_time=substr($microtime,11).'.'.substr($microtime,2,8);
 
     $data_1c = get_data_from_1c('ostatki');
-
     if (count($data_1c) > 0) {
         $cnt_ostatki=0;
-//echo "1";
-        $db->query("TRUNCATE goods_1c");
+        //echo "1";
+        // mysql_query("TRUNCATE goods_1c");
+        $db->query("UPDATE goods_1c SET still_at_1C=0");
         foreach ($data_1c as $key => $value) {
-            $temp_arr[]="('".$key."', '".str_replace("'","&#700;",$value['name'])."', '".$value['f1_stock']."','".$value['f2_stock']."','".round($value['price'])."')";
+            $barcode    =   $key;
+            $name       =   str_replace("'","&#700;",$value['name']);
+            $f1_stock   =   $value['f1_stock'];
+            $f2_stock   =   $value['f2_stock'];
+            $price      =   round($value['price']);
             
             $cnt_ostatki++ ;
+        
+            $db->query("INSERT INTO goods_1c (barcode,name,f1_stock,f2_stock,price,still_at_1C)
+                                        VALUES ('".$barcode."','".$name."','".$f1_stock."','".$f2_stock."', '".$price."', 1)
+                                        ON DUPLICATE KEY UPDATE
+                                        name = '".$name."',
+                                        f1_stock = '".$f1_stock."',
+                                        f2_stock = '".$f2_stock."',
+                                        still_at_1C = 1");
+            /*
+                        echo "INSERT INTO goods_1c (barcode,name,f1_stock,f2_stock,price,still_at_1C)
+                                        VALUES ('".$barcode."','".$name."','".$f1_stock."','".$f2_stock."', '".$price."', 1)
+                                        ON DUPLICATE KEY UPDATE
+                                        name = '".$name."',
+                                        f1_stock = '".$f1_stock."',
+                                        f2_stock = '".$f2_stock."',
+                                        still_at_1C = 1<br />";
+             */                                        
         }
-        $temp_arr2=array_chunk($temp_arr, 200);
-        foreach($temp_arr2 AS $v){
-            $db->query("INSERT INTO goods_1c (barcode,name,f1_stock,f2_stock,price)
-                                        VALUES ".implode(",", $v));
-        }
-        /*
-                $db->query("INSERT INTO goods_1c (barcode,name,f1_stock,f2_stock,price)
-                                        VALUES('".$key."', '".str_replace("'","&#700;",$value['name'])."', '".$value['f1_stock']."','".$value['f2_stock']."','".round($value['price'])."')");
-         */  
-            
+
         
         echo   $sync_text = 'Залишки синхронізовані. Завантажено товарів: <b>'.$cnt_ostatki.'</b><br />';
     } else {

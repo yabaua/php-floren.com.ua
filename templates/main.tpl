@@ -744,7 +744,7 @@
 
               <ul class="services-list-mobile">
                 <li data-category="services-phytodesign">
-                  <a href="{$LANGURL}/phytodesign/">
+                  <a href="{$LANGURL}/services/phytodesign/">
                     <b>{$LINGVO.phytodesign}</b>
                     <span>{$LINGVO.ozelenenie_prostoru}</span>
                     <span class="summary-icon" data-event="click" data-callback="toggleDetails"></span>
@@ -920,7 +920,7 @@
                   </button>
                   <ul class="category-content__item-list">
                     <li class="category-content__item-list-all">
-                      <a href="{$LANGURL}/phytodesign/">                        
+                      <a href="{$LANGURL}/services/phytodesign/">                        
                         <span>Всі послуги з фітодизайну</span>
                       </a>
                     </li>
@@ -1075,7 +1075,7 @@
               <button class="secondary-item--button" aria-label="{$LINGVO.phytodesign}">
                 <svg class="icon icon-fitodesign"/>
                 <div class="secondary-item--button-text">
-                  <a href="{$LANGURL}/phytodesign/">
+                  <a href="{$LANGURL}/services/phytodesign/">
                     <b>{$LINGVO.phytodesign}</b>
                     <span>{$LINGVO.ozelenenie_prostoru}</span>
                   </a>
@@ -1386,7 +1386,7 @@
               <h3>{$LINGVO.goods_and_services}</h3>
               <ul class="footer__body-list">
                 <li>
-                  <a href="{$LANGURL}/phytodesign/">{$LINGVO.phytodesign}</a>
+                  <a href="{$LANGURL}/services/phytodesign/">{$LINGVO.phytodesign}</a>
                 </li>
                 <li>
                   <a href="{$LANGURL}/services/vertikalnoe-ozelenenie/">{$LINGVO.vertikalnoe_ozelenenie}</a>

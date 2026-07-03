@@ -1,6 +1,8 @@
 <?
 require("auth.php");
 require("../include/strlib.php");
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 if (!isset($_REQUEST['ID'])){
 	header("location: goods_filters.php");
 	exit();
@@ -9,7 +11,7 @@ if (!isset($_REQUEST['ID'])){
 	
 	
 if (isset($_REQUEST['edit_seo'])) {
-		mysql_query("UPDATE goods_filters_meta SET
+		$db->query("UPDATE goods_filters_meta SET
 		name='".trim($_REQUEST['name'])."',
 		page_title='".trim($_REQUEST['page_title'])."',
 		meta_title='".$_REQUEST['meta_title']."',
@@ -37,6 +39,7 @@ if (isset($_REQUEST['edit_seo'])) {
 <script src="/admin/ckeditor/ckeditor.js"></script>
 </head>
 <body style="margin-left:20px;">
+
 <?
 //============================
 
@@ -50,8 +53,8 @@ include("top_menu.php");
 <br /><br />
 
 <?
-	$qr=mysql_query("SELECT * FROM goods_filters_meta WHERE ID='".$ID."'");
-	$rs=mysql_fetch_array($qr);
+	$db->query("SELECT * FROM goods_filters_meta WHERE ID='".$ID."'");
+	$rs=$db->fetch();
 ?>
 <h1><?=$rs['alias']?></h1>
 <br /><br />
