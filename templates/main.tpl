@@ -1072,15 +1072,15 @@
           <!-- Додаткові категорії: фітодизайн, вертикальне озеленення, флораріуми -->
           <ul class="header__catalog--secondary">
             <li class="secondary-item">
-              <button class="secondary-item--button" aria-label="{$LINGVO.phytodesign}">
+              <a href="{$LANGURL}/services/phytodesign/" class="secondary-item--button" aria-label="{$LINGVO.phytodesign}">
                 <svg class="icon icon-fitodesign"/>
                 <div class="secondary-item--button-text">
-                  <a href="{$LANGURL}/services/phytodesign/">
+                  <span>
                     <b>{$LINGVO.phytodesign}</b>
                     <span>{$LINGVO.ozelenenie_prostoru}</span>
-                  </a>
+                  </span>
                 </div>
-              </button>
+              </a>
               <section class="secondary-item--content">
                 <ul class="secondary-item--content-list">
                   <li>
@@ -1114,15 +1114,15 @@
               </section>
             </li>
             <li class="secondary-item">
-              <button class="secondary-item--button" aria-label="{$LINGVO.vertikalnoe_ozelenenie}">
+              <a href="{$LANGURL}/services/vertikalnoe-ozelenenie/" class="secondary-item--button" aria-label="{$LINGVO.vertikalnoe_ozelenenie}">
                 <svg class="icon icon-vertical"/>
                 <div class="secondary-item--button-text">
-                  <a href="{$LANGURL}/services/vertikalnoe-ozelenenie/">
+                  <span>
                     <b>{$LINGVO.vertikalnoe_ozelenenie}</b>
                     <span>{$LINGVO.green_wall_short}</span>
-                  </a>
+                  </span>
                 </div>
-              </button>
+              </a>
               <section class="secondary-item--content">
                 <ul class="secondary-item--content-list">
                   <li>
@@ -1141,15 +1141,15 @@
               </section>
             </li>
             <li class="secondary-item">
-              <button class="secondary-item--button" aria-label="{$LINGVO.care} {$LINGVO.za_rasteniyami}">
+              <a href="{$LANGURL}/services/house_plant_care/" class="secondary-item--button" aria-label="{$LINGVO.care} {$LINGVO.za_rasteniyami}">
                 <svg class="icon icon-care"/>
                 <div class="secondary-item--button-text">
-                  <a href="{$LANGURL}/services/house_plant_care/">
+                  <span>
                     <b>{$LINGVO.care}</b>
                     <span>{$LINGVO.za_rasteniyami}</span>
-                  </a>
+                  </span>
                 </div>
-              </button>
+              </a>
               <section class="secondary-item--content">
                 <ul class="secondary-item--content-list">
                   <li>
@@ -1168,15 +1168,15 @@
               </section>
             </li>
             <li class="secondary-item">
-              <button class="secondary-item--button" aria-label="{$LINGVO.photo_gallery}">
+              <a href="{$LANGURL}/gallery/" class="secondary-item--button" aria-label="{$LINGVO.photo_gallery}">
                 <svg class="icon icon-photogallery"/>
                 <div class="secondary-item--button-text">
-                  <a href="{$LANGURL}/gallery/">
+                  <span>
                     <b>{$LINGVO.portfolio}</b>
                     <span>{$LINGVO.photo_gallery}</span>
-                  </a>
+                  </span>
                 </div>
-              </button>
+              </a>
             </li>
           </ul>
         </div>

@@ -2447,7 +2447,9 @@ main {
   height: 100%;
   background-color: var(--color-green-100);
   color: var(--color-white);
+  display: flex;
   justify-content: center;
+  align-items: center;
   padding: 0 1.5rem;
   gap: 1rem;
   line-height: 1.2;
