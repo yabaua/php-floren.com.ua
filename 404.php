@@ -999,15 +999,15 @@ if(!strstr(@$_SERVER['HTTP_FROM'], 'bingbot')){
           <!-- Додаткові категорії: фітодизайн, вертикальне озеленення, флораріуми -->
           <ul class="header__catalog--secondary">
             <li class="secondary-item">
-              <button class="secondary-item--button" aria-label="Фітодизайн">
+              <a href="/ua/services/phytodesign/" class="secondary-item--button" aria-label="Фітодизайн">
                 <svg class="icon icon-fitodesign"/>
                 <div class="secondary-item--button-text">
-                  <a href="/ua/phytodesign/">
+                  <span>
                     <b>Фітодизайн</b>
                     <span>Озеленення простору</span>
-                  </a>
+                  </span>
                 </div>
-              </button>
+              </a>
               <section class="secondary-item--content">
                 <ul class="secondary-item--content-list">
                   <li>
@@ -1039,15 +1039,15 @@ if(!strstr(@$_SERVER['HTTP_FROM'], 'bingbot')){
               </section>
             </li>
             <li class="secondary-item">
-              <button class="secondary-item--button" aria-label="Вертикальне озеленення">
+              <a href="/ua/services/vertikalnoe-ozelenenie/" class="secondary-item--button" aria-label="Вертикальне озеленення">
                 <svg class="icon icon-vertical"/>
                 <div class="secondary-item--button-text">
-                  <a href="/ua/services/vertikalnoe-ozelenenie/">
+                  <span>
                     <b>Вертикальне озеленення</b>
                     <span>Зелені стіни</span>
-                  </a>
+                  </span>
                 </div>
-              </button>
+              </a>
               <section class="secondary-item--content">
                 <ul class="secondary-item--content-list">
                   <li>
@@ -1066,15 +1066,15 @@ if(!strstr(@$_SERVER['HTTP_FROM'], 'bingbot')){
               </section>
             </li>
             <li class="secondary-item">
-              <button class="secondary-item--button" aria-label="Догляд за рослинами">
+              <a href="/ua/services/house_plant_care/" class="secondary-item--button" aria-label="Догляд за рослинами">
                 <svg class="icon icon-care"/>
                 <div class="secondary-item--button-text">
-                  <a href="/ua/services/house_plant_care/">
+                  <span>
                     <b>Догляд</b>
                     <span>за рослинами</span>
-                  </a>
+                  </span>
                 </div>
-              </button>
+              </a>
               <section class="secondary-item--content">
                 <ul class="secondary-item--content-list">
                   <li>
@@ -1093,15 +1093,15 @@ if(!strstr(@$_SERVER['HTTP_FROM'], 'bingbot')){
               </section>
             </li>
             <li class="secondary-item">
-              <button class="secondary-item--button" aria-label="Галерея фотографій">
+              <a href="/ua/gallery/" class="secondary-item--button" aria-label="Галерея фотографій">
                 <svg class="icon icon-photogallery"/>
                 <div class="secondary-item--button-text">
-                  <a href="/ua/gallery/">
+                  <span>
                     <b>Портфоліо</b>
                     <span>Галерея фотографій</span>
-                  </a>
+                  </span>
                 </div>
-              </button>
+              </a>
             </li>
           </ul>
         </div>
