@@ -76,7 +76,24 @@ const addToCart = async (event) => {
   if (modal) {
     modal.show();
   }
-  console.log("addToCart", data);
+  if (data && data.basket_items) {
+    const addedItem = data.basket_items.find((item) => item.formID == productId);
+    if (addedItem) {
+      const price = Number(addedItem.price);
+      if (typeof gtag === "function") {
+        gtag("event", "add_to_cart", {
+          currency: "UAH",
+          value: price,
+          items: [{
+            item_id: String(addedItem.formID),
+            item_name: addedItem.name,
+            price: price,
+            quantity: 1
+          }]
+        });
+      }
+    }
+  }
 };
 async function updateCartDisplay(cartData) {
   const cartTotal = cartData || [];
