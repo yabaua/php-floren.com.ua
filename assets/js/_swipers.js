@@ -5732,9 +5732,45 @@ const initPortfolioViewers = () => {
     });
   });
 };
+
+
+const initFormValidation = () => {
+  let alertValidation = null;
+  document.addEventListener("submit", (e) => {
+    const form = e.target.closest("form");
+    if (!form) return;
+
+    const action = form.getAttribute("action");
+    if (action && action.includes("/thankyou/")) {
+      const nameInput = form.querySelector('[name="cb_name"], [name="name"], #cb_name, #name');
+      const phoneInput = form.querySelector('[name="cb_phone"], [name="phone"], #cb_phone, #phone');
+
+      const nameVal = nameInput ? String(nameInput.value || "").trim() : "";
+      const phoneVal = phoneInput ? String(phoneInput.value || "").trim() : "";
+
+      if (!nameVal || !phoneVal) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        if (!alertValidation) {
+          alertValidation = document.getElementById("alert-validation");
+        }
+
+        if (alertValidation) {
+          alertValidation.toast();
+        }
+      }
+    }
+  }, true);
+};
+
+
+
+
 window.youtubePlayers = [];
 window.submitForm = submitForm;
 function startApp() {
+  initFormValidation();
   initEvents();
   // initScroll();
   initCatalog();

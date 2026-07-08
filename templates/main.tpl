@@ -1458,6 +1458,12 @@
         </div>
       </div>
     </footer>
+
+    <sl-alert id="alert-validation" variant="danger" duration="3000" closable>
+      <img slot="icon" src="/img/icons/icon-warning-circle-red.svg" alt="">
+      <strong>Вкажіть ваше ім'я та номер телефону</strong>      
+    </sl-alert>
+
   {if $URL[0]=='product'}
     <script src="https://www.youtube.com/iframe_api"></script>
   {/if}
