@@ -1461,6 +1461,16 @@
   {if $URL[0]=='product'}
     <script src="https://www.youtube.com/iframe_api"></script>
   {/if}
+
+  <script type="text/javascript">
+    function trackConv(csrc, curl) {
+      console.log('trackConv', csrc, curl);
+      fetch('/bsk/call_back_trackConv.php', {
+        method: 'POST',
+        body: new URLSearchParams({ src: csrc, url: curl })
+      }).catch(err => console.error('Error tracking conversion:', err));
+    }
+  </script>
   
   <!-- BEGIN BINOCHAT CODE  -->
   {literal}   
