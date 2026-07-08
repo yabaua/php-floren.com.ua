@@ -3,11 +3,9 @@
   <div class="container">
     <h1 class="cart-page__title">{$PAGE_TITLE}</h1>
 
-    <script>
-      {
-        $GA4_SCRIPT
-      }
-    </script>
+<script>
+  {$GA4_SCRIPT}
+</script>
 
 {if $ERROR}
 <sl-alert variant="warning" data-name="small-order">

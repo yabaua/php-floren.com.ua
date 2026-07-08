@@ -445,14 +445,14 @@
                       <a 
                         href="viber://chat?number=%2B380992382644" 
                         target="_blank" 
-                        onclick="trackConv('vb','{$LANGURL}/{$URL|@join:"/"}')"
+                        onclick="trackConv('vb','{$LANGURL}/{$URL|@join:"/"}/')"
                       >
                         <svg class="icon icon-whatsapp"></svg>
                       </a>
                       <a 
                         href="https://t.me/studio_floren" 
                         target="_blank" 
-                        onclick="trackConv('tg','{$LANGURL}/{$URL|@join:"/"}')"
+                        onclick="trackConv('tg','{$LANGURL}/{$URL|@join:"/"}/')"
                       >
                         <svg class="icon icon-telegram"></svg>
                       </a>
@@ -543,11 +543,10 @@
                       </p>
                       <p class="item-hours">По буднях 09:00 - 19:30</p>
                       <p class="item-messengers">
-                        <a href="viber://chat?number=%2B380992382644" target="_blank" onclick="trackConv('vb','{$LANGURL}/{$URL|@join:"
-                          /"}')">
+                        <a href="viber://chat?number=%2B380992382644" target="_blank" onclick="trackConv('vb','{$LANGURL}/{$URL|@join:"/"}/')">
                           <svg class="icon icon-whatsapp"></svg>
                         </a>
-                        <a href="https://t.me/studio_floren" target="_blank" onclick="trackConv('tg','{$LANGURL}/{$URL|@join:" /"}')">
+                        <a href="https://t.me/studio_floren" target="_blank" onclick="trackConv('tg','{$LANGURL}/{$URL|@join:"/"}/')">
                           <svg class="icon icon-telegram"></svg>
                         </a>
                       </p>
@@ -1059,10 +1058,10 @@
                 </li>
               </ul>
               <div class="category-list--item-messengers">
-                <a href="viber://chat?number=%2B380992382644" target="_blank" onclick="trackConv('vb','{$LANGURL}/{$URL|@join:"/"}')">
+                <a href="viber://chat?number=%2B380992382644" target="_blank" onclick="trackConv('vb','{$LANGURL}/{$URL|@join:"/"}/')">
                   <svg class="icon icon-whatsapp" />
                 </a>
-                <a href="https://t.me/studio_floren" target="_blank" onclick="trackConv('tg','{$LANGURL}/{$URL|@join:"/"}')">
+                <a href="https://t.me/studio_floren" target="_blank" onclick="trackConv('tg','{$LANGURL}/{$URL|@join:"/"}/')">
                   <svg class="icon icon-telegram" />
                 </a>
               </div>
