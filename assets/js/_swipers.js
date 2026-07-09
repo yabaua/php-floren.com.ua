@@ -5783,6 +5783,7 @@ function startApp() {
   initIntlTelInput();
   initCart();
   customElements.define("quantity-counter", QuantityCounter);
+  console.log('Application started')
 }
 const generateRandomId = (length = 10) => {
   return Math.random().toString(36).substring(2, 2 + length);

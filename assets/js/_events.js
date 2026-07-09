@@ -124,7 +124,6 @@ const initEvents = () => {
   });
 
   const hasBinotelSession = sessionStorage.getItem('C-BIN') === '1';
-  console.log('hasBinotelSession', hasBinotelSession);
 
   if (hasBinotelSession) {
     binotelSections.forEach(el => {
