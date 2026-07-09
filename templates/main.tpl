@@ -1461,7 +1461,7 @@
 
     <sl-alert id="alert-validation" variant="danger" duration="3000" closable>
       <img slot="icon" src="/img/icons/icon-warning-circle-red.svg" alt="">
-      <strong>Вкажіть ваше ім'я та номер телефону</strong>      
+      <strong>{$LINGVO.fb_phone_false}</strong>      
     </sl-alert>
 
   {if $URL[0]=='product'}
@@ -1471,7 +1471,7 @@
   <script type="text/javascript">
     function trackConv(csrc, curl) {
       console.log('trackConv', csrc, curl);
-      fetch('/bsk/call_back_trackConv.php', {
+      fetch('/api/trackConv.php', {
         method: 'POST',
         body: new URLSearchParams({ src: csrc, url: curl })
       }).catch(err => console.error('Error tracking conversion:', err));

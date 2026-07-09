@@ -12,8 +12,8 @@
             <span>
               Мобільний
               <span class="map-list__item_messengers">
-                <a class="ico" href="viber://chat?number=%2B380992382644"><img src="/img/icons/icon-whatsapp.svg" alt=""></a>
-                <a class="ico" href="https://t.me/studio_floren"><img src="/img/icons/icon-telegram.svg" alt=""></a>
+                <a class="ico" href="viber://chat?number=%2B380992382644" onclick="trackConv('vb','{$LANGURL}/{$URL|@join:"/"}/')"><img src="/img/icons/icon-whatsapp.svg" alt=""></a>
+                <a class="ico" href="https://t.me/studio_floren" onclick="trackConv('tg','{$LANGURL}/{$URL|@join:"/"}/')"><img src="/img/icons/icon-telegram.svg" alt=""></a>
               </span>
             </span>
             <span>e-mail:</span>
