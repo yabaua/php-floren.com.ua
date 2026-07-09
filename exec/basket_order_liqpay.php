@@ -3,7 +3,7 @@ $public_key='i74969477618';
 $private_key='Ef2XMSHcaXgQgisqfMmfWvPjk5JXpWrd7eDg4IMK';
 
 // $order_id = "003"; //$_POST['order_id']; ============ DECLARETED UPPER
-$order_id_txt='windows-1251', 'utf-8', 'Îïëàòà çàìîâëåííÿ ¹ ' . $order_id;
+$order_id_txt='Замовлення №' . $order_id;
 
 $json_stringPrivat = array(
 					"public_key"	=>	$public_key,

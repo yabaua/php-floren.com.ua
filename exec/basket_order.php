@@ -1,5 +1,7 @@
 <?php
-//error_reporting(E_ALL);
+// error_reporting(E_ALL);
+// ini_set('display_errors', '1');
+// print_r($_POST);
 if(isset($_POST['send_bsk']) && count($_SESSION['basket'])){
  	
 	$smarty->assign("CONTENT_TPL",'basket_tnx.tpl');
@@ -241,7 +243,7 @@ if(isset($_POST['send_bsk']) && count($_SESSION['basket'])){
 
 
 	//=================== LIQPAY ======================
-	if	($POST['payment_way']=="visa" && $POST['allow_payment'] != '0'){
+	if	($_POST['payment_way']=="visa" && $_POST['allow_payment'] != '0'){
 		
 		$bsk_ttl=intval($_POST['to_pay']); //============ $basket_total + delivery
 		if($bsk_ttl==0){

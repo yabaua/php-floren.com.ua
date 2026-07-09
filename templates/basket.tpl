@@ -26,6 +26,7 @@
 
     
     <form name="bsk_form" method="POST" id="bsk_form" action="{$LANGURL}/order/" class="basket__form">
+    <input type="hidden" name="allow_payment" id="allow_payment" value="1">
       <div class="cart-page__grid">
         <div class="cart-page__order-information">
           <section class="information__contact">
@@ -207,7 +208,7 @@
               <span class="hidden" data-text="nova-poshta-money">{$LINGVO.nova_poshta_money}</span>
             </div>
           </sl-radio>
-          <sl-radio value="{$LINGVO.bsk_pay_now}" {if $BSK_STOP_PRIVAT}disabled{/if}>
+          <sl-radio value="visa" {if $BSK_STOP_PRIVAT}disabled{/if}>
             <div class="radio-option">
               <img src="/img/icons/icon-card.svg" alt="">
               <span>{$LINGVO.bsk_pay_now}</span>
@@ -298,9 +299,9 @@
             <div class="summary__item_value" id="total-to-pay">{$BSK_TTL|number_format:2:'.':' '} ₴</div>
           </div>
         </div>
-        <input type="hidden" name="basket_totalprice" id="input-hidden-basket_totalprice" value="{$BSK_TTL|number_format:2:'.':' '}">
+        <input type="hidden" name="basket_totalprice" id="input-hidden-basket_totalprice" value="{$BSK_TTL}">
         <input type="hidden" name="cost_delivery" id="input-hidden-cost_delivery" value="0.00">
-        <input type="hidden" name="to_pay" id="input-hidden-to_pay" value="{$BSK_TTL|number_format:2:'.':' '}">
+        <input type="hidden" name="to_pay" id="input-hidden-to_pay" value="{$BSK_TTL}">
 
         <div class="cart-page__order-list_actions">
           <button class="button button--primary" name="send_bsk">{$LINGVO.confirm_order}</button>

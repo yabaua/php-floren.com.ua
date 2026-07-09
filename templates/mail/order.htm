@@ -33,7 +33,7 @@ table td, table th
 </head>
 <body bgcolor="#FFFFFF" text="#434342" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
 <br><br>
-<h4>Новый заказ</h4>
+<h2 align="center">Нове замовлення</h4>
 
 <table align="center" width="600" cellspacing="0" border="0">
 	<tr>
@@ -113,7 +113,7 @@ table td, table th
 
 <table align="center" cellspacing="0" class="chuvak_details">
 
-	{if $POST.recipient}
+	{if isset($POST.recipient) && $POST.recipient != ''}
 		<tr valign="top">
 			<td>Отримувач замовлення:</td>
 			<td>Я отримувач</td>
@@ -309,7 +309,7 @@ table td, table th
 <table align="center" cellspacing="0" class="chuvak_details">
 		<tr valign="top">
 			<td>Додаткова консультація:</td>
-			<td>{if $POST.additional_consulting}{$POST.additional_consulting}{else}не заповнено{/if}</td>
+			<td>{if isset($POST.additional_consulting) && $POST.additional_consulting != ''}{$POST.additional_consulting}{else}не заповнено{/if}</td>
 		</tr>
 
 		<tr valign="top">
