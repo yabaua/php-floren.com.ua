@@ -5,7 +5,6 @@ const totalToPay = {
   total: 0
 };
 const initCart = async () => {
-  console.log("initCart");
   document.querySelectorAll("#cart-modal-items-list .cart-item").forEach((item) => {
     item.querySelector("quantity-counter").addEventListener("change", () => updateCartDisplay());
     item.querySelector(".cart-item__remove").addEventListener("click", () => {
@@ -42,7 +41,7 @@ const initCart = async () => {
       changeBasketTotal();
     });
   });
-  if (cartState.productPrice < defaultOptions.minimumOrderDelivery) {
+  if (typeof cartState !== "undefined" && cartState.productPrice < defaultOptions.minimumOrderDelivery) {
     document.querySelector('sl-alert[data-name="small-order-for-delivery"]').show();
   }
 };
