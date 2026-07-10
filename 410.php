@@ -1003,7 +1003,7 @@ if(!strstr(@$_SERVER['HTTP_FROM'], 'bingbot')){
                 <svg class="icon icon-fitodesign"/>
                 <div class="secondary-item--button-text">
                   <span>
-                    <b>Фітодизайн</b>
+                    <span>Фітодизайн</span>
                     <span>Озеленення простору</span>
                   </span>
                 </div>
@@ -1043,7 +1043,7 @@ if(!strstr(@$_SERVER['HTTP_FROM'], 'bingbot')){
                 <svg class="icon icon-vertical"/>
                 <div class="secondary-item--button-text">
                   <span>
-                    <b>Вертикальне озеленення</b>
+                    <span>Вертикальне озеленення</span>
                     <span>Зелені стіни</span>
                   </span>
                 </div>
@@ -1070,7 +1070,7 @@ if(!strstr(@$_SERVER['HTTP_FROM'], 'bingbot')){
                 <svg class="icon icon-care"/>
                 <div class="secondary-item--button-text">
                   <span>
-                    <b>Догляд</b>
+                    <span>Догляд</span>
                     <span>за рослинами</span>
                   </span>
                 </div>
@@ -1097,7 +1097,7 @@ if(!strstr(@$_SERVER['HTTP_FROM'], 'bingbot')){
                 <svg class="icon icon-photogallery"/>
                 <div class="secondary-item--button-text">
                   <span>
-                    <b>Портфоліо</b>
+                    <span>Портфоліо</span>
                     <span>Галерея фотографій</span>
                   </span>
                 </div>

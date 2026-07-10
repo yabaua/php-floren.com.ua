@@ -1075,7 +1075,7 @@
                 <svg class="icon icon-fitodesign"/>
                 <div class="secondary-item--button-text">
                   <span>
-                    <b>{$LINGVO.phytodesign}</b>
+                    <span>{$LINGVO.phytodesign}</span>
                     <span>{$LINGVO.ozelenenie_prostoru}</span>
                   </span>
                 </div>
@@ -1117,7 +1117,7 @@
                 <svg class="icon icon-vertical"/>
                 <div class="secondary-item--button-text">
                   <span>
-                    <b>{$LINGVO.vertikalnoe_ozelenenie}</b>
+                    <span>{$LINGVO.vertikalnoe_ozelenenie}</span>
                     <span>{$LINGVO.green_wall_short}</span>
                   </span>
                 </div>
@@ -1144,7 +1144,7 @@
                 <svg class="icon icon-care"/>
                 <div class="secondary-item--button-text">
                   <span>
-                    <b>{$LINGVO.care}</b>
+                    <span>{$LINGVO.care}</span>
                     <span>{$LINGVO.za_rasteniyami}</span>
                   </span>
                 </div>
@@ -1171,7 +1171,7 @@
                 <svg class="icon icon-photogallery"/>
                 <div class="secondary-item--button-text">
                   <span>
-                    <b>{$LINGVO.portfolio}</b>
+                    <span>{$LINGVO.portfolio}</span>
                     <span>{$LINGVO.photo_gallery}</span>
                   </span>
                 </div>

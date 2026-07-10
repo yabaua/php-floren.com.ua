@@ -2464,14 +2464,14 @@ main {
   height: 40px;
   flex-shrink: 0;
 }
-.header__catalog--secondary .secondary-item--button-text b {
-  display: block;
-  font-weight: 600;
-}
-.header__catalog--secondary .secondary-item--button-text span {
+.header__catalog--secondary .secondary-item--button-text span, b {
   font-size: 0.875rem;
   font-weight: 300;
   color: var(--color-green-30);
+  display: block;
+  &:first-child {
+    font-weight: 600;
+  }
   @media screen and (max-width: 1200px) {
     display: none;
   }
