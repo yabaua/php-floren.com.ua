@@ -5092,17 +5092,6 @@ body.secondary-hovered .catalog-overlay {
 }
 .catalog-page__content {
   min-width: 0;
-  a {
-    text-decoration: underline;
-    text-decoration-color: var(--color-gray-40);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.25rem;
-    transition: color 0.2s ease, text-decoration-color 0.2s ease;    
-    color: var(--color-green-40);
-    &:hover {
-      text-decoration-color: transparent;
-    }
-  }
 }
 .catalog-page__breadcrumbs {
   position: relative;
