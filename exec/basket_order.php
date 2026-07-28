@@ -260,9 +260,9 @@ if(isset($_POST['send_bsk']) && count($_SESSION['basket'])){
 
 }
 elseif (isset($_POST['data']) && isset($_POST['signature'])){
- 	echo "YYY";
-	exit();
-	$smarty->assign("CONTENT_TPL",'basket_order.tpl');
+// 	echo "YYY";
+//	exit();
+	$smarty->assign("CONTENT_TPL",'basket_tnx.tpl');
 	$smarty->assign("POST", $POST);
 	$smarty->assign("PAYMENT", "yes");
 	$smarty->assign("PAYMENT_TRY", "first_try");
@@ -385,11 +385,11 @@ elseif (isset($_POST['data']) && isset($_POST['signature'])){
 //==========================END OF KEEP IN CRM SENDING DATA ================================
 
 }	elseif (isset($_POST['oneMoreTry']) && isset($_POST['order_id'])){
- 	echo "CCC";
-	exit();
+// 	echo "CCC";
+//	exit();
 	//============== LETS GIVE another TRY to client
 	$db->query("SELECT * FROM orders WHERE id='".$_POST['order_id']."'");
-	echo "SELECT * FROM orders WHERE id='".$_POST['order_id']."'";
+//	echo "SELECT * FROM orders WHERE id='".$_POST['order_id']."'";
 	if(!$db->num_rows()){
 		header("location:".$lang_url."/basket/");	
 	}else{
