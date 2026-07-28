@@ -1258,38 +1258,7 @@
           <span class="icon icon-close"></span>
         </button>
         <div style="--swiper-navigation-color: #fff" class="swiper photo-viewer__main-swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="https://floren.com.ua/images/gallery/b/ozelenenie-office-kiev-212.jpg"/>
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-2.jpg"/>
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-3.jpg"/>
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-4.jpg"/>
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-5.jpg"/>
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-6.jpg"/>
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-7.jpg"/>
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-8.jpg"/>
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-9.jpg"/>
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-10.jpg"/>
-            </div>
-          </div>
+          <div class="swiper-wrapper"></div>
           <div class="photo-viewer__button-next">
             <span class="icon icon-arrow-angle-right"></span>
           </div>
@@ -1298,38 +1267,7 @@
           </div>
         </div>
         <div thumbsSlider="2" class="swiper photo-viewer__thumbs-swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="https://floren.com.ua/images/gallery/b/ozelenenie-office-kiev-212.jpg"/>
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-2.jpg"/>
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-3.jpg"/>
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-4.jpg"/>
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-5.jpg"/>
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-6.jpg"/>
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-7.jpg"/>
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-8.jpg"/>
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-9.jpg"/>
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-10.jpg"/>
-            </div>
-          </div>
+          <div class="swiper-wrapper"></div>
         </div>
       </div>
     </div>
