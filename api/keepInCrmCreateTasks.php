@@ -23,7 +23,7 @@ if($data){
 	$db->query("INSERT INTO crm_tasks (keepInCrmTaskID, hash) VALUES ('".$crmID."', '".$hash."')");
 	//echo $response="Updated agreements: ".mysql_affected_rows();
 	
-	$json_string=array("link"=>"https://n.floren.com.ua/crm/task.php?hash=".$hash);
+	$json_string=array("link"=>"https://floren.com.ua/crm/task.php?hash=".$hash);
 	$dataString = json_encode($json_string, JSON_UNESCAPED_UNICODE);
 	echo $dataString;
 	//echo $hash;

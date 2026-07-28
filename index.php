@@ -84,7 +84,7 @@ if (!$spiders) {
 		$SxGeo = new SxGeo('SxGeo.dat');
 		$country = $SxGeo->getCountry($clientIP);
 		*/
-		$_SESSION['clientCountry']=$country;
+		//$_SESSION['clientCountry']=$country;
 //		$session_id=session_id();
 
 		

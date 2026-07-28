@@ -210,7 +210,7 @@
       <div class="homepage__rating_grid">
         <div class="homepage__rating_title">
           <h2>{$LINGVO.title_care_feedback}</h2>
-          <div class="google-logo">
+          <a href="https://goo.gl/maps/UPpaCBkrMd2TWfXq7" class="google-logo">
             <img class="google-logo__img" src="/img/google-logo.svg" alt="Google"/>
             <div class="google-logo__info">
               <h5>Рейтинг Google</h5>
@@ -219,7 +219,7 @@
                 <sl-rating size="small" value="4.9" readonly></sl-rating>
               </div>              
             </div>
-          </div>
+          </a>
         </div>
         <ul class="homepage__rating_list">
         {foreach from=$GOOGLE_RATING item=GM}

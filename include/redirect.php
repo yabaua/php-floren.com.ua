@@ -148,8 +148,6 @@ $redirect_pages_2=array(
 	'https://floren.com.ua/services/shipping//'	=>	'https://floren.com.ua/phytodesign/',
 	'https://floren.com.ua/services/oformlenie_mashin//'	=>	'https://floren.com.ua/phytodesign/',
 	'https://floren.com.ua/services/buket_dlya_svidetelnici//'	=>	'https://floren.com.ua/phytodesign/',
-	'https://floren.com.ua/uhod/uhod-za-sadom/'	=>	'https://floren.com.ua/uhod/',
-	'https://floren.com.ua/gazon/avtopiliv/'	=>	'https://floren.com.ua/gazon/avtopoliv/',
 	'https://floren.com.ua/search/?srch=%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD'	=>	'https://floren.com.ua/',
 	'https://floren.com.ua/images/ins/b/ficus-microcarpa-bonsai.jpg'	=>	'https://floren.com.ua/',
 	'https://floren.com.ua/images/ins/b/ficus_microcarpa_1.jpg	'	=>	'https://floren.com.ua/',
@@ -971,10 +969,14 @@ $redirect_pages_3=array(
 	
 	
 	'https://floren.com.ua/pricelist/'					=>		'https://floren.com.ua/sitemap/',
-	'https://floren.com.ua/landscape/'					=>		'https://floren.com.ua/ua/komnatnie-rasteniya/',
-	'https://floren.com.ua/blagoustroistvo/'		=>		'https://floren.com.ua/ua/komnatnie-rasteniya/',
-	'https://floren.com.ua/uhod/'								=>		'https://floren.com.ua/ua/komnatnie-rasteniya/',
-	'https://floren.com.ua/gazon/'							=>		'https://floren.com.ua/ua/komnatnie-rasteniya/'
+	'https://floren.com.ua/landscape/'					=>		'https://floren.com.ua/komnatnie-rasteniya/',
+	'https://floren.com.ua/blagoustroistvo/'		=>		'https://floren.com.ua/komnatnie-rasteniya/',
+	'https://floren.com.ua/uhod/'								=>		'https://floren.com.ua/komnatnie-rasteniya/',
+	'https://floren.com.ua/gazon/'							=>		'https://floren.com.ua/komnatnie-rasteniya/',
+	'https://floren.com.ua/ua/landscape/'					=>		'https://floren.com.ua/ua/komnatnie-rasteniya/',
+	'https://floren.com.ua/ua/blagoustroistvo/'		=>		'https://floren.com.ua/ua/komnatnie-rasteniya/',
+	'https://floren.com.ua/ua/uhod/'								=>		'https://floren.com.ua/ua/komnatnie-rasteniya/',
+	'https://floren.com.ua/ua/gazon/'							=>		'https://floren.com.ua/ua/komnatnie-rasteniya/'
 );
 	if(in_array('https://floren.com.ua'.$_SERVER['REQUEST_URI'], array_keys($redirect_pages_3))){
 //		include($_SERVER['DOCUMENT_ROOT'].'/include/send_404_email.php');
