@@ -62,7 +62,7 @@
               <sl-tag variant="danger" disabled>{$LINGVO.not_available}</sl-tag>
               {/if}
 
-              {if $PLANT_GOOD}
+              {if $PLANT_GOOD && $size.price!=0}
                 {if $size.db_1c_availability>0}
                 <sl-tag variant="success">{$LINGVO.good_available}</sl-tag>
                 {elseif $size.visibility==0}

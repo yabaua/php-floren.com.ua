@@ -14,10 +14,28 @@ if(isset($_POST) && count($_POST)){
 			'Content-Type: text/html; charset=utf-8'.$nn
 		);
 	}
+//============= EMPTY FIELDS ===========
+if (
+    empty($_REQUEST['cb_phone']) ||
+    empty($_REQUEST['cb_topic'])
+) {
+    $referer = $_SERVER['HTTP_REFERER'] ?? '';
+
+    $redirect = (strpos($referer, 'https://floren.com.ua') === 0)
+        ? str_replace('https://floren.com.ua', '', $referer)
+        : '/';
+
+    header('Location: ' . $redirect, true, 302);
+    exit;
+}
+//============= // EMPTY FIELDS ===========
+				
+				
+				
 	
-            $cb_topic		=	str_replace("'", "`", $_REQUEST['cb_topic'] ?? '');
-            $subject	=	str_replace("'", "`", $_REQUEST['cb_topic'] ?? '');
-            $name			= $_REQUEST['cb_name'] ?? '';
+            $cb_topic	=	str_replace("'", "", $_REQUEST['cb_topic'] ?? '');
+            $subject	=	str_replace("'", "", $_REQUEST['cb_topic'] ?? '');
+            $name			= str_replace("'", "", $_REQUEST['cb_name'] ?? '');
             $cb_phone	=	strtolower($_REQUEST['cb_phone'] ?? '');
             $cb_txt		=	$_REQUEST['cb_txt'] ?? '';
             $cb_page	=	str_replace('https://floren.com.ua','',($_SERVER['HTTP_REFERER'] ?? ''));
