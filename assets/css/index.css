@@ -2464,7 +2464,7 @@ main {
   height: 40px;
   flex-shrink: 0;
 }
-.header__catalog--secondary .secondary-item--button-text span, b {
+.header__catalog--secondary .secondary-item--button-text span,  .header__catalog--secondary .secondary-item--button-text b {
   font-size: 0.875rem;
   font-weight: 300;
   color: var(--color-green-30);
@@ -4904,6 +4904,10 @@ body.secondary-hovered .catalog-overlay {
     justify-content: space-between;
     align-items: center;
   }
+  @media screen and (max-width: 576px) {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  } 
 }
 .homepage__rating_title .google-logo {
   margin-top: 32px;
