@@ -4,8 +4,8 @@
       помешкань. Ми виконали понад 100 проектів в цьому напрямку.</p>
     <p>&nbsp;</p>
     <p>Якщо вас турбує питання як підібрати кімнатні рослини так, щоб вони не загинули через місяць &ndash; просто
-      зателефонуйте до відділу фітодизайну і розкажіть про ваш проект <span class="binct-phone-number-2">+380 99
-        238-26-44</span>.</p>
+      зателефонуйте до відділу фітодизайну і розкажіть про ваш проект <a href="tel:" class="binct-phone-number-2">+380 99
+        238-26-44</a>.</p>
     <p>&nbsp;</p>
     <p>Ми з радістю підберемо для вас кімнатні рослини та кашпо, вигадаєм зелені рішення саме для вашого помешкання.</p>
 
@@ -22,8 +22,8 @@
         (044) 344..<button data-event="click" data-callback="toggleAdvicesPhones">показати номери</button>
       </div>
       <div class="phones--visible">
-        <p class="binct-phone-number-1">(044) 344-28-95</p>
-        <p class="binct-phone-number-2">(050) 660-52-75</p>
+        <a href="tel:" class="binct-phone-number-1">(044) 344-28-95</a>
+        <a href="tel:" class="binct-phone-number-2">(050) 660-52-75</a>
       </div>
       <div class="phones--hours">По буднях з 9:00 до 19:30</div>
     </div>

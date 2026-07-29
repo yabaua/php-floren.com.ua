@@ -23,8 +23,8 @@
         (044) 344..<button data-event="click" data-callback="toggleAdvicesPhones">показать номера</button>
       </div>
       <div class="phones--visible">
-        <p class="binct-phone-number-1">(044) 344-28-95</p>
-        <p class="binct-phone-number-2">(050) 660-52-75</p>
+        <a href="tel:" class="binct-phone-number-1">(044) 344-28-95</a>
+        <a href="tel:" class="binct-phone-number-2">(050) 660-52-75</a>
       </div>
       <div class="phones--hours">По будням с 9:00 до 19:30</div>
     </div>
@@ -59,7 +59,7 @@
 			</table>
 			<p>Если вы считаете, что способны справиться с процедурой пересадки в домашних условиях, все же рекомендуем прочитать <a href="/publications/pravilnaya-peresadka-komnatnih-rasteniy/">статью-инструкцию по пересадке растений</a>, написанную нашими флористами. Практические советы и нюансы.</p>
 			<p>&nbsp;</p>
-			<p>Если вы беспокоитесь за свое растение и не уверены в собственных силах, звоните нам <a class="binct-phone-number-2" href="tel:(099) 238-26-44">(099) 238-26-44</a>.</p>
+			<p>Если вы беспокоитесь за свое растение и не уверены в собственных силах, звоните нам <a href="tel:" class="binct-phone-number-2">(099) 238-26-44</a>.</p>
 		</div>
 	</div>
 </section>

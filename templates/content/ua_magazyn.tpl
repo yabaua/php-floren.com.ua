@@ -83,13 +83,13 @@
 						<tr>
 							<td style="padding-right:10px;">Телефон</td>
 							<td style="white-space: nowrap">
-							<p>&#9742;&nbsp;&nbsp;<a href="tel:+380443337755" class="binct-phone-number-1">(044) 333-77-55</a></p>
+							<p>&#9742;&nbsp;&nbsp;<a href="tel:" class="binct-phone-number-1">(044) 333-77-55</a></p>
 							</td>
 						</tr>
 						<tr>
 							<td style="padding-right:10px;white-space: nowrap;">Мобільний&nbsp;+Viber/Telegram</td>
 							<td style="white-space: nowrap">
-								<p>&#128222;&nbsp;&nbsp;<a href="tel:0992382644" class="binct-phone-number-2">(099) 238-26-44</a></p>
+								<p>&#128222;&nbsp;&nbsp;<a href="tel:" class="binct-phone-number-2">(099) 238-26-44</a></p>
 							</td>
 						</tr>
 						<tr>
