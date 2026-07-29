@@ -19,8 +19,8 @@
         (044) 344..<button data-event="click" data-callback="toggleAdvicesPhones">показать номера</button>
       </div>
       <div class="phones--visible">
-        <a href="tel:" class="binct-phone-number-1">(044) 344-28-95</a>
-        <a href="tel:" class="binct-phone-number-2">(050) 660-52-75</a>
+        <a href="tel:+380443337755" class="binct-phone-number-1">(044) 333-77-55</a>
+        <a href="tel:+380992382644" class="binct-phone-number-2">(099) 238-26-44</a>
       </div>
       <div class="phones--hours">По будням с 9:00 до 19:30</div>
     </div>

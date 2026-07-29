@@ -76,7 +76,7 @@
   <div class="callback-button">
     <h3>Залишились питання?</h3>
     <div class="callback-button__phones">
-      <a href="tel:" class="binct-phone-number-2">+380 99 238-26-44</a>
+      <a href="tel:+380992382644" class="binct-phone-number-2">+380 99 238-26-44</a>
     </div>
     <button class="button button--primary button--pill">Зворотній звʼязок</button>
   </div>

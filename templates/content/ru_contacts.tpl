@@ -27,12 +27,12 @@
                 показать номера
               </button>
             </div>
-            <div class="phones--visible binct-phone-number-1">
-              (044) 344-28-95
-            </div>
-            <div class="phones--visible binct-phone-number-2">
-              (050) 660-52-75
-            </div>
+            <a href="tel:+380443337755" class="phones--visible binct-phone-number-1">
+              (044) 333-77-55
+            </a>
+            <a href="tel:+380992382644" class="phones--visible binct-phone-number-2">
+              (099) 238-26-44
+            </a>
             <a href="mailto:info@floren.com.ua">info@floren.com.ua</a>
           </div>
         </div>
@@ -80,13 +80,13 @@
 		<tr>
 			<td style="padding-right:10px;">Телефон в Киеве</td>
 			<td>
-			<p>&#9742;&nbsp;&nbsp;<a href="tel:" class="binct-phone-number-1">(044) 333-77-55</a></p>
+			<p>&#9742;&nbsp;&nbsp;<a href="tel:+380443337755" class="binct-phone-number-1">(044) 333-77-55</a></p>
 			</td>
 		</tr>
 		<tr>
 			<td style="padding-right:10px;">Мобильный +Viber/Telegram</td>
 			<td>
-			<p>&#128222;&nbsp;&nbsp;<a href="tel:" class="binct-phone-number-2">(099) 238-26-44</a></p>
+			<p>&#128222;&nbsp;&nbsp;<a href="tel:+380992382644" class="binct-phone-number-2">(099) 238-26-44</a></p>
 			</td>
 		</tr>
 		<tr>
