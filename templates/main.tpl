@@ -439,7 +439,7 @@
                 <div class="phones-tooltip--item">
                   <img src="/img/icons/icon-phone.svg" alt="Phone" />
                   <div class="phones-tooltip--item-wrapper">
-                    <a href="tel:" class="item-phone binct-phone-number-2">(044) 333-77-55, (099) 238-26-44</a>
+                    <a href="tel:+380443337755" class="item-phone binct-phone-number-1">(044) 333-77-55</a>, <a href="tel:+380992382644" class="item-phone binct-phone-number-2">(099) 238-26-44</a>
                     <p class="item-hours">По буднях 09:00 - 19:30</p>
                     <p class="item-messengers">
                       <a 
@@ -477,8 +477,7 @@
                     </button>
                   </div>
                   <div class="header__main--phones-showed">
-                    <a href="tel:" class="binct-phone-number-1">(044) 333-77-55</a>, <a href="tel:" class="binct-phone-number-2">(099) 238-26-44</a>
-                    <!-- <a href="tel:(044) 333-77-55">(044) 333-77-55</a>, <a href="tel:(099) 238-26-44">(099) 238-26-44</a> -->
+                    <a href="tel:+380443337755" class="binct-phone-number-1">(044) 333-77-55</a>, <a href="tel:+380992382644" class="binct-phone-number-2">(099) 238-26-44</a>
                   </div>
                   <div class="header__main--phones-hours">
                     <span>По буднях 9:00 - 19:30</span>
@@ -538,8 +537,8 @@
                     <img src="/img/icons/icon-phone.svg" alt="Phone" />
                     <div class="phones-tooltip--item-wrapper">
                       <p class="item-phone">
-                        <a href="tel:" class="binct-phone-number-1">(044) 333-77-55</a>,
-                        <a href="tel:" class="binct-phone-number-2">(099) 238-26-44</a>
+                        <a href="tel:+380443337755" class="binct-phone-number-1">(044) 333-77-55</a>,
+                        <a href="tel:+380992382644" class="binct-phone-number-2">(099) 238-26-44</a>
                       </p>
                       <p class="item-hours">По буднях 09:00 - 19:30</p>
                       <p class="item-messengers">
@@ -1360,8 +1359,8 @@
                     <p>(050) 660..</p>
                   </div>
                   <div class="contacts-phone--shown">
-                    <a href="tel:" class="binct-phone-number-1">(044) 333-77-55</a>
-                    <a href="tel:" class="binct-phone-number-2">(099) 238-26-44</a>
+                    <a href="tel:+380443337755" class="binct-phone-number-1">(044) 333-77-55</a>,
+                    <a href="tel:+380992382644" class="binct-phone-number-2">(099) 238-26-44</a>
                   </div>
                 </li>
                 <li class="contacts-socials">
