@@ -1,5 +1,6 @@
 <?php
 //setlocale(LC_ALL, 'ru_RU');
+ini_set('display_errors', '1');
 if(isset($_POST) && count($_POST)){
 	function send_mail($to,$subject,$body) {
 		$nn="\r\n";
@@ -65,10 +66,35 @@ if (
             
             if ($cb_topic=='') $is_spam = true;
 
-      if (!$is_spam) {
-
-	        $db->query("INSERT INTO callback (cb_topic,cb_name,cb_phone,cb_txt,cb_page,cb_date) VALUES ('".base64_encode($cb_topic)."', '".base64_encode($name)."', '".base64_encode($cb_phone)."', '".base64_encode($cb_txt)."', '".$cb_page."', '".time()."')" );
-	    }
+   //   if (!$is_spam) {
+			    $utm_source		= $db->escape($_SESSION['utm_source'] ?? '');
+			    $utm_medium		= $db->escape($_SESSION['utm_medium'] ?? '');
+			    $utm_campaign = $db->escape($_SESSION['utm_campaign'] ?? '');
+			
+			    $db->query("
+			        INSERT INTO callback (
+			            cb_topic,
+			            cb_name,
+			            cb_phone,
+			            cb_txt,
+			            cb_page,
+			            cb_date,
+			            utm_source,
+			            utm_medium,
+			            utm_campaign
+			        ) VALUES (
+			            '".base64_encode($cb_topic)."',
+			            '".base64_encode($name)."',
+			            '".base64_encode($cb_phone)."',
+			            '".base64_encode($cb_txt)."',
+			            '".$db->escape($cb_page)."',
+			            '".time()."',
+			            '".$utm_source."',
+			            '".$utm_medium."',
+			            '".$utm_campaign."'
+			        )
+			    ");
+		//	}
 			
 			$body='<p>'.$cb_topic.' (thankyoupage)'.mb_detect_encoding($cb_topic).'</p>';
 			$body.='<table>';

@@ -163,6 +163,11 @@ input{width:100px;padding:4px;}
 .roas-neutral {
     background: #fff;
 }
+.orders-info{
+    font-size:12px;
+    color:#666;
+    margin-top:2px;
+}
 </style>
 </head>
 
@@ -195,6 +200,8 @@ input{width:100px;padding:4px;}
 
         $cell = $data[$ym][$camp][$yw] ?? null;
         $sum = $cell['orders_sum'] ?? 0;
+        $ordersCount = $cell['orders_count'] ?? 0;
+        $avgCheck = $ordersCount > 0 ? $sum / $ordersCount : 0;
         $savedCost = $cell['ad_cost'] ?? 0;
 				$roas = $cell['roas'] ?? ($savedCost > 0 ? round(($sum / $savedCost) * 100) : 0);
 				
@@ -205,15 +212,23 @@ input{width:100px;padding:4px;}
 
 
 		<td
-		    class="<?=
-		        $isEmpty ? 'cell-empty' : (
-		        $isGood ? 'roas-good' : (
-		        $isBad ? 'roas-bad' : 'roas-neutral'
-		        ))
-		    ?>"
-		>
-        <div><?= number_format((float)$sum, 2, '.', ' ') ?></div>
-
+        class="<?=
+            $isEmpty ? 'cell-empty' : (
+            $isGood ? 'roas-good' : (
+            $isBad ? 'roas-bad' : 'roas-neutral'
+            ))
+        ?>"
+    >
+        <div class="orders-revenue">
+            <?= number_format($sum, 2, '.', ' ') ?>
+        </div>
+        
+        <div class="orders-info">
+            <?= $ordersCount ?> 
+            •
+            <?= number_format($avgCheck, 0, '.', ' ') ?>
+        </div>
+    
         <input
             type="number"
             step="0.01"
@@ -223,8 +238,8 @@ input{width:100px;padding:4px;}
             data-yw="<?= $yw ?>"
             data-campaign="<?= htmlspecialchars($camp) ?>"
         >
-
-        <div class="roas"><?= (int)$roas ?></div>
+    
+        <div class="roas"><?= (int)$roas ?>%</div>
     </td>
 
     <?php endforeach; ?>
@@ -337,7 +352,7 @@ document.querySelectorAll('.ad-cost').forEach(input => {
 
         const td = this.closest('td');
 
-        const sumText = td.querySelector('div').innerText || '0';
+        const sumText = td.querySelector('.orders-revenue').childNodes[0].textContent || '0';
         const sum = parseFloat(sumText.replace(/\s/g, ''));
 
         const cost = parseFloat(this.value || 0);
