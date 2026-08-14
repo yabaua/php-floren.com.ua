@@ -73,14 +73,14 @@ if($groupData=='month'){
 }
 
 //========Data From Basket
-$qr=mysql_query("SELECT DISTINCT(sessID), count(ID) AS bsk_qt, date_add, WEEK(FROM_UNIXTIME(date_add, '%Y-%m-%d'),1) AS weekNo, MONTH(FROM_UNIXTIME(date_add, '%Y-%m-%d')) AS monthNo
+$db->query("SELECT DISTINCT(sessID), count(ID) AS bsk_qt, date_add, WEEK(FROM_UNIXTIME(date_add, '%Y-%m-%d'),1) AS weekNo, MONTH(FROM_UNIXTIME(date_add, '%Y-%m-%d')) AS monthNo
 		FROM orders_basket
 		WHERE formIDs!='' AND spiders!=1 AND (date_add BETWEEN '".$sql_date_from."' AND '".$sql_date_to."')
 		GROUP BY ".$group_by_basket_SQL."
 		ORDER BY date_add");
 
 
-while($rs=mysql_fetch_array($qr)){
+while($rs=$db->fetch()){
 	switch($groupData){
 		case 'day'	: 	$new_var=date("Y-m-d", $rs['date_add']);break;
 		case 'week'	: 	$new_var=$rs['weekNo'];break;
@@ -92,14 +92,14 @@ while($rs=mysql_fetch_array($qr)){
 }
 
 //========Data From Orders
-$qr=mysql_query("SELECT count(ID) AS orders_qt, SUM(total) AS summ_uah, order_date, WEEK(FROM_UNIXTIME(order_date, '%Y-%m-%d'),1) AS weekNo, MONTH(FROM_UNIXTIME(order_date, '%Y-%m-%d')) AS monthNo
+$db->query("SELECT count(ID) AS orders_qt, SUM(total) AS summ_uah, order_date, WEEK(FROM_UNIXTIME(order_date, '%Y-%m-%d'),1) AS weekNo, MONTH(FROM_UNIXTIME(order_date, '%Y-%m-%d')) AS monthNo
 				FROM orders
 				WHERE order_date BETWEEN '".$sql_date_from."' AND '".$sql_date_to."'
 				GROUP BY ".$group_by_orders_SQL."
 				ORDER BY order_date");
 				
 				 
-while($rs=mysql_fetch_array($qr)){
+while($rs=$db->fetch()){
 	switch($groupData){
 		case 'day'	: 	$new_var=date("Y-m-d", $rs['order_date']);break;
 		case 'week'	: 	$new_var=$rs['weekNo'];break;
@@ -110,13 +110,13 @@ while($rs=mysql_fetch_array($qr)){
 }
 
 //========Data From Orders ONLY successful
-$qr=mysql_query("SELECT count(ID) AS orders_qt, SUM(total) AS summ_uah, order_date, WEEK(FROM_UNIXTIME(order_date, '%Y-%m-%d'),1) AS weekNo, MONTH(FROM_UNIXTIME(order_date, '%Y-%m-%d')) AS monthNo, basket
+$db->query("SELECT count(ID) AS orders_qt, SUM(total) AS summ_uah, order_date, WEEK(FROM_UNIXTIME(order_date, '%Y-%m-%d'),1) AS weekNo, MONTH(FROM_UNIXTIME(order_date, '%Y-%m-%d')) AS monthNo, basket
 				FROM orders
 				WHERE order_date BETWEEN '".$sql_date_from."' AND '".$sql_date_to."'
 				AND keepInCrmResult='successful'
 				GROUP BY ".$group_by_orders_SQL."
 				ORDER BY order_date");
-while($rs=mysql_fetch_array($qr)){
+while($rs=$db->fetch()){
 	switch($groupData){
 		case 'day'	: 	$new_var=date("Y-m-d", $rs['order_date']);break;
 		case 'week'	: 	$new_var=$rs['weekNo'];break;
@@ -232,18 +232,18 @@ foreach ($orders AS $k=>$v){
 <p>Клієнти, які заповнили корзину, але не відправили замовлення з <?=date("Y-m-d", $sql_date_from)?> по <?=date("Y-m-d", $sql_date_to)?>.</p>
 <?
 $ii=0;
-$qr=mysql_query("SELECT * FROM orders_basket WHERE LENGTH(phone)>7 AND date_add BETWEEN '".$sql_date_from."' AND '".$sql_date_to."'");
-while($rs=mysql_fetch_array($qr)){
-	$qr2=mysql_query("SELECT * FROM orders WHERE SUBSTR(TRIM(phone), -7)='".substr($rs['phone'],-7)."' AND order_date BETWEEN '".($sql_date_from-86400)."' AND '".($sql_date_to+86400)."'");
+$db->query("SELECT * FROM orders_basket WHERE LENGTH(phone)>7 AND date_add BETWEEN '".$sql_date_from."' AND '".$sql_date_to."'");
+while($rs=$db->fetch()){
+	$db->query("SELECT * FROM orders WHERE SUBSTR(TRIM(phone), -7)='".substr($rs['phone'],-7)."' AND order_date BETWEEN '".($sql_date_from-86400)."' AND '".($sql_date_to+86400)."'", 1);
 	
 	
 	
-	if(!mysql_num_rows($qr2)){
+	if(!$db->num_rows(1)){
 		
 		echo "<p><b>".$rs['fio']." – ".$rs['phone']."</b></p>";
 		if($rs['formIDs']!=''){
-			$qr3=mysql_query("SELECT g.name AS nome, gf.dia, gf.hgt, gf.color, gf.price FROM goods_forms gf JOIN goods_ua g ON gf.goodID=g.ID WHERE gf.ID IN('".str_replace(",","','",$rs['formIDs'])."')");
-			while($rs3=mysql_fetch_array($qr3)){
+			$db->query("SELECT g.name AS nome, gf.dia, gf.hgt, gf.color, gf.price FROM goods_forms gf JOIN goods_ua g ON gf.goodID=g.ID WHERE gf.ID IN('".str_replace(",","','",$rs['formIDs'])."')");
+			while($rs3 = $db->fetch(3)){
 				echo "<ul>";
 				echo "<li>".$rs3['nome']." ".$rs3['dia']."x".$rs3['hgt'].($rs3['color']>0?" ".$rs3['color']:"")." – ".$rs3['price']."</li>";
 				echo "</ul>";
@@ -258,8 +258,8 @@ while($rs=mysql_fetch_array($qr)){
 <hr>
 
 <?
-$qr = mysql_query("SELECT * FROM orders WHERE order_date BETWEEN '".$sql_date_from."' AND '".$sql_date_to."'");
-while($rs = mysql_fetch_array($qr)){
+$qr = $db->query("SELECT * FROM orders WHERE order_date BETWEEN '".$sql_date_from."' AND '".$sql_date_to."'");
+while($rs = $db->fetch()){
 	$basket[] = unserialize(base64_decode($rs['basket']));
 	
 }

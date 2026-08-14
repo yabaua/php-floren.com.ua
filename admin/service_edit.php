@@ -53,7 +53,7 @@ if(isset($_REQUEST['edit_article'])){
 			$db->query("UPDATE services_ua SET schema_image='https://floren.com.ua/images/content/".$temp_image_name."' WHERE ID=".$ID);
 			
 	}
-	header("location:service_edit.php??lang=".$lang."&ID=".$ID);
+	header("location:service_edit.php?lang=".$lang."&ID=".$ID);
 }
 ?>
 <html>

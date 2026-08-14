@@ -149,26 +149,6 @@ if (!$spiders && (!isset($_COOKIE['qms']) || !($_COOKIE['qms']=eregi_replace('[^
 */
 //print_r($_COOKIE);
 
-
-//lets put utm-s to Session to track it in basket
-if(isset($_REQUEST['utm_source']) && $_REQUEST['utm_source']!=''){
-	$_SESSION['utm_source']=	$_REQUEST['utm_source'];
-	$_SESSION['utm_medium']=	$_REQUEST['utm_medium'];
-	$_SESSION['utm_campaign']=	$_REQUEST['utm_campaign'];
-	$_SESSION['utm_content']=	(isset($_REQUEST['utm_content']) && $_REQUEST['utm_content']!='')?$_REQUEST['utm_content']:'';
-	$_SESSION['utm_term']=		(isset($_REQUEST['utm_term']) && $_REQUEST['utm_term']!='')?$_REQUEST['utm_term']:'';
-}
-if(isset($_REQUEST['srsltid']) && !isset($_REQUEST['utm_source'])){
-	$_SESSION['utm_source']=	'google';
-	$_SESSION['utm_medium']=	'organic';
-	$_SESSION['utm_campaign']=	'srsltid';
-	$_SESSION['utm_content']=	'';
-	$_SESSION['utm_term']=		'';
-}
-if(!isset($_SESSION['first_url'])){
-	$_SESSION['first_url']=$_SERVER['REQUEST_URI'];
-}
-
 // проверка логина пароля
 
 //парсинг урла
@@ -1052,6 +1032,50 @@ function getVideoData($videoID){
 //======================================
 if (strpos($_SERVER['REQUEST_URI'],'FBOK')) $smarty->assign("FBOK",true);
 //==============================COMMON_FUNC
+
+//lets put utm-s to Session to track it in basket
+$hasGaClientId = !empty($_SESSION['gaClientId']) ? 'true' : 'false';
+$smarty->assign('HASGACLIENTID', $hasGaClientId);
+
+if (isset($_REQUEST['utm_source']) && $_REQUEST['utm_source'] != '') {
+
+    $_SESSION['utm_source']   = $_REQUEST['utm_source'];
+    $_SESSION['utm_medium']   = $_REQUEST['utm_medium'] ?? '';
+    $_SESSION['utm_campaign'] = $_REQUEST['utm_campaign'] ?? '';
+    $_SESSION['utm_content']  = $_REQUEST['utm_content'] ?? '';
+    $_SESSION['utm_term']     = $_REQUEST['utm_term'] ?? '';
+
+    setcookie('floren_utm_source', $_SESSION['utm_source'], time() + 60*60*24*90, '/');
+    setcookie('floren_utm_medium', $_SESSION['utm_medium'], time() + 60*60*24*90, '/');
+    setcookie('floren_utm_campaign', $_SESSION['utm_campaign'], time() + 60*60*24*90, '/');
+    setcookie('floren_utm_content', $_SESSION['utm_content'], time() + 60*60*24*90, '/');
+    setcookie('floren_utm_term', $_SESSION['utm_term'], time() + 60*60*24*90, '/');
+}
+if (isset($_REQUEST['srsltid']) && !isset($_REQUEST['utm_source'])) {
+
+    $_SESSION['utm_source']   = 'google';
+    $_SESSION['utm_medium']   = 'organic';
+    $_SESSION['utm_campaign'] = 'srsltid';
+    $_SESSION['utm_content']  = '';
+    $_SESSION['utm_term']     = '';
+
+    setcookie('floren_utm_source', 'google', time() + 60*60*24*90, '/');
+    setcookie('floren_utm_medium', 'organic', time() + 60*60*24*90, '/');
+    setcookie('floren_utm_campaign', 'srsltid', time() + 60*60*24*90, '/');
+    setcookie('floren_utm_content', '', time() + 60*60*24*90, '/');
+    setcookie('floren_utm_term', '', time() + 60*60*24*90, '/');
+}
+if (!isset($_SESSION['utm_source']) && isset($_COOKIE['utm_source'])) {
+    $_SESSION['utm_source']   = $_COOKIE['floren_utm_source'];
+    $_SESSION['utm_medium']   = $_COOKIE['floren_utm_medium'] ?? '';
+    $_SESSION['utm_campaign'] = $_COOKIE['floren_utm_campaign'] ?? '';
+    $_SESSION['utm_content']  = $_COOKIE['floren_utm_content'] ?? '';
+    $_SESSION['utm_term']     = $_COOKIE['floren_utm_term'] ?? '';
+}
+
+if(!isset($_SESSION['first_url'])){
+		$_SESSION['first_url']=$_SERVER['REQUEST_URI'];
+}
 
 $smarty->display('main.tpl');
 

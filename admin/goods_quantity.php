@@ -485,7 +485,7 @@ if (isset($_REQUEST['remove_barcode'])) {
 
                 <tr<?if ($rs['visibility']!='1'){?> style="background:#FBE8E5"<?}?>>
 
-                    <td><a href="goods_edit.php?ID=<?=$rs['ID']?>&cid=<?=$rs['classID']?>"><?=$rs['formID']?></a></td>
+                    <td><a href="goods_edit.php?ID=<?=$rs['ID']?>&category=<?=$rs['classID']?>"><?=$rs['formID']?></a></td>
                     <td<?=$green_border?>><?=$rs['name']?> <? if ($rs['act'] != 'Y') {?><span style="color:red">(товар скрыт, на сайте значится как нет в наличии)</span><?}?></td>
                     <td>
                         <? if ($rs['dia']) {?>Диаметр: <b><?=$rs['dia']?> <?=$rs['unit']?></b><br><?}?>

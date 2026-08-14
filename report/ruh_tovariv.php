@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 header("content-type: text/html;charset=utf-8 \r\n");
 require("auth.php");
 if($_SESSION['admin_lvl']!='top'){
@@ -94,6 +96,14 @@ for($i=1;$i<=12;$i++){
 	    </span>
 	  </label>
 	</div>
+	<div class="checkbox-wrapper-16">
+	  <label class="checkbox-wrapper">
+	    <input name="ch_year" value="2026" type="radio" class="checkbox-input"<?=($year=='2026')?' checked="true"':''?> />
+	    <span class="checkbox-tile">
+	      <span class="checkbox-label">2026</span>
+	    </span>
+	  </label>
+	</div>
   
 </div>
 
@@ -156,8 +166,8 @@ function selectNone(){
 </div>
 <select name="classNames[]" onfocus="selectByClass()" id="classNames" multiple style="width:300px;height:200px;">
 <?
-	$qr=mysql_query("SELECT className FROM goods_1c_class GROUP BY className;");
-	while($rs=mysql_fetch_array($qr)){
+	$db->query("SELECT className FROM goods_1c_class GROUP BY className;");
+	while($rs=$db->fetch()){
 		//if(!$rs['className']) $rs['className']='Головний екран'
 		$selected='';
 		if(isset($_REQUEST['classNames'])){
@@ -185,7 +195,7 @@ if($searchtype!='') {
 		
 		$sqlSearchType= "";
 		if($searchtype=='searchByName' && strlen($query_string)>3 && !strpos($query_string, "%")>0){
-			$sqlSearchType="g.name LIKE '%".mysql_real_escape_string($query_string)."%' OR g.barcode LIKE '%".mysql_real_escape_string($query_string)."%'";
+			$sqlSearchType="g.name LIKE '%".$db->escape($query_string)."%' OR g.barcode LIKE '%".$db->escape($query_string)."%'";
 
 		} elseif($searchtype=='searchByGroup' && isset($_REQUEST['classNames'])) {
 	     	$sql_className=implode("','", $_REQUEST['classNames']);

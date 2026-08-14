@@ -4,8 +4,6 @@ include("../include/strlib.php");
 require("../include/resize.php");
 
 
-$sliders=mysql_query("SELECT * FROM sliders");
-
 $slider_id = '';
 
 
@@ -15,7 +13,7 @@ if (isset($_REQUEST['select_slider'])) {
 
         $slider_id = intval($_REQUEST['slider']);
         header("location:edit_sliders.php?id=$slider_id&mod=slider");
-        echo mysql_error();
+        echo $db->error();
     }
 
 }
@@ -38,11 +36,11 @@ if (isset($_REQUEST['edit_slider'])) {
         $edit_qnt_min=intval(trim($_REQUEST['edit_qnt_min']));
         $edit_slider_hgt=intval(trim($_REQUEST['edit_slider_hgt']));
     
-        mysql_query("UPDATE sliders SET alias='".$edit_alias."', name_ru='".$edit_name_ru."', name_ua='".$edit_name_ua."', zoom='".$edit_zoom."', qnt_large='".$edit_qnt_large."', qnt_medium='".$edit_qnt_medium."', qnt_small='".$edit_qnt_small."', qnt_min='".$edit_qnt_min."', height='".$edit_slider_hgt."', visible='".$edit_visible."' WHERE slider_id = ".$k."");
+        $db->query("UPDATE sliders SET alias='".$edit_alias."', name_ru='".$edit_name_ru."', name_ua='".$edit_name_ua."', zoom='".$edit_zoom."', qnt_large='".$edit_qnt_large."', qnt_medium='".$edit_qnt_medium."', qnt_small='".$edit_qnt_small."', qnt_min='".$edit_qnt_min."', height='".$edit_slider_hgt."', visible='".$edit_visible."' WHERE slider_id = ".$k."");
 
 
         header("location:edit_sliders.php?id=$slider_id&mod=slider");
-        echo mysql_error();
+        echo $db->error();
 
 }
 
@@ -52,7 +50,7 @@ if (isset($_REQUEST['edit_slides'])) {
 
         $slider_id = intval($_REQUEST['slider']);
         header("location:edit_sliders.php?id=$slider_id&mod=slides");
-        echo mysql_error();
+        echo $db->error();
     }
     
 }
@@ -62,11 +60,11 @@ if (isset($_REQUEST['del'])) {
     $sld_id = $_REQUEST['slider_idd'];
 
 	foreach($_REQUEST['del'] as $k=>$v){
-		mysql_query("DELETE FROM sliders_data WHERE ID=".$k);
+		$db->query("DELETE FROM sliders_data WHERE ID=".$k);
 	}
 
     header("location:edit_sliders.php?id=$sld_id&mod=slides");
-    echo mysql_error();
+    echo $db->error();
 
 }
 
@@ -75,35 +73,35 @@ if (isset($_REQUEST['delpage'])){
     $slider_id = intval($_REQUEST['slider_id']);
 
 	foreach($_REQUEST['delpage'] as $k=>$v){
-		mysql_query("DELETE FROM sliders_pages WHERE ID=".$k);
+		$db->query("DELETE FROM sliders_pages WHERE ID=".$k);
 	}
 
     header("location:edit_sliders.php?id=$slider_id&mod=slider");
-    echo mysql_error();
+    echo $db->error();
 
 }
 
 if (isset($_REQUEST['pluspage'])){
 
 	foreach($_REQUEST['pluspage'] as $k=>$v){
-        $new_page=trim($k);
-		mysql_query("INSERT INTO sliders_pages SET slider_id=".$k.", page='".$_REQUEST['page']."'");
+      $new_page=trim($k);
+		  $db->query("INSERT INTO sliders_pages SET slider_id=".$k.", page='".$_REQUEST['page']."'");
 	}
 
     header("location:edit_sliders.php?id=$k&mod=slider");
-    echo mysql_error();
+    echo $db->error();
 
 }
 
 if (isset($_REQUEST['del_slider'])) {
 
     foreach($_REQUEST['del_slider'] as $k=>$v){
-        mysql_query("DELETE FROM sliders_data WHERE slider_id=".$k);
-        mysql_query("DELETE FROM sliders WHERE slider_id=".$k);
+        $db->query("DELETE FROM sliders_data WHERE slider_id=".$k);
+        $db->query("DELETE FROM sliders WHERE slider_id=".$k);
     }
 
     header("location:edit_sliders.php");
-    echo mysql_error();
+    echo $db->error();
 
 }
 
@@ -115,8 +113,8 @@ if (isset($_REQUEST['new_slider'])) {
 
     $sl_id = rand(0, 999);
     $new_alias=trim($_REQUEST['new_alias']);
-	$new_name_ru=trim($_REQUEST['new_name_ru']);
-	$new_name_ua=trim($_REQUEST['new_name_ua']);
+	  $new_name_ru=trim($_REQUEST['new_name_ru']);
+	  $new_name_ua=trim($_REQUEST['new_name_ua']);
     $new_visible=intval(trim($_REQUEST['new_visible']));
     $new_zoom=intval(trim($_REQUEST['new_zoom']));
     $new_qnt_large=intval(trim($_REQUEST['new_qnt_large']));
@@ -126,10 +124,24 @@ if (isset($_REQUEST['new_slider'])) {
     $new_slider_hgt=intval(trim($_REQUEST['new_slider_hgt']));
 
 
-    mysql_query("INSERT INTO sliders SET slider_id=".$sl_id.", alias='".$new_alias."', name_ru='".$new_name_ru."', name_ua='".$new_name_ua."', zoom='".$new_zoom."', qnt_large='".$new_qnt_large."', qnt_medium='".$new_qnt_medium."', qnt_small='".$new_qnt_small."', qnt_min='".$new_qnt_min."', height='".$new_slider_hgt."', visible='".$new_visible."'");
+    $db->query("
+                INSERT INTO sliders
+                SET
+                slider_id=".$sl_id.",
+                alias='".$new_alias."',
+                name_ru='".$new_name_ru."',
+                name_ua='".$new_name_ua."',
+                zoom='".$new_zoom."',
+                qnt_large='".$new_qnt_large."',
+                qnt_medium='".$new_qnt_medium."',
+                qnt_small='".$new_qnt_small."',
+                qnt_min='".$new_qnt_min."',
+                height='".$new_slider_hgt."',
+                visible='".$new_visible."'
+              ");
 
     header("location:edit_sliders.php");
-    echo mysql_error();
+    echo $db->error();
 
 }
 
@@ -152,8 +164,8 @@ if (isset($_REQUEST['new_slide'])) {
 
     if (isset($_FILES['new_img']) && is_uploaded_file($_FILES['new_img']['tmp_name'])) {
 
-        $r=mysql_query("SELECT * FROM sliders WHERE slider_id=".$s_id);
-		$f=mysql_fetch_array($r);
+        $db->query("SELECT * FROM sliders WHERE slider_id=".$s_id);
+		    $f=$db->fetch();
         $format = explode('/', $_FILES['new_img']['type']);
 
         $img = $f['alias'] . '-'.time() . '.' . $format[1];
@@ -179,11 +191,11 @@ if (isset($_REQUEST['new_slide'])) {
             $qv = $qv . ", slide_order=".$new_order."";
         }
     
-        mysql_query($qv);
+        $db->query($qv);
     }
 
     header("location:edit_sliders.php?id=$s_id&mod=slides");
-    echo mysql_error();
+    echo $db->error();
 
 }
 
@@ -198,13 +210,13 @@ if (isset($_REQUEST['edit_allslides'])) {
             $caption_ua=trim($_REQUEST['caption_ua'][$k]);
             $order=trim($_REQUEST['slide_order'][$k]);
 
-            mysql_query("UPDATE sliders_data SET link='".$link."', caption_ru='".$caption_ru."', caption_ua='".$caption_ua."', slide_order=".$order." WHERE ID = ".$k."");
+            $db->query("UPDATE sliders_data SET link='".$link."', caption_ru='".$caption_ru."', caption_ua='".$caption_ua."', slide_order=".$order." WHERE ID = ".$k."");
     
         }
     }
 
     header("location:edit_sliders.php?id=$kk&mod=slides");
-    echo mysql_error();
+    echo $db->error();
     
 
 }
@@ -328,7 +340,9 @@ if (isset($_REQUEST['edit_allslides'])) {
 
                                 <select name="slider" class="admin__select">
                                     <option>Доступные слайдеры</option>
-                                    <? for($i=0; $res=mysql_fetch_array($sliders); $i++){ ?>
+                                    <?
+                                      $db->query("SELECT * FROM sliders");
+                                      for($i=0; $res=$db->fetch(); $i++){ ?>
                                             <option value="<?=$res['slider_id']?>"><?=$res['name_ru']?></option>
                                     <?}?>
                                 </select>
@@ -363,9 +377,10 @@ if (isset($_REQUEST['edit_allslides'])) {
                     </div>
                 </div>
 
-                <? $cur_slider = mysql_query("SELECT s.ID, sd.ID AS slide_id, s.slider_id, sd.slider_id, sd.img, sd.link, sd.caption_ru, sd.caption_ua, sd.slide_order, sd.slider_id FROM sliders s JOIN sliders_data sd ON s.slider_id=sd.slider_id WHERE s.slider_id=".$_GET['id']); 
+                <?
+                $db->query("SELECT s.ID, sd.ID AS slide_id, s.slider_id, sd.slider_id, sd.img, sd.link, sd.caption_ru, sd.caption_ua, sd.slide_order, sd.slider_id FROM sliders s JOIN sliders_data sd ON s.slider_id=sd.slider_id WHERE s.slider_id=".$_GET['id']); 
 
-                if (mysql_num_rows($cur_slider) > 0) {
+                if ($db->num_rows() > 0) {
                 ?>
 
                 <div class="admin__holder">
@@ -383,7 +398,7 @@ if (isset($_REQUEST['edit_allslides'])) {
                                     <th>Удалить слайд</th>
                                 </tr>
 
-                                <? for($i=0; $res=mysql_fetch_array($cur_slider); $i++){?>
+                                <? for($i=0; $res=$db->fetch(); $i++){?>
                                     <input type="hidden" name="slider_idd" value="<?=$_GET['id']?>">
                                     <tr>
                                         <td><input style="width: 40px; border: none; background: transparent" readonly type="text" name="idd[<?=$res['slide_id']?>]" value="<?=$res['slide_id']?>"></td>
@@ -453,9 +468,9 @@ if (isset($_REQUEST['edit_allslides'])) {
                                 <th>Увеличивать при клике</th>
                             </tr>
 
-                            <? $ed_slider = mysql_query("SELECT * from sliders WHERE slider_id=".$_GET['id']); 
+                            <? $db->query("SELECT * from sliders WHERE slider_id=".$_GET['id']); 
                                 
-                                for ($i=0; $s_res=mysql_fetch_array($ed_slider); $i++){?>
+                                for ($i=0; $s_res=$db->fetch(); $i++){?>
 
                             <tr>
                                 <td><input class="input" type="text" name="edit_alias" value="<?=$s_res['alias']?>"></td>
@@ -505,9 +520,10 @@ if (isset($_REQUEST['edit_allslides'])) {
                 <div class="admin__holder">
                     <div class="block">
                         
-                    <? $sl_pages = mysql_query("SELECT s.slider_id, sp.slider_id, sp.page, sp.ID AS pageID from sliders s JOIN sliders_pages sp ON s.slider_id=sp.slider_id WHERE s.slider_id=".$_GET['id']);
+                    <? 
+                    $db->query("SELECT s.slider_id, sp.slider_id, sp.page, sp.ID AS pageID from sliders s JOIN sliders_pages sp ON s.slider_id=sp.slider_id WHERE s.slider_id=".$_GET['id']);
                     
-                    if (mysql_num_rows($sl_pages) > 0) {
+                    if ($db->num_rows() > 0) {
 
                 ?>
 
@@ -521,7 +537,8 @@ if (isset($_REQUEST['edit_allslides'])) {
                             </tr>
 
                             <?  
-                                for ($i=0; $s_page=mysql_fetch_array($sl_pages); $i++){?>
+                                for ($i=0; $s_page=$db->fetch(); $i++){
+                            ?>
                             <tr>
                                 <input class="input" type="hidden" name="slider_id" value="<?=$s_page['slider_id']?>">
                                 <td><input class="input" type="text" name="page" value="<?=$s_page['page']?>"></td>

@@ -1,14 +1,15 @@
-<?
-header("content-type: text/html;charset=utf-8 \r\n");
-include("../database.php");
+<?php
 session_start();
-if(isset($_REQUEST['gaClientId']) && $_REQUEST['gaClientId']!='') $_SESSION['gaClientId']=$_REQUEST['gaClientId'];
+header('Content-Type: application/json; charset=utf-8');
+if (empty($_SESSION['gaClientId']) && !empty($_POST['gaClientId'])) {
+    $gaClientId = trim($_POST['gaClientId']);
 
-/*
-	$html_header = "MIME-Version: 1.0\r\n";
-	$html_header .= "Content-type: text/html; charset=utf-8\r\n";
-	$html_header .= "From: <info@floren.com.ua>\r\n";
-	$db->query("INSERT INTO admins SET login='".rand().time()."', name='".$_REQUEST['gaClientId']."'");
-	@mail('info@floren.com.ua', 'test', '=='.$_REQUEST['gaClientId'].'++', $html_header);
-*/
+    if ($gaClientId !== '') {
+        $_SESSION['gaClientId'] = $gaClientId;
+    }
+}
+echo json_encode([
+    'success' => !empty($_SESSION['gaClientId']),
+    'gaClientId' => $_SESSION['gaClientId'] ?? null
+]);
 ?>

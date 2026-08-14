@@ -266,32 +266,80 @@
     {literal}
 		 <!--[if IE]>
     <script>document.createElement('header');document.createElement('nav');document.createElement('section');document.createElement('article');document.createElement('aside');document.createElement('footer');</script>
-     		<![endif]-->
-    
-    <script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-20410887-2');
-    ga('send', 'pageview');
-    </script>
+     <![endif]-->
     
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-W7VHLVP');</script>
-    <!-- End Google Tag Manager -->
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-736148489"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'AW-736148489');
-      gtag('get', 'G-KKVRZ8YBC3', 'client_id', (clientID) => {
-           fetch('/api/save_to_session.php?r=3',{gaClientId:clientID}, function(data) {});
-         });
-    </script>
+					<script>
+					(function(w,d,s,l,i){
+					    w[l]=w[l]||[];
+					    w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+					    var f=d.getElementsByTagName(s)[0],
+					        j=d.createElement(s),
+					        dl=l!='dataLayer'?'&l='+l:'';
+					    j.async=true;
+					    j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+					    f.parentNode.insertBefore(j,f);
+					})(window,document,'script','dataLayer','GTM-W7VHLVP');
+					</script>
+					
+					<!-- Google Ads -->
+					<script async src="https://www.googletagmanager.com/gtag/js?id=AW-736148489"></script>
+					
+					<script>
+					window.dataLayer = window.dataLayer || [];
+					function gtag(){dataLayer.push(arguments);}
+					
+					gtag('js', new Date());
+					gtag('config', 'AW-736148489');
+					
+					var hasGaClientId = {/literal}{$HASGACLIENTID}{literal};
+					
+					function saveGaClientId(clientID) {
+					    if (!clientID || hasGaClientId) return;
+					
+					    fetch('/api/save_to_session.php?r=5', {
+					        method: 'POST',
+					        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+					        body: 'gaClientId=' + encodeURIComponent(clientID),
+					        credentials: 'same-origin',
+					        keepalive: true
+					    }).then(function(response) {
+					        if (response.ok) hasGaClientId = true;
+					    });
+					}
+					
+					function getGaClientIdFromCookie() {
+					    var match = document.cookie.match(/(?:^|;\s*)_ga=GA\d+\.\d+\.(\d+\.\d+)/);
+					    return match ? match[1] : null;
+					}
+					
+					function getGaClientId(attempt) {
+					    if (hasGaClientId) return;
+					
+					    var clientID = getGaClientIdFromCookie();
+					
+					    if (clientID) {
+					        saveGaClientId(clientID);
+					        return;
+					    }
+					
+					    gtag('get', 'G-KKVRZ8YBC3', 'client_id', function(clientID) {
+					        if (clientID) {
+					            saveGaClientId(clientID);
+					        } else if (attempt < 10) {
+					            setTimeout(function() {
+					                getGaClientId(attempt + 1);
+					            }, 500);
+					        }
+					    });
+					}
+					
+					if (!hasGaClientId) {
+					    setTimeout(function() {
+					        getGaClientId(1);
+					    }, 300);
+					}
+					</script>
     
     <!-- Facebook Pixel Code -->
     <script>
@@ -347,8 +395,7 @@
                 data-callback="toggleLocation">
                   <svg class="icon icon-close"/>
                 </button>
-                <a href="{$LANGURL}/magazyn/" target="_blank"
-                rel="noopener noreferrer">{$LINGVO.kiev_addr}</a>
+                <a href="{$LANGURL}/magazyn/" rel="noopener noreferrer">{$LINGVO.kiev_addr}</a>
                 <p>{$LINGVO.opening_hours}:</p>
                 <p>{$LINGVO.opening_hours_mo_st}</p>
                 <p>{$LINGVO.opening_hours_sn}</p>

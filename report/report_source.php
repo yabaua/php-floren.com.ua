@@ -55,8 +55,8 @@ function selectNone(){
 </div>
 <select name="sourceNames[]" id="sourceNames" multiple style="width:300px;height:200px;">
 <?
-	$qr=mysql_query("SELECT sourceName FROM report_source GROUP BY sourceName;");
-	while($rs=mysql_fetch_array($qr)){
+	$db->query("SELECT sourceName FROM report_source GROUP BY sourceName;");
+	while($rs=$db->fetch()){
 		//if(!$rs['sourceName']) $rs['sourceName']='Головний екран'
 		$selected='';
 		if(isset($_REQUEST['sourceNames'])){
@@ -89,9 +89,9 @@ if(isset($_REQUEST['sourceNames'])){
 				WHERE rg.sourceName IN ('".$sql_sourceName."') AND report_year='2025'
 				GROUP BY sourceName, rg.report_month
 				ORDER BY ".$orderField.";";
-		$qr=mysql_query($query);
+		$db->query($query);
 		
-		while($rs=mysql_fetch_array($qr)){
+		while($db->fetch()){
 	
 			$sourceName=$rs['sourceName'];
 			$month=$rs['report_month'];
@@ -168,9 +168,9 @@ if(isset($_REQUEST['sourceNames'])){
 				ORDER BY ".$orderField.";";
 				
 				echo $query;
-		$qr2=mysql_query($query2);
+		$db->query($query2);
 		
-		while($rs2=mysql_fetch_array($qr2)){
+		while($rs2=$db->fetch()){
 	
 			$sourceName=$rs2['sourceName'];
 			$month=$rs2['report_month'];

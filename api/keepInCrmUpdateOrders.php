@@ -18,7 +18,7 @@ $income_data = json_decode($postData, true);
 //	print_r($income_data);
 // =============GET DATA FROM CRM============
 		$url = 'https://api.keepincrm.com/v1/agreements/'.$income_data['id'];
-//	$url = 'https://api.keepincrm.com/v1/agreements/33122661';
+//	$url = 'https://api.keepincrm.com/v1/agreements/34845995';
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, [
 	    'accept: application/json',
@@ -114,10 +114,38 @@ if($db->num_rows()){
 			WHERE keepInCrmID='".$crmID."'";
 		//	echo $query;
 			$db->query($query);
-			echo "Floren Updated Agreements:". $db->affected_rows(); ;
+			echo "Floren Updated Agreements:". $db->affected_rows();
 			//mail('info@floren.com.ua','order'.$order_id,$query);
 }
+echo $crmOrderStage;
+//========================= INSERT INTO TASKS =======================
+if ($crmOrderStage == 'До Збирання' && !empty($deliveryDate) && $deliveryWay == 'Доставка Флорен') {
 
+		$people_array = array();
+		$db->query("SELECT * FROM crm_users");
+		while($f = $db->fetch()){
+			$people_array[$f['keepInCrmID']] = $f['ID'];
+		}
+
+    $db->query("SELECT * FROM crm_tasks WHERE agreementID='".intval($crmID)."' AND type='logistics' LIMIT 1");
+    if (!$db->num_rows()) {
+
+     $db->query("
+            INSERT INTO crm_tasks SET
+                hash='" . md5(time().rand(1000,9999)) . "',
+                creatorID='" . $people_array[intval($crmMainResponsibleID)] . "',
+                responsibleID='1009',
+                created_at='" . time() . "',
+                deadline_at='" . intval(strtotime($deliveryDate . ' 07:00:00')) . "',
+                completed_at='0',
+                title='Доставка " . $db->escape($address) . "',
+                agreementID='" . intval($crmID) . "',
+                agreementTitle='" . $db->escape($crmOrderTitle) . "',
+                type='logistics'
+        ");
+				echo "Завдання на доставку Сворено";
+		} // if !db->num_rows
+}		
 
 //========================= INSERT INTO pid zamovlennya =======================
 
@@ -151,5 +179,5 @@ if($db->num_rows()){
 	if($deliveryWay == '' && $orderStage == ''){
 		
 	}
-	echo $deliveryWay, "==", $orderStage;
+//	echo $deliveryWay, "==", $orderStage;
 ?>

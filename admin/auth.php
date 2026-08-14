@@ -12,7 +12,7 @@ if (!isset($_SESSION['IP']) || $_SESSION['IP']!=$_SERVER['REMOTE_ADDR'] || isset
 $session=session_id();
 
 if (isset($_REQUEST['login']) && isset($_REQUEST['pass'])) {
-  $login=preg_replace('/[^0-9a-zA-Z_]/','',$_REQUEST['login']);
+  $login = preg_replace('/[^0-9a-zA-Z@._+\-]/', '', $_REQUEST['login'] ?? '');
   $pass=md5($_REQUEST['pass']);
   if ($login) {
     $db->query("SELECT * FROM admins WHERE login='$login' AND pass='$pass'");

@@ -55,7 +55,13 @@
         <p class="mt-16">В результаті отримаємо — живий, доглянутий простір, який працює на затишок і враження.</p>
       </div>
       <div class="grow">
-        <img src="/images/services/ozelenenie-ofisa-3.jpg" alt="Озеленення офісу Вінниця, Хмельницький, Одеса">
+        <iframe
+            src="https://www.youtube.com/embed/VzcHeO3681g"
+            title="YouTube Shorts"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+        </iframe>
       </div>
     </div>
   </div>
