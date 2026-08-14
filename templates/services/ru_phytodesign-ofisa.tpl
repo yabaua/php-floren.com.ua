@@ -69,7 +69,13 @@
         </p>
       </div>
       <div class="grow">
-        <img src="/images/services/ozelenenie-ofisa-3.jpg" alt="Озеленение офиса Винница, Хмельницкий, Одесса">
+        <iframe
+            src="https://www.youtube.com/embed/VzcHeO3681g"
+            title="YouTube Shorts"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+        </iframe>
       </div>
     </div>
   </div>
