@@ -6966,6 +6966,9 @@ button.catalog-page__show-filters {
   width: 100%;
   height: auto;
   aspect-ratio: 1.8;
+  &.vertical-video {
+    aspect-ratio: 9/16;
+  }
 }
 .services-page__left-title .flex {
   @media screen and (max-width: 992px) {

@@ -70,6 +70,7 @@
       </div>
       <div class="grow">
         <iframe
+            class="vertical-video"
             src="https://www.youtube.com/embed/VzcHeO3681g"
             title="YouTube Shorts"
             frameborder="0"
