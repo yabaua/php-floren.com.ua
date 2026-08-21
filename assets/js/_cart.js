@@ -273,6 +273,7 @@ function changeDeliveryOptions(e) {
     case "courier":
       totalToPay.deliveryCost = courierDeliveryPrice;
       document.getElementById("courier-form").classList.remove("hidden");
+      document.querySelector('#payment-cash-option [data-text="cash"]')?.classList.remove("hidden");
       if (!!cartState.bigGoodCourier) {
         document.querySelector('sl-alert[data-name="delivery-biggoods"]').show();
       }
@@ -291,8 +292,7 @@ function changeDeliveryOptions(e) {
       }
       document.querySelector('.summary__item_label[data-text="np-cost"]').classList.remove("hidden");
       document.querySelector('.summary__item_label[data-text="delivery-cost"]').classList.add("hidden");
-      document.querySelector('#payment-cash-option [data-text="cash"]').classList.add("hidden");
-      document.querySelector('#payment-cash-option [data-text="nova-poshta-money"]').classList.remove("hidden");
+      document.querySelector('#payment-cash-option [data-text="nova-poshta-money"]')?.classList.remove("hidden");
       if (cartState.isPlant) {
         document.querySelector('sl-alert[data-name="not-nova-poshta"]').show();
       }
@@ -300,7 +300,9 @@ function changeDeliveryOptions(e) {
       refreshTotal(totalToPay);
       break;
     default:
+      console.log('default');
       document.getElementById("magazin-form").classList.remove("hidden");
+      document.querySelector('#payment-cash-option [data-text="cash-or-visa"]')?.classList.remove("hidden");
       totalToPay.deliveryCost = 0;
       refreshTotal(totalToPay);
       break;
@@ -313,8 +315,9 @@ function refreshCart() {
   document.getElementById("nova-poshta-form").classList.add("hidden");
   document.querySelector('.summary__item_label[data-text="np-cost"]').classList.add("hidden");
   document.querySelector('.summary__item_label[data-text="delivery-cost"]').classList.remove("hidden");
-  document.querySelector('#payment-cash-option [data-text="cash"]').classList.remove("hidden");
-  document.querySelector('#payment-cash-option [data-text="nova-poshta-money"]').classList.add("hidden");
+  document.querySelector('#payment-cash-option [data-text="cash"]')?.classList.add("hidden");
+  document.querySelector('#payment-cash-option [data-text="nova-poshta-money"]')?.classList.add("hidden");
+  document.querySelector('#payment-cash-option [data-text="cash-or-visa"]')?.classList.add("hidden");
 }
 function refreshTotal(totalToPay2) {
   console.log("totalToPay", totalToPay2);

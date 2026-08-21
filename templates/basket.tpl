@@ -204,8 +204,9 @@
           <sl-radio value="{$LINGVO.bsk_cash}">
             <div class="radio-option" id="payment-cash-option">
               <img src="/img/icons/icon-cash.svg" alt="">
-              <span data-text="cash">{$LINGVO.bsk_cash}</span>
-              <span class="hidden" data-text="nova-poshta-money">{$LINGVO.nova_poshta_money}</span>
+              <span data-text="cash" class="hidden">{$LINGVO.bsk_cash}</span>
+              <span data-text="nova-poshta-money" class="hidden">{$LINGVO.nova_poshta_money}</span>
+              <span data-text="cash-or-visa">{$LINGVO.bsk_cash_or_visa}</span>              
             </div>
           </sl-radio>
           <sl-radio value="visa" {if $BSK_STOP_PRIVAT || $BSK_TTL < 1000}disabled{/if}>
