@@ -81,9 +81,6 @@ if ($URL[1] == 'sezon') {
 	$hleb[2]['name'] = $f_cat['name'];
 }
 
-echo '<pre>';
-print_r($f_cat);
-echo '</pre>';
 	//======FILTERS
 	$filters=array();
 	$filters_url=array();
