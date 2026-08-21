@@ -209,7 +209,7 @@
               <span data-text="cash-or-visa">{$LINGVO.bsk_cash_or_visa}</span>              
             </div>
           </sl-radio>
-          <sl-radio value="visa" {if $BSK_STOP_PRIVAT || $BSK_TTL < 1000}disabled{/if}>
+          <sl-radio value="visa" disabled>
             <div class="radio-option">
               <img src="/img/icons/icon-card.svg" alt="">
               <span>{$LINGVO.bsk_pay_now}</span>

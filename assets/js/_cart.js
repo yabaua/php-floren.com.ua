@@ -4,6 +4,39 @@ const totalToPay = {
   productPrice: typeof cartState !== "undefined" ? Number(cartState.productPrice) : 0,
   total: 0
 };
+const updateVisaRadioState = (currentSum) => {
+  const visaRadio = document.querySelector('[name="payment_way"]>[value="visa"], sl-radio[value="visa"]');
+  const paymentGroup = document.querySelector('sl-radio-group[name="payment_way"]');
+  const deliveryMethods = document.getElementById("delivery-methods");
+  const selectedDelivery = deliveryMethods?.value || "magazin";
+  const sum = currentSum !== undefined ? Number(currentSum) : (typeof totalToPay !== "undefined" ? Number(totalToPay.productPrice) : 0);
+  const minDelivery = Number(defaultOptions?.minimumOrderDelivery) || 1000;
+  const isStopPrivat = typeof cartState !== "undefined" && Boolean(cartState.stopPrivat);
+
+  let shouldDisableVisa = false;
+
+  if (selectedDelivery === "magazin" || sum < 1000 || sum < minDelivery || isStopPrivat) {
+    shouldDisableVisa = true;
+  }
+
+  if (visaRadio) {
+    visaRadio.disabled = shouldDisableVisa;
+    if (shouldDisableVisa) {
+      visaRadio.setAttribute("disabled", "");
+    } else {
+      visaRadio.removeAttribute("disabled");
+    }
+  }
+
+  if (shouldDisableVisa && paymentGroup && paymentGroup.value === "visa") {
+    const cashOption = paymentGroup.querySelector('sl-radio:not([value="visa"]):not([disabled])');
+    paymentGroup.value = cashOption ? cashOption.value : (typeof lingvo !== "undefined" && lingvo.paymentTextCash ? lingvo.paymentTextCash : "Готівка");
+    paymentGroup.querySelectorAll("sl-radio").forEach((r) => {
+      r.checked = (r.value === paymentGroup.value);
+    });
+  }
+};
+
 const initCart = async () => {
   document.querySelectorAll("#cart-modal-items-list .cart-item").forEach((item) => {
     item.querySelector("quantity-counter").addEventListener("change", () => updateCartDisplay());
@@ -44,6 +77,7 @@ const initCart = async () => {
   if (typeof cartState !== "undefined" && cartState.productPrice < defaultOptions.minimumOrderDelivery) {
     document.querySelector('sl-alert[data-name="small-order-for-delivery"]').show();
   }
+  updateVisaRadioState(typeof cartState !== "undefined" ? cartState.productPrice : 0);
 };
 const addToCart = async (event) => {
   const productId = event.currentTarget.dataset.id;
@@ -234,34 +268,48 @@ async function changeBasketTotal(cartData) {
       }
     }
 
-    const visaRadio = document.querySelector('[name="payment_way"]>[value="visa"]');
-    const paymentGroup = document.querySelector('sl-radio-group[name="payment_way"]');
+    if (typeof cartState !== "undefined") {
+      cartState.productPrice = Number(data.basket_sum);
+    }
+    const minDelivery = Number(defaultOptions?.minimumOrderDelivery) || 1000;
+    const isBelow1000 = Number(data.basket_sum) < 1000 || Number(data.basket_sum) < minDelivery;
 
-    if (data.basket_sum < minimumOrderDelivery) {
+    const deliveryMethods = document.getElementById("delivery-methods");
+    const courierDelivery = document.querySelector('#delivery-methods sl-radio[value="courier"], [name="delivery_way"]>[value="courier"]');
+    const npDelivery = document.querySelector('#delivery-methods sl-radio[value="nova-poshta"], [name="delivery_way"]>[value="nova-poshta"]');
+
+    if (isBelow1000) {
       document.querySelector('sl-alert[data-name="small-order-for-delivery"]')?.show();
-      const courierDelivery = document.querySelector('[name="delivery_way"][value="courier"]');
-      if (courierDelivery) courierDelivery.disabled = true;
-      const npDelivery = document.querySelector('[name="delivery_way"][value="nova-poshta"]');
-      if (npDelivery) npDelivery.disabled = true;
-
-      if (visaRadio) {
-        visaRadio.disabled = true;
+      if (courierDelivery) {
+        courierDelivery.disabled = true;
+        courierDelivery.setAttribute("disabled", "");
       }
-      if (paymentGroup && paymentGroup.value === "visa") {
-        const cashOption = paymentGroup.querySelector('sl-radio:not([value="visa"]):not([disabled])');
-        paymentGroup.value = cashOption ? cashOption.value : (typeof lingvo !== "undefined" && lingvo.paymentTextCash ? lingvo.paymentTextCash : "Готівка");
+      if (npDelivery) {
+        npDelivery.disabled = true;
+        npDelivery.setAttribute("disabled", "");
+      }
+
+      if (deliveryMethods && (deliveryMethods.value === "courier" || deliveryMethods.value === "nova-poshta")) {
+        deliveryMethods.value = "magazin";
+        const magazinRadio = document.querySelector('#delivery-methods sl-radio[value="magazin"], [name="delivery_way"][value="magazin"]');
+        if (magazinRadio) magazinRadio.checked = true;
+        if (courierDelivery) courierDelivery.checked = false;
+        if (npDelivery) npDelivery.checked = false;
+        changeDeliveryOptions({ target: { value: "magazin" } });
       }
     } else {
       document.querySelector('sl-alert[data-name="small-order-for-delivery"]')?.hide();
-      const courierDelivery = document.querySelector('[name="delivery_way"][value="courier"]');
-      if (courierDelivery) courierDelivery.disabled = false;
-      const npDelivery = document.querySelector('[name="delivery_way"][value="nova-poshta"]');
-      if (npDelivery) npDelivery.disabled = false;
-
-      if (visaRadio) {
-        visaRadio.disabled = false;
+      if (courierDelivery) {
+        courierDelivery.disabled = false;
+        courierDelivery.removeAttribute("disabled");
+      }
+      const stopPost = typeof cartState !== "undefined" && Boolean(cartState.stopPostDelivery);
+      if (npDelivery && !stopPost) {
+        npDelivery.disabled = false;
+        npDelivery.removeAttribute("disabled");
       }
     }
+    updateVisaRadioState(data.basket_sum);
     refreshTotal(totalToPay);
   }
   return data;
@@ -307,6 +355,7 @@ function changeDeliveryOptions(e) {
       refreshTotal(totalToPay);
       break;
   }
+  updateVisaRadioState(totalToPay.productPrice);
 }
 function refreshCart() {
   document.querySelectorAll("sl-alert[data-name]").forEach((alert) => alert.hide());
