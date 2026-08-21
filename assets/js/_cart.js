@@ -233,15 +233,34 @@ async function changeBasketTotal(cartData) {
         document.querySelector('sl-alert[data-name="small-order"]').hide();
       }
     }
-    if (data.basket_sum < minimumOrderDelivery) {
-      document.querySelector('sl-alert[data-name="small-order-for-delivery"]').show();
-      document.querySelector('[name="delivery_way"][value="courier"]').disabled = true;
-      document.querySelector('[name="delivery_way"][value="nova-poshta"]').disabled = true;
 
+    const visaRadio = document.querySelector('[name="payment_way"]>[value="visa"]');
+    const paymentGroup = document.querySelector('sl-radio-group[name="payment_way"]');
+
+    if (data.basket_sum < minimumOrderDelivery) {
+      document.querySelector('sl-alert[data-name="small-order-for-delivery"]')?.show();
+      const courierDelivery = document.querySelector('[name="delivery_way"][value="courier"]');
+      if (courierDelivery) courierDelivery.disabled = true;
+      const npDelivery = document.querySelector('[name="delivery_way"][value="nova-poshta"]');
+      if (npDelivery) npDelivery.disabled = true;
+
+      if (visaRadio) {
+        visaRadio.disabled = true;
+      }
+      if (paymentGroup && paymentGroup.value === "visa") {
+        const cashOption = paymentGroup.querySelector('sl-radio:not([value="visa"]):not([disabled])');
+        paymentGroup.value = cashOption ? cashOption.value : (typeof lingvo !== "undefined" && lingvo.paymentTextCash ? lingvo.paymentTextCash : "Готівка");
+      }
     } else {
-      document.querySelector('sl-alert[data-name="small-order-for-delivery"]').hide();
-      document.querySelector('[name="delivery_way"][value="courier"]').disabled = false;
-      document.querySelector('[name="delivery_way"][value="nova-poshta"]').disabled = false;
+      document.querySelector('sl-alert[data-name="small-order-for-delivery"]')?.hide();
+      const courierDelivery = document.querySelector('[name="delivery_way"][value="courier"]');
+      if (courierDelivery) courierDelivery.disabled = false;
+      const npDelivery = document.querySelector('[name="delivery_way"][value="nova-poshta"]');
+      if (npDelivery) npDelivery.disabled = false;
+
+      if (visaRadio) {
+        visaRadio.disabled = false;
+      }
     }
     refreshTotal(totalToPay);
   }

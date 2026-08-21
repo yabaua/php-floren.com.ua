@@ -243,7 +243,7 @@ if(isset($_POST['send_bsk']) && count($_SESSION['basket'])){
 
 
 	//=================== LIQPAY ======================
-	if	($_POST['payment_way']=="visa" && $_POST['allow_payment'] != '0'){
+	if	($_POST['payment_way']=="visa" && $_POST['allow_payment'] != '0' && intval($_POST['to_pay']) >= 1000){
 		
 		$bsk_ttl=intval($_POST['to_pay']); //============ $basket_total + delivery
 		if($bsk_ttl==0){

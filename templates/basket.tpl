@@ -68,7 +68,7 @@
               </div>
  **}
             </div>
-          </section>
+          </section>          
 
           <section class="information__shipping">
             <h2>2. {$LINGVO.way_to_deliver}</h2>
@@ -208,7 +208,7 @@
               <span class="hidden" data-text="nova-poshta-money">{$LINGVO.nova_poshta_money}</span>
             </div>
           </sl-radio>
-          <sl-radio value="visa" {if $BSK_STOP_PRIVAT}disabled{/if}>
+          <sl-radio value="visa" {if $BSK_STOP_PRIVAT || $BSK_TTL < 1000}disabled{/if}>
             <div class="radio-option">
               <img src="/img/icons/icon-card.svg" alt="">
               <span>{$LINGVO.bsk_pay_now}</span>
