@@ -4,6 +4,41 @@ require("../database.php");
 include("../include/strlib.php");
 session_start();
 setlocale(LC_ALL, "ru_RU.UTF-8");
+
+function formatGoodName($name) {
+
+    // 1рр / 1рр. -> 1 стовбур і т.д.
+    $replace = array(
+        '1' => '1 стовбур',
+        '2' => '2 стовбури',
+        '3' => '3 стовбури',
+        '4' => '4 стовбури',
+        '5' => '5 стовбурів',
+        '6' => '6 стовбурів',
+        '7' => '7 стовбурів'
+    );
+
+    $name = preg_replace_callback('/([1-7])рр\.?/u', function($m) use ($replace) {
+        return $replace[$m[1]];
+    }, $name);
+
+    // Шукаємо розмір виду 30/170 см або 30/170см
+    if (preg_match('/\s*(\d+)\s*\/\s*(\d+)\s*см\s*$/ui', $name, $m)) {
+
+        $diameter = $m[1];
+        $height   = $m[2];
+
+        // Прибираємо розмір з основної назви
+        $name = preg_replace('/\s*\d+\s*\/\s*\d+\s*см\s*$/ui', '', $name);
+
+        return trim($name)
+            . '<br>'
+            . '<span>Діаметр горщика: ' . $diameter
+            . ' см, Висота: ' . $height . ' см</span>';
+    }
+
+    return trim($name);
+}
 ?>
 
 <!DOCTYPE html>
@@ -54,6 +89,10 @@ body{
 	.good_name b{
 		color:#5F1C13 !important;
 		font-weight:bold;
+		}
+		.good_name span{
+			font-size:.9em;
+			color:#777777 !important;
 		}
 	.tbl th{
 		background:#EEE7DF;
@@ -148,6 +187,7 @@ if(!strlen($query_string)<3 /*&& !strpos($query_string, "%")>0*/) {
 			$goods_list[$rs['ID']]['new_barcode']	=str_replace($query_string, '<b>'.$query_string.'</b>', $rs['barcode']);
 			*/
 			
+			//Let's paint search word
 			$encoding = 'UTF-8';
 			$pos = mb_stripos($rs['name'], $query_string, 0, $encoding);
 			if ($pos !== false) {
@@ -176,6 +216,7 @@ if(!strlen($query_string)<3 /*&& !strpos($query_string, "%")>0*/) {
 				<th>Основний</th>
 				<th>Склад Ф2</th>
 				<th>Резерв</th>
+				<th>Інста Назва</th>
     </thead>
     <tbody id="listTable">
     <?
@@ -188,6 +229,7 @@ if(!strlen($query_string)<3 /*&& !strpos($query_string, "%")>0*/) {
 			<td align="center" class="<?=$v['f1_class']?>"><?=$v['f1_stock']?></td>
 			<td align="center" class="<?=$v['f2_class']?>"><?=$v['f2_stock']?></td>
 			<td align="center"><b><?=($v['rezerv']>0?$v['rezerv']:'')?></b></td>
+			<td><?=formatGoodName($v['new_name'])?></td>
 		</tr>
 	<?}?>
     </tbody>

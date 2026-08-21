@@ -1,0 +1,296 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    background: #f6f6f6;
+
+    font-family: Arial, sans-serif;
+
+    color: #222;
+}
+
+.header {
+    height: 90px;
+
+    background: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-bottom: 1px solid #eee;
+}
+
+.logo {
+    display: block;
+
+    max-width: 180px;
+    max-height: 55px;
+}
+
+.form-container {
+    width: calc(100% - 30px);
+
+    max-width: 620px;
+
+    margin: 40px auto;
+
+    padding: 40px;
+
+    background: #fff;
+
+    border-radius: 12px;
+
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.06);
+}
+
+.form-container_text {
+    margin-bottom: 40px;
+
+    text-align: center;
+
+    font-size: 16px;
+    line-height: 1.55;
+}
+
+.form-container_text h1 {
+    margin: 0 0 20px;
+
+    font-size: 26px;
+}
+
+.form-container_text p {
+    margin: 10px 0;
+}
+
+
+/* RATING */
+
+.rating-block {
+    padding: 25px 0;
+
+    border-bottom: 1px solid #eee;
+
+    text-align: center;
+}
+
+.rating-title {
+    margin: 0 0 15px;
+
+    font-size: 18px;
+
+    font-weight: 600;
+}
+
+.stars {
+    display: inline-flex;
+
+    flex-direction: row-reverse;
+
+    justify-content: center;
+}
+
+.stars input {
+    display: none;
+}
+
+.stars label {
+    padding: 0 4px;
+
+    font-size: 46px;
+
+    line-height: 1;
+
+    color: #ddd;
+
+    cursor: pointer;
+
+    transition: 0.15s;
+}
+
+.stars label:hover,
+.stars label:hover ~ label,
+.stars input:checked ~ label {
+    color: #f4b400;
+}
+
+.rating-text {
+    height: 20px;
+
+    margin-top: 10px;
+
+    font-size: 14px;
+
+    color: #777;
+}
+
+
+/* COMMENT */
+
+.comment-block {
+    margin-top: 30px;
+}
+
+textarea,
+input[type="text"],
+input[type="tel"] {
+    width: 100%;
+
+    margin-bottom: 12px;
+
+    padding: 15px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 6px;
+
+    background: #fff;
+
+    outline: none;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 16px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="tel"]:focus {
+    border-color: #777;
+}
+
+
+/* BUTTON */
+
+.fsubmit {
+    width: 100%;
+
+    margin-top: 15px;
+
+    padding: 17px 20px;
+
+    border: 0;
+
+    border-radius: 6px;
+
+    background: #222;
+
+    color: #fff;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.fsubmit:hover {
+    background: #000;
+}
+
+.fsubmit:disabled {
+    opacity: 0.6;
+
+    cursor: default;
+}
+
+
+/* ERRORS */
+
+.error {
+    margin-top: 15px;
+
+    color: #d90000;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+
+/* SUCCESS */
+
+#response-success,
+#response-retry {
+    display: none;
+
+    padding: 30px 0;
+
+    text-align: center;
+}
+
+.success-icon {
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 20px;
+
+    border-radius: 50%;
+
+    background: #42a846;
+
+    color: #fff;
+
+    font-size: 40px;
+
+    line-height: 70px;
+}
+
+#response-success h2,
+#response-retry h2 {
+    font-size: 26px;
+}
+
+#response-success p,
+#response-retry p {
+    font-size: 16px;
+
+    line-height: 1.5;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .header {
+        height: 75px;
+    }
+
+    .logo {
+        max-width: 150px;
+    }
+
+    .form-container {
+        width: 100%;
+
+        margin: 0;
+
+        padding: 30px 20px;
+
+        border-radius: 0;
+
+        box-shadow: none;
+    }
+
+    .form-container_text h1 {
+        font-size: 23px;
+    }
+
+    .rating-title {
+        font-size: 17px;
+    }
+
+    .stars label {
+        font-size: 44px;
+    }
+
+}

@@ -31,32 +31,51 @@ $income_data = json_decode($postData, true);
 	$data=json_decode($response);
 //	print_r($data);	
 //====CUSTOM-FIELDS======
-foreach($data->custom_fields_detailed AS $cf=>$det){
-	if($det->name == 'tip_oplati_6124995'){
-		$custom_fields_tip_oplaty = $det->value;
-	}
-	if($det->name == 'adriesa_4658058'){
-		$custom_fields_address = str_replace("'", "", $det->value);
-	}
-	if($det->name == 'gaa_utm_source_4449395'){
-		$custom_fields_utm_source = $det->value;
-	}
-	if($det->name == 'gaa_utm_campaign_4449398'){
-		$custom_fields_utm_campaign = str_replace("'", "", str_replace("%20", " ", $det->value));
-	}
-	if($det->name == 'gaa_utm_medium_4449399'){
-		$custom_fields_utm_medium = $det->value;
-	}
-	if($det->name == 'dostavka_4656739'){
-		$custom_fields_deliveryWay = $det->value;
-	}
-	if($det->name == 'data_vidghruzki_307'){
-		$custom_fields_deliveryDate = $det->value;
+if (
+	isset($data->custom_fields_detailed)
+	&&
+	is_array($data->custom_fields_detailed)
+) {
+
+	foreach ($data->custom_fields_detailed as $cf => $det) {
+
+		if ($det->name == 'tip_oplati_6124995') {
+			$custom_fields_tip_oplaty = $det->value;
+		}
+
+		if ($det->name == 'adriesa_4658058') {
+			$custom_fields_address = str_replace("'", "", $det->value);
+		}
+
+		if ($det->name == 'gaa_utm_source_4449395') {
+			$custom_fields_utm_source = $det->value;
+		}
+
+		if ($det->name == 'gaa_utm_campaign_4449398') {
+			$custom_fields_utm_campaign = str_replace("'", "", str_replace("%20", " ", $det->value));
+		}
+
+		if ($det->name == 'gaa_utm_medium_4449399') {
+			$custom_fields_utm_medium = $det->value;
+		}
+
+		if ($det->name == 'dostavka_4656739') {
+			$custom_fields_deliveryWay = $det->value;
+		}
+
+		if ($det->name == 'data_vidghruzki_307') {
+			$custom_fields_deliveryDate = $det->value;
+		}
 	}
 }
+
 //lets take Last ttn
-foreach($data->deliveries AS $dID=>$dVal){
-	$last_ttn = $dVal->ttn;
+$last_ttn = '';
+
+if (isset($data->deliveries) && is_array($data->deliveries)) {
+	foreach ($data->deliveries as $dID => $dVal) {
+		$last_ttn = isset($dVal->ttn) ? $dVal->ttn : '';
+	}
 }
 
 
@@ -117,7 +136,7 @@ if($db->num_rows()){
 			echo "Floren Updated Agreements:". $db->affected_rows();
 			//mail('info@floren.com.ua','order'.$order_id,$query);
 }
-echo $crmOrderStage;
+
 //========================= INSERT INTO TASKS =======================
 if ($crmOrderStage == 'До Збирання' && !empty($deliveryDate) && $deliveryWay == 'Доставка Флорен') {
 
@@ -176,7 +195,7 @@ if ($crmOrderStage == 'До Збирання' && !empty($deliveryDate) && $deliv
 	}//if PID ZAMOVLENNYA
 	
 	//=================== NovaPOshta Alert =======================
-	if($deliveryWay == '' && $orderStage == ''){
+	if($deliveryWay == '' && $crmOrderStage == ''){
 		
 	}
 //	echo $deliveryWay, "==", $orderStage;

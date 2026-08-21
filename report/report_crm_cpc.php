@@ -45,7 +45,7 @@ function get_data($start_time, $end_time){
 	$orders_cnt=0;
 	$person_array=array();
 	$funnel_array=array();
-	$qr=mysql_query("SELECT * FROM orders_crm WHERE orderDate BETWEEN '".$start_time."' AND '".$end_time."'");
+	$db->query("SELECT * FROM orders_crm WHERE orderDate BETWEEN '".$start_time."' AND '".$end_time."'");
 	while ($rs=mysql_fetch_array($qr)){
 		$orders_summ+=$rs['orderTotal'];
 		$orders_cnt++;
@@ -141,8 +141,8 @@ if($rand_date_from){
 //	echo "<br />", date("Y-m-d-H:i:s", $rdf), "==", date("Y-m-d-H:i:s", $rdt);
 		$query="SELECT * FROM orders_crm WHERE orderDate BETWEEN '".$rdf."' AND '".$rdt."' AND utm_medium='cpc' AND orderResult!='failed' ORDER BY utm_source DESC, utm_medium DESC, utm_campaign DESC";
 //		echo $query;
-		$qr=mysql_query($query);
-		while($rs=mysql_fetch_array($qr)){
+		$db->query($query);
+		while($rs=$db->fetch()){
 			$utm_array[$rs['utm_source']][$rs['utm_medium']][mb_strtolower($rs['utm_campaign'], 'UTF-8')]['rdm'][]=$rs['orderTotal'];
 			$utm_array[$rs['utm_source']][$rs['utm_medium']][mb_strtolower($rs['utm_campaign'], 'UTF-8')]['month']=array();
 			$utm_array[$rs['utm_source']][$rs['utm_medium']][mb_strtolower($rs['utm_campaign'], 'UTF-8')]['week']=array();
@@ -152,7 +152,7 @@ if($rand_date_from){
 //print_r($utm_array);
 // AND utm_medium='cpc'
 //=======MONTH
-$qr=mysql_query("SELECT * FROM orders_crm WHERE orderDate BETWEEN '".$month_start_day."' AND '".$today_date_to."' AND utm_medium='cpc' AND orderResult!='failed' ORDER BY utm_source DESC, utm_medium DESC, utm_campaign DESC");
+$db->query("SELECT * FROM orders_crm WHERE orderDate BETWEEN '".$month_start_day."' AND '".$today_date_to."' AND utm_medium='cpc' AND orderResult!='failed' ORDER BY utm_source DESC, utm_medium DESC, utm_campaign DESC");
 //echo "SELECT * FROM orders_crm WHERE orderDate BETWEEN '".$month_start_day."' AND '".$today_date_to."' AND utm_medium='cpc' AND orderResult!='failed' ORDER BY utm_source DESC, utm_medium DESC, utm_campaign DESC";
 /*
 if we will count with SQL
@@ -166,7 +166,7 @@ GROUP BY utm_campaign
 ORDER BY utm_source DESC, utm_medium DESC, SUM(orderTotal), utm_campaign DESC
 */
 
-while($rs=mysql_fetch_array($qr)){
+while($rs=$db->fetch()){
 		$utm_array[$rs['utm_source']][$rs['utm_medium']][mb_strtolower($rs['utm_campaign'], 'UTF-8')]['month'][]=$rs['orderTotal'];
 		$utm_array[$rs['utm_source']][$rs['utm_medium']][mb_strtolower($rs['utm_campaign'], 'UTF-8')]['week']=array();
 		if(!isset($utm_array[$rs['utm_source']][$rs['utm_medium']][mb_strtolower($rs['utm_campaign'], 'UTF-8')]['rdm']) && $rand_date_from){
@@ -174,9 +174,9 @@ while($rs=mysql_fetch_array($qr)){
 		}
 }
 //========WEEEK
-$qr=mysql_query("SELECT * FROM orders_crm WHERE orderDate BETWEEN '".$minus_one_week_midnight."' AND '".$today_date_from."' AND utm_medium='cpc' AND orderResult!='failed' ORDER BY utm_source DESC, utm_medium DESC, utm_campaign DESC");
+$db->query("SELECT * FROM orders_crm WHERE orderDate BETWEEN '".$minus_one_week_midnight."' AND '".$today_date_from."' AND utm_medium='cpc' AND orderResult!='failed' ORDER BY utm_source DESC, utm_medium DESC, utm_campaign DESC");
 //echo "SELECT COUNT(*), SUM(orderTotal) FROM orders_crm WHERE orderDate BETWEEN '1752699600' AND '1753304400'";
-while($rs=mysql_fetch_array($qr)){
+while($rs=$db->fetch()){
 		$utm_array[$rs['utm_source']][$rs['utm_medium']][mb_strtolower($rs['utm_campaign'], 'UTF-8')]['week'][]=$rs['orderTotal'];
 		if(!isset($utm_array[$rs['utm_source']][$rs['utm_medium']][mb_strtolower($rs['utm_campaign'], 'UTF-8')]['month'])){
 			$utm_array[$rs['utm_source']][$rs['utm_medium']][mb_strtolower($rs['utm_campaign'], 'UTF-8')]['month']=array();
@@ -206,8 +206,8 @@ while($rs=mysql_fetch_array($qr)){
 		<select id="rand_date_select" onchange="setDates(this.value)">
 		<option></option>
 		<?
-		$qr=mysql_query("SELECT DISTINCT(date_add) FROM orders_crm_roas ORDER BY date_add DESC");
-		while($rs=mysql_fetch_array($qr)){
+		$db->query("SELECT DISTINCT(date_add) FROM orders_crm_roas ORDER BY date_add DESC");
+		while($rs=$db->fetch()){
 		?>
 		<?//=date("d.m.Y", strtotime("first day of ".date("F Y", $rs['date_add'])))? >|<?=date("d.m.Y", $rs['date_add'])?>
 		<option value="<?=date("d.m.Y", strtotime("first day of ".date("F Y", $rs['date_add'])))?>|<?=date("d.m.Y", $rs['date_add'])?>">
@@ -295,11 +295,11 @@ if($rand_date_from){
 //print_r($new_utm_arr);
 
 $roasOnDate=array();
-$qr=mysql_query("SELECT * FROM orders_crm_roas ORDER BY date_add DESC LIMIT 1");
-$rs_roas_date=mysql_fetch_array($qr);
+$db->query("SELECT * FROM orders_crm_roas ORDER BY date_add DESC LIMIT 1");
+$rs_roas_date=$db->fetch();
 
-$qr_roas=mysql_query("SELECT * FROM orders_crm_roas WHERE date_add='".$rs_roas_date['date_add']."'");
-while($rs2=mysql_fetch_array($qr_roas)){
+$db->query("SELECT * FROM orders_crm_roas WHERE date_add='".$rs_roas_date['date_add']."'");
+while($rs2=$db->fetch()){
 	$roasOnDate[$rs2['campName']]=array('roas'=>$rs2['roasOnDate'], 'cpcCost'=>$rs2['cpcCost']);
 	if($rand_date_from){
 		$roasOnRandDate[$rs2['campName']]=array();
@@ -314,8 +314,8 @@ usort($new_utm_arr, function($a, $b){
 if($rand_date_from){
 	$roasOnRandDate=array();
 
-	$qr_roas=mysql_query("SELECT * FROM orders_crm_roas WHERE date_add='".strtotime($rand_date_to)."'");
-	while($rs2=mysql_fetch_array($qr_roas)){
+	$db->query("SELECT * FROM orders_crm_roas WHERE date_add='".strtotime($rand_date_to)."'");
+	while($rs2=$db->fetch()){
 		$roasOnRandDate[$rs2['campName']]=array('roas'=>$rs2['roasOnDate'], 'cpcCost'=>$rs2['cpcCost']);
 	}
 }
@@ -427,12 +427,12 @@ $roasFieldName=$v['utm_source']."_".$v['utm_medium']."_".transliterateCampName($
 <p>&nbsp</p>
 <p>Замовлення з початку місяця</p>
 <?
-$qr = mysql_query("SELECT * FROM orders_crm o WHERE orderResult!='failed' AND orderDate>'".$month_start_day."'");
+$db->query("SELECT * FROM orders_crm o WHERE orderResult!='failed' AND orderDate>'".$month_start_day."'");
 $phone_orders_general=array();
 $phone_orders_cpc=array();
 $chat_orders_general=array();
 $chat_orders_cpc=array();
-while ($f=mysql_fetch_array($qr)){
+while ($f=$db->fetch()){
 	if(in_array($f['orderSource'], array('Новий / Дзвінок', 'Існуючий / Дзвінок')))
 		$phone_orders_general[]=$f['orderTotal'];
 	if(in_array($f['orderSource'], array('Новий / Дзвінок', 'Існуючий / Дзвінок')) && $f['utm_medium']=='cpc')

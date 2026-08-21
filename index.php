@@ -443,7 +443,7 @@ elseif (count($URL)==1 && $URL[0]=='orchids') {
 elseif (count($URL)==1 && $URL[0]=='metal-pots') {
 	include($_SERVER['DOCUMENT_ROOT'].'/include/send_404_email.php');
 	header("HTTP/1.0 301 Moved Permanently"); 
-	header("Location: /planters/metal-pots/");
+	header("Location: /planters/");
 	exit();
 }
 elseif (count($URL)==1 && $URL[0]=='wood-planters') {
@@ -1033,10 +1033,18 @@ function getVideoData($videoID){
 if (strpos($_SERVER['REQUEST_URI'],'FBOK')) $smarty->assign("FBOK",true);
 //==============================COMMON_FUNC
 
+// ===========================================================================
+// ===========================================================================
 //lets put utm-s to Session to track it in basket
+// ===========================================================================
+// ===========================================================================
 $hasGaClientId = !empty($_SESSION['gaClientId']) ? 'true' : 'false';
 $smarty->assign('HASGACLIENTID', $hasGaClientId);
 
+
+/*
+ * 1. Если пришли реальные UTM — они имеют максимальный приоритет
+ */
 if (isset($_REQUEST['utm_source']) && $_REQUEST['utm_source'] != '') {
 
     $_SESSION['utm_source']   = $_REQUEST['utm_source'];
@@ -1051,7 +1059,12 @@ if (isset($_REQUEST['utm_source']) && $_REQUEST['utm_source'] != '') {
     setcookie('floren_utm_content', $_SESSION['utm_content'], time() + 60*60*24*90, '/');
     setcookie('floren_utm_term', $_SESSION['utm_term'], time() + 60*60*24*90, '/');
 }
-if (isset($_REQUEST['srsltid']) && !isset($_REQUEST['utm_source'])) {
+
+
+/*
+ * 2. Google Organic с srsltid
+ */
+elseif (isset($_REQUEST['srsltid'])) {
 
     $_SESSION['utm_source']   = 'google';
     $_SESSION['utm_medium']   = 'organic';
@@ -1065,17 +1078,161 @@ if (isset($_REQUEST['srsltid']) && !isset($_REQUEST['utm_source'])) {
     setcookie('floren_utm_content', '', time() + 60*60*24*90, '/');
     setcookie('floren_utm_term', '', time() + 60*60*24*90, '/');
 }
-if (!isset($_SESSION['utm_source']) && isset($_COOKIE['utm_source'])) {
+
+
+/*
+ * 3. Google Ads по gclid
+ *
+ * Сам gclid не сохраняем.
+ */
+elseif (isset($_REQUEST['gclid']) && $_REQUEST['gclid'] != '') {
+
+    $_SESSION['utm_source']   = 'google';
+    $_SESSION['utm_medium']   = 'cpc';
+    $_SESSION['utm_campaign'] = '';
+    $_SESSION['utm_content']  = '';
+    $_SESSION['utm_term']     = '';
+
+    setcookie('floren_utm_source', 'google', time() + 60*60*24*90, '/');
+    setcookie('floren_utm_medium', 'cpc', time() + 60*60*24*90, '/');
+    setcookie('floren_utm_campaign', '', time() + 60*60*24*90, '/');
+    setcookie('floren_utm_content', '', time() + 60*60*24*90, '/');
+    setcookie('floren_utm_term', '', time() + 60*60*24*90, '/');
+}
+
+
+/*
+ * 4. Если новых меток нет и UTM ещё не определены,
+ * пробуем определить источник по HTTP_REFERER
+ */
+elseif (
+    !isset($_SESSION['utm_source']) &&
+    !empty($_SERVER['HTTP_REFERER'])
+) {
+
+    $referrer = $_SERVER['HTTP_REFERER'];
+    $host = strtolower(parse_url($referrer, PHP_URL_HOST) ?? '');
+
+    /*
+     * Не считаем переходы внутри floren.com.ua новым источником
+     */
+    if (
+        $host != '' &&
+        strpos($host, 'floren.com.ua') === false
+    ) {
+
+        if (strpos($host, 'google.') !== false) {
+
+            $_SESSION['utm_source']   = 'google';
+            $_SESSION['utm_medium']   = 'organic';
+            $_SESSION['utm_campaign'] = '';
+        }
+
+        elseif (
+            strpos($host, 'bing.') !== false ||
+            strpos($host, 'bing.com') !== false
+        ) {
+
+            $_SESSION['utm_source']   = 'bing';
+            $_SESSION['utm_medium']   = 'organic';
+            $_SESSION['utm_campaign'] = '';
+        }
+
+        elseif (
+            strpos($host, 'facebook.') !== false ||
+            strpos($host, 'fb.com') !== false
+        ) {
+
+            $_SESSION['utm_source']   = 'facebook';
+            $_SESSION['utm_medium']   = 'referral';
+            $_SESSION['utm_campaign'] = '';
+        }
+
+        elseif (strpos($host, 'instagram.') !== false) {
+
+            $_SESSION['utm_source']   = 'instagram';
+            $_SESSION['utm_medium']   = 'referral';
+            $_SESSION['utm_campaign'] = '';
+        }
+
+        else {
+
+            $_SESSION['utm_source']   = $host;
+            $_SESSION['utm_medium']   = 'referral';
+            $_SESSION['utm_campaign'] = '';
+        }
+
+
+        $_SESSION['utm_content'] = '';
+        $_SESSION['utm_term']    = '';
+
+
+        /*
+         * Сохраняем определённый источник на 90 дней
+         */
+        setcookie(
+            'floren_utm_source',
+            $_SESSION['utm_source'],
+            time() + 60*60*24*90,
+            '/'
+        );
+
+        setcookie(
+            'floren_utm_medium',
+            $_SESSION['utm_medium'],
+            time() + 60*60*24*90,
+            '/'
+        );
+
+        setcookie(
+            'floren_utm_campaign',
+            $_SESSION['utm_campaign'],
+            time() + 60*60*24*90,
+            '/'
+        );
+
+        setcookie(
+            'floren_utm_content',
+            '',
+            time() + 60*60*24*90,
+            '/'
+        );
+
+        setcookie(
+            'floren_utm_term',
+            '',
+            time() + 60*60*24*90,
+            '/'
+        );
+    }
+}
+/*
+ * 5. Если в текущей PHP SESSION ничего нет —
+ * восстанавливаем источник из cookie
+ */
+if (
+    !isset($_SESSION['utm_source']) &&
+    isset($_COOKIE['floren_utm_source'])
+) {
     $_SESSION['utm_source']   = $_COOKIE['floren_utm_source'];
     $_SESSION['utm_medium']   = $_COOKIE['floren_utm_medium'] ?? '';
     $_SESSION['utm_campaign'] = $_COOKIE['floren_utm_campaign'] ?? '';
     $_SESSION['utm_content']  = $_COOKIE['floren_utm_content'] ?? '';
     $_SESSION['utm_term']     = $_COOKIE['floren_utm_term'] ?? '';
 }
-
-if(!isset($_SESSION['first_url'])){
-		$_SESSION['first_url']=$_SERVER['REQUEST_URI'];
+/*
+ * 6. Первая страница визита
+ */
+if (!isset($_SESSION['first_url'])) {
+    $_SESSION['first_url'] = $_SERVER['REQUEST_URI'];
 }
+// ===========================================================================
+// ===========================================================================
+//lets put utm-s to Session to track it in basket
+// ===========================================================================
+// ===========================================================================
+
+
 
 $smarty->display('main.tpl');
 

@@ -81,7 +81,9 @@ if ($URL[1] == 'sezon') {
 	$hleb[2]['name'] = $f_cat['name'];
 }
 
-
+echo '<pre>';
+print_r($f_cat);
+echo '</pre>';
 	//======FILTERS
 	$filters=array();
 	$filters_url=array();
@@ -502,12 +504,8 @@ $smarty->assign("META_KEYWORDS",		$meta_keywords);
 			
 			
 			$smarty->assign("PROMO", $promo);
-
-			if($PARAM[0]=='metal-pots'){
-				$smarty->assign("CONTENT_TPL",'category/metal_pots.tpl');
-			} else {
-				$smarty->assign("CONTENT_TPL",'plants.tpl');
-			}
+			$smarty->assign("CONTENT_TPL",'plants.tpl');
+			
 
 
 		//=============== /Вывод списка товаров БЕЗ фильтров ========

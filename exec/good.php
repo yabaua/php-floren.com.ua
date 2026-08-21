@@ -499,8 +499,10 @@ $smarty->assign("CUR_GFSID", $curFID);
 					$form_measure = $form_measure . $f['measure_qt'];
 				}
 			}
-
 			$form_measure = $form_measure . ' ' .$f['unit'];
+			
+			/* ======  OLD CODE ====== */
+			/*
 			$goods_sizes[count($goods_sizes)-1][''] = $f['name_ru'];
 			$goods_sizes[count($goods_sizes)-1]['formID'] = $uniqueSizes[$good['ID'].'_'.$f['dia'] ."_". $f['wdt']."_".$f['hgt']."_".$f['depth']."_".$f['measure_qt']][$curColor]['formID'];
 			$goods_sizes[count($goods_sizes)-1]['price'] = $uniqueSizes[$good['ID'].'_'.$f['dia'] ."_". $f['wdt']."_".$f['hgt']."_".$f['depth']."_".$f['measure_qt']][$curColor]['price'];
@@ -517,7 +519,97 @@ $smarty->assign("CUR_GFSID", $curFID);
 			
 			$goods_sizes[count($goods_sizes)-1]['visibility'] = $f['visibility'];
 			$goods_sizes[count($goods_sizes)-1]['db_1c_availability'] = $uniqueSizes[$good['ID'].'_'.$f['dia'] ."_". $f['wdt']."_".$f['hgt']."_".$f['depth']."_".$f['measure_qt']][$curColor]['db_1c_availability'];
+			*/
+			/* ====== / OLD CODE ====== */
+			/* ====== REPLACED BY chatGPT ====== */
+			$sizeKey = $good['ID'].'_'.$f['dia']."_".$f['wdt']."_".$f['hgt']."_".$f['depth']."_".$f['measure_qt'];
+			
+			/*
+			 * Костыль:
+			 * когда админ добавил не все размеры в каждый цвет
+			 * добавляем фиктивный размер
+			 */
+			if (isset($uniqueSizes[$sizeKey][$curColor])) {
+				$sizeColor = $uniqueSizes[$sizeKey][$curColor];
+			} else {
+				/*
+				 * Виртуальный отсутствующий вариант.
+				 * В БД ничего не создаём.
+				 */
+				$sizeColor = array(
+					'formID'              => 0,
+					'price'               => 0,
+					'old_price'           => 0,
+					'hrefID'              => '#',
+					'video'               => '',
+					'videoID'             => '',
+					'visibility'          => 0,
+					'db_1c_availability'  => 0
+				);
+			
+			}		
+			$goods_sizes[count($goods_sizes)-1][''] = $f['name_ru'];
+			$goods_sizes[count($goods_sizes)-1]['formID'] = $sizeColor['formID'];
+			$goods_sizes[count($goods_sizes)-1]['price'] = $sizeColor['price'];
+			$goods_sizes[count($goods_sizes)-1]['old_price'] = $sizeColor['old_price'];
+			$goods_sizes[count($goods_sizes)-1]['hrefID'] = $sizeColor['hrefID'];
+			
+			if ($curSize == $sizeKey) {
+				$goods_sizes[count($goods_sizes)-1]['active'] = 1;
+			} else {
+				$goods_sizes[count($goods_sizes)-1]['active'] = 0;
+			}
+			
+			$goods_sizes[count($goods_sizes)-1]['video'] = $sizeColor['video'];
+			$goods_sizes[count($goods_sizes)-1]['videoID'] = $sizeColor['videoID'];
+			$goods_sizes[count($goods_sizes)-1]['measure_name'] = $f['measure_name'];
+			$goods_sizes[count($goods_sizes)-1]['mg_unit'] = iconv('windows-1251', 'utf-8', $f['unit']);
+			$goods_sizes[count($goods_sizes)-1]['measure'] = $form_measure;
+			$goods_sizes[count($goods_sizes)-1]['visibility'] = $sizeColor['visibility'];
+			$goods_sizes[count($goods_sizes)-1]['db_1c_availability'] = $sizeColor['db_1c_availability'];
+			/* ====== REPLACED BY chatGPT ====== */
 		}
+		/* ======= SORT BY chatGPT ======== */
+		usort($goods_sizes, function($a, $b) use ($is_plant) {
+			$priceA = isset($a['price']) ? (float)$a['price'] : 0;
+			$priceB = isset($b['price']) ? (float)$b['price'] : 0;
+		
+			// Комнатные растения
+			if ($is_plant == 1) {
+		
+				$availabilityA = isset($a['db_1c_availability']) ? (float)$a['db_1c_availability'] : 0;
+				$availabilityB = isset($b['db_1c_availability']) ? (float)$b['db_1c_availability'] : 0;
+		
+				$availableA = $availabilityA > 0 ? 1 : 0;
+				$availableB = $availabilityB > 0 ? 1 : 0;
+		
+				// Сначала то, что есть в наличии
+				if ($availableA != $availableB) {
+					return $availableB <=> $availableA;
+				}
+			}
+		
+			// Для растений внутри группы:
+			// цена от дорогого к дешевому
+			//
+			// Для всех остальных товаров:
+			// просто цена от дорогого к дешевому
+			return $priceB <=> $priceA;
+		});
+/*		echo '<pre>';
+
+foreach ($goods_sizes as $v) {
+	echo
+		$v['measure'] .
+		' | price: ' . $v['price'] .
+		' | stock: ' . $v['db_1c_availability'] .
+		'<br>';
+}
+
+echo '</pre>';
+*/
+		/* ======= /SORT BY chatGPT ======== */
+		
 		if($active_formID!=''){
 			$main_image	=	$img_path . $active_formIDArray['img'];
 			/*== try to create WEBP image
@@ -674,9 +766,13 @@ $smarty->assign("CUR_GFSID", $curFID);
 					}else{
 						$goods_color[$gc['ID']]['colorClass']= "plant__color";
 					}
-					if (in_array($gc['color'], $uniqueSizes[$curSize]) && $uniqueSizes[$curSize][$gc['color']]['price']==0){
-		            	$goods_color[$gc['ID']]['colorClass'] = $goods_color[$gc['ID']]['colorClass'] . " plant__color_notavailable";
-		            }
+					if (
+						!isset($uniqueSizes[$curSize][$gc['color']])
+						||
+						$uniqueSizes[$curSize][$gc['color']]['price'] == 0
+					) {
+						$goods_color[$gc['ID']]['colorClass'] .= " plant__color_notavailable";
+					}
 				};
 			}
 

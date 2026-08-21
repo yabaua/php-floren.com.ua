@@ -73,9 +73,14 @@ if($_SESSION['basket']){
 $send_text.='</table>';
 $send_text.='<br><hr><br><br>';
 
+$sessID = isset($_SESSION['ID']) ? $_SESSION['ID'] : '';
+$clientIP = isset($_SESSION['IP']) && $_SESSION['IP'] != ''
+	? $_SESSION['IP']
+	: (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '');
+
 $db->query("INSERT INTO orders_basket SET
-						sessID='".$_SESSION['ID']."',
-						clientIP='".$_SESSION['IP']."',
+						sessID='".$sessID."',
+						clientIP='".$clientIP."',
 						formIDs='".implode(",", array_keys($_SESSION['basket']))."',
 						lang='".$lang."',
 						date_add=UNIX_TIMESTAMP(),
